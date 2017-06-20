@@ -5,6 +5,7 @@
   font-family: 'Source Code Pro', Inconsolata, Monaco, Consolas, monospace;
   height: 100%;
   color: black;
+  padding: 3px 0 8px !important;
   box-shadow: 0 0 15px rgba(0,0,0,0.6);
 }
 
@@ -34,7 +35,7 @@
   padding: 0 3px 0 5px;
   min-width: 20px;
   text-align: center;
-  color: #999;
+  color: rgba(255,255,255,0.4) !important;
   white-space: nowrap;
 }
 
