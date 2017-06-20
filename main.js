@@ -115,10 +115,13 @@ function createWindow () {
         {label: "Documentation", click: function () {
           shell.openExternal(Config.repository.docs);
         }},
+        {label: "Keybindings", click: function () {
+          dialog.showMessageBox({title: "Keybindings", type:"info", message: "An Electron powered markdown editor for Jekyll users.\nMIT Copyright (c) 2017 Brett Stevenson <brettstevenson.me>", buttons: ["Close"] });
+        }},
         {label: "Report Issue", click: function () {
           shell.openExternal(Config.bugs.url);
         }},
-        {label: "About Markdownify", click: function () {
+        {label: "About Hyde MD", click: function () {
           dialog.showMessageBox({title: "About Hyde MD", type:"info", message: "An Electron powered markdown editor for Jekyll users.\nMIT Copyright (c) 2017 Brett Stevenson <brettstevenson.me>", buttons: ["Close"] });
         }}
       ]

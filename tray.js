@@ -38,7 +38,7 @@ exports.create = function(mainWindow) {
   ]);
 
   tray = new electron.Tray(iconPath);
-  tray.setToolTip('Markdownify');
+  tray.setToolTip('Hyde MD');
   tray.setContextMenu(contextMenu);
   tray.on('click', toggleWin);
 };
