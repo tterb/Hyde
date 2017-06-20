@@ -35,6 +35,7 @@ window.addEventListener('contextmenu', function(e) {
 var cm = CodeMirror.fromTextArea(document.getElementById("plainText"), {
   lineNumbers: true,
   mode: "markdown",
+  theme: "monokai",
   viewportMargin: 100000000000,
   lineWrapping : true,
   autoCloseBrackets: true
