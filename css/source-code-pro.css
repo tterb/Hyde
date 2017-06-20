@@ -1,0 +1,5 @@
+@font-face{
+    font-family: 'Source Code Pro';
+    /*src: url('./fonts/OpenSans-Regular.ttf');*/
+    src: url('./fonts/SourceCodePro.ttf') format('truetype');
+}

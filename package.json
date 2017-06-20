@@ -1,0 +1,53 @@
+{
+  "name": "hyde-md",
+  "version": "0.0.1",
+  "description": "An Electron powered markdown editor for Jekyll users",
+  "main": "main.js",
+  "productName": "Hyde MD",
+  "scripts": {
+    "start": "electron main.js",
+    "build": "rm -rf dist && gulp build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JonSn0w/Hyde-MD.git",
+    "docs": "https://github.com/JonSn0w/Hyde-MD/blob/master/README.md"
+  },
+  "keywords": [
+    "electron",
+    "markdown",
+    "jekyll",
+    "node",
+    "gfm",
+    "editor",
+    "live",
+    "preview",
+    "html",
+    "desktop"
+    "hyde",
+    "md",
+    "README"
+  ],
+  "author": "Brett Stevenson <brettstevenson.me>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JonSn0w/Hyde-MD/issues"
+  },
+  "homepage": "https://github.com/JonSn0w/Hyde-MD#readme",
+  "_npmUser": {
+    "name": "brett_stevenson",
+    "email": "bstevensondev@gmail.com"
+  },
+  "devDependencies": {
+    "devtron": "^1.1.2",
+    "electron-packager": "^7.0.3",
+    "electron-prebuilt": "^0.36.12",
+    "gulp": "^3.9.1"
+  },
+  "dependencies": {
+    "electron-editor-context-menu": "^1.1.1",
+    "showdown": "^1.3.0",
+    "electron-json-storage": "latest",
+    "parse-filepath": "latest"
+  }
+}
