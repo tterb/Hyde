@@ -1,11 +1,8 @@
-
-<h1 align="center">
-  <!-- <br>
-  <a href="http://www.amitmerchant.com/electron-markdownify"><img src="https://raw.githubusercontent.com/JonSn0w/electron-markdownify/master/img/markdownify.png" alt="Markdownify" width="200"></a>
-  <br> -->
-  Hyde M.D.
-  <br>
-</h1>
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/16360374/27329362-2f41b4b4-556a-11e7-9b74-fffd11baf34b.png" width="300"/>
+  <br><br>
+  <img src="https://user-images.githubusercontent.com/16360374/27329363-2f505686-556a-11e7-8664-419fc3fd61a9.png" width="250"/>
+</p>
 
 <h4 align="center">An <a href="http://electron.atom.io" target="_blank"><img src="https://user-images.githubusercontent.com/16360374/27318472-58bebca2-5541-11e7-9870-68d4a4f8f957.png" width="22"/> Electron</a> powered markdown editor for<a href="https://jekyllrb.com" target="_blank"><img src="https://user-images.githubusercontent.com/16360374/27318375-ce58ace4-5540-11e7-83df-7381787aa0ca.png" width="85"/></a> users.</h4>
 
@@ -30,9 +27,9 @@
 </p>
 <br>
 
-![screenshot](https://raw.githubusercontent.com/JonSn0w/Hyde-MD/master/img/markdownify.gif)
+<!-- ![screenshot](https://raw.githubusercontent.com/JonSn0w/Hyde-MD/master/img/markdownify.gif) -->
 
-## Features
+# Features
 
 * LivePreview
   - Instantly see changes to your Markdown documents in rendered Markdown or HTML as you create them.
@@ -52,7 +49,7 @@
 -------------------
 
 
-## Installation
+# Installation
 
 After cloning this repository, install and run the application using the command:
 
