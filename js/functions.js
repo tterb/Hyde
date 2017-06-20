@@ -11,26 +11,32 @@ var clkPref = function (opt) {
 
 var changeTheme = function (opt) {
   currentValueTheme = opt.value;
-  if ( currentValueTheme=='light' ) {
-    cm.setOption("theme", "default");
-    document.getElementById("previewPanel").className = "col-md-6 full-height";
-  } else if ( currentValueTheme=='dark' ) {
-    cm.setOption("theme", "zenburn");
+  if ( currentValueTheme=='dark' ) {
+    cm.setOption("theme", "monokai");
     document.getElementById("previewPanel").className = "col-md-6 full-height preview-dark-mode";
+    document.getElementByClassName("CodeMirror-gutters").borderRight = "1px solid rgba(255,255,255,0.5)"
+  } else if ( currentValueTheme=='light' ) {
+    cm.setOption("theme", "solarized");
+    document.getElementById("previewPanel").className = "col-md-6 full-height preview-light-mode";
+    document.getElementByClassName("CodeMirror-gutters").borderRight = "1px solid rgba(0,0,0,0.5)"
   }
 }
 
 var showToolBar = function () {
-  if(document.getElementById("toolbarArea").style.display == "block"){
+  if(document.getElementById("toolbarArea").style.display == "block") {
     document.getElementById("angleToolBar").className = "";
-    document.getElementById("angleToolBar").className = "fa fa-angle-double-right";
+    document.getElementById("angleToolBar").className = "fa fa-chevron-right";
     document.getElementById("toolbarArea").style.display = "none";
     document.getElementById("editArea").style.paddingTop = "24px";
-  }else{
+    document.getElementById("textPanel").style.paddingTop = "10px";
+    document.getElementByClassName("CodeMirror").paddingTop = "3px";
+  } else {
     document.getElementById("angleToolBar").className = "";
-    document.getElementById("angleToolBar").className = "fa fa-angle-double-down";
+    document.getElementById("angleToolBar").className = "fa fa-chevron-down";
     document.getElementById("toolbarArea").style.display = "block";
     document.getElementById("editArea").style.paddingTop = "53px";
+    document.getElementById("textPanel").style.paddingTop = "15px";
+    document.getElementByClassName("CodeMirror").paddingTop = "12px";
   }
 }
 
@@ -49,7 +55,7 @@ var isClean = function () {
 
 // Update window title on various events
 var updateWindowTitle = function (path) {
-  var appName = "Markdownify",
+  var appName = "Hyde MD",
       isClean = this.isClean(),
       saveSymbol = "*",
       parsedPath,
