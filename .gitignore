@@ -1,0 +1,8 @@
+# Mac
+.DS_Store
+# Local .npmrc preferences
+.npmrc
+
+dist
+node_modules
+img/README/*
