@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>New document - Markdownify</title>
+    <title>New document - Hyde MD</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <link href="css/style.scss" rel="stylesheet">
     <link rel="stylesheet" href="css/codemirror.css">
-    <link rel="stylesheet" href="css/theme/zenburn.css">
+    <link rel="stylesheet" href="css/theme/monokai.css">
+    <link rel="stylesheet" href="css/theme/solarized.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/alva.css">
     <link rel="stylesheet" href="css/open-sans.css">
     <link rel="stylesheet" href="css/source-code-pro.css">
     <link rel="stylesheet" href="css/dialog.css">
@@ -15,11 +17,11 @@
       <div class="optContainer">
         <div class="mode">
           <span class="toolContainer">
-            <a id="angleToolBar" title="Toolbar" class="fa fa-angle-double-right" onclick="showToolBar();" style="cursor: pointer;text-decoration:none;"></a>
+            <a id="angleToolBar" title="Toolbar" class="fa fa-chevron-right" onclick="showToolBar();" style="cursor: pointer;text-decoration:none;"></a>
           </span>
-          <span>
-            <input type="radio" name="changeTheme" value="light" onclick="changeTheme(this);" title="Light Mode" checked="checked"> <label style="vertical-align: middle;" title="Light Mode"><b>Light</b></label>
-            <input type="radio" name="changeTheme" value="dark" onclick="changeTheme(this);" title="Dark Mode"> <label style="vertical-align: middle;" title="Dark Mode"><b>Dark</b></label>
+          <span class="themeContainer">
+            <input type="radio" name="changeTheme" value="light" onclick="changeTheme(this);" title="Light Mode"> <label class="lightButton" style="vertical-align: middle;" title="Light Mode"><b>Light</b></label>
+            <input type="radio" name="changeTheme" value="dark" onclick="changeTheme(this);" title="Dark Mode" checked="checked"> <label class="darkButton" style="vertical-align: middle;" title="Dark Mode"><b>Dark</b></label>
           </span>
         </div>
         <div class="pref" id="pref">
@@ -28,7 +30,7 @@
         </div>
       </div>
       <div id="toolbarArea">
-        <div style="padding-left:10px;">
+        <div style="padding:10px 0 0 10px;">
           <a onclick="toggleFormat('bold');" title="Bold [Ctrl+B]" class="fa fa-bold editor-toolbar"></a>
           <a onclick="toggleFormat('italic');" title="Italic [Ctrl+I]" class="fa fa-italic editor-toolbar"></a>
           <a onclick="toggleHeadingSmaller();" title="Header [Ctrl+H]" class="fa fa-header editor-toolbar"></a>
@@ -48,10 +50,10 @@
         </div>
       </div>
       <section class="row" id="editArea" style="background-color: rgb(246, 245, 245); color:#eee; padding-top:24px;">
-          <div class="col-md-6 full-height" style="background: #383734;box-shadow:0 0 10px rgba(0,0,0,0.8)" id="textPanel">
+          <div class="col-md-6 full-height preview-dark-mode" style="background: #383734;padding:15px 15px 0;box-shadow:0 0 10px rgba(0,0,0,0.8)" id="textPanel">
             <textarea  id="plainText" placeholder="Write your Markdown here.." autofocus></textarea>
           </div>
-          <div class="col-md-6 full-height" style="overflow-y: auto;display:block;" id="previewPanel">
+          <div class="col-md-6 full-height preview-dark-mode" style="overflow-y: auto;display:block;padding:10px 25px;" id="previewPanel">
             <div id="markdown"></div>
             <textarea id="htmlPreview" class="mdHtml"></textarea>
           </div>
