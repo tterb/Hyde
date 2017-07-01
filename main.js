@@ -14,6 +14,8 @@ const tray = require('./tray');
 const func = require('./js/functions');
 const Config = require('./package.json');
 var globalShortcut = require('global-shortcut');
+//var localShortcut = require('electron-localshortcut');
+
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -38,16 +40,16 @@ function createWindow () {
     mainWindow = null;
   });
 
-  mainWindow.on('close', e => {
-    if (!isQuitting) {
-      e.preventDefault();
-      if (process.platform === 'darwin') {
-        app.hide();
-      } else {
-        mainWindow.hide();
-      }
-    }
-  });
+  // mainWindow.on('close', e => {
+  //   if (!isQuitting) {
+  //     e.preventDefault();
+  //     if (process.platform === 'darwin') {
+  //       app.hide();
+  //     } else {
+  //       mainWindow.hide();
+  //     }
+  //   }
+  // });
 
   //Open anchor links in browser
   mainWindow.webContents.on('will-navigate', function(e, url) {
@@ -76,7 +78,7 @@ function createWindow () {
           var focusedWindow = BrowserWindow.getFocusedWindow();
           focusedWindow.webContents.send('file-save-as');
         }},
-        {label: "Quit", accelerator: "Command+Q", click: app.quit}
+        {label: "Quit", accelerator: "CmdOrCtrl+Q", click: app.quit}
       ]
     },
     {
