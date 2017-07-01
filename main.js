@@ -11,6 +11,7 @@ var Menu = require('menu');
 var dialog = require('dialog');
 var shell = require('shell');
 const tray = require('./tray');
+const func = require('./js/functions');
 const Config = require('./package.json');
 var globalShortcut = require('global-shortcut');
 
@@ -102,11 +103,33 @@ function createWindow () {
     {
       label: "&View",
       submenu: [
-        {label: "Toggle Full Screen", accelerator:"F11", click: function(){
+        { label: "Themes",
+          submenu: [
+            { label: "Monokai", click: function(){
+              var cm = CodeMirror.fromTextArea(myTextArea);
+              cm.setOption("theme", "monokai");
+            }},
+            { label: "Solarized", click: function(){
+              func.pickTheme(this, "solarized");
+            }}
+          ]},
+          { label: "Toggle Full Screen", accelerator:"F11", click: function(){
           let focusedWindow = BrowserWindow.getFocusedWindow();
           let isFullScreen = focusedWindow.isFullScreen();
           focusedWindow.setFullScreen(!isFullScreen);
-        }}
+        }},
+        {
+        label: 'Toggle Developer Tools',
+        accelerator: (function() {
+          if (process.platform == 'darwin')
+            return 'Alt+Command+I';
+          else
+            return 'Ctrl+Shift+I';
+        })(),
+        click: function(item, focusedWindow) {
+          if (focusedWindow)
+            focusedWindow.toggleDevTools();
+        }},
       ]
     },
     {
