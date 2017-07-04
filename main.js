@@ -24,7 +24,12 @@ let isQuitting = false;
 
 function createWindow () {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 1400, height: 800, icon: __dirname+'/img/favicon.ico'});
+  mainWindow = new BrowserWindow({
+      frame: false,
+      width: 1400,
+      height: 800,
+      icon: __dirname+'/img/favicon.ico'
+  });
 
   // and load the index.html of the app.
   mainWindow.loadURL(mainPage);
