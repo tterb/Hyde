@@ -1,7 +1,7 @@
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/16360374/27329362-2f41b4b4-556a-11e7-9b74-fffd11baf34b.png" width="300"/>
+  <img src="https://user-images.githubusercontent.com/16360374/27329362-2f41b4b4-556a-11e7-9b74-fffd11baf34b.png" width="250"/>
   <br><br>
-  <img src="https://user-images.githubusercontent.com/16360374/27329363-2f505686-556a-11e7-8664-419fc3fd61a9.png" width="250"/>
+  <img src="https://user-images.githubusercontent.com/16360374/27329363-2f505686-556a-11e7-8664-419fc3fd61a9.png" width="225"/>
 </p>
 
 <h3 align="center">An <a href="http://electron.atom.io" target="_blank"><img src="https://user-images.githubusercontent.com/16360374/27318472-58bebca2-5541-11e7-9870-68d4a4f8f957.png" width="22"/> Electron</a> powered markdown editor for  <a href="https://jekyllrb.com" target="_blank"><img src="https://user-images.githubusercontent.com/16360374/27342564-662358d6-5595-11e7-944d-309b695d238a.png" width="65"/></a> users.</h3>
@@ -20,9 +20,7 @@
     <img src="https://img.shields.io/badge/built for-Jekyll-red.svg" height="21" title="Jekyll">&nbsp;
   </a>
 </p>
-<br><br>
 
-<!-- ![screenshot](https://raw.githubusercontent.com/JonSn0w/Hyde-MD/master/img/markdownify.gif) -->
 
 # Features
 
@@ -39,7 +37,8 @@
   - Write distraction free.
 * Cross platform
   - Windows, Mac and Linux ready.
-
+  
+<br>
 
 -------------------
 
