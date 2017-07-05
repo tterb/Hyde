@@ -14,25 +14,23 @@
     <link rel="stylesheet" href="css/source-code-pro.css">
     <link rel="stylesheet" href="css/dialog.css">
   </head>
-  <body class="container-fluid">
-      <div class="frame" style="-webkit-app-region:drag">
+  <body class="container-fluid" style="resize: both">
+      <section class="frame">
+        <div id="draggable" style="-webkit-app-region:drag">
         <div class="icon"><img src="img/favicon.ico"></div>
         <div id="title">Hyde</div>
+        </div>
         <!--<div class="metacity" onclick="close()">-->
           <button id="close" style="cursor: pointer;"><img src="img/close.png" alt="Close"/></button>
           <button id="maximize" style="cursor: pointer;"><img src="img/max.png" alt="Maximize"/></button>
           <button id="minimize" style="cursor: pointer;"><img src="img/min.png" alt="Minimize"/></button>
         <!--</div>-->
-      </div>
+    </section>
       <div class="optContainer">
         <div class="mode">
           <span class="toolContainer">
-            <a id="angleToolBar" title="Toolbar" class="fa fa-angle-right" onclick="showToolBar();" style="cursor: pointer;text-decoration:none;font-size:24px;padding-left:10px;"></a>
+            <a id="angleToolBar" title="Toolbar" class="fa fa-chevron-right" onclick="showToolBar();" style="cursor: pointer;text-decoration:none;font-size:17px;padding:3px 0 0 10px;"></a>
           </span>
-          <!-- <span>
-            <input type="radio" name="changeTheme" value="light" onclick="changeTheme(this);" title="Light Mode" checked="checked"> <label style="vertical-align: middle;" title="Light Mode"><b>Light</b></label>
-            <input type="radio" name="changeTheme" value="dark" onclick="changeTheme(this);" title="Dark Mode"> <label style="vertical-align: middle;" title="Dark Mode"><b>Dark</b></label>
-          </span> -->
           <div id="buttons">
             <button id="new"><img src="img/16x16/file_add.png"/>New </button>
             <button id="open"><img src="img/16x16/file.png"/>Open </button>
@@ -60,12 +58,13 @@
           <a onclick="drawTable();" title="Insert Table [Ctrl+Shift+T]" class="fa fa-table editor-toolbar"></a>
           <a onclick="drawHorizontalRule();" title="Insert Horizontal Rule" class="fa fa-minus editor-toolbar"></a>
           <i class="separator">|</i>
+          <a onclick="changeTheme();" title="Light/Dark Theme" id="toggle-theme" class="fa fa-lightbulb-o editor-toolbar"></a>
           <a onclick="toggleSidePanel();" title="Side-By-Side Panel Toggle" class="fa fa-columns editor-toolbar"></a>
           <a data-toggle="modal" data-target="#myModal" title="Markdown Help" class="fa fa-question-circle editor-toolbar"></a>
         </div>
       </div>
       <section class="row" id="editArea" style="background-color: rgba(246, 245, 245,0.0); color:#3a3a3a; padding-top:60px;">
-          <div class="col-md-6 full-height" style="background: #383734;padding-top:25px;" id="textPanel">
+          <div class="col-md-6 full-height" style="background:#323130;padding-top:25px;overflow-y:auto;" id="textPanel">
             <textarea  id="plainText" placeholder="Write your Markdown here.." autofocus></textarea>
           </div>
           <div class="col-md-6 full-height" style="overflow-y:auto;display:block;padding-top:25px;" id="previewPanel">
@@ -73,10 +72,10 @@
             <textarea id="htmlPreview" class="mdHtml"></textarea>
           </div>
       </section>
-      <div class="bottom-bar" style="-webkit-app-region: drag">
+      <div class="bottom-bar">
         <div id="bottom-file">None</div>
-        <div class="caret-pos">18:42
-        </div>
+        <div id="wordcount"></div>
+        <input type="checkbox" id="syncScroll"/><label> Sync Scrolling</label>
       </div>
       <!-- Markdown Help Modal -->
       <div class="modal fade" id="myModal" role="dialog">

@@ -13,29 +13,43 @@ var clkPref = function (opt) {
   }
 }
 
-var changeTheme = function (opt) {
+function toggleTheme(opt) {
   currentValueTheme = opt.value;
   if (currentValueTheme=='light') {
-    cm.setOption("theme", "default");
+    cm.setOption("theme", "zenburn");
     document.getElementById("previewPanel").className = "col-md-6 full-height";
   } else if (currentValueTheme=='dark') {
-    cm.setOption("theme", "zenburn");
+    cm.setOption("theme", "monokai");
     document.getElementById("previewPanel").className = "col-md-6 full-height preview-dark-mode";
+  }
+}
+
+var changeTheme = function() {
+  if(document.getElementById("previewPanel").className.includes("preview-dark-mode")) {
+    cm.setOption("theme", "default");
+    document.getElementById("previewPanel").className = "col-md-6 full-height";
+    document.getElementById("toggle-theme").className = "fa fa-lightbulb-o editor-toolbar active";
+  } else {
+    cm.setOption("theme", "monokai");
+    document.getElementById("previewPanel").className = "col-md-6 full-height preview-dark-mode";
+    document.getElementById("toggle-theme").className = "fa fa-lightbulb-o editor-toolbar inactive";
   }
 }
 
 var showToolBar = function () {
   if(document.getElementById("toolbarArea").style.display == "block"){
     document.getElementById("angleToolBar").className = "";
-    document.getElementById("angleToolBar").className = "fa fa-angle-right";
+    document.getElementById("angleToolBar").className = "fa fa-chevron-right";
+    document.getElementById("angleToolBar").style.paddingLeft = "10px";
     document.getElementById("toolbarArea").style.display = "none";
     document.getElementById("editArea").style.paddingTop = "60px";
     document.getElementById("textPanel").style.paddingTop = "25px";
   } else {
     document.getElementById("angleToolBar").className = "";
-    document.getElementById("angleToolBar").className = "fa fa-angle-down";
+    document.getElementById("angleToolBar").className = "fa fa-chevron-down";
+    document.getElementById("angleToolBar").style.paddingLeft = "6px";
     document.getElementById("toolbarArea").style.display = "block";
-    document.getElementById("editArea").style.paddingTop = "110px";
+    document.getElementById("editArea").style.paddingTop = "115px";
     document.getElementById("textPanel").style.paddingTop = "0px";
   }
 }
@@ -75,4 +89,5 @@ var updateWindowTitle = function (path) {
     title = saveSymbol + title;
   }
   document.title = title;
+  document.getElementById("title").innerHTML = title;
 }
