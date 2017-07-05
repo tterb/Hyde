@@ -1,0 +1,354 @@
+html, body, section, .full-height {
+    height: 100%;
+}
+
+body {
+    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif !important;
+    font-size: 16px;
+    overflow: hidden;
+}
+
+#editArea {
+    background-color: #383734;
+    color: #efefef;
+}
+
+label {
+    font-size: 15px;
+    color: rgba(255,255,255,0.75);
+    margin-right: 6px;
+}
+
+.optContainer {
+    background-color: #383734;
+}
+
+.pref {
+    background-color: #383734;
+}
+
+#pad{
+    font-family: "Source Code Pro", Menlo, Monaco, Consolas, "Courier New", monospace;
+    border: none;
+    overflow: auto;
+    outline: none;
+    resize: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+#markdown {
+    overflow: auto;
+}
+
+#markdown > pre {
+    background-color: #3e3e3e;
+    color: #ddd;
+}
+
+.frame {
+    position: absolute;
+    background-image: -webkit-linear-gradient(top, #444340, #383734);
+    color: #8C8C8C;
+    height: 32px;
+    width: 100%;
+    top: 0;
+    left: 0;
+    border-top-left-radius: 15px !important;
+    border-top-right-radius: 15px !important;
+    z-index: 9999 !important;
+}
+
+.frame .icon > img {
+    display: inline-block;
+    position: fixed;
+    height: 22px;
+    width: 22px;
+    left: 10px;
+    margin: 9px 5px;
+}
+
+.frame #title {
+  position: absolute;
+  display: inline-block;
+  color: #bbb;
+  top: 8.5px;
+  left: 48px;
+}
+
+.frame .metacity {
+    display: block;
+    top: 4px;
+    right: 0;
+    float: right;
+    margin: 0 8px;
+    padding: 4px 5px;
+    /*z-index: 999999 !important;*/
+}
+
+.frame > button {
+    display: inline-block;
+    background: #383734;
+    border: none;
+    float: right;
+    margin: 1px 0px;
+    padding: 4px;
+}
+
+.frame #close {
+    margin-right: 7px;
+}
+
+.frame > button > img {
+    display: inline-block;
+    height: 24px;
+    width: 24px;
+    padding: 4px;
+}
+
+.frame #minimize:hover > img {
+    content: url('../img/min_active.png');
+}
+.frame #maximize:hover > img {
+    content: url('../img/max_active.png');
+}
+.frame #close:hover > img {
+    content: url('../img/close_active.png');
+}
+.frame #minimize:active > img {
+    content: url('../img/min_active.png');
+}
+.frame #maximize:active > img {
+    content: url('../img/max_active.png');
+}
+.frame #close:active > img {
+    content: url('../img/close_active.png');
+}
+
+.frame .metacity #close:hover > img {
+    visibility: hidden;
+}
+
+#buttons {
+  display: inline-block;
+  /*background-image: -webkit-linear-gradient(#2a2d2c, #1e2120);*/
+  color: #d2d5d4;
+  padding: 2px 9px;
+  height: 30px;
+}
+
+#buttons > button {
+  background-image: -webkit-linear-gradient(#454746, #242625);
+  color: #d2d5d4;
+  border: 1px inset #3a3f3d;
+  border-radius: 4px;
+  margin-right: 2px;
+}
+
+#buttons > button > img {
+  margin: 0 5px 4px 0;
+}
+
+.toolbar-buttons > a {
+    background: -webkit-linear-gradient(#3c3e3d, #292b2a);
+    border: 1px outset #3a3f3d;
+    padding: 3px 5px 4px 4px;
+}
+
+.toolbar-buttons > a:hover {
+  color: rgba(255,255,255,0.85) !important;
+  border-color: #656766;
+}
+
+.bottom-bar {
+  position: absolute;
+  background-color: #383734;
+  color: #d2d5d4;
+  height: 32px;
+  width: 100%;
+  top: 96%;
+  left: 0;
+  border-bottom-left-radius: 10px !important;
+  border-bottom-right-radius: 10px !important;
+  padding: 2px;
+  z-index: 99999;
+}
+
+.bottom-bar #bottom-file {
+  display: inline-block;
+  font-size: 15px;
+  margin: 4px 16px;
+}
+
+.pref {
+  float: right;
+  width: 50%;
+  text-align: right;
+  padding: 20px 10px 6px;
+}
+
+.mode {
+  float: left;
+  width: 50%;
+  text-align: left;
+  padding-left: 10px;
+  background-color: #383734;
+  padding: 15px 10px 5px;
+}
+
+.mdHtml {
+  display:none;
+  width:100%;
+  height:100%;
+  resize:none;
+  overflow:auto;
+  border: none;
+}
+
+.optContainer{
+  position:fixed;
+  top: 32px;
+  left: 0;
+  z-index: 999;
+  width: 100%;
+  height: 23px;
+  box-shadow: 0px 1px 11px -2px rgba(0,0,0,0.75);
+}
+
+#htmlPreview:focus{
+  outline: 1px solid #ECE6E6;
+}
+
+#toolbarArea{
+  position: fixed;
+  top: 75px;
+  left: 0;
+  z-index: 999;
+  width: 100%;
+  height: 35px;
+  display:none;
+  border-bottom: 1px #2a2a2a solid;
+  background-color: #383735;
+}
+
+a#angleToolBar {
+  color: rgba(255,255,255,0.5);
+}
+
+a#angleToolBar:hover {
+  color: rgba(255,255,255,0.8);
+}
+
+#textPanel {
+    padding: 25px 8px 0;
+}
+
+.editor-toolbar{
+    display: inline-block;
+    text-align: center;
+    text-decoration: none!important;
+    color: rgba(255,255,255,0.55) !important;
+    width: 25px;
+    height: 25px;
+    margin: 0;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    cursor: pointer;
+    line-height: 24px;
+    padding: 4px 10px 0px 6px;
+}
+
+.editor-toolbar:hover {
+    /*background: #fcfcfc;*/
+    border-color: #95a5a6;
+    color: rgba(255,255,255,0.9) !important;
+}
+
+.separator {
+    display: inline-block;
+    width: 0;
+    border-left: 1px solid #282725;
+    border-right: 1px solid #282725;
+    color: transparent;
+    text-indent: -10px;
+    margin: 0 6px;
+}
+
+.toolContainer{
+  width: 16px;
+  float: left;
+  padding-top: 2px;
+  margin-right: 6px;
+}
+
+input[type="radio"]:checked:before {
+    content: "";
+    display: block;
+    position: relative;
+    top: 3px;
+    left: 3px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #442178;
+}
+
+.modal--default__content {
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 1em;
+    background: #f2f0ed;
+}
+
+.markdown-help-content {
+    width: 100%;
+    border-spacing: 0;
+}
+
+.markdown-help-content tr {
+    line-height: 30px;
+}
+
+.markdown-help-content tr:nth-child(even) {
+    background-color: rgb(212, 212, 212);
+}
+
+.markdown-help-content tr:first-child td {
+    border-top: 0;
+}
+.markdown-help-content td {
+    border-top: 1px solid rgba(38,50,56,.1);
+    min-width: 180px;
+}
+
+.preview-dark-mode{
+    background: rgb(246,245,245);
+    color: #E0E0E0;
+}
+
+.preview-dark-mode textarea{
+    background: #151515;
+    color: #E0E0E0;
+}
+
+.CodeMirror-linenumbers {
+    color: rgba(200,200,200,0.7);
+}
+
+::-webkit-scrollbar {
+  background-color: rgba(56,55,52,0.5);
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #42403E;
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
