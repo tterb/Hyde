@@ -52,23 +52,19 @@ window.onload = function() {
     //Md -> Preview
     html = marked(markdownText,{gfm: true});
     markdownArea.innerHTML = replaceWithEmojis(html);
-
     //Md -> HTML
     converter = new showdown.Converter();
     html      = converter.makeHtml(markdownText);
     document.getElementById("htmlPreview").value = html;
-
-    if(this.isFileLoadedInitially){
+    if(this.isFileLoadedInitially) {
       this.setClean();
       this.isFileLoadedInitially = false;
     }
-
-    if(this.currentFile!=''){
+    if(this.currentFile!='') {
       this.updateWindowTitle(this.currentFile);
-    }else{
+    } else {
       this.updateWindowTitle();
     }
-
   });
 
   // Get the most recently saved file
@@ -86,4 +82,8 @@ window.onload = function() {
       this.currentFile = data.filename;
     }
   });
+
+  document.getElementById("minimize").onclick = function() { window.minimize(); }
+  document.getElementById("maximize").onclick = function() { window.isMaximized() ? window.unmaximize() : window.maximize(); }
+  document.getElementById("close").onclick = function() { window.close(); }
 }
