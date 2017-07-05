@@ -45,6 +45,7 @@
     "gulp": "^3.9.1"
   },
   "dependencies": {
+    "electron-config": "^0.2.1",
     "electron-editor-context-menu": "^1.1.1",
     "showdown": "^1.3.0",
     "electron-json-storage": "latest",
