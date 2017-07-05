@@ -9,11 +9,13 @@ function toggleFormat(type) {
   'use strict';
   let modifiers = [];
   if(type == "bold") {
-    modifiers = ["**", "__"];
+    modifiers = ["**"];
   } else if(type == "italic") {
-    modifiers = ["*", "_"];
+    modifiers = ["*"];
   } else if(type == "strikethrough") {
     modifiers = ["~~"];
+  } else if(type == "comment") {
+    modifiers = ["<!-- ", " -->"];
   }
   cm.operation(() => {
     _toggleFormat(modifiers);
@@ -33,7 +35,7 @@ function _toggleFormat(modifiers) {
     bFound = false;
     for (let i = 0, len = allModifiers.length; i < len; i++) {
       let modi = allModifiers[i];
-      if (cm.getSelection().startsWith(modi) && cm.getSelection().endsWith(modi) 
+      if (cm.getSelection().startsWith(modi) && cm.getSelection().endsWith(modi)
         && endPoint.ch - startPoint.ch >= 2 * modi.length) {
         bFound = true;
         startPoint.ch += modi.length;
@@ -49,12 +51,12 @@ function _toggleFormat(modifiers) {
   let modifierWidth = 0;
   let rangeStartPoint = new CodeMirror.Pos(startPoint.line, startPoint.ch);
   let rangeEndPoint = new CodeMirror.Pos(endPoint.line, endPoint.ch);
-  let lineLenght = cm.getLine(rangeEndPoint.line).length;
+  let lineLength = cm.getLine(rangeEndPoint.line).length;
   for (let bFound = true; bFound; ) {
     bFound = false;
     for (let i = 0, len = allModifiers.length; i < len; i++) {
       let modi = allModifiers[i];
-      if (rangeStartPoint.ch < modi.length || rangeEndPoint.ch > lineLenght - modi.length) {
+      if (rangeStartPoint.ch < modi.length || rangeEndPoint.ch > lineLength - modi.length) {
         continue;
       }
       rangeStartPoint.ch -= modi.length;
@@ -149,6 +151,10 @@ function toggleBlockquote() {
   _toggleLine(cm, "quote");
 }
 
+function toggleComment(editor) {
+  _toggleLine(cm, "comment");
+}
+
 function toggleUnorderedList(editor) {
   _toggleLine(cm, "unordered-list");
 }
@@ -167,18 +173,22 @@ function _toggleLine(cm, name) {
   var repl = {
     "quote": /^(\s*)\>\s+/,
     "unordered-list": /^(\s*)(\*|\-|\+)\s+/,
-    "ordered-list": /^(\s*)\d+\.\s+/
+    "ordered-list": /^(\s*)\d+\.\s+/,
+    "comment": /^(\s*)\<!--\s+/
   };
   var map = {
     "quote": "> ",
     "unordered-list": "* ",
-    "ordered-list": "1. "
+    "ordered-list": "1. ",
+    "comment": ["<!-- ", " -->"]
   };
   for(var i = startPoint.line; i <= endPoint.line; i++) {
     (function(i) {
       var text = cm.getLine(i);
       if(stat[name]) {
         text = text.replace(repl[name], "$1");
+      } else if(map[name].constructor === Array) {
+        text = map[name][0] + text + map[name][1];
       } else {
         text = map[name] + text;
       }

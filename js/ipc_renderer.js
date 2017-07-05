@@ -107,8 +107,12 @@ ipc.on('ctrl+i', function() {
   toggleFormat('italic');
 });
 
-ipc.on('ctrl+/', function() {
+ipc.on('ctrl+`', function() {
   toggleFormat('strikethrough');
+});
+
+ipc.on('ctrl+/', function() {
+  toggleComment();
 });
 
 ipc.on('ctrl+l', function() {
