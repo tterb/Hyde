@@ -13,6 +13,7 @@ var console = require('console');
 var parsePath = require("parse-filepath");
 var currentFile = '';
 var isFileLoadedInitially = false;
+const config = require('./config');
 
 // `remote.require` since `Menu` is a main-process module.
 var buildEditorContextMenu = remote.require('electron-editor-context-menu');
@@ -46,6 +47,7 @@ window.onload = function() {
   var markdownArea = document.getElementById('markdown');
 
   cm.on('change',function(cMirror){
+      countWords();
     // get value right from instance
     //yourTextarea.value = cMirror.getValue();
     var markdownText = cMirror.getValue();
@@ -83,7 +85,183 @@ window.onload = function() {
     }
   });
 
-  document.getElementById("minimize").onclick = function() { window.minimize(); }
-  document.getElementById("maximize").onclick = function() { window.isMaximized() ? window.unmaximize() : window.maximize(); }
+  // const BrowserWindow = remote;
+  // const win = BrowserWindow.getFocusedWindow();
+  const win = remote.BrowserWindow.getFocusedWindow();
+
+  document.getElementById("minimize").onclick = function() { remote.BrowserWindow.getFocusedWindow().minimize(); }
+  document.getElementById("maximize").onclick = function() { win.isMaximized() ? win.unmaximize() : win.maximize(); }
   document.getElementById("close").onclick = function() { window.close(); }
 }
+
+/**************************
+  * Synchronized scrolling *
+  **************************/
+
+ var $prev = $('#previewPanel'),
+   $markdown = $('#markdown'),
+   $syncScroll = $('#syncScroll'),
+   canScroll; // Initialized below.
+
+ // Retaining state in boolean since this will be more CPU friendly instead of constantly selecting on each event.
+ var toggleSyncScroll = () => {
+     console.log('Toggle scroll synchronization.');
+     canScroll = $syncScroll.is(':checked');
+
+   config.set('isSyncScroll', canScroll);
+     // If scrolling was just enabled, ensure we're back in sync by triggering window resize.
+     if (canScroll) $(window).trigger('resize');
+ }
+ //toggleSyncScroll();
+ $syncScroll.on('change', toggleSyncScroll);
+
+ const isSyncScroll = config.get('isSyncScroll');
+ if(isSyncScroll===true){
+   $syncScroll.attr('checked', true);
+ }else{
+   $syncScroll.attr('checked', false);
+ }
+ /**
+  * Scrollable height.
+  */
+
+ var codeScrollable = () => {
+   var info = cm.getScrollInfo(),
+     fullHeight = info.height,
+     viewHeight = info.clientHeight;
+
+   return fullHeight - viewHeight;
+ }
+
+ var prevScrollable = () => {
+   var fullHeight = $markdown.height(),
+     viewHeight = $prev.height();
+   return fullHeight - viewHeight;
+ }
+
+ /**
+  * Temporarily swaps out a scroll handler.
+  */
+ var muteScroll = (obj, listener) => {
+   obj.off('scroll', listener);
+   obj.on('scroll', tempHandler);
+
+   var tempHandler = () => {
+     obj.off('scroll', tempHandler);
+     obj.on('scroll', listener);
+   }
+ }
+
+ /**
+  * Scroll Event Listeners
+  */
+ var codeScroll = () => {
+   var scrollable = codeScrollable();
+   if (scrollable > 0 && canScroll) {
+     var percent = cm.getScrollInfo().top / scrollable;
+
+     // Since we'll be triggering scroll events.
+    //  console.log('Code scroll: %' + (Math.round(100 * percent)));
+     muteScroll($prev, prevScroll);
+     $prev.scrollTop(percent * prevScrollable());
+   }
+ }
+ cm.on('scroll', codeScroll);
+ $(window).on('resize', codeScroll);
+
+ var prevScroll = () => {
+     var scrollable = prevScrollable();
+     if (scrollable > 0 && canScroll) {
+       var percent = $(this).scrollTop() / scrollable;
+
+       // Since we'll be triggering scroll events.
+      //  console.log('Preview scroll: %' + (Math.round(100 * percent)));
+       muteScroll(cm, codeScroll);
+       cm.scrollTo(null, codeScrollable() * percent);
+     }
+ }
+ $prev.on('scroll', prevScroll);
+
+
+function newFile() {
+  fileEntry = null;
+  hasWriteAccess = false;
+  cm.setValue("");
+}
+
+function setFile(theFileEntry, isWritable) {
+  fileEntry = theFileEntry;
+  hasWriteAccess = isWritable;
+}
+
+function readFileIntoEditor(theFileEntry) {
+  fs.readFile(theFileEntry.toString(), function (err, data) {
+    if (err) {
+      console.log("Read failed: " + err);
+    }
+    cm.setValue(String(data));
+  });
+}
+
+function writeEditorToFile(theFileEntry) {
+  var str = cm.getValue();
+  fs.writeFile(theFileEntry, cm.getValue(), function (err) {
+    if (err) {
+      console.log("Write failed: " + err);
+      return;
+    }
+    console.log("Write completed.");
+  });
+}
+
+var onChosenFileToOpen = function(theFileEntry) {
+  console.log(theFileEntry);
+  setFile(theFileEntry, false);
+  readFileIntoEditor(theFileEntry);
+};
+
+var onChosenFileToSave = function(theFileEntry) {
+  setFile(theFileEntry, true);
+  writeEditorToFile(theFileEntry);
+};
+
+function handleNewButton() {
+  if (false) {
+    newFile();
+    cm.setValue("");
+    console.log(cm.getValue().toString())
+  } else {
+    window.open('file://' + __dirname + '/index.html');
+  }
+}
+
+function handleOpenButton() {
+  dialog.showOpenDialog({properties: ['openFile']}, function(filename) {
+      onChosenFileToOpen(filename.toString()); });
+}
+
+function handleSaveButton() {
+  if (fileEntry && hasWriteAccess) {
+    writeEditorToFile(fileEntry);
+  } else {
+    dialog.showSaveDialog(function(filename) {
+       onChosenFileToSave(filename.toString(), true);
+    });
+  }
+}
+
+document.getElementById("new").addEventListener("click", handleNewButton);
+document.getElementById("open").addEventListener("click", handleOpenButton);
+document.getElementById("save").addEventListener("click", handleSaveButton);
+
+
+/****************
+ ** Word Count **
+*****************/
+function countWords() {
+    wordcount = cm.getValue().split(/\b[\s,\.-:;]*/).length;
+    document.getElementById("wordcount").innerHTML = "words: " + wordcount.toString();
+    return cm.getValue().split(/\b[\s,\.-:;]*/).length;
+}
+
+document.getElementById("plainText").addEventListener("keypress", countWords)
