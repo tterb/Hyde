@@ -1,14 +1,13 @@
-<p align="center">
+<p align="center"> 
   <img src="https://user-images.githubusercontent.com/16360374/27329362-2f41b4b4-556a-11e7-9b74-fffd11baf34b.png" width="250"/>
   <br><br>
   <img src="https://user-images.githubusercontent.com/16360374/27329363-2f505686-556a-11e7-8664-419fc3fd61a9.png" width="225"/>
 </p>
-
 <h3 align="center">An <a href="http://electron.atom.io" target="_blank"><img src="https://user-images.githubusercontent.com/16360374/27318472-58bebca2-5541-11e7-9870-68d4a4f8f957.png" width="22"/> Electron</a> powered markdown editor for  <a href="https://jekyllrb.com" target="_blank"><img src="https://user-images.githubusercontent.com/16360374/27342564-662358d6-5595-11e7-944d-309b695d238a.png" width="65"/></a> users.</h3>
 <br>
 <p align="center">
   <a href="https://badge.fury.io/gh/JonSn0w%2FHyde-MD">
-    <img src="https://badge.fury.io/gh/JonSn0w%2FHyde-MD.svg" height="21" alt="version">
+    <img src="https://badge.fury.io/gh/JonSn0w%2FHyde-MD.svg" height="21" alt="version">&nbsp;
   </a>
   <a href="https://opensource.org/licenses/MIT">
     <img src="https://img.shields.io/badge/license-MIT-yellow.svg?" height="21" title="License">&nbsp;
@@ -20,23 +19,24 @@
     <img src="https://img.shields.io/badge/built for-Jekyll-red.svg" height="21" title="Jekyll">&nbsp;
   </a>
 </p>
-
+<br>
 
 # Features
 
-* LivePreview
-  - Instantly see changes to your Markdown documents in rendered Markdown or HTML as you create them.
-  - Automatically scrolling that keeps up with you as you type.
+* Live Preview
+  - Instantly observe changes to your documents in rendered Markdown or HTML as you create them
+  - Sync scrolling to keep up with you as you type
 * GitHub Flavored Markdown(GFM")
-* Toolbar for basic Markdown formatting
-* Syntax highlighting
+* User-friendly formatting via the toolbar
+* Syntax highlighting for Markdown and compatible HTML
 * Dark/Light syntax-themes
-* Emoji support :tada:
-* App can remain active in tray for quick usage
+* :tada: Emoji support :tada:
 * Full screen mode
-  - Write distraction free.
+  - Write distraction free
+* Integrated word count
+* App can remain active in tray for quick usage
 * Cross platform
-  - Windows, Mac and Linux ready.
+  - Windows, Mac and Linux ready
   
 <br>
 
