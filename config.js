@@ -5,6 +5,7 @@ module.exports = new Config({
   defaults: {
     darkMode: true,
     isSyncScroll: true,
-    isHtml: false
+    isHtml: false,
+    keepInTray: false
   }
 });
