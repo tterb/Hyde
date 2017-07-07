@@ -5,11 +5,12 @@ html, body, section, .full-height {
 body {
     font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif !important;
     font-size: 16px;
+    resize: both;
     overflow: hidden;
 }
 
 #editArea {
-    background-color: #383734;
+    background-color: #323130;
     color: #efefef;
 }
 
@@ -20,11 +21,11 @@ label {
 }
 
 .optContainer {
-    background-color: #383734;
+    background-color: #282726;
 }
 
 .pref {
-    background-color: #383734;
+    background-color: #282726;
 }
 
 #pad{
@@ -49,7 +50,7 @@ label {
 
 .frame {
     position: absolute;
-    background-image: -webkit-linear-gradient(top, #444340, #383734);
+    background-image: -webkit-linear-gradient(top, #353334, #282726);
     color: #8C8C8C;
     height: 32px;
     width: 100%;
@@ -57,7 +58,15 @@ label {
     left: 0;
     border-top-left-radius: 15px !important;
     border-top-right-radius: 15px !important;
-    z-index: 9999 !important;
+    z-index: 9999;
+}
+
+.frame #draggable {
+    position: absolute;
+    height: 100%;
+    width: -webkit-calc(100% - 105px);
+    top: 0;
+    left: 0;
 }
 
 .frame .icon > img {
@@ -89,11 +98,12 @@ label {
 
 .frame > button {
     display: inline-block;
-    background: #383734;
+    background: transparent;
     border: none;
     float: right;
     margin: 1px 0px;
     padding: 4px;
+    z-index: 9999999;
 }
 
 .frame #close {
@@ -151,7 +161,7 @@ label {
 }
 
 .toolbar-buttons > a {
-    background: -webkit-linear-gradient(#3c3e3d, #292b2a);
+    /*background: -webkit-linear-gradient(#3c3e3d, #292b2a);*/
     border: 1px outset #3a3f3d;
     padding: 3px 5px 4px 4px;
 }
@@ -163,8 +173,9 @@ label {
 
 .bottom-bar {
   position: absolute;
-  background-color: #383734;
-  color: #d2d5d4;
+  background-image: -webkit-linear-gradient(top, #2d2f2a, #232220);
+  color: #b6b5b4;
+  font-size: 14px;
   height: 32px;
   width: 100%;
   top: 96%;
@@ -173,12 +184,41 @@ label {
   border-bottom-right-radius: 10px !important;
   padding: 2px;
   z-index: 99999;
+  resize: both;
 }
 
 .bottom-bar #bottom-file {
   display: inline-block;
   font-size: 15px;
-  margin: 4px 16px;
+  margin: 4px 4px 4px 16px;
+}
+
+/*.bottom-bar #caret-pos {
+  display: inline-block;
+  font-size: 15px;
+  margin: 4px 4px;
+}*/
+
+.bottom-bar #wordcount {
+  display: inline-block;
+  font-size: 15px;
+  margin: 4px 6px 4px 15px;
+}
+
+.bottom-bar > label {
+  display: inline-block;
+  position: absolute;
+  color: #b6b5b4;
+  font-size: 14px;
+  right: 1%;
+  margin: 4px 5px;
+}
+
+.bottom-bar #syncScroll {
+  display: inline-block;
+  position: absolute;
+  right: 8.25%;
+  margin-top: 8.25px;
 }
 
 .pref {
@@ -193,7 +233,7 @@ label {
   width: 50%;
   text-align: left;
   padding-left: 10px;
-  background-color: #383734;
+  background-color: #282726;
   padding: 15px 10px 5px;
 }
 
@@ -213,7 +253,7 @@ label {
   z-index: 999;
   width: 100%;
   height: 23px;
-  box-shadow: 0px 1px 11px -2px rgba(0,0,0,0.75);
+  /*box-shadow: 0px 1px 11px -2px rgba(0,0,0,0.75);*/
 }
 
 #htmlPreview:focus{
@@ -222,14 +262,15 @@ label {
 
 #toolbarArea{
   position: fixed;
-  top: 75px;
+  top: 80px;
   left: 0;
   z-index: 999;
   width: 100%;
   height: 35px;
   display:none;
   border-bottom: 1px #2a2a2a solid;
-  background-color: #383735;
+  background-color: #302f2e;
+  box-shadow: 0 0 6px rgba(0,0,0,0.75);
 }
 
 a#angleToolBar {
@@ -263,6 +304,14 @@ a#angleToolBar:hover {
     /*background: #fcfcfc;*/
     border-color: #95a5a6;
     color: rgba(255,255,255,0.9) !important;
+}
+
+.editor-toolbar.active {
+  color: rgba(255,255,255,0.9) !important;
+}
+
+.editor-toolbar.inactive {
+    color: rgba(255,255,255,0.4) !important;
 }
 
 .separator {
@@ -324,13 +373,13 @@ input[type="radio"]:checked:before {
 }
 
 .preview-dark-mode{
-    background: rgb(246,245,245);
-    color: #E0E0E0;
+    background: rgb(248,246,245);
+    color: #3a3a3a;
 }
 
 .preview-dark-mode textarea{
-    background: #151515;
-    color: #E0E0E0;
+    background: rgb(248,246,245);
+    color: #3a3a3a;
 }
 
 .CodeMirror-linenumbers {
@@ -351,4 +400,59 @@ input[type="radio"]:checked:before {
   background: #42403E;
   border-radius: 10px;
   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+
+
+#markdown h1 {
+    color: #333;
+    font-size: 42px;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    line-height: 1.25;
+    border-bottom: 1px solid #eaecef;
+    margin-bottom: 20px;
+}
+#markdown h2 {
+    color: #333;
+    font-size: 33px;
+    font-weight: 600;
+    line-height: 1.2;
+    border-bottom: 1px solid #eaecef;
+    margin-bottom: 15px;
+}
+#markdown h3 {
+    color: #333;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.1;
+}
+#markdown h4 {
+    color: #333;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.05;
+}
+#markdown ol, ul {
+    line-height: 1.75;
+}
+#markdown a {
+    color: #237aa7;
+    text-decoration: none;
+}
+#markdown a:focus, a:hover, a:active {
+    color: ##23728c;
+    text-decoration: none;
+}
+#markdown hr {
+    border-top: 1px solid #ddd;
+}
+#markdown pre {
+  background: #424242;
+  border-radius: 10px;
+  padding: 9.5px 18px;
+}
+#markdown pre code {
+  color: rgba(255,255,255,0.7);
+  letter-spacing: 0.045em;
+  border-radius: 10px;
 }
