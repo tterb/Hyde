@@ -8,24 +8,32 @@
     <link rel="stylesheet" href="css/theme/monokai.css">
     <link rel="stylesheet" href="css/theme/zenburn.css">
     <link rel="stylesheet" href="css/theme/material.css">
+    <link rel="stylesheet" href="css/theme/mdn-like.css">
     <link rel="stylesheet" href="css/theme/one-dark.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/open-sans.css">
     <link rel="stylesheet" href="css/source-code-pro.css">
     <link rel="stylesheet" href="css/dialog.css">
   </head>
-  <body class="container-fluid" style="resize: both">
-      <section class="frame">
+  <section class="frame">
         <div id="draggable" style="-webkit-app-region:drag">
         <div class="icon"><img src="img/favicon.ico"></div>
         <div id="title">Hyde</div>
         </div>
-        <!--<div class="metacity" onclick="close()">-->
           <button id="close" style="cursor: pointer;"><img src="img/close.png" alt="Close"/></button>
           <button id="maximize" style="cursor: pointer;"><img src="img/max.png" alt="Maximize"/></button>
           <button id="minimize" style="cursor: pointer;"><img src="img/min.png" alt="Minimize"/></button>
-        <!--</div>-->
     </section>
+  <body class="container-fluid" style="resize: both">
+      <section class="frame">
+        <div id="draggable" style="-webkit-app-region:drag">
+          <div class="icon"><img src="img/favicon.ico"></div>
+          <div id="title">Hyde</div>
+        </div>
+        <button id="close" style="cursor: pointer;"><img src="img/close.png" alt="Close"/></button>
+        <button id="maximize" style="cursor: pointer;"><img src="img/max.png" alt="Maximize"/></button>
+        <button id="minimize" style="cursor: pointer;"><img src="img/min.png" alt="Minimize"/></button>
+      </section>
       <div class="optContainer">
         <div class="mode">
           <span class="toolContainer">
@@ -135,7 +143,7 @@
                         <td>$$LaTeX code$$</td>
                       </tr>
                       <tr>
-                        <td><pre style="display: inline-block; margin: 4px 0"><code><span class="keyword">var </span>code = <span class="string">"formatted"</span>;</code></pre></td>
+                        <td><pre style="display: inline-block; margin: 8px 0 2px"><code><span class="keyword">var </span>code = <span class="string">"formatted"</span>;</code></pre></td>
                         <td style="line-height: 100%">``` <i style="color: rgba(0,0,0,0.5)">(shift+enter for line break)</i><br>var code = "formatted";<br>```</td>
                       </tr>
                   </tbody>

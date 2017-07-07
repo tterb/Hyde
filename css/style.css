@@ -178,7 +178,7 @@ label {
   font-size: 14px;
   height: 32px;
   width: 100%;
-  top: 96%;
+  bottom: 0%;
   left: 0;
   border-bottom-left-radius: 10px !important;
   border-bottom-right-radius: 10px !important;
@@ -189,8 +189,10 @@ label {
 
 .bottom-bar #bottom-file {
   display: inline-block;
+  position: relative;
   font-size: 15px;
-  margin: 4px 4px 4px 16px;
+  bottom: 2px;
+  margin: 4px 4px 4px 15px;
 }
 
 /*.bottom-bar #caret-pos {
@@ -201,7 +203,9 @@ label {
 
 .bottom-bar #wordcount {
   display: inline-block;
+  position: relative;
   font-size: 15px;
+  bottom: 2px;
   margin: 4px 6px 4px 15px;
 }
 
@@ -348,7 +352,55 @@ input[type="radio"]:checked:before {
     box-sizing: border-box;
     width: 100%;
     padding: 1em;
-    background: #f2f0ed;
+    background: #d2d0cd;
+    border-radius: 20px;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.6);
+}
+
+.modal-header {
+  border-bottom-color: #494949;
+}
+
+.modal-header .close {
+  position: relative;
+  color: #fff;
+  font-size: 25px;
+  top: -3px;
+  right: 3px;
+}
+
+.modal-content {
+    position: relative;
+    background: #353334;
+    color: #e5e5e5;
+    top: 20px;
+    border-radius: 15px;
+}
+
+.modal-body {
+    color: #333;
+}
+
+.modal-footer {
+  border-top-color: #494949;
+}
+
+.modal-footer > button {
+  background-image: -webkit-linear-gradient(#454746, #242625);
+  color: #d2d5d4;
+  border: 1px inset #3a3f3d;
+  border-radius: 6px;
+}
+
+pre {
+  background: #454545;
+  color: #eee;
+  border-radius: 10px;
+}
+
+code {
+  background: #414141;
+  color: #eee;
 }
 
 .markdown-help-content {
@@ -361,7 +413,7 @@ input[type="radio"]:checked:before {
 }
 
 .markdown-help-content tr:nth-child(even) {
-    background-color: rgb(212, 212, 212);
+    background-color: #b2b0ad;
 }
 
 .markdown-help-content tr:first-child td {
@@ -373,7 +425,7 @@ input[type="radio"]:checked:before {
 }
 
 .preview-dark-mode{
-    background: rgb(248,246,245);
+    /*background: rgb(248,246,245);*/
     color: #3a3a3a;
 }
 
