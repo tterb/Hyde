@@ -5,8 +5,7 @@
   font-family: 'Source Code Pro', Inconsolata, Monaco, Consolas, monospace;
   height: 100%;
   color: black;
-  padding: 3px 0 8px !important;
-  box-shadow: 0 0 15px rgba(0,0,0,0.6);
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
 }
 
 /* PADDING */
@@ -16,7 +15,7 @@
 }
 .CodeMirror pre {
   font-size: 18px;
-  padding: 0 4px; /* Horizontal padding of content */
+  padding: 0 12px; /* Horizontal padding of content */
 }
 
 .CodeMirror-scrollbar-filler, .CodeMirror-gutter-filler {
@@ -26,16 +25,15 @@
 /* GUTTER */
 
 .CodeMirror-gutters {
-  border-right: 1px solid rgba(0,0,0,0.5);
   background-color: #f7f7f7;
   white-space: nowrap;
 }
 .CodeMirror-linenumbers {}
 .CodeMirror-linenumber {
-  padding: 0 3px 0 5px;
+  padding: 0 9px 0 5px;
   min-width: 20px;
-  text-align: center;
-  color: rgba(255,255,255,0.4) !important;
+  text-align: right;
+  color: rgba(245,245,245,0.4);
   white-space: nowrap;
 }
 
@@ -45,7 +43,8 @@
 /* CURSOR */
 
 .CodeMirror-cursor {
-  border-left: 1px solid black;
+  border-left: 2px solid rbga(255,255,255,0.9);
+  border-left-width: 2px !important;
   border-right: none;
   width: 0;
 }
@@ -198,10 +197,13 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
   z-index: 3;
 }
 .CodeMirror-gutter {
+  background: rgba(0,0,0,0.2);
   white-space: normal;
   height: 100%;
   display: inline-block;
   vertical-align: top;
+  border-right: 1px solid rgba(240,240,240,0.025);
+  padding-right: 3px;
   margin-bottom: -30px;
   /* Hack to make IE7 behave */
   *zoom:1;
