@@ -7,16 +7,21 @@ const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 
 const mainPage = 'file://' + __dirname + '/index.html';
-var Menu = require('menu');
-var dialog = require('dialog');
-var shell = require('shell');
+// const remote = require('electron').remote;
+// const Menu = remote.Menu;
+// var Menu = require('menu');
+// const {dialog} = require('electron').remote
+// const {shell} = require('electron');
+// var dialog = require('dialog');
+var shell = require('electron').shell;
 const tray = require('./tray');
 const func = require('./js/functions');
 const mod = require('./package.json');
+
 var config = require('./config');
 const keepInTray = config.get('keepInTray');
-var globalShortcut = require('global-shortcut');
-// var localShortcut = require('electron-localShortcut');
+// var globalShortcut = require('global-shortcut');
+var localShortcut = require('electron-localShortcut');
 
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -27,10 +32,10 @@ let isQuitting = false;
 function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-      width: 1400,
-      height: 800,
+      width: 1000,
+      height: 600,
       show: true,
-      frame: true,
+      frame: false,
       icon: __dirname+'/img/favicon.ico'
   });
 
@@ -161,36 +166,38 @@ function createWindow () {
       ]
     }
   ];
-
-  Menu.setApplicationMenu(Menu.buildFromTemplate(template));
+  const {Menu, MenuItem, ipcMain} = require('electron');
+    let menu = Menu.buildFromTemplate(template);
+    Menu.setApplicationMenu(menu);
+  // Menu.setApplicationMenu(Menu.buildFromTemplate(template));
 
   // Regestering global shortcuts for formatting markdown
   var focusedWindow = BrowserWindow.getFocusedWindow();
-  globalShortcut.register('CmdOrCtrl+b', function() {
+  localShortcut.register('CmdOrCtrl+b', function() {
       focusedWindow.webContents.send('ctrl+b');
   });
 
-  globalShortcut.register('CmdOrCtrl+i', function() {
+  localShortcut.register('CmdOrCtrl+i', function() {
       focusedWindow.webContents.send('ctrl+i');
   });
 
-  globalShortcut.register('CmdOrCtrl+/', function() {
+  localShortcut.register('CmdOrCtrl+/', function() {
       focusedWindow.webContents.send('ctrl+/');
   });
 
-  globalShortcut.register('CmdOrCtrl+l', function() {
+  localShortcut.register('CmdOrCtrl+l', function() {
       focusedWindow.webContents.send('ctrl+l');
   });
 
-  globalShortcut.register('CmdOrCtrl+h', function() {
+  localShortcut.register('CmdOrCtrl+h', function() {
       focusedWindow.webContents.send('ctrl+h');
   });
 
-  globalShortcut.register('CmdOrCtrl+Alt+i', function() {
+  localShortcut.register('CmdOrCtrl+Alt+i', function() {
       focusedWindow.webContents.send('ctrl+alt+i');
   });
 
-  globalShortcut.register('CmdOrCtrl+Shift+t', function() {
+  localShortcut.register('CmdOrCtrl+Shift+t', function() {
       focusedWindow.webContents.send('ctrl+shift+t');
   });
 
