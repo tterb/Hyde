@@ -41,14 +41,17 @@
   "devDependencies": {
     "devtron": "^1.1.2",
     "electron-packager": "^7.0.3",
-    "electron-prebuilt": "^0.36.12",
+    "electron-rebuild": "^1.5.11",
     "gulp": "^3.9.1"
   },
   "dependencies": {
+    "electron": "^1.4.0",
     "electron-config": "^0.2.1",
     "electron-editor-context-menu": "^1.1.1",
-    "showdown": "^1.3.0",
     "electron-json-storage": "latest",
-    "parse-filepath": "latest"
+    "electron-localshortcut": "^0.6.1",
+    "electron-titlebar": "0.0.2",
+    "parse-filepath": "latest",
+    "showdown": "^1.3.0"
   }
 }
