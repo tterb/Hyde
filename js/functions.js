@@ -26,7 +26,7 @@ function toggleTheme(opt) {
 
 var changeTheme = function() {
   if(document.getElementById("previewPanel").className.includes("preview-dark-mode")) {
-    cm.setOption("theme", "default");
+    cm.setOption("theme", "mdn-like");
     document.getElementById("previewPanel").className = "col-md-6 full-height";
     document.getElementById("toggle-theme").className = "fa fa-lightbulb-o editor-toolbar active";
   } else {
@@ -39,17 +39,17 @@ var changeTheme = function() {
 var showToolBar = function () {
   if(document.getElementById("toolbarArea").style.display == "block"){
     document.getElementById("angleToolBar").className = "";
-    document.getElementById("angleToolBar").className = "fa fa-chevron-right";
+    document.getElementById("angleToolBar").className = "fa fa-angle-right";
     document.getElementById("angleToolBar").style.paddingLeft = "10px";
     document.getElementById("toolbarArea").style.display = "none";
-    document.getElementById("editArea").style.paddingTop = "60px";
-    document.getElementById("textPanel").style.paddingTop = "25px";
+    document.getElementById("editArea").style.paddingTop = "79px";
+    document.getElementById("textPanel").style.paddingTop = "0px";
   } else {
     document.getElementById("angleToolBar").className = "";
-    document.getElementById("angleToolBar").className = "fa fa-chevron-down";
+    document.getElementById("angleToolBar").className = "fa fa-angle-down";
     document.getElementById("angleToolBar").style.paddingLeft = "6px";
     document.getElementById("toolbarArea").style.display = "block";
-    document.getElementById("editArea").style.paddingTop = "115px";
+    document.getElementById("editArea").style.paddingTop = "114px";
     document.getElementById("textPanel").style.paddingTop = "0px";
   }
 }
@@ -79,10 +79,10 @@ var updateWindowTitle = function (path) {
   if (path) {
     parsedPath = parsePath(path);
     dir = parsedPath.dirname || process.cwd();
-    title = appName + " - " + parsedPath.basename + " - " + dir;
+    title = appName + " - " + path.toString();
     document.getElementById("bottom-file").innerHTML = parsedPath.basename;
   } else {
-    title = appName + " - New document";
+    title = appName;
     document.getElementById("bottom-file").innerHTML = "New document"
   }
   if (!this.isClean()) {
