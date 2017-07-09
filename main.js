@@ -10,19 +10,16 @@ const mainPage = 'file://' + __dirname + '/index.html';
 // const remote = require('electron').remote;
 // const Menu = remote.Menu;
 // var Menu = require('menu');
-// const {dialog} = require('electron').remote
-// const {shell} = require('electron');
-// var dialog = require('dialog');
+var dialog = require('electron').dialog;
 var shell = require('electron').shell;
 const tray = require('./tray');
 const func = require('./js/functions');
 const mod = require('./package.json');
-
 var config = require('./config');
 const keepInTray = config.get('keepInTray');
 // var globalShortcut = require('global-shortcut');
 var localShortcut = require('electron-localShortcut');
-
+// const titlebar = require('electron-titlebar');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -30,14 +27,25 @@ let mainWindow;
 let isQuitting = false;
 
 function createWindow () {
-  // Create the browser window.
-  mainWindow = new BrowserWindow({
+
+  var conf = {
       width: 1000,
       height: 600,
       show: true,
-      frame: false,
+      autoHideMenuBar: true,
       icon: __dirname+'/img/favicon.ico'
-  });
+  }
+
+  if (process.platform == 'darwin') {
+    conf.titleBarStyle = 'hidden';
+  } else {
+    conf.frame = false;
+  }
+
+  // Create the browser window.
+  mainWindow = new BrowserWindow(conf);
+
+  mainWindow.show();
 
   // and load the index.html of the app.
   mainWindow.loadURL(mainPage);
