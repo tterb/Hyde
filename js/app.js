@@ -15,6 +15,9 @@ var currentFile = '';
 var isFileLoadedInitially = false;
 const config = require('./config');
 
+// require('electron-titlebar');
+// const titlebar = document.getElementById('electron-titlebar');
+
 // `remote.require` since `Menu` is a main-process module.
 var buildEditorContextMenu = remote.require('electron-editor-context-menu');
 var currentValue = 0, currentValueTheme = 0;
@@ -33,21 +36,35 @@ window.addEventListener('contextmenu', function(e) {
   }, 30);
 });
 
-var cm = CodeMirror.fromTextArea(document.getElementById("plainText"), {
-  lineNumbers: true,
-  mode: "markdown",
-  theme: "monokai",
+var conf = {
+  mode: "gfm",
   viewportMargin: 100000000000,
   lineWrapping : true,
   autoCloseBrackets: true
-});
+}
+var fs = require('fs');
+var files = fs.readdirSync('./css/theme');
+var theme = config.get('theme');
+
+if (files.includes(theme+'.css')) {
+  conf.theme = theme;
+} else {
+  conf.theme = "zenburn";
+}
+
+if (!config.get('lineNumbers')) {
+    conf.lineNumbers = false;
+}
+
+var cm = CodeMirror.fromTextArea(document.getElementById("plainText"), conf);
+
 
 window.onload = function() {
   var plainText = document.getElementById('plainText');
   var markdownArea = document.getElementById('markdown');
 
   cm.on('change',function(cMirror){
-      countWords();
+    countWords();
     // get value right from instance
     //yourTextarea.value = cMirror.getValue();
     var markdownText = cMirror.getValue();
@@ -92,7 +109,19 @@ window.onload = function() {
   document.getElementById("minimize").onclick = function() { remote.BrowserWindow.getFocusedWindow().minimize(); }
   document.getElementById("maximize").onclick = function() { win.isMaximized() ? win.unmaximize() : win.maximize(); }
   document.getElementById("close").onclick = function() { window.close(); }
+
+  var syncButton = document.getElementById('syncScroll');
+  if(config.get('isSyncScroll') === true) {
+    syncButton.className = 'fa fa-link';
+    //  $syncScroll.attr('checked', true);
+    isSynced = 'one';
+  } else {
+    syncButton.className = 'fa fa-unlink';
+    //  $syncScroll.attr('checked', false);
+    isSynced = 'two';
+  }
 }
+
 
 /**************************
   * Synchronized scrolling *
@@ -101,30 +130,34 @@ window.onload = function() {
  var $prev = $('#previewPanel'),
    $markdown = $('#markdown'),
    $syncScroll = $('#syncScroll'),
-   canScroll; // Initialized below.
+   isSynced; // Initialized below.
 
  // Retaining state in boolean since this will be more CPU friendly instead of constantly selecting on each event.
  var toggleSyncScroll = () => {
-     console.log('Toggle scroll synchronization.');
-     canScroll = $syncScroll.is(':checked');
+    console.log('Toggle scroll synchronization.');
+    isSynced = document.getElementById('syncScroll').className.includes('fa-link');
 
-   config.set('isSyncScroll', canScroll);
+    // config.set('isSyncScroll', isSynced);
+    if(isSynced === true) {
+      document.getElementById('syncScroll').className = 'fa fa-unlink';
+      isSynced = false;
+      $(window).trigger('resize')
+      // $syncScroll.attr('checked', true);
+    } else {
      // If scrolling was just enabled, ensure we're back in sync by triggering window resize.
-     if (canScroll) $(window).trigger('resize');
+      document.getElementById('syncScroll').className = 'fa fa-link';
+      isSynced = true;
+      $(window).trigger('resize')
+    //  $syncScroll.attr('checked', false);
+   }
+   config.set('isSyncScroll', !isSynced);
  }
- //toggleSyncScroll();
+
  $syncScroll.on('change', toggleSyncScroll);
 
- const isSyncScroll = config.get('isSyncScroll');
- if(isSyncScroll===true){
-   $syncScroll.attr('checked', true);
- }else{
-   $syncScroll.attr('checked', false);
- }
  /**
   * Scrollable height.
   */
-
  var codeScrollable = () => {
    var info = cm.getScrollInfo(),
      fullHeight = info.height,
@@ -157,7 +190,7 @@ window.onload = function() {
   */
  var codeScroll = () => {
    var scrollable = codeScrollable();
-   if (scrollable > 0 && canScroll) {
+   if (scrollable > 0 && isSynced) {
      var percent = cm.getScrollInfo().top / scrollable;
 
      // Since we'll be triggering scroll events.
@@ -171,7 +204,7 @@ window.onload = function() {
 
  var prevScroll = () => {
      var scrollable = prevScrollable();
-     if (scrollable > 0 && canScroll) {
+     if (scrollable > 0 && isSynced) {
        var percent = $(this).scrollTop() / scrollable;
 
        // Since we'll be triggering scroll events.
@@ -181,6 +214,8 @@ window.onload = function() {
      }
  }
  $prev.on('scroll', prevScroll);
+
+
 
 
 function newFile() {
