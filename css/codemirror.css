@@ -163,6 +163,7 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
 }
 .CodeMirror-sizer {
   position: relative;
+  margin-left: 20px !important;
   border-right: 30px solid transparent;
 }
 
@@ -175,6 +176,7 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
   display: none;
 }
 .CodeMirror-vscrollbar {
+  width: 9px;
   right: 0; top: 0;
   overflow-x: hidden;
   overflow-y: scroll;
@@ -197,12 +199,13 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
   z-index: 3;
 }
 .CodeMirror-gutter {
-  background: rgba(0,0,0,0.2);
+  display: inline-block;
+  background: rgba(0,0,0,0.075);
   white-space: normal;
   height: 100%;
-  display: inline-block;
+  width: 30px !important;
   vertical-align: top;
-  border-right: 1px solid rgba(240,240,240,0.025);
+  border-right: 1px solid rgba(240,240,240,0.065);
   padding-right: 3px;
   margin-bottom: -30px;
   /* Hack to make IE7 behave */
@@ -258,6 +261,7 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
   word-wrap: break-word;
   white-space: pre-wrap;
   word-break: normal;
+  padding-left: 8px;
 }
 
 .CodeMirror-linebackground {
@@ -276,6 +280,10 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
 
 .CodeMirror-code {
   outline: none;
+}
+
+.CodeMirror-code > div {
+  padding-left: 15px;
 }
 
 /* Force content-box sizing for the elements where we expect it */
