@@ -1,3 +1,4 @@
+
 var clkPref = function (opt) {
   currentValue = opt.value;
   if (currentValue=='preview') {
@@ -36,23 +37,78 @@ var changeTheme = function() {
   }
 }
 
-var showToolBar = function () {
-  if(document.getElementById("toolbarArea").style.display == "block"){
-    document.getElementById("angleToolBar").className = "";
-    document.getElementById("angleToolBar").className = "fa fa-angle-right";
-    document.getElementById("angleToolBar").style.paddingLeft = "10px";
-    document.getElementById("toolbarArea").style.display = "none";
-    document.getElementById("editArea").style.paddingTop = "79px";
-    document.getElementById("textPanel").style.paddingTop = "0px";
-  } else {
-    document.getElementById("angleToolBar").className = "";
-    document.getElementById("angleToolBar").className = "fa fa-angle-down";
-    document.getElementById("angleToolBar").style.paddingLeft = "6px";
-    document.getElementById("toolbarArea").style.display = "block";
-    document.getElementById("editArea").style.paddingTop = "114px";
-    document.getElementById("textPanel").style.paddingTop = "0px";
+var formatHead = function() {
+  var edit = $('#editArea');
+  var toolbar = $('#toolbarArea');
+  var toggle = $('#angleToolBar');
+  var menu = $('#appMenu');
+  var opt = $('#opt');
+  var menuHeight = parseInt(menu.height());
+  var editTop = 74;
+  if($('#toolbarArea:hidden').length == 0) {
+    editTop += 35;
   }
+  if(menu.attr('class') == 'hidden') {
+    opt.css({ top: '32px' });
+    toolbar.css({ top: '74px' });
+  } else {
+    editTop += 19;
+    opt.css({ top: '52px' });
+    toolbar.css({ top: '93px' });
+  }
+  edit.css('padding-top', editTop);
 }
+
+var showToolBar = function() {
+  var toolbar = $('#toolbarArea');
+  var toggle = $('#angleToolBar');
+  if($('#toolbarArea:hidden').length == 0) {
+    toggle.attr('class', 'fa fa-angle-right');
+    toggle.css('padding-left', '10px');
+    toolbar.css('display', 'none');
+  } else {
+    toggle.attr('class', 'fa fa-angle-down');
+    toggle.css('padding-left', '6px');
+    toolbar.css('display', 'block');
+  }
+  formatHead();
+};
+
+function toggleMenu() {
+    var menu = $('#appMenu');
+    if(menu.attr('class') == 'hidden') {
+        menu.attr('class', '');
+        menu.css('visibility', 'visible');
+        menu.css('height', '27px');
+    } else {
+        menu.attr('class', 'hidden');
+        menu.css('visibility', 'hidden');
+        menu.css('height', '0px');
+    }
+    formatHead();
+}
+
+// var showToolBar = function () {
+//   var editTop = document.getElementById('editArea').style.paddingTop;
+//   var toolbarHeight = document.getElementById('toolbarArea').offsetHeight;
+//   var menuHeight = document.getElementById('appMenu').offsetHeight;
+//   // if(!document.getElementById('appMenu').style.visibility == 'hidden') {
+//   //   menuHeight = 27;
+//   // }
+//   if(document.getElementById("toolbarArea").style.display == "block"){
+//     document.getElementById("angleToolBar").className = "";
+//     document.getElementById("angleToolBar").className = "fa fa-angle-right";
+//     document.getElementById("angleToolBar").style.paddingLeft = "10px";
+//     document.getElementById("toolbarArea").style.display = "none";
+//     document.getElementById("editArea").style.paddingTop = (editTop-toolbarHeight+menuHeight).toString()+"px";
+//   } else {
+//     document.getElementById("angleToolBar").className = "";
+//     document.getElementById("angleToolBar").className = "fa fa-angle-down";
+//     document.getElementById("angleToolBar").style.paddingLeft = "6px";
+//     document.getElementById("toolbarArea").style.display = "block";
+//     document.getElementById("editArea").style.paddingTop = (editTop+toolbarHeight+menuHeight).toString()+"px";
+//   }
+// }
 
 // Generations and clean state of CodeMirror
 var getGeneration = function () {
