@@ -138,3 +138,7 @@ ipc.on('ctrl+f', function() {
 ipc.on('ctrl+shift+f', function() {
   cm.execCommand('replace');
 });
+
+ipc.on('ctrl+.', function() {
+  toggleMenu();
+});
