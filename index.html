@@ -1,57 +1,149 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="UTF-8">
     <title>Hyde - New document</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/codemirror.css">
-    <link rel="stylesheet" href="css/theme/monokai.css">
-    <link rel="stylesheet" href="css/theme/zenburn.css">
-    <link rel="stylesheet" href="css/theme/material.css">
-    <link rel="stylesheet" href="css/theme/mdn-like.css">
-    <link rel="stylesheet" href="css/theme/one-dark.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/open-sans.css">
     <link rel="stylesheet" href="css/source-code-pro.css">
     <link rel="stylesheet" href="css/dialog.css">
+
+    <script src="node_modules/codemirror/lib/codemirror.js"></script>
+    <script src="node_modules/codemirror/mode/markdown/markdown.js"></script>
+    <script src="node_modules/codemirror/mode/gfm/gfm.js"></script>
+    <script src="node_modules/codemirror/addon/mode/simple.js"></script>
+    <script src="node_modules/codemirror/mode/xml/xml.js"></script>
+    <script src="node_modules/codemirror/mode/css/css.js"></script>
+    <script src="node_modules/codemirror/mode/clike/clike.js"></script>
+    <script src="node_modules/codemirror/mode/haml/haml.js"></script>
+    <script src="node_modules/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+    <script src="node_modules/codemirror/mode/yaml/yaml.js"></script>
+    <script src="node_modules/codemirror/mode/yaml-frontmatter/yaml-frontmatter.js"></script>
+    <script src="node_modules/codemirror/mode/javascript/javascript.js"></script>
+    <script src="node_modules/codemirror/mode/jsx/jsx.js"></script>
+    <script src="node_modules/codemirror/mode/php/php.js"></script>
+    <script src="node_modules/codemirror/mode/python/python.js"></script>
+    <script src="node_modules/codemirror/mode/powershell/powershell.js"></script>
+    <script src="node_modules/codemirror/mode/ruby/ruby.js"></script>
+    <script src="node_modules/codemirror/mode/shell/shell.js"></script>
+    <script src="node_modules/codemirror/mode/slim/slim.js"></script>
+    <script src="node_modules/codemirror/mode/sql/sql.js"></script>
+    <script src="node_modules/codemirror/mode/stex/stex.js"></script>
+    <script src="node_modules/codemirror/mode/textile/textile.js"></script>
+    <script src="node_modules/codemirror/mode/verilog/verilog.js"></script>
+    <script src="node_modules/codemirror/mode/xml/xml.js"></script>
+    <script src="node_modules/codemirror/mode/xquery/xquery.js"></script>
+    <script src="node_modules/codemirror/mode/rust/rust.js"></script>
+    <script src="node_modules/codemirror/mode/mscgen/mscgen.js"></script>
+    <script src="node_modules/codemirror/mode/dylan/dylan.js"></script>
+    <script src="node_modules/codemirror/mode/meta.js"></script>
+    <script src="node_modules/codemirror/addon/mode/overlay.js"></script>
+    <script src="node_modules/codemirror/addon/mode/multiplex.js"></script>
+    <script src="node_modules/codemirror/addon/scroll/simplescrollbars.js"></script>
+    <script src="node_modules/codemirror/addon/selection/active-line.js"></script>
   </head>
-  <section class="frame">
-        <div id="draggable" style="-webkit-app-region:drag">
-        <div class="icon"><img src="img/favicon.ico"></div>
-        <div id="title">Hyde</div>
-        </div>
-          <button id="close" style="cursor: pointer;"><img src="img/close.png" alt="Close"/></button>
-          <button id="maximize" style="cursor: pointer;"><img src="img/max.png" alt="Maximize"/></button>
-          <button id="minimize" style="cursor: pointer;"><img src="img/min.png" alt="Minimize"/></button>
-    </section>
+  <!-- <div id="electron-titlebar" class="drag inset" style="z-index:999999999;"></div> -->
   <body class="container-fluid" style="resize: both">
       <section class="frame">
         <div id="draggable" style="-webkit-app-region:drag">
-          <div class="icon"><img src="img/favicon.ico"></div>
+          <div class="icon"><img src="img/IconTray.png"></div>
           <div id="title">Hyde</div>
         </div>
         <button id="close" style="cursor: pointer;"><img src="img/close.png" alt="Close"/></button>
         <button id="maximize" style="cursor: pointer;"><img src="img/max.png" alt="Maximize"/></button>
         <button id="minimize" style="cursor: pointer;"><img src="img/min.png" alt="Minimize"/></button>
       </section>
-      <div class="optContainer">
+
+      <div id="appMenu" class="hidden" style="visibility:hidden;">
+        <!-- File -->
+        <div class="btn-group">
+          <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">File</button>
+          <ul class="dropdown-menu">
+            <li><a href="#">New</a><span>Ctrl + N</span></li>
+            <li><a href="#">Open</a><span>Ctrl + O</span></li>
+            <li class="dropdown-divider"></li>
+            <li><a href="#">Save</a><span>Ctrl + S</span></li>
+            <li><a href="#">Save As</a><span>Ctrl + Shift + S</span></li>
+            <li class="dropdown-divider"></li>
+            <li><a href="#">Settings</a><span>Ctrl + ,</span></li>
+            <li class="dropdown-divider"></li>
+            <li><a href="#">Exit</a></li>
+          </ul>
+        </div>
+        <!-- Edit -->
+        <div class="btn-group">
+          <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Edit</button>
+          <ul class="dropdown-menu">
+            <li><a href="#">Undo</a><span>Ctrl + Z</span></li>
+            <li><a href="#">Redo</a><span>Ctrl + Shift + Z</span></li>
+            <li class="dropdown-divider"></li>
+            <li><a href="#">Cut</a><span>Ctrl + X</span></li>
+            <li><a href="#">Copy</a><span>Ctrl + C</span></li>
+            <li><a href="#">Paste</a><span>Ctrl + V</span></li>
+            <li><a href="#">Select All</a><span>Ctrl + A</span></li>
+            <li class="dropdown-divider"></li>
+            <li><a href="#">Search</a><span>Ctrl + F</span></li>
+            <li><a href="#">Replace</a><span>Ctrl + Shift + F</span></li>
+            <li class="dropdown-divider"></li>
+            <li><a href="#">Toggle Comment</a><span>Ctrl + /</span></li>
+          </ul>
+        </div>
+        <!-- View -->
+        <div class="btn-group">
+          <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">View</button>
+          <ul class="dropdown-menu">
+            <li><a class="sub-menu" href="#">Themes</a></li>
+            <ul class="sub-menu inner">
+              <li onclick="includeTheme(material);">Material</li>
+              <li onclick="includeTheme(monokai);">Monokai</li>
+              <li onclick="includeTheme(one-dark);">One Dark</li>
+              <li onclick="includeTheme(solarized);">Solarized</li>
+              <li onclick="includeTheme(tomorrow-night-eighties);">Tomorrow Night Eighties</li>
+              <li onclick="includeTheme(zenburn);">Zenburn</li>
+            </ul>
+            <li class="dropdown-divider"></li>
+            <li><a href="#">Toggle Full Screen</a><span>F11</span></li>
+            <li><a href="#">Toggle Menu Bar</a><span>Ctrl + .</span></li>
+            <li class="dropdown-divider"></li>
+            <li><a href="#">Toggle Developer Tools</a><span>Ctrl + Shift + I</span></li>
+          </ul>
+        </div>
+         <!-- Help -->
+        <div class="btn-group">
+          <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Help</button>
+          <ul class="dropdown-menu">
+            <li><a href="#">Documentation</a></li>
+            <li class="dropdown-divider"></li>
+            <li><a href="#">Keybindings</a></li>
+            <li><a href="#">Markdown Syntax</a></li>
+            <li><a href="https://github.com/JonSn0w/Hyde-MD/issues/new">Report Issue</a></li>
+            <li class="dropdown-divider"></li>
+            <li><a href="#">About Hyde</a></li>
+          </ul>
+        </div>
+      </div>
+      <div id="opt" class="optContainer">
         <div class="mode">
           <span class="toolContainer">
-            <a id="angleToolBar" title="Toolbar" class="fa fa-chevron-right" onclick="showToolBar();" style="cursor: pointer;text-decoration:none;font-size:17px;padding:3px 0 0 10px;"></a>
+            <a id="angleToolBar" title="Toolbar" class="fa fa-angle-right" onclick="showToolBar();" style="cursor: pointer;text-decoration:none;font-size:21px;padding:0 0 0 6px;"></a>
           </span>
-          <div id="buttons">
+          <!-- <div id="buttons">
             <button id="new"><img src="img/16x16/file_add.png"/>New </button>
             <button id="open"><img src="img/16x16/file.png"/>Open </button>
             <button id="save"><img src="img/16x16/diskette.png"/>Save </button>
-          </div>
+          </div> -->
         </div>
         <div class="pref" id="pref">
-          <input type="radio" name="showPreference" value="html" onclick="clkPref(this);"> <label style="vertical-align: middle;"><b>HTML</b></label>
-          <input type="radio" name="showPreference" value="preview" onclick="clkPref(this);" checked="checked"> <label style="vertical-align: middle;"><b>Preview</b></label>
+          <input type="radio" name="showPreference" value="html" id="html" onclick="clkPref(this);"><label for="html" style="vertical-align: middle;"><span></span>HTML</label>
+          <input type="radio" name="showPreference" value="preview" id="preview" onclick="clkPref(this);" checked="checked"><label for="preview" style="vertical-align: middle;"><span></span>Preview</label>
         </div>
       </div>
       <div id="toolbarArea">
-        <div class="toolbar-buttons" style="padding:5px 30px;">
+        <div class="toolbar-buttons" style="padding:5px 12px;">
           <a onclick="toggleFormat('bold');" title="Bold [Ctrl+B]" class="fa fa-bold editor-toolbar"></a>
           <a onclick="toggleFormat('italic');" title="Italic [Ctrl+I]" class="fa fa-italic editor-toolbar"></a>
           <a onclick="toggleHeadingSmaller();" title="Header [Ctrl+H]" class="fa fa-header editor-toolbar"></a>
@@ -71,8 +163,8 @@
           <a data-toggle="modal" data-target="#myModal" title="Markdown Help" class="fa fa-question-circle editor-toolbar"></a>
         </div>
       </div>
-      <section class="row" id="editArea" style="background-color: rgba(246, 245, 245,0.0); color:#3a3a3a; padding-top:60px;">
-          <div class="col-md-6 full-height" style="background:#323130;padding-top:25px;overflow-y:auto;" id="textPanel">
+      <section class="row" id="editArea" style="background-color: rgba(246, 245, 245,0.0); color:#3a3a3a;">
+          <div class="col-md-6 full-height" style="background:#323130;padding-top:0px;overflow-y:auto;" id="textPanel">
             <textarea  id="plainText" placeholder="Write your Markdown here.." autofocus></textarea>
           </div>
           <div class="col-md-6 full-height" style="overflow-y:auto;display:block;padding-top:25px;" id="previewPanel">
@@ -83,7 +175,8 @@
       <div class="bottom-bar">
         <div id="bottom-file">None</div>
         <div id="wordcount"></div>
-        <input type="checkbox" id="syncScroll"/><label> Sync Scrolling</label>
+        <button id="syncScroll" class="fa fa-unlink" onclick="toggleSyncScroll();"></button>
+        <!-- <input type="checkbox" id="syncScroll" style="right:9.5%;"/> -->
       </div>
       <!-- Markdown Help Modal -->
       <div class="modal fade" id="myModal" role="dialog">
@@ -158,26 +251,20 @@
       </div>
 
       <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
-      <script src="js/libs/jquery.min.js"></script>
-      <script src="js/libs/bootstrap.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+      <script src="js/CodeMirror/libs/jquery.min.js"></script>
+      <script src="js/CodeMirror/libs/bootstrap.min.js"></script>
       <script>if (window.module) module = window.module;</script>
-      <script src="js/libs/marked.min.js"></script>
-      <script src="js/libs/codemirror.js"></script>
-      <script src="js/libs/search.js"></script>
-      <script src="js/libs/searchcursor.js"></script>
-      <script src="js/libs/dialog.js"></script>
-      <script src="js/libs/closebrackets.js"></script>
-      <script src="js/css/css.js"></script>
-      <script src="js/gfm/gfm.js"></script>
-      <script src="js/htmlembedded/htmlembedded.js"></script>
-      <script src="js/htmlmixed/htmlmixed.js"></script>
-      <script src="js/javascript/javascript.js"></script>
-      <script src="js/markdown/markdown.js"></script>
-      <script src="js/xml/xml.js"></script>
+      <script src="js/CodeMirror/libs/marked.min.js"></script>
+      <script src="js/CodeMirror/libs/search.js"></script>
+      <script src="js/CodeMirror/libs/searchcursor.js"></script>
+      <script src="js/CodeMirror/libs/dialog.js"></script>
+      <script src="js/CodeMirror/libs/closebrackets.js"></script>
       <script src="js/app.js"></script>
       <script src="js/format.js"></script>
       <script src="js/functions.js"></script>
       <script src="js/ipc_renderer.js"></script>
       <script src="js/emoji.js"></script>
+      <!-- <script src="node_modules/codemirror/mode/gfm/gfm.js"></script> -->
   </body>
 </html>
