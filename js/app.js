@@ -14,7 +14,6 @@ var parsePath = require("parse-filepath");
 var currentFile = '';
 var isFileLoadedInitially = false;
 const config = require('./config');
-
 // require('electron-titlebar');
 // const titlebar = document.getElementById('electron-titlebar');
 
@@ -27,7 +26,6 @@ window.addEventListener('contextmenu', function(e) {
   if (!e.target.closest('textarea, input, [contenteditable="true"],section')) return;
 
   var menu = buildEditorContextMenu();
-
   // The 'contextmenu' event is emitted after 'selectionchange' has fired but possibly before the
   // visible selection has changed. Try to wait to show the menu until after that, otherwise the
   // visible selection will update after the menu dismisses and look weird.
@@ -42,6 +40,16 @@ var conf = {
   lineWrapping : true,
   autoCloseBrackets: true
 }
+
+function includeTheme(theme) {
+  var head = document.getElementsByTagName('head')[0];
+  var themeTag = document.createElement('link');
+  themeTag.setAttribute('rel', 'stylesheet');
+  themeTag.setAttribute('href', 'css/theme/'+theme+'.css');
+  head.appendChild(themeTag);
+  return themeTag;
+}
+
 var fs = require('fs');
 var files = fs.readdirSync('./css/theme');
 var theme = config.get('theme');
@@ -51,6 +59,7 @@ if (files.includes(theme+'.css')) {
 } else {
   conf.theme = "zenburn";
 }
+includeTheme(theme);
 
 if (!config.get('lineNumbers')) {
     conf.lineNumbers = false;
@@ -66,7 +75,6 @@ window.onload = function() {
   cm.on('change',function(cMirror){
     countWords();
     // get value right from instance
-    //yourTextarea.value = cMirror.getValue();
     var markdownText = cMirror.getValue();
     //Md -> Preview
     html = marked(markdownText,{gfm: true});
@@ -102,8 +110,6 @@ window.onload = function() {
     }
   });
 
-  // const BrowserWindow = remote;
-  // const win = BrowserWindow.getFocusedWindow();
   const win = remote.BrowserWindow.getFocusedWindow();
 
   document.getElementById("minimize").onclick = function() { remote.BrowserWindow.getFocusedWindow().minimize(); }
@@ -113,12 +119,8 @@ window.onload = function() {
   var syncButton = document.getElementById('syncScroll');
   if(config.get('isSyncScroll') === true) {
     syncButton.className = 'fa fa-link';
-    //  $syncScroll.attr('checked', true);
-    isSynced = 'one';
   } else {
     syncButton.className = 'fa fa-unlink';
-    //  $syncScroll.attr('checked', false);
-    isSynced = 'two';
   }
 }
 
@@ -137,18 +139,15 @@ window.onload = function() {
     console.log('Toggle scroll synchronization.');
     isSynced = document.getElementById('syncScroll').className.includes('fa-link');
 
-    // config.set('isSyncScroll', isSynced);
     if(isSynced === true) {
       document.getElementById('syncScroll').className = 'fa fa-unlink';
       isSynced = false;
       $(window).trigger('resize')
-      // $syncScroll.attr('checked', true);
     } else {
      // If scrolling was just enabled, ensure we're back in sync by triggering window resize.
       document.getElementById('syncScroll').className = 'fa fa-link';
       isSynced = true;
       $(window).trigger('resize')
-    //  $syncScroll.attr('checked', false);
    }
    config.set('isSyncScroll', !isSynced);
  }
@@ -285,9 +284,9 @@ function handleSaveButton() {
   }
 }
 
-document.getElementById("new").addEventListener("click", handleNewButton);
-document.getElementById("open").addEventListener("click", handleOpenButton);
-document.getElementById("save").addEventListener("click", handleSaveButton);
+// document.getElementById("new").addEventListener("click", handleNewButton);
+// document.getElementById("open").addEventListener("click", handleOpenButton);
+// document.getElementById("save").addEventListener("click", handleSaveButton);
 
 
 /****************
