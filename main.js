@@ -209,6 +209,10 @@ function createWindow () {
       focusedWindow.webContents.send('ctrl+shift+t');
   });
 
+  localShortcut.register('CmdOrCtrl+.', function() {
+    focusedWindow.webContents.send('ctrl+.');
+});
+
   tray.create(mainWindow);
 }
 
