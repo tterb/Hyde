@@ -1,7 +1,7 @@
 
 $text-color: rgba(255,255,255,0.75);
-$text-emphasis-color: rgba(255,255,255,0.9);
 $text-subtle-color: rgba(255,255,255,0.4);
+$text-emphasis-color: #f2f2f2;
 
 
 html, body, section, .full-height {
@@ -16,8 +16,7 @@ body {
 }
 
 #editArea {
-    background-color: #323130;
-    color: #efefef;
+    padding: 74px 15px 0;
 }
 
 label {
@@ -51,7 +50,7 @@ label {
     position: absolute;
     background-image: -webkit-linear-gradient(top, #353334, #282726);
     color: #8C8C8C;
-    height: 32px;
+    height: 37px;
     width: 100%;
     top: 0;
     left: 0;
@@ -109,6 +108,226 @@ label {
         }
     }
 }
+
+#appMenu {
+    position: fixed;
+    background-color: #282726;
+    color: $text-color !important;
+    font-size: 11px;
+    width: 100%;
+    height: 0;
+    top: 34px;
+    left: 0;
+    border: 1px inset #424443;
+    visibility: visible;
+    z-index: 999999;
+    :focus,
+    :active:focus,
+    .active:focus,
+    .focus,
+    :active.focus,
+    .active.focus {
+        outline: none !important;
+    }
+    .hidden {
+        visibility: hidden;
+    }
+    .btn-group > button {
+        display: inline-block;
+        // background-image: -webkit-linear-gradient(#454746, #242625);
+        background: transparent;
+        color: $text-subtle-color;
+        font-size: 11px;
+        height: 26px;
+        width: 40px;
+        white-space: nowrap;
+        // border: 1px outset #424443;
+        padding: 3px 0 5px;
+        &:hover, &:focus, &:active {
+            color: $text-emphasis-color;
+        }
+    }
+    .dropdown-menu {
+        // position: relative;
+        background-color: #2d2e2c;
+        color: $text-color;
+        font-size: 11px;
+        top: 82%;
+        z-index: 0;
+        // box-shadow: 0 1px 8px rgba(0,0,0,0.55);
+        // padding: 6px 6px 2px 13px;
+        > li {
+            padding: 2px 0;
+            > a {
+                display: inline;
+                background-color: transparent;
+                color: $text-subtle-color;
+                font-size: 11px;
+                text-decoration: none !important;
+                padding: 3px 15px;
+                &:hover, &:focus, &:active {
+                    color: $text-emphasis-color;
+                }
+            }
+            > span {
+                display: inline;
+                position: relative;
+                color: rgba(255,255,255,0.2);
+                font-size: 10px;
+                font-weight: 200;
+                right: 10px;
+                text-align: right;
+                float: right;
+            }
+            &:hover, &:active {
+                background: #484a49;
+                box-shadow: inset 0 0 2px rgba(0,0,0,0.4);
+                > a {
+                    color: $text-emphasis-color;
+                }
+            }
+        }
+        .dropdown-divider {
+            background: rgba(255,255,255,0.075);
+            height: 1px;
+            width: 98%;
+            margin: 4px auto;
+            padding: 0;
+        }
+    }
+}
+
+
+// .appMenu {
+//     position: fixed;
+//     background-color: #282726;
+//     color: $text-color !important;
+//     font-size: 11px;
+//     width: 100%;
+//     height: 29px;
+//     top: 36px;
+//     left: 0;
+//     border: 1px inset #424443;
+//     z-index: 999999;
+//     :focus,
+//     :active:focus,
+//     .active:focus,
+//     .focus,
+//     :active.focus,
+//     .active.focus {
+//         outline: none !important;
+//     }
+//     ul > li > button {
+//         display: inline-block;
+//         // background-image: -webkit-linear-gradient(#454746, #242625);
+//         background: transparent;
+//         color: $text-color;
+//         font-size: 11px;
+//         height: 28px;
+//         width: 40px;
+//         white-space: nowrap;
+//         // border: 1px outset #424443;
+//         padding: 6px 0;
+//         &:focus .submenu, &:active .submenu {
+//             visibility: visible;
+//         }
+//     }
+//     > ul {
+//         height: 28px;
+//         list-style: none;
+//         margin: 0;
+//         padding: 0;
+//         .menuItem {
+//             display: inline-block;
+//             // background-image: -webkit-linear-gradient(#454746, #242625);
+//             background: transparent;
+//             color: $text-color;
+//             height: 28px;
+//             width: 40px;
+//             white-space: nowrap;
+//             // border: 1px outset #424443;
+//             padding: 6px 0;
+//             &:focus .submenu, &:active .submenu {
+//                 visibility: visible;
+//             }
+//             .submenu {
+//                 position: relative;
+//                 background-color: #2d2e2c;
+//                 color: $text-color;
+//                 white-space: nowrap;
+//                 min-width: 100px;
+//                 max-width: 200px;
+//                 top: 5px;
+//                 left: 0;
+//                 visibility: hidden;
+//                 list-style: none !important;
+//                 box-shadow: 0 1px 8px rgba(0,0,0,0.55);
+//                 padding: 6px 6px 2px 13px;
+//                 z-index: 999999;
+//                 > li {
+//                     height: 28px;
+//                     width: 100%;
+//                     padding: 6px 2px 7px 0;
+//                     &:first-child {
+//                         padding-top: 3px;
+//                     }
+//                     .inner {
+//                         position: relative;
+//                         background-color: #2a2b29;
+//                         top: -23px;
+//                         left: 86px;
+//                         visibility: hidden;
+//                         > li {
+//                             word-wrap: nowrap;
+//                         }
+//                     }
+//                     &:focus .inner, &:active .inner {
+//                         visibility: visible;
+//                     }
+//                     > span {
+//                         position: relative;
+//                         font-size: 14px;
+//                         right: -33%;
+//                     }
+//                     > a {
+//                         display: block;
+//                         color: $text-subtle-color;
+//                         text-decoration: none;
+//                         &:hover, &:active {
+//                             color: $text-emphasis-color;
+//                             text-decoration: none;
+//                         }
+//                     }
+//                 }
+//             }
+//             > a {
+//                 display: block;
+//                 position: relative;
+//                 color: $text-subtle-color;
+//                 text-align: center;
+//                 text-decoration: none;
+//                 top: -2px;
+//                 left: 1px;
+//                 &:hover, &:active {
+//                     color: $text-emphasis-color;
+//                     text-decoration: none;
+//                 }
+//             }
+//         }
+//         > li {
+//             float: left;
+//         }
+//     }
+//     #edit .submenu {
+//         width: 110px;
+//     }
+//     #view .submenu {
+//         width: 160px;
+//     }
+//     #help .submenu {
+//         width: 110px;
+//     }
+// }
 
 #buttons {
     display: inline-block;
@@ -187,6 +406,7 @@ label {
         background: transparent;
         font-size: 14.5px;
         border: none;
+        outline: none !important;
         right: 1.25%;
         margin-top: 6.125px;
     }
@@ -199,7 +419,7 @@ label {
     width: 50%;
     text-align: right;
     box-shadow: 4px 1px 3px 3px rgba(0,0,0,0.2);
-    padding: 20px 10px 6px;
+    padding: 14px 10px 6px;
     > input {
         width: 12px;
         margin: 2px 2px 0;
@@ -231,7 +451,7 @@ input[type="radio"] {
     width: 50%;
     text-align: left;
     box-shadow: 0 1px 3px 3px rgba(0,0,0,0.125);
-    padding: 15px 10px 2px;
+    padding: 14px 10px 6px;
 }
 
 .mdHtml {
@@ -260,7 +480,7 @@ input[type="radio"] {
 
 #toolbarArea{
     position: fixed;
-    top: 79px;
+    top: 74px;
     left: 0;
     z-index: 999;
     width: 100%;
@@ -279,7 +499,10 @@ a#angleToolBar {
 }
 
 #textPanel {
-    padding: 20px 0 0 0;
+    padding: 0;
+    > div {
+        padding-top: 8px;
+    }
 }
 
 .editor-toolbar{
@@ -321,7 +544,7 @@ a#angleToolBar {
 .toolContainer{
     width: 16px;
     float: left;
-    margin-right: 0px;
+    margin-right: 5px;
 }
 
 // input[type="radio"]:checked:before {
@@ -510,7 +733,7 @@ code {
     pre {
       background: #424242;
       border-radius: 10px;
-      margin: 10px 0 10px;
+      margin: 15px 0;
       padding: 9.5px 18px;
     }
     pre code {

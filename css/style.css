@@ -8,8 +8,7 @@ body {
   overflow: hidden; }
 
 #editArea {
-  background-color: #323130;
-  color: #efefef; }
+  padding: 74px 15px 0; }
 
 label {
   font-size: 12px;
@@ -37,7 +36,7 @@ label {
   position: absolute;
   background-image: -webkit-linear-gradient(top, #353334, #282726);
   color: #8C8C8C;
-  height: 32px;
+  height: 37px;
   width: 100%;
   top: 0;
   left: 0;
@@ -86,6 +85,76 @@ label {
     .frame #close:hover, .frame #close:active > img {
       content: url("../img/close_active.png"); }
 
+#appMenu {
+  position: fixed;
+  background-color: #282726;
+  color: rgba(255, 255, 255, 0.75) !important;
+  font-size: 11px;
+  width: 100%;
+  height: 0;
+  top: 34px;
+  left: 0;
+  border: 1px inset #424443;
+  visibility: visible;
+  z-index: 999999; }
+  #appMenu :focus,
+  #appMenu :active:focus,
+  #appMenu .active:focus,
+  #appMenu .focus,
+  #appMenu :active.focus,
+  #appMenu .active.focus {
+    outline: none !important; }
+  #appMenu .hidden {
+    visibility: hidden; }
+  #appMenu .btn-group > button {
+    display: inline-block;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 11px;
+    height: 26px;
+    width: 40px;
+    white-space: nowrap;
+    padding: 3px 0 5px; }
+    #appMenu .btn-group > button:hover, #appMenu .btn-group > button:focus, #appMenu .btn-group > button:active {
+      color: #f2f2f2; }
+  #appMenu .dropdown-menu {
+    background-color: #2d2e2c;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 11px;
+    top: 82%;
+    z-index: 0; }
+    #appMenu .dropdown-menu > li {
+      padding: 2px 0; }
+      #appMenu .dropdown-menu > li > a {
+        display: inline;
+        background-color: transparent;
+        color: rgba(255, 255, 255, 0.4);
+        font-size: 11px;
+        text-decoration: none !important;
+        padding: 3px 15px; }
+        #appMenu .dropdown-menu > li > a:hover, #appMenu .dropdown-menu > li > a:focus, #appMenu .dropdown-menu > li > a:active {
+          color: #f2f2f2; }
+      #appMenu .dropdown-menu > li > span {
+        display: inline;
+        position: relative;
+        color: rgba(255, 255, 255, 0.2);
+        font-size: 10px;
+        font-weight: 200;
+        right: 10px;
+        text-align: right;
+        float: right; }
+      #appMenu .dropdown-menu > li:hover, #appMenu .dropdown-menu > li:active {
+        background: #484a49;
+        box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.4); }
+        #appMenu .dropdown-menu > li:hover > a, #appMenu .dropdown-menu > li:active > a {
+          color: #f2f2f2; }
+    #appMenu .dropdown-menu .dropdown-divider {
+      background: rgba(255, 255, 255, 0.075);
+      height: 1px;
+      width: 98%;
+      margin: 4px auto;
+      padding: 0; }
+
 #buttons {
   display: inline-block;
   /*background-image: -webkit-linear-gradient(#2a2d2c, #1e2120);*/
@@ -112,7 +181,7 @@ label {
   margin-right: 1.5px;
   padding: 5px; }
   .toolbar-buttons > a:hover {
-    color: rgba(255, 255, 255, 0.9) !important;
+    color: #f2f2f2 !important;
     border-color: #656766; }
 
 .bottom-bar {
@@ -155,6 +224,7 @@ label {
     background: transparent;
     font-size: 14.5px;
     border: none;
+    outline: none !important;
     right: 1.25%;
     margin-top: 6.125px; }
 
@@ -165,7 +235,7 @@ label {
   width: 50%;
   text-align: right;
   box-shadow: 4px 1px 3px 3px rgba(0, 0, 0, 0.2);
-  padding: 20px 10px 6px; }
+  padding: 14px 10px 6px; }
   .pref > input {
     width: 12px;
     margin: 2px 2px 0; }
@@ -191,7 +261,7 @@ input[type="radio"] {
   width: 50%;
   text-align: left;
   box-shadow: 0 1px 3px 3px rgba(0, 0, 0, 0.125);
-  padding: 15px 10px 2px; }
+  padding: 14px 10px 6px; }
 
 .mdHtml {
   display: none;
@@ -216,7 +286,7 @@ input[type="radio"] {
 
 #toolbarArea {
   position: fixed;
-  top: 79px;
+  top: 74px;
   left: 0;
   z-index: 999;
   width: 100%;
@@ -232,7 +302,9 @@ a#angleToolBar {
     color: rgba(255, 255, 255, 0.9); }
 
 #textPanel {
-  padding: 20px 0 0 0; }
+  padding: 0; }
+  #textPanel > div {
+    padding-top: 8px; }
 
 .editor-toolbar {
   display: inline-block;
@@ -250,9 +322,9 @@ a#angleToolBar {
   .editor-toolbar:hover {
     /*background: #fcfcfc;*/
     border-color: #95a5a6;
-    color: rgba(255, 255, 255, 0.9) !important; }
+    color: #f2f2f2 !important; }
   .editor-toolbar.active {
-    color: rgba(255, 255, 255, 0.9) !important; }
+    color: #f2f2f2 !important; }
   .editor-toolbar.inactive {
     color: rgba(255, 255, 255, 0.4) !important; }
 
@@ -268,7 +340,7 @@ a#angleToolBar {
 .toolContainer {
   width: 16px;
   float: left;
-  margin-right: 0px; }
+  margin-right: 5px; }
 
 .modal--default__content {
   position: relative;
@@ -411,7 +483,7 @@ code {
   #markdown pre {
     background: #424242;
     border-radius: 10px;
-    margin: 10px 0 10px;
+    margin: 15px 0;
     padding: 9.5px 18px; }
   #markdown pre code {
     color: rgba(255, 255, 255, 0.75);
