@@ -46,12 +46,13 @@
     <script src="node_modules/codemirror/addon/scroll/simplescrollbars.js"></script>
     <script src="node_modules/codemirror/addon/selection/active-line.js"></script>
   </head>
+
   <!-- <div id="electron-titlebar" class="drag inset" style="z-index:999999999;"></div> -->
   <body class="container-fluid" style="resize: both">
       <section class="frame">
         <div id="draggable" style="-webkit-app-region:drag">
           <div class="icon"><img src="img/IconTray.png"></div>
-          <div id="title">Hyde</div>
+          <div id="title"><strong>Hyde</strong> - <span id="titlePath">New Document</span></div>
         </div>
         <button id="close" style="cursor: pointer;"><img src="img/close.png" alt="Close"/></button>
         <button id="maximize" style="cursor: pointer;"><img src="img/max.png" alt="Maximize"/></button>
@@ -63,71 +64,73 @@
         <div class="btn-group">
           <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">File</button>
           <ul class="dropdown-menu">
-            <li><a href="#">New</a><span>Ctrl + N</span></li>
-            <li><a href="#">Open</a><span>Ctrl + O</span></li>
+            <li><a tabindex="-1" href="#">New</a><span>Ctrl + N</span></li>
+            <li><a tabindex="-1" href="#">Open</a><span>Ctrl + O</span></li>
             <li class="dropdown-divider"></li>
-            <li><a href="#">Save</a><span>Ctrl + S</span></li>
-            <li><a href="#">Save As</a><span>Ctrl + Shift + S</span></li>
+            <li><a tabindex="-1" href="#">Save</a><span>Ctrl + S</span></li>
+            <li><a tabindex="-1" href="#">Save As</a><span>Ctrl + Shift + S</span></li>
             <li class="dropdown-divider"></li>
-            <li><a href="#">Settings</a><span>Ctrl + ,</span></li>
+            <li><a tabindex="-1" href="#">Settings</a><span>Ctrl + ,</span></li>
             <li class="dropdown-divider"></li>
-            <li><a href="#">Exit</a></li>
+            <li><a tabindex="-1" href="#">Exit</a></li>
           </ul>
         </div>
         <!-- Edit -->
         <div class="btn-group">
           <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Edit</button>
           <ul class="dropdown-menu">
-            <li><a href="#">Undo</a><span>Ctrl + Z</span></li>
-            <li><a href="#">Redo</a><span>Ctrl + Shift + Z</span></li>
+            <li><a tabindex="-1" href="#">Undo</a><span>Ctrl + Z</span></li>
+            <li><a tabindex="-1" href="#">Redo</a><span>Ctrl + Shift + Z</span></li>
             <li class="dropdown-divider"></li>
-            <li><a href="#">Cut</a><span>Ctrl + X</span></li>
-            <li><a href="#">Copy</a><span>Ctrl + C</span></li>
-            <li><a href="#">Paste</a><span>Ctrl + V</span></li>
-            <li><a href="#">Select All</a><span>Ctrl + A</span></li>
+            <li><a tabindex="-1" href="#">Cut</a><span>Ctrl + X</span></li>
+            <li><a tabindex="-1" href="#">Copy</a><span>Ctrl + C</span></li>
+            <li><a tabindex="-1" href="#">Paste</a><span>Ctrl + V</span></li>
+            <li><a tabindex="-1" href="#">Select All</a><span>Ctrl + A</span></li>
             <li class="dropdown-divider"></li>
-            <li><a href="#">Search</a><span>Ctrl + F</span></li>
-            <li><a href="#">Replace</a><span>Ctrl + Shift + F</span></li>
+            <li><a tabindex="-1" href="#">Search</a><span>Ctrl + F</span></li>
+            <li><a tabindex="-1" href="#">Replace</a><span>Ctrl + Shift + F</span></li>
             <li class="dropdown-divider"></li>
-            <li><a href="#">Toggle Comment</a><span>Ctrl + /</span></li>
+            <li><a tabindex="-1" href="#">Toggle Comment</a><span>Ctrl + /</span></li>
           </ul>
         </div>
         <!-- View -->
         <div class="btn-group">
           <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">View</button>
           <ul class="dropdown-menu">
-            <li><a class="sub-menu" href="#">Themes</a></li>
-            <ul class="sub-menu inner">
-              <li onclick="includeTheme(material);">Material</li>
-              <li onclick="includeTheme(monokai);">Monokai</li>
-              <li onclick="includeTheme(one-dark);">One Dark</li>
-              <li onclick="includeTheme(solarized);">Solarized</li>
-              <li onclick="includeTheme(tomorrow-night-eighties);">Tomorrow Night Eighties</li>
-              <li onclick="includeTheme(zenburn);">Zenburn</li>
-            </ul>
+            <li class="dropdown-submenu">
+              <a class="test" tabindex="-1" href="#">Themes <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#" onclick="includeTheme('material');">Material</a></li>
+                <li><a href="#" onclick="includeTheme('monokai');">Monokai</a></li>
+                <li><a href="#" onclick="includeTheme('one-dark');">One Dark</a></li>
+                <li><a href="#" onclick="includeTheme('solarized');">Solarized</a></li>
+                <li><a href="#" onclick="includeTheme('tomorrow-night-eighties');">Tomorrow Night Eighties</a></li>
+                <li><a href="#" onclick="includeTheme('zenburn');">Zenburn</a></li>
+              </ul>
+            </li>
             <li class="dropdown-divider"></li>
-            <li><a href="#">Toggle Full Screen</a><span>F11</span></li>
-            <li><a href="#">Toggle Menu Bar</a><span>Ctrl + .</span></li>
+            <li><a tabindex="-1" href="#">Toggle Full Screen</a><span>F11</span></li>
+            <li><a tabindex="-1" href="#">Toggle Menu Bar</a><span>Ctrl + .</span></li>
             <li class="dropdown-divider"></li>
-            <li><a href="#">Toggle Developer Tools</a><span>Ctrl + Shift + I</span></li>
+            <li><a tabindex="-1" href="#">Toggle Developer Tools</a><span>Ctrl + Shift + I</span></li>
           </ul>
         </div>
          <!-- Help -->
         <div class="btn-group">
           <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Help</button>
           <ul class="dropdown-menu">
-            <li><a href="#">Documentation</a></li>
+            <li><a tabindex="-1" href="#">Documentation</a></li>
             <li class="dropdown-divider"></li>
-            <li><a href="#">Keybindings</a></li>
-            <li><a href="#">Markdown Syntax</a></li>
-            <li><a href="https://github.com/JonSn0w/Hyde-MD/issues/new">Report Issue</a></li>
+            <li><a tabindex="-1" href="#">Keybindings</a></li>
+            <li><a tabindex="-1" href="#">Markdown Syntax</a></li>
+            <li><a tabindex="-1" href="https://github.com/JonSn0w/Hyde-MD/issues/new">Report Issue</a></li>
             <li class="dropdown-divider"></li>
-            <li><a href="#">About Hyde</a></li>
+            <li><a tabindex="-1" href="#">About Hyde</a></li>
           </ul>
         </div>
       </div>
       <div id="opt" class="optContainer">
-        <div class="mode">
+        <div class="mode" id="mode">
           <span class="toolContainer">
             <a id="angleToolBar" title="Toolbar" class="fa fa-angle-right" onclick="showToolBar();" style="cursor: pointer;text-decoration:none;font-size:21px;padding:0 0 0 6px;"></a>
           </span>
@@ -138,8 +141,8 @@
           </div> -->
         </div>
         <div class="pref" id="pref">
-          <input type="radio" name="showPreference" value="html" id="html" onclick="clkPref(this);"><label for="html" style="vertical-align: middle;"><span></span>HTML</label>
-          <input type="radio" name="showPreference" value="preview" id="preview" onclick="clkPref(this);" checked="checked"><label for="preview" style="vertical-align: middle;"><span></span>Preview</label>
+          <input type="radio" name="showPreference" value="html" id="htmlRadio" onclick="clkPref(this);"><label for="html" style="vertical-align: middle;"><span></span>HTML</label>
+          <input type="radio" name="showPreference" value="preview" id="previewRadio" onclick="clkPref(this);" checked="checked"><label for="preview" style="vertical-align: middle;"><span></span>Preview</label>
         </div>
       </div>
       <div id="toolbarArea">
@@ -150,6 +153,7 @@
           <a onclick="toggleFormat('strikethrough');" title="StrikeThrough [Ctrl+/]" class="fa fa-strikethrough editor-toolbar"></a>
           <i class="separator">|</i>
           <a onclick="toggleBlockquote();" title="Quote" class="fa fa-quote-left editor-toolbar"></a>
+          <a onclick="toggleCodeBlock();" title="Code Block" class="fa fa-code editor-toolbar"></a>
           <a onclick="toggleUnorderedList();" title="Unordered List" class="fa fa-list-ul editor-toolbar"></a>
           <a onclick="toggleOrderedList();" title="Ordered List" class="fa fa-list-ol editor-toolbar"></a>
           <i class="separator">|</i>
@@ -159,7 +163,7 @@
           <a onclick="drawHorizontalRule();" title="Insert Horizontal Rule" class="fa fa-minus editor-toolbar"></a>
           <i class="separator">|</i>
           <a onclick="changeTheme();" title="Light/Dark Theme" id="toggle-theme" class="fa fa-lightbulb-o editor-toolbar"></a>
-          <a onclick="toggleSidePanel();" title="Side-By-Side Panel Toggle" class="fa fa-columns editor-toolbar"></a>
+          <a onclick="toggleSidePanel();" title="Toggle Preview Panel" class="fa fa-columns editor-toolbar"></a>
           <a data-toggle="modal" data-target="#myModal" title="Markdown Help" class="fa fa-question-circle editor-toolbar"></a>
         </div>
       </div>
@@ -176,7 +180,6 @@
         <div id="bottom-file">None</div>
         <div id="wordcount"></div>
         <button id="syncScroll" class="fa fa-unlink" onclick="toggleSyncScroll();"></button>
-        <!-- <input type="checkbox" id="syncScroll" style="right:9.5%;"/> -->
       </div>
       <!-- Markdown Help Modal -->
       <div class="modal fade" id="myModal" role="dialog">
@@ -251,10 +254,20 @@
       </div>
 
       <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-      <script src="js/CodeMirror/libs/jquery.min.js"></script>
-      <script src="js/CodeMirror/libs/bootstrap.min.js"></script>
       <script>if (window.module) module = window.module;</script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+      <!-- <script src="js/CodeMirror/libs/bootstrap.min.js"></script> -->
+      <script>
+        $(document).ready(function(){
+          $('.dropdown-submenu a.test').on("click", function(e){
+            $(this).next('ul').toggle();
+            e.stopPropagation();
+            e.preventDefault();
+          });
+        });
+      </script>
+      <script src="js/CodeMirror/libs/jquery.min.js"></script>
       <script src="js/CodeMirror/libs/marked.min.js"></script>
       <script src="js/CodeMirror/libs/search.js"></script>
       <script src="js/CodeMirror/libs/searchcursor.js"></script>
