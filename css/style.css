@@ -2,6 +2,7 @@ html, body, section, .full-height {
   height: 100%; }
 
 body {
+  background: #282726;
   font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif !important;
   font-size: 13.5px;
   resize: both;
@@ -45,8 +46,8 @@ label {
   z-index: 9999; }
   .frame #draggable {
     position: absolute;
-    height: 100%;
-    width: -webkit-calc(100% - 105px);
+    height: 125%;
+    width: -webkit-calc(100% - 75px);
     top: 0;
     left: 0; }
   .frame .icon > img {
@@ -61,8 +62,12 @@ label {
     display: inline-block;
     color: #bbb;
     font-size: 12px;
-    top: 8.5px;
+    top: 9px;
     left: 44px; }
+    .frame #title #titlePath {
+      display: inline-block;
+      color: #bbb;
+      font-size: 12px; }
   .frame > button {
     display: inline-block;
     background: transparent;
@@ -113,47 +118,96 @@ label {
     font-size: 11px;
     height: 26px;
     width: 40px;
+    border-radius: 0px;
     white-space: nowrap;
     padding: 3px 0 5px; }
     #appMenu .btn-group > button:hover, #appMenu .btn-group > button:focus, #appMenu .btn-group > button:active {
-      color: #f2f2f2; }
-  #appMenu .dropdown-menu {
+      background: #313029;
+      color: #f2f2f2;
+      border-top: 1px inset #424443;
+      border-bottom: 1px inset #424443; }
+  #appMenu .btn-group .dropdown-menu {
     background-color: #2d2e2c;
     color: rgba(255, 255, 255, 0.75);
     font-size: 11px;
     top: 82%;
-    z-index: 0; }
-    #appMenu .dropdown-menu > li {
+    z-index: 0;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px; }
+    #appMenu .btn-group .dropdown-menu > li {
       padding: 2px 0; }
-      #appMenu .dropdown-menu > li > a {
+      #appMenu .btn-group .dropdown-menu > li > a {
         display: inline;
         background-color: transparent;
-        color: rgba(255, 255, 255, 0.4);
+        color: rgba(255, 255, 255, 0.75);
         font-size: 11px;
+        letter-spacing: 0.06em;
         text-decoration: none !important;
-        padding: 3px 15px; }
-        #appMenu .dropdown-menu > li > a:hover, #appMenu .dropdown-menu > li > a:focus, #appMenu .dropdown-menu > li > a:active {
+        padding: 3px 15px 3px 10px; }
+        #appMenu .btn-group .dropdown-menu > li > a:hover, #appMenu .btn-group .dropdown-menu > li > a:focus, #appMenu .btn-group .dropdown-menu > li > a:active {
           color: #f2f2f2; }
-      #appMenu .dropdown-menu > li > span {
+      #appMenu .btn-group .dropdown-menu > li > span {
         display: inline;
         position: relative;
         color: rgba(255, 255, 255, 0.2);
         font-size: 10px;
         font-weight: 200;
-        right: 10px;
         text-align: right;
-        float: right; }
-      #appMenu .dropdown-menu > li:hover, #appMenu .dropdown-menu > li:active {
-        background: #484a49;
+        right: 10px;
+        float: right;
+        padding-top: 1.5px; }
+      #appMenu .btn-group .dropdown-menu > li:hover, #appMenu .btn-group .dropdown-menu > li:active {
+        background: #3a3b39;
         box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.4); }
-        #appMenu .dropdown-menu > li:hover > a, #appMenu .dropdown-menu > li:active > a {
+        #appMenu .btn-group .dropdown-menu > li:hover > a, #appMenu .btn-group .dropdown-menu > li:active > a {
           color: #f2f2f2; }
-    #appMenu .dropdown-menu .dropdown-divider {
+    #appMenu .btn-group .dropdown-menu .dropdown-divider {
       background: rgba(255, 255, 255, 0.075);
       height: 1px;
       width: 98%;
       margin: 4px auto;
       padding: 0; }
+
+.dropdown-submenu {
+  position: relative;
+  background-color: #2d2e2c;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 11px;
+  top: 82%;
+  z-index: 0;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px; }
+  .dropdown-submenu .dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -1px; }
+    .dropdown-submenu .dropdown-menu > li {
+      padding: 2px 0; }
+      .dropdown-submenu .dropdown-menu > li > a {
+        display: inline;
+        background-color: transparent;
+        color: rgba(255, 255, 255, 0.75);
+        font-size: 11px;
+        letter-spacing: 0.06em;
+        text-decoration: none !important;
+        padding: 3px 15px 3px 10px; }
+        .dropdown-submenu .dropdown-menu > li > a:hover, .dropdown-submenu .dropdown-menu > li > a:focus, .dropdown-submenu .dropdown-menu > li > a:active {
+          color: #f2f2f2; }
+      .dropdown-submenu .dropdown-menu > li > span {
+        display: inline;
+        position: relative;
+        color: rgba(255, 255, 255, 0.2);
+        font-size: 10px;
+        font-weight: 200;
+        text-align: right;
+        right: 10px;
+        float: right;
+        padding-top: 1.5px; }
+      .dropdown-submenu .dropdown-menu > li:hover, .dropdown-submenu .dropdown-menu > li:active {
+        background: #3a3b39;
+        box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.4); }
+        .dropdown-submenu .dropdown-menu > li:hover > a, .dropdown-submenu .dropdown-menu > li:active > a {
+          color: #f2f2f2; }
 
 #buttons {
   display: inline-block;
@@ -186,7 +240,7 @@ label {
 
 .bottom-bar {
   position: absolute;
-  background-image: -webkit-linear-gradient(top, #2d2f2a, #232220);
+  background-image: -webkit-linear-gradient(top, #2d2a2c, #232220);
   color: #b6b5b4;
   font-size: 12px;
   height: 28px;
@@ -195,6 +249,7 @@ label {
   left: 0;
   /*border-bottom-left-radius: 10px !important;
   border-bottom-right-radius: 10px !important;*/
+  border-top: 1px solid #363534;
   padding: 2px;
   z-index: 99999;
   resize: both; }
@@ -234,6 +289,7 @@ label {
   float: right;
   width: 50%;
   text-align: right;
+  border-bottom: 1px solid #323130;
   box-shadow: 4px 1px 3px 3px rgba(0, 0, 0, 0.2);
   padding: 14px 10px 6px; }
   .pref > input {
@@ -243,7 +299,7 @@ label {
 input[type="radio"] {
   display: none; }
   input[type="radio"] + label {
-    color: #f2f2f2; }
+    color: rgba(255, 255, 255, 0.75); }
     input[type="radio"] + label span {
       display: inline-block;
       width: 19px;
@@ -261,7 +317,8 @@ input[type="radio"] {
   width: 50%;
   text-align: left;
   box-shadow: 0 1px 3px 3px rgba(0, 0, 0, 0.125);
-  padding: 14px 10px 6px; }
+  padding: 14px 10px 6px;
+  border-bottom: 1px solid #323130; }
 
 .mdHtml {
   display: none;
@@ -302,9 +359,16 @@ a#angleToolBar {
     color: rgba(255, 255, 255, 0.9); }
 
 #textPanel {
-  padding: 0; }
+  padding: 0;
+  overflow: scroll;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.75); }
   #textPanel > div {
     padding-top: 8px; }
+
+#previewPanel {
+  background: #f6f5f5;
+  text-rendering: geometricPrecision;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.75); }
 
 .editor-toolbar {
   display: inline-block;
@@ -432,19 +496,19 @@ code {
 
 ::-webkit-scrollbar {
   background-color: rgba(76, 75, 72, 0.3);
-  width: 12px; }
+  width: 8px; }
 
 ::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
   border-radius: 10px; }
 
 ::-webkit-scrollbar-thumb {
   background: #42403E;
-  border-radius: 10px;
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5); }
+  border-radius: 10px; }
 
 #markdown {
-  font-size: 14px; }
+  font-size: 14px;
+  text-rendering: geometricPrecision; }
   #markdown h1 {
     color: #333;
     font-size: 36px;

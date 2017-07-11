@@ -9,6 +9,7 @@ html, body, section, .full-height {
 }
 
 body {
+    background: #282726;
     font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif !important;
     font-size: 13.5px;
     resize: both;
@@ -59,8 +60,8 @@ label {
     z-index: 9999;
     #draggable {
         position: absolute;
-        height: 100%;
-        width: -webkit-calc(100% - 105px);
+        height: 125%;
+        width: -webkit-calc(100% - 75px);
         top: 0;
         left: 0;
     }
@@ -77,8 +78,13 @@ label {
         display: inline-block;
         color: #bbb;
         font-size: 12px;
-        top: 8.5px;
+        top: 9px;
         left: 44px;
+        #titlePath {
+            display: inline-block;
+            color: #bbb;
+            font-size: 12px;
+        }
     }
     > button {
         display: inline-block;
@@ -132,39 +138,105 @@ label {
     .hidden {
         visibility: hidden;
     }
-    .btn-group > button {
-        display: inline-block;
-        // background-image: -webkit-linear-gradient(#454746, #242625);
-        background: transparent;
-        color: $text-subtle-color;
-        font-size: 11px;
-        height: 26px;
-        width: 40px;
-        white-space: nowrap;
-        // border: 1px outset #424443;
-        padding: 3px 0 5px;
-        &:hover, &:focus, &:active {
-            color: $text-emphasis-color;
+    .btn-group {
+        > button {
+            display: inline-block;
+            // background-image: -webkit-linear-gradient(#454746, #242625);
+            background: transparent;
+            color: $text-subtle-color;
+            font-size: 11px;
+            height: 26px;
+            width: 40px;
+            border-radius: 0px;
+            white-space: nowrap;
+            // border: 1px outset #424443;
+            padding: 3px 0 5px;
+            &:hover, &:focus, &:active {
+                background: #313029;
+                color: $text-emphasis-color;
+                border-top: 1px inset #424443;
+                border-bottom: 1px inset #424443;
+            }
+        }
+        .dropdown-menu {
+            // position: relative;
+            background-color: #2d2e2c;
+            color: $text-color;
+            font-size: 11px;
+            top: 82%;
+            z-index: 0;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+            // box-shadow: 0 1px 8px rgba(0,0,0,0.55);
+            // padding: 6px 6px 2px 13px;
+            > li {
+                padding: 2px 0;
+                > a {
+                    display: inline;
+                    background-color: transparent;
+                    color: $text-color;
+                    font-size: 11px;
+                    letter-spacing: 0.06em;
+                    text-decoration: none !important;
+                    padding: 3px 15px 3px 10px;
+                    &:hover, &:focus, &:active {
+                        color: $text-emphasis-color;
+                    }
+                }
+                > span {
+                    display: inline;
+                    position: relative;
+                    color: rgba(255,255,255,0.2);
+                    font-size: 10px;
+                    font-weight: 200;
+                    text-align: right;
+                    right: 10px;
+                    float: right;
+                    padding-top: 1.5px;
+                }
+                &:hover, &:active {
+                    background: #3a3b39;
+                    box-shadow: inset 0 0 2px rgba(0,0,0,0.4);
+                    > a {
+                        color: $text-emphasis-color;
+                    }
+                }
+            }
+            .dropdown-divider {
+                background: rgba(255,255,255,0.075);
+                height: 1px;
+                width: 98%;
+                margin: 4px auto;
+                padding: 0;
+            }
         }
     }
+}
+
+
+.dropdown-submenu {
+    position: relative;
+    background-color: #2d2e2c;
+    color: $text-color;
+    font-size: 11px;
+    top: 82%;
+    z-index: 0;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
     .dropdown-menu {
-        // position: relative;
-        background-color: #2d2e2c;
-        color: $text-color;
-        font-size: 11px;
-        top: 82%;
-        z-index: 0;
-        // box-shadow: 0 1px 8px rgba(0,0,0,0.55);
-        // padding: 6px 6px 2px 13px;
+        top: 0;
+        left: 100%;
+        margin-top: -1px;
         > li {
             padding: 2px 0;
             > a {
                 display: inline;
                 background-color: transparent;
-                color: $text-subtle-color;
+                color: $text-color;
                 font-size: 11px;
+                letter-spacing: 0.06em;
                 text-decoration: none !important;
-                padding: 3px 15px;
+                padding: 3px 15px 3px 10px;
                 &:hover, &:focus, &:active {
                     color: $text-emphasis-color;
                 }
@@ -175,29 +247,21 @@ label {
                 color: rgba(255,255,255,0.2);
                 font-size: 10px;
                 font-weight: 200;
-                right: 10px;
                 text-align: right;
+                right: 10px;
                 float: right;
+                padding-top: 1.5px;
             }
             &:hover, &:active {
-                background: #484a49;
+                background: #3a3b39;
                 box-shadow: inset 0 0 2px rgba(0,0,0,0.4);
                 > a {
                     color: $text-emphasis-color;
                 }
             }
         }
-        .dropdown-divider {
-            background: rgba(255,255,255,0.075);
-            height: 1px;
-            width: 98%;
-            margin: 4px auto;
-            padding: 0;
-        }
     }
 }
-
-
 // .appMenu {
 //     position: fixed;
 //     background-color: #282726;
@@ -365,7 +429,7 @@ label {
 
 .bottom-bar {
     position: absolute;
-    background-image: -webkit-linear-gradient(top, #2d2f2a, #232220);
+    background-image: -webkit-linear-gradient(top, #2d2a2c, #232220);
     color: #b6b5b4;
     font-size: 12px;
     height: 28px;
@@ -374,6 +438,7 @@ label {
     left: 0;
     /*border-bottom-left-radius: 10px !important;
     border-bottom-right-radius: 10px !important;*/
+    border-top: 1px solid lighten(#282726, 5.5%);
     padding: 2px;
     z-index: 99999;
     resize: both;
@@ -418,6 +483,7 @@ label {
     float: right;
     width: 50%;
     text-align: right;
+    border-bottom: 1px solid lighten(#282726, 4%);
     box-shadow: 4px 1px 3px 3px rgba(0,0,0,0.2);
     padding: 14px 10px 6px;
     > input {
@@ -429,7 +495,7 @@ label {
 input[type="radio"] {
     display: none;
     + label {
-        color:#f2f2f2;
+        color: $text-color;
         span {
             display:inline-block;
             width:19px;
@@ -452,6 +518,7 @@ input[type="radio"] {
     text-align: left;
     box-shadow: 0 1px 3px 3px rgba(0,0,0,0.125);
     padding: 14px 10px 6px;
+    border-bottom: 1px solid lighten(#282726, 4%);
 }
 
 .mdHtml {
@@ -500,9 +567,17 @@ a#angleToolBar {
 
 #textPanel {
     padding: 0;
+    overflow: scroll;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.75);
     > div {
         padding-top: 8px;
     }
+}
+
+#previewPanel {
+    background: rgb(246, 245, 245);
+    text-rendering: geometricPrecision;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.75);
 }
 
 .editor-toolbar{
@@ -670,23 +745,24 @@ code {
 
 ::-webkit-scrollbar {
     background-color: rgba(76,75,72,0.3);
-    width: 12px;
+    width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
     border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
     background: #42403E;
     border-radius: 10px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
 }
 
 
 #markdown  {
     font-size: 14px;
+    text-rendering: geometricPrecision;
     h1 {
         color: #333;
         font-size: 36px;
