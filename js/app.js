@@ -42,11 +42,21 @@ var conf = {
 }
 
 function includeTheme(theme) {
+  var themeTag;
   var head = document.getElementsByTagName('head')[0];
-  var themeTag = document.createElement('link');
-  themeTag.setAttribute('rel', 'stylesheet');
-  themeTag.setAttribute('href', 'css/theme/'+theme+'.css');
-  head.appendChild(themeTag);
+  config.set('theme', theme);
+  if(document.getElementById('themeLink')) {
+    themeTag = document.getElementById('themeLink');
+    themeTag.setAttribute('href', 'css/theme/'+theme+'.css');
+    head.appendChild(themeTag);
+    remote.getCurrentWindow().reload();
+  } else {
+    themeTag = document.createElement('link');
+    themeTag.setAttribute('id', 'themeLink');
+    themeTag.setAttribute('rel', 'stylesheet');
+    themeTag.setAttribute('href', 'css/theme/'+theme+'.css');
+    head.appendChild(themeTag);
+  }
   return themeTag;
 }
 
@@ -137,15 +147,15 @@ window.onload = function() {
  // Retaining state in boolean since this will be more CPU friendly instead of constantly selecting on each event.
  var toggleSyncScroll = () => {
     console.log('Toggle scroll synchronization.');
-    isSynced = document.getElementById('syncScroll').className.includes('fa-link');
+    isSynced = $('#syncScroll').attr('class').includes('fa-link');
 
     if(isSynced === true) {
-      document.getElementById('syncScroll').className = 'fa fa-unlink';
+      $('#syncScroll').attr('class', 'fa fa-unlink');
       isSynced = false;
       $(window).trigger('resize')
     } else {
      // If scrolling was just enabled, ensure we're back in sync by triggering window resize.
-      document.getElementById('syncScroll').className = 'fa fa-link';
+      $('#syncScroll').attr('class', 'fa fa-link');
       isSynced = true;
       $(window).trigger('resize')
    }
