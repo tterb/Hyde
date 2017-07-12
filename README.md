@@ -25,16 +25,17 @@
 
 * Live Preview
   - Instantly observe changes to your documents in rendered Markdown or HTML as you create them
-  - Sync scrolling to keep up with you as you type
-* GitHub Flavored Markdown(GFM")
+  - Sync-scrolling allows the preview to keep up with you as you type
+* GitHub Flavored Markdown(GFM)
 * User-friendly formatting via the toolbar
-* Syntax highlighting for Markdown and compatible HTML
-* Dark/Light syntax-themes
+* Syntax highlighting for Markdown and GFM-compatible HTML
+* A collection of popular syntax-themes
 * :tada: Emoji support :tada:
 * Full screen mode
-  - Write distraction free
+  - Write free of all distractions
+* All contained within an approachable, modular interface that caters to your workflow
 * Integrated word count
-* App can remain active in tray for quick usage
+* App can remain active in tray for quick access
 * Cross platform
   - Windows, Mac and Linux ready
   
