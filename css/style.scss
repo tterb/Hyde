@@ -89,6 +89,7 @@ label {
     > button {
         display: inline-block;
         background: transparent;
+        outline: none;
         border: none;
         float: right;
         margin: 3px 0px;
@@ -262,136 +263,6 @@ label {
         }
     }
 }
-// .appMenu {
-//     position: fixed;
-//     background-color: #282726;
-//     color: $text-color !important;
-//     font-size: 11px;
-//     width: 100%;
-//     height: 29px;
-//     top: 36px;
-//     left: 0;
-//     border: 1px inset #424443;
-//     z-index: 999999;
-//     :focus,
-//     :active:focus,
-//     .active:focus,
-//     .focus,
-//     :active.focus,
-//     .active.focus {
-//         outline: none !important;
-//     }
-//     ul > li > button {
-//         display: inline-block;
-//         // background-image: -webkit-linear-gradient(#454746, #242625);
-//         background: transparent;
-//         color: $text-color;
-//         font-size: 11px;
-//         height: 28px;
-//         width: 40px;
-//         white-space: nowrap;
-//         // border: 1px outset #424443;
-//         padding: 6px 0;
-//         &:focus .submenu, &:active .submenu {
-//             visibility: visible;
-//         }
-//     }
-//     > ul {
-//         height: 28px;
-//         list-style: none;
-//         margin: 0;
-//         padding: 0;
-//         .menuItem {
-//             display: inline-block;
-//             // background-image: -webkit-linear-gradient(#454746, #242625);
-//             background: transparent;
-//             color: $text-color;
-//             height: 28px;
-//             width: 40px;
-//             white-space: nowrap;
-//             // border: 1px outset #424443;
-//             padding: 6px 0;
-//             &:focus .submenu, &:active .submenu {
-//                 visibility: visible;
-//             }
-//             .submenu {
-//                 position: relative;
-//                 background-color: #2d2e2c;
-//                 color: $text-color;
-//                 white-space: nowrap;
-//                 min-width: 100px;
-//                 max-width: 200px;
-//                 top: 5px;
-//                 left: 0;
-//                 visibility: hidden;
-//                 list-style: none !important;
-//                 box-shadow: 0 1px 8px rgba(0,0,0,0.55);
-//                 padding: 6px 6px 2px 13px;
-//                 z-index: 999999;
-//                 > li {
-//                     height: 28px;
-//                     width: 100%;
-//                     padding: 6px 2px 7px 0;
-//                     &:first-child {
-//                         padding-top: 3px;
-//                     }
-//                     .inner {
-//                         position: relative;
-//                         background-color: #2a2b29;
-//                         top: -23px;
-//                         left: 86px;
-//                         visibility: hidden;
-//                         > li {
-//                             word-wrap: nowrap;
-//                         }
-//                     }
-//                     &:focus .inner, &:active .inner {
-//                         visibility: visible;
-//                     }
-//                     > span {
-//                         position: relative;
-//                         font-size: 14px;
-//                         right: -33%;
-//                     }
-//                     > a {
-//                         display: block;
-//                         color: $text-subtle-color;
-//                         text-decoration: none;
-//                         &:hover, &:active {
-//                             color: $text-emphasis-color;
-//                             text-decoration: none;
-//                         }
-//                     }
-//                 }
-//             }
-//             > a {
-//                 display: block;
-//                 position: relative;
-//                 color: $text-subtle-color;
-//                 text-align: center;
-//                 text-decoration: none;
-//                 top: -2px;
-//                 left: 1px;
-//                 &:hover, &:active {
-//                     color: $text-emphasis-color;
-//                     text-decoration: none;
-//                 }
-//             }
-//         }
-//         > li {
-//             float: left;
-//         }
-//     }
-//     #edit .submenu {
-//         width: 110px;
-//     }
-//     #view .submenu {
-//         width: 160px;
-//     }
-//     #help .submenu {
-//         width: 110px;
-//     }
-// }
 
 #buttons {
     display: inline-block;
@@ -497,13 +368,13 @@ input[type="radio"] {
     + label {
         color: $text-color;
         span {
-            display:inline-block;
-            width:19px;
-            height:19px;
-            margin:-2px 6px 0 5px;
+            display: inline-block;
+            width: 19px;
+            height: 19px;
+            margin: 0  6px 0 5px;
             vertical-align: middle;
             background: url(../img/check_radio_sheet.png) -38px top no-repeat;
-            cursor:pointer;
+            cursor: pointer;
         }
     }
     &:checked + label span {
@@ -763,6 +634,7 @@ code {
 #markdown  {
     font-size: 14px;
     text-rendering: geometricPrecision;
+    overflow: auto;
     h1 {
         color: #333;
         font-size: 36px;
@@ -792,6 +664,11 @@ code {
         font-weight: 600;
         line-height: 1.05;
     }
+    img {
+        width: auto;
+        max-width: 100%;
+        height: auto;
+    }
     ol, ul {
         line-height: 1.75;
     }
@@ -808,6 +685,7 @@ code {
     }
     pre {
       background: #424242;
+      color: $text-color;
       border-radius: 10px;
       margin: 15px 0;
       padding: 9.5px 18px;

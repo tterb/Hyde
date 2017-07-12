@@ -71,6 +71,7 @@ label {
   .frame > button {
     display: inline-block;
     background: transparent;
+    outline: none;
     border: none;
     float: right;
     margin: 3px 0px;
@@ -304,7 +305,7 @@ input[type="radio"] {
       display: inline-block;
       width: 19px;
       height: 19px;
-      margin: -2px 6px 0 5px;
+      margin: 0  6px 0 5px;
       vertical-align: middle;
       background: url(../img/check_radio_sheet.png) -38px top no-repeat;
       cursor: pointer; }
@@ -508,7 +509,8 @@ code {
 
 #markdown {
   font-size: 14px;
-  text-rendering: geometricPrecision; }
+  text-rendering: geometricPrecision;
+  overflow: auto; }
   #markdown h1 {
     color: #333;
     font-size: 36px;
@@ -534,6 +536,10 @@ code {
     font-size: 16px;
     font-weight: 600;
     line-height: 1.05; }
+  #markdown img {
+    width: auto;
+    max-width: 100%;
+    height: auto; }
   #markdown ol, #markdown ul {
     line-height: 1.75; }
   #markdown a {
@@ -546,6 +552,7 @@ code {
     border-top: 1px solid #ddd; }
   #markdown pre {
     background: #424242;
+    color: rgba(255, 255, 255, 0.75);
     border-radius: 10px;
     margin: 15px 0;
     padding: 9.5px 18px; }
