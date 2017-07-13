@@ -35,7 +35,8 @@ window.addEventListener('contextmenu', function(e) {
 });
 
 var conf = {
-  mode: "gfm",
+  mode: "yaml-frontmatter",
+  base: "gfm",
   viewportMargin: 100000000000,
   lineWrapping : true,
   autoCloseBrackets: true
