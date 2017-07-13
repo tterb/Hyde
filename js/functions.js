@@ -1,16 +1,16 @@
 
 var clkPref = function (opt) {
   currentValue = opt.value;
-  if (currentValue=='preview') {
-    document.getElementById("htmlPreview").style.display = "none";
-    document.getElementById("markdown").style.display = "block";
-    document.getElementById("previewPanel").style.paddingTop = "25px";
-    document.getElementById("previewPanel").style.paddingRight = "15px";
-  } else if (currentValue=='html') {
-    document.getElementById("markdown").style.display = "none";
-    document.getElementById("htmlPreview").style.display = "block";
-    document.getElementById("previewPanel").style.paddingTop = "0px";
-    document.getElementById("previewPanel").style.paddingRight = "0px";
+  if (currentValue == 'preview') {
+    $('#htmlPreview').hide();
+    $('#markdown').show();
+    $('#previewPanel').css('padding-top', '25px');
+    $('#previewPanel').css('padding-right', '15px');
+  } else if (currentValue == 'html') {
+    $('#markdown').hide();
+    $('#htmlPreview').show();
+    $('#previewPanel').css('padding-top', '0px');
+    $('#previewPanel').css('padding-right', '0px');
   }
 }
 
@@ -18,22 +18,22 @@ function toggleTheme(opt) {
   currentValueTheme = opt.value;
   if (currentValueTheme=='light') {
     cm.setOption("theme", "zenburn");
-    document.getElementById("previewPanel").className = "col-md-6 full-height";
+    $('#previewPanel').attr('class', 'col-md-6 full-height');
   } else if (currentValueTheme=='dark') {
     cm.setOption("theme", "monokai");
-    document.getElementById("previewPanel").className = "col-md-6 full-height preview-dark-mode";
+    $('#previewPanel').attr('class', 'col-md-6 full-height preview-dark-mode');
   }
 }
 
 var changeTheme = function() {
   if(document.getElementById("previewPanel").className.includes("preview-dark-mode")) {
     cm.setOption("theme", "mdn-like");
-    document.getElementById("previewPanel").className = "col-md-6 full-height";
-    document.getElementById("toggle-theme").className = "fa fa-lightbulb-o editor-toolbar active";
+    $('#previewPanel').attr('class', 'col-md-6 full-height');
+    $('#toggle-theme').attr('class', 'fa fa-lightbulb-o editor-toolbar active');
   } else {
     cm.setOption("theme", "monokai");
-    document.getElementById("previewPanel").className = "col-md-6 full-height preview-dark-mode";
-    document.getElementById("toggle-theme").className = "fa fa-lightbulb-o editor-toolbar inactive";
+    $('#previewPanel').attr('class', 'col-md-6 full-height preview-dark-mode');
+    $('#toggle-theme').attr('class', 'fa fa-lightbulb-o editor-toolbar inactive');
   }
 }
 
@@ -88,27 +88,62 @@ function toggleMenu() {
     formatHead();
 }
 
-// var showToolBar = function () {
-//   var editTop = document.getElementById('editArea').style.paddingTop;
-//   var toolbarHeight = document.getElementById('toolbarArea').offsetHeight;
-//   var menuHeight = document.getElementById('appMenu').offsetHeight;
-//   // if(!document.getElementById('appMenu').style.visibility == 'hidden') {
-//   //   menuHeight = 27;
-//   // }
-//   if(document.getElementById("toolbarArea").style.display == "block"){
-//     document.getElementById("angleToolBar").className = "";
-//     document.getElementById("angleToolBar").className = "fa fa-angle-right";
-//     document.getElementById("angleToolBar").style.paddingLeft = "10px";
-//     document.getElementById("toolbarArea").style.display = "none";
-//     document.getElementById("editArea").style.paddingTop = (editTop-toolbarHeight+menuHeight).toString()+"px";
-//   } else {
-//     document.getElementById("angleToolBar").className = "";
-//     document.getElementById("angleToolBar").className = "fa fa-angle-down";
-//     document.getElementById("angleToolBar").style.paddingLeft = "6px";
-//     document.getElementById("toolbarArea").style.display = "block";
-//     document.getElementById("editArea").style.paddingTop = (editTop+toolbarHeight+menuHeight).toString()+"px";
-//   }
-// }
+function toggleFullscreen() {
+    var electron = require('electron');
+    var window = electron.remote.getCurrentWindow();
+    if(window.isFullScreen())
+      window.setFullScreen(false);
+    else
+      window.setFullScreen(true);
+}
+
+function toggleDeveloper() {
+    var window = electron.remote.getCurrentWindow();
+    window.toggleDevTools();
+}
+
+const electron = require('electron');
+const {clipboard} = require('electron');
+const {webContents} = require('electron');
+
+function copySelected() {
+    var content = "Text that will be now on the clipboard as text";
+    clipboard.writeText(content);
+}
+
+function pasteSelected() {
+    var content = clipboard.readText();
+    alert(content);
+}
+
+function searchContent() {
+    cm.execCommand('find');
+}
+
+function replaceContent() {
+  cm.execCommand('replace');
+}
+
+function undoAction() {
+    var window = electron.remote.getCurrentWindow();
+    webContents.undo();
+}
+
+function newFile() {
+    electron.remote.getCurrentWindow().webContents.send('file-new');
+}
+
+function openFile() {
+    electron.remote.getCurrentWindow().webContents.send('file-open');
+}
+
+function saveFile() {
+    electron.remote.getCurrentWindow().webContents.send('file-save');
+}
+
+function saveFileAs() {
+    electron.remote.getCurrentWindow().webContents.send('file-save-as');
+}
 
 // Generations and clean state of CodeMirror
 var getGeneration = function () {
@@ -136,14 +171,14 @@ var updateWindowTitle = function (path) {
     parsedPath = parsePath(path);
     dir = parsedPath.dirname || process.cwd();
     title = appName + " - " + path.toString();
-    document.getElementById("bottom-file").innerHTML = parsedPath.basename;
+    $('#bottom-file').html(parsedPath.basename);
   } else {
     title = appName;
-    document.getElementById("bottom-file").innerHTML = "New document"
+    $('#bottom-file').html('New document');
   }
   if (!this.isClean()) {
     title = saveSymbol + title;
   }
   document.title = title;
-  document.getElementById("title").innerHTML = title;
+  $('#title').html(title);
 }

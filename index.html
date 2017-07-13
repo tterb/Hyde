@@ -64,11 +64,11 @@
         <div class="btn-group">
           <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">File</button>
           <ul class="dropdown-menu">
-            <li><a tabindex="-1" href="#">New</a><span>Ctrl + N</span></li>
-            <li><a tabindex="-1" href="#">Open</a><span>Ctrl + O</span></li>
+            <li><a tabindex="-1" href="#" onclick="newFile();">New</a><span>Ctrl + N</span></li>
+            <li><a tabindex="-1" href="#" onclick="openFile();">Open</a><span>Ctrl + O</span></li>
             <li class="dropdown-divider"></li>
-            <li><a tabindex="-1" href="#">Save</a><span>Ctrl + S</span></li>
-            <li><a tabindex="-1" href="#">Save As</a><span>Ctrl + Shift + S</span></li>
+            <li><a tabindex="-1" href="#" onclick="saveFile();">Save</a><span>Ctrl + S</span></li>
+            <li><a tabindex="-1" href="#" onclick="saveFileAs();">Save As</a><span>Ctrl + Shift + S</span></li>
             <li class="dropdown-divider"></li>
             <li><a tabindex="-1" href="#">Settings</a><span>Ctrl + ,</span></li>
             <li class="dropdown-divider"></li>
@@ -79,18 +79,18 @@
         <div class="btn-group">
           <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Edit</button>
           <ul class="dropdown-menu">
-            <li><a tabindex="-1" href="#">Undo</a><span>Ctrl + Z</span></li>
+            <li><a tabindex="-1" href="#" onclick="undoAction();">Undo</a><span>Ctrl + Z</span></li>
             <li><a tabindex="-1" href="#">Redo</a><span>Ctrl + Shift + Z</span></li>
             <li class="dropdown-divider"></li>
             <li><a tabindex="-1" href="#">Cut</a><span>Ctrl + X</span></li>
-            <li><a tabindex="-1" href="#">Copy</a><span>Ctrl + C</span></li>
-            <li><a tabindex="-1" href="#">Paste</a><span>Ctrl + V</span></li>
+            <li><a tabindex="-1" href="#" onclick="copySelected();">Copy</a><span>Ctrl + C</span></li>
+            <li><a tabindex="-1" href="#" onclick="pasteSelected();">Paste</a><span>Ctrl + V</span></li>
             <li><a tabindex="-1" href="#">Select All</a><span>Ctrl + A</span></li>
             <li class="dropdown-divider"></li>
-            <li><a tabindex="-1" href="#">Search</a><span>Ctrl + F</span></li>
-            <li><a tabindex="-1" href="#">Replace</a><span>Ctrl + Shift + F</span></li>
+            <li><a tabindex="-1" href="#" onclick="searchContent();">Search</a><span>Ctrl + F</span></li>
+            <li><a tabindex="-1" href="#" onclick="replaceContent();">Replace</a><span>Ctrl + Shift + F</span></li>
             <li class="dropdown-divider"></li>
-            <li><a tabindex="-1" href="#">Toggle Comment</a><span>Ctrl + /</span></li>
+            <li><a tabindex="-1" href="#" onclick="toggleComment();">Toggle Comment</a><span>Ctrl + /</span></li>
           </ul>
         </div>
         <!-- View -->
@@ -100,19 +100,27 @@
             <li class="dropdown-submenu">
               <a class="test" tabindex="-1" href="#">Themes <span class="caret"></span></a>
               <ul class="dropdown-menu">
+                <li><a href="#" onclick="includeTheme('base16-dark');">Base16 Dark</a></li>
+                <li><a href="#" onclick="includeTheme('base16-light');">Base16 Light</a></li>
+                <li><a href="#" onclick="includeTheme('duotone-dark');">Duotone Dark</a></li>
+                <li><a href="#" onclick="includeTheme('hopscotch');">Hopscotch</a></li>
                 <li><a href="#" onclick="includeTheme('material');">Material</a></li>
                 <li><a href="#" onclick="includeTheme('monokai');">Monokai</a></li>
                 <li><a href="#" onclick="includeTheme('one-dark');">One Dark</a></li>
-                <li><a href="#" onclick="includeTheme('solarized');">Solarized</a></li>
-                <li><a href="#" onclick="includeTheme('tomorrow-night-eighties');">Tomorrow Night Eighties</a></li>
+                <li><a href="#" onclick="includeTheme('seti');">Seti</a></li>
+                <li><a href="#" onclick="includeTheme('solarized-dark');">Solarized Dark</a></li>
+                <li><a href="#"onclick="includeTheme('solarized-light');">Solarized Light</a></li>
+                <li><a href="#" onclick="includeTheme('tomorrow-night-bright');">Tomorrow Night</a></li>
+                <li><a href="#" onclick="includeTheme('yeti');">Yeti</a></li>
                 <li><a href="#" onclick="includeTheme('zenburn');">Zenburn</a></li>
               </ul>
             </li>
             <li class="dropdown-divider"></li>
-            <li><a tabindex="-1" href="#">Toggle Full Screen</a><span>F11</span></li>
-            <li><a tabindex="-1" href="#">Toggle Menu Bar</a><span>Ctrl + .</span></li>
+            <li><a tabindex="-1" href="#" onclick="toggleMenu();">Toggle Menu Bar</a><span>Ctrl + .</span></li>
+            <li><a tabindex="-1" href="#" onclick="showToolBar();">Toggle Toolbar</a><span>Ctrl + t</span></li>
+            <li><a tabindex="-1" href="#" onclick="toggleFullscreen();">Toggle Full Screen</a><span>F11</span></li>
             <li class="dropdown-divider"></li>
-            <li><a tabindex="-1" href="#">Toggle Developer Tools</a><span>Ctrl + Shift + I</span></li>
+            <li><a tabindex="-1" href="#" onclick="toggleDeveloper();">Toggle Developer Tools</a><span>Ctrl + Shift + I</span></li>
           </ul>
         </div>
          <!-- Help -->
@@ -122,7 +130,7 @@
             <li><a tabindex="-1" href="#">Documentation</a></li>
             <li class="dropdown-divider"></li>
             <li><a tabindex="-1" href="#">Keybindings</a></li>
-            <li><a tabindex="-1" href="#">Markdown Syntax</a></li>
+            <li><a tabindex="-1" href="#" data-toggle="modal" data-target="#myModal">Markdown Help</a></li>
             <li><a tabindex="-1" href="https://github.com/JonSn0w/Hyde-MD/issues/new">Report Issue</a></li>
             <li class="dropdown-divider"></li>
             <li><a tabindex="-1" href="#">About Hyde</a></li>
@@ -146,7 +154,7 @@
         </div>
       </div>
       <div id="toolbarArea">
-        <div class="toolbar-buttons" style="padding:5px 12px;">
+        <div class="toolbar-buttons" style="padding:4px 12px 5px;">
           <a onclick="toggleFormat('bold');" title="Bold [Ctrl+B]" class="fa fa-bold editor-toolbar"></a>
           <a onclick="toggleFormat('italic');" title="Italic [Ctrl+I]" class="fa fa-italic editor-toolbar"></a>
           <a onclick="toggleHeadingSmaller();" title="Header [Ctrl+H]" class="fa fa-header editor-toolbar"></a>
