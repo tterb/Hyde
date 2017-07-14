@@ -10,7 +10,7 @@ html, body, section, .full-height {
 
 body {
     background: #282726;
-    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif !important;
+    font-family: "Roboto","Helvetica Neue",Helvetica,Arial,sans-serif !important;
     font-size: 13.5px;
     resize: both;
     overflow: hidden;
@@ -21,7 +21,9 @@ body {
 }
 
 label {
-    font-size: 12px;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.0175em;
     color: $text-color;
     margin-right: 6px;
     margin-bottom: 5px;
@@ -177,6 +179,7 @@ label {
                     background-color: transparent;
                     color: $text-color;
                     font-size: 11px;
+                    font-weight: 300;
                     letter-spacing: 0.06em;
                     text-decoration: none !important;
                     padding: 3px 15px 3px 10px;
@@ -187,7 +190,7 @@ label {
                 > span {
                     display: inline;
                     position: relative;
-                    color: rgba(255,255,255,0.2);
+                    color: rgba(255,255,255,0.3);
                     font-size: 10px;
                     font-weight: 200;
                     text-align: right;
@@ -318,7 +321,7 @@ label {
         position: relative;
         font-size: 12px;
         bottom: 2px;
-        margin: 5.25px 4px 4px 15px;
+        margin: 5.25px 4px 4px 12px;
     }
     #wordcount {
         display: inline-block;
@@ -371,14 +374,33 @@ input[type="radio"] {
             display: inline-block;
             width: 19px;
             height: 19px;
-            margin: 0  6px 0 5px;
+            margin: 0 6px 3px 5px;
             vertical-align: middle;
-            background: url(../img/check_radio_sheet.png) -38px top no-repeat;
+            background: url(../img/radio.png) 0px top no-repeat;
             cursor: pointer;
         }
     }
     &:checked + label span {
-        background: url(../img/check_radio_sheet.png) -57px top no-repeat;
+        background: url(../img/radio.png) -24px top no-repeat;
+    }
+}
+
+input[type="checkbox"] {
+    display: none;
+    + label {
+        color: $text-color;
+        span {
+            display: inline-block;
+            width: 19px;
+            height: 19px;
+            margin: -1px  6px 0 5px;
+            vertical-align: middle;
+            background: url(../img/check.png) 0px top no-repeat;
+            cursor: pointer;
+        }
+    }
+    &:checked + label span {
+        background: url(../img/check.png) -24px top no-repeat;
     }
 }
 
@@ -694,6 +716,13 @@ code {
       color: $text-color;
       letter-spacing: 0.045em;
       border-radius: 10px;
+    }
+    blockquote {
+        background: rgba(0,0,0,0.05);
+        color: rgba(0,0,0,0.65);
+        font-size: 14px;
+        border-left: 3px solid rgba(0,0,0,0.5);
+        border-radius: 5px;
     }
 }
 
