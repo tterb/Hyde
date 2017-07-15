@@ -121,9 +121,10 @@ label {
     font-size: 11px;
     height: 26px;
     width: 40px;
-    border-radius: 0px;
+    border-radius: 2px;
     white-space: nowrap;
-    padding: 3px 0 5px; }
+    border-right: 1px inset #393b40;
+    padding: 4px 0 5px; }
     #appMenu .btn-group > button:hover, #appMenu .btn-group > button:focus, #appMenu .btn-group > button:active {
       background: #313029;
       color: #f2f2f2;
@@ -301,7 +302,11 @@ label {
     margin: 2px 2px 0; }
 
 input[type="radio"] {
-  display: none; }
+  display: inline-block;
+  position: relative;
+  left: 23px;
+  opacity: 0;
+  cursor: pointer; }
   input[type="radio"] + label {
     color: rgba(255, 255, 255, 0.75); }
     input[type="radio"] + label span {
@@ -338,6 +343,44 @@ input[type="checkbox"] {
   box-shadow: 0 1px 3px 3px rgba(0, 0, 0, 0.125);
   padding: 14px 10px 6px;
   border-bottom: 1px solid #323130; }
+
+#side-trigger {
+  display: inline-block;
+  position: absolute;
+  background: transparent;
+  height: 100%;
+  width: 12px;
+  left: 0;
+  margin: 0;
+  z-index: 99999999; }
+  #side-trigger:hover button img {
+    visibility: visible; }
+
+#side-button {
+  display: inline-block;
+  position: absolute;
+  background: transparent;
+  border: none;
+  top: 37%;
+  left: 0;
+  cursor: pointer; }
+  #side-button > img {
+    display: inline-block;
+    position: absolute;
+    height: 48px;
+    width: 24px;
+    top: 0;
+    left: -2px;
+    cursor: pointer; }
+
+#sidebar {
+  display: inline-block;
+  position: absolute;
+  background: #252726;
+  color: rgba(255, 255, 255, 0.75);
+  height: 100%;
+  width: 375px;
+  left: 0; }
 
 .mdHtml {
   display: none;
