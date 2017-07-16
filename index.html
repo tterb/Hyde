@@ -62,7 +62,7 @@
       <div id="appMenu" class="hidden" style="visibility:hidden;">
         <!-- File -->
         <div class="btn-group">
-          <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">File</button>
+          <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="fileMenu">File</button>
           <ul class="dropdown-menu">
             <li><a tabindex="-1" href="#" onclick="newFile();">New</a><span>Ctrl + N</span></li>
             <li><a tabindex="-1" href="#" onclick="openFile();">Open</a><span>Ctrl + O</span></li>
@@ -70,32 +70,38 @@
             <li><a tabindex="-1" href="#" onclick="saveFile();">Save</a><span>Ctrl + S</span></li>
             <li><a tabindex="-1" href="#" onclick="saveFileAs();">Save As</a><span>Ctrl + Shift + S</span></li>
             <li class="dropdown-divider"></li>
-            <li><a tabindex="-1" href="#">Settings</a><span>Ctrl + ,</span></li>
+            <li><a tabindex="-1" href="#" onclick="exportToPDF();">Export to PDF</a></li>
+            <li class="dropdown-divider"></li>
+            <li><a tabindex="-1" href="#" onclick="openSettings();">Settings</a><span>Ctrl + ,</span></li>
             <li class="dropdown-divider"></li>
             <li><a tabindex="-1" href="#">Exit</a></li>
           </ul>
         </div>
         <!-- Edit -->
         <div class="btn-group">
-          <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Edit</button>
+          <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="editMenu">Edit</button>
           <ul class="dropdown-menu">
             <li><a tabindex="-1" href="#" onclick="undoAction();">Undo</a><span>Ctrl + Z</span></li>
-            <li><a tabindex="-1" href="#">Redo</a><span>Ctrl + Shift + Z</span></li>
+            <li><a tabindex="-1" href="#" onclick="redoAction();">Redo</a><span>Ctrl + Shift + Z</span></li>
             <li class="dropdown-divider"></li>
-            <li><a tabindex="-1" href="#">Cut</a><span>Ctrl + X</span></li>
+            <li><a tabindex="-1" href="#" onclick="cm.execCommand('cut');">Cut</a><span>Ctrl + X</span></li>
             <li><a tabindex="-1" href="#" onclick="copySelected();">Copy</a><span>Ctrl + C</span></li>
             <li><a tabindex="-1" href="#" onclick="pasteSelected();">Paste</a><span>Ctrl + V</span></li>
-            <li><a tabindex="-1" href="#">Select All</a><span>Ctrl + A</span></li>
+            <li><a tabindex="-1" href="#" onclick="cm.execCommand("selectAll");">Select All</a><span>Ctrl + A</span></li>
             <li class="dropdown-divider"></li>
-            <li><a tabindex="-1" href="#" onclick="searchContent();">Search</a><span>Ctrl + F</span></li>
-            <li><a tabindex="-1" href="#" onclick="replaceContent();">Replace</a><span>Ctrl + Shift + F</span></li>
+            <li><a tabindex="-1" href="#" onclick="cm.execCommand('find');">Search</a><span>Ctrl + F</span></li>
+            <li><a tabindex="-1" href="#" onclick="cm.execCommand('replace');">Replace</a><span>Ctrl + Shift + F</span></li>
+            <li class="dropdown-divider"></li>
+            <li><a tabindex="-1" href="#" onclick="cm.execCommand('indentAuto');">Auto-Indent</a><span></span></li>
+            <li><a tabindex="-1" href="#" onclick="cm.execCommand('indentLess');">Indent Left</a><span>Ctrl + Left</span></li>
+            <li><a tabindex="-1" href="#" onclick="cm.execCommand('indentMore');">Indent Right</a><span>Ctrl + Right</span></li>
             <li class="dropdown-divider"></li>
             <li><a tabindex="-1" href="#" onclick="toggleComment();">Toggle Comment</a><span>Ctrl + /</span></li>
           </ul>
         </div>
         <!-- View -->
         <div class="btn-group">
-          <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">View</button>
+          <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="viewMenu">View</button>
           <ul class="dropdown-menu">
             <li class="dropdown-submenu">
               <a class="test" tabindex="-1" href="#">Themes <span class="caret"></span></a>
@@ -125,12 +131,13 @@
         </div>
          <!-- Help -->
         <div class="btn-group">
-          <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Help</button>
+          <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="helpMenu">Help</button>
           <ul class="dropdown-menu">
             <li><a tabindex="-1" href="#">Documentation</a></li>
             <li class="dropdown-divider"></li>
             <li><a tabindex="-1" href="#">Keybindings</a></li>
-            <li><a tabindex="-1" href="#" data-toggle="modal" data-target="#myModal">Markdown Help</a></li>
+            <!-- <li><a tabindex="-1" href="#" data-toggle="modal" data-target="#mdModal">Markdown Help</a></li> -->
+            <li><a tabindex="-1" href="modal/markdown.html">Markdown Help</a></li>
             <li><a tabindex="-1" href="https://github.com/JonSn0w/Hyde-MD/issues/new">Report Issue</a></li>
             <li class="dropdown-divider"></li>
             <li><a tabindex="-1" href="#">About Hyde</a></li>
@@ -149,8 +156,12 @@
           </div> -->
         </div>
         <div class="pref" id="pref">
-          <input type="radio" name="showPreference" value="html" id="htmlRadio" onclick="clkPref(this);"><label for="html" style="vertical-align: middle;"><span></span>HTML</label>
-          <input type="radio" name="showPreference" value="preview" id="previewRadio" onclick="clkPref(this);" checked="checked"><label for="preview" style="vertical-align: middle;"><span></span>Preview</label>
+          <!-- <div id="prefHtml"> -->
+            <input type="radio" name="showPreference" value="html" id="htmlRadio" onclick="clkPref(this);"><label for="html" style="vertical-align: middle;"><span></span>HTML</label>
+          <!-- </div> -->
+          <!-- <div id="prefPreview"> -->
+            <input type="radio" name="showPreference" value="preview" id="previewRadio" onclick="clkPref(this);" checked="checked"><label for="preview" style="vertical-align: middle;"><span></span>Preview</label>
+          <!-- </div> -->
         </div>
       </div>
       <div id="toolbarArea">
@@ -172,14 +183,26 @@
           <i class="separator">|</i>
           <a onclick="changeTheme();" title="Light/Dark Theme" id="toggle-theme" class="fa fa-lightbulb-o editor-toolbar"></a>
           <a onclick="toggleSidePanel();" title="Toggle Preview Panel" class="fa fa-columns editor-toolbar"></a>
-          <a data-toggle="modal" data-target="#myModal" title="Markdown Help" class="fa fa-question-circle editor-toolbar"></a>
+          <a data-toggle="modal" data-target="#mdModal" title="Markdown Help" class="fa fa-question-circle editor-toolbar"></a>
         </div>
       </div>
       <section class="row" id="editArea" style="background-color: rgba(246, 245, 245,0.0); color:#3a3a3a;">
+        <div id="side-trigger">
+          <button id="side-button" onclick="toggleSidebar()" style="visibility:hidden;"/><img src="img/left-arrow.png" onclick="toggleSidebar()"/>
+        </div>
+        <section id="sidebar" style="display:none;">
+          <img id="side-logo" src=""/>
+          <ul id="side-menu">
+            <li>New</li>
+            <li>Open</li>
+            <li>Save</li>
+            <li>Settings</li>
+          </ul>
+        </section>
           <div class="col-md-6 full-height" style="background:#323130;padding-top:0px;overflow-y:auto;" id="textPanel">
-            <textarea  id="plainText" placeholder="Write your Markdown here.." autofocus></textarea>
+            <textarea  id="plainText" placeholder="" autofocus></textarea>
           </div>
-          <div class="col-md-6 full-height" style="overflow-y:auto;display:block;padding-top:25px;" id="previewPanel">
+          <div class="col-md-6 full-height" style="overflow-y:auto;display:block;padding-top:8px;" id="previewPanel">
             <div id="markdown"></div>
             <textarea id="htmlPreview" class="mdHtml"></textarea>
           </div>
@@ -275,12 +298,14 @@
           });
         });
       </script>
+      <link rel="import" href="modal/markdown.html" >
       <script src="js/CodeMirror/libs/jquery.min.js"></script>
       <script src="js/CodeMirror/libs/marked.min.js"></script>
       <script src="js/CodeMirror/libs/search.js"></script>
       <script src="js/CodeMirror/libs/searchcursor.js"></script>
       <script src="js/CodeMirror/libs/dialog.js"></script>
       <script src="js/CodeMirror/libs/closebrackets.js"></script>
+      <script src="js/settings.js"></script>
       <script src="js/app.js"></script>
       <script src="js/format.js"></script>
       <script src="js/functions.js"></script>
