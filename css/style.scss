@@ -80,7 +80,7 @@ label {
         display: inline-block;
         color: #bbb;
         font-size: 12px;
-        top: 9px;
+        top: 10px;
         left: 44px;
         #titlePath {
             display: inline-block;
@@ -347,7 +347,7 @@ label {
         border: none;
         outline: none !important;
         right: 1.25%;
-        margin-top: 6.125px;
+        margin-top: 4px;
     }
 }
 
@@ -398,20 +398,35 @@ input[type="radio"] {
 }
 
 input[type="checkbox"] {
-    display: none;
+    display: inline-block;
+    position: relative;
+    left: 23px;
+    opacity: 0;
     + label {
         color: $text-color;
         span {
             display: inline-block;
             width: 19px;
             height: 19px;
-            margin: -1px  6px 0 5px;
+            margin: 0 6px 3px 5px;
             vertical-align: middle;
             background: url(../img/check.png) 0px top no-repeat;
             cursor: pointer;
         }
     }
+    + span {
+        display: inline-block;
+        width: 19px;
+        height: 19px;
+        margin: 0 6px 3px 5px;
+        vertical-align: middle;
+        background: url(../img/check.png) 0px top no-repeat;
+        cursor: pointer;
+    }
     &:checked + label span {
+        background: url(../img/check.png) -24px top no-repeat;
+    }
+    &:checked + span {
         background: url(../img/check.png) -24px top no-repeat;
     }
 }
@@ -520,6 +535,8 @@ a#angleToolBar {
     overflow: scroll;
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.75);
     > div {
+        font-size: 10pt;
+        line-height: 1.5;
         padding-top: 8px;
     }
 }
@@ -711,7 +728,9 @@ code {
 
 
 #markdown  {
-    font-size: 14px;
+    font-size: 10pt;
+    letter-spacing: 0.035em;
+    line-height: 1.45;
     text-rendering: geometricPrecision;
     overflow: auto;
     h1 {
@@ -719,29 +738,31 @@ code {
         font-size: 36px;
         font-weight: 800;
         letter-spacing: 0.02em;
-        line-height: 1.25;
+        line-height: 1.45;
         border-bottom: 1px solid #eaecef;
-        margin-bottom: 20px;
+        margin-bottom: 27px;
     }
     h2 {
         color: #333;
         font-size: 28px;
-        font-weight: 600;
-        line-height: 1.2;
+        font-weight: 700;
+        line-height: 1.4;
         border-bottom: 1px solid #eaecef;
-        margin-bottom: 15px;
+        margin-bottom: 24px;
     }
     h3 {
         color: #333;
         font-size: 20px;
         font-weight: 600;
-        line-height: 1.1;
+        line-height: 1.3;
+        margin-bottom: 22px;
     }
     h4 {
         color: #333;
         font-size: 16px;
         font-weight: 600;
-        line-height: 1.05;
+        line-height: 1.25;
+        margin-bottom: 20px;
     }
     img {
         width: auto;
@@ -762,6 +783,9 @@ code {
     hr {
         border-top: 1px solid #ddd;
     }
+    p {
+        margin: 0 0 16px !important;
+    }
     pre {
       background: #424242;
       color: $text-color;
@@ -780,6 +804,7 @@ code {
         font-size: 14px;
         border-left: 3px solid rgba(0,0,0,0.5);
         border-radius: 5px;
+        margin-top: 15px;
     }
 }
 
