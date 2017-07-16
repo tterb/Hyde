@@ -13,7 +13,11 @@ var console = require('console');
 var parsePath = require("parse-filepath");
 var currentFile = '';
 var isFileLoadedInitially = false;
+// const default = require('./config');
 const config = require('./config');
+const settings = require('electron-settings');
+const setter = require('./js/settings');
+// const settings = require('electron-settings');
 // require('electron-titlebar');
 // const titlebar = document.getElementById('electron-titlebar');
 
@@ -34,6 +38,8 @@ window.addEventListener('contextmenu', function(e) {
   }, 30);
 });
 
+getUserSettings();
+
 var conf = {
   mode: "yaml-frontmatter",
   base: "gfm",
@@ -45,7 +51,7 @@ var conf = {
 function includeTheme(theme) {
   var themeTag;
   var head = document.getElementsByTagName('head')[0];
-  config.set('theme', theme);
+  settings.set('editorTheme', theme);
   if(document.getElementById('themeLink')) {
     themeTag = document.getElementById('themeLink');
     themeTag.setAttribute('href', 'css/theme/'+theme+'.css');
@@ -58,12 +64,12 @@ function includeTheme(theme) {
     themeTag.setAttribute('href', 'css/theme/'+theme+'.css');
     head.appendChild(themeTag);
   }
-  return themeTag;
+  settings.set('editorTheme', theme);
 }
 
 var fs = require('fs');
 var files = fs.readdirSync('./css/theme');
-var theme = config.get('theme');
+var theme = settings.get('editorTheme');
 
 if (files.includes(theme+'.css')) {
   conf.theme = theme;
@@ -72,7 +78,7 @@ if (files.includes(theme+'.css')) {
 }
 includeTheme(theme);
 
-if (!config.get('lineNumbers')) {
+if (!settings.get('lineNumbers')) {
     conf.lineNumbers = false;
 }
 
@@ -91,7 +97,8 @@ window.onload = function() {
     html = marked(markdownText,{gfm: true});
     markdownArea.innerHTML = replaceWithEmojis(html);
     //Md -> HTML
-    converter = new showdown.Converter();
+    var jekyll = require('./js/extensions/jekyll.js');
+    converter = new showdown.Converter({ extensions: ['jekyll'] });
     html      = converter.makeHtml(markdownText);
     document.getElementById("htmlPreview").value = html;
     if(this.isFileLoadedInitially) {
@@ -125,10 +132,10 @@ window.onload = function() {
 
   document.getElementById("minimize").onclick = function() { remote.BrowserWindow.getFocusedWindow().minimize(); }
   document.getElementById("maximize").onclick = function() { win.isMaximized() ? win.unmaximize() : win.maximize(); }
-  document.getElementById("close").onclick = function() { window.close(); }
+  document.getElementById("close").onclick = function() { win.close(); }
 
   var syncButton = document.getElementById('syncScroll');
-  if(config.get('isSyncScroll') === true) {
+  if(settings.get('syncScroll') === true) {
     syncButton.className = 'fa fa-link';
   } else {
     syncButton.className = 'fa fa-unlink';
@@ -160,7 +167,7 @@ window.onload = function() {
       isSynced = true;
       $(window).trigger('resize')
    }
-   config.set('isSyncScroll', !isSynced);
+   settings.set('syncScroll', !isSynced);
  }
 
  $syncScroll.on('change', toggleSyncScroll);
