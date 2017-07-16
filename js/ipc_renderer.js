@@ -16,7 +16,7 @@ function saveAs() {
       var mdValue = cm.getValue();
       // fileName is a string that contains the path and filename created in the save file dialog.
       fs.writeFile(fileName, mdValue, function (err) {
-        if(err){
+        if(err) {
           alert("An error ocurred creating the file "+ err.message)
         }
       });
@@ -99,6 +99,13 @@ ipc.on('file-open', function() {
   });
 });
 
+function copySelected() {
+    const {clipboard} = require('electron');
+    var content = window.getSelection().toString();
+    console.log(window.getSelection().toString());
+    clipboard.writeText(content);
+}
+
 ipc.on('ctrl+b', function() {
   toggleFormat('bold');
 });
@@ -139,6 +146,37 @@ ipc.on('ctrl+shift+f', function() {
   cm.execCommand('replace');
 });
 
+ipc.on('ctrl+h', function() {
+  cm.execCommand('replace');
+});
+
 ipc.on('ctrl+.', function() {
   toggleMenu();
+});
+
+ipc.on('ctrl+,', function() {
+  openSettings();
+});
+
+ipc.on('ctrl+p', function() {
+  const ipcRenderer = require('electron').ipcRenderer;
+  ipcRenderer.send('show-settings-window');
+});
+
+ipc.on('ctrl+p', function() {
+  toggleMenu();
+});
+
+ipc.on('file-pdf', () => {
+  // Only save PDF files
+  options = {
+    filters: [
+      {name: 'PDF', extensions: ['pdf']}
+    ]
+  };
+
+  dialog.showSaveDialog(options, (fileName) => {
+    ipc.send('export-to-pdf', fileName);
+  });
+
 });

@@ -1,3 +1,8 @@
+const electron = require('electron');
+const {clipboard} = require('electron');
+const {webContents} = require('electron');
+// const settings = require('electron-settings');
+var count = 0;
 
 var clkPref = function (opt) {
   currentValue = opt.value;
@@ -12,29 +17,7 @@ var clkPref = function (opt) {
     $('#previewPanel').css('padding-top', '0px');
     $('#previewPanel').css('padding-right', '0px');
   }
-}
-
-function toggleTheme(opt) {
-  currentValueTheme = opt.value;
-  if (currentValueTheme=='light') {
-    cm.setOption("theme", "zenburn");
-    $('#previewPanel').attr('class', 'col-md-6 full-height');
-  } else if (currentValueTheme=='dark') {
-    cm.setOption("theme", "monokai");
-    $('#previewPanel').attr('class', 'col-md-6 full-height preview-dark-mode');
-  }
-}
-
-var changeTheme = function() {
-  if(document.getElementById("previewPanel").className.includes("preview-dark-mode")) {
-    cm.setOption("theme", "mdn-like");
-    $('#previewPanel').attr('class', 'col-md-6 full-height');
-    $('#toggle-theme').attr('class', 'fa fa-lightbulb-o editor-toolbar active');
-  } else {
-    cm.setOption("theme", "monokai");
-    $('#previewPanel').attr('class', 'col-md-6 full-height preview-dark-mode');
-    $('#toggle-theme').attr('class', 'fa fa-lightbulb-o editor-toolbar inactive');
-  }
+  count = count + 1;
 }
 
 var formatHead = function() {
@@ -102,9 +85,15 @@ function toggleDeveloper() {
     window.toggleDevTools();
 }
 
-const electron = require('electron');
-const {clipboard} = require('electron');
-const {webContents} = require('electron');
+function toggleSidebar() {
+    if($('#toggleSidebar:hidden').length == 0) {
+        $('#side-button').show();
+        $('#sidebar').hide();
+    } else {
+        $('#side-button').hide();
+        $('#sidebar').show();
+    }
+}
 
 function copySelected() {
     var content = "Text that will be now on the clipboard as text";
@@ -114,19 +103,6 @@ function copySelected() {
 function pasteSelected() {
     var content = clipboard.readText();
     alert(content);
-}
-
-function searchContent() {
-    cm.execCommand('find');
-}
-
-function replaceContent() {
-  cm.execCommand('replace');
-}
-
-function undoAction() {
-    var window = electron.remote.getCurrentWindow();
-    webContents.undo();
 }
 
 function newFile() {
@@ -145,6 +121,13 @@ function saveFileAs() {
     electron.remote.getCurrentWindow().webContents.send('file-save-as');
 }
 
+function exportToPDF() {
+    electron.remote.getCurrentWindow().webContents.send('file-pdf');
+}
+
+function selectMarkdown() {
+    document.getElementById('previewPanel').focus();
+}
 // Generations and clean state of CodeMirror
 var getGeneration = function () {
   return this.cm.doc.changeGeneration();
@@ -181,4 +164,9 @@ var updateWindowTitle = function (path) {
   }
   document.title = title;
   $('#title').html(title);
+}
+
+function openSettings() {
+    var HydeSettings = require('./js/settingsMenu');
+    HydeSettings();
 }

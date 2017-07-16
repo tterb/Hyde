@@ -14,9 +14,11 @@ var dialog = require('electron').dialog;
 var shell = require('electron').shell;
 const tray = require('./tray');
 const func = require('./js/functions');
+const setter = require('./js/settings');
 const mod = require('./package.json');
 var config = require('./config');
 const keepInTray = config.get('keepInTray');
+const fs = require('fs');
 // var globalShortcut = require('global-shortcut');
 var localShortcut = require('electron-localShortcut');
 // const titlebar = require('electron-titlebar');
@@ -100,6 +102,9 @@ function createWindow () {
           var focusedWindow = BrowserWindow.getFocusedWindow();
           focusedWindow.webContents.send('file-save-as');
         }},
+        {label: "Settings", accelerator: "CmdOrCtrl+,", click: function() {
+          openSettings();
+        }},
         {label: "Quit", accelerator: "CmdOrCtrl+Q", click: app.quit}
       ]
     },
@@ -175,9 +180,22 @@ function createWindow () {
     }
   ];
   const {Menu, MenuItem, ipcMain} = require('electron');
-    let menu = Menu.buildFromTemplate(template);
-    Menu.setApplicationMenu(menu);
+    // let menu = Menu.buildFromTemplate(template);
+    // Menu.setApplicationMenu(menu);
   // Menu.setApplicationMenu(Menu.buildFromTemplate(template));
+
+  ipcMain.on('export-to-pdf', (event, filePath) => {
+    const win = BrowserWindow.fromWebContents(event.sender)
+    // Use default printing options
+    win.webContents.printToPDF({pageSize: 'A4'}, (error, data) => {
+      if (error) throw error
+      fs.writeFile(filePath, data, (error) => {
+        if (error) {
+          throw error
+        }
+      })
+    })
+  });
 
   // Regestering global shortcuts for formatting markdown
   var focusedWindow = BrowserWindow.getFocusedWindow();
@@ -211,10 +229,15 @@ function createWindow () {
 
   localShortcut.register('CmdOrCtrl+.', function() {
     focusedWindow.webContents.send('ctrl+.');
-});
+  });
+
+  localShortcut.register('CmdOrCtrl+,', function() {
+    focusedWindow.webContents.send('ctrl+,');
+  });
 
   tray.create(mainWindow);
 }
+
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
