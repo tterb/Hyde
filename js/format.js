@@ -163,9 +163,9 @@ function toggleOrderedList(editor) {
   _toggleLine(cm, "ordered-list");
 }
 
+
 function _toggleLine(cm, name) {
-  if(/editor-preview-active/.test(cm.getWrapperElement().lastChild.className))
-  return;
+  if(/editor-preview-active/.test(cm.getWrapperElement().lastChild.className)) return;
 
   var stat = getState(cm);
   var startPoint = cm.getCursor("start");
@@ -331,14 +331,7 @@ function _replaceSelection(cm, active, startEnd, url) {
   cm.focus();
 }
 
-function toggleSidePanel() {
-  if(document.getElementById("previewPanel").style.display == "block"){
-    document.getElementById("previewPanel").style.display = "none";
-    document.getElementById("pref").style.display = "none";
-    document.getElementById("textPanel").style.width = "100%";
-  }else{
-    document.getElementById("previewPanel").style.display = "block";
-    document.getElementById("pref").style.display = "block";
-    document.getElementById("textPanel").style.width = "50%";
-  }
+function removeFrontMatter(text) {
+    var re = new RegExp(/((---))(\w|\d|\n|[().,\-:;@#$%^&*\[\]\"\'+–\/\/®°⁰!?{}|`~]| )+?((---))/gm, "mg");
+    return text.replace(re, "<br>");
 }

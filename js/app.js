@@ -45,7 +45,13 @@ var conf = {
   base: "gfm",
   viewportMargin: 100000000000,
   lineWrapping : true,
-  autoCloseBrackets: true
+  autoCloseBrackets: true,
+  extraKeys: {
+    Enter: 'newlineAndIndentContinueMarkdownList',
+    // Home: 'goLineLeft',
+    // End: 'goLineRight'
+    // 'Shift-Tab': 'indentLess'
+  },
 }
 
 function includeTheme(theme) {
@@ -74,7 +80,7 @@ var theme = settings.get('editorTheme');
 if (files.includes(theme+'.css')) {
   conf.theme = theme;
 } else {
-  conf.theme = "zenburn";
+  conf.theme = "base16-dark";
 }
 includeTheme(theme);
 
@@ -93,13 +99,17 @@ window.onload = function() {
     countWords();
     // get value right from instance
     var markdownText = cMirror.getValue();
+
+    // Remove the YAML frontmatter from live-preview
+    if(!config.get('previewFrontMatter'))
+      markdownText = removeFrontMatter(markdownText);
+
     //Md -> Preview
     html = marked(markdownText,{gfm: true});
     markdownArea.innerHTML = replaceWithEmojis(html);
     //Md -> HTML
-    var jekyll = require('./js/extensions/jekyll.js');
-    converter = new showdown.Converter({ extensions: ['jekyll'] });
-    html      = converter.makeHtml(markdownText);
+    converter = new showdown.Converter();
+    html = converter.makeHtml(markdownText);
     document.getElementById("htmlPreview").value = html;
     if(this.isFileLoadedInitially) {
       this.setClean();
@@ -131,8 +141,7 @@ window.onload = function() {
   const win = remote.BrowserWindow.getFocusedWindow();
 
   document.getElementById("minimize").onclick = function() { remote.BrowserWindow.getFocusedWindow().minimize(); }
-  document.getElementById("maximize").onclick = function() { win.isMaximized() ? win.unmaximize() : win.maximize(); }
-  document.getElementById("close").onclick = function() { win.close(); }
+  document.getElementById("close").onclick = function() { window.close(); }
 
   var syncButton = document.getElementById('syncScroll');
   if(settings.get('syncScroll') === true) {
