@@ -19,9 +19,7 @@ const mod = require('./package.json');
 var config = require('./config');
 const keepInTray = config.get('keepInTray');
 const fs = require('fs');
-// var globalShortcut = require('global-shortcut');
 var localShortcut = require('electron-localShortcut');
-// const titlebar = require('electron-titlebar');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -180,9 +178,9 @@ function createWindow () {
     }
   ];
   const {Menu, MenuItem, ipcMain} = require('electron');
-    // let menu = Menu.buildFromTemplate(template);
-    // Menu.setApplicationMenu(menu);
-  // Menu.setApplicationMenu(Menu.buildFromTemplate(template));
+  let menu = Menu.buildFromTemplate(template);
+  Menu.setApplicationMenu(menu);
+  Menu.setApplicationMenu(Menu.buildFromTemplate(template));
 
   ipcMain.on('export-to-pdf', (event, filePath) => {
     const win = BrowserWindow.fromWebContents(event.sender)
