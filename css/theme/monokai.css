@@ -31,9 +31,9 @@
 .cm-s-monokai span.cm-hr { color: #fd971f; }
 .cm-s-monokai span.cm-error { background: #fd2632; color: #f8f8f0; }
 
-.cm-s-monokai span.cm-em { color: #e6db74; }
 .cm-s-monokai span.cm-strong { color: #ae81ff; }
-.cm-s-monokai span.cm-em, span.cm-strong { color: #fd971f; }
+.cm-s-monokai span.cm-em { color: #e6db74; }
+/*.cm-s-monokai span.cm-em, .cm-s-monokai span.cm-strong { color: #fd971f; }*/
 
 .cm-s-monokai .CodeMirror-activeline-background { background: #373831; }
 .cm-s-monokai .CodeMirror-matchingbracket {

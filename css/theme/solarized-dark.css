@@ -12,7 +12,7 @@ http://ethanschoonover.com/solarized-dark/img/solarized-dark-palette.png
 .solarized-dark.base02 { color: #073642; }
 .solarized-dark.base01 { color: #586e75; }
 .solarized-dark.base00 { color: #657b83; }
-.solarized-dark.base0 { color: #839496; }
+.solarized-dark.base0 { color: #88999b; }
 .solarized-dark.base1 { color: #93a1a1; }
 .solarized-dark.base2 { color: #eee8d5; }
 .solarized-dark.base3  { color: #fdf6e3; }
@@ -33,7 +33,7 @@ http://ethanschoonover.com/solarized-dark/img/solarized-dark-palette.png
   rendering-intent: auto;
 }
 .cm-s-solarized-dark {
-  color: #839496;
+  color: #88999b;
   background-color: #002b36;
   text-shadow: #002b36 0 1px;
 }
@@ -42,7 +42,7 @@ http://ethanschoonover.com/solarized-dark/img/solarized-dark-palette.png
   text-shadow: none;
 }
 
-.cm-s-solarized-dark .cm-header { color: #586e75; }
+.cm-s-solarized-dark .cm-header { color: #268bd2; }
 .cm-s-solarized-dark .cm-quote { color: #93a1a1; }
 
 .cm-s-solarized-dark .cm-keyword { color: #cb4b16; }
@@ -75,14 +75,14 @@ http://ethanschoonover.com/solarized-dark/img/solarized-dark-palette.png
   border-top: 1px solid #586e75;
   display: block;
 }
-.cm-s-solarized-dark .cm-link { color: #93a1a1; cursor: pointer; }
+.cm-s-solarized-dark .cm-link { color: #2aa198; text-decoration: none; }
 .cm-s-solarized-dark .cm-special { color: #6c71c4; }
 .cm-s-solarized-dark .cm-em {
   color: #999;
-  text-decoration: underline;
+  text-decoration: none;
   text-decoration-style: dotted;
 }
-.cm-s-solarized-dark .cm-strong { color: #eee; }
+.cm-s-solarized-dark .cm-strong { color: #98a9ab; }
 .cm-s-solarized-dark .cm-error,
 .cm-s-solarized-dark .cm-invalidchar {
   color: #586e75;

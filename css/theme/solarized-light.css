@@ -42,7 +42,7 @@ http://ethanschoonover.com/solarized-light/img/solarized-light-palette.png
   text-shadow: none;
 }
 
-.cm-s-solarized-light .cm-header { color: #586e75; }
+.cm-s-solarized-light .cm-header { color: #268bd2; }
 .cm-s-solarized-light .cm-quote { color: #93a1a1; }
 
 .cm-s-solarized-light .cm-keyword { color: #cb4b16; }
@@ -75,14 +75,14 @@ http://ethanschoonover.com/solarized-light/img/solarized-light-palette.png
   border-top: 1px solid #586e75;
   display: block;
 }
-.cm-s-solarized-light .cm-link { color: #93a1a1; cursor: pointer; }
+.cm-s-solarized-light .cm-link { color: #2aa198; text-decoration: none;}
 .cm-s-solarized-light .cm-special { color: #6c71c4; }
 .cm-s-solarized-light .cm-em {
-  color: #999;
-  text-decoration: underline;
+  color: #cb4b16;
+  text-decoration: none;
   text-decoration-style: dotted;
 }
-.cm-s-solarized-light .cm-strong { color: #eee; }
+.cm-s-solarized-light .cm-strong { color: #d33682; font-weight: 500; }
 .cm-s-solarized-light .cm-error,
 .cm-s-solarized-light .cm-invalidchar {
   color: #586e75;
