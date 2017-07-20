@@ -9,6 +9,7 @@ body {
   overflow: hidden; }
 
 #editArea {
+  height: -webkit-calc(100% - 28px);
   padding: 0px 15px 0; }
 
 label {
@@ -18,12 +19,6 @@ label {
   color: rgba(255, 255, 255, 0.75);
   margin-right: 6px;
   margin-bottom: 5px; }
-
-#editorFade {
-  background-image: -webkit-linear-gradient(top, #292c33, transparent); }
-
-#previewFade {
-  background-image: -webkit-linear-gradient(top, #f6f5f4, transparent); }
 
 #pad {
   font-family: "Source Code Pro", "Menlo", "Ubuntu Mono", "Dejavu Sans Mono", "Consolas", monospace;
@@ -43,14 +38,14 @@ label {
 
 .frame {
   position: absolute;
-  height: 37px;
+  height: 33px;
   width: 100%;
   top: 0;
   left: 0;
   z-index: 9999999; }
   .frame #draggable {
     position: absolute;
-    height: 90%;
+    height: 100%;
     width: -webkit-calc(100% - 75px);
     top: 0;
     left: 0; }
@@ -74,7 +69,8 @@ label {
       font-size: 12px; }
 
 #metacity {
-  position: relative;
+  position: absolute;
+  right: 0.5%;
   z-index: 999999999; }
   #metacity button {
     display: inline-block;
@@ -89,13 +85,17 @@ label {
       height: 21px;
       width: 21px;
       padding: 4px; }
-  #metacity #minimize:hover, #metacity #minimize:active > img {
+  #metacity #minimize:active > img {
     content: url("../img/min_active.png"); }
-  #metacity #maximize:hover, #metacity #maximize:active > img {
+  #metacity #minimize > img:hover {
+    content: url("../img/min_active.png"); }
+  #metacity #maximize:active > img {
+    content: url("../img/max_active.png"); }
+  #metacity #maximize > img:hover {
     content: url("../img/max_active.png"); }
   #metacity #close {
     margin-right: 8px; }
-    #metacity #close:hover, #metacity #close:active > img {
+    #metacity #close:active > img, #metacity #close > img:hover {
       content: url("../img/close_active.png"); }
 
 #appMenu {
@@ -109,7 +109,7 @@ label {
   left: 0;
   border: 1px inset #323435;
   visibility: visible;
-  z-index: 999999; }
+  z-index: 9999999; }
   #appMenu :focus,
   #appMenu :active:focus,
   #appMenu .active:focus,
@@ -272,14 +272,15 @@ label {
     top: 4px;
     bottom: 2px;
     margin: 0px 4px 0px 12px; }
-    .bottom-bar #bottom-file #file-status {
-      display: inline-block;
-      position: relative;
-      color: #de5464;
-      font-size: 13px;
-      top: -1px;
-      left: 4px;
-      visibility: hidden; }
+  .bottom-bar #file-status {
+    display: inline-block;
+    position: relative;
+    color: #de5464;
+    font-size: 14px;
+    top: 2px;
+    left: -1px;
+    line-height: 0.5;
+    visibility: hidden; }
   .bottom-bar #wordcount {
     display: inline-block;
     position: relative;
@@ -507,19 +508,54 @@ a#angleToolBar {
   a#angleToolBar:hover {
     color: rgba(255, 255, 255, 0.9); }
 
+.topFade {
+  position: absolute;
+  height: 45px;
+  width: 98%;
+  top: 0;
+  z-index: 999999; }
+
+#leftPanel {
+  position: absolute;
+  left: 0;
+  width: 50%;
+  height: -webkit-calc(100% - 28px); }
+  #leftPanel .topFade {
+    left: 0; }
+
 #textPanel {
   background: #292c33;
+  height: 100%;
+  width: 100%;
   padding: 0;
-  overflow: scroll;
+  overflow-y: auto;
   text-rendering: geometricPrecision; }
   #textPanel > div {
     font-size: 9.5pt;
     line-height: 1.5;
-    padding-top: 8px; }
+    padding-top: 0px; }
+  #textPanel #plainText {
+    background: transparent;
+    outline: none;
+    border: none;
+    resize: none; }
+
+#rightPanel {
+  position: absolute;
+  right: 0;
+  width: 50%;
+  height: -webkit-calc(100% - 28px); }
+  #rightPanel .topFade {
+    background-image: -webkit-linear-gradient(top, #f5f4f3 40%, transparent);
+    right: 2%; }
 
 #previewPanel {
   background: #f6f5f4;
   font-family: "Open Sans", "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif !important;
+  height: 100%;
+  width: 100%;
+  padding: 27px 15px 0;
+  overflow-y: auto;
   text-rendering: geometricPrecision; }
 
 .editor-toolbar {
@@ -699,8 +735,7 @@ code {
     line-height: 1.25;
     margin-bottom: 14px; }
   #markdown img {
-    max-width: 90%;
-    height: auto; }
+    vertical-align: middle; }
   #markdown ol, #markdown ul {
     line-height: 1.75; }
   #markdown a {

@@ -88,7 +88,7 @@
             <li><a tabindex="-1" href="#" onclick="cm.execCommand('find');">Search</a><span>Ctrl + F</span></li>
             <li><a tabindex="-1" href="#" onclick="cm.execCommand('replace');">Replace</a><span>Ctrl + Shift + F</span></li>
             <li class="dropdown-divider"></li>
-            <li><a tabindex="-1" href="#" onclick="cm.execCommand('indentAuto');">Auto-Indent</a><span></span></li>
+            <li><a tabindex="-1" href="#" onclick="cm.execCommand('indentAuto');">Auto-Indent</a><span>Ctrl + Shift + A</span></li>
             <li><a tabindex="-1" href="#" onclick="cm.execCommand('indentLess');">Indent Left</a><span>Ctrl + Left</span></li>
             <li><a tabindex="-1" href="#" onclick="cm.execCommand('indentMore');">Indent Right</a><span>Ctrl + Right</span></li>
             <li class="dropdown-divider"></li>
@@ -112,14 +112,14 @@
                 <li><a href="#" onclick="includeTheme('seti');">Seti</a></li>
                 <li><a href="#" onclick="includeTheme('solarized-dark');">Solarized Dark</a></li>
                 <li><a href="#"onclick="includeTheme('solarized-light');">Solarized Light</a></li>
-                <li><a href="#" onclick="includeTheme('tomorrow-night-bright');">Tomorrow Night</a></li>
+                <li><a href="#" onclick="includeTheme('tomorrow-night-eighties');">Tomorrow Night</a></li>
                 <li><a href="#" onclick="includeTheme('yeti');">Yeti</a></li>
                 <li><a href="#" onclick="includeTheme('zenburn');">Zenburn</a></li>
               </ul>
             </li>
             <li class="dropdown-divider"></li>
-            <li><a tabindex="-1" href="#" onclick="toggleMenu();">Toggle Menu Bar</a><span>Ctrl + .</span></li>
-            <li><a tabindex="-1" href="#" onclick="showToolBar();">Toggle Toolbar</a><span>Ctrl + t</span></li>
+            <li><a tabindex="-1" href="#" onclick="toggleMenu();">Toggle Menu Bar</a><span>Ctrl + M</span></li>
+            <li><a tabindex="-1" href="#" onclick="toggleToolbar();">Toggle Toolbar</a><span>Ctrl + .</span></li>
             <li><a tabindex="-1" href="#" onclick="toggleFullscreen();">Toggle Full Screen</a><span>F11</span></li>
             <li class="dropdown-divider"></li>
             <li><a tabindex="-1" href="#" onclick="toggleDeveloper();">Toggle Developer Tools</a><span>Ctrl + Shift + I</span></li>
@@ -133,7 +133,7 @@
             <li class="dropdown-divider"></li>
             <li><a tabindex="-1" href="#">Keybindings</a></li>
             <li><a tabindex="-1" href="#" data-toggle="modal" data-target="#mdModal">Markdown Help</a></li>
-            <li><a tabindex="-1" href="https://github.com/JonSn0w/Hyde-MD/issues/new">Report Issue</a></li>
+            <li><a tabindex="-1" href="https://github.com/JonSn0w/Hyde-MD/issues/new">Report an Issue</a></li>
             <li class="dropdown-divider"></li>
             <li><a tabindex="-1" href="#">About Hyde</a></li>
           </ul>
@@ -161,6 +161,7 @@
           <a data-toggle="modal" data-target="#mdModal" title="Markdown Help" class="fa fa-question-circle editor-toolbar"></a>
         </div>
       </div>
+      <!-- <div id="editorFade"></div><div id="previewFade"></div> -->
       <section class="row" id="editArea">
         <div id="side-trigger">
           <button id="side-button" onclick="toggleSidebar()" style="visibility:hidden;"/><img id="side-img" src="img/left-arrow.png"/>
@@ -179,23 +180,27 @@
             <li class="fa fa-file-text" alt="Read the Docs"><a href="https://github.com/JonSn0w/Hyde-MD"></a></li>
           </ul>
         </section>
-        <div id="editorFade"></div><div id="previewFade"></div>
-        <div class="col-md-6 full-height" style="background:hsl(220, 11%, 18%);padding-top:27px;overflow-y:auto;" id="textPanel">
-          <textarea id="plainText" placeholder="" autofocus></textarea>
+        <div id="leftPanel">
+            <div id="leftFade" class="topFade"></div>
+            <div class="col-md-6 full-height" style="background:hsl(220, 11%, 18%);" id="textPanel">
+              <textarea id="plainText" placeholder="" autofocus></textarea>
+            </div>
         </div>
-        <div class="col-md-6 full-height" style="display:block;padding-top:0px;overflow-y:auto;" id="previewPanel">
-          <div id="markdown"></div>
-          <textarea id="htmlPreview" class="mdHtml" readonly></textarea>
+        <div id="rightPanel">
+            <div id="rightFade" class="topFade"></div>
+            <div class="col-md-6 full-height" id="previewPanel">
+              <div id="markdown"></div>
+              <textarea id="htmlPreview" class="mdHtml" readonly></textarea>
+            </div>
         </div>
       </section>
       <div class="bottom-bar">
         <div id="bottom-file">None</div><span id="file-status">*</span>
         <div id="wordcount"></div>
-        <!-- <button id="toggleToolbar" class="fa fa-paragraph" onclick="showToolBar();"></button> -->
         <button id="syncScroll" class="fa fa-unlink" onclick="toggleSyncScroll();"></button>
         <button id="togglePreview" class="fa fa-eye" onclick="togglePreview();"></button>
       </div>
-      <link rel="import" href="modal/markdown.html">
+      <!-- <link rel="import" href="modal/markdown.html"> -->
       <!-- Markdown Help Modal -->
       <div class="modal fade" id="mdModal" tabindex="-1" role="dialog">
         <div class="modal-dialog">
@@ -264,6 +269,20 @@
           </div>
         </div>
       </div>
+      <!-- About Modal -->
+      <div class="modal fade" id="mdModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">About</h4>
+              <div class="aboutHyde">
+
+              </div>
+            </div>
+            <div class="modal-body">
+              <section class="modal--default__content" id="modal-body-region">
 
       <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
       <script>if (window.module) module = window.module;</script>
