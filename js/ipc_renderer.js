@@ -114,7 +114,7 @@ ipc.on('ctrl+i', function() {
   toggleFormat('italic');
 });
 
-ipc.on('ctrl+`', function() {
+ipc.on('ctrl+-', function() {
   toggleFormat('strikethrough');
 });
 
@@ -150,8 +150,24 @@ ipc.on('ctrl+h', function() {
   cm.execCommand('replace');
 });
 
-ipc.on('ctrl+.', function() {
+ipc.on('ctrl+shift+a', function() {
+  cm.execCommand('indentAuto');
+});
+
+ipc.on('ctrl+left', function() {
+  cm.execCommand('indentLess');
+});
+
+ipc.on('ctrl+right', function() {
+  cm.execCommand('indentMore');
+});
+
+ipc.on('ctrl+m', function() {
   toggleMenu();
+});
+
+ipc.on('ctrl+.', function() {
+  toggleToolbar();
 });
 
 ipc.on('ctrl+,', function() {
@@ -161,10 +177,6 @@ ipc.on('ctrl+,', function() {
 ipc.on('ctrl+p', function() {
   const ipcRenderer = require('electron').ipcRenderer;
   ipcRenderer.send('show-settings-window');
-});
-
-ipc.on('ctrl+p', function() {
-  toggleMenu();
 });
 
 ipc.on('file-pdf', () => {

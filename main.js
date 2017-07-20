@@ -92,6 +92,7 @@ function createWindow () {
           let focusedWindow = BrowserWindow.getFocusedWindow();
           focusedWindow.webContents.send('file-open');
         }},
+        {type: "separator"},
         {label: "Save", accelerator: "CmdOrCtrl+S", click: function() {
           var focusedWindow = BrowserWindow.getFocusedWindow();
           focusedWindow.webContents.send('file-save');
@@ -100,9 +101,15 @@ function createWindow () {
           var focusedWindow = BrowserWindow.getFocusedWindow();
           focusedWindow.webContents.send('file-save-as');
         }},
+        {label: "Export to PDF", click: function() {
+          var focusedWindow = BrowserWindow.getFocusedWindow();
+          focusedWindow.webContents.send('file-pdf');
+        }},
+        {type: "separator"},
         {label: "Settings", accelerator: "CmdOrCtrl+,", click: function() {
           openSettings();
         }},
+        {type: "separator"},
         {label: "Quit", accelerator: "CmdOrCtrl+Q", click: app.quit}
       ]
     },
@@ -124,6 +131,24 @@ function createWindow () {
         {label: "Replace", accelerator: "CmdOrCtrl+Shift+F", click: function() {
           let focusedWindow = BrowserWindow.getFocusedWindow();
           focusedWindow.webContents.send('ctrl+shift+f');
+        }},
+        {type: "separator"},
+        {label: "Auto-Indent", accelerator: "CmdOrCtrl+Shift+A", click: function() {
+          let focusedWindow = BrowserWindow.getFocusedWindow();
+          focusedWindow.webContents.send('ctrl+shift+a');
+        }},
+        {label: "Indent Left", accelerator: "CmdOrCtrl+Left", click: function() {
+          let focusedWindow = BrowserWindow.getFocusedWindow();
+          focusedWindow.webContents.send('ctrl+left');
+        }},
+        {label: "Indent Right", accelerator: "CmdOrCtrl+Right", click: function() {
+          let focusedWindow = BrowserWindow.getFocusedWindow();
+          focusedWindow.webContents.send('ctrl+right');
+        }},
+        {type: "separator"},
+        {label: "Toggle Comment", accelerator: "CmdOrCtrl+/", click: function() {
+          let focusedWindow = BrowserWindow.getFocusedWindow();
+          focusedWindow.webContents.send('ctrl+/');
         }}
       ]
     },
@@ -140,7 +165,15 @@ function createWindow () {
               func.pickTheme(this, "solarized");
             }}
           ]},
-          { label: "Toggle Full Screen", accelerator:"F11", click: function(){
+        { label: "Toggle Menu", accelerator:"CmdOrCtrl+M", click: function(){
+            let focusedWindow = BrowserWindow.getFocusedWindow();
+            focusedWindow.webContents.send('ctrl+m');
+        }},
+        { label: "Toggle Toolbar", accelerator:"CmdOrCtrl+.", click: function(){
+            let focusedWindow = BrowserWindow.getFocusedWindow();
+            focusedWindow.webContents.send('ctrl+.');
+        }},
+        { label: "Toggle Full Screen", accelerator:"F11", click: function(){
           let focusedWindow = BrowserWindow.getFocusedWindow();
           let isFullScreen = focusedWindow.isFullScreen();
           focusedWindow.setFullScreen(!isFullScreen);
@@ -223,6 +256,10 @@ function createWindow () {
 
   localShortcut.register('CmdOrCtrl+Shift+t', function() {
       focusedWindow.webContents.send('ctrl+shift+t');
+  });
+
+  localShortcut.register('CmdOrCtrl+,', function() {
+    focusedWindow.webContents.send('ctrl+m');
   });
 
   localShortcut.register('CmdOrCtrl+.', function() {
