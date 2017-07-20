@@ -18,8 +18,6 @@ const config = require('./config');
 const settings = require('electron-settings');
 const setter = require('./js/settings');
 // const settings = require('electron-settings');
-// require('electron-titlebar');
-// const titlebar = document.getElementById('electron-titlebar');
 
 // `remote.require` since `Menu` is a main-process module.
 var buildEditorContextMenu = remote.require('electron-editor-context-menu');
@@ -104,9 +102,12 @@ window.onload = function() {
     if(!config.get('previewFrontMatter'))
       markdownText = removeFrontMatter(markdownText);
 
+    // Convert emoji's
+    markdownText = replaceWithEmojis(markdownText);
+
     //Md -> Preview
     html = marked(markdownText,{gfm: true});
-    markdownArea.innerHTML = replaceWithEmojis(html);
+    markdownArea.innerHTML = html;
     //Md -> HTML
     converter = new showdown.Converter();
     html = converter.makeHtml(markdownText);
@@ -138,7 +139,7 @@ window.onload = function() {
     }
   });
 
-  const win = remote.BrowserWindow.getFocusedWindow();
+  // const win = remote.BrowserWindow.getFocusedWindow();
 
   document.getElementById("minimize").onclick = function() { remote.BrowserWindow.getFocusedWindow().minimize(); }
   document.getElementById("close").onclick = function() { window.close(); }
@@ -178,7 +179,6 @@ window.onload = function() {
    }
    settings.set('syncScroll', !isSynced);
  }
-
  $syncScroll.on('change', toggleSyncScroll);
 
  /**
@@ -236,12 +236,10 @@ window.onload = function() {
        // Since we'll be triggering scroll events.
       //  console.log('Preview scroll: %' + (Math.round(100 * percent)));
        muteScroll(cm, codeScroll);
-       cm.scrollTo(null, codeScrollable() * percent);
+       cm.scrollTo(percent * codeScrollable());
      }
  }
  $prev.on('scroll', prevScroll);
-
-
 
 
 function newFile() {
@@ -310,10 +308,6 @@ function handleSaveButton() {
     });
   }
 }
-
-// document.getElementById("new").addEventListener("click", handleNewButton);
-// document.getElementById("open").addEventListener("click", handleOpenButton);
-// document.getElementById("save").addEventListener("click", handleSaveButton);
 
 
 /****************
