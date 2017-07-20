@@ -332,6 +332,6 @@ function _replaceSelection(cm, active, startEnd, url) {
 }
 
 function removeFrontMatter(text) {
-    var re = new RegExp(/((---))(\w|\d|\n|[().,\-:;@#$%^&*\[\]\"\'+–\/\/®°⁰!?{}|`~]| )+?((---))/gm, "mg");
+    var re = new RegExp(/((---\n))(\w|\d|\n|[().,\-:;@#$%^&*\[\]\"\'+–\/\/®°⁰!?{}|`~]| )+?((---))/gm, "mg");
     return text.replace(re, "<br>");
 }
