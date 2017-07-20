@@ -2,10 +2,9 @@
 
 .CodeMirror {
   /* Set height, width, borders, and global font properties here */
-  font-family: 'Source Code Pro', Inconsolata, Monaco, Consolas, monospace;
+  font-family: "Source Code Pro","Menlo","Ubuntu Mono","Dejavu Sans Mono","Consolas",monospace;
   height: 100%;
   color: black;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
 }
 
 /* PADDING */
@@ -163,7 +162,7 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
 }
 .CodeMirror-sizer {
   position: relative;
-  margin-left: 20px !important;
+  margin-left: 12px !important;
   border-right: 30px solid transparent;
 }
 
