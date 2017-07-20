@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="css/open-sans.css">
     <link rel="stylesheet" href="css/source-code-pro.css">
     <link rel="stylesheet" href="css/dialog.css">
-
     <script src="node_modules/codemirror/lib/codemirror.js"></script>
     <script src="node_modules/codemirror/mode/markdown/markdown.js"></script>
     <script src="node_modules/codemirror/mode/gfm/gfm.js"></script>
@@ -47,18 +46,15 @@
     <script src="node_modules/codemirror/addon/selection/active-line.js"></script>
   </head>
 
-  <!-- <div id="electron-titlebar" class="drag inset" style="z-index:999999999;"></div> -->
-  <body class="container-fluid" style="resize: both">
-      <section class="frame">
-        <div id="draggable" style="-webkit-app-region:drag">
-          <div class="icon"><img src="img/IconTray.png"></div>
-          <div id="title"><strong>Hyde</strong> - <span id="titlePath">New Document</span></div>
-        </div>
-        <button id="close" style="cursor: pointer;"><img src="img/close.png" alt="Close"/></button>
-        <button id="maximize" style="cursor: pointer;"><img src="img/max.png" alt="Maximize"/></button>
-        <button id="minimize" style="cursor: pointer;"><img src="img/min.png" alt="Minimize"/></button>
+  <body class="container-fluid" id="body" style="resize: both">
+      <section class="frame" id="frame">
+        <div id="draggable" style="-webkit-app-region:drag"></div>
       </section>
-
+      <div id="metacity">
+        <button id="close" style="cursor: pointer;"><img src="img/close.png" alt="Close"/></button>
+        <button id="maximize" style="cursor: pointer;"><img src="img/max.png" alt="Maximize" onclick="toggleFullscreen();"/></button>
+        <button id="minimize" style="cursor: pointer;"><img src="img/min.png" alt="Minimize"/></button>
+      </div>
       <div id="appMenu" class="hidden" style="visibility:hidden;">
         <!-- File -->
         <div class="btn-group">
@@ -136,40 +132,21 @@
             <li><a tabindex="-1" href="#">Documentation</a></li>
             <li class="dropdown-divider"></li>
             <li><a tabindex="-1" href="#">Keybindings</a></li>
-            <!-- <li><a tabindex="-1" href="#" data-toggle="modal" data-target="#mdModal">Markdown Help</a></li> -->
-            <li><a tabindex="-1" href="modal/markdown.html">Markdown Help</a></li>
+            <li><a tabindex="-1" href="#" data-toggle="modal" data-target="#mdModal">Markdown Help</a></li>
             <li><a tabindex="-1" href="https://github.com/JonSn0w/Hyde-MD/issues/new">Report Issue</a></li>
             <li class="dropdown-divider"></li>
             <li><a tabindex="-1" href="#">About Hyde</a></li>
           </ul>
         </div>
-      </div>
-      <div id="opt" class="optContainer">
-        <div class="mode" id="mode">
-          <span class="toolContainer">
-            <a id="angleToolBar" title="Toolbar" class="fa fa-angle-right" onclick="showToolBar();" style="cursor: pointer;text-decoration:none;font-size:21px;padding:0 0 0 6px;"></a>
-          </span>
-          <!-- <div id="buttons">
-            <button id="new"><img src="img/16x16/file_add.png"/>New </button>
-            <button id="open"><img src="img/16x16/file.png"/>Open </button>
-            <button id="save"><img src="img/16x16/diskette.png"/>Save </button>
-          </div> -->
-        </div>
-        <div class="pref" id="pref">
-          <!-- <div id="prefHtml"> -->
-            <input type="radio" name="showPreference" value="html" id="htmlRadio" onclick="clkPref(this);"><label for="html" style="vertical-align: middle;"><span></span>HTML</label>
-          <!-- </div> -->
-          <!-- <div id="prefPreview"> -->
-            <input type="radio" name="showPreference" value="preview" id="previewRadio" onclick="clkPref(this);" checked="checked"><label for="preview" style="vertical-align: middle;"><span></span>Preview</label>
-          <!-- </div> -->
-        </div>
+        <div id="draggable-menu" style="-webkit-app-region:drag"></div>
       </div>
       <div id="toolbarArea">
-        <div class="toolbar-buttons" style="padding:4px 12px 5px;">
+        <div class="toolbar-buttons" style="padding:5px 12px 2px;">
+          <a onclick="toggleHeadingSmaller();" title="Header [Ctrl+H]" class="fa fa-header editor-toolbar"></a>
           <a onclick="toggleFormat('bold');" title="Bold [Ctrl+B]" class="fa fa-bold editor-toolbar"></a>
           <a onclick="toggleFormat('italic');" title="Italic [Ctrl+I]" class="fa fa-italic editor-toolbar"></a>
-          <a onclick="toggleHeadingSmaller();" title="Header [Ctrl+H]" class="fa fa-header editor-toolbar"></a>
-          <a onclick="toggleFormat('strikethrough');" title="StrikeThrough [Ctrl+/]" class="fa fa-strikethrough editor-toolbar"></a>
+          <!-- <a onclick="toggleHeadingSmaller();" title="Header [Ctrl+H]" class="fa fa-header editor-toolbar"></a> -->
+          <a onclick="toggleFormat('strikethrough');" title="Strikethrough [Ctrl+-]" class="fa fa-strikethrough editor-toolbar"></a>
           <i class="separator">|</i>
           <a onclick="toggleBlockquote();" title="Quote" class="fa fa-quote-left editor-toolbar"></a>
           <a onclick="toggleCodeBlock();" title="Code Block" class="fa fa-code editor-toolbar"></a>
@@ -181,39 +158,46 @@
           <a onclick="drawTable();" title="Insert Table [Ctrl+Shift+T]" class="fa fa-table editor-toolbar"></a>
           <a onclick="drawHorizontalRule();" title="Insert Horizontal Rule" class="fa fa-minus editor-toolbar"></a>
           <i class="separator">|</i>
-          <a onclick="changeTheme();" title="Light/Dark Theme" id="toggle-theme" class="fa fa-lightbulb-o editor-toolbar"></a>
-          <a onclick="toggleSidePanel();" title="Toggle Preview Panel" class="fa fa-columns editor-toolbar"></a>
           <a data-toggle="modal" data-target="#mdModal" title="Markdown Help" class="fa fa-question-circle editor-toolbar"></a>
         </div>
       </div>
-      <section class="row" id="editArea" style="background-color: rgba(246, 245, 245,0.0); color:#3a3a3a;">
+      <section class="row" id="editArea">
         <div id="side-trigger">
-          <button id="side-button" onclick="toggleSidebar()" style="visibility:hidden;"/><img src="img/left-arrow.png" onclick="toggleSidebar()"/>
+          <button id="side-button" onclick="toggleSidebar()" style="visibility:hidden;"/><img id="side-img" src="img/left-arrow.png"/>
         </div>
-        <section id="sidebar" style="display:none;">
-          <img id="side-logo" src=""/>
+        <section id="sidebar">
+          <img id="side-logo" src="img/icon.png"/>
           <ul id="side-menu">
-            <li>New</li>
-            <li>Open</li>
-            <li>Save</li>
-            <li>Settings</li>
+            <li id="sidebar-new"><a onclick="">New</a></li>
+            <li id="sidebar-open"><a onclick="">Open</a></li>
+            <li id="sidebar-save"><a onclick="">Save</a></li>
+            <li id="sidebar-settings"><a onclick="">Settings</a></li>
+          </ul>
+          <ul id="side-icons">
+            <li class="fa fa-github" alt="View on GitHub"><a href="https://github.com/JonSn0w/Hyde-MD"></a></li>
+            <li class="fa fa-bug" alt="Report an Issue"><a href="https://github.com/JonSn0w/Hyde-MD/issues/new"></a></li>
+            <li class="fa fa-file-text" alt="Read the Docs"><a href="https://github.com/JonSn0w/Hyde-MD"></a></li>
           </ul>
         </section>
-          <div class="col-md-6 full-height" style="background:#323130;padding-top:0px;overflow-y:auto;" id="textPanel">
-            <textarea  id="plainText" placeholder="" autofocus></textarea>
-          </div>
-          <div class="col-md-6 full-height" style="overflow-y:auto;display:block;padding-top:8px;" id="previewPanel">
-            <div id="markdown"></div>
-            <textarea id="htmlPreview" class="mdHtml"></textarea>
-          </div>
+        <div id="editorFade"></div><div id="previewFade"></div>
+        <div class="col-md-6 full-height" style="background:hsl(220, 11%, 18%);padding-top:27px;overflow-y:auto;" id="textPanel">
+          <textarea id="plainText" placeholder="" autofocus></textarea>
+        </div>
+        <div class="col-md-6 full-height" style="display:block;padding-top:0px;overflow-y:auto;" id="previewPanel">
+          <div id="markdown"></div>
+          <textarea id="htmlPreview" class="mdHtml" readonly></textarea>
+        </div>
       </section>
       <div class="bottom-bar">
-        <div id="bottom-file">None</div>
+        <div id="bottom-file">None</div><span id="file-status">*</span>
         <div id="wordcount"></div>
+        <!-- <button id="toggleToolbar" class="fa fa-paragraph" onclick="showToolBar();"></button> -->
         <button id="syncScroll" class="fa fa-unlink" onclick="toggleSyncScroll();"></button>
+        <button id="togglePreview" class="fa fa-eye" onclick="togglePreview();"></button>
       </div>
+      <link rel="import" href="modal/markdown.html">
       <!-- Markdown Help Modal -->
-      <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal fade" id="mdModal" tabindex="-1" role="dialog">
         <div class="modal-dialog">
           <!-- Modal content-->
           <div class="modal-content">
@@ -277,9 +261,6 @@
                 </table>
               </section>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
           </div>
         </div>
       </div>
@@ -287,7 +268,7 @@
       <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
       <script>if (window.module) module = window.module;</script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
       <!-- <script src="js/CodeMirror/libs/bootstrap.min.js"></script> -->
       <script>
         $(document).ready(function(){
@@ -298,19 +279,18 @@
           });
         });
       </script>
-      <link rel="import" href="modal/markdown.html" >
       <script src="js/CodeMirror/libs/jquery.min.js"></script>
       <script src="js/CodeMirror/libs/marked.min.js"></script>
       <script src="js/CodeMirror/libs/search.js"></script>
       <script src="js/CodeMirror/libs/searchcursor.js"></script>
       <script src="js/CodeMirror/libs/dialog.js"></script>
       <script src="js/CodeMirror/libs/closebrackets.js"></script>
+      <script src="js/CodeMirror/libs/continuelist.js"></script>
       <script src="js/settings.js"></script>
       <script src="js/app.js"></script>
       <script src="js/format.js"></script>
       <script src="js/functions.js"></script>
       <script src="js/ipc_renderer.js"></script>
       <script src="js/emoji.js"></script>
-      <!-- <script src="node_modules/codemirror/mode/gfm/gfm.js"></script> -->
   </body>
 </html>
