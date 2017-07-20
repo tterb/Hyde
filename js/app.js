@@ -17,6 +17,7 @@ var isFileLoadedInitially = false;
 const config = require('./config');
 const settings = require('electron-settings');
 const setter = require('./js/settings');
+var currentTheme = "one-dark";
 // const settings = require('electron-settings');
 
 // `remote.require` since `Menu` is a main-process module.
@@ -56,6 +57,10 @@ function includeTheme(theme) {
   var themeTag;
   var head = document.getElementsByTagName('head')[0];
   settings.set('editorTheme', theme);
+  var editorColor = $('.cm-s-'+theme+'.CodeMirror').css('background-color');
+  $('#leftFade').css('background-color', editorColor);
+  $('#textPanel').css('background-color', editorColor);
+  currentTheme = theme;
   if(document.getElementById('themeLink')) {
     themeTag = document.getElementById('themeLink');
     themeTag.setAttribute('href', 'css/theme/'+theme+'.css');
@@ -69,6 +74,10 @@ function includeTheme(theme) {
     head.appendChild(themeTag);
   }
   settings.set('editorTheme', theme);
+}
+
+function getEditorTheme() {
+  return currentTheme;
 }
 
 var fs = require('fs');
