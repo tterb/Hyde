@@ -70,7 +70,7 @@ label {
 
 #metacity {
   position: absolute;
-  right: 0.5%;
+  right: 0.35%;
   z-index: 999999999; }
   #metacity button {
     display: inline-block;
@@ -254,7 +254,7 @@ label {
 
 .bottom-bar {
   position: absolute;
-  background-image: -webkit-linear-gradient(top, #2d2a2c, #232220);
+  background-image: -webkit-linear-gradient(top, #333231, #252423);
   color: #b6b5b4;
   font-size: 11px;
   height: 28px;
@@ -393,14 +393,14 @@ input[type="checkbox"] {
   position: absolute;
   background: transparent;
   border: none;
-  top: 37%;
+  top: 45%;
   left: 0;
   cursor: pointer;
   z-index: -99; }
   #side-button > img {
     position: absolute;
-    height: 48px;
-    width: 24px;
+    height: 56px;
+    width: 28px;
     top: 0;
     left: -2px;
     cursor: pointer; }
@@ -408,14 +408,12 @@ input[type="checkbox"] {
 #sidebar {
   display: none;
   position: absolute;
-  font-family: 'Gotham Rounded', serif;
-  background: #252726;
+  background: #31302f;
   color: rgba(255, 255, 255, 0.75);
   height: 100%;
   width: 250px;
-  top: 35px;
+  top: 0;
   left: 0;
-  border: 1px outset #888786;
   box-shadow: 0 0 16px rgba(0, 0, 0, 0.4);
   z-index: 99; }
   #sidebar #side-logo {
@@ -423,11 +421,11 @@ input[type="checkbox"] {
     width: 70%;
     height: auto;
     left: 15%;
-    margin: 42px auto;
+    margin: 27px auto;
     opacity: 0.9; }
   #sidebar #side-menu {
     position: relative;
-    font-size: 25px;
+    font-size: 28px;
     font-weight: 200;
     list-style: none;
     top: 1%;
@@ -436,9 +434,11 @@ input[type="checkbox"] {
       text-align: center;
       padding: 2px 0; }
       #sidebar #side-menu li a {
-        color: rgba(255, 255, 255, 0.75); }
+        color: rgba(255, 255, 255, 0.75);
+        cursor: pointer; }
         #sidebar #side-menu li a:hover, #sidebar #side-menu li a:active {
-          color: rgba(255, 255, 255, 0.85); }
+          color: rgba(255, 255, 255, 0.85);
+          text-decoration: none; }
       #sidebar #side-menu li:after {
         display: block;
         position: relative;
@@ -500,7 +500,7 @@ input[type="checkbox"] {
   height: 35px;
   display: none;
   border-bottom: 1px #2a2a2a solid;
-  background-color: #302f2e;
+  background-color: -webkit-linear-gradient(top, #353334, #302f2e);
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.75); }
 
 a#angleToolBar {
@@ -513,7 +513,7 @@ a#angleToolBar {
   height: 45px;
   width: 98%;
   top: 0;
-  z-index: 999999; }
+  z-index: 1010; }
 
 #leftPanel {
   position: absolute;
@@ -524,7 +524,6 @@ a#angleToolBar {
     left: 0; }
 
 #textPanel {
-  background: #292c33;
   height: 100%;
   width: 100%;
   padding: 0;
@@ -593,7 +592,21 @@ a#angleToolBar {
   float: left;
   margin: 3.5px 5px 0 0; }
 
+.modal-content {
+  position: relative;
+  background: #353433;
+  color: #e5e5e5;
+  top: 20px;
+  border-radius: 15px;
+  overflow-y: auto; }
+
 .modal--default__content {
+  position: relative;
+  width: 100%;
+  padding: 0.8em;
+  background: transparent; }
+
+.modal--inset__content {
   position: relative;
   box-sizing: border-box;
   width: 100%;
@@ -607,21 +620,37 @@ a#angleToolBar {
   border-bottom-color: #494949; }
 
 .modal-header .close {
-  position: relative;
-  color: #fff;
+  position: absolute;
+  background: transparent;
+  color: transparent;
   font-size: 25px;
   top: -3px;
   right: 3px; }
 
-.modal-content {
-  position: relative;
-  background: #353433;
-  color: #e5e5e5;
-  top: 20px;
-  border-radius: 15px;
-  overflow-y: auto; }
+#unsavedModal .modal-dialog {
+  width: 450px;
+  margin: 95px auto !important; }
+#unsavedModal .modal-header {
+  padding: 10px; }
+  #unsavedModal .modal-header .close {
+    top: 7px;
+    right: 13px; }
+#unsavedModal .modal-body {
+  padding: 5px 15px; }
 
-.modal-body {
+#unsavedBody {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 15.5px;
+  line-height: 1.6; }
+
+#unsavedDeny {
+  color: rgba(255, 255, 255, 0.75); }
+
+.modal-body-inset {
+  background: transparent;
+  color: #d4d3d2; }
+
+.modal-body-inset {
   background-image: -webkit-linear-gradient(top, #302928, #232221);
   color: #343332; }
 
@@ -633,11 +662,82 @@ a#angleToolBar {
     border: 1px inset #3a3f3d;
     border-radius: 6px; }
 
-.modal-footer > button {
-  background-image: -webkit-linear-gradient(#454746, #242625);
-  color: rgba(255, 255, 255, 0.75);
-  border: 1px inset #3a3f3d;
-  border-radius: 6px; }
+.bg-gradient1 span,
+.bg-gradient1:before {
+  background: #3e3d3c;
+  background: -moz-linear-gradient(180deg, #3e3d3c 0%, #2f2e2d 80%, #2f2e2d 100%);
+  background: -webkit-linear-gradient(180deg, #3e3d3c 0%, #2f2e2d 80%, #2f2e2d 100%);
+  background: linear-gradient(180deg, #3e3d3c 0%, #2f2e2d 80%, #2f2e2d 100%); }
+
+/* fancy Button */
+.fancy-button {
+  display: inline-block;
+  margin: 20px 10px 5px;
+  font-weight: 300;
+  font-size: 13px;
+  letter-spacing: 0.07em;
+  text-transform: none;
+  line-height: 24px;
+  color: #ffffff;
+  position: relative; }
+  .fancy-button:before {
+    content: '';
+    position: absolute;
+    display: inline-block;
+    height: 40px;
+    bottom: -1px;
+    left: 10px;
+    right: 10px;
+    z-index: -1;
+    border-radius: 2em;
+    filter: blur(14px) brightness(0.9);
+    transform-style: preserve-3d;
+    transition: all 0.3s ease-out; }
+  .fancy-button i {
+    margin-top: -2px;
+    font-size: 1.265em;
+    vertical-align: middle; }
+  .fancy-button span {
+    position: relative;
+    display: inline-block;
+    padding: 2px 8px;
+    border: 1px outset #5a5a5a;
+    border-radius: 5px;
+    z-index: 2;
+    will-change: transform, filter;
+    transform-style: preserve-3d;
+    transition: all 0.3s ease-out; }
+  .fancy-button:focus {
+    color: #ffffff; }
+  .fancy-button:hover {
+    color: #ffffff; }
+    .fancy-button:hover span {
+      filter: brightness(0.9) contrast(1.2);
+      transform: scale(0.96); }
+    .fancy-button:hover:before {
+      bottom: 3px;
+      filter: blur(6px) brightness(0.8); }
+  .fancy-button:active span {
+    filter: brightness(0.75) contrast(1.7); }
+  .fancy-button.pop-onhover span {
+    border-radius: 4px; }
+  .fancy-button.pop-onhover:before {
+    opacity: 0;
+    bottom: 10px; }
+  .fancy-button.pop-onhover:hover:before {
+    bottom: -7px;
+    opacity: 1;
+    filter: blur(16px); }
+  .fancy-button.pop-onhover:hover span {
+    transform: scale(1); }
+  .fancy-button.pop-onhover:hover:active span {
+    filter: brightness(1) contrast(1);
+    transform: scale(1);
+    transition: all 0.2s ease-out; }
+  .fancy-button.pop-onhover:hover:active:before {
+    bottom: 0;
+    filter: blur(5px) brightness(0.85);
+    transition: all 0.2s ease-out; }
 
 pre {
   background: #454545;
