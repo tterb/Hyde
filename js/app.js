@@ -153,10 +153,7 @@ window.onload = function() {
   document.getElementById("minimize").onclick = function() { remote.BrowserWindow.getFocusedWindow().minimize(); }
   document.getElementById("close").onclick = function() { closeWindow(window); }
 
-  document.getElementById("unsavedConfirm").onclick = function() {
-    if (path) { saveFile(); }
-    else { saveFileAs(); }
-  }
+  document.getElementById("unsavedConfirm").onclick = function() { saveFile(); }
   document.getElementById("unsavedDeny").onclick = function() {
   remote.BrowserWindow.getFocusedWindow().close();
   }

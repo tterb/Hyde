@@ -91,19 +91,19 @@ function toggleDeveloper() {
   window.toggleDevTools();
 }
 
-function toggleUnsavedDialog(win) {
-  var $modal = $('#unsavedModal'),
-      $text = $('#unsavedBody')
+function showUnsavedDialog(win) {
+  var $modal = jQuery('#unsavedModal'),
+      $text = $('#unsavedBody'),
       $filename = $('#bottom-file').text();
   // if(!isClean) {
     if($('#unsavedModal:hidden').length > 0) {
       if ($filename == 'New document') {
         $filename = 'This document';
       }
-      $text.innerHTML("'"+$filename+"' has unsaved changes, do you want to save them?");
-      $modal.show();
+      $text.text("'"+$filename.toString()+"' has unsaved changes, do you want to save them?");
+      $modal.modal();
     } else {
-      $modal.hide();
+      $modal.modal('hide');
     }
   // }
 }
@@ -119,7 +119,7 @@ function toggleUnsavedDialog(win) {
 function closeWindow(win) {
   var isClean = this.isClean()
   if(!isClean) {
-    toggleUnsavedDialog(win);
+    showUnsavedDialog(win);
   } else {
     win.close();
   }
