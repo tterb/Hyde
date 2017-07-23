@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/codemirror.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/metro-icons.min.css">
     <link rel="stylesheet" href="css/open-sans.css">
     <link rel="stylesheet" href="css/source-code-pro.css">
     <link rel="stylesheet" href="css/dialog.css">
@@ -118,6 +119,8 @@
               </ul>
             </li>
             <li class="dropdown-divider"></li>
+            <!-- <li><a tabindex="-1" href="#" onclick="toggleDynamicFontSizing();">Toggle Dynamic Editor</a></li> -->
+            <li class="dropdown-divider"></li>
             <li><a tabindex="-1" href="#" onclick="toggleMenu();">Toggle Menu Bar</a><span>Ctrl + M</span></li>
             <li><a tabindex="-1" href="#" onclick="toggleToolbar();">Toggle Toolbar</a><span>Ctrl + .</span></li>
             <li><a tabindex="-1" href="#" onclick="toggleFullscreen();">Toggle Full Screen</a><span>F11</span></li>
@@ -142,18 +145,18 @@
       </div>
       <div id="toolbarArea">
         <div class="toolbar-buttons" style="padding:5px 12px 2px;">
-          <a onclick="toggleHeadingSmaller();" title="Header [Ctrl+H]" class="fa fa-header editor-toolbar"></a>
-          <a onclick="toggleFormat('bold');" title="Bold [Ctrl+B]" class="fa fa-bold editor-toolbar"></a>
-          <a onclick="toggleFormat('italic');" title="Italic [Ctrl+I]" class="fa fa-italic editor-toolbar"></a>
+          <a onclick="toggleHeadingSmaller();" style="padding-left:4x;" title="Header [Ctrl+H]" class="fa fa-header editor-toolbar"></a>
+          <a onclick="toggleFormat('bold');" title="Bold [Ctrl+B]" class="mif-bold editor-toolbar"></a>
+          <a onclick="toggleFormat('italic');" title="Italic [Ctrl+I]" class="mif-italic editor-toolbar"></a>
           <!-- <a onclick="toggleHeadingSmaller();" title="Header [Ctrl+H]" class="fa fa-header editor-toolbar"></a> -->
-          <a onclick="toggleFormat('strikethrough');" title="Strikethrough [Ctrl+-]" class="fa fa-strikethrough editor-toolbar"></a>
+          <a onclick="toggleFormat('strikethrough');" title="Strikethrough [Ctrl+-]" class="mif-strikethrough editor-toolbar"></a>
           <i class="separator">|</i>
           <a onclick="toggleBlockquote();" title="Quote" class="fa fa-quote-left editor-toolbar"></a>
           <a onclick="toggleCodeBlock();" title="Code Block" class="fa fa-code editor-toolbar"></a>
-          <a onclick="toggleUnorderedList();" title="Unordered List" class="fa fa-list-ul editor-toolbar"></a>
-          <a onclick="toggleOrderedList();" title="Ordered List" class="fa fa-list-ol editor-toolbar"></a>
+          <a onclick="toggleUnorderedList();" title="Unordered List" class="mif-list2 editor-toolbar"></a>
+          <a onclick="toggleOrderedList();" title="Ordered List" class="mif-list-numbered editor-toolbar"></a>
           <i class="separator">|</i>
-          <a onclick="drawLink();" title="Create Link [Ctrl+L]" class="fa fa-link editor-toolbar"></a>
+          <a onclick="drawLink();" title="Create Link [Ctrl+L]" class="mif-link editor-toolbar"></a>
           <a onclick="drawImage();" title="Insert Image [Ctrl+Alt+I]" class="fa fa-picture-o editor-toolbar"></a>
           <a onclick="drawTable();" title="Insert Table [Ctrl+Shift+T]" class="fa fa-table editor-toolbar"></a>
           <a onclick="drawHorizontalRule();" title="Insert Horizontal Rule" class="fa fa-minus editor-toolbar"></a>
@@ -164,10 +167,10 @@
       <!-- <div id="editorFade"></div><div id="previewFade"></div> -->
       <section class="row" id="editArea">
         <div id="side-trigger">
-          <button id="side-button" onclick="toggleSidebar()" style="visibility:hidden;"/><img id="side-img" src="img/left-arrow.png"/>
+          <button id="side-button" onclick="toggleSidebar()" style="visibility:hidden;"/><img id="side-img" src="img/right-arrow.png"/>
         </div>
         <section id="sidebar">
-          <img id="side-logo" src="img/icon.png"/>
+          <img id="side-logo" src="img/logo.png"/>
           <ul id="side-menu">
             <li id="sidebar-new"><a onclick="">New</a></li>
             <li id="sidebar-open"><a onclick="">Open</a></li>
@@ -270,20 +273,44 @@
         </div>
       </div>
       <!-- About Modal -->
-      <div class="modal fade" id="mdModal" tabindex="-1" role="dialog">
+      <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog">
         <div class="modal-dialog">
           <!-- Modal content-->
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
               <h4 class="modal-title">About</h4>
-              <div class="aboutHyde">
-
-              </div>
             </div>
             <div class="modal-body">
               <section class="modal--default__content" id="modal-body-region">
+                <div class="aboutHyde">
 
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Close-Unsaved Modal -->
+      <div class="modal fade" id="unsavedModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" onclick="toggleSaveDialog()">&times;</button>
+              <h4 class="modal-title">Unsaved Changes</h4>
+            </div>
+            <div class="modal-body">
+              <section class="modal--default__content" id="modal-body-region">
+                <div class="closeUnsaved">
+                  <span id="unsavedBody" class="body"></span>
+                  <button id="unsavedConfirm" class="fancy-button bg-gradient1">Save</button>
+                  <button id="unsavedDeny" class="fancy-button bg-gradient1">Don't Save</button>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
       <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
       <script>if (window.module) module = window.module;</script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
