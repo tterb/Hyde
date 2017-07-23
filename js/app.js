@@ -151,7 +151,15 @@ window.onload = function() {
   // const win = remote.BrowserWindow.getFocusedWindow();
 
   document.getElementById("minimize").onclick = function() { remote.BrowserWindow.getFocusedWindow().minimize(); }
-  document.getElementById("close").onclick = function() { window.close(); }
+  document.getElementById("close").onclick = function() { closeWindow(window); }
+
+  document.getElementById("unsavedConfirm").onclick = function() {
+    if (path) { saveFile(); }
+    else { saveFileAs(); }
+  }
+  document.getElementById("unsavedDeny").onclick = function() {
+  remote.BrowserWindow.getFocusedWindow().close();
+  }
 
   var syncButton = document.getElementById('syncScroll');
   if(settings.get('syncScroll') === true) {
