@@ -1,6 +1,6 @@
 <p align="center"> 
   <img src="https://user-images.githubusercontent.com/16360374/27329362-2f41b4b4-556a-11e7-9b74-fffd11baf34b.png" width="250"/>
-  <br>
+  <br>  
   <img src="https://user-images.githubusercontent.com/16360374/28460541-67e91a6c-6dc7-11e7-9fe2-f8e648d3c179.png" width="225"/>
 </p>
 <h3 align="center">An <a href="http://electron.atom.io" target="_blank"><img src="https://user-images.githubusercontent.com/16360374/27318472-58bebca2-5541-11e7-9870-68d4a4f8f957.png" width="22"/> Electron</a> powered markdown editor for  <a href="https://jekyllrb.com" target="_blank"><img src="https://user-images.githubusercontent.com/16360374/27342564-662358d6-5595-11e7-944d-309b695d238a.png" width="65"/></a> users.</h3>
@@ -19,19 +19,27 @@
     <img src="https://img.shields.io/badge/built for-Jekyll-red.svg" height="21" title="Jekyll">&nbsp;
   </a>
 </p>
+
 <br>
 
 # Description  
-
+  
 **Hyde** is a electron-based markdown editor that aims to improve the accessibility of [Jekyll](https://jekyllrb.com) as a blogging platform for developers and non-developers, alike.  
 As many users already know, [Jekyll](https://jekyllrb.com) holds many benefits over other blogging platforms. Though, it appears that many potential users outside of the developer community are initially intimidated by the foreign Markdown used to compose and format blog posts.  
 **Hyde** aims to counter this issue by providing an approachable modular interface, capable of offering the familiar toolbars and live-preview of a word-processor or the simplicity of a minimalistic editor.  
+  
+<br>
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/16360374/28510622-4c892968-6ffe-11e7-9944-b5fd30ca9147.png"/>
+</p>
+
+-------------------------  
 
 # Features
 
 * Live Preview
   - Instantly observe changes to your documents in rendered Markdown or HTML as you create them
-  - Sync-scrolling allows the preview to keep up with you as you type
+* Sync-scrolling allows the preview to keep up with you as you type
 * GitHub Flavored Markdown(GFM)
 * User-friendly formatting via the toolbar
 * Syntax highlighting for Markdown, GFM-compatible HTML, and YAML frontmatter
@@ -45,7 +53,7 @@ As many users already know, [Jekyll](https://jekyllrb.com) holds many benefits o
 * Cross platform
   - Windows, Mac and Linux ready
   
-<br>
+<br>  
 
 -------------------
 
