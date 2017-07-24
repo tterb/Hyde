@@ -8,13 +8,13 @@ var insertTexts = {
 function toggleFormat(type) {
   'use strict';
   let modifiers = [];
-  if(type == "bold") {
+  if(type === "bold") {
     modifiers = ["**"];
-  } else if(type == "italic") {
+} else if(type === "italic") {
     modifiers = ["*"];
-  } else if(type == "strikethrough") {
+} else if(type === "strikethrough") {
     modifiers = ["~~"];
-  } else if(type == "comment") {
+} else if(type === "comment") {
     modifiers = ["<!-- ", " -->"];
   }
   cm.operation(() => {
@@ -250,30 +250,30 @@ function _toggleHeading(direction, size) {
           } else {
             text = "# " + text;
           }
-        } else if(currHeadingLevel == 6 && direction == "smaller") {
+        } else if(currHeadingLevel === 6 && direction === "smaller") {
           text = text.substr(7);
-        } else if(currHeadingLevel == 1 && direction == "bigger") {
+        } else if(currHeadingLevel === 1 && direction === "bigger") {
           text = text.substr(2);
         } else {
-          if(direction == "bigger") {
+          if(direction === "bigger") {
             text = text.substr(1);
           } else {
             text = "#" + text;
           }
         }
       } else {
-        if(size == 1) {
+        if(size === 1) {
           if(currHeadingLevel <= 0) {
             text = "# " + text;
-          } else if(currHeadingLevel == size) {
+          } else if(currHeadingLevel === size) {
             text = text.substr(currHeadingLevel + 1);
           } else {
             text = "# " + text.substr(currHeadingLevel + 1);
           }
-        } else if(size == 2) {
+        } else if(size === 2) {
           if(currHeadingLevel <= 0) {
             text = "## " + text;
-          } else if(currHeadingLevel == size) {
+          } else if(currHeadingLevel === size) {
             text = text.substr(currHeadingLevel + 1);
           } else {
             text = "## " + text.substr(currHeadingLevel + 1);
@@ -281,7 +281,7 @@ function _toggleHeading(direction, size) {
         } else {
           if(currHeadingLevel <= 0) {
             text = "### " + text;
-          } else if(currHeadingLevel == size) {
+          } else if(currHeadingLevel === size) {
             text = text.substr(currHeadingLevel + 1);
           } else {
             text = "### " + text.substr(currHeadingLevel + 1);

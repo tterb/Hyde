@@ -6,7 +6,6 @@ const app = electron.app;
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow;
 
-const mainPage = 'file://' + __dirname + '/index.html';
 // const remote = require('electron').remote;
 // const Menu = remote.Menu;
 // var Menu = require('menu');
@@ -19,6 +18,8 @@ const mod = require('./package.json');
 var config = require('./config');
 const keepInTray = config.get('keepInTray');
 const fs = require('fs');
+const path = require('path');
+const mainPage = path.join('file://', __dirname, '/index.html');
 var localShortcut = require('electron-localShortcut');
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -33,10 +34,10 @@ function createWindow () {
       height: 600,
       show: true,
       autoHideMenuBar: true,
-      icon: __dirname+'/img/favicon.ico'
+      icon: path.join(__dirname, '/img/favicon.ico')
   }
 
-  if (process.platform == 'darwin') {
+  if (process.platform === 'darwin') {
     conf.titleBarStyle = 'hidden';
   } else {
     conf.frame = false;
@@ -89,7 +90,7 @@ function createWindow () {
           focusedWindow.webContents.send('file-new');
         }},
         {label: "Open", accelerator: "CmdOrCtrl+O", click: function() {
-          let focusedWindow = BrowserWindow.getFocusedWindow();
+          var focusedWindow = BrowserWindow.getFocusedWindow();
           focusedWindow.webContents.send('file-open');
         }},
         {type: "separator"},
@@ -125,29 +126,29 @@ function createWindow () {
         {label: "Select All", accelerator: "CmdOrCtrl+A", role: 'selectall'},
         {type: "separator"},
         {label: "Search", accelerator: "CmdOrCtrl+F", click: function() {
-          let focusedWindow = BrowserWindow.getFocusedWindow();
+          var focusedWindow = BrowserWindow.getFocusedWindow();
           focusedWindow.webContents.send('ctrl+f');
         }},
         {label: "Replace", accelerator: "CmdOrCtrl+Shift+F", click: function() {
-          let focusedWindow = BrowserWindow.getFocusedWindow();
+          var focusedWindow = BrowserWindow.getFocusedWindow();
           focusedWindow.webContents.send('ctrl+shift+f');
         }},
         {type: "separator"},
         {label: "Auto-Indent", accelerator: "CmdOrCtrl+Shift+A", click: function() {
-          let focusedWindow = BrowserWindow.getFocusedWindow();
+          var focusedWindow = BrowserWindow.getFocusedWindow();
           focusedWindow.webContents.send('ctrl+shift+a');
         }},
         {label: "Indent Left", accelerator: "CmdOrCtrl+Left", click: function() {
-          let focusedWindow = BrowserWindow.getFocusedWindow();
+          var focusedWindow = BrowserWindow.getFocusedWindow();
           focusedWindow.webContents.send('ctrl+left');
         }},
         {label: "Indent Right", accelerator: "CmdOrCtrl+Right", click: function() {
-          let focusedWindow = BrowserWindow.getFocusedWindow();
+          var focusedWindow = BrowserWindow.getFocusedWindow();
           focusedWindow.webContents.send('ctrl+right');
         }},
         {type: "separator"},
         {label: "Toggle Comment", accelerator: "CmdOrCtrl+/", click: function() {
-          let focusedWindow = BrowserWindow.getFocusedWindow();
+          var focusedWindow = BrowserWindow.getFocusedWindow();
           focusedWindow.webContents.send('ctrl+/');
         }}
       ]
@@ -166,34 +167,34 @@ function createWindow () {
             }}
           ]},
         { label: "Toggle Menu", accelerator:"CmdOrCtrl+M", click: function(){
-            let focusedWindow = BrowserWindow.getFocusedWindow();
+          var focusedWindow = BrowserWindow.getFocusedWindow();
             focusedWindow.webContents.send('CmdOrCtrl+m');
         }},
         { label: "Toggle Toolbar", accelerator:"CmdOrCtrl+.", click: function(){
-            let focusedWindow = BrowserWindow.getFocusedWindow();
+          var focusedWindow = BrowserWindow.getFocusedWindow();
             focusedWindow.webContents.send('CmdOrCtrl+.');
         }},
         { label: "Toggle Toolbar", accelerator:"CmdOrCtrl+.", click: function(){
-            let focusedWindow = BrowserWindow.getFocusedWindow();
+          var focusedWindow = BrowserWindow.getFocusedWindow();
             focusedWindow.webContents.send('CmdOrCtrl+Shift+M');
         }},
         { label: "Toggle Full Screen", accelerator:"F11", click: function(){
-          let focusedWindow = BrowserWindow.getFocusedWindow();
+          var focusedWindow = BrowserWindow.getFocusedWindow();
           let isFullScreen = focusedWindow.isFullScreen();
           focusedWindow.setFullScreen(!isFullScreen);
         }},
         {
         label: 'Toggle Developer Tools',
-        accelerator: (function() {
-          if (process.platform == 'darwin')
+        accelerator: function() {
+          if (process.platform === 'darwin')
             return 'Alt+Command+I';
           else
             return 'Ctrl+Shift+I';
-        })(),
+        }(),
         click: function(item, focusedWindow) {
           if (focusedWindow)
             focusedWindow.toggleDevTools();
-        }},
+        }}
       ]
     },
     {

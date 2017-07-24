@@ -1,3 +1,6 @@
+const ipcRenderer = require('electron').ipcRenderer;
+// const {clipboard} = require('electron');
+
 // Handling file saving through IPCRenderer
 function saveAs() {
   storage.get('markdown-savefile', function(error, data) {
@@ -100,7 +103,6 @@ ipc.on('file-open', function() {
 });
 
 function copySelected() {
-    const {clipboard} = require('electron');
     var content = window.getSelection().toString();
     console.log(window.getSelection().toString());
     clipboard.writeText(content);
@@ -179,7 +181,6 @@ ipc.on('ctrl+,', function() {
 });
 
 ipc.on('ctrl+p', function() {
-  const ipcRenderer = require('electron').ipcRenderer;
   ipcRenderer.send('show-settings-window');
 });
 

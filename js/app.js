@@ -13,7 +13,6 @@ var console = require('console');
 var parsePath = require("parse-filepath");
 var currentFile = '';
 var isFileLoadedInitially = false;
-// const default = require('./config');
 const config = require('./config');
 const settings = require('electron-settings');
 const setter = require('./js/settings');
@@ -46,11 +45,11 @@ var conf = {
   lineWrapping : true,
   autoCloseBrackets: true,
   extraKeys: {
-    Enter: 'newlineAndIndentContinueMarkdownList',
+    Enter: 'newlineAndIndentContinueMarkdownList'
     // Home: 'goLineLeft',
     // End: 'goLineRight'
     // 'Shift-Tab': 'indentLess'
-  },
+  }
 }
 
 function includeTheme(theme) {
@@ -58,8 +57,10 @@ function includeTheme(theme) {
   var head = document.getElementsByTagName('head')[0];
   settings.set('editorTheme', theme);
   var editorColor = $('.cm-s-'+theme+'.CodeMirror').css('background-color');
-  $('#leftFade').css('background-color', editorColor);
-  $('#textPanel').css('background-color', editorColor);
+  // var topFade = '-webkit-gradient(linear, top, bottom, from('+editorColor+') 25%, transparent)';
+  // $('#leftFade').css('background-image', topFade);
+  // $('#leftFade').css({background: '-webkit-gradient(linear, top, bottom, from('+editorColor+') 25%, transparent)'});
+  // $('#textPanel').css('background-color', editorColor);
   currentTheme = theme;
   if(document.getElementById('themeLink')) {
     themeTag = document.getElementById('themeLink');
@@ -80,7 +81,6 @@ function getEditorTheme() {
   return currentTheme;
 }
 
-var fs = require('fs');
 var files = fs.readdirSync('./css/theme');
 var theme = settings.get('editorTheme');
 
@@ -125,7 +125,7 @@ window.onload = function() {
       this.setClean();
       this.isFileLoadedInitially = false;
     }
-    if(this.currentFile!='') {
+    if(this.currentFile !== '') {
       this.updateWindowTitle(this.currentFile);
     } else {
       this.updateWindowTitle();
@@ -180,13 +180,11 @@ window.onload = function() {
  var toggleSyncScroll = () => {
     console.log('Toggle scroll synchronization.');
     isSynced = $('#syncScroll').attr('class').includes('fa-link');
-
     if(isSynced === true) {
       $('#syncScroll').attr('class', 'fa fa-unlink');
       isSynced = false;
       $(window).trigger('resize')
     } else {
-     // If scrolling was just enabled, ensure we're back in sync by triggering window resize.
       $('#syncScroll').attr('class', 'fa fa-link');
       isSynced = true;
       $(window).trigger('resize')
@@ -304,7 +302,7 @@ function handleNewButton() {
     cm.setValue("");
     console.log(cm.getValue().toString())
   } else {
-    window.open('file://' + __dirname + '/index.html');
+    window.open(path.join('file://', __dirname, '/index.html'));
   }
 }
 
