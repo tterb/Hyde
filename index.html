@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="css/open-sans.css">
     <link rel="stylesheet" href="css/source-code-pro.css">
     <link rel="stylesheet" href="css/dialog.css">
+    <link rel="stylesheet" href="css/scrollbar.css">
     <script src="node_modules/codemirror/lib/codemirror.js"></script>
     <script src="node_modules/codemirror/mode/markdown/markdown.js"></script>
     <script src="node_modules/codemirror/mode/gfm/gfm.js"></script>
@@ -118,7 +119,7 @@
                 <li><a href="#" onclick="includeTheme('zenburn');">Zenburn</a></li>
               </ul>
             </li>
-            <li class="dropdown-divider"></li>
+            <!-- <li class="dropdown-divider"></li> -->
             <!-- <li><a tabindex="-1" href="#" onclick="toggleDynamicFontSizing();">Toggle Dynamic Editor</a></li> -->
             <li class="dropdown-divider"></li>
             <li><a tabindex="-1" href="#" onclick="toggleMenu();">Toggle Menu Bar</a><span>Ctrl + M</span></li>
@@ -213,8 +214,8 @@
               <button type="button" class="close" data-dismiss="modal">&times;</button>
               <h4 class="modal-title">Markdown Help</h4>
             </div>
-            <div class="modal-body">
-              <section class="modal--default__content" id="modal-body-region">
+            <div class="modal-body-inset">
+              <section class="modal--inset__content" id="modal-body-region">
                 <table class="markdown-help-content">
                   <tbody>
                       <tr>
@@ -303,8 +304,8 @@
               <section class="modal--default__content" id="modal-body-region">
                 <div class="closeUnsaved">
                   <span id="unsavedBody" class="body"></span>
-                  <button id="unsavedConfirm" class="fancy-button bg-gradient1">Save</button>
-                  <button id="unsavedDeny" class="fancy-button bg-gradient1">Don't Save</button>
+                  <a href="#" id="unsavedConfirm" class="fancy-button bg-gradient1"><span>Save</span></a>
+                  <a href="#" id="unsavedDeny" class="fancy-button bg-gradient1"><span>Don't Save</span></a>
                 </div>
               </section>
             </div>
@@ -325,7 +326,7 @@
           });
         });
       </script>
-      <script src="js/CodeMirror/libs/jquery.min.js"></script>
+      <!-- <script src="js/CodeMirror/libs/jquery.min.js"></script> -->
       <script src="js/CodeMirror/libs/marked.min.js"></script>
       <script src="js/CodeMirror/libs/search.js"></script>
       <script src="js/CodeMirror/libs/searchcursor.js"></script>
