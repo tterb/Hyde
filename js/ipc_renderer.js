@@ -170,6 +170,10 @@ ipc.on('ctrl+.', function() {
   toggleToolbar();
 });
 
+ipc.on('ctrl+shift+m', function() {
+  togglePreview();
+});
+
 ipc.on('ctrl+,', function() {
   openSettings();
 });

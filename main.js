@@ -167,11 +167,15 @@ function createWindow () {
           ]},
         { label: "Toggle Menu", accelerator:"CmdOrCtrl+M", click: function(){
             let focusedWindow = BrowserWindow.getFocusedWindow();
-            focusedWindow.webContents.send('ctrl+m');
+            focusedWindow.webContents.send('CmdOrCtrl+m');
         }},
         { label: "Toggle Toolbar", accelerator:"CmdOrCtrl+.", click: function(){
             let focusedWindow = BrowserWindow.getFocusedWindow();
-            focusedWindow.webContents.send('ctrl+.');
+            focusedWindow.webContents.send('CmdOrCtrl+.');
+        }},
+        { label: "Toggle Toolbar", accelerator:"CmdOrCtrl+.", click: function(){
+            let focusedWindow = BrowserWindow.getFocusedWindow();
+            focusedWindow.webContents.send('CmdOrCtrl+Shift+M');
         }},
         { label: "Toggle Full Screen", accelerator:"F11", click: function(){
           let focusedWindow = BrowserWindow.getFocusedWindow();
@@ -258,12 +262,16 @@ function createWindow () {
       focusedWindow.webContents.send('ctrl+shift+t');
   });
 
-  localShortcut.register('CmdOrCtrl+,', function() {
+  localShortcut.register('CmdOrCtrl+m', function() {
     focusedWindow.webContents.send('ctrl+m');
   });
 
   localShortcut.register('CmdOrCtrl+.', function() {
     focusedWindow.webContents.send('ctrl+.');
+  });
+
+  localShortcut.register('CmdOrCtrl+m', function() {
+    focusedWindow.webContents.send('ctrl+shift+m');
   });
 
   localShortcut.register('CmdOrCtrl+,', function() {
