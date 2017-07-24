@@ -78,4 +78,4 @@ Users provide the best insight for improving a product. So always feel free to s
 
 
 ------------------------------------------------------------    
-(*Adapted from the contribution guidelines of [Atom](https://github.com/atom)*)
+(*Adapted from the contribution guidelines of [Atom](https://github.com/atom)*)  

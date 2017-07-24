@@ -9,8 +9,8 @@
 |     Save File        |   <kbd>Ctrl + S</kbd>           |  
 |     Save As          |   <kbd>Ctrl + Shift + S</kbd>   |  
 |     Settings         |   <kbd>Ctrl + ,</kbd>           |  
-|     Toggle Menu      |   <kbd>Ctrl + .</kbd>           |  
-|     Toggle Toolbar   |   <kbd>Ctrl + T</kbd>           |   
+|     Toggle Menu      |   <kbd>Ctrl + m</kbd>           |  
+|     Toggle Toolbar   |   <kbd>Ctrl + .</kbd>           |   
 |     Toggle Preview   |   <kbd>Ctrl + Shift + M</kbd>   |  
 |     Toggle Fullscreen|   <kbd>F11</kbd>                |  
 |     Toggle Dev Tools |   <kbd>Ctrl + Shift + F</kbd>   |  
@@ -43,6 +43,7 @@
 |     Italic           |   <kbd>Ctrl + i</kbd>           |
 |     Strikethrough    |   <kbd>Ctrl + -</kbd>           |
 |     Create Link      |   <kbd>Ctrl + L</kbd>           |
+|     Create Image     |   <kbd>Ctrl + Alt + i</kbd>     |
 |     Horizontal Rule  |   <kbd>Ctrl + Shift + _</kbd>   |
 
 --------------------  
