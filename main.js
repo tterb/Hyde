@@ -21,6 +21,7 @@ const fs = require('fs');
 const path = require('path');
 const mainPage = path.join('file://', __dirname, '/index.html');
 var localShortcut = require('electron-localShortcut');
+const {Menu, MenuItem, ipcMain} = require('electron');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -33,26 +34,23 @@ function createWindow () {
       width: 1000,
       height: 600,
       show: true,
+      frame: false,
       autoHideMenuBar: true,
       icon: path.join(__dirname, '/img/favicon.ico')
   }
 
   if (process.platform === 'darwin') {
     conf.titleBarStyle = 'hidden';
-  } else {
-    conf.frame = false;
   }
 
   // Create the browser window.
   mainWindow = new BrowserWindow(conf);
 
   mainWindow.show();
-
   // and load the index.html of the app.
   mainWindow.loadURL(mainPage);
-
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {
@@ -80,36 +78,34 @@ function createWindow () {
     shell.openExternal(url);
   });
 
+  function sendShortcut(cmd) {
+      var focusedWindow = BrowserWindow.getFocusedWindow();
+      focusedWindow.webContents.send(cmd);
+  }
+
   //Set native menubar
   var template = [
     {
       label: "&File",
       submenu: [
         {label: "New", accelerator: "CmdOrCtrl+N", click: function() {
-          var focusedWindow = BrowserWindow.getFocusedWindow();
-          focusedWindow.webContents.send('file-new');
-        }},
+          sendShortcut('file-new'); }
+        },
         {label: "Open", accelerator: "CmdOrCtrl+O", click: function() {
-          var focusedWindow = BrowserWindow.getFocusedWindow();
-          focusedWindow.webContents.send('file-open');
-        }},
+          sendShortcut('file-open'); }
+        },
         {type: "separator"},
         {label: "Save", accelerator: "CmdOrCtrl+S", click: function() {
-          var focusedWindow = BrowserWindow.getFocusedWindow();
-          focusedWindow.webContents.send('file-save');
-        }},
-        {label: "Save As", accelerator: "CmdOrCtrl+Shift+S", click: function() {
-          var focusedWindow = BrowserWindow.getFocusedWindow();
-          focusedWindow.webContents.send('file-save-as');
-        }},
+          sendShortcut('file-save'); }
+        },
+        {label: "Save As", accelerator: "CmdOrCtrl+Shift+S", click: function() { sendShortcut('file-saveAs'); }
+        },
         {label: "Export to PDF", click: function() {
-          var focusedWindow = BrowserWindow.getFocusedWindow();
-          focusedWindow.webContents.send('file-pdf');
-        }},
+          sendShortcut('file-pdf'); }
+        },
         {type: "separator"},
-        {label: "Settings", accelerator: "CmdOrCtrl+,", click: function() {
-          openSettings();
-        }},
+        {label: "Settings", accelerator: "CmdOrCtrl+,", click: function() { openSettings(); }
+        },
         {type: "separator"},
         {label: "Quit", accelerator: "CmdOrCtrl+Q", click: app.quit}
       ]
@@ -125,32 +121,20 @@ function createWindow () {
         {label: "Paste", accelerator: "CmdOrCtrl+V", role: "paste"},
         {label: "Select All", accelerator: "CmdOrCtrl+A", role: 'selectall'},
         {type: "separator"},
-        {label: "Search", accelerator: "CmdOrCtrl+F", click: function() {
-          var focusedWindow = BrowserWindow.getFocusedWindow();
-          focusedWindow.webContents.send('ctrl+f');
-        }},
-        {label: "Replace", accelerator: "CmdOrCtrl+Shift+F", click: function() {
-          var focusedWindow = BrowserWindow.getFocusedWindow();
-          focusedWindow.webContents.send('ctrl+shift+f');
-        }},
+        {label: "Search", accelerator: "CmdOrCtrl+F", click: function() { sendShortcut('CmdOrCtrl+f'); }
+        },
+        {label: "Replace", accelerator: "CmdOrCtrl+Shift+F", click: function() { sendShortcut('CmdOrCtrl+shift+f'); }
+        },
         {type: "separator"},
-        {label: "Auto-Indent", accelerator: "CmdOrCtrl+Shift+A", click: function() {
-          var focusedWindow = BrowserWindow.getFocusedWindow();
-          focusedWindow.webContents.send('ctrl+shift+a');
-        }},
-        {label: "Indent Left", accelerator: "CmdOrCtrl+Left", click: function() {
-          var focusedWindow = BrowserWindow.getFocusedWindow();
-          focusedWindow.webContents.send('ctrl+left');
-        }},
-        {label: "Indent Right", accelerator: "CmdOrCtrl+Right", click: function() {
-          var focusedWindow = BrowserWindow.getFocusedWindow();
-          focusedWindow.webContents.send('ctrl+right');
-        }},
+        {label: "Auto-Indent", accelerator: "CmdOrCtrl+Shift+A", click: function() { sendShortcut('CmdOrCtrl+shift+a'); }
+        },
+        {label: "Indent Left", accelerator: "CmdOrCtrl+Left", click: function() { sendShortcut('CmdOrCtrl+left'); }
+        },
+        {label: "Indent Right", accelerator: "CmdOrCtrl+Right", click: function() { sendShortcut('CmdOrCtrl+right'); }
+        },
         {type: "separator"},
-        {label: "Toggle Comment", accelerator: "CmdOrCtrl+/", click: function() {
-          var focusedWindow = BrowserWindow.getFocusedWindow();
-          focusedWindow.webContents.send('ctrl+/');
-        }}
+        {label: "Toggle Comment", accelerator: "CmdOrCtrl+/", click: function() { sendShortcut('CmdOrCtrl+/'); }
+        }
       ]
     },
     {
@@ -166,19 +150,13 @@ function createWindow () {
               func.pickTheme(this, "solarized");
             }}
           ]},
-        { label: "Toggle Menu", accelerator:"CmdOrCtrl+M", click: function(){
-          var focusedWindow = BrowserWindow.getFocusedWindow();
-            focusedWindow.webContents.send('CmdOrCtrl+m');
-        }},
-        { label: "Toggle Toolbar", accelerator:"CmdOrCtrl+.", click: function(){
-          var focusedWindow = BrowserWindow.getFocusedWindow();
-            focusedWindow.webContents.send('CmdOrCtrl+.');
-        }},
-        { label: "Toggle Toolbar", accelerator:"CmdOrCtrl+.", click: function(){
-          var focusedWindow = BrowserWindow.getFocusedWindow();
-            focusedWindow.webContents.send('CmdOrCtrl+Shift+M');
-        }},
-        { label: "Toggle Full Screen", accelerator:"F11", click: function(){
+        { label: "Toggle Menu", accelerator:"CmdOrCtrl+M", click: function() { sendShortcut('CmdOrCtrl+m'); }
+        },
+        { label: "Toggle Toolbar", accelerator:"CmdOrCtrl+.", click: function() { sendShortcut('CmdOrCtrl+.'); }
+        },
+        { label: "Toggle Preview", accelerator:"CmdOrCtrl+Shift+M", click: function() { sendShortcut("CmdOrCtrl+Shift+M"); }
+        },
+        { label: "Toggle Full Screen", accelerator:"F11", click: function() {
           var focusedWindow = BrowserWindow.getFocusedWindow();
           let isFullScreen = focusedWindow.isFullScreen();
           focusedWindow.setFullScreen(!isFullScreen);
@@ -215,10 +193,10 @@ function createWindow () {
       ]
     }
   ];
-  const {Menu, MenuItem, ipcMain} = require('electron');
   let menu = Menu.buildFromTemplate(template);
   Menu.setApplicationMenu(menu);
   Menu.setApplicationMenu(Menu.buildFromTemplate(template));
+
 
   ipcMain.on('export-to-pdf', (event, filePath) => {
     const win = BrowserWindow.fromWebContents(event.sender)
@@ -233,7 +211,7 @@ function createWindow () {
     })
   });
 
-  // Regestering global shortcuts for formatting markdown
+  // Regestering local shortcuts for formatting markdown
   var focusedWindow = BrowserWindow.getFocusedWindow();
   localShortcut.register('CmdOrCtrl+b', function() {
       focusedWindow.webContents.send('ctrl+b');
@@ -271,8 +249,8 @@ function createWindow () {
     focusedWindow.webContents.send('ctrl+.');
   });
 
-  localShortcut.register('CmdOrCtrl+m', function() {
-    focusedWindow.webContents.send('ctrl+shift+m');
+  localShortcut.register('CmdOrCtrl+Shift+M', function() {
+    focusedWindow.webContents.send('ctrl+shift+M');
   });
 
   localShortcut.register('CmdOrCtrl+,', function() {
