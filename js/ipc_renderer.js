@@ -172,7 +172,7 @@ ipc.on('ctrl+.', function() {
   toggleToolbar();
 });
 
-ipc.on('ctrl+shift+m', function() {
+ipc.on('ctrl+shift+M', function() {
   togglePreview();
 });
 
