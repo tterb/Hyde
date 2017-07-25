@@ -175,14 +175,14 @@ function togglePreview() {
 }
 
 function toggleSidebar() {
-  if($('#sidebar:hidden').length > 0) {
+  if(parseInt($('#sidebar').css('left'), 10) < 0) {
     $('#side-button').css('visibility','hidden');
-    $('#sidebar').css('display','block');
+    $('#sidebar').css('left', '0px');
     $('#side-trigger').css('left','250px');
     $('#side-img').attr('src','img/left-arrow.png');
   } else {
     $('#side-button').css('visibility','hidden');
-    $('#sidebar').hide();
+    $('#sidebar').css('left', '-250px');
     $('#side-trigger').css('left','0px');
     $('#side-img').attr('src','img/right-arrow.png');
   }
