@@ -40,6 +40,7 @@ exclude_paths:
   - "css/font-awesome.min.css"
   - "css/fonts/*"
   - "js/CodeMirror/*"
+  - "img/emoji/*"
 
 parserOptions:
   sourceType: module
