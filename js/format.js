@@ -2,7 +2,7 @@ var insertTexts = {
   link: ["[", "](#url#)"],
   image: ["![", "](#url#)"],
   table: ["", "\n\n| Column 1 | Column 2 | Column 3 |\n| -------- | -------- | -------- |\n| Text     | Text     | Text     |\n\n"],
-  horizontalRule: ["", "\n\n-----\n\n"]
+  horizontalRule: ["", "\n\n-------------------\n\n"]
 };
 
 function toggleFormat(type) {
@@ -31,6 +31,12 @@ function _toggleFormat(modifiers) {
   let allModifiers = ['**', "__", "~~", "*", "_", "`"];
   let startPoint = cm.getCursor("start");
   let endPoint = cm.getCursor("end");
+  // get containing word if no selection
+  if(startPoint.ch === endPoint.ch) {
+    var word = cm.findWordAt(cm.getCursor())
+    startPoint = word.anchor;
+    endPoint = word.head;
+  }
   for (let bFound = true; bFound; ) {
     bFound = false;
     for (let i = 0, len = allModifiers.length; i < len; i++) {
@@ -76,7 +82,7 @@ function _toggleFormat(modifiers) {
   let modifierIndex = -1;
   for (let i = 0; i < modifiers.length; i++) {
     modifierIndex = foundModifiers.indexOf(modifiers[i]);
-    if (modifierIndex != -1) {
+    if (modifierIndex !== -1) {
       break;
     }
   }
@@ -135,7 +141,12 @@ function getState(cm, pos) {
     } else if(data === "strikethrough") {
       ret.strikethrough = true;
     } else if(data === "comment") {
-      ret.code = true;
+      text = cm.getLine(pos.line);
+      if(text.indexOf('`') > -1) {
+          ret.code = true;
+      } else {
+          ret.comment = true;
+      }
     } else if(data === "link") {
       ret.link = true;
     } else if(data === "tag") {
@@ -166,6 +177,7 @@ function toggleOrderedList(editor) {
 
 function _toggleLine(cm, name) {
   if(/editor-preview-active/.test(cm.getWrapperElement().lastChild.className)) return;
+
 
   var stat = getState(cm);
   var startPoint = cm.getCursor("start");
@@ -245,7 +257,7 @@ function _toggleHeading(direction, size) {
 
       if(direction !== undefined) {
         if(currHeadingLevel <= 0) {
-          if(direction == "bigger") {
+          if(direction === "bigger") {
             text = "###### " + text;
           } else {
             text = "# " + text;
