@@ -28,7 +28,7 @@ function _toggleFormat(modifiers) {
     return;
   }
   // exclude modifiers from selection
-  let allModifiers = ['**', "__", "~~", "*", "_", "`"];
+  let allModifiers = ["*", "_", '**', "__", "~~", "`"];
   let startPoint = cm.getCursor("start");
   let endPoint = cm.getCursor("end");
   // get containing word if no selection
@@ -178,7 +178,6 @@ function toggleOrderedList(editor) {
 function _toggleLine(cm, name) {
   if(/editor-preview-active/.test(cm.getWrapperElement().lastChild.className)) return;
 
-
   var stat = getState(cm);
   var startPoint = cm.getCursor("start");
   var endPoint = cm.getCursor("end");
@@ -186,7 +185,7 @@ function _toggleLine(cm, name) {
     "quote": /^(\s*)\>\s+/,
     "unordered-list": /^(\s*)(\*|\-|\+)\s+/,
     "ordered-list": /^(\s*)\d+\.\s+/,
-    "comment": /^(\s*)\<!--\s+/
+    "comment": /<!-- (.*) -->/
   };
   var map = {
     "quote": "> ",
