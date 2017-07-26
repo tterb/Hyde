@@ -52,6 +52,9 @@
       <section class="frame" id="frame">
         <div id="draggable" style="-webkit-app-region:drag"></div>
       </section>
+      <div id="menuToggle">
+        <button id="menuButton" onclick="toggleMenu();" style="cursor: pointer;"><span class="mif-menu"></span></button>
+      </div>
       <div id="metacity">
         <button id="close" style="cursor: pointer;"><img src="img/close.png" alt="Close"/></button>
         <button id="maximize" style="cursor: pointer;"><img src="img/max.png" alt="Maximize" onclick="toggleFullscreen();"/></button>
@@ -62,7 +65,7 @@
         <div class="btn-group">
           <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="fileMenu">File</button>
           <ul class="dropdown-menu">
-            <li><a tabindex="-1" href="#" onclick="newFile();">New</a><span>Ctrl + N</span></li>
+            <li><a tabindex="-1" href="#" onclick="createWindow();">New</a><span>Ctrl + N</span></li>
             <li><a tabindex="-1" href="#" onclick="openFile();">Open</a><span>Ctrl + O</span></li>
             <li class="dropdown-divider"></li>
             <li><a tabindex="-1" href="#" onclick="saveFile();">Save</a><span>Ctrl + S</span></li>
@@ -153,7 +156,7 @@
           <a onclick="toggleFormat('strikethrough');" title="Strikethrough [Ctrl+-]" class="mif-strikethrough editor-toolbar"></a>
           <i class="separator">|</i>
           <a onclick="toggleBlockquote();" title="Quote" class="fa fa-quote-left editor-toolbar"></a>
-          <a onclick="toggleCodeBlock();" title="Code Block" class="fa fa-code editor-toolbar"></a>
+          <a onclick="toggleFormat('code');" title="Code Block" class="fa fa-code editor-toolbar"></a>
           <a onclick="toggleUnorderedList();" title="Unordered List" class="mif-list2 editor-toolbar"></a>
           <a onclick="toggleOrderedList();" title="Ordered List" class="mif-list-numbered editor-toolbar"></a>
           <i class="separator">|</i>
@@ -187,7 +190,7 @@
           </ul>
         </section>
         <div id="leftPanel">
-            <div id="leftFade" class="topFade"></div>
+            <!-- <div id="leftFade" class="topFade"></div> -->
             <div class="col-md-6 full-height" style="background:hsl(220, 11%, 18%);" id="textPanel">
               <textarea id="plainText" placeholder="" autofocus></textarea>
             </div>

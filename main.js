@@ -5,31 +5,29 @@ const electron = require('electron');
 const app = electron.app;
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow;
-
-// const remote = require('electron').remote;
-// const Menu = remote.Menu;
-// var Menu = require('menu');
 var dialog = require('electron').dialog;
 var shell = require('electron').shell;
 const tray = require('./tray');
 const func = require('./js/functions');
 const setter = require('./js/settings');
 const mod = require('./package.json');
-var config = require('./config');
+const config = require('./config');
 const keepInTray = config.get('keepInTray');
 const fs = require('fs');
 const path = require('path');
 const mainPage = path.join('file://', __dirname, '/index.html');
 var localShortcut = require('electron-localShortcut');
 const {Menu, MenuItem, ipcMain} = require('electron');
+// const window = require('./js/windowManager');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
+const windows = [];
 let mainWindow;
 let isQuitting = false;
 
 function createWindow () {
-
+  var i = windows.length;
   var conf = {
       width: 1000,
       height: 600,
@@ -89,7 +87,7 @@ function createWindow () {
       label: "&File",
       submenu: [
         {label: "New", accelerator: "CmdOrCtrl+N", click: function() {
-          sendShortcut('file-new'); }
+          createWindow(); }
         },
         {label: "Open", accelerator: "CmdOrCtrl+O", click: function() {
           sendShortcut('file-open'); }
@@ -201,7 +199,7 @@ function createWindow () {
   ipcMain.on('export-to-pdf', (event, filePath) => {
     const win = BrowserWindow.fromWebContents(event.sender)
     // Use default printing options
-    win.webContents.printToPDF({pageSize: 'A4'}, (error, data) => {
+    win.webContents.printToPDF({}, (error, data) => {
       if (error) throw error
       fs.writeFile(filePath, data, (error) => {
         if (error) {
@@ -258,6 +256,10 @@ function createWindow () {
   });
 
   tray.create(mainWindow);
+  if(windows.length > 0) {
+    focusedWindow.webContents.send('file-new');
+  }
+  windows[i] = mainWindow;
 }
 
 
