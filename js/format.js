@@ -14,6 +14,8 @@ function toggleFormat(type) {
     modifiers = ["*"];
 } else if(type === "strikethrough") {
     modifiers = ["~~"];
+} else if(type === "code") {
+    modifiers = ["`"];
 } else if(type === "comment") {
     modifiers = ["<!-- ", " -->"];
   }
