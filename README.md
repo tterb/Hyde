@@ -1,6 +1,6 @@
 <p align="center"> 
   <img src="https://user-images.githubusercontent.com/16360374/27329362-2f41b4b4-556a-11e7-9b74-fffd11baf34b.png" width="250"/>
-  <br>  
+  <br><br>  
   <img src="https://user-images.githubusercontent.com/16360374/28460541-67e91a6c-6dc7-11e7-9fe2-f8e648d3c179.png" width="225"/>
 </p>
 <h3 align="center">An <a href="http://electron.atom.io" target="_blank"><img src="https://user-images.githubusercontent.com/16360374/27318472-58bebca2-5541-11e7-9870-68d4a4f8f957.png" width="22"/> Electron</a> powered markdown editor for  <a href="https://jekyllrb.com" target="_blank"><img src="https://user-images.githubusercontent.com/16360374/27342564-662358d6-5595-11e7-944d-309b695d238a.png" width="65"/></a> users.</h3>
@@ -11,6 +11,9 @@
   </a>
   <a href="https://opensource.org/licenses/MIT">
     <img src="https://img.shields.io/badge/license-MIT-yellow.svg?" height="21" title="License">&nbsp;
+  </a>
+  <a href="https://codeclimate.com/github/JonSn0w/Hyde">
+    <img src="https://codeclimate.com/github/JonSn0w/Hyde.png" height="21" alt="Code Climate">&nbsp;
   </a>
   <a href="https://jekyllrb.com/">
     <img src="https://img.shields.io/badge/powered_by-Electron-blue.svg" height="21" title="Electron">&nbsp;
@@ -24,7 +27,7 @@
 
 # Description  
   
-**Hyde** is a electron-based markdown editor that aims to improve the accessibility of [Jekyll](https://jekyllrb.com) as a blogging platform for developers and non-developers, alike.  
+**Hyde** is an electron-based markdown editor that aims to improve the accessibility of [Jekyll](https://jekyllrb.com) as a blogging platform for developers and non-developers, alike.  
 As many users already know, [Jekyll](https://jekyllrb.com) holds many benefits over other blogging platforms. Though, it appears that many potential users outside of the developer community are initially intimidated by the foreign Markdown used to compose and format blog posts.  
 **Hyde** aims to counter this issue by providing an approachable modular interface, capable of offering the familiar toolbars and live-preview of a word-processor or the simplicity of a minimalistic editor.  
   
@@ -70,7 +73,7 @@ After cloning this repository, install and run the application using the command
 
 -------------------
 
-# Contribute  
+# Contributing  
 
 For those looking to contribute to the projects development, `gulp watch` can be used to provide preprocessor compilation and live-reload functionalities.  
 In case you're looking for an easy way to contribute to this project but aren't sure where to start, I've created a list of minor bugs and/or issues to be fixed before the projects initial release, which you can find [here](https://github.com/JonSn0w/Hyde/issues/1). 
