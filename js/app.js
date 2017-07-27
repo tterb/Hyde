@@ -46,9 +46,6 @@ var conf = {
   autoCloseBrackets: true,
   extraKeys: {
     Enter: 'newlineAndIndentContinueMarkdownList'
-    // Home: 'goLineLeft',
-    // End: 'goLineRight'
-    // 'Shift-Tab': 'indentLess'
   }
 }
 
@@ -57,10 +54,6 @@ function includeTheme(theme) {
   var head = document.getElementsByTagName('head')[0];
   settings.set('editorTheme', theme);
   var editorColor = $('.cm-s-'+theme+'.CodeMirror').css('background-color');
-  // var topFade = '-webkit-gradient(linear, top, bottom, from('+editorColor+') 25%, transparent)';
-  // $('#leftFade').css('background-image', topFade);
-  // $('#leftFade').css({background: '-webkit-gradient(linear, top, bottom, from('+editorColor+') 25%, transparent)'});
-  // $('#textPanel').css('background-color', editorColor);
   currentTheme = theme;
   if(document.getElementById('themeLink')) {
     themeTag = document.getElementById('themeLink');
@@ -87,13 +80,12 @@ var theme = settings.get('editorTheme');
 if (files.includes(theme+'.css')) {
   conf.theme = theme;
 } else {
-  conf.theme = "base16-dark";
+  conf.theme = "one-dark";
 }
-includeTheme(theme);
-
 if (!settings.get('lineNumbers')) {
     conf.lineNumbers = false;
 }
+includeTheme(theme);
 
 var cm = CodeMirror.fromTextArea(document.getElementById("plainText"), conf);
 
@@ -102,22 +94,19 @@ window.onload = function() {
   var plainText = document.getElementById('plainText');
   var markdownArea = document.getElementById('markdown');
 
-  cm.on('change',function(cMirror){
+  cm.on('change',function(cMirror) {
     countWords();
     // get value right from instance
     var markdownText = cMirror.getValue();
-
     // Remove the YAML frontmatter from live-preview
-    if(!config.get('previewFrontMatter'))
+    if(!settings.get('previewFrontMatter'))
       markdownText = removeFrontMatter(markdownText);
-
     // Convert emoji's
     markdownText = replaceWithEmojis(markdownText);
-
-    //Md -> Preview
+    //Markdown -> Preview
     html = marked(markdownText,{gfm: true});
     markdownArea.innerHTML = html;
-    //Md -> HTML
+    //Markdown -> HTML
     converter = new showdown.Converter();
     html = converter.makeHtml(markdownText);
     document.getElementById("htmlPreview").value = html;
@@ -135,20 +124,19 @@ window.onload = function() {
   // Get the most recently saved file
   storage.get('markdown-savefile', function(error, data) {
     if (error) throw error;
-
     if ('filename' in data) {
       fs.readFile(data.filename, 'utf-8', function (err, data) {
          if(err){
              alert("An error ocurred while opening the file "+ err.message)
          }
          cm.getDoc().setValue(data);
+         cm.getDoc().clearHistory();
       });
       this.isFileLoadedInitially = true;
       this.currentFile = data.filename;
     }
   });
 
-  // const win = remote.BrowserWindow.getFocusedWindow();
 
   document.getElementById("minimize").onclick = function() { remote.BrowserWindow.getFocusedWindow().minimize(); }
   document.getElementById("close").onclick = function() { closeWindow(window); }
@@ -165,6 +153,7 @@ window.onload = function() {
     syncButton.className = 'fa fa-unlink';
   }
 }
+
 
 
 /**************************
@@ -232,7 +221,6 @@ window.onload = function() {
      var percent = cm.getScrollInfo().top / scrollable;
 
      // Since we'll be triggering scroll events.
-    //  console.log('Code scroll: %' + (Math.round(100 * percent)));
      muteScroll($prev, prevScroll);
      $prev.scrollTop(percent * prevScrollable());
    }
@@ -254,7 +242,35 @@ window.onload = function() {
  $prev.on('scroll', prevScroll);
 
 
+const BrowserWindow = remote.BrowserWindow;
+var path = require('path');
+var appPath = path.resolve(__dirname);
+let newWindow;
+
 function newFile() {
+    var conf = {
+      width: 1000,
+      height: 600,
+      show: true,
+      frame: false,
+      autoHideMenuBar: true,
+      icon: path.join(__dirname, '/img/favicon.ico')
+  }
+  if (process.platform === 'darwin') {
+    conf.titleBarStyle = 'hidden';
+  }
+  // openSettings();
+  newWindow = new BrowserWindow(conf);
+  newWindow.loadURL(path.join('file://', __dirname, '/index.html'));
+  newWindow.webContents.on('close', () => {
+    newWindow = undefined;
+  });
+}
+
+function newFiles() {
+  // if(!this.isClean()) {
+  //   showUnsavedDialog(window);
+  // }
   fileEntry = null;
   hasWriteAccess = false;
   cm.setValue("");
@@ -271,6 +287,7 @@ function readFileIntoEditor(theFileEntry) {
       console.log("Read failed: " + err);
     }
     cm.setValue(String(data));
+    cm.getDoc().clearHistory()
   });
 }
 
@@ -285,40 +302,15 @@ function writeEditorToFile(theFileEntry) {
   });
 }
 
-var onChosenFileToOpen = function(theFileEntry) {
-  console.log(theFileEntry);
-  setFile(theFileEntry, false);
-  readFileIntoEditor(theFileEntry);
-};
-
-var onChosenFileToSave = function(theFileEntry) {
-  setFile(theFileEntry, true);
-  writeEditorToFile(theFileEntry);
-};
-
 function handleNewButton() {
   if (false) {
-    newFile();
-    cm.setValue("");
+    newFiles();
+    this.cm.setValue("");
     console.log(cm.getValue().toString())
   } else {
     window.open(path.join('file://', __dirname, '/index.html'));
   }
-}
-
-function handleOpenButton() {
-  dialog.showOpenDialog({properties: ['openFile']}, function(filename) {
-      onChosenFileToOpen(filename.toString()); });
-}
-
-function handleSaveButton() {
-  if (fileEntry && hasWriteAccess) {
-    writeEditorToFile(fileEntry);
-  } else {
-    dialog.showSaveDialog(function(filename) {
-       onChosenFileToSave(filename.toString(), true);
-    });
-  }
+  return cm.getValue().toString();
 }
 
 
