@@ -26,21 +26,6 @@
     <script src="node_modules/codemirror/mode/yaml-frontmatter/yaml-frontmatter.js"></script>
     <script src="node_modules/codemirror/mode/javascript/javascript.js"></script>
     <script src="node_modules/codemirror/mode/jsx/jsx.js"></script>
-    <script src="node_modules/codemirror/mode/php/php.js"></script>
-    <script src="node_modules/codemirror/mode/python/python.js"></script>
-    <script src="node_modules/codemirror/mode/powershell/powershell.js"></script>
-    <script src="node_modules/codemirror/mode/ruby/ruby.js"></script>
-    <script src="node_modules/codemirror/mode/shell/shell.js"></script>
-    <script src="node_modules/codemirror/mode/slim/slim.js"></script>
-    <script src="node_modules/codemirror/mode/sql/sql.js"></script>
-    <script src="node_modules/codemirror/mode/stex/stex.js"></script>
-    <script src="node_modules/codemirror/mode/textile/textile.js"></script>
-    <script src="node_modules/codemirror/mode/verilog/verilog.js"></script>
-    <script src="node_modules/codemirror/mode/xml/xml.js"></script>
-    <script src="node_modules/codemirror/mode/xquery/xquery.js"></script>
-    <script src="node_modules/codemirror/mode/rust/rust.js"></script>
-    <script src="node_modules/codemirror/mode/mscgen/mscgen.js"></script>
-    <script src="node_modules/codemirror/mode/dylan/dylan.js"></script>
     <script src="node_modules/codemirror/mode/meta.js"></script>
     <script src="node_modules/codemirror/addon/mode/overlay.js"></script>
     <script src="node_modules/codemirror/addon/mode/multiplex.js"></script>
@@ -65,7 +50,7 @@
         <div class="btn-group">
           <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="fileMenu">File</button>
           <ul class="dropdown-menu">
-            <li><a tabindex="-1" href="#" onclick="createWindow();">New</a><span>Ctrl + N</span></li>
+            <li><a tabindex="-1" href="#" onclick="handleNewButton();">New</a><span>Ctrl + N</span></li>
             <li><a tabindex="-1" href="#" onclick="openFile();">Open</a><span>Ctrl + O</span></li>
             <li class="dropdown-divider"></li>
             <li><a tabindex="-1" href="#" onclick="saveFile();">Save</a><span>Ctrl + S</span></li>
@@ -75,22 +60,22 @@
             <li class="dropdown-divider"></li>
             <li><a tabindex="-1" href="#" onclick="openSettings();">Settings</a><span>Ctrl + ,</span></li>
             <li class="dropdown-divider"></li>
-            <li><a tabindex="-1" href="#">Exit</a></li>
+            <li><a tabindex="-1" href="#">Close</a></li>
           </ul>
         </div>
         <!-- Edit -->
         <div class="btn-group">
           <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="editMenu">Edit</button>
           <ul class="dropdown-menu">
-            <li><a tabindex="-1" href="#" onclick="undoAction();">Undo</a><span>Ctrl + Z</span></li>
-            <li><a tabindex="-1" href="#" onclick="redoAction();">Redo</a><span>Ctrl + Shift + Z</span></li>
+            <li><a tabindex="-1" href="#" onclick="cm.execCommand('undo');">Undo</a><span>Ctrl + Z</span></li>
+            <li><a tabindex="-1" href="#" onclick="cm.execCommand('redo');">Redo</a><span>Ctrl + Shift + Z</span></li>
             <li class="dropdown-divider"></li>
             <li><a tabindex="-1" href="#" onclick="cm.execCommand('cut');">Cut</a><span>Ctrl + X</span></li>
             <li><a tabindex="-1" href="#" onclick="copySelected();">Copy</a><span>Ctrl + C</span></li>
             <li><a tabindex="-1" href="#" onclick="pasteSelected();">Paste</a><span>Ctrl + V</span></li>
-            <li><a tabindex="-1" href="#" onclick="cm.execCommand("selectAll");">Select All</a><span>Ctrl + A</span></li>
+            <li><a tabindex="-1" href="#" onclick="cm.execCommand('selectAll');">Select All</a><span>Ctrl + A</span></li>
             <li class="dropdown-divider"></li>
-            <li><a tabindex="-1" href="#" onclick="cm.execCommand('find');">Search</a><span>Ctrl + F</span></li>
+            <li><a tabindex="-1" href="#" onclick="cm.execCommand('find');">Find</a><span>Ctrl + F</span></li>
             <li><a tabindex="-1" href="#" onclick="cm.execCommand('replace');">Replace</a><span>Ctrl + Shift + F</span></li>
             <li class="dropdown-divider"></li>
             <li><a tabindex="-1" href="#" onclick="cm.execCommand('indentAuto');">Auto-Indent</a><span>Ctrl + Shift + A</span></li>
