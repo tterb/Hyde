@@ -9,6 +9,8 @@ const plumber = require('gulp-plumber');
 const jetpack = require('fs-jetpack');
 const config = JSON.parse(fs.readFileSync('package.json'));
 const appVersion = config.version;
+const cp = require('child_process');
+const shell = require('gulp-shell');
 // const electronVersion = config.devDependencies['electron'].match(/[\d.]+/)[0];
 
 const projectDir = jetpack;
@@ -30,20 +32,14 @@ const options = {
 gulp.task('liveReload', () => {
 	electron.start();
 	//Watch js files and restart Electron if they change
-	gulp.watch(['./js/*.js'], electron.restart);
+	gulp.watch(['./*.js'], electron.restart);
+	gulp.watch(['./js/**/*.js'], electron.restart);
 	//watch css files, but only reload (no restart necessary)
 	gulp.watch(['./css/*.css'], electron.reload);
+	gulp.watch(['./css/**/*.css'], electron.reload);
+    gulp.watch(['./**/*.scss'], ['scss']);
 	//watch html
 	gulp.watch(['./index.html'], electron.reload);
-});
-
-
-gulp.task('compile-scss', () => {
-    gulp.src(
-            "css/*.scss"
-        ).pipe(scss(
-            {"bundleExec": true}
-        )).pipe(gulp.dest("css/style.css"));
 });
 
 gulp.task('scss', () => {
