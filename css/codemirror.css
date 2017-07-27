@@ -27,7 +27,7 @@
   background-color: #f7f7f7;
   white-space: nowrap;
 }
-.CodeMirror-linenumbers {}
+
 .CodeMirror-linenumber {
   padding: 0 9px 0 5px;
   min-width: 20px;
@@ -85,7 +85,7 @@
 }
 
 /* Can style cursor different in overwrite (non-insert) mode */
-.CodeMirror-overwrite .CodeMirror-cursor {}
+/*.CodeMirror-overwrite .CodeMirror-cursor {}*/
 
 .cm-tab { display: inline-block; text-decoration: inherit; }
 
@@ -109,7 +109,7 @@
 .cm-s-default .cm-atom {color: #219;}
 .cm-s-default .cm-number {color: #164;}
 .cm-s-default .cm-def {color: #00f;}
-.cm-s-default .cm-variable,
+/*.cm-s-default .cm-variable,*/
 .cm-s-default .cm-punctuation,
 .cm-s-default .cm-property,
 .cm-s-default .cm-operator {}
@@ -207,9 +207,6 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
   border-right: 1px solid rgba(240,240,240,0.065);
   padding-right: 3px;
   margin-bottom: -30px;
-  /* Hack to make IE7 behave */
-  *zoom:1;
-  *display:inline;
 }
 .CodeMirror-gutter-wrapper {
   position: absolute;
@@ -275,7 +272,7 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
   overflow: auto;
 }
 
-.CodeMirror-widget {}
+/*.CodeMirror-widget {}*/
 
 .CodeMirror-code {
   outline: none;
