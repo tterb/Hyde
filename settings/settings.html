@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <base href="../href.html">
+        <!-- <base href="../href.html"> -->
         <title>Settings</title>
 
 		<!-- <script>
@@ -15,44 +15,45 @@
         const path = require('path');
         </script> -->
 
-        <link rel="stylesheet" href="css/scrollbar.css">
+        <link rel="stylesheet" href="../css/scrollbar.css">
         <!-- <script type="text/javascript" src="localize.js"></script> -->
 
-        <link rel="stylesheet" href="css/font-awesome.min.css">
-        <link rel="stylesheet" href="css/open-sans.css">
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="../css/fonts/metro-icons.min.css">
+        <link rel="stylesheet" href="../css/fonts/open-sans.css">
+        <link rel="stylesheet" href="../css/style.css">
 
-        <link rel="stylesheet" href="settings/settings.css">
-        <script type="text/javascript" src="settings/settings.js"></script>
+        <link rel="stylesheet" href="settings.css">
+        <script type="text/javascript" src="settings.js"></script>
 
-        <link rel="stylesheet" href="settings/tabview.css">
-        <script type="text/javascript" src="settings/tabview.js"></script>
+        <link rel="stylesheet" href="tabview.css">
+        <script type="text/javascript" src="tabview.js"></script>
+        <body>
     </head>
-    <body>
       <section class="frame">
         <div id="draggable" style="-webkit-app-region:drag">
           <div id="settings-title">Settings</div>
         </div>
-        <button id="settings-close" style="cursor: pointer;" onclick="window.close();"><img src="img/close.png" alt="Close"/></button>
+        <button id="settings-close" style="cursor: pointer;" onclick="window.close();"><img src="../img/close.png" alt="Close"/></button>
       </section>
         <div id="main">
             <div class="tabview">
                 <div class="bar">
-                    <div class="item selected" data-tab="general">
+                    <div class="item selected" data-tab="general" alt="general">
                         <div class="image"><i class="fa fa-cog" aria-hidden="true"></i></div>
-                        <div class="text">General</div>
+                        <!-- <div class="text">General</div> -->
                     </div>
-                    <div class="item" data-tab="appearance">
+                    <!-- <div class="item" data-tab="appearance">
                         <div class="image"><i class="fa fa-paint-brush" aria-hidden="true"></i></div>
                         <div class="text">Appearance</div>
-                    </div>
-                    <div class="item" data-tab="editor">
+                    </div> -->
+                    <div class="item" data-tab="editor" alt="editor">
                         <div class="image"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></div>
-                        <div class="text">Editor</div>
+                        <!-- <div class="text">Editor</div> -->
                     </div>
-                    <div class="item" data-tab="preview">
+                    <div class="item" data-tab="preview" alt="preview">
                         <div class="image"><i class="fa fa-magic" aria-hidden="true"></i></div>
-                        <div class="text">Preview</div>
+                        <!-- <div class="text">Preview</div> -->
                     </div>
                 </div>
                 <div class="content">
@@ -120,7 +121,7 @@
                                         <option value="default" class="label">Default</option>
                                         <option value="monospace">Monospace</option>
                                         <option value="serif">Serif</option>
-                                        <option value="sans">Sans</option>
+                                        <option value="sans-serif">Sans-Serif</option>
                                     </select>
                                 </td>
                             </tr>
