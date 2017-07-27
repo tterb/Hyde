@@ -6,10 +6,10 @@ var count = 0;
 
 var clkPref = function (opt) {
   currentValue = opt.value;
-  if (currentValue == 'preview') {
+  if (currentValue === 'preview') {
     $('#htmlPreview').hide();
     $('#markdown').show();
-  } else if (currentValue == 'html') {
+} else if (currentValue === 'html') {
     $('#markdown').hide();
     $('#htmlPreview').show();
   }
@@ -21,24 +21,34 @@ var formatHead = function() {
   var toolbar = $('#toolbarArea');
   var toggle = $('#angleToolBar');
   var menu = $('#appMenu');
+  var dragArea = $('#draggable');
   var menuHeight = parseInt(menu.height());
   var editTop = 0;
-  if(menu.attr('class') != 'hidden') {
+  if(menu.attr('class') !== 'hidden') {
     toolbar.css({ top: '26px' });
-    if($('#toolbarArea:hidden').length == 0) {
+    if($('#toolbarArea:hidden').length === 0) {
       $('#body').css('paddingTop', '30px');
     } else {
       $('#body').css('paddingTop', '0px');
     }
   } else {
     toolbar.css({ top: '0px' });
+    if(toolbar.attr('class') !== 'hidden') {
+      dragArea.css('width', '50%');
+      dragArea.css('left', '50%');
+      $('#menuToggle').hide()
+    } else {
+      dragArea.css('width', '-webkit-calc(100% - 125px)');
+      dragArea.css('left', '4%');
+      $('#menuToggle').show()
+    }
   }
 }
 
 var toggleToolbar = function() {
   var toolbar = $('#toolbarArea');
   var toggle = $('#angleToolBar');
-  if($('#toolbarArea:hidden').length == 0) {
+  if($('#toolbarArea:hidden').length === 0) {
     toggle.attr('class', 'fa fa-angle-right');
     toggle.css('padding-left', '10px');
     toolbar.css('display', 'none');
@@ -53,7 +63,7 @@ var toggleToolbar = function() {
 function toggleMenu() {
   var menu = $('#appMenu');
   var buttons = $('#metacity').children('button');
-  if(menu.attr('class') == 'hidden') {
+  if(menu.attr('class') === 'hidden') {
     menu.attr('class', '');
     menu.css('visibility', 'visible');
     menu.css('height', '26px');
@@ -61,6 +71,7 @@ function toggleMenu() {
     buttons.css('marginBottom', '4px');
     $('#frame').hide()
     $('#draggable-menu').show()
+    $('#menuToggle').hide()
     $('#editArea').css('paddingTop', '0px')
   } else {
     menu.attr('class', 'hidden');
@@ -70,6 +81,7 @@ function toggleMenu() {
     buttons.css('marginBottom', '3px');
     $('#frame').show()
     $('#draggable-menu').hide()
+    $('#menuToggle').show()
   }
   formatHead();
 }
@@ -95,61 +107,24 @@ function showUnsavedDialog(win) {
   var $modal = jQuery('#unsavedModal'),
       $text = $('#unsavedBody'),
       $filename = $('#bottom-file').text();
-  // if(!isClean) {
-    if($('#unsavedModal:hidden').length > 0) {
-      if ($filename == 'New document') {
-        $filename = 'This document';
-      }
-      $text.text("'"+$filename.toString()+"' has unsaved changes, do you want to save them?");
-      $modal.modal();
-    } else {
-      $modal.modal('hide');
+  if($('#unsavedModal:hidden').length > 0) {
+    if ($filename === 'New document') {
+      $filename = 'This document';
     }
-  // }
+    $text.text("'"+$filename.toString()+"' has unsaved changes, do you want to save them?");
+    $modal.modal();
+  } else {
+    $modal.modal('hide');
+  }
 }
 
-// document.getElementById("unsavedConfirm").onclick = function() {
-//     if (path) { saveFile(); }
-//     else { saveFileAs(); }
-// }
-// document.getElementById("unsavedDeny").onclick = function() {
-//   remote.BrowserWindow.getFocusedWindow().close();
-// }
-
 function closeWindow(win) {
-  var isClean = this.isClean()
-  if(!isClean) {
+  if(!this.isClean()) {
     showUnsavedDialog(win);
   } else {
     win.close();
   }
 }
-
-// function toggleDynamicFontSizing() {
-//     var dynamicFontSize = config.get('dynamicFontSize');
-//     var $h1 = $('.cm-header-1'),
-//         $h2 = $('.cm-header-2'),
-//         $h3 = $('.cm-header-3'),
-//         $h4 = $('.cm-header-4'),
-//         $h5 = $('.cm-header-5');
-//     if(!dynamicFontSize) {
-//       $h1.css('font-size', '1.8em');
-//       $h2.css('font-size', '1.6em');
-//       $h3.css('font-size', '1.5em');
-//       $h4.css('font-size', '1.4em');
-//       $h5.css('font-size', '1.35em');
-//       $('.CodeMirror-cursor').css('line-height', '3');
-//       config.set('dynamicFontSize', true);
-//     } else {
-//       $h1.css('font-size', '9.5pt');
-//       $h2.css('font-size', '9.5pt');
-//       $h3.css('font-size', '9.5pt');
-//       $h4.css('font-size', '9.5pt');
-//       $h5.css('font-size', '9.5pt');
-//       $('.CodeMirror-cursor').css('line-height', '1em');
-//       config.set('dynamicFontSize', false);
-//     }
-// }
 
 function togglePreview() {
   if(!settings.get('livePreview')) {
@@ -199,9 +174,9 @@ function pasteSelected() {
   alert(content);
 }
 
-function newFile() {
-  electron.remote.getCurrentWindow().webContents.send('file-new');
-}
+// function newFile() {
+//   electron.remote.getCurrentWindow().webContents.send('file-new');
+// }
 
 function openFile() {
   electron.remote.getCurrentWindow().webContents.send('file-open');
