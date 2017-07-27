@@ -66,9 +66,9 @@ label {
     #draggable {
         position: absolute;
         height: 100%;
-        width: -webkit-calc(100% - 75px);
+        width: -webkit-calc(100% - 125px);
         top: 0;
-        left: 0;
+        left: 4%;
     }
     .icon > img {
         display: inline-block;
@@ -90,6 +90,30 @@ label {
             color: #bbb;
             font-size: 12px;
         }
+    }
+}
+
+#menuToggle {
+    position: absolute;
+    top: -0.75%;
+    left: 0.5%;
+    outline: none !important;
+    cursor: pointer;
+    z-index: 9999999;
+    button {
+        display: block;
+        font-size: 1.75em;
+        background: transparent;
+        color: rgba(255,255,255,0.07);
+        border: none;
+        outline: none !important;
+        z-index: 99;
+        &:hover {
+            color: rgba(255,255,255,0.5);
+        }
+    }
+    &:hover {
+        color: $text-color;
     }
 }
 
@@ -623,8 +647,9 @@ input[type="checkbox"] {
     height: 35px;
     display:none;
     border-bottom: 1px #2a2a2a solid;
-    background-color: -webkit-linear-gradient(top, #353334, #302f2e);
+    background-image: -webkit-linear-gradient(top, #353334, #302f2e);
     box-shadow: 0 0 6px rgba(0,0,0,0.75);
+    z-index: 9999999;
 }
 
 #angleToolBar {
@@ -679,7 +704,7 @@ input[type="checkbox"] {
     width: 50%;
     height: -webkit-calc(100% - 28px);
     .topFade {
-        background-image: -webkit-linear-gradient(top, #f5f4f3 25%, transparent);
+        background-image: -webkit-linear-gradient(top, #f6f5f4 25%, transparent);
         right: 2%;
     }
 }
@@ -1001,14 +1026,14 @@ code {
     min-width: 180px;
 }
 
-.preview-dark-mode{
-    /*background: rgb(248,246,245);*/
-    color: #3a3a3a;
-    textarea{
-        background: rgb(248,246,245);
-        color: #3a3a3a;
-    }
-}
+// .preview-dark-mode{
+//     /*background: rgb(248,246,245);*/
+//     color: #3a3a3a;
+//     textarea{
+//         background: rgb(248,246,245);
+//         color: #3a3a3a;
+//     }
+// }
 
 ::-webkit-scrollbar {
     // background-color: rgba(76,75,72,0.3);

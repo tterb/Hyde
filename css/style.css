@@ -46,9 +46,9 @@ label {
   .frame #draggable {
     position: absolute;
     height: 100%;
-    width: -webkit-calc(100% - 75px);
+    width: -webkit-calc(100% - 125px);
     top: 0;
-    left: 0; }
+    left: 4%; }
   .frame .icon > img {
     display: inline-block;
     position: fixed;
@@ -67,6 +67,26 @@ label {
       display: inline-block;
       color: #bbb;
       font-size: 12px; }
+
+#menuToggle {
+  position: absolute;
+  top: -0.75%;
+  left: 0.5%;
+  outline: none !important;
+  cursor: pointer;
+  z-index: 9999999; }
+  #menuToggle button {
+    display: block;
+    font-size: 1.75em;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.07);
+    border: none;
+    outline: none !important;
+    z-index: 99; }
+    #menuToggle button:hover {
+      color: rgba(255, 255, 255, 0.5); }
+  #menuToggle:hover {
+    color: rgba(255, 255, 255, 0.75); }
 
 #metacity {
   position: absolute;
@@ -509,8 +529,9 @@ input[type="checkbox"] {
   height: 35px;
   display: none;
   border-bottom: 1px #2a2a2a solid;
-  background-color: -webkit-linear-gradient(top, #353334, #302f2e);
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.75); }
+  background-image: -webkit-linear-gradient(top, #353334, #302f2e);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.75);
+  z-index: 9999999; }
 
 #angleToolBar {
   color: rgba(255, 255, 255, 0.4); }
@@ -554,7 +575,7 @@ input[type="checkbox"] {
   width: 50%;
   height: -webkit-calc(100% - 28px); }
   #rightPanel .topFade {
-    background-image: -webkit-linear-gradient(top, #f5f4f3 25%, transparent);
+    background-image: -webkit-linear-gradient(top, #f6f5f4 25%, transparent);
     right: 2%; }
 
 #previewPanel {
@@ -732,13 +753,6 @@ code {
 .markdown-help-content td {
   border-top: 1px solid rgba(38, 50, 56, 0.1);
   min-width: 180px; }
-
-.preview-dark-mode {
-  /*background: rgb(248,246,245);*/
-  color: #3a3a3a; }
-  .preview-dark-mode textarea {
-    background: #f8f6f5;
-    color: #3a3a3a; }
 
 ::-webkit-scrollbar {
   width: 8px; }
