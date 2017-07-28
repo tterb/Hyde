@@ -3,24 +3,30 @@ const Config = require('electron-config');
 
 module.exports = new Config ({
   defaults: {
+    // UI Elements
     showMenu: false,
     showToolbar: false,
     livePreview: true,
     syncScroll: true,
     isFullscreen: false,
-    keepInTray: false,
+    // Editor
     editorTheme: 'one-dark',
     editorFont: 'monospaced',
     editorFontSize: 9.5,
     editorLineHeight: 1.5,
+    dynamicFontSize: true,
     tabSize: 2,
-    lineNumbers: false,
+    lineNumbers: true,
     lineWrapping: true,
+    showTrailingSpace: true,
+    matchBrackets: true,
+    // Preview
     previewMode: 'markdown',
     previewFont: 'sans-serif',
     previewFontSize: 10,
     previewLineHeight: 1.45,
     previewFrontMatter: false,
-    autoCloseBrackets: true
+    // Other
+    keepInTray: false
   }
 });

@@ -39,11 +39,15 @@ window.addEventListener('contextmenu', function(e) {
 getUserSettings();
 
 var conf = {
-  mode: "yaml-frontmatter",
+  mode: "spell-checker",
+  backdrop: "yaml-frontmatter",
   base: "gfm",
   viewportMargin: 100000000000,
-  lineWrapping : true,
-  autoCloseBrackets: true,
+  lineNumbers: settings.get('lineNumbers'),
+  lineWrapping: settings.get('lineWrapping'),
+  showTrailingSpace: settings.get('showTrailingSpace'),
+  autoCloseBrackets: settings.get('matchBrackets'),
+  autoCloseTags: settings.get('matchBrackets'),
   extraKeys: {
     Enter: 'newlineAndIndentContinueMarkdownList'
   }
@@ -86,8 +90,6 @@ if (!settings.get('lineNumbers')) {
     conf.lineNumbers = false;
 }
 includeTheme(theme);
-
-var cm = CodeMirror.fromTextArea(document.getElementById("plainText"), conf);
 
 
 window.onload = function() {
