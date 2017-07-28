@@ -9,16 +9,14 @@ var dialog = require('electron').dialog;
 var shell = require('electron').shell;
 const tray = require('./tray');
 const func = require('./js/functions');
-const setter = require('./js/settings');
 const mod = require('./package.json');
 const config = require('./config');
 const keepInTray = config.get('keepInTray');
 const fs = require('fs');
 const path = require('path');
 const mainPage = path.join('file://', __dirname, '/index.html');
-var localShortcut = require('electron-localShortcut');
+var localShortcut = require('electron-localshortcut');
 const {Menu, MenuItem, ipcMain} = require('electron');
-// const window = require('./js/windowManager');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -259,7 +257,6 @@ function createWindow () {
   if(windows.length > 0) {
     focusedWindow.webContents.send('file-new');
   }
-  windows[i] = mainWindow;
 }
 
 
