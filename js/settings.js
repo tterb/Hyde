@@ -1,5 +1,5 @@
 
-var opt = ['showMenu', 'showToolbar', 'livePreview', 'syncScroll', 'isFullscreen', 'editorTheme', 'editorFont', 'editorFontSize', 'editorLineHeight', 'dynamicFontSize', 'tabSize',  'lineNumbers', 'lineWrapping', 'showTrailingSpace', 'matchBrackets', 'previewMode', 'previewFont', 'previewFontSize', 'previewLineHeight', 'previewFrontMatter', 'keepInTray'];
+var opt = ['showMenu', 'showToolbar', 'livePreview', 'syncScroll', 'isFullscreen', 'editorTheme', 'editorFont', 'editorFontSize', 'editorLineHeight', 'dynamicFontSize', 'tabSize',  'lineNumbers', 'lineWrapping', 'showTrailingSpace', 'matchBrackets', 'enableSpellCheck', 'previewMode', 'previewFont', 'previewFontSize', 'previewLineHeight', 'previewFrontMatter', 'keepInTray'];
 
 function getUserSettings() {
     opt.forEach(checkSetting)

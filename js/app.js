@@ -16,6 +16,7 @@ var isFileLoadedInitially = false;
 const config = require('./config');
 const settings = require('electron-settings');
 const setter = require('./js/settings');
+const CMSpellChecker = require('codemirror-spell-checker');
 var currentTheme = "one-dark";
 // const settings = require('electron-settings');
 
@@ -91,6 +92,11 @@ if (!settings.get('lineNumbers')) {
 }
 includeTheme(theme);
 
+CMSpellChecker({
+	codeMirrorInstance: CodeMirror,
+});
+
+var cm = CodeMirror.fromTextArea(document.getElementById("plainText"), conf);
 
 window.onload = function() {
   var plainText = document.getElementById('plainText');

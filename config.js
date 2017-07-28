@@ -20,6 +20,7 @@ module.exports = new Config ({
     lineWrapping: true,
     showTrailingSpace: true,
     matchBrackets: true,
+    enableSpellCheck: false,
     // Preview
     previewMode: 'markdown',
     previewFont: 'sans-serif',
