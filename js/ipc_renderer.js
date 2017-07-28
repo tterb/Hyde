@@ -1,5 +1,4 @@
 const ipcRenderer = require('electron').ipcRenderer;
-// const {clipboard} = require('electron');
 
 // Handling file saving through IPCRenderer
 function saveAs() {
@@ -81,7 +80,7 @@ ipc.on('file-open', function() {
     }
 
     dialog.showOpenDialog(options, function (fileName) {
-      if (fileName === undefined){
+      if (fileName === undefined) {
         console.log("You didn't open the file");
         return;
       }
@@ -145,10 +144,6 @@ ipc.on('ctrl+f', function() {
 });
 
 ipc.on('ctrl+shift+f', function() {
-  cm.execCommand('replace');
-});
-
-ipc.on('ctrl+h', function() {
   cm.execCommand('replace');
 });
 
