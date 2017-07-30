@@ -29,10 +29,10 @@
 }
 
 .CodeMirror-linenumber {
-  padding: 0 9px 0 5px;
+  color: rgba(245,245,245,0.2);
+  padding: 0 9px 0 -5px;
   min-width: 20px;
   text-align: right;
-  color: rgba(245,245,245,0.4);
   white-space: nowrap;
 }
 
@@ -162,7 +162,7 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
 }
 .CodeMirror-sizer {
   position: relative;
-  margin-left: 12px !important;
+  margin-left: 4px !important;
   border-right: 30px solid transparent;
 }
 
@@ -193,8 +193,10 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
 }
 
 .CodeMirror-gutters {
-  position: absolute; left: 0; top: 0;
+  position: absolute;
+  top: 0; left: 0 !important;
   min-height: 100%;
+  padding-top: 34px !important;
   z-index: 3;
 }
 .CodeMirror-gutter {
@@ -202,7 +204,7 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
   background: rgba(0,0,0,0.075);
   white-space: normal;
   height: 100%;
-  width: 30px !important;
+  width: 25px !important;
   vertical-align: top;
   border-right: 1px solid rgba(240,240,240,0.065);
   padding-right: 3px;

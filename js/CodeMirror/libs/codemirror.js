@@ -999,7 +999,7 @@
           elt("div", lineNumberFor(cm.options, lineN),
               "CodeMirror-linenumber CodeMirror-gutter-elt",
               "left: " + dims.gutterLeft["CodeMirror-linenumbers"] + "px; width: "
-              + (cm.display.lineNumInnerWidth - 10) + "px"));
+              + (cm.display.lineNumInnerWidth - 20) + "px"));
       if (markers) for (var k = 0; k < cm.options.gutters.length; ++k) {
         var id = cm.options.gutters[k], found = markers.hasOwnProperty(id) && markers[id];
         if (found)
