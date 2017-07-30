@@ -1,0 +1,40 @@
+{% if page.layout == 'post' %}
+    <header id="header-alt" class="header">
+{% else %}
+    <header id="header" class="header">
+{% endif %}
+  <div class="wrapper-head">
+    <!-- <div class="logo" style="background-image: url({{ site.favicon | prepend: site.baseurl}})"></div> -->
+    <nav class="site-nav">
+      <div class="trigger">
+        <a class="page-link" href="{{ site.baseurl }}/">home</a>
+        {% assign sorted_pages = site.pages | sort: 'key' | reverse %}
+        {% for page in sorted_pages %}
+          {% if page.title %}{% unless page.options contains 'nomenu' %}
+            <a class="page-link" href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>
+          {% endunless %}{% endif %}
+        {% endfor %}
+      </div>
+    </nav>
+  </div>
+</header>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript">
+(function($) {
+    $(document).ready(function(){
+        $(window).scroll(function(){
+            if ($(this).scrollTop() > 250) {
+                $('#header-alt').css('background', 'rgba(255,255,255,0.9)');
+                $('#header-alt').css('border-bottom', '1px solid lighten(#525252, 10%)');
+                $('#header-alt .page-link').css('color', 'rgba(0,0,0,0.85)');
+                $('#header-alt .logo').css('display','none');
+            } else {
+                $('#header-alt').css('background', 'transparent');
+                $('#header-alt').css('border-bottom', 'none');
+                $('#header-alt .page-link').css('color', 'rgba(255,255,255,0.85)');
+                $('#header-alt .logo').css('display','inline-block');
+            }
+        });
+    });
+})(jQuery);
+</script>

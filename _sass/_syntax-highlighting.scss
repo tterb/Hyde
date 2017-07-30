@@ -1,0 +1,95 @@
+/**
+ * Syntax highlighting styles
+ */
+ 
+$base: #282C33;
+$text: #ABB2BF;
+$subtle: #5C6370;
+$highlight: #F8F8F2;
+$red: #E06C75;
+$orange: #D19A66;
+$yellow: #E5C07B;
+$green: #98C379;
+$blue: #56B6C2;
+$purple: #C678DD;
+$pink: #F92672;
+$err: #960050;
+
+.highlight,
+pre.highlight {
+    background: $base;
+    color: $text;
+}
+
+.highlight {
+    background: $base;
+    @extend %vertical-rhythm;
+
+    .highlighter-rouge & {
+        background: $base;
+    }
+
+    pre { background: $base; }
+    .hll { background: $base; }
+    .c { color: $subtle; font-style: italic; }
+    .err { color: $err; }
+    .k { color: $purple; }
+    .l { color: $green; }
+    .n { color: $text; }
+    .o { color: $text; }
+    .p { color: $text; }
+    .cm { color: $subtle; font-style: italic; }
+    .cp { color: $subtle; font-style: italic; }
+    .c1 { color: $subtle; font-style: italic; }
+    .cs { color: $subtle; font-style: italic; }
+    .ge { font-style: italic; }
+    .gs { font-weight: 700; }
+    .kc { color: $purple; }
+    .kd { color: $purple; }
+    .kn { color: $purple; }
+    .kp { color: $purple; }
+    .kr { color: $purple; }
+    .kt { color: $purple; }
+    .ld { color: $green; }
+    .m { color: $orange; }
+    .s { color: $green; }
+    .na { color: $orange; }
+    .nb { color: $yellow; }
+    .nc { color: $yellow; }
+    .no { color: $yellow; }
+    .nd { color: $yellow; }
+    .ni { color: $yellow; }
+    .ne { color: $yellow; }
+    .nf { color: $text; }
+    .nl { color: $yellow; }
+    .nn { color: $text; }
+    .nx { color: $text; }
+    .py { color: $yellow; }
+    .nt { color: $red; }
+    .nv { color: $yellow; }
+    .ow { font-weight: 700; }
+    .w { color: $highlight; }
+    .mf { color: $orange; }
+    .mh { color: $orange; }
+    .mi { color: $orange; }
+    .mo { color: $orange; }
+    .sb { color: $green; }
+    .sc { color: $green; }
+    .sd { color: $green; }
+    .s2 { color: $green; }
+    .se { color: $green; }
+    .sh { color: $green; }
+    .si { color: $green; }
+    .sx { color: $green; }
+    .sr { color: $blue; }
+    .s1 { color: $green; }
+    .ss { color: $blue; }
+    .bp { color: $yellow; }
+    .vc { color: $yellow; }
+    .vg { color: $yellow; }
+    .vi { color: $red; }
+    .il { color: $orange; }
+    .gu { color: #75715e; }
+    .gd { color: $pink; }
+    .gi { color: #a6e22e; }
+}

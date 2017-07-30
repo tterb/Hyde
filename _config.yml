@@ -1,1 +1,75 @@
-theme: jekyll-theme-slate
+# Site settings
+title: Hyde
+email: bstevensondev@gmail.com
+description: A wwebsite for Hyde editor
+owner:
+  name: Brett Stevenson # or company name
+  url: https://brettstevenson.github.io
+first_published: 2017
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "" # the base hostname & protocol for your site
+twitter_username: bstevensondev
+github_username:  JonSn0w
+
+name: 'Brett Stevenson'
+author: 'Brett Stevenson'
+# author_image: "/images/avatar.jpg"
+# cover: "/images/cover.jpg"
+# logo: "/images/logo.jpg"
+# favicon: "/images/favicon.png"
+
+social:
+  github: https://github.com/JonSn0w/Hyde
+  # deviantart:
+  # dribbble:
+  # twitter:
+  # etsy: https://etsy.com/
+  # pinterest: https://pintrest.com/
+  # linkedin-square: https://linkedin.com/
+  # email: /contact/
+  #flickr:
+  #spotify:
+  #stack-overflow:
+  #vimeo:
+  #reddit:
+  #pied-piper:
+  #digg:
+  #weibo:
+  #trello:
+  #foursquare:
+  #linux:
+  #bitbucket-square:
+  #vk:
+  #slack:
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+sass:
+ style: compressed
+
+# Pagination
+# paginate: 15
+# paginate_path: "/blog/page:num/"
+
+# mailaction: https://getsimpleform.com/messages?form_api_token=b2c41d3e99fac447c26b268851e42028
+
+# collections:
+#   blog:
+#     output: true
+#     permalink: /blog/:path/
+#   archive:
+#     output: true
+#     permalink: /archive/:path/
+
+exclude: ['template.md', 'TODO.md', README.md, 'Gulpfile.js', 'package.json', 'node_modules', 'jspm_packages']
+include: ['_pages','.htaccess']
+defaults:
+  - scope:
+      path: _pages
+    values:
+      layout: page
+
+gems:
+  - jemoji
+  - jekyll-paginate

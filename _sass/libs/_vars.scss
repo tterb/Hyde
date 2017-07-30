@@ -1,0 +1,186 @@
+/* Variables */
+
+	// Misc
+	$misc: (
+		max-spotlights:		10,
+		max-features:		10,
+		z-index-base:		10000
+	);
+
+    // Duration
+	$duration: (
+		transitions:		0.2s,
+		menu:				0.5s,
+		fadein:				3s
+	);
+
+    // Size
+	$size: (
+		element-height:		2.75em,
+		element-margin:		2em,
+		letter-spacing:		0.075em,
+		letter-spacing-alt:	0.225em
+	);
+
+    // Font
+	$font: (
+        thin:                     100,
+        light:                    300,
+		normal:				      400,
+		bold:		              700,
+		extrabold:	              800,
+		family-fixed:	         ('Source Code Pro', 'Inconsolata', 'Monaco', monospace),
+		fixed-size:               1em,
+		inline-fixed-size:     1.05em,
+		fixed-lheight:         1.75em,
+		ctrl-family:		     ('Montserrat','Open Sans', Helvetica, Verdana, sans-serif),
+        ctrl-size-xxxlarge:      20pt,
+		ctrl-size-xxlarge:       15pt,
+		ctrl-size-xlarge:        13pt,
+		ctrl-size-large:         12pt,
+		ctrl-size-small:         11pt,
+		ctrl-size-xsmall:         9pt,
+		ctrl-lheight-normal:   1.65em,
+		ctrl-lheight-small:    1.35em,
+		ctrl-lheight-smaller:  1.25em,
+		ctrl-lheight-smallest:  0.9em,
+		ctrl-form-size:           1em,
+		ctrl-form-label-size:   0.9em,
+		ctrl-bttn-size:         0.8em,
+		ctrl-bttn-bigsize:     1.35em,
+		ctrl-bttn-lheight:    3.125em,
+		prose-family:		  ('Volkhov', 'Georgia', 'Garamond', serif),
+		prose-size-xxlarge:      15pt,
+		prose-size-xlarge:       14pt,
+		prose-size-large:        12pt,
+		prose-size-med:          11pt,
+		prose-size-small:        10pt,
+		prose-size-xsmall:        8pt,
+		prose-lheight-med:     1.65em,
+		prose-lheight-small:   1.35em,
+		prose-lheight-smaller: 1.25em,
+		prose-lheight-smallest: 0.9em,
+        prose-spacing:         0.0175em,
+		hdr-family:           ('Lusitana', 'Open Sans', sans-serif),
+		hdr-size-xxxlarge:     2.25em,
+		hdr-size-xxlarge:      1.75em,
+		hdr-size-xlarge:       1.35em,
+		hdr-size-large:        1.25em,
+		hdr-size-normal:       1.15em,
+		hdr-size-med:           1.1em,
+		hdr-size-small:           1em,
+		hdr-size-smaller:       0.9em,
+	    hdr-size-xsmall:        0.8em,
+	    hdr-size-xxsmall:       0.75em,
+		hdr-lheight-large:     1.75em,
+		hdr-lheight-normal:    1.65em,
+		hdr-lheight-small:      1.5em,
+		hdr-lheight-smaller:      1em,
+        h1-size:                  4em,
+        h2-size:                  3em,
+        h3-size:              2.125em,
+        h4-size:              1.625em,
+        hdr-weight:               700,
+        hdr-lspacing:         -0.02em,
+        hdr-lheight:              1.2
+	);
+
+    // Palette
+	$palette: (
+		bg:					#fcfafa,
+        bg-dark:            #dee1e5,
+		// fg-bold:			#101010,
+        fg-bold:            rgba(0,0,0,0.9),
+		// fg:					#363636,
+        fg:                 rgba(0,0,0,0.8),
+		fg-light:			rgba(0,0,0,0.38),
+		border:				rgba(0,0,0,0.175),
+		border-bg:			rgba(144,144,144,0.25),
+		border2:			rgba(0,0,0,0.8),
+		border2-bg:			rgba(144,144,144,0.5),
+        white:              #fafafa,
+
+		accent1: (
+			bg:				#2a2e35,
+			fg-bold:		#ffffff,
+			fg:				mix(#272930, #ffffff, 20%),
+			fg-light:		mix(#272930, #ffffff, 40%),
+			shadow:         desaturate(darken(#272930, 12%), 10%),
+			border:			rgba(0,0,0,0.125),
+			border-bg:		rgba(255,255,255,0.075),
+			border2:		rgba(0,0,0,0.25),
+			border2-bg:		rgba(255,255,255,0.2)
+		),
+
+        accent2: (
+			bg:				#4f6272,
+			fg-bold:		#ffffff,
+			fg:				mix(#4f6272, #ffffff, 20%),
+			fg-light:		mix(#4f6272, #ffffff, 40%),
+			shadow:         desaturate(darken(#4f6272, 12%), 10%),
+			border:			rgba(0,0,0,0.125),
+			border-bg:		rgba(255,255,255,0.075),
+			border2:		rgba(0,0,0,0.25),
+			border2-bg:		rgba(255,255,255,0.2)
+		),
+
+		accent3: (
+			bg:				#717c98,
+			fg-bold:		#ffffff,
+			fg:				mix(#717c98, #ffffff, 25%),
+			fg-light:		mix(#717c98, #ffffff, 40%),
+			shadow:         desaturate(darken(#717c98, 10%), 5%),
+			border:			rgba(0,0,0,0.125),
+			border-bg:		rgba(255,255,255,0.075),
+			border2:		rgba(0,0,0,0.25),
+			border2-bg:		rgba(255,255,255,0.2)
+		),
+
+		accent4: (
+			bg:				#d4e4bc,
+			fg-bold:		#ffffff,
+			fg:				mix(#d4e4bc, #ffffff, 25%),
+			fg-light:		mix(#d4e4bc, #ffffff, 40%),
+			shadow:         desaturate(darken(#d4e4bc, 15%), 30%),
+			border:			rgba(0,0,0,0.125),
+			border-bg:		rgba(255,255,255,0.075),
+			border2:		rgba(0,0,0,0.25),
+			border2-bg:		rgba(255,255,255,0.2)
+		),
+
+		accent5: (
+			bg:				#ff3636,
+			fg-bold:		#ffffff,
+			fg:				mix(#ff3636, #ffffff, 25%),
+			fg-light:		mix(#ff3636, #ffffff, 40%),
+			shadow:         desaturate(darken(#ff3636, 15%), 25%),
+			border:			rgba(0,0,0,0.125),
+			border-bg:		rgba(255,255,255,0.075),
+			border2:		rgba(0,0,0,0.25),
+			border2-bg:		rgba(255,255,255,0.2)
+		),
+
+		accent6: (
+			bg:				#fefdfe,
+			fg-bold:		#303840,
+			fg:				#4E4852,
+			fg-light:		#8E8892,
+			border:			rgba(0,0,0,0.0),
+			border-bg:		rgba(0,0,0,0.1),
+			border2:		#bfbfbf,
+			border2-bg:		rgba(0,0,0,0.1)
+		)
+	);
+
+	// Palette
+	// * #35393d
+	// * #4f6272
+	// * #dee1e5
+	// * #717c98
+	// * #d4e4bc
+	// * #ff3636
+
+
+    // * #b7c3f3
+    // * #8aa2a9
+    // * #00272b

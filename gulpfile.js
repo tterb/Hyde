@@ -1,77 +1,142 @@
-'use strict';
+var gulp = require('gulp'),
+    shell = require('gulp-shell'),
+    minifyHTML = require('gulp-minify-html'),
+    sass = require('gulp-sass'),
+    importCss = require('gulp-import-css'),
+    autoprefixer = require('gulp-autoprefixer'),
+    uncss = require('gulp-uncss'),
+    minifyCss = require('gulp-minify-css'),
+    rename = require('gulp-rename'),
+    glob = require('glob'),
+    imagemin = require('gulp-imagemin'),
+    pngquant = require('imagemin-pngquant'),
+    jpegtran = require('imagemin-jpegtran'),
+    gifsicle = require('imagemin-gifsicle'),
+    optipng = require('imagemin-optipng'),
+    rsync = require('gulp-rsync'),
+    replace = require('gulp-replace'),
+    fs = require('fs'),
+    concat = require('gulp-concat-util'),
+    uncss = require('gulp-uncss'),
+    minifyCSS = require('gulp-minify-css'),
+    critical = require('critical');
 
-const fs = require('fs');
-const gulp = require('gulp');
-const scss = require('gulp-scss');
-const packager = require('electron-packager');
-const electron = require('electron-connect').server.create();
-const plumber = require('gulp-plumber');
-const jetpack = require('fs-jetpack');
-const config = JSON.parse(fs.readFileSync('package.json'));
-const appVersion = config.version;
-const cp = require('child_process');
-const shell = require('gulp-shell');
-// const electronVersion = config.devDependencies['electron'].match(/[\d.]+/)[0];
-
-const projectDir = jetpack;
-const srcDir = jetpack.cwd('./');
-const destDir = jetpack.cwd('./');
-
-const options = {
-	asar: true,
-	dir: '.',
-	icon: './img/icon.icns',
-	name: 'Hyde MD',
-	out: 'dist',
-	overwrite: true,
-	prune: true,
-	// version: electronVersion,
-	'app-version': appVersion
-};
-
-gulp.task('liveReload', () => {
-	electron.start();
-	//Watch js files and restart Electron if they change
-	gulp.watch(['./*.js'], electron.restart);
-	gulp.watch(['./js/**/*.js'], electron.restart);
-	//watch css files, but only reload (no restart necessary)
-	gulp.watch(['./css/*.css'], electron.reload);
-	gulp.watch(['./css/**/*.css'], electron.reload);
-    gulp.watch(['./**/*.scss'], ['scss']);
-	//watch html
-	gulp.watch(['./index.html'], electron.reload);
+// Jekyll
+gulp.task('jekyll', function() {
+  return gulp.src('index.html', { read: false })
+    .pipe(shell(['jekyll build']));
 });
 
-gulp.task('scss', () => {
-  return gulp.src(srcDir.path('css/style.scss'))
-  .pipe(plumber())
-  .pipe(scss())
-  .pipe(gulp.dest(destDir.path('css')));
+// HTML
+gulp.task('optimize-html', function() {
+    return gulp.src('_site/**/*.html')
+        .pipe(minifyHTML({
+            quotes: true
+        }))
+        .pipe(replace(/<link href=\"\/css\/style.scss\"[^>]*>/, function(s) {
+            var style = fs.readFileSync('_site/css/style.scss', 'utf8');
+            return '<style>\n' + style + '\n</style>';
+        }))
+        .pipe(gulp.dest('_site/'));
 });
 
-gulp.task('build:osx', (done) => {
-	options.arch = 'x64';
-	options.platform = 'darwin';
-	options['app-bundle-id'] = 'com.brettstevenson.hyde-md';
-	options['helper-bundle-id'] = 'com.brettstevenson.hyde-md.helper';
-
-	packager(options, (err, paths) => {
-		if (err) {
-			console.error(err);
-		}
-
-		done();
-	});
+// Javascript
+gulp.task('javascript', ['jekyll'], function() {
+    return gulp.src('js/main.js', { read: false })
+        .pipe(shell(['jspm install']))
+        .pipe(shell(['jspm bundle-sfx js/main _site/js/min.js --minify --no-mangle']));
 });
 
-gulp.task('build:linux', () => {
-	// @TODO
+// CSS
+gulp.task('optimize-css', function() {
+   return gulp.src('_site/css/style.scss')
+       .pipe(autoprefixer())
+       .pipe(uncss({
+           html: ['_site/**/*.html'],
+           ignore: []
+       }))
+       .pipe(minifyCss({keepBreaks: false}))
+       .pipe(gulp.dest('_site/css/'));
 });
 
-gulp.task('build:windows', () => {
-	// @TODO
+// Eliminate render-blocking CSS
+gulp.task('include-css', function() {
+  return gulp.src('_site/**/*.html')
+    .pipe(replace(/<link href=\"\/css\/style.scss\"[^>]*>/, function(s) {
+      var style = fs.readFileSync('_site/css/style.scss', 'utf8');
+      return '<style>\n' + style + '\n</style>';
+    }))
+    .pipe(gulp.dest('_site/'));
 });
 
-gulp.task('build', ['build:osx', 'build:linux', 'build:windows', 'compile-scss']);
+// Eliminate render-blocking CSS in above-the-fold content
+gulp.task('styles:critical', function() {
+    return gulp.src('src/styles/critical.css')
+    .pipe(minifyCSS())
+    .pipe(concat.header('<style>'))
+    .pipe(concat.footer('</style>'))
+    .pipe(rename({
+        basename: 'criticalCSS',
+        extname: '.html'
+      }))
+    .pipe(gulp.dest('_includes/'));
+});
 
-gulp.task('watch', ['scss', 'liveReload']);
+// Optimize Images
+gulp.task('optimize-images', function () {
+    return gulp.src(['_site/**/*.jpg', '_site/**/*.jpeg', '_site/**/*.gif', '_site/**/*.png'])
+        .pipe(imagemin({
+            progressive: false,
+            svgoPlugins: [{removeViewBox: false}],
+            use: [pngquant(), jpegtran(), gifsicle()]
+        }))
+        .pipe(gulp.dest('_site/'));
+});
+
+// Purge cache
+// gulp.task('purge-cache', function() {
+// 	var options = {
+// 		token: config.cloudflareToken,
+// 		email: config.cloudflareEmail,
+// 		domain: config.cloudflareDomain
+// 	};
+// 	cloudflare(options);
+// });
+
+// Remove unused CSS
+gulp.task('uncss', function() {
+  return gulp.src([
+      'css/style.scss'
+      // 'node_modules/bootstrap/dist/css/bootstrap-theme.css'
+    ])
+    .pipe(uncss({
+      html: [
+        'http://127.0.0.1:4000/',
+        'http://127.0.0.1:4000/blog/',
+        'http://127.0.0.1:4000/archive/',
+        'http://127.0.0.1:4000/contact/',
+        'http://127.0.0.1:4000/credits/'
+      ]
+    }))
+    .pipe(gulp.dest('css/uncss/'));
+});
+
+// // Deployment
+// gulp.task('sync', function() {
+//     return gulp.src(['_site/**'])
+//         .pipe(rsync({
+//             root: '_site',
+//             hostname: '',
+//             username: '',
+//             destination: 'public_html',
+//             incremental: true,
+//             exclude: []
+//         }));
+// });
+
+// Run (Default)
+gulp.task('default', ['javascript', 'optimize-css', 'include-css',  'optimize-html', 'styles:critical']);
+
+gulp.task('clean', ['uncss']);
+// Run
+gulp.task('build', ['javascript', 'optimize-css', 'include-css',  'optimize-html', 'styles:critical']);

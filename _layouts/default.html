@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+
+<html>
+  {% include head.html %}
+  <body>
+    <div class="page-content">
+      <div id="page-wrapper" class="wrapper">
+        {% include header.html %}
+        {{ content }}
+      </div>
+    </div>
+    {% unless page.options contains "nofooter" %}{% include footer.html %}{% endunless %}
+    {% include scripts.html %}
+  </body>
+</html>

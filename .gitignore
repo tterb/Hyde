@@ -1,12 +1,23 @@
-# Mac
-.DS_Store
-# Local .npmrc preferences
-.npmrc
-
-dist
-.gulp-scss-cache/*
-.sass-cache/*
-node_modules
-npm-debug.txt
-img/README/*
+_site
+.sass-cache
+.DS_store
+Gemfile.lock
+.jekyll-metadata
+node_modules/*
+jspm_packages/*
+gulpconfig.json
+config.js
+_layouts/post_old.html
+images/AI/*
+images/orig/*
+images/res/*
+images/pre-optimize/*
+images/favicon.ico
 TODO.md
+
+#Non-minified javascript
+js/index.js
+js/jekyll-search.js
+js/main.js
+js/scroll-top.js
+js/util.js
