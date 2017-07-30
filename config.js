@@ -6,7 +6,7 @@ module.exports = new Config ({
     // UI Elements
     showMenu: false,
     showToolbar: false,
-    livePreview: true,
+    showPreview: true,
     syncScroll: true,
     isFullscreen: false,
     // Editor
@@ -14,11 +14,11 @@ module.exports = new Config ({
     editorFont: 'monospaced',
     editorFontSize: 9.5,
     editorLineHeight: 1.5,
-    dynamicFontSize: true,
+    dynamicFontSize: false,
     tabSize: 2,
-    lineNumbers: true,
+    lineNumbers: false,
     lineWrapping: true,
-    showTrailingSpace: true,
+    showTrailingSpace: false,
     matchBrackets: true,
     enableSpellCheck: false,
     // Preview
