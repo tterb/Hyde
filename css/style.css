@@ -142,6 +142,8 @@ label {
     visibility: hidden; }
   #appMenu .btn-group {
     top: -10px; }
+    #appMenu .btn-group:first-child {
+      margin-left: 6px; }
     #appMenu .btn-group > button {
       display: inline-block;
       background: transparent;
@@ -151,8 +153,9 @@ label {
       width: 40px;
       border-radius: 2px;
       white-space: nowrap;
-      border-right: 1px inset #393b40;
-      padding: 3px 4px 2px 0; }
+      border-left: 1px outset #494b50;
+      border-right: 1px outset #494b50;
+      padding: 3px 0 2px; }
       #appMenu .btn-group > button:hover, #appMenu .btn-group > button:focus, #appMenu .btn-group > button:active {
         background: #313029;
         color: rgba(255, 255, 255, 0.75);
@@ -162,12 +165,14 @@ label {
       background-color: #2d2e2c;
       color: rgba(255, 255, 255, 0.75);
       font-size: 11px;
+      min-width: 175px;
       top: 82%;
-      z-index: 0;
       border-bottom-left-radius: 5px;
-      border-bottom-right-radius: 5px; }
+      border-bottom-right-radius: 5px;
+      z-index: 0; }
       #appMenu .btn-group .dropdown-menu > li {
-        padding: 2px 0; }
+        padding: 2px 0;
+        cursor: pointer; }
         #appMenu .btn-group .dropdown-menu > li > a {
           display: inline;
           background-color: transparent;
@@ -200,10 +205,18 @@ label {
         width: 98%;
         margin: 4px auto;
         padding: 0; }
+        #appMenu .btn-group .dropdown-menu .dropdown-divider:hover {
+          background: rgba(255, 255, 255, 0.075);
+          color: rgba(255, 255, 255, 0.75); }
   #appMenu #draggable-menu {
     display: inline-block;
     height: 100%;
     width: 75%; }
+
+.caret {
+  color: fade(rgba(255, 255, 255, 0.4), 10%);
+  float: right;
+  margin: 5px 9px 0 0; }
 
 .dropdown-submenu {
   position: relative;
@@ -214,6 +227,8 @@ label {
   z-index: 0;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px; }
+  .dropdown-submenu .sub {
+    top: -5px !important; }
   .dropdown-submenu .dropdown-menu {
     top: 0;
     left: 100%;
@@ -333,11 +348,11 @@ label {
   .bottom-bar #syncScroll {
     font-size: 14.5px;
     right: 2.5em;
-    margin-top: 4.5px; }
+    margin-top: 4px; }
   .bottom-bar #togglePreview {
-    font-size: 16.5px;
+    font-size: 17.5px;
     right: 0.4em;
-    margin-top: 2px; }
+    margin-top: 1px; }
 
 .prevToggle {
   position: absolute;
@@ -531,7 +546,7 @@ input[type="checkbox"] {
   border-bottom: 1px #2a2a2a solid;
   background-image: -webkit-linear-gradient(top, #353334, #302f2e);
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.75);
-  z-index: 9999999; }
+  z-index: 9999; }
 
 #angleToolBar {
   color: rgba(255, 255, 255, 0.4); }
