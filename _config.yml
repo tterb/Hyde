@@ -6,7 +6,7 @@ owner:
   name: Brett Stevenson # or company name
   url: https://brettstevenson.github.io
 first_published: 2017
-baseurl: "" # the subpath of your site, e.g. /blog/
+baseurl: "/Hyde" # the subpath of your site, e.g. /blog/
 url: "" # the base hostname & protocol for your site
 twitter_username: bstevensondev
 github_username:  JonSn0w
