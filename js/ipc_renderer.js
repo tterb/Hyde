@@ -123,20 +123,24 @@ ipc.on('ctrl+/', function() {
   toggleComment();
 });
 
-ipc.on('ctrl+l', function() {
-  drawLink();
+ipc.on('ctrl+h', function() {
+  toggleHeading();
 });
 
-ipc.on('ctrl+h', function() {
-  toggleHeadingSmaller();
+ipc.on('ctrl+l', function() {
+  insert('link');
 });
 
 ipc.on('ctrl+alt+i', function() {
-  drawImage();
+  insert('image');
 });
 
 ipc.on('ctrl+shift+t', function() {
-  drawTable();
+  insert('table');
+});
+
+ipc.on('ctrl+shift+-', function() {
+  insert('hr');
 });
 
 ipc.on('ctrl+f', function() {

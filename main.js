@@ -1,26 +1,24 @@
 'use strict';
 
 const electron = require('electron');
-// Module to control application life.
 const app = electron.app;
-// Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow;
-var dialog = require('electron').dialog;
-var shell = require('electron').shell;
 const tray = require('./tray');
 const func = require('./js/functions');
 const mod = require('./package.json');
-const config = require('./config');
-const keepInTray = config.get('keepInTray');
+const settings = require('./config');
+const keepInTray = settings.get('keepInTray');
 const fs = require('fs');
 const path = require('path');
 const mainPage = path.join('file://', __dirname, '/index.html');
-var localShortcut = require('electron-localshortcut');
 const {Menu, MenuItem, ipcMain} = require('electron');
+var dialog = require('electron').dialog;
+var shell = require('electron').shell;
+var localShortcut = require('electron-localshortcut');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
-const windows = [];
+var windows = [];
 let mainWindow;
 let isQuitting = false;
 
@@ -32,7 +30,7 @@ function createWindow () {
       show: true,
       frame: false,
       autoHideMenuBar: true,
-      icon: path.join(__dirname, '/img/favicon.ico')
+      icon: path.join(__dirname, '/img/icon/favicon.ico')
   }
 
   if (process.platform === 'darwin') {
@@ -56,16 +54,16 @@ function createWindow () {
     mainWindow = null;
   });
   if(keepInTray) {
-      mainWindow.on('close', e => {
-        if (!isQuitting) {
-          e.preventDefault();
-          if (process.platform === 'darwin') {
-            app.hide();
-          } else {
-            mainWindow.hide();
-          }
+    mainWindow.on('close', e => {
+      if (!isQuitting) {
+        e.preventDefault();
+        if (process.platform === 'darwin') {
+          app.hide();
+        } else {
+          mainWindow.hide();
         }
-      });
+      }
+    });
   }
 
   //Open anchor links in browser
@@ -75,8 +73,8 @@ function createWindow () {
   });
 
   function sendShortcut(cmd) {
-      var focusedWindow = BrowserWindow.getFocusedWindow();
-      focusedWindow.webContents.send(cmd);
+    var focusedWindow = BrowserWindow.getFocusedWindow();
+    focusedWindow.webContents.send(cmd);
   }
 
   //Set native menubar
@@ -217,6 +215,10 @@ function createWindow () {
       focusedWindow.webContents.send('ctrl+i');
   });
 
+  localShortcut.register('CmdOrCtrl+-', function() {
+    focusedWindow.webContents.send('ctrl+-');
+  });
+
   localShortcut.register('CmdOrCtrl+/', function() {
       focusedWindow.webContents.send('ctrl+/');
   });
@@ -235,6 +237,10 @@ function createWindow () {
 
   localShortcut.register('CmdOrCtrl+Shift+t', function() {
       focusedWindow.webContents.send('ctrl+shift+t');
+  });
+
+  localShortcut.register('CmdOrCtrl+Shift+-', function() {
+    focusedWindow.webContents.send('ctrl+shift+-');
   });
 
   localShortcut.register('CmdOrCtrl+m', function() {
