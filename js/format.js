@@ -2,7 +2,7 @@ var insertTexts = {
   link: ["[", "](#url#)"],
   image: ["![", "](#url#)"],
   table: ["", "\n\n| Column 1 | Column 2 | Column 3 |\n| -------- | -------- | -------- |\n| Text     | Text     | Text     |\n\n"],
-  horizontalRule: ["", "\n\n-------------------\n\n"]
+  horizontalRule: ["", "\n-------------------\n"]
 };
 
 function toggleFormat(type) {
@@ -10,25 +10,21 @@ function toggleFormat(type) {
   let modifiers = [];
   if(type === "bold") {
     modifiers = ["**"];
-} else if(type === "italic") {
+  } else if(type === "italic") {
     modifiers = ["*"];
-} else if(type === "strikethrough") {
+  } else if(type === "strikethrough") {
     modifiers = ["~~"];
-} else if(type === "code") {
+  } else if(type === "code") {
     modifiers = ["`"];
-} else if(type === "comment") {
+  } else if(type === "comment") {
     modifiers = ["<!-- ", " -->"];
   }
-  cm.operation(() => {
-    _toggleFormat(modifiers);
-  })
+  cm.operation(() => { _toggleFormat(modifiers); })
 }
 
 function _toggleFormat(modifiers) {
   'use strict';
-  if (modifiers.length === 0) {
-    return;
-  }
+  if (modifiers.length === 0) return;
   // exclude modifiers from selection
   let allModifiers = ["*", "_", '**', "__", "~~", "`"];
   let startPoint = cm.getCursor("start");
@@ -57,26 +53,26 @@ function _toggleFormat(modifiers) {
   // find modifiers around selection
   let foundModifiers = [];
   let modifierWidth = 0;
-  let rangeStartPoint = new CodeMirror.Pos(startPoint.line, startPoint.ch);
-  let rangeEndPoint = new CodeMirror.Pos(endPoint.line, endPoint.ch);
-  let lineLength = cm.getLine(rangeEndPoint.line).length;
+  let rangeStart = new CodeMirror.Pos(startPoint.line, startPoint.ch);
+  let rangeEnd = new CodeMirror.Pos(endPoint.line, endPoint.ch);
+  let lineLength = cm.getLine(rangeEnd.line).length;
   for (let bFound = true; bFound; ) {
     bFound = false;
     for (let i = 0, len = allModifiers.length; i < len; i++) {
       let modi = allModifiers[i];
-      if (rangeStartPoint.ch < modi.length || rangeEndPoint.ch > lineLength - modi.length) {
+      if (rangeStart.ch < modi.length || rangeEnd.ch > lineLength - modi.length) {
         continue;
       }
-      rangeStartPoint.ch -= modi.length;
-      rangeEndPoint.ch += modi.length;
-      let text = cm.getRange(rangeStartPoint, rangeEndPoint);
+      rangeStart.ch -= modi.length;
+      rangeEnd.ch += modi.length;
+      let text = cm.getRange(rangeStart, rangeEnd);
       if (text.startsWith(modi) && text.endsWith(modi)) {
         bFound = true;
         foundModifiers.push(modi);
         break;
       }
-      rangeStartPoint.ch += modi.length;
-      rangeEndPoint.ch -= modi.length;
+      rangeStart.ch += modi.length;
+      rangeEnd.ch -= modi.length;
     }
   }
 
@@ -84,9 +80,7 @@ function _toggleFormat(modifiers) {
   let modifierIndex = -1;
   for (let i = 0; i < modifiers.length; i++) {
     modifierIndex = foundModifiers.indexOf(modifiers[i]);
-    if (modifierIndex !== -1) {
-      break;
-    }
+    if (modifierIndex !== -1) { break; }
   }
 
   // if modifier found, delete it from array(boundModifiers). or push it to array
@@ -102,8 +96,8 @@ function _toggleFormat(modifiers) {
   // replace text with modified modifiers
   let prefix = foundModifiers.join("");
   let suffix = foundModifiers.reverse().join("");
-  cm.replaceRange(suffix, endPoint, rangeEndPoint);
-  cm.replaceRange(prefix, rangeStartPoint, startPoint);
+  cm.replaceRange(suffix, endPoint, rangeEnd);
+  cm.replaceRange(prefix, rangeStart, startPoint);
 
   startPoint.ch += modifierLength;
   // only change endpoint when selection is in single line
@@ -120,12 +114,10 @@ function getState(cm, pos) {
   if(!stat.type) return {};
 
   var types = stat.type.split(" ");
-
-  var ret = {},
-    data, text;
-    for(var i = 0; i < types.length; i++) {
-      data = types[i];
-      if(data === "strong") {
+  var ret = {}, data, text;
+  for(var i = 0; i < types.length; i++) {
+    data = types[i];
+    if(data === "strong") {
       ret.bold = true;
     } else if(data === "variable-2") {
       text = cm.getLine(pos.line);
@@ -179,10 +171,9 @@ function toggleOrderedList(editor) {
 
 function _toggleLine(cm, name) {
   if(/editor-preview-active/.test(cm.getWrapperElement().lastChild.className)) return;
-
-  var stat = getState(cm);
-  var startPoint = cm.getCursor("start");
-  var endPoint = cm.getCursor("end");
+  var startPoint = cm.getCursor("start"),
+      endPoint = cm.getCursor("end"),
+      stat = getState(cm);
   var repl = {
     "quote": /^(\s*)\>\s+/,
     "unordered-list": /^(\s*)(\*|\-|\+)\s+/,
@@ -196,130 +187,74 @@ function _toggleLine(cm, name) {
     "comment": ["<!-- ", " -->"]
   };
   for(var i = startPoint.line; i <= endPoint.line; i++) {
-    (function(i) {
-      var text = cm.getLine(i);
-      if(stat[name]) {
-        text = text.replace(repl[name], "$1");
-      } else if(map[name].constructor === Array) {
-        text = map[name][0] + text + map[name][1];
-      } else {
-        text = map[name] + text;
-      }
-      cm.replaceRange(text, {
-        line: i,
-        ch: 0
-      }, {
-        line: i,
-        ch: 99999999999999
-      });
-    })(i);
+    var text = cm.getLine(i);
+    if(stat[name])
+      text = text.replace(repl[name], "$1");
+    else if(map[name].constructor === Array)
+      text = map[name][0] + text + map[name][1];
+    else
+      text = map[name] + text;
+    cm.replaceRange(text, {line: i, ch: 0}, {line: i, ch: 99999999999999});
   }
   cm.focus();
 }
 
-// function for drawing a link
-function drawLink() {
-  var stat = getState(cm);
-  var url = "http://";
-  _replaceSelection(cm, stat.link, insertTexts.link, url);
-}
-
-// function for drawing an image
-function drawImage() {
-  var stat = getState(cm);
-  var url = "http://";
-  _replaceSelection(cm, stat.image, insertTexts.image, url);
-}
-
-// function for drawing a image
-function drawTable() {
-  var stat = getState(cm);
-  _replaceSelection(cm, stat.table, insertTexts.table);
-}
-
-// function for drawing a horizontal rule.
-function drawHorizontalRule() {
-  var stat = getState(cm);
-  _replaceSelection(cm, stat.image, insertTexts.horizontalRule);
+function insert(obj) {
+    var stat = getState(cm);
+    if(obj === 'link')
+      _replaceSelection(cm, stat.link, insertTexts.link, "http://");
+    else if(obj === 'image')
+      _replaceSelection(cm, stat.image, insertTexts.image, "http://");
+    else if(obj === 'image')
+      _replaceSelection(cm, stat.image, insertTexts.image, "http://");
+    else if(obj === 'table')
+      _replaceSelection(cm, stat.table, insertTexts.table);
+    else if(obj === 'hr')
+      _replaceSelection(cm, stat.image, insertTexts.horizontalRule);
+    else return;
 }
 
 // function for adding heading
-function toggleHeadingSmaller() {
-	_toggleHeading("smaller");
+function toggleHeading() {
+  _toggleHeading("larger");
 }
 
-function _toggleHeading(direction, size) {
-  var startPoint = cm.getCursor("start");
-  var endPoint = cm.getCursor("end");
+function _toggleHeading(direction) {
+  var startPoint = cm.getCursor("start"),
+      endPoint = cm.getCursor("end");
   for(var i = startPoint.line; i <= endPoint.line; i++) {
-    (function(i) {
-      var text = cm.getLine(i);
-      var currHeadingLevel = text.search(/[^#]/);
-
-      if(direction !== undefined) {
-        if(currHeadingLevel <= 0) {
-          if(direction === "bigger") {
-            text = "###### " + text;
-          } else {
-            text = "# " + text;
-          }
-        } else if(currHeadingLevel === 6 && direction === "smaller") {
-          text = text.substr(7);
-        } else if(currHeadingLevel === 1 && direction === "bigger") {
-          text = text.substr(2);
+    var text = cm.getLine(i);
+    var currHeadingLevel = text.search(/[^#]/);
+    if(direction !== undefined) {
+      if(currHeadingLevel <= 0) {
+        if(direction === "smaller") {
+          text = "###### " + text;
         } else {
-          if(direction === "bigger") {
-            text = text.substr(1);
-          } else {
-            text = "#" + text;
-          }
+          text = "# " + text;
         }
+      } else if(currHeadingLevel === 6 && direction === "larger") {
+          text = text.substr(7);
+      } else if(currHeadingLevel === 1 && direction === "smaller") {
+          text = text.substr(2);
       } else {
-        if(size === 1) {
-          if(currHeadingLevel <= 0) {
-            text = "# " + text;
-          } else if(currHeadingLevel === size) {
-            text = text.substr(currHeadingLevel + 1);
-          } else {
-            text = "# " + text.substr(currHeadingLevel + 1);
-          }
-        } else if(size === 2) {
-          if(currHeadingLevel <= 0) {
-            text = "## " + text;
-          } else if(currHeadingLevel === size) {
-            text = text.substr(currHeadingLevel + 1);
-          } else {
-            text = "## " + text.substr(currHeadingLevel + 1);
-          }
+        if(direction === "smaller") {
+          text = text.substr(1);
         } else {
-          if(currHeadingLevel <= 0) {
-            text = "### " + text;
-          } else if(currHeadingLevel === size) {
-            text = text.substr(currHeadingLevel + 1);
-          } else {
-            text = "### " + text.substr(currHeadingLevel + 1);
-          }
+          text = "#" + text;
         }
       }
-
-      cm.replaceRange(text, {
-        line: i,
-        ch: 0
-      }, {
-        line: i,
-        ch: 99999999999999
-      });
-    })(i);
+    }
+    cm.replaceRange(text, {line: i, ch: 0}, {line: i, ch: 99999999999999});
   }
   cm.focus();
 }
 
 function _replaceSelection(cm, active, startEnd, url) {
-  var text;
-  var start = startEnd[0];
-  var end = startEnd[1];
-  var startPoint = cm.getCursor("start");
-  var endPoint = cm.getCursor("end");
+  var startPoint = cm.getCursor("start"),
+      endPoint = cm.getCursor("end"),
+      start = startEnd[0],
+      end = startEnd[1],
+      text;
   if(url) {
     end = end.replace("#url#", url);
   }
@@ -327,14 +262,10 @@ function _replaceSelection(cm, active, startEnd, url) {
     text = cm.getLine(startPoint.line);
     start = text.slice(0, startPoint.ch);
     end = text.slice(startPoint.ch);
-    cm.replaceRange(start + end, {
-      line: startPoint.line,
-      ch: 0
-    });
+    cm.replaceRange(start + end, {line: startPoint.line, ch: 0});
   } else {
     text = cm.getSelection();
     cm.replaceSelection(start + text + end);
-
     startPoint.ch += start.length;
     if(startPoint !== endPoint) {
       endPoint.ch += start.length;
