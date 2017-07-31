@@ -13,8 +13,7 @@
     <link rel="stylesheet" href="css/fonts/source-code-pro.css">
     <link rel="stylesheet" href="css/dialog.css">
     <link rel="stylesheet" href="css/scrollbar.css">
-    <link rel="stylesheet" href="node_modules/codemirror/addon/dialog/dialog.css">
-    <script src="node_modules/codemirror/lib/codemirror.js"></script>
+    <script src="js/codemirror/codemirror.js"></script>
     <script src="node_modules/codemirror/mode/markdown/markdown.js"></script>
     <script src="node_modules/codemirror/mode/gfm/gfm.js"></script>
     <script src="node_modules/codemirror/addon/mode/simple.js"></script>
@@ -42,309 +41,309 @@
   </head>
 
   <body class="container-fluid" id="body" style="resize: both">
-      <section class="frame" id="frame">
-        <div id="draggable" style="-webkit-app-region:drag"></div>
+    <section class="frame" id="frame">
+      <div id="draggable" style="-webkit-app-region:drag"></div>
+    </section>
+    <div id="menuToggle">
+      <button id="menuButton" onclick="toggleMenu();" style="cursor: pointer;"><span class="mif-menu"></span></button>
+    </div>
+    <div id="metacity">
+      <button id="close" style="cursor: pointer;"><img src="img/close.png" alt="Close"/></button>
+      <button id="maximize" style="cursor: pointer;"><img src="img/max.png" alt="Maximize" onclick="toggleFullscreen();"/></button>
+      <button id="minimize" style="cursor: pointer;"><img src="img/min.png" alt="Minimize"/></button>
+    </div>
+    <div id="appMenu" class="hidden" style="visibility:hidden;">
+      <!-- File -->
+      <div class="btn-group">
+        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="fileMenu">File</button>
+        <ul class="dropdown-menu">
+          <li tabindex="-1" href="#" onclick="handleNewButton();"><a>New</a><span>Ctrl + N</span></li>
+          <li tabindex="-1" href="#" onclick="openFile();"><a>Open</a><span>Ctrl + O</span></li>
+          <li class="dropdown-divider"></li>
+          <li tabindex="-1" href="#" onclick="saveFile();"><a>Save</a><span>Ctrl + S</span></li>
+          <li tabindex="-1" href="#" onclick="saveFileAs();"><a>Save As</a><span>Ctrl + Shift + S</span></li>
+          <li class="dropdown-divider"></li>
+          <li tabindex="-1" href="#" onclick="exportToPDF();"><a>Export to PDF</a></li>
+          <li class="dropdown-divider"></li>
+          <li tabindex="-1" href="#" onclick="openSettings();"><a>Settings</a><span>Ctrl + ,</span></li>
+          <li class="dropdown-divider"></li>
+          <li tabindex="-1" href="#" onclick="closeWindow(this)"><a>Close</a></li>
+        </ul>
+      </div>
+      <!-- Edit -->
+      <div class="btn-group">
+        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="editMenu">Edit</button>
+        <ul class="dropdown-menu">
+          <li tabindex="-1" href="#" onclick="cm.execCommand('undo');"><a>Undo</a><span>Ctrl + Z</span></li>
+          <li tabindex="-1" href="#" onclick="cm.execCommand('redo');"><a>Redo</a><span>Ctrl + Shift + Z</span></li>
+          <li class="dropdown-divider"></li>
+          <li tabindex="-1" href="#" onclick="cm.execCommand('cut');"><a>Cut</a><span>Ctrl + X</span></li>
+          <li tabindex="-1" href="#" onclick="copySelected();"><a>Copy</a><span>Ctrl + C</span></li>
+          <li tabindex="-1" href="#" onclick="pasteSelected();"><a>Paste</a><span>Ctrl + V</span></li>
+          <li tabindex="-1" href="#" onclick="cm.execCommand('selectAll');"><a>Select All</a><span>Ctrl + A</span></li>
+          <li class="dropdown-divider"></li>
+          <li tabindex="-1" href="#" onclick="cm.execCommand('find');"><a>Find</a><span>Ctrl + F</span></li>
+          <li tabindex="-1" href="#" onclick="cm.execCommand('replace');"><a>Replace</a><span>Ctrl + Shift + F</span></li>
+          <li class="dropdown-divider"></li>
+          <li tabindex="-1" href="#" onclick="cm.execCommand('indentAuto');"><a>Auto-Indent</a><span>Ctrl + Shift + A</span></li>
+          <li tabindex="-1" href="#" onclick="cm.execCommand('indentLess');"><a>Indent Left</a><span>Ctrl + Left</span></li>
+          <li tabindex="-1" href="#" onclick="cm.execCommand('indentMore');"><a>Indent Right</a><span>Ctrl + Right</span></li>
+          <li class="dropdown-divider"></li>
+          <li tabindex="-1" href="#" onclick="toggleComment();"><a>Toggle Comment</a><span>Ctrl + /</span></li>
+        </ul>
+      </div>
+      <!-- View -->
+      <div class="btn-group">
+        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="viewMenu">View</button>
+        <ul class="dropdown-menu">
+          <li class="dropdown-submenu">
+            <a class="test" tabindex="-1" href="#" data-toggle="dropdown">Themes <span class="caret"></span></a>
+            <ul class="dropdown-menu sub">
+              <li href="#" onclick="includeTheme('base16-dark');"><a>Base16 Dark</a></li>
+              <li href="#" onclick="includeTheme('base16-light');"><a>Base16 Light</a></li>
+              <li href="#" onclick="includeTheme('duotone-dark');"><a>Duotone Dark</a></li>
+              <li href="#" onclick="includeTheme('hopscotch');"><a>Hopscotch</a></li>
+              <li href="#" onclick="includeTheme('material');"><a>Material</a></li>
+              <li href="#" onclick="includeTheme('monokai');"><a>Monokai</a></li>
+              <li href="#" onclick="includeTheme('one-dark');"><a>One Dark</a></li>
+              <li href="#" onclick="includeTheme('seti');"><a>Seti</a></li>
+              <li href="#" onclick="includeTheme('solarized-dark');"><a>Solarized Dark</a></li>
+              <li href="#"onclick="includeTheme('solarized-light');"><a>Solarized Light</a></li>
+              <li href="#" onclick="includeTheme('tomorrow-night-eighties');"><a>Tomorrow Night</a></li>
+              <li href="#" onclick="includeTheme('yeti');"><a>Yeti</a></li>
+              <li href="#" onclick="includeTheme('zenburn');"><a>Zenburn</a></li>
+            </ul>
+          </li>
+          <!-- <li class="dropdown-divider"></li> -->
+          <!-- <li><a tabindex="-1" href="#" onclick="toggleDynamicFontSizing();">Toggle Dynamic Editor</a></li> -->
+          <li class="dropdown-divider"></li>
+          <li tabindex="-1" href="#" onclick="toggleMenu();"><a>Toggle Menu Bar</a><span>Ctrl + M</span></li>
+          <li tabindex="-1" href="#" onclick="toggleToolbar();"><a>Toggle Toolbar</a><span>Ctrl + .</span></li>
+          <li tabindex="-1" href="#" onclick="toggleFullscreen();"><a>Toggle Full Screen</a><span>F11</span></li>
+          <li class="dropdown-divider"></li>
+          <li class="dropdown-submenu">
+            <a class="test" tabindex="-1" href="#" data-toggle="dropdown">Preview Mode <span class="caret"></span></a>
+            <ul class="dropdown-menu sub">
+              <li href="#" value="markdown" onclick="clkPref(this);"><a>Markdown</a></li>
+              <li href="#" value="html" onclick="clkPref(this);"><a>HTML</a></li>
+            </ul>
+          </li>
+          <li class="dropdown-divider"></li>
+          <li tabindex="-1" href="#" onclick="toggleDeveloper();"><a>Open Dev Tools</a><span>Ctrl + Shift + I</span></li>
+        </ul>
+      </div>
+       <!-- Help -->
+      <div class="btn-group">
+        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="helpMenu">Help</button>
+        <ul class="dropdown-menu">
+          <li tabindex="-1" href="#"><a>Documentation</a></li>
+          <li class="dropdown-divider"></li>
+          <li tabindex="-1" href="#"><a>Keybindings</a></li>
+          <li tabindex="-1" href="#" data-toggle="modal" data-target="#markdown-modal"><a>Markdown Help</a></li>
+          <li tabindex="-1" href="https://github.com/JonSn0w/Hyde-MD/issues/new"><a>Report an Issue</a></li>
+          <li class="dropdown-divider"></li>
+          <li tabindex="-1" href="#"><a>About Hyde</a></li>
+        </ul>
+      </div>
+      <div id="draggable-menu" style="-webkit-app-region:drag"></div>
+    </div>
+    <div id="toolbarArea">
+      <div class="toolbar-buttons" style="padding:5px 12px 2px;">
+        <a onclick="toggleHeadingSmaller();" style="padding-left:4x;" title="Header [Ctrl+H]" class="fa fa-header editor-toolbar"></a>
+        <a onclick="toggleFormat('bold');" title="Bold [Ctrl+B]" class="mif-bold editor-toolbar"></a>
+        <a onclick="toggleFormat('italic');" title="Italic [Ctrl+I]" class="mif-italic editor-toolbar"></a>
+        <!-- <a onclick="toggleHeadingSmaller();" title="Header [Ctrl+H]" class="fa fa-header editor-toolbar"></a> -->
+        <a onclick="toggleFormat('strikethrough');" title="Strikethrough [Ctrl+-]" class="mif-strikethrough editor-toolbar"></a>
+        <i class="separator">|</i>
+        <a onclick="toggleBlockquote();" title="Quote" class="fa fa-quote-left editor-toolbar"></a>
+        <a onclick="toggleFormat('code');" title="Code Block" class="fa fa-code editor-toolbar"></a>
+        <a onclick="toggleUnorderedList();" title="Unordered List" class="mif-list2 editor-toolbar"></a>
+        <a onclick="toggleOrderedList();" title="Ordered List" class="mif-list-numbered editor-toolbar"></a>
+        <i class="separator">|</i>
+        <a onclick="drawLink();" title="Create Link [Ctrl+L]" class="mif-link editor-toolbar"></a>
+        <a onclick="drawImage();" title="Insert Image [Ctrl+Alt+I]" class="fa fa-picture-o editor-toolbar"></a>
+        <a onclick="drawTable();" title="Insert Table [Ctrl+Shift+T]" class="fa fa-table editor-toolbar"></a>
+        <a onclick="drawHorizontalRule();" title="Insert Horizontal Rule" class="fa fa-minus editor-toolbar"></a>
+        <i class="separator">|</i>
+        <a data-toggle="modal" data-target="#markdown-modal" title="Markdown Help" class="fa fa-question-circle editor-toolbar"></a>
+      </div>
+    </div>
+    <!-- <div id="editorFade"></div><div id="previewFade"></div> -->
+    <section class="row" id="editArea">
+      <div id="side-trigger">
+        <button id="side-button" onclick="toggleSidebar()" style="visibility:hidden;"/><img id="side-img" src="img/right-arrow.png"/>
+      </div>
+      <section id="sidebar">
+        <img id="side-logo" src="img/logo.png"/>
+        <ul id="side-menu">
+          <li id="sidebar-new"><a onclick="newFile();">New</a></li>
+          <li id="sidebar-open"><a onclick="openFile();">Open</a></li>
+          <li id="sidebar-save"><a onclick="saveFile();">Save</a></li>
+          <li id="sidebar-save-as"><a onclick="saveFileAs();">Save As</a></li>
+          <li id="sidebar-settings"><a onclick="openSettings();">Settings</a></li>
+          <li id="sidebar-about"><a onclick="">About</a></li>
+        </ul>
+        <ul id="side-icons">
+          <li class="fa fa-github" alt="View on GitHub"><a href="https://github.com/JonSn0w/Hyde-MD"></a></li>
+          <li class="fa fa-bug" alt="Report an Issue"><a href="https://github.com/JonSn0w/Hyde-MD/issues/new"></a></li>
+          <li class="fa fa-file-text" alt="Read the Docs"><a href="https://github.com/JonSn0w/Hyde-MD"></a></li>
+        </ul>
       </section>
-      <div id="menuToggle">
-        <button id="menuButton" onclick="toggleMenu();" style="cursor: pointer;"><span class="mif-menu"></span></button>
+      <div id="leftPanel">
+          <!-- <div id="leftFade" class="topFade"></div> -->
+          <div class="col-md-6 full-height" style="background:hsl(220, 11%, 18%);" id="textPanel">
+            <textarea id="plainText" placeholder="" autofocus></textarea>
+          </div>
       </div>
-      <div id="metacity">
-        <button id="close" style="cursor: pointer;"><img src="img/close.png" alt="Close"/></button>
-        <button id="maximize" style="cursor: pointer;"><img src="img/max.png" alt="Maximize" onclick="toggleFullscreen();"/></button>
-        <button id="minimize" style="cursor: pointer;"><img src="img/min.png" alt="Minimize"/></button>
+      <div id="rightPanel">
+          <div id="rightFade" class="topFade"></div>
+          <div class="col-md-6 full-height" id="previewPanel">
+            <div id="markdown"></div>
+            <textarea id="htmlPreview" class="mdHtml" readonly></textarea>
+          </div>
       </div>
-      <div id="appMenu" class="hidden" style="visibility:hidden;">
-        <!-- File -->
-        <div class="btn-group">
-          <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="fileMenu">File</button>
-          <ul class="dropdown-menu">
-            <li tabindex="-1" href="#" onclick="handleNewButton();"><a>New</a><span>Ctrl + N</span></li>
-            <li tabindex="-1" href="#" onclick="openFile();"><a>Open</a><span>Ctrl + O</span></li>
-            <li class="dropdown-divider"></li>
-            <li tabindex="-1" href="#" onclick="saveFile();"><a>Save</a><span>Ctrl + S</span></li>
-            <li tabindex="-1" href="#" onclick="saveFileAs();"><a>Save As</a><span>Ctrl + Shift + S</span></li>
-            <li class="dropdown-divider"></li>
-            <li tabindex="-1" href="#" onclick="exportToPDF();"><a>Export to PDF</a></li>
-            <li class="dropdown-divider"></li>
-            <li tabindex="-1" href="#" onclick="openSettings();"><a>Settings</a><span>Ctrl + ,</span></li>
-            <li class="dropdown-divider"></li>
-            <li tabindex="-1" href="#" onclick="closeWindow(this)"><a>Close</a></li>
-          </ul>
-        </div>
-        <!-- Edit -->
-        <div class="btn-group">
-          <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="editMenu">Edit</button>
-          <ul class="dropdown-menu">
-            <li tabindex="-1" href="#" onclick="cm.execCommand('undo');"><a>Undo</a><span>Ctrl + Z</span></li>
-            <li tabindex="-1" href="#" onclick="cm.execCommand('redo');"><a>Redo</a><span>Ctrl + Shift + Z</span></li>
-            <li class="dropdown-divider"></li>
-            <li tabindex="-1" href="#" onclick="cm.execCommand('cut');"><a>Cut</a><span>Ctrl + X</span></li>
-            <li tabindex="-1" href="#" onclick="copySelected();"><a>Copy</a><span>Ctrl + C</span></li>
-            <li tabindex="-1" href="#" onclick="pasteSelected();"><a>Paste</a><span>Ctrl + V</span></li>
-            <li tabindex="-1" href="#" onclick="cm.execCommand('selectAll');"><a>Select All</a><span>Ctrl + A</span></li>
-            <li class="dropdown-divider"></li>
-            <li tabindex="-1" href="#" onclick="cm.execCommand('find');"><a>Find</a><span>Ctrl + F</span></li>
-            <li tabindex="-1" href="#" onclick="cm.execCommand('replace');"><a>Replace</a><span>Ctrl + Shift + F</span></li>
-            <li class="dropdown-divider"></li>
-            <li tabindex="-1" href="#" onclick="cm.execCommand('indentAuto');"><a>Auto-Indent</a><span>Ctrl + Shift + A</span></li>
-            <li tabindex="-1" href="#" onclick="cm.execCommand('indentLess');"><a>Indent Left</a><span>Ctrl + Left</span></li>
-            <li tabindex="-1" href="#" onclick="cm.execCommand('indentMore');"><a>Indent Right</a><span>Ctrl + Right</span></li>
-            <li class="dropdown-divider"></li>
-            <li tabindex="-1" href="#" onclick="toggleComment();"><a>Toggle Comment</a><span>Ctrl + /</span></li>
-          </ul>
-        </div>
-        <!-- View -->
-        <div class="btn-group">
-          <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="viewMenu">View</button>
-          <ul class="dropdown-menu">
-            <li class="dropdown-submenu">
-              <a class="test" tabindex="-1" href="#">Themes <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li href="#" onclick="includeTheme('base16-dark');"><a>Base16 Dark</a></li>
-                <li href="#" onclick="includeTheme('base16-light');"><a>Base16 Light</a></li>
-                <li href="#" onclick="includeTheme('duotone-dark');"><a>Duotone Dark</a></li>
-                <li href="#" onclick="includeTheme('hopscotch');"><a>Hopscotch</a></li>
-                <li href="#" onclick="includeTheme('material');"><a>Material</a></li>
-                <li href="#" onclick="includeTheme('monokai');"><a>Monokai</a></li>
-                <li href="#" onclick="includeTheme('one-dark');"><a>One Dark</a></li>
-                <li href="#" onclick="includeTheme('seti');"><a>Seti</a></li>
-                <li href="#" onclick="includeTheme('solarized-dark');"><a>Solarized Dark</a></li>
-                <li href="#"onclick="includeTheme('solarized-light');"><a>Solarized Light</a></li>
-                <li href="#" onclick="includeTheme('tomorrow-night-eighties');"><a>Tomorrow Night</a></li>
-                <li href="#" onclick="includeTheme('yeti');"><a>Yeti</a></li>
-                <li href="#" onclick="includeTheme('zenburn');"><a>Zenburn</a></li>
-              </ul>
-            </li>
-            <!-- <li class="dropdown-divider"></li> -->
-            <!-- <li><a tabindex="-1" href="#" onclick="toggleDynamicFontSizing();">Toggle Dynamic Editor</a></li> -->
-            <li class="dropdown-divider"></li>
-            <li tabindex="-1" href="#" onclick="toggleMenu();"><a>Toggle Menu Bar</a><span>Ctrl + M</span></li>
-            <li tabindex="-1" href="#" onclick="toggleToolbar();"><a>Toggle Toolbar</a><span>Ctrl + .</span></li>
-            <li tabindex="-1" href="#" onclick="toggleFullscreen();"><a>Toggle Full Screen</a><span>F11</span></li>
-            <li class="dropdown-divider"></li>
-            <li class="dropdown-submenu">
-              <a class="test" tabindex="-1" href="#">Preview Mode <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li href="#" value="markdown" onclick="clkPref(this);"><a>Markdown</a></li>
-                <li href="#" value="html" onclick="clkPref(this);"><a>HTML</a></li>
-              </ul>
-            </li>
-            <li class="dropdown-divider"></li>
-            <li tabindex="-1" href="#" onclick="toggleDeveloper();"><a>Open Dev Tools</a><span>Ctrl + Shift + I</span></li>
-          </ul>
-        </div>
-         <!-- Help -->
-        <div class="btn-group">
-          <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="helpMenu">Help</button>
-          <ul class="dropdown-menu">
-            <li tabindex="-1" href="#"><a>Documentation</a></li>
-            <li class="dropdown-divider"></li>
-            <li tabindex="-1" href="#"><a>Keybindings</a></li>
-            <li tabindex="-1" href="#" data-toggle="modal" data-target="#mdModal"><a>Markdown Help</a></li>
-            <li tabindex="-1" href="https://github.com/JonSn0w/Hyde-MD/issues/new"><a>Report an Issue</a></li>
-            <li class="dropdown-divider"></li>
-            <li tabindex="-1" href="#"><a>About Hyde</a></li>
-          </ul>
-        </div>
-        <div id="draggable-menu" style="-webkit-app-region:drag"></div>
-      </div>
-      <div id="toolbarArea">
-        <div class="toolbar-buttons" style="padding:5px 12px 2px;">
-          <a onclick="toggleHeadingSmaller();" style="padding-left:4x;" title="Header [Ctrl+H]" class="fa fa-header editor-toolbar"></a>
-          <a onclick="toggleFormat('bold');" title="Bold [Ctrl+B]" class="mif-bold editor-toolbar"></a>
-          <a onclick="toggleFormat('italic');" title="Italic [Ctrl+I]" class="mif-italic editor-toolbar"></a>
-          <!-- <a onclick="toggleHeadingSmaller();" title="Header [Ctrl+H]" class="fa fa-header editor-toolbar"></a> -->
-          <a onclick="toggleFormat('strikethrough');" title="Strikethrough [Ctrl+-]" class="mif-strikethrough editor-toolbar"></a>
-          <i class="separator">|</i>
-          <a onclick="toggleBlockquote();" title="Quote" class="fa fa-quote-left editor-toolbar"></a>
-          <a onclick="toggleFormat('code');" title="Code Block" class="fa fa-code editor-toolbar"></a>
-          <a onclick="toggleUnorderedList();" title="Unordered List" class="mif-list2 editor-toolbar"></a>
-          <a onclick="toggleOrderedList();" title="Ordered List" class="mif-list-numbered editor-toolbar"></a>
-          <i class="separator">|</i>
-          <a onclick="drawLink();" title="Create Link [Ctrl+L]" class="mif-link editor-toolbar"></a>
-          <a onclick="drawImage();" title="Insert Image [Ctrl+Alt+I]" class="fa fa-picture-o editor-toolbar"></a>
-          <a onclick="drawTable();" title="Insert Table [Ctrl+Shift+T]" class="fa fa-table editor-toolbar"></a>
-          <a onclick="drawHorizontalRule();" title="Insert Horizontal Rule" class="fa fa-minus editor-toolbar"></a>
-          <i class="separator">|</i>
-          <a data-toggle="modal" data-target="#mdModal" title="Markdown Help" class="fa fa-question-circle editor-toolbar"></a>
-        </div>
-      </div>
-      <!-- <div id="editorFade"></div><div id="previewFade"></div> -->
-      <section class="row" id="editArea">
-        <div id="side-trigger">
-          <button id="side-button" onclick="toggleSidebar()" style="visibility:hidden;"/><img id="side-img" src="img/right-arrow.png"/>
-        </div>
-        <section id="sidebar">
-          <img id="side-logo" src="img/logo.png"/>
-          <ul id="side-menu">
-            <li id="sidebar-new"><a onclick="newFile();">New</a></li>
-            <li id="sidebar-open"><a onclick="openFile();">Open</a></li>
-            <li id="sidebar-save"><a onclick="saveFile();">Save</a></li>
-            <li id="sidebar-save-as"><a onclick="saveFileAs();">Save As</a></li>
-            <li id="sidebar-settings"><a onclick="openSettings();">Settings</a></li>
-            <li id="sidebar-about"><a onclick="">About</a></li>
-          </ul>
-          <ul id="side-icons">
-            <li class="fa fa-github" alt="View on GitHub"><a href="https://github.com/JonSn0w/Hyde-MD"></a></li>
-            <li class="fa fa-bug" alt="Report an Issue"><a href="https://github.com/JonSn0w/Hyde-MD/issues/new"></a></li>
-            <li class="fa fa-file-text" alt="Read the Docs"><a href="https://github.com/JonSn0w/Hyde-MD"></a></li>
-          </ul>
-        </section>
-        <div id="leftPanel">
-            <!-- <div id="leftFade" class="topFade"></div> -->
-            <div class="col-md-6 full-height" style="background:hsl(220, 11%, 18%);" id="textPanel">
-              <textarea id="plainText" placeholder="" autofocus></textarea>
-            </div>
-        </div>
-        <div id="rightPanel">
-            <div id="rightFade" class="topFade"></div>
-            <div class="col-md-6 full-height" id="previewPanel">
-              <div id="markdown"></div>
-              <textarea id="htmlPreview" class="mdHtml" readonly></textarea>
-            </div>
-        </div>
-      </section>
-      <div class="bottom-bar">
-        <div id="bottom-file">None</div><span id="file-status">*</span>
-        <div id="wordcount"></div>
-        <div id="draggable" style="-webkit-app-region:drag"></div>
-        <button id="syncScroll" onclick="toggleSyncScroll();"></button>
-        <button id="togglePreview" class="fa fa-eye" onclick="togglePreview();"></button>
-      </div>
-      <!-- <link rel="import" href="modal/markdown.html"> -->
-      <!-- Markdown Help Modal -->
-      <div class="modal fade" id="mdModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog">
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Markdown Help</h4>
-            </div>
-            <div class="modal-body-inset">
-              <section class="modal--inset__content" id="modal-body-region">
-                <table class="markdown-help-content">
-                  <tbody>
-                      <tr>
-                        <td><strong>Bold</strong></td>
-                        <td>**bold**</td>
-                      </tr>
-                      <tr>
-                        <td><i>Italics</i></td>
-                        <td>*italics*</td>
-                      </tr>
-                      <tr>
-                        <td><del>Strikethrough</del></td>
-                        <td>~~strikethrough~~</td>
-                      </tr>
-                      <tr>
-                        <td>Header</td>
-                        <td># H1     ## H2     ### H3</td>
-                      </tr>
-                      <tr>
-                        <td><li>item</li></td>
-                        <td>* item</td>
-                      </tr>
-                      <tr>
-                        <td>Blockquote</td>
-                        <td>&gt; blockquote</td>
-                      </tr>
-                      <tr>
-                        <td><span class="issue open">#123</span> (issue)</td>
-                        <td>#123</td>
-                      </tr>
-                      <tr>
-                        <td><a href="https://github.com/JonSn0w/Hyde-MD" target="_rick">Link</a></td>
-                        <td>[title](http://)</td>
-                      </tr>
-                      <tr>
-                        <td>Image</td>
-                        <td>![alt](http://)</td>
-                      </tr>
-                      <tr>
-                        <td><code>code</code></td>
-                        <td>`code`</td>
-                      </tr>
-                      <tr>
-                        <td>L<sup>a</sup>T<sub>e</sub>X</td>
-                        <td>$$LaTeX code$$</td>
-                      </tr>
-                      <tr>
-                        <td><pre style="display: inline-block; margin: 8px 0 2px"><code><span class="keyword">var </span>code = <span class="string">"formatted"</span>;</code></pre></td>
-                        <td style="line-height: 100%">``` <i style="color: rgba(0,0,0,0.5)">(shift+enter for line break)</i><br>var code = "formatted";<br>```</td>
-                      </tr>
-                  </tbody>
-                </table>
-              </section>
-            </div>
+    </section>
+    <div class="bottom-bar">
+      <div id="bottom-file">None</div><span id="file-status">*</span>
+      <div id="wordcount"></div>
+      <div id="draggable" style="-webkit-app-region:drag"></div>
+      <button id="syncScroll" onclick="toggleSyncScroll();"></button>
+      <button id="togglePreview" class="fa fa-eye" onclick="togglePreview();"></button>
+    </div>
+    <!-- <link rel="import" href="modal/markdown.html"> -->
+    <!-- Markdown Help Modal -->
+    <div class="modal fade" id="markdown-modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content modal-inset">
+          <div class="modal-header">
+            <button id="close" type="button" class="close" data-dismiss="modal"><img src="./img/close.png"></img></button>
+            <h4 class="modal-title">Markdown Help</h4>
+          </div>
+          <div class="modal-body-inset">
+            <section class="modal--default__content" id="modal-body-region">
+              <table class="markdown-help-content">
+                <tbody>
+                    <tr>
+                      <td><strong>Bold</strong></td>
+                      <td>**bold**</td>
+                    </tr>
+                    <tr>
+                      <td><i>Italics</i></td>
+                      <td>*italics*</td>
+                    </tr>
+                    <tr>
+                      <td><del>Strikethrough</del></td>
+                      <td>~~strikethrough~~</td>
+                    </tr>
+                    <tr>
+                      <td>Header</td>
+                      <td># H1     ## H2     ### H3</td>
+                    </tr>
+                    <tr>
+                      <td><li>item</li></td>
+                      <td>* item</td>
+                    </tr>
+                    <tr>
+                      <td>Blockquote</td>
+                      <td>&gt; blockquote</td>
+                    </tr>
+                    <tr>
+                      <td><span class="issue open">#123</span> (issue)</td>
+                      <td>#123</td>
+                    </tr>
+                    <tr>
+                      <td><a href="https://github.com/JonSn0w/Hyde-MD" target="_rick">Link</a></td>
+                      <td>[title](http://)</td>
+                    </tr>
+                    <tr>
+                      <td>Image</td>
+                      <td>![alt](http://)</td>
+                    </tr>
+                    <tr>
+                      <td><code>code</code></td>
+                      <td>`code`</td>
+                    </tr>
+                    <tr>
+                      <td>L<sup>a</sup>T<sub>e</sub>X</td>
+                      <td>$$LaTeX code$$</td>
+                    </tr>
+                    <tr>
+                      <td><pre style="display: inline-block; margin: 8px 0 2px"><code><span class="keyword">var </span>code = <span class="string">"formatted"</span>;</code></pre></td>
+                      <td style="line-height: 100%">``` <i style="color: rgba(0,0,0,0.5)">(shift+enter for line break)</i><br>var code = "formatted";<br>```</td>
+                    </tr>
+                </tbody>
+              </table>
+            </section>
           </div>
         </div>
       </div>
-      <!-- About Modal -->
-      <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog">
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">About</h4>
-            </div>
-            <div class="modal-body">
-              <section class="modal--default__content" id="modal-body-region">
-                <div class="aboutHyde">
-
+    </div>
+    <!-- About Modal -->
+    <div class="modal fade" id="about-modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">About</h4>
+          </div>
+          <div class="about-logo">
+            <img src=""></img>
+          </div>
+          <div class="modal-body">
+            <section class="modal--default__content" id="modal-body-region">
+              <div class="about-hyde">
+                Our mission is to create an open-source markdown editor that improves the accessibility of markdown reliant platforms and benefit new and experienced writers, alike.
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Close-Unsaved Modal -->
+    <div class="modal fade" id="unsaved-modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button id="close" type="button" class="close" data-dismiss="modal"><img src="./img/close.png"><img></button>
+            <h4 class="modal-title">Unsaved Changes</h4>
+          </div>
+          <div class="modal-body">
+            <section class="modal--default__content" id="modal-body-region">
+              <div class="unsaved-close">
+                <span id="unsaved-body" class="body"></span>
+                <div class="unsaved-buttons">
+                  <a href="#" id="unsavedConfirm" class="modal-button bg-gradient1"><span>Save</span></a>
+                  <a href="#" id="unsavedDeny" class="modal-button bg-gradient1"><span>Don't Save</span></a>
                 </div>
-            </div>
+              </div>
+            </section>
           </div>
         </div>
       </div>
-      <!-- Close-Unsaved Modal -->
-      <div class="modal fade" id="unsavedModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog">
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" onclick="toggleSaveDialog()">&times;</button>
-              <h4 class="modal-title">Unsaved Changes</h4>
-            </div>
-            <div class="modal-body">
-              <section class="modal--default__content" id="modal-body-region">
-                <div class="closeUnsaved">
-                  <span id="unsavedBody" class="body"></span>
-                  <a href="#" id="unsavedConfirm" class="fancy-button bg-gradient1"><span>Save</span></a>
-                  <a href="#" id="unsavedDeny" class="fancy-button bg-gradient1"><span>Don't Save</span></a>
-                </div>
-              </section>
-            </div>
-          </div>
-        </div>
-      </div>
-      <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
-      <script>if (window.module) module = window.module;</script>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-      <!-- <script src="js/CodeMirror/libs/bootstrap.min.js"></script> -->
-      <script>
-        $(document).ready(function(){
-          $('.dropdown-submenu a.test').on("click", function(e){
-            $(this).next('ul').toggle();
-            e.stopPropagation();
-            e.preventDefault();
-          });
+    </div>
+    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+    <script>if (window.module) module = window.module;</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        $('.dropdown-submenu a.test').on("click", function(e){
+          $(this).next('ul').toggle();
+          e.stopPropagation();
+          e.preventDefault();
         });
-      </script>
-      <!-- <script src="js/CodeMirror/libs/jquery.min.js"></script> -->
-      <script src="js/CodeMirror/libs/marked.min.js"></script>
-      <script src="js/CodeMirror/libs/search.js"></script>
-      <script src="js/CodeMirror/libs/searchcursor.js"></script>
-      <script src="js/CodeMirror/libs/dialog.js"></script>
-      <script src="js/CodeMirror/libs/closebrackets.js"></script>
-      <script src="js/CodeMirror/libs/continuelist.js"></script>
-      <script src="js/settings.js"></script>
-      <script src="js/app.js"></script>
-      <script src="js/format.js"></script>
-      <script src="js/functions.js"></script>
-      <script src="js/ipc_renderer.js"></script>
-      <script src="js/emoji.js"></script>
+      });
+    </script>
+    <script src="js/codemirror/marked.min.js"></script>
+    <script src="js/codemirror/search.js"></script>
+    <script src="js/codemirror/searchcursor.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/format.js"></script>
+    <script src="js/functions.js"></script>
+    <script src="js/ipc_renderer.js"></script>
+    <script src="js/emoji.js"></script>
   </body>
 </html>
