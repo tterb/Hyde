@@ -19,10 +19,10 @@ function toggleDeveloper() {
 }
 
 function showUnsavedDialog(win) {
-  var $modal = jQuery('#unsavedModal'),
-      $text = $('#unsavedBody'),
+  var $modal = jQuery('#unsaved-modal'),
+      $text = $('#unsaved-body'),
       $filename = $('#bottom-file').text();
-  if($('#unsavedModal:hidden').length > 0) {
+  if($modal.is(':visible') > 0) {
     if ($filename === 'New document') {
       $filename = 'This document';
     }
@@ -104,12 +104,12 @@ var isClean = function () {
 // Update window title on various events
 var updateWindowTitle = function (path) {
   var appName = "Hyde",
-    isClean = this.isClean(),
-    saveSymbol = "*",
-    parsedPath,
-    filename,
-    dir,
-    title;
+      isClean = this.isClean(),
+      saveSymbol = "*",
+      parsedPath,
+      filename,
+      dir,
+      title;
 
   if (path) {
     parsedPath = parsePath(path);
@@ -138,11 +138,33 @@ function openSettings() {
 
 function openModal(opt) {
   let win = new remote.BrowserWindow({
-    parent: remote.getCurrentWindow(),
-    frame: false,
-    autoHideMenuBar: true,
-    modal: true
+      parent: remote.getCurrentWindow(),
+      frame: false,
+      autoHideMenuBar: true,
+      modal: true
   })
   var path = 'file://' + __dirname + '/modal/' + opt.toString() + '.html';
   win.loadURL(path);
+}
+
+function toggleSearch(opt) {
+  var dialog = $('#search-container'),
+      searchBar = $('.CodeMirror-dialog-top');
+  if(!searchBar.is(':visible')) {
+    dialog.css('visibility', 'visible');
+    if(opt === 'find') {
+      cm.execCommand('find');
+    } else if(opt === 'replace') {
+      cm.execCommand('replace');
+    } else { return; }
+  }
+}
+
+function getPOS() {
+    var word = cm.findWordAt(cm.getCursor());
+    return 'Cursor: '+cm.getCursor().ch.toString()+'\nStart: '+word.anchor.ch.toString()+'       End: '+word.head.ch.toString()+'\nWord: '+cm.getRange(word.anchor, word.head).toString()+'\nSelection: ('+cm.getCursor("start").ch.toString()+', '+cm.getCursor("end").ch.toString()+')';
+}
+
+function getHistory() {
+    return this.cm.doc.historySize();
 }

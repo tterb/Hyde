@@ -115,7 +115,7 @@ function createWindow () {
         {label: "Paste", accelerator: "CmdOrCtrl+V", role: "paste"},
         {label: "Select All", accelerator: "CmdOrCtrl+A", role: 'selectall'},
         {type: "separator"},
-        {label: "Search", accelerator: "CmdOrCtrl+F", click: function() { sendShortcut('CmdOrCtrl+f'); }
+        {label: "Find", accelerator: "CmdOrCtrl+F", click: function() { sendShortcut('CmdOrCtrl+f'); }
         },
         {label: "Replace", accelerator: "CmdOrCtrl+Shift+F", click: function() { sendShortcut('CmdOrCtrl+shift+f'); }
         },
@@ -225,6 +225,14 @@ function createWindow () {
 
   localShortcut.register('CmdOrCtrl+l', function() {
       focusedWindow.webContents.send('ctrl+l');
+  });
+
+  localShortcut.register('CmdOrCtrl+f', function() {
+      focusedWindow.webContents.send('ctrl+f');
+  });
+
+  localShortcut.register('CmdOrCtrl+Shift+f', function() {
+    focusedWindow.webContents.send('ctrl+shift+f');
   });
 
   localShortcut.register('CmdOrCtrl+h', function() {

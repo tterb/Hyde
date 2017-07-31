@@ -61,13 +61,20 @@
     cm.openDialog(text, f, {
       value: deflt,
       selectValueOnOpen: true,
+      closeOnBlur: false,
       closeOnEnter: false,
-      onClose: function() { clearSearch(cm); }
+      onClose: function() {
+        $('#search-container').css('visibility','hidden');
+        $('#search-container').hide();
+        clearSearch(cm);
+      }
     });
   }
 
   function dialog(cm, text, shortText, deflt, f) {
-    if (cm) cm.openDialog(text, f, {value: deflt, selectValueOnOpen: true});
+    if (cm) cm.openDialog(text, f, {value: deflt, closeOnBlur: true, selectValueOnOpen: true, onClose: function() {
+      $('#search-container').css('visibility','hidden');
+    }});
     else if(prompt(shortText, deflt));
   }
 

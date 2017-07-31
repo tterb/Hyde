@@ -82,8 +82,8 @@
           <li tabindex="-1" href="#" onclick="pasteSelected();"><a>Paste</a><span>Ctrl + V</span></li>
           <li tabindex="-1" href="#" onclick="cm.execCommand('selectAll');"><a>Select All</a><span>Ctrl + A</span></li>
           <li class="dropdown-divider"></li>
-          <li tabindex="-1" href="#" onclick="cm.execCommand('find');"><a>Find</a><span>Ctrl + F</span></li>
-          <li tabindex="-1" href="#" onclick="cm.execCommand('replace');"><a>Replace</a><span>Ctrl + Shift + F</span></li>
+          <li tabindex="-1" href="#" onclick="toggleSearch('find');"><a>Find</a><span>Ctrl + F</span></li>
+          <li tabindex="-1" href="#" onclick="toggleSearch('replace');"><a>Replace</a><span>Ctrl + Shift + F</span></li>
           <li class="dropdown-divider"></li>
           <li tabindex="-1" href="#" onclick="cm.execCommand('indentAuto');"><a>Auto-Indent</a><span>Ctrl + Shift + A</span></li>
           <li tabindex="-1" href="#" onclick="cm.execCommand('indentLess');"><a>Indent Left</a><span>Ctrl + Left</span></li>
@@ -149,21 +149,20 @@
     </div>
     <div id="toolbarArea">
       <div class="toolbar-buttons" style="padding:5px 12px 2px;">
-        <a onclick="toggleHeadingSmaller();" style="padding-left:4x;" title="Header [Ctrl+H]" class="fa fa-header editor-toolbar"></a>
-        <a onclick="toggleFormat('bold');" title="Bold [Ctrl+B]" class="mif-bold editor-toolbar"></a>
-        <a onclick="toggleFormat('italic');" title="Italic [Ctrl+I]" class="mif-italic editor-toolbar"></a>
-        <!-- <a onclick="toggleHeadingSmaller();" title="Header [Ctrl+H]" class="fa fa-header editor-toolbar"></a> -->
-        <a onclick="toggleFormat('strikethrough');" title="Strikethrough [Ctrl+-]" class="mif-strikethrough editor-toolbar"></a>
+        <a onclick="toggleHeading();" style="padding-left:4x;" title="Header (Ctrl+H)" class="fa fa-header editor-toolbar"></a>
+        <a onclick="toggleFormat('bold');" title="Bold (Ctrl+B)" class="mif-bold editor-toolbar"></a>
+        <a onclick="toggleFormat('italic');" title="Italic (Ctrl+I)" class="mif-italic editor-toolbar"></a>
+        <a onclick="toggleFormat('strikethrough');" title="Strikethrough (Ctrl+-)" class="mif-strikethrough editor-toolbar"></a>
         <i class="separator">|</i>
         <a onclick="toggleBlockquote();" title="Quote" class="fa fa-quote-left editor-toolbar"></a>
         <a onclick="toggleFormat('code');" title="Code Block" class="fa fa-code editor-toolbar"></a>
         <a onclick="toggleUnorderedList();" title="Unordered List" class="mif-list2 editor-toolbar"></a>
         <a onclick="toggleOrderedList();" title="Ordered List" class="mif-list-numbered editor-toolbar"></a>
         <i class="separator">|</i>
-        <a onclick="drawLink();" title="Create Link [Ctrl+L]" class="mif-link editor-toolbar"></a>
-        <a onclick="drawImage();" title="Insert Image [Ctrl+Alt+I]" class="fa fa-picture-o editor-toolbar"></a>
-        <a onclick="drawTable();" title="Insert Table [Ctrl+Shift+T]" class="fa fa-table editor-toolbar"></a>
-        <a onclick="drawHorizontalRule();" title="Insert Horizontal Rule" class="fa fa-minus editor-toolbar"></a>
+        <a onclick="insert('link');" title="Create Link (Ctrl+L)" class="mif-link editor-toolbar"></a>
+        <a onclick="insert('image');" title="Insert Image (Ctrl+Alt+I)" class="fa fa-picture-o editor-toolbar"></a>
+        <a onclick="insert('table');" title="Insert Table (Ctrl+Shift+T)" class="fa fa-table editor-toolbar"></a>
+        <a onclick="insert('hr');" title="Insert Horizontal Rule (Ctrl+Shift+_)" class="fa fa-minus editor-toolbar"></a>
         <i class="separator">|</i>
         <a data-toggle="modal" data-target="#markdown-modal" title="Markdown Help" class="fa fa-question-circle editor-toolbar"></a>
       </div>
@@ -174,7 +173,7 @@
         <button id="side-button" onclick="toggleSidebar()" style="visibility:hidden;"/><img id="side-img" src="img/right-arrow.png"/>
       </div>
       <section id="sidebar">
-        <img id="side-logo" src="img/logo.png"/>
+        <img id="side-logo" src="img/icon/icon.png"/>
         <ul id="side-menu">
           <li id="sidebar-new"><a onclick="newFile();">New</a></li>
           <li id="sidebar-open"><a onclick="openFile();">Open</a></li>
@@ -203,6 +202,7 @@
           </div>
       </div>
     </section>
+    <div class="search-dialog" id="search-container"><span id="search-icon" class="fa fa-search"></span></div>
     <div class="bottom-bar">
       <div id="bottom-file">None</div><span id="file-status">*</span>
       <div id="wordcount"></div>
