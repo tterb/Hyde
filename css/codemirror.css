@@ -2,7 +2,7 @@
 
 .CodeMirror {
   /* Set height, width, borders, and global font properties here */
-  font-family: "Source Code Pro","Menlo","Ubuntu Mono","Dejavu Sans Mono","Consolas",monospace;
+  font-family: "Source Code Pro","Monaco","Ubuntu Mono","Dejavu Sans Mono","Consolas",monospace;
   height: 100%;
   color: black;
 }
