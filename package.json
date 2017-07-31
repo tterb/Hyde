@@ -47,7 +47,6 @@
   "devDependencies": {
     "electron-connect": "^0.6.1",
     "electron-packager": "^7.0.3",
-    "electron-prebuilt-compile": "^1.6.11",
     "electron-rebuild": "^1.5.11",
     "gulp": "^3.9.1",
     "gulp-plumber": "^1.1.0",
