@@ -9,7 +9,7 @@ This project adheres to the Contributor Covenant [code of conduct](http://contri
 ## How Can I Contribute?
 
 For those looking to contribute to the development of the project, I recommend using the `gulp watch` command, to provide preprocessor compilation and live-reload functionalities.  
-Also, if you're looking for an easy way to contribute to this project but aren't sure where to start, I've created a list of minor bugs and/or issues to be fixed before the projects initial release, which you can find [here](https://github.com/JonSn0w/Hyde/issues/1). 
+Also, if you're looking for an easy way to contribute to this project but aren't sure where to start, I've created a list of minor bugs and/or issues to be fixed before the projects initial release, which you can find [here](https://github.com/JonSn0w/Hyde/issues/1) or feel free to explore any other issue with a [help wanted](https://github.com/JonSn0w/Hyde/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20is%3Ahelpwanted) tag.
 
 ### Reporting Bugs
 
