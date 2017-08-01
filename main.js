@@ -1,5 +1,5 @@
-'use strict';
 
+'use strict';
 const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
@@ -37,12 +37,10 @@ function createWindow () {
     conf.titleBarStyle = 'hidden';
   }
 
-  // Create the browser window.
   mainWindow = new BrowserWindow(conf);
-
   mainWindow.show();
-  // and load the index.html of the app.
   mainWindow.loadURL(mainPage);
+
   // Open the DevTools.
   // mainWindow.webContents.openDevTools();
 
@@ -157,12 +155,12 @@ function createWindow () {
         }},
         {
         label: 'Toggle Developer Tools',
-        accelerator: function() {
+        accelerator: (function() {
           if (process.platform === 'darwin')
             return 'Alt+Command+I';
           else
             return 'Ctrl+Shift+I';
-        }(),
+        }()),
         click: function(item, focusedWindow) {
           if (focusedWindow)
             focusedWindow.toggleDevTools();
@@ -206,76 +204,74 @@ function createWindow () {
   });
 
   // Regestering local shortcuts for formatting markdown
-  var focusedWindow = BrowserWindow.getFocusedWindow();
   localShortcut.register('CmdOrCtrl+b', function() {
-      focusedWindow.webContents.send('ctrl+b');
+      sendShortcut('ctrl+b');
   });
 
   localShortcut.register('CmdOrCtrl+i', function() {
-      focusedWindow.webContents.send('ctrl+i');
+      sendShortcut('ctrl+i');
   });
 
   localShortcut.register('CmdOrCtrl+-', function() {
-    focusedWindow.webContents.send('ctrl+-');
+    sendShortcut('ctrl+-');
   });
 
   localShortcut.register('CmdOrCtrl+/', function() {
-      focusedWindow.webContents.send('ctrl+/');
+      sendShortcut('ctrl+/');
   });
 
   localShortcut.register('CmdOrCtrl+l', function() {
-      focusedWindow.webContents.send('ctrl+l');
+      sendShortcut('ctrl+l');
   });
 
   localShortcut.register('CmdOrCtrl+f', function() {
-      focusedWindow.webContents.send('ctrl+f');
+      sendShortcut('ctrl+f');
   });
 
   localShortcut.register('CmdOrCtrl+Shift+f', function() {
-    focusedWindow.webContents.send('ctrl+shift+f');
+    sendShortcut('ctrl+shift+f');
   });
 
   localShortcut.register('CmdOrCtrl+h', function() {
-      focusedWindow.webContents.send('ctrl+h');
+      sendShortcut('ctrl+h');
   });
 
   localShortcut.register('CmdOrCtrl+Alt+i', function() {
-      focusedWindow.webContents.send('ctrl+alt+i');
+      sendShortcut('ctrl+alt+i');
   });
 
   localShortcut.register('CmdOrCtrl+Shift+t', function() {
-      focusedWindow.webContents.send('ctrl+shift+t');
+      sendShortcut('ctrl+shift+t');
   });
 
   localShortcut.register('CmdOrCtrl+Shift+-', function() {
-    focusedWindow.webContents.send('ctrl+shift+-');
+    sendShortcut('ctrl+shift+-');
   });
 
   localShortcut.register('CmdOrCtrl+m', function() {
-    focusedWindow.webContents.send('ctrl+m');
+    sendShortcut('ctrl+m');
   });
 
   localShortcut.register('CmdOrCtrl+.', function() {
-    focusedWindow.webContents.send('ctrl+.');
+    sendShortcut('ctrl+.');
   });
 
   localShortcut.register('CmdOrCtrl+Shift+M', function() {
-    focusedWindow.webContents.send('ctrl+shift+M');
+    sendShortcut('ctrl+shift+M');
   });
 
   localShortcut.register('CmdOrCtrl+,', function() {
-    focusedWindow.webContents.send('ctrl+,');
+    sendShortcut('ctrl+,');
   });
 
   tray.create(mainWindow);
   if(windows.length > 0) {
-    focusedWindow.webContents.send('file-new');
+    sendShortcut('file-new');
   }
 }
 
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
+// This method will be called when Electron has finished initialization
 app.on('ready', createWindow);
 
 // Quit when all windows are closed.
