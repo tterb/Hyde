@@ -30,12 +30,13 @@ function createWindow () {
       show: true,
       frame: false,
       autoHideMenuBar: true,
-      icon: path.join(__dirname, '/img/icon/favicon.ico')
+      icon: path.join(__dirname, '/img/icon/icon.ico')
   }
 
   if (process.platform === 'darwin') {
     conf.titleBarStyle = 'hidden';
-  }
+    conf.icon = path.join(__dirname, '/img/icon/icon.icns')
+  } 
 
   mainWindow = new BrowserWindow(conf);
   mainWindow.show();
