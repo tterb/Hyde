@@ -5,9 +5,8 @@
   "main": "main.js",
   "productName": "Hyde",
   "scripts": {
-    "start": "electron main.js",
-    "build": "rm -rf dist && gulp build",
-    "dev": "gulp watch"
+    "start": "gulp start",
+    "build": "rm -rf dist && gulp build"
   },
   "repository": {
     "type": "git",
