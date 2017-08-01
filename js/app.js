@@ -1,28 +1,30 @@
-/*!
+/*
 * The MIT License (MIT)
 * Copyright (c) 2017 Brett Stevenson <bstevensondev@gmail.com>
- */
+*/
 
+const electron = require('electron');
 var showdown  = require('showdown');
-var remote = require('electron').remote;
-var ipc = require('electron').ipcRenderer;
-var dialog = require('electron').remote.dialog;
+var remote = electron.remote;
+var ipc = electron.ipcRenderer;
+var dialog = electron.remote.dialog;
 var fs = remote.require('fs');
 const storage = require('electron-json-storage');
 var console = require('console');
 var parsePath = require("parse-filepath");
-var currentFile = '';
-var isFileLoadedInitially = false;
 const config = require('./config');
 const settings = require('electron-settings');
 const setter = require('./js/settings');
+const func = require('./js/functions');
 const CMSpellChecker = require('codemirror-spell-checker');
-var currentTheme = "one-dark";
-// const settings = require('electron-settings');
+var os = require("os");
+
+var isFileLoadedInitially = false,
+    currentTheme = settings.get('editorTheme'),
+    currentFile = '';
 
 // `remote.require` since `Menu` is a main-process module.
 var buildEditorContextMenu = remote.require('electron-editor-context-menu');
-var currentValue = 0, currentValueTheme = 0;
 
 window.addEventListener('contextmenu', function(e) {
   // Only show the context menu in text editors.
@@ -40,25 +42,41 @@ window.addEventListener('contextmenu', function(e) {
 getUserSettings();
 
 var conf = {
-  mode: "spell-checker",
-  backdrop: "yaml-frontmatter",
-  base: "gfm",
-  viewportMargin: 100000000000,
-  lineNumbers: settings.get('lineNumbers'),
-  lineWrapping: settings.get('lineWrapping'),
-  showTrailingSpace: settings.get('showTrailingSpace'),
-  autoCloseBrackets: settings.get('matchBrackets'),
-  autoCloseTags: settings.get('matchBrackets'),
-  extraKeys: {
-    Enter: 'newlineAndIndentContinueMarkdownList'
-  }
+    mode: "yaml-frontmatter",
+    base: "gfm",
+    viewportMargin: 100000000000,
+    lineNumbers: settings.get('lineNumbers'),
+    lineWrapping: settings.get('lineWrapping'),
+    showTrailingSpace: settings.get('showTrailingSpace'),
+    autoCloseBrackets: settings.get('matchBrackets'),
+    autoCloseTags: settings.get('matchBrackets'),
+    extraKeys: {
+      Enter: 'newlineAndIndentContinueMarkdownList'
+    }
 }
 
+var files = fs.readdirSync('./css/theme'),
+    theme = settings.get('editorTheme');
+if (files.includes(theme+'.css')) {
+  conf.theme = theme;
+} else {
+  conf.theme = "one-dark";
+}
+includeTheme(theme);
+
+if(settings.get('enableSpellCheck')) {
+    conf.mode = "spell-checker";
+    conf.backdrop = "yaml-frontmatter";
+    CMSpellChecker({ codeMirrorInstance: CodeMirror });
+}
+
+var cm = CodeMirror.fromTextArea(document.getElementById("plainText"), conf);
+
 function includeTheme(theme) {
-  var themeTag;
   var head = document.getElementsByTagName('head')[0];
   settings.set('editorTheme', theme);
   var editorColor = $('.cm-s-'+theme+'.CodeMirror').css('background-color');
+  var themeTag;
   currentTheme = theme;
   if(document.getElementById('themeLink')) {
     themeTag = document.getElementById('themeLink');
@@ -75,32 +93,13 @@ function includeTheme(theme) {
   settings.set('editorTheme', theme);
 }
 
-function getEditorTheme() {
-  return currentTheme;
-}
-
-var files = fs.readdirSync('./css/theme');
-var theme = settings.get('editorTheme');
-
-if (files.includes(theme+'.css')) {
-  conf.theme = theme;
-} else {
-  conf.theme = "one-dark";
-}
-if (!settings.get('lineNumbers')) {
-    conf.lineNumbers = false;
-}
-includeTheme(theme);
-
-CMSpellChecker({
-	codeMirrorInstance: CodeMirror,
-});
-
-var cm = CodeMirror.fromTextArea(document.getElementById("plainText"), conf);
-
 window.onload = function() {
-  var plainText = document.getElementById('plainText');
-  var markdownArea = document.getElementById('markdown');
+  var plainText = document.getElementById('plainText'),
+      markdownArea = document.getElementById('markdown');
+
+  if(os.type === 'linux') {
+      $('.CodeMirror').css('font-size', '1em');
+  }
 
   cm.on('change',function(cMirror) {
     countWords();
@@ -154,12 +153,11 @@ window.onload = function() {
   remote.BrowserWindow.getFocusedWindow().close();
   }
 
-  var syncButton = document.getElementById('syncScroll');
-  if(settings.get('syncScroll') === true) {
-    syncButton.className = 'fa fa-link';
-  } else {
-    syncButton.className = 'fa fa-unlink';
-  }
+  $('.dropdown-submenu').mouseover(function() {
+    $(this).children('ul').show();
+  }).mouseout(function() {
+    $(this).children('ul').hide();
+  });
 }
 
 
@@ -169,42 +167,35 @@ window.onload = function() {
   **************************/
 
  var $prev = $('#previewPanel'),
-   $markdown = $('#markdown'),
-   $syncScroll = $('#syncScroll'),
-   isSynced; // Initialized below.
+     $markdown = $('#markdown'),
+     $syncScroll = $('#syncScroll'),
+     isSynced = settings.get('syncScroll');
 
  // Retaining state in boolean since this will be more CPU friendly instead of constantly selecting on each event.
  var toggleSyncScroll = () => {
-    console.log('Toggle scroll synchronization.');
-    isSynced = $('#syncScroll').attr('class').includes('fa-link');
-    if(isSynced === true) {
-      $('#syncScroll').attr('class', 'fa fa-unlink');
+    if(settings.get('syncScroll')) {
+      $syncScroll.attr('class', 'fa fa-unlink');
       isSynced = false;
-      $(window).trigger('resize')
+      $(window).trigger('resize');
     } else {
-      $('#syncScroll').attr('class', 'fa fa-link');
+      $syncScroll.attr('class', 'fa fa-link');
       isSynced = true;
-      $(window).trigger('resize')
+      $(window).trigger('resize');
    }
-   settings.set('syncScroll', !isSynced);
+   settings.set('syncScroll', isSynced);
  }
- $syncScroll.on('change', toggleSyncScroll);
+ $syncScroll.on('change', toggleSyncScroll());
 
  /**
   * Scrollable height.
   */
  var codeScrollable = () => {
-   var info = cm.getScrollInfo(),
-     fullHeight = info.height,
-     viewHeight = info.clientHeight;
-
-   return fullHeight - viewHeight;
+   var info = cm.getScrollInfo();
+   return info.height - info.clientHeight;
  }
 
  var prevScrollable = () => {
-   var fullHeight = $markdown.height(),
-     viewHeight = $prev.height();
-   return fullHeight - viewHeight;
+   return $markdown.height() - $prev.height();
  }
 
  /**
@@ -235,6 +226,10 @@ window.onload = function() {
  }
  cm.on('scroll', codeScroll);
  $(window).on('resize', codeScroll);
+ $(window).on('resize', function() {
+    settings.set('windowWidth', parseInt($(window).width(),10));
+    settings.set('windowHeight', parseInt($(window).height(),10));
+ });
 
  var prevScroll = () => {
      var scrollable = prevScrollable();
@@ -242,7 +237,6 @@ window.onload = function() {
        var percent = $(this).scrollTop() / scrollable;
 
        // Since we'll be triggering scroll events.
-      //  console.log('Preview scroll: %' + (Math.round(100 * percent)));
        muteScroll(cm, codeScroll);
        cm.scrollTo(percent * codeScrollable());
      }
@@ -251,8 +245,8 @@ window.onload = function() {
 
 
 const BrowserWindow = remote.BrowserWindow;
-var path = require('path');
-var appPath = path.resolve(__dirname);
+var path = require('path'),
+    appPath = path.resolve(__dirname);
 let newWindow;
 
 function newFile() {
@@ -262,7 +256,7 @@ function newFile() {
       show: true,
       frame: false,
       autoHideMenuBar: true,
-      icon: path.join(__dirname, '/img/favicon.ico')
+      icon: path.join(__dirname, '/img/icon/favicon.ico')
   }
   if (process.platform === 'darwin') {
     conf.titleBarStyle = 'hidden';
@@ -326,7 +320,7 @@ function handleNewButton() {
  ** Word Count **
 *****************/
 function countWords() {
-    wordcount = cm.getValue().split(/\b[\s,\.-:;]*/).length;
+    var wordcount = cm.getValue().split(/\b[\s,\.-:;]*/).length;
     document.getElementById("wordcount").innerHTML = "words: " + wordcount.toString();
     return cm.getValue().split(/\b[\s,\.-:;]*/).length;
 }
