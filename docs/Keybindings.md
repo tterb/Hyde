@@ -1,6 +1,6 @@
-# Keyboard Shortcuts 
+# Keyboard Shortcuts  
 
-## Operations 
+## Operations  
 
 |      Command         |            Shortcut             |  
 |:---------------------|:-------------------------------:|   
@@ -17,7 +17,7 @@
 
 --------------------  
 
-## Editing
+## Editing  
 
 |      Command         |            Shortcut             |
 |:---------------------|:-------------------------------:|
@@ -33,7 +33,7 @@
 
 --------------------  
 
-## Formatting
+## Formatting  
 
 |      Command         |            Shortcut             |
 |:---------------------|:-------------------------------:| 

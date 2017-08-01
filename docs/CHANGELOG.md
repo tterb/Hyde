@@ -1,6 +1,9 @@
 # Change Log
 <br>
 
-## Version 1.0.0
+## Version 0.0.1
   * All features added
   * All bugs created
+
+
+---------------------

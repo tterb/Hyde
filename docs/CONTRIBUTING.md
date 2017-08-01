@@ -3,7 +3,7 @@
 The following is a set of guidelines for contributing to this project. These are not rules, use your best judgment and feel free to propose changes to this document in a pull request.
 
 ### Code of Conduct
-This project adheres to the Contributor Covenant [code of conduct](http://contributor-covenant.org/version/1/4/). By participating, you are expected to uphold this code. Please report any unacceptable behavior to bstevensondev@gmail.com.
+This project adheres to the Contributor Covenant [code of conduct](http://contributor-covenant.org/version/1/4/). By participating, you are expected to uphold this code. Please report any unacceptable behavior to [bstevensondev@gmail.com](bstevensondev@gmail.com). 
 
 
 ## How Can I Contribute?
