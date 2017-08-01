@@ -255,11 +255,13 @@ function newFile() {
       height: 600,
       show: true,
       frame: false,
-      autoHideMenuBar: true,
-      icon: path.join(__dirname, '/img/icon/favicon.ico')
+      autoHideMenuBar: true
   }
   if (process.platform === 'darwin') {
     conf.titleBarStyle = 'hidden';
+    conf.icon = path.join(__dirname, '/img/icon/icon.icns')
+  } else {
+    conf.icon = path.join(__dirname, '/img/icon/icon.ico');
   }
   // openSettings();
   newWindow = new BrowserWindow(conf);

@@ -1,6 +1,5 @@
 'use strict';
 
-// const {BrowserWindow, ipcMain} = require('electron');
 const electron = require('electron');
 const remote = require('electron').remote;
 const BrowserWindow = remote.BrowserWindow;
@@ -14,18 +13,21 @@ function showSettingsWindow() {
         settingsWindow.close();
         return;
     }
-    // const debug = (moeApp.flag.debug | moeApp.config.get('debug')) != 0;
     const conf = {
-        icon: appPath + '/img/favicon.ico',
         autoHideMenuBar: true,
-        width: 400,
-        height: 500,
+        width: 375,
+        height: 400,
         resizable: false,
         maximizable: false,
         show: true,
         frame: false
     };
-    settings.set('editorTheme', 'one-dark');
+    if (process.platform === 'darwin') {
+      conf.icon = path.join(__dirname, '/img/icon/icon.icns')
+    } else {
+      conf.icon = path.join(__dirname, '/img/icon/icon.ico');
+    }
+
     // if (process.platform == 'darwin') conf.titleBarStyle = 'hidden-inset';
     // else conf.frame = false;
 
@@ -37,7 +39,7 @@ function showSettingsWindow() {
     });
     settingsWindow.webContents.on('close', () => {
         settingsWindow = undefined;
-    })
+    });
 }
 
 

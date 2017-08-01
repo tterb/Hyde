@@ -29,14 +29,15 @@ function createWindow () {
       height: 600,
       show: true,
       frame: false,
-      autoHideMenuBar: true,
-      icon: path.join(__dirname, '/img/icon/icon.ico')
+      autoHideMenuBar: true
   }
 
   if (process.platform === 'darwin') {
     conf.titleBarStyle = 'hidden';
-    conf.icon = path.join(__dirname, '/img/icon/icon.icns')
-  } 
+    conf.icon = path.join(__dirname, '/img/icon/icon.icns');
+} else {
+    conf.icon = path.join(__dirname, '/img/icon/icon.ico');
+}
 
   mainWindow = new BrowserWindow(conf);
   mainWindow.show();
