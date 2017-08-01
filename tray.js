@@ -9,7 +9,7 @@ exports.create = function(mainWindow) {
     return;
   }
 
-  const iconPath = path.join(__dirname, 'img/IconTray.png');
+  const iconPath = path.join(__dirname, 'img/icon/iconTray.png');
 
   const toggleWin = function(){
     if (mainWindow.isVisible()) {
