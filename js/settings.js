@@ -1,13 +1,19 @@
+/*
+* The MIT License (MIT)
+* Copyright (c) 2017 Brett Stevenson <bstevensondev@gmail.com>
+*/
 
 var opt = [
-    { name: 'showMenu', action: function() { toggleMenu(); }},
-    { name: 'showToolbar', action: function() { toggleToolbar(); }},
-    { name: 'showPreview', action: function() { togglePreview(); }},
-    { name: 'syncScroll', action: function() { toggleSyncScroll; }},
-    { name: 'isFullscreen', action: function() { toggleFullscreen(); }}
+  { name: 'showMenu', action: function() { toggleMenu(); }},
+  { name: 'showToolbar', action: function() { toggleToolbar(); }},
+  { name: 'showPreview', action: function() { togglePreview(); }},
+  { name: 'syncScroll', action: function() { toggleSyncScroll; }},
+  { name: 'isFullscreen', action: function() { toggleFullscreen(); }},
+  { name: 'lineNumbers', action: function() { toggleLineNumbers(); }}
 ];
 
 function getUserSettings() {
+    setWindowSize();
     opt.forEach(checkSetting)
     opt.forEach(applySettings);
     syncScrollCheck();
@@ -36,14 +42,14 @@ function applySettings(opt) {
 }
 
 var formatHead = function() {
-  var edit = $('#editArea');
-  var toolbar = $('#toolbarArea');
-  var toggle = $('#angleToolBar');
-  var menu = $('#appMenu');
-  var dragArea = $('#draggable');
-  var preview = $('#previewPanel');
-  var menuHeight = parseInt(menu.height(),10);
-  var editTop = 0;
+  var editTop = 0,
+      edit = $('#editArea'),
+      toolbar = $('#toolbarArea'),
+      toggle = $('#angleToolBar'),
+      menu = $('#appMenu'),
+      dragArea = $('#draggable'),
+      preview = $('#previewPanel'),
+      menuHeight = parseInt(menu.height(),10);
   if(menu.is(':visible')) {
     toolbar.css({ top: '26px' });
     if($('#toolbarArea:hidden').length === 0) {
@@ -70,8 +76,8 @@ var formatHead = function() {
 }
 
 function toggleMenu() {
-  var menu = $('#appMenu');
-  var buttons = $('#metacity').children('button');
+  var buttons = $('#metacity').children('button'),
+      menu = $('#appMenu');
   if(menu.attr('class') === 'hidden') {
     menu.attr('class', '');
     menu.css('visibility', 'visible');
@@ -98,8 +104,8 @@ function toggleMenu() {
 }
 
 var toggleToolbar = function() {
-  var toolbar = $('#toolbarArea');
-  var toggle = $('#angleToolBar');
+  var toolbar = $('#toolbarArea'),
+      toggle = $('#angleToolBar');
   if(toolbar.is(':visible')) {
     toggle.attr('class', 'fa fa-angle-right');
     toggle.css('padding-left', '10px');
@@ -136,6 +142,19 @@ function togglePreview() {
     settings.set('showPreview', false);
   }
   formatHead();
+}
+
+function toggleLineNumbers() {
+  if(settings.get('lineNumbers')) {
+    $('.CodeMirror-code > div').css('padding-left', '15px');
+    $('.CodeMirror-gutters').hide();
+    settings.set('lineNumbers', false);
+  } else {
+    $('.CodeMirror-code > div').css('padding-left', '22px');
+    $('.CodeMirror-gutters').show();
+    settings.set('lineNumbers', true);
+  }
+  // cm.execCommand('reload');
 }
 
 function toggleFullscreen() {
