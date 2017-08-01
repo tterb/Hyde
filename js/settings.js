@@ -25,6 +25,11 @@ function checkSetting(opt) {
     }
 }
 
+function setWindowSize() {
+    $(window).css('width', settings.get('windowWidth'));
+    $(window).css('height', settings.get('windowHeight'));
+}
+
 function syncScrollCheck() {
     var syncScroll = $('#syncScroll');
     if(settings.get('syncScroll')) {
