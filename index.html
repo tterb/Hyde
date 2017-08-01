@@ -101,11 +101,13 @@
             <ul class="dropdown-menu sub">
               <li href="#" onclick="includeTheme('base16-dark');"><a>Base16 Dark</a></li>
               <li href="#" onclick="includeTheme('base16-light');"><a>Base16 Light</a></li>
+              <li href="#" onclick="includeTheme('dracula');"><a>Dracula</a></li>
               <li href="#" onclick="includeTheme('duotone-dark');"><a>Duotone Dark</a></li>
               <li href="#" onclick="includeTheme('hopscotch');"><a>Hopscotch</a></li>
               <li href="#" onclick="includeTheme('material');"><a>Material</a></li>
               <li href="#" onclick="includeTheme('monokai');"><a>Monokai</a></li>
               <li href="#" onclick="includeTheme('one-dark');"><a>One Dark</a></li>
+              <li href="#" onclick="includeTheme('panda');"><a>Panda</a></li>
               <li href="#" onclick="includeTheme('seti');"><a>Seti</a></li>
               <li href="#" onclick="includeTheme('solarized-dark');"><a>Solarized Dark</a></li>
               <li href="#"onclick="includeTheme('solarized-light');"><a>Solarized Light</a></li>
@@ -225,6 +227,10 @@
               <table class="markdown-help-content">
                 <tbody>
                     <tr>
+                      <td id="header">Header</td>
+                      <td># Header</td>
+                    </tr>
+                    <tr>
                       <td><strong>Bold</strong></td>
                       <td>**bold**</td>
                     </tr>
@@ -237,20 +243,12 @@
                       <td>~~strikethrough~~</td>
                     </tr>
                     <tr>
-                      <td>Header</td>
-                      <td># H1     ## H2     ### H3</td>
-                    </tr>
-                    <tr>
-                      <td><li>item</li></td>
+                      <td><ul><li>item</li></ul></td>
                       <td>* item</td>
                     </tr>
                     <tr>
                       <td>Blockquote</td>
                       <td>&gt; blockquote</td>
-                    </tr>
-                    <tr>
-                      <td><span class="issue open">#123</span> (issue)</td>
-                      <td>#123</td>
                     </tr>
                     <tr>
                       <td><a href="https://github.com/JonSn0w/Hyde-MD" target="_rick">Link</a></td>
@@ -261,7 +259,7 @@
                       <td>![alt](http://)</td>
                     </tr>
                     <tr>
-                      <td><code>code</code></td>
+                      <td id="code"><code>code</code></td>
                       <td>`code`</td>
                     </tr>
                     <tr>
@@ -269,7 +267,7 @@
                       <td>$$LaTeX code$$</td>
                     </tr>
                     <tr>
-                      <td><pre style="display: inline-block; margin: 8px 0 2px"><code><span class="keyword">var </span>code = <span class="string">"formatted"</span>;</code></pre></td>
+                      <td id="code-block"><pre style="display: inline-block; margin: 8px 0 2px"><code><span class="keyword">var </span>code = <span class="string">"formatted"</span>;</code></pre></td>
                       <td style="line-height: 100%">``` <i style="color: rgba(0,0,0,0.5)">(shift+enter for line break)</i><br>var code = "formatted";<br>```</td>
                     </tr>
                 </tbody>
