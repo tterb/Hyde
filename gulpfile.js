@@ -20,14 +20,17 @@ const destDir = jetpack.cwd('./');
 const options = {
 	asar: true,
 	dir: '.',
-	icon: './img/icon.icns',
-	name: 'Hyde MD',
+	name: 'Hyde',
 	out: 'dist',
 	overwrite: true,
 	prune: true,
 	// version: electronVersion,
 	'app-version': appVersion
 };
+
+gulp.task('launch', () => {
+	electron.start();
+});
 
 gulp.task('liveReload', () => {
 	electron.start();
@@ -49,29 +52,37 @@ gulp.task('scss', () => {
   .pipe(gulp.dest(destDir.path('css')));
 });
 
-gulp.task('build:osx', (done) => {
-	options.arch = 'x64';
-	options.platform = 'darwin';
-	options['app-bundle-id'] = 'com.brettstevenson.hyde-md';
-	options['helper-bundle-id'] = 'com.brettstevenson.hyde-md.helper';
-
-	packager(options, (err, paths) => {
-		if (err) {
-			console.error(err);
-		}
-
-		done();
-	});
-});
-
 gulp.task('build:linux', () => {
 	// @TODO
 });
 
 gulp.task('build:windows', () => {
-	// @TODO
+	options.arch = 'x64';
+	options.platform = 'win';
+	options.icon = './img/icon/icon.ico';
+	options['app-bundle-id'] = 'com.brettstevenson.hyde';
+	options['helper-bundle-id'] = 'com.brettstevenson.hyde.helper';
+	packager(options, (err, paths) => {
+		if (err) { console.error(err); }
+		done();
+	});
 });
 
-gulp.task('build', ['build:osx', 'build:linux', 'build:windows', 'compile-scss']);
+gulp.task('build:osx', (done) => {
+	options.arch = 'x64';
+	options.platform = 'darwin';
+	options.icon = './img/icon/icon.icns';
+	options['app-bundle-id'] = 'com.brettstevenson.hyde';
+	options['helper-bundle-id'] = 'com.brettstevenson.hyde.helper';
+	packager(options, (err, paths) => {
+		if (err) { console.error(err); }
+		done();
+	});
+});
+
+
+gulp.task('start', ['scss', 'launch']);
 
 gulp.task('watch', ['scss', 'liveReload']);
+
+gulp.task('build', ['build:osx', 'build:linux', 'build:windows', 'compile-scss']);
