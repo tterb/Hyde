@@ -48,7 +48,7 @@
       <button id="menuButton" onclick="toggleMenu();" style="cursor: pointer;"><span class="mif-menu"></span></button>
     </div>
     <div id="metacity">
-      <button id="close" style="cursor: pointer;"><img src="img/close.png" alt="Close"/></button>
+      <button id="close" style="cursor: pointer;"><img src="img/close.png" alt="Close" onclick="closeWindow(window);"/></button>
       <button id="maximize" style="cursor: pointer;"><img src="img/max.png" alt="Maximize" onclick="toggleFullscreen();"/></button>
       <button id="minimize" style="cursor: pointer;"><img src="img/min.png" alt="Minimize"/></button>
     </div>
@@ -96,6 +96,15 @@
       <div class="btn-group">
         <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="viewMenu">View</button>
         <ul class="dropdown-menu">
+          <li tabindex="-1" href="#" onclick="reloadWin()"><a>Reload</a><span>Ctrl + R</span></li>
+          <!-- <li class="dropdown-divider"></li> -->
+          <!-- <li class="dropdown-divider"></li> -->
+          <!-- <li><a tabindex="-1" href="#" onclick="toggleDynamicFontSizing();">Toggle Dynamic Editor</a></li> -->
+          <li class="dropdown-divider"></li>
+          <li tabindex="-1" href="#" onclick="toggleMenu();"><a>Toggle Menu Bar</a><span>Ctrl + M</span></li>
+          <li tabindex="-1" href="#" onclick="toggleToolbar();"><a>Toggle Toolbar</a><span>Ctrl + .</span></li>
+          <li tabindex="-1" href="#" onclick="toggleFullscreen();"><a>Toggle Full Screen</a><span>F11</span></li>
+          <li class="dropdown-divider"></li>
           <li class="dropdown-submenu">
             <a class="test" tabindex="-1" href="#" data-toggle="dropdown">Themes <span class="caret"></span></a>
             <ul class="dropdown-menu sub">
@@ -116,12 +125,6 @@
               <li href="#" onclick="includeTheme('zenburn');"><a>Zenburn</a></li>
             </ul>
           </li>
-          <!-- <li class="dropdown-divider"></li> -->
-          <!-- <li><a tabindex="-1" href="#" onclick="toggleDynamicFontSizing();">Toggle Dynamic Editor</a></li> -->
-          <li class="dropdown-divider"></li>
-          <li tabindex="-1" href="#" onclick="toggleMenu();"><a>Toggle Menu Bar</a><span>Ctrl + M</span></li>
-          <li tabindex="-1" href="#" onclick="toggleToolbar();"><a>Toggle Toolbar</a><span>Ctrl + .</span></li>
-          <li tabindex="-1" href="#" onclick="toggleFullscreen();"><a>Toggle Full Screen</a><span>F11</span></li>
           <li class="dropdown-divider"></li>
           <li class="dropdown-submenu">
             <a class="test" tabindex="-1" href="#" data-toggle="dropdown">Preview Mode <span class="caret"></span></a>
@@ -138,13 +141,13 @@
       <div class="btn-group">
         <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="helpMenu">Help</button>
         <ul class="dropdown-menu">
-          <li tabindex="-1" href="#"><a>Documentation</a></li>
-          <li class="dropdown-divider"></li>
-          <li tabindex="-1" href="#"><a>Keybindings</a></li>
           <li tabindex="-1" href="#" data-toggle="modal" data-target="#markdown-modal"><a>Markdown Help</a></li>
+          <li class="dropdown-divider"></li>
+          <li tabindex="-1" href="#"><a>Documentation</a></li>
+          <li tabindex="-1" href="#" onclick="newFile('/docs/keybindings.md')"><a>Keybindings</a></li>
           <li tabindex="-1" href="https://github.com/JonSn0w/Hyde-MD/issues/new"><a>Report an Issue</a></li>
           <li class="dropdown-divider"></li>
-          <li tabindex="-1" href="#"><a>About Hyde</a></li>
+          <li tabindex="-1" href="#" data-toggle="modal" data-target="#about-modal"><a>About Hyde</a></li>
         </ul>
       </div>
       <div id="draggable-menu" style="-webkit-app-region:drag"></div>
@@ -282,18 +285,25 @@
       <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">About</h4>
-          </div>
           <div class="about-logo">
             <img src=""></img>
           </div>
           <div class="modal-body">
-            <section class="modal--default__content" id="modal-body-region">
-              <div class="about-hyde">
-                Our mission is to create an open-source markdown editor that improves the accessibility of markdown reliant platforms and benefit new and experienced writers, alike.
-              </div>
+            <div class="modal-header">
+              <button id="close" type="button" class="close" data-dismiss="modal"><img src="./img/close.png"></img></button>
+            </div>
+            <img id="hyde-img" src="./img/README/mongolian_bati.png"/>
+            <!-- <div class="about-hyde">
+              Our mission is to create an open-source markdown editor that improves the accessibility of markdown reliant platforms and benefit new and experienced writers, alike.
+            </div> -->
+            <div class="about-content">
+              <ul class="about-info">
+                <li>Created by <a href="https://JonSn0w.github.io/">Brett Stevenson</a></li>
+                <li>License: <a id="license" href="http://www.gnu.org/licenses/gpl.txt">GPL v3.0</a></li>
+                <li>Version: <a id="version" href="https://github.com/JonSn0w/PlayMusic/releases/tag/v0.0.1">v0.0.1</a></li>
+                <li id="check-updates"><a href="https://github.com/JonSn0w/Hyde/releases/latest">Check for Updates</a></li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
