@@ -141,7 +141,7 @@ label {
   #appMenu .hidden {
     visibility: hidden; }
   #appMenu .btn-group {
-    top: -10px;
+    top: -8px;
     height: 100%; }
     #appMenu .btn-group:first-child {
       margin-left: 6px; }
@@ -171,21 +171,21 @@ label {
       border-bottom-left-radius: 5px;
       border-bottom-right-radius: 5px;
       z-index: 0; }
-      #appMenu .btn-group .dropdown-menu > li {
+      #appMenu .btn-group .dropdown-menu li {
         padding: 2px 0;
         cursor: pointer; }
-        #appMenu .btn-group .dropdown-menu > li > a {
+        #appMenu .btn-group .dropdown-menu li a {
           display: inline;
           background-color: transparent;
-          color: rgba(255, 255, 255, 0.75);
+          color: rgba(255, 255, 255, 0.65);
           font-size: 11px;
           font-weight: 300;
           letter-spacing: 0.06em;
           text-decoration: none !important;
           padding: 3px 15px 3px 10px; }
-          #appMenu .btn-group .dropdown-menu > li > a:hover, #appMenu .btn-group .dropdown-menu > li > a:focus, #appMenu .btn-group .dropdown-menu > li > a:active {
+          #appMenu .btn-group .dropdown-menu li a:hover, #appMenu .btn-group .dropdown-menu li a:focus, #appMenu .btn-group .dropdown-menu li a:active {
             color: #f0f0f0; }
-        #appMenu .btn-group .dropdown-menu > li > span {
+        #appMenu .btn-group .dropdown-menu li span {
           display: inline;
           position: relative;
           color: rgba(255, 255, 255, 0.3);
@@ -195,11 +195,14 @@ label {
           right: 10px;
           float: right;
           padding-top: 1.5px; }
-        #appMenu .btn-group .dropdown-menu > li:hover, #appMenu .btn-group .dropdown-menu > li:active {
+        #appMenu .btn-group .dropdown-menu li:hover, #appMenu .btn-group .dropdown-menu li:active {
           background: #3a3b39;
           box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.4); }
-          #appMenu .btn-group .dropdown-menu > li:hover > a, #appMenu .btn-group .dropdown-menu > li:active > a {
+          #appMenu .btn-group .dropdown-menu li:hover a, #appMenu .btn-group .dropdown-menu li:active a {
             color: #f0f0f0; }
+          #appMenu .btn-group .dropdown-menu li:hover span, #appMenu .btn-group .dropdown-menu li:active span {
+            font-weight: 400;
+            color: #f34957; }
       #appMenu .btn-group .dropdown-menu .dropdown-divider {
         background: rgba(255, 255, 255, 0.075);
         height: 1px;
@@ -312,7 +315,7 @@ label {
   .bottom-bar #file-status {
     display: inline-block;
     position: relative;
-    color: #de5464;
+    color: #de545f;
     font-size: 14px;
     top: 2px;
     left: -1px;
@@ -586,6 +589,11 @@ input[type="checkbox"] {
   #leftPanel .topFade {
     left: 0; }
 
+.CodeMirror {
+  font-size: 0.9em;
+  letter-spacing: 0.02em;
+  line-height: 1.6; }
+
 #rightPanel {
   position: absolute;
   right: 0;
@@ -666,15 +674,11 @@ input[type="checkbox"] {
 
 .modal-header {
   background-image: -webkit-linear-gradient(top, #333231, #292827);
-  border-bottom-color: #494949; }
+  border-bottom-color: #494949;
+  padding: 10px 15px; }
 
-.modal-header .close {
-  position: absolute;
-  background: transparent;
-  color: transparent;
-  font-size: 25px;
-  top: -3px;
-  right: 3px; }
+.modal-title {
+  font-weight: 200; }
 
 #unsaved-modal .modal-title {
   margin: 0 0 0 6px; }
@@ -713,7 +717,7 @@ input[type="checkbox"] {
 
 .close img {
   position: absolute;
-  width: 16.5px;
+  width: 16px;
   top: 6px;
   right: 1px;
   opacity: 1;
@@ -724,6 +728,62 @@ input[type="checkbox"] {
 #markdown-modal .close img {
   top: 18px;
   right: 12px; }
+
+#about-modal .modal-dialog {
+  width: 42%;
+  border-radius: 20px;
+  margin: 80px auto; }
+#about-modal .modal-header {
+  background: transparent;
+  height: 19px;
+  border-bottom: none;
+  padding-top: 0;
+  padding-bottom: 0; }
+#about-modal .modal-body {
+  background-image: -webkit-linear-gradient(top, #292827, #252423);
+  padding-top: 0; }
+#about-modal .about-content {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 16px;
+  font-weight: 300;
+  letter-spacing: 0.035em;
+  width: 90%;
+  text-align: center;
+  margin: 20px auto 10px; }
+#about-modal .close img {
+  position: absolute;
+  width: 16px;
+  top: 12px;
+  right: 14px; }
+#about-modal .close:active > img, #about-modal .close > img:hover {
+  content: url("../img/close_active.png"); }
+#about-modal #hyde-img {
+  width: 50%;
+  height: auto;
+  margin: auto;
+  margin: 8px 4px 5px; }
+#about-modal a {
+  color: #de545f;
+  font-size: 14px;
+  border-bottom: none; }
+  #about-modal a:hover, #about-modal a:active {
+    text-decoration: none;
+    border-bottom: 1px solid rgba(222, 84, 95, 0.6); }
+#about-modal ul {
+  list-style: none;
+  margin: 4px auto;
+  padding: 0; }
+  #about-modal ul li {
+    font-size: 12px;
+    line-height: 1.5;
+    margin-bottom: 2px; }
+#about-modal #check-updates {
+  font-size: 19px;
+  font-weight: 400;
+  margin-top: 5px; }
+  #about-modal #check-updates a:hover, #about-modal #check-updates a:active {
+    font-weight: 600;
+    border-bottom: none !important; }
 
 .bg-gradient1 span,
 .bg-gradient1:before {
@@ -831,6 +891,7 @@ pre {
   border-radius: 10px; }
 
 code {
+  font-family: "Source Code Pro", "Monaco", "Ubuntu Mono", "Dejavu Sans Mono", "Consolas", monospace !important;
   background: #414141;
   color: #eee;
   white-space: nowrap; }
@@ -844,22 +905,29 @@ code {
       background-color: #b2b0ad; }
     .markdown-help-content tr:first-child td {
       border-top: 0; }
+    .markdown-help-content tr td:last-child {
+      border-right: none;
+      padding-left: 20px; }
   .markdown-help-content td {
+    width: 50%;
     border-top: 1px solid rgba(38, 50, 56, 0.1);
-    min-width: 180px; }
-
-.markdown-help-content tr {
-  line-height: 30px; }
-
-.markdown-help-content tr:nth-child(even) {
-  background-color: #b2b0ad; }
-
-.markdown-help-content tr:first-child td {
-  border-top: 0; }
-
-.markdown-help-content td {
-  border-top: 1px solid rgba(38, 50, 56, 0.1);
-  min-width: 180px; }
+    border-right: 1px solid rgba(38, 50, 56, 0.1);
+    padding-left: 15px; }
+    .markdown-help-content td ul {
+      margin: 0;
+      padding-left: 12px; }
+    .markdown-help-content td pre {
+      font-size: 12px;
+      padding: 9px; }
+  .markdown-help-content #header {
+    font-size: 24px;
+    font-weight: 600;
+    padding-left: 12px;
+    padding-bottom: 5px; }
+  .markdown-help-content #code {
+    padding-left: 13px; }
+  .markdown-help-content #code-block {
+    padding-left: 8px; }
 
 ::-webkit-scrollbar {
   width: 8px; }
@@ -875,7 +943,7 @@ code {
   color: #2a2a2a;
   font-family: "Open Sans", "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
   font-size: 10pt;
-  letter-spacing: 0.035em;
+  letter-spacing: 0.0375em;
   line-height: 1.45;
   text-rendering: geometricPrecision;
   overflow: auto; }
@@ -918,7 +986,9 @@ code {
     vertical-align: middle;
     box-sizing: content-box; }
   #markdown ol, #markdown ul {
-    line-height: 1.75; }
+    line-height: 1.6; }
+  #markdown li {
+    margin-bottom: 5px; }
   #markdown a {
     color: #237aa7;
     text-decoration: none; }
@@ -936,6 +1006,7 @@ code {
     margin: 15px 0;
     padding: 9.5px 18px; }
   #markdown pre code {
+    font-family: "Source Code Pro", "Monaco", "Ubuntu Mono", "Dejavu Sans Mono", "Consolas", monospace !important;
     color: rgba(255, 255, 255, 0.75);
     letter-spacing: 0.045em;
     border-radius: 10px; }
@@ -967,7 +1038,7 @@ code {
     #markdown table thead tr {
       line-height: 1.5; }
   #markdown kbd {
-    background-image: -webkit-linear-gradient(top, #fafafa, #ebebeb);
+    background-image: -webkit-linear-gradient(top, #f5f5f5, #e6e6e6);
     color: rgba(0, 0, 0, 0.7);
     font-size: 8pt;
     border: solid 1px #c6cbd1;
