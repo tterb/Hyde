@@ -57,7 +57,7 @@
       <div class="btn-group">
         <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="fileMenu">File</button>
         <ul class="dropdown-menu">
-          <li tabindex="-1" href="#" onclick="handleNewButton();"><a>New</a><span>Ctrl + N</span></li>
+          <li tabindex="-1" href="#" onclick="openNewWindow();"><a>New</a><span>Ctrl + N</span></li>
           <li tabindex="-1" href="#" onclick="openFile();"><a>Open</a><span>Ctrl + O</span></li>
           <li class="dropdown-divider"></li>
           <li tabindex="-1" href="#" onclick="saveFile();"><a>Save</a><span>Ctrl + S</span></li>
@@ -85,9 +85,9 @@
           <li tabindex="-1" href="#" onclick="toggleSearch('find');"><a>Find</a><span>Ctrl + F</span></li>
           <li tabindex="-1" href="#" onclick="toggleSearch('replace');"><a>Replace</a><span>Ctrl + Shift + F</span></li>
           <li class="dropdown-divider"></li>
-          <li tabindex="-1" href="#" onclick="cm.execCommand('indentAuto');"><a>Auto-Indent</a><span>Ctrl + Shift + A</span></li>
           <li tabindex="-1" href="#" onclick="cm.execCommand('indentLess');"><a>Indent Left</a><span>Ctrl + Left</span></li>
           <li tabindex="-1" href="#" onclick="cm.execCommand('indentMore');"><a>Indent Right</a><span>Ctrl + Right</span></li>
+          <li tabindex="-1" href="#" onclick="cm.execCommand('indentAuto');"><a>Auto-Indent</a><span>Ctrl + Shift + A</span></li>
           <li class="dropdown-divider"></li>
           <li tabindex="-1" href="#" onclick="toggleComment();"><a>Toggle Comment</a><span>Ctrl + /</span></li>
         </ul>
@@ -98,11 +98,11 @@
         <ul class="dropdown-menu">
           <li tabindex="-1" href="#" onclick="reloadWin()"><a>Reload</a><span>Ctrl + R</span></li>
           <!-- <li class="dropdown-divider"></li> -->
-          <!-- <li class="dropdown-divider"></li> -->
           <!-- <li><a tabindex="-1" href="#" onclick="toggleDynamicFontSizing();">Toggle Dynamic Editor</a></li> -->
           <li class="dropdown-divider"></li>
           <li tabindex="-1" href="#" onclick="toggleMenu();"><a>Toggle Menu Bar</a><span>Ctrl + M</span></li>
           <li tabindex="-1" href="#" onclick="toggleToolbar();"><a>Toggle Toolbar</a><span>Ctrl + .</span></li>
+          <li tabindex="-1" href="#" onclick="togglePreview();"><a>Toggle Preview</a><span>Ctrl + P</span></li>
           <li tabindex="-1" href="#" onclick="toggleFullscreen();"><a>Toggle Full Screen</a><span>F11</span></li>
           <li class="dropdown-divider"></li>
           <li class="dropdown-submenu">
@@ -180,12 +180,11 @@
       <section id="sidebar">
         <img id="side-logo" src="img/icon/icon.png"/>
         <ul id="side-menu">
-          <li id="sidebar-new"><a onclick="newFile();">New</a></li>
-          <li id="sidebar-open"><a onclick="openFile();">Open</a></li>
+          <li id="sidebar-new"><a onclick="openNewWindow();">New</a></li>
+          <li id="sidebar-open"><a>Open</a></li>
           <li id="sidebar-save"><a onclick="saveFile();">Save</a></li>
-          <li id="sidebar-save-as"><a onclick="saveFileAs();">Save As</a></li>
           <li id="sidebar-settings"><a onclick="openSettings();">Settings</a></li>
-          <li id="sidebar-about"><a onclick="">About</a></li>
+          <li id="sidebar-about"><a href="#" data-toggle="modal" data-target="#about-modal" onclick="toggleSidebar()">About</a></li>
         </ul>
         <ul id="side-icons">
           <li class="fa fa-github" alt="View on GitHub"><a href="https://github.com/JonSn0w/Hyde-MD"></a></li>
@@ -209,7 +208,7 @@
     </section>
     <div class="search-dialog" id="search-container"><span id="search-icon" class="fa fa-search"></span></div>
     <div class="bottom-bar">
-      <div id="bottom-file">None</div><span id="file-status">*</span>
+      <div id="bottom-file">New Document</div><span id="file-status">*</span>
       <div id="wordcount"></div>
       <div id="draggable" style="-webkit-app-region:drag"></div>
       <button id="syncScroll" onclick="toggleSyncScroll();"></button>
@@ -293,9 +292,6 @@
               <button id="close" type="button" class="close" data-dismiss="modal"><img src="./img/close.png"></img></button>
             </div>
             <img id="hyde-img" src="./img/README/mongolian_bati.png"/>
-            <!-- <div class="about-hyde">
-              Our mission is to create an open-source markdown editor that improves the accessibility of markdown reliant platforms and benefit new and experienced writers, alike.
-            </div> -->
             <div class="about-content">
               <ul class="about-info">
                 <li>Created by <a href="https://JonSn0w.github.io/">Brett Stevenson</a></li>
