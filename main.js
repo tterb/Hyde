@@ -130,7 +130,7 @@ var template = [
       {label: "Replace", accelerator: "CmdOrCtrl+Shift+F", click: function() { sendShortcut('CmdOrCtrl+shift+f'); }
       },
       {type: "separator"},
-      {label: "Auto-Indent", accelerator: "CmdOrCtrl+Shift+A", click: function() { sendShortcut('CmdOrCtrl+shift+a'); }
+      {label: "Auto-Indent", accelerator: "CmdOrCtrl+Shift+A", click: function() { sendShortcut('ctrl+shift+a'); }
       },
       {label: "Indent Left", accelerator: "CmdOrCtrl+Left", click: function() { sendShortcut('CmdOrCtrl+left'); }
       },
@@ -162,7 +162,7 @@ var template = [
       },
       { label: "Toggle Toolbar", accelerator:"CmdOrCtrl+.", click: function() { sendShortcut('CmdOrCtrl+.'); }
       },
-      { label: "Toggle Preview", accelerator:"CmdOrCtrl+Shift+M", click: function() { sendShortcut("CmdOrCtrl+Shift+M"); }
+      { label: "Toggle Preview", accelerator:"CmdOrCtrl+P", click: function() { sendShortcut("CmdOrCtrl+p"); }
       },
       { label: "Toggle Full Screen", accelerator:"F11", click: function() {
         var focusedWindow = BrowserWindow.getFocusedWindow();
@@ -212,23 +212,26 @@ function sendShortcut(cmd) {
 }
 
 // Regestering local shortcuts for formatting markdown
-localShortcut.register('CmdOrCtrl+b', function() { sendShortcut('ctrl+b'); });
-localShortcut.register('CmdOrCtrl+i', function() { sendShortcut('ctrl+i'); });
-localShortcut.register('CmdOrCtrl+-', function() { sendShortcut('ctrl+-'); });
-localShortcut.register('CmdOrCtrl+/', function() { sendShortcut('ctrl+/'); });
-localShortcut.register('CmdOrCtrl+l', function() { sendShortcut('ctrl+l'); });
-localShortcut.register('CmdOrCtrl+f', function() { sendShortcut('ctrl+f'); });
-localShortcut.register('CmdOrCtrl+Shift+f', function() { sendShortcut('ctrl+shift+f'); });
-localShortcut.register('CmdOrCtrl+h', function() { sendShortcut('ctrl+h'); });
-localShortcut.register('CmdOrCtrl+Alt+i', function() { sendShortcut('ctrl+alt+i'); });
-localShortcut.register('CmdOrCtrl+Shift+t', function() { sendShortcut('ctrl+shift+t'); });
-localShortcut.register('CmdOrCtrl+Shift+-', function() { sendShortcut('ctrl+shift+-'); });
-localShortcut.register('CmdOrCtrl+r', function() { sendShortcut('ctrl+r'); });
-localShortcut.register('CmdOrCtrl+m', function() { sendShortcut('ctrl+m'); });
-localShortcut.register('CmdOrCtrl+.', function() { sendShortcut('ctrl+.'); });
-localShortcut.register('CmdOrCtrl+Shift+m', function() { sendShortcut('ctrl+shift+m'); });
-localShortcut.register('CmdOrCtrl+,', function() { sendShortcut('ctrl+,'); });
-
+localShortcut.register('CmdOrCtrl+b', () =>  { sendShortcut('ctrl+b'); });
+localShortcut.register('CmdOrCtrl+i',() => { sendShortcut('ctrl+i'); });
+localShortcut.register('CmdOrCtrl+-',() => { sendShortcut('ctrl+-'); });
+localShortcut.register('CmdOrCtrl+/', () => { sendShortcut('ctrl+/'); });
+localShortcut.register('CmdOrCtrl+l', () => { sendShortcut('ctrl+l'); });
+localShortcut.register('CmdOrCtrl+f', () => { sendShortcut('ctrl+f'); });
+localShortcut.register('CmdOrCtrl+Shift+f', () => { sendShortcut('ctrl+shift+f'); });
+localShortcut.register('CmdOrCtrl+h', () => { sendShortcut('ctrl+h'); });
+localShortcut.register('CmdOrCtrl+Alt+i', () => { sendShortcut('ctrl+alt+i'); });
+localShortcut.register('CmdOrCtrl+Shift+t', () => { sendShortcut('ctrl+shift+t'); });
+localShortcut.register('CmdOrCtrl+Shift+-', () => { sendShortcut('ctrl+shift+-'); });
+localShortcut.register('CmdOrCtrl+r', () => { sendShortcut('ctrl+r'); });
+localShortcut.register('CmdOrCtrl+m', () => { sendShortcut('ctrl+m'); });
+localShortcut.register('CmdOrCtrl+.', () => { sendShortcut('ctrl+.'); });
+localShortcut.register('CmdOrCtrl+p', () => { sendShortcut('ctrl+p'); });
+localShortcut.register('CmdOrCtrl+,', () => { sendShortcut('ctrl+,'); });
+localShortcut.register('CmdOrCtrl+up', () => { sendShortcut('ctrl+up'); });
+localShortcut.register('CmdOrCtrl+left', () => { sendShortcut('ctrl+left'); });
+localShortcut.register('CmdOrCtrl+right', () => { sendShortcut('ctrl+right'); });
+localShortcut.register('CmdOrCtrl+down', () => { sendShortcut('ctrl+down'); });
 
 // This method will be called when Electron has finished initialization
 // app.on('ready', createWindow);

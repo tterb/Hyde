@@ -1,4 +1,5 @@
-const ipcRenderer = require('electron').ipcRenderer;
+
+const ipcRenderer = electron.ipcRenderer;
 
 // Handling file saving through IPCRenderer
 function saveAs() {
@@ -16,7 +17,7 @@ function saveAs() {
       storage.set('markdown-savefile', {'filename' : fileName}, function(error) { if (error) alert(error); });
 
       var mdValue = cm.getValue();
-      // fileName is a string that contains the path and filename created in the save file dialog.
+      // fileName is a string that contains the path and filename created in the save dialog.
       fs.writeFile(fileName, mdValue, function (err) {
         if(err) {
           alert("An error ocurred creating the file "+ err.message)
@@ -69,34 +70,39 @@ ipc.on('file-save', function() {
 
 ipc.on('file-save-as', saveAs);
 
+
 // Handling file opening through IPCRenderer
 ipc.on('file-open', function() {
   storage.get('markdown-savefile', function(error, data) {
     if (error) alert(error);
-
-    var options = {'properties' : ['openFile'], 'filters' : [{name: 'Markdown', 'extensions':['md']}]};
+    var options = {
+      'properties': ['openFile'],
+      'filters': [{
+        name: 'Markdown',
+        'extensions': ['md']
+      }]
+    };
     if ('filename' in data) {
       options.defaultPath = data.filename;
     }
 
-    dialog.showOpenDialog(options, function (fileName) {
-      if (fileName === undefined) {
+    dialog.showOpenDialog(options, function (file) {
+      if (file === undefined) {
         console.log("You didn't open the file");
         return;
       }
 
-      storage.set('markdown-savefile', {'filename' : fileName[0]}, function(error) { if (error) alert(error); });
+      storage.set('markdown-savefile', {'filename' : file[0]}, function(error) { if (error) alert(error); });
 
       var mdValue = cm.getValue();
       // fileName is a string that contains the path and filename created in the save file dialog.
-      fs.readFile(fileName[0], 'utf-8', function (err, data) {
-        if(err){
-          alert("An error ocurred while opening the file "+ err.message)
-        }
+      fs.readFile(file[0], 'utf-8', function (err, data) {
+        if (err) { alert("An error ocurred while opening the file "+ err.message); }
         cm.getDoc().setValue(data);
       });
+      // app.addRecentDocument(file);
       this.isFileLoadedInitially = true;
-      this.currentFile = fileName[0];
+      this.currentFile = file[0];
     });
   });
 });
@@ -107,82 +113,28 @@ function copySelected() {
     clipboard.writeText(content);
 }
 
-ipc.on('ctrl+b', function() {
-  toggleFormat('bold');
-});
-
-ipc.on('ctrl+i', function() {
-  toggleFormat('italic');
-});
-
-ipc.on('ctrl+-', function() {
-  toggleFormat('strikethrough');
-});
-
-ipc.on('ctrl+/', function() {
-  toggleComment();
-});
-
-ipc.on('ctrl+h', function() {
-  toggleHeading();
-});
-
-ipc.on('ctrl+l', function() {
-  insert('link');
-});
-
-ipc.on('ctrl+alt+i', function() {
-  insert('image');
-});
-
-ipc.on('ctrl+shift+t', function() {
-  insert('table');
-});
-
-ipc.on('ctrl+shift+-', function() {
-  insert('hr');
-});
-
-ipc.on('ctrl+f', function() {
-  toggleSearch('find');
-});
-
-ipc.on('ctrl+shift+f', function() {
-  toggleSearch('replace');
-});
-
-ipc.on('ctrl+shift+a', function() {
-  cm.execCommand('indentAuto');
-});
-
-ipc.on('ctrl+left', function() {
-  cm.execCommand('indentLess');
-});
-
-ipc.on('ctrl+right', function() {
-  cm.execCommand('indentMore');
-});
-
-ipc.on('ctrl+m', function() {
-  toggleMenu();
-});
-
-ipc.on('ctrl+.', function() {
-  toggleToolbar();
-});
-
-ipc.on('ctrl+shift+M', function() {
-  togglePreview();
-});
-
-ipc.on('ctrl+,', function() {
-  openSettings();
-});
-
-ipc.on('ctrl+p', function() {
-  ipcRenderer.send('show-settings-window');
-});
-
+ipc.on('ctrl+b', () => { toggleFormat('bold'); });
+ipc.on('ctrl+i', () => { toggleFormat('italic'); });
+ipc.on('ctrl+-', () => { toggleFormat('strikethrough'); });
+ipc.on('ctrl+/', () => { toggleComment(); });
+ipc.on('ctrl+h', () => { toggleHeading(); });
+ipc.on('ctrl+l', () => { insert('link'); });
+ipc.on('ctrl+alt+i', () => { insert('image'); });
+ipc.on('ctrl+shift+t', () => { insert('table'); });
+ipc.on('ctrl+shift+-', () => { insert('hr'); });
+ipc.on('ctrl+f', () => { toggleSearch('find'); });
+ipc.on('ctrl+shift+f', () => { toggleSearch('replace'); });
+ipc.on('ctrl+shift+a', () => { cm.execCommand('indentAuto'); });
+ipc.on('ctrl+left', () => { cm.execCommand('indentLess'); });
+ipc.on('ctrl+right', () => { cm.execCommand('indentMore'); });
+ipc.on('ctrl+r', () => { reloadWin(); });
+ipc.on('ctrl+m', () => { toggleMenu(); });
+ipc.on('ctrl+.', () => { toggleToolbar(); });
+ipc.on('ctrl+p', () => { togglePreview(); });
+ipc.on('ctrl+,', () => { openSettings(); });
+// ipc.on('ctrl+p', () => { ipcRenderer.send('show-settings-window'); });
+ipc.on('ctrl+up', () => { cm.execCommand('goDocStart'); });
+ipc.on('ctrl+down', () => { cm.execCommand('goDocEnd'); });
 ipc.on('file-pdf', () => {
   // Only save PDF files
   options = {
