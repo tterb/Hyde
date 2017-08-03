@@ -107,7 +107,7 @@
           <li class="dropdown-divider"></li>
           <li class="dropdown-submenu">
             <a class="test" tabindex="-1" href="#" data-toggle="dropdown">Themes <span class="caret"></span></a>
-            <ul class="dropdown-menu sub">
+            <ul class="dropdown-menu sub" id="themes-menu">
               <li href="#" onclick="includeTheme('base16-dark');"><a>Base16 Dark</a></li>
               <li href="#" onclick="includeTheme('base16-light');"><a>Base16 Light</a></li>
               <li href="#" onclick="includeTheme('dracula');"><a>Dracula</a></li>
@@ -129,8 +129,8 @@
           <li class="dropdown-submenu">
             <a class="test" tabindex="-1" href="#" data-toggle="dropdown">Preview Mode <span class="caret"></span></a>
             <ul class="dropdown-menu sub">
-              <li href="#" value="markdown" onclick="clkPref(this);"><a>Markdown</a></li>
-              <li href="#" value="html" onclick="clkPref(this);"><a>HTML</a></li>
+              <li href="#" value="markdown" onclick="setPreviewMode('markdown');"><a>Markdown</a></li>
+              <li href="#" value="html" onclick="setPreviewMode('html');"><a>HTML</a></li>
             </ul>
           </li>
           <li class="dropdown-divider"></li>
@@ -173,7 +173,7 @@
       </div>
     </div>
     <!-- <div id="editorFade"></div><div id="previewFade"></div> -->
-    <section class="row" id="editArea">
+    <section id="editArea" class="row">
       <div id="side-trigger">
         <button id="side-button" onclick="toggleSidebar()" style="visibility:hidden;"/><img id="side-img" src="img/right-arrow.png"/>
       </div>
@@ -284,9 +284,6 @@
       <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
-          <div class="about-logo">
-            <img src=""></img>
-          </div>
           <div class="modal-body">
             <div class="modal-header">
               <button id="close" type="button" class="close" data-dismiss="modal"><img src="./img/close.png"></img></button>

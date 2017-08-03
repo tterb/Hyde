@@ -1,16 +1,9 @@
+
 const {clipboard} = require('electron');
 const {webContents} = require('electron');
 
-var clkPref = function (opt) {
-  currentValue = opt.value;
-  if (currentValue === 'markdown') {
-    $('#htmlPreview').hide();
-    $('#markdown').show();
-  } else if (currentValue === 'html') {
-    $('#markdown').hide();
-    $('#htmlPreview').show();
-  }
-  settings.set('previewMode', opt)
+function reloadWin() {
+  remote.getCurrentWindow().reload();
 }
 
 function toggleDeveloper() {
@@ -49,11 +42,11 @@ function toggleSidebar() {
   if(parseInt(sidebar.css('left'), 10) < 0) {
     button.css('visibility','hidden');
     sidebar.css('left', '0px');
-    trigger.css('left','250px');
+    trigger.css('left','240px');
     buttonImg.attr('src','img/left-arrow.png');
   } else {
     button.css('visibility','hidden');
-    sidebar.css('left', '-250px');
+    sidebar.css('left', '-240px');
     trigger.css('left','0px');
     buttonImg.attr('src','img/right-arrow.png');
   }
@@ -61,16 +54,20 @@ function toggleSidebar() {
 
 
 function copySelected() {
-  var content = "Text that will be now on the clipboard as text";
-  clipboard.writeText(content);
+    clipboard.writeText(cm.getSelection().toString());
 }
 
 function pasteSelected() {
-  var content = clipboard.readText();
+  cm.replaceSelection(clipboard.readText());
 }
 
 function openFile() {
-  electron.remote.getCurrentWindow().webContents.send('file-open');
+  if(this.cm.getValue === "")
+    electron.remote.getCurrentWindow().webContents.send('file-open');
+  else {
+    // TODO Open file in new window
+    electron.remote.getCurrentWindow().webContents.send('file-open');
+  }
 }
 
 function saveFile() {
@@ -86,49 +83,39 @@ function exportToPDF() {
 }
 
 function selectMarkdown() {
-  document.getElementById('previewPanel').focus();
+  $('#previewPanel').focus();
 }
+
 // Generations and clean state of CodeMirror
-var getGeneration = function () {
-  return this.cm.doc.changeGeneration();
-}
-
-var setClean = function () {
-  this.latestGeneration = this.getGeneration();
-}
-
-var isClean = function () {
-  return this.cm.doc.isClean(this.latestGeneration);
-}
+var getGeneration = () => { return this.cm.doc.changeGeneration(); }
+var setClean = () => { this.latestGeneration = this.getGeneration(); }
+var isClean = () => { return this.cm.doc.isClean(this.latestGeneration); }
 
 // Update window title on various events
-var updateWindowTitle = function (path) {
+var updateWindowTitle = function(path) {
   var appName = "Hyde",
+      activeFile = $('#bottom-file'),
+      status = $('#file-status'),
       isClean = this.isClean(),
       saveSymbol = "*",
-      parsedPath,
       filename,
-      dir,
       title;
-
-  if (path) {
-    parsedPath = parsePath(path);
-    dir = parsedPath.dirname || process.cwd();
+  if(path) {
     title = appName + " - " + path.toString();
-    filename = parsedPath.basename;
+    filename = parsePath(path).basename;
   } else {
     title = appName;
     filename = 'New document';
   }
   if (!this.isClean()) {
     title = saveSymbol + title;
-    $('#file-status').css('visibility', 'visible');
+    status.css('visibility', 'visible');
   } else {
-    $('#file-status').css('visibility', 'hidden');
+    status.css('visibility', 'hidden');
   }
   document.title = title;
-  $('#bottom-file').html(filename);
-  $('#bottom-file').title = path.toString();
+  activeFile.html(filename);
+  activeFile.title = path.toString();
 }
 
 function openSettings() {
@@ -142,7 +129,7 @@ function openModal(opt) {
       frame: false,
       autoHideMenuBar: true,
       modal: true
-  })
+  });
   var path = 'file://' + __dirname + '/modal/' + opt.toString() + '.html';
   win.loadURL(path);
 }
@@ -152,19 +139,10 @@ function toggleSearch(opt) {
       searchBar = $('.CodeMirror-dialog-top');
   if(!searchBar.is(':visible')) {
     dialog.css('visibility', 'visible');
-    if(opt === 'find') {
+    if(opt === 'find')
       cm.execCommand('find');
-    } else if(opt === 'replace') {
+    else if(opt === 'replace')
       cm.execCommand('replace');
-    } else { return; }
+    else return;
   }
-}
-
-function getPOS() {
-    var word = cm.findWordAt(cm.getCursor());
-    return 'Cursor: '+cm.getCursor().ch.toString()+'\nStart: '+word.anchor.ch.toString()+'       End: '+word.head.ch.toString()+'\nWord: '+cm.getRange(word.anchor, word.head).toString()+'\nSelection: ('+cm.getCursor("start").ch.toString()+', '+cm.getCursor("end").ch.toString()+')';
-}
-
-function getHistory() {
-    return this.cm.doc.historySize();
 }
