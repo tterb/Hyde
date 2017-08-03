@@ -158,13 +158,13 @@ label {
       border-right: 1px outset #494b50;
       padding: 3px 0 2px; }
       #appMenu .btn-group > button:hover, #appMenu .btn-group > button:focus, #appMenu .btn-group > button:active {
-        background: #313029;
+        background: #312930;
         color: rgba(255, 255, 255, 0.75);
-        border-top: 1px inset #424443;
-        border-bottom: 1px inset #424443; }
+        border-top: 1px inset #434443;
+        border-bottom: 1px inset #434443; }
     #appMenu .btn-group .dropdown-menu {
-      background-color: #2d2e2c;
-      color: rgba(255, 255, 255, 0.75);
+      background-color: #2c2b2c;
+      color: rgba(255, 255, 255, 0.65);
       font-size: 11px;
       min-width: 175px;
       top: 82%;
@@ -183,7 +183,7 @@ label {
           letter-spacing: 0.06em;
           text-decoration: none !important;
           padding: 3px 15px 3px 10px; }
-          #appMenu .btn-group .dropdown-menu li a:hover, #appMenu .btn-group .dropdown-menu li a:focus, #appMenu .btn-group .dropdown-menu li a:active {
+          #appMenu .btn-group .dropdown-menu li a:hover, #appMenu .btn-group .dropdown-menu li a:active {
             color: #f0f0f0; }
         #appMenu .btn-group .dropdown-menu li span {
           display: inline;
@@ -196,7 +196,7 @@ label {
           float: right;
           padding-top: 1.5px; }
         #appMenu .btn-group .dropdown-menu li:hover, #appMenu .btn-group .dropdown-menu li:active {
-          background: #3a3b39;
+          background: #3a393b;
           box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.4); }
           #appMenu .btn-group .dropdown-menu li:hover a, #appMenu .btn-group .dropdown-menu li:active a {
             color: #f0f0f0; }
@@ -224,32 +224,35 @@ label {
 
 .dropdown-submenu {
   position: relative;
-  background-color: #2d2e2c;
-  color: rgba(255, 255, 255, 0.75);
+  background-color: #2c2b2c;
+  color: rgba(255, 255, 255, 0.65);
   font-size: 11px;
   top: 82%;
   z-index: 0;
   border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px; }
+  border-bottom-right-radius: 5px;
+  visibility: visible !important; }
   .dropdown-submenu .sub {
     top: -5px !important; }
+    .dropdown-submenu .sub li {
+      color: rgba(255, 255, 255, 0.65) !important; }
   .dropdown-submenu .dropdown-menu {
     top: 0;
     left: 100%;
     margin-top: -1px; }
-    .dropdown-submenu .dropdown-menu > li {
+    .dropdown-submenu .dropdown-menu li {
       padding: 2px 0; }
-      .dropdown-submenu .dropdown-menu > li > a {
+      .dropdown-submenu .dropdown-menu li a {
         display: inline;
         background-color: transparent;
-        color: rgba(255, 255, 255, 0.75);
+        color: rgba(255, 255, 255, 0.65);
         font-size: 11px;
         letter-spacing: 0.06em;
         text-decoration: none !important;
         padding: 3px 15px 3px 10px; }
-        .dropdown-submenu .dropdown-menu > li > a:hover, .dropdown-submenu .dropdown-menu > li > a:focus, .dropdown-submenu .dropdown-menu > li > a:active {
+        .dropdown-submenu .dropdown-menu li a:hover, .dropdown-submenu .dropdown-menu li a:focus, .dropdown-submenu .dropdown-menu li a:active {
           color: #f0f0f0; }
-      .dropdown-submenu .dropdown-menu > li > span {
+      .dropdown-submenu .dropdown-menu li span {
         display: inline;
         position: relative;
         color: rgba(255, 255, 255, 0.2);
@@ -259,11 +262,14 @@ label {
         right: 10px;
         float: right;
         padding-top: 1.5px; }
-      .dropdown-submenu .dropdown-menu > li:hover, .dropdown-submenu .dropdown-menu > li:active {
-        background: #3a3b39;
+      .dropdown-submenu .dropdown-menu li:hover, .dropdown-submenu .dropdown-menu li:active {
+        background: #3a393b;
         box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.4); }
-        .dropdown-submenu .dropdown-menu > li:hover > a, .dropdown-submenu .dropdown-menu > li:active > a {
+        .dropdown-submenu .dropdown-menu li:hover a, .dropdown-submenu .dropdown-menu li:active a {
           color: #f0f0f0; }
+        .dropdown-submenu .dropdown-menu li:hover span, .dropdown-submenu .dropdown-menu li:active span {
+          font-weight: 400;
+          color: #f34957; }
 
 #buttons {
   display: inline-block;
@@ -455,10 +461,10 @@ input[type="checkbox"] {
 #sidebar {
   display: block;
   position: absolute;
-  background: #31302f;
+  background-image: -webkit-linear-gradient(#343233 40%, #292728);
   color: rgba(255, 255, 255, 0.75);
   height: 100%;
-  width: 250px;
+  width: 240px;
   top: 0;
   left: -250px;
   box-shadow: 0 0 16px rgba(0, 0, 0, 0.4);
@@ -466,10 +472,10 @@ input[type="checkbox"] {
   z-index: 99999; }
   #sidebar #side-logo {
     position: relative;
-    width: 70%;
+    width: 68%;
     height: auto;
     left: 0;
-    margin: 15px 15%;
+    margin: 25px 16% 20px;
     opacity: 0.9; }
   #sidebar #side-menu {
     position: relative;
@@ -500,13 +506,14 @@ input[type="checkbox"] {
   #sidebar #side-icons {
     width: 40%;
     text-shadow: 0 2px rgba(0, 0, 0, 0.2);
-    margin: 30px auto 0;
+    margin: 30px 30% 8px;
     padding: 0; }
     #sidebar #side-icons li {
       position: relative;
       font-size: 23px;
       color: #666;
-      padding-right: 12px; }
+      padding-right: 12px;
+      cursor: pointer; }
       #sidebar #side-icons li:first-child {
         font-size: 27px; }
       #sidebar #side-icons li:last-child {
@@ -517,7 +524,7 @@ input[type="checkbox"] {
         color: #888; }
 
 .mdHtml {
-  display: none;
+  display: block;
   width: 100%;
   height: 100%;
   resize: none;
@@ -559,7 +566,7 @@ input[type="checkbox"] {
 
 .topFade {
   position: absolute;
-  height: 45px;
+  height: 40px;
   width: 98%;
   top: 0;
   z-index: 1010; }
@@ -608,7 +615,7 @@ input[type="checkbox"] {
   font-family: "Open Sans", "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif !important;
   height: 100%;
   width: 100%;
-  padding: 27px 15px 0;
+  padding: 32px 15px 27px;
   overflow-y: auto;
   text-rendering: geometricPrecision; }
 
@@ -729,61 +736,65 @@ input[type="checkbox"] {
   top: 18px;
   right: 12px; }
 
-#about-modal .modal-dialog {
-  width: 42%;
-  border-radius: 20px;
-  margin: 80px auto; }
-#about-modal .modal-header {
-  background: transparent;
-  height: 19px;
-  border-bottom: none;
-  padding-top: 0;
-  padding-bottom: 0; }
-#about-modal .modal-body {
-  background-image: -webkit-linear-gradient(top, #292827, #252423);
-  padding-top: 0; }
-#about-modal .about-content {
-  color: rgba(255, 255, 255, 0.5);
-  font-size: 16px;
-  font-weight: 300;
-  letter-spacing: 0.035em;
-  width: 90%;
-  text-align: center;
-  margin: 20px auto 10px; }
-#about-modal .close img {
-  position: absolute;
-  width: 16px;
-  top: 12px;
-  right: 14px; }
-#about-modal .close:active > img, #about-modal .close > img:hover {
-  content: url("../img/close_active.png"); }
-#about-modal #hyde-img {
-  width: 50%;
-  height: auto;
-  margin: auto;
-  margin: 8px 4px 5px; }
-#about-modal a {
-  color: #de545f;
-  font-size: 14px;
-  border-bottom: none; }
-  #about-modal a:hover, #about-modal a:active {
-    text-decoration: none;
-    border-bottom: 1px solid rgba(222, 84, 95, 0.6); }
-#about-modal ul {
-  list-style: none;
-  margin: 4px auto;
-  padding: 0; }
-  #about-modal ul li {
-    font-size: 12px;
-    line-height: 1.5;
-    margin-bottom: 2px; }
-#about-modal #check-updates {
-  font-size: 19px;
-  font-weight: 400;
-  margin-top: 5px; }
-  #about-modal #check-updates a:hover, #about-modal #check-updates a:active {
-    font-weight: 600;
-    border-bottom: none !important; }
+#about-modal {
+  font-family: "Open Sans", "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif; }
+  #about-modal .modal-dialog {
+    width: 42%;
+    border-radius: 20px;
+    margin: 80px auto; }
+  #about-modal .modal-header {
+    background: transparent;
+    height: 19px;
+    border-bottom: none;
+    padding-top: 0;
+    padding-bottom: 0; }
+  #about-modal .modal-body {
+    background-image: -webkit-linear-gradient(top, #292827, #252423);
+    padding-top: 0; }
+  #about-modal .about-content {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 16px;
+    font-weight: 300;
+    letter-spacing: 0.035em;
+    width: 90%;
+    text-align: center;
+    margin: 20px auto 10px; }
+  #about-modal .close img {
+    position: absolute;
+    width: 15px;
+    top: 12px;
+    right: 14px; }
+  #about-modal .close:active > img, #about-modal .close > img:hover {
+    content: url("../img/close_active.png"); }
+  #about-modal #hyde-img {
+    width: 50%;
+    height: auto;
+    margin: auto;
+    margin: 8px 4px 5px; }
+  #about-modal a {
+    color: #de545f;
+    font-size: 14px;
+    border-bottom: none; }
+    #about-modal a:hover, #about-modal a:active {
+      text-decoration: none;
+      border-bottom: 1px solid rgba(222, 84, 95, 0.6); }
+  #about-modal ul {
+    list-style: none;
+    margin: 4px auto;
+    padding: 0; }
+    #about-modal ul li {
+      font-size: 12px;
+      line-height: 1.5;
+      margin-bottom: 2px; }
+  #about-modal #license {
+    font-size: 12px; }
+  #about-modal #check-updates {
+    font-size: 19px;
+    font-weight: 400;
+    margin-top: 5px; }
+    #about-modal #check-updates a:hover, #about-modal #check-updates a:active {
+      font-weight: 600;
+      border-bottom: none !important; }
 
 .bg-gradient1 span,
 .bg-gradient1:before {
@@ -792,7 +803,9 @@ input[type="checkbox"] {
   background: -webkit-linear-gradient(180deg, #3e3d3c 0%, #2f2e2d 80%, #2f2e2d 100%);
   background: linear-gradient(180deg, #3e3d3c 0%, #2f2e2d 80%, #2f2e2d 100%); }
 
-.cm-trailingspace, .cm-trailing-space-new-line {
+.cm-trailingspace,
+.cm-trailing-space-a,
+.cm-trailing-space-new-line {
   color: rgba(255, 255, 255, 0.15) !important;
   text-decoration: underline; }
 

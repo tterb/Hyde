@@ -164,6 +164,7 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
   position: relative;
   margin-left: 4px !important;
   border-right: 30px solid transparent;
+  padding: 0 4px 0 5px;
 }
 
 /* The fake, visible scrollbars. Used to force redraw during scrolling
@@ -238,28 +239,29 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
 }
 .CodeMirror pre {
   /* Reset some styles that the rest of the page might have set */
-  -moz-border-radius: 0; -webkit-border-radius: 0; border-radius: 0;
-  border-width: 0;
+  position: relative;
   background: transparent;
+  color: inherit;
   font-family: inherit;
   font-size: inherit;
-  margin: 0;
-  white-space: pre;
-  word-wrap: normal;
   line-height: inherit;
-  color: inherit;
-  z-index: 2;
-  position: relative;
+  border-width: 0;
+  border-radius: 0;
+  margin: 0;
+  white-space: inherit;
+  word-wrap: normal;
   overflow: visible;
   -webkit-tap-highlight-color: transparent;
   -webkit-font-variant-ligatures: none;
   font-variant-ligatures: none;
+  z-index: 2;
 }
 .CodeMirror-wrap pre {
   word-wrap: break-word;
   white-space: pre-wrap;
   word-break: normal;
   padding-left: 8px;
+  padding-right: 10px;
 }
 
 .CodeMirror-linebackground {

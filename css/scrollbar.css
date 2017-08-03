@@ -7,6 +7,10 @@
     overflow-y: scroll !important;
 }
 
+.CodeMirror-scrollbar-filler {
+  background: transparent;
+}
+
 ::-webkit-scrollbar {
     width: 10px;
     height: 6px;

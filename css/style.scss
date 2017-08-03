@@ -199,15 +199,15 @@ label {
             border-right: 1px outset #494b50;
             padding: 3px 0 2px;
             &:hover, &:focus, &:active {
-                background: #313029;
+                background: #312930;
                 color: $text-color;
-                border-top: 1px inset #424443;
-                border-bottom: 1px inset #424443;
+                border-top: 1px inset #434443;
+                border-bottom: 1px inset #434443;
             }
         }
         .dropdown-menu {
-            background-color: #2d2e2c;
-            color: $text-color;
+            background-color: #2c2b2c;
+            color: rgba(255,255,255,0.65);
             font-size: 11px;
             min-width: 175px;
             top: 82%;
@@ -226,7 +226,7 @@ label {
                     letter-spacing: 0.06em;
                     text-decoration: none !important;
                     padding: 3px 15px 3px 10px;
-                    &:hover, &:focus, &:active {
+                    &:hover, &:active {
                         color: $text-emphasis-color;
                     }
                 }
@@ -242,7 +242,7 @@ label {
                     padding-top: 1.5px;
                 }
                 &:hover, &:active {
-                    background: #3a3b39;
+                    background: #3a393b;
                     box-shadow: inset 0 0 2px rgba(0,0,0,0.4);
                     a {
                         color: $text-emphasis-color;
@@ -281,26 +281,30 @@ label {
 
 .dropdown-submenu {
     position: relative;
-    background-color: #2d2e2c;
-    color: $text-color;
+    background-color: #2c2b2c;
+    color: rgba(255,255,255,0.65);
     font-size: 11px;
     top: 82%;
     z-index: 0;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
+    visibility: visible !important;
     .sub {
         top: -5px !important;
+        li {
+            color: rgba(255,255,255,0.65) !important;
+        }
     }
     .dropdown-menu {
         top: 0;
         left: 100%;
         margin-top: -1px;
-        > li {
+        li {
             padding: 2px 0;
-            > a {
+            a {
                 display: inline;
                 background-color: transparent;
-                color: $text-color;
+                color: rgba(255,255,255,0.65);
                 font-size: 11px;
                 letter-spacing: 0.06em;
                 text-decoration: none !important;
@@ -309,7 +313,7 @@ label {
                     color: $text-emphasis-color;
                 }
             }
-            > span {
+            span {
                 display: inline;
                 position: relative;
                 color: rgba(255,255,255,0.2);
@@ -321,12 +325,16 @@ label {
                 padding-top: 1.5px;
             }
             &:hover, &:active {
-                background: #3a3b39;
+                background: #3a393b;
                 box-shadow: inset 0 0 2px rgba(0,0,0,0.4);
-                > a {
+                a {
                     color: $text-emphasis-color;
+                  }
+                span {
+                    font-weight: 400;
+                    color: saturate(lighten($accent-color, 2%), 20%);
                 }
-            }
+          }
         }
     }
 }
@@ -559,11 +567,11 @@ input[type="checkbox"] {
 #sidebar {
     display: block;
     position: absolute;
-    // font-family: $serif;
-    background: #31302f;
+    // font-family: $sans-serif;
+    background-image: -webkit-linear-gradient(#343233 40%, #292728);
     color: $text-color;
     height: 100%;
-    width: 250px;
+    width: 240px;
     top: 0;
     left: -250px;
     // border: 1px outset #888786;
@@ -572,10 +580,10 @@ input[type="checkbox"] {
     z-index: 99999;
     #side-logo {
         position: relative;
-        width: 70%;
+        width: 68%;
         height: auto;
         left: 0;
-        margin: 15px 15%;
+        margin: 25px 16% 20px;
         opacity: 0.9;
     }
     #side-menu {
@@ -612,13 +620,14 @@ input[type="checkbox"] {
     #side-icons {
         width: 40%;
         text-shadow: 0 2px rgba(0,0,0,0.2);
-        margin: 30px auto 0;
+        margin: 30px 30% 8px;
         padding: 0;
         li {
             position: relative;
             font-size: 23px;
             color: #666;
             padding-right: 12px;
+            cursor: pointer;
             &:first-child {
                 font-size: 27px;
             }
@@ -635,11 +644,11 @@ input[type="checkbox"] {
 }
 
 .mdHtml {
-    display:none;
-    width:100%;
-    height:100%;
-    resize:none;
-    overflow:auto;
+    display: block;
+    width: 100%;
+    height: 100%;
+    resize: none;
+    overflow: auto;
     border: none;
 }
 
@@ -684,7 +693,7 @@ input[type="checkbox"] {
 
 .topFade {
     position: absolute;
-    height: 45px;
+    height: 40px;
     width: 98%;
     top: 0;
     z-index: 1010;
@@ -744,7 +753,7 @@ input[type="checkbox"] {
     font-family: $sans-serif !important;
     height: 100%;
     width: 100%;
-    padding: 27px 15px 0;
+    padding: 32px 15px 27px;
     overflow-y: auto;
     text-rendering: geometricPrecision;
 }
@@ -903,6 +912,7 @@ input[type="checkbox"] {
 }
 
 #about-modal {
+    font-family: $sans-serif;
     .modal-dialog {
         width: 42%;
         border-radius: 20px;
@@ -931,7 +941,7 @@ input[type="checkbox"] {
     .close {
         img {
             position: absolute;
-            width: 16px;
+            width: 15px;
             top: 12px;
             right: 14px;
         }
@@ -964,6 +974,9 @@ input[type="checkbox"] {
             margin-bottom: 2px;
         }
     }
+    #license {
+      font-size: 12px;
+    }
     #check-updates {
         font-size: 19px;
         font-weight: 400;
@@ -989,7 +1002,9 @@ input[type="checkbox"] {
 }
 
 // When trialing whitespace is visible
-.cm-trailingspace, .cm-trailing-space-new-line {
+.cm-trailingspace,
+.cm-trailing-space-a,
+.cm-trailing-space-new-line {
     color: rgba(255,255,255,0.15) !important;
     text-decoration: underline;
 }
