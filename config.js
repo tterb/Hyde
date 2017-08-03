@@ -4,6 +4,8 @@ const Config = require('electron-config');
 module.exports = new Config ({
   defaults: {
     // UI Elements
+    windowWidth: 1000,
+    windowHeight: 600,
     showMenu: false,
     showToolbar: false,
     showPreview: true,
@@ -18,7 +20,7 @@ module.exports = new Config ({
     tabSize: 2,
     lineNumbers: false,
     lineWrapping: true,
-    showTrailingSpace: false,
+    showTrailingSpace: true,
     matchBrackets: true,
     enableSpellCheck: false,
     // Preview
