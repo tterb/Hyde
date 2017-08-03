@@ -1,9 +1,8 @@
 <p align="center"> 
-  <img src="https://user-images.githubusercontent.com/16360374/28805921-eeee3968-7621-11e7-80d2-19e97e0cd63a.png" width="150"/><br>
-  <img src="https://user-images.githubusercontent.com/16360374/28872153-c6e677f2-773c-11e7-85c0-e608c5b2cf92.png" height="115"/>
+  <img src="https://user-images.githubusercontent.com/16360374/28908506-e58c3a38-77d8-11e7-8177-00610617d7a9.png" height="350"/>
 </p>
 <h3 align="center">An <a href="http://electron.atom.io" target="_blank"><img src="https://user-images.githubusercontent.com/16360374/27318472-58bebca2-5541-11e7-9870-68d4a4f8f957.png" width="22"/> Electron</a> powered markdown editor for  <a href="https://jekyllrb.com" target="_blank"><img src="https://user-images.githubusercontent.com/16360374/27342564-662358d6-5595-11e7-944d-309b695d238a.png" width="65"/></a> users.</h3>
-
+<br>  
 <p align="center">
   <a href="https://badge.fury.io/gh/JonSn0w%2FHyde-MD">
     <img src="https://badge.fury.io/gh/JonSn0w%2FHyde-MD.svg" height="21" alt="version">&nbsp;
@@ -12,7 +11,7 @@
     <img src="https://img.shields.io/badge/License-GPL%20v3-yellow.svg" height="21" title="License">&nbsp;
   </a>
   <a href="https://codeclimate.com/github/JonSn0w/Hyde">
-    <img src="https://codeclimate.com/github/JonSn0w/Hyde.png" height="21" alt="Code Climate">&nbsp;
+    <img src="https://codeclimate.com/github/JonSn0w/Hyde/badges/gpa.svg"  height="21" alt="Code Climate"/>&nbsp;
   </a>
   <a href="https://jekyllrb.com/">
     <img src="https://img.shields.io/badge/powered_by-Electron-blue.svg" height="21" title="Electron">&nbsp;
