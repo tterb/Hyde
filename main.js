@@ -15,20 +15,22 @@ const {Menu, MenuItem, ipcMain} = require('electron');
 const dialog = require('electron').dialog;
 const shell = require('electron').shell;
 const localShortcut = require('electron-localshortcut');
+const windowStateManager = require('electron-window-state');
 
-// Keep a global reference of the window object, if you don't, the window will
-// be closed automatically when the JavaScript object is garbage collected.
-let isQuitting = false;
+// Keep a global reference of the window object
 var windows = new Set();
+let isQuitting = false;
+let windowState;
 
+// Allows render process to access active windows
 const getWindows = exports.getWindows = () => {
   return windows;
 }
 
 const createWindow = exports.createWindow = (file) => {
   var conf = {
-      width: 1000,
-      height: 600,
+      width: windowState.width,
+      height: windowState.height,
       show: false,
       frame: false,
       autoHideMenuBar: true
@@ -89,119 +91,81 @@ ipcMain.on('export-to-pdf', (event, filePath) => {
 
 //Set native menubar
 var template = [
-  {
-    label: "&File",
-    submenu: [
-      {label: "New", accelerator: "CmdOrCtrl+N", click: function() {
-        createWindow(); }
-      },
-      {label: "Open", accelerator: "CmdOrCtrl+O", click: function() {
-        sendShortcut('file-open'); }
-      },
-      {type: "separator"},
-      {label: "Save", accelerator: "CmdOrCtrl+S", click: function() {
-        sendShortcut('file-save'); }
-      },
-      {label: "Save As", accelerator: "CmdOrCtrl+Shift+S", click: function() { sendShortcut('file-saveAs'); }
-      },
-      {label: "Export to PDF", click: function() {
-        sendShortcut('file-pdf'); }
-      },
-      {type: "separator"},
-      {label: "Settings", accelerator: "CmdOrCtrl+,", click: function() { openSettings(); }
-      },
-      {type: "separator"},
-      {label: "Quit", accelerator: "CmdOrCtrl+Q", click: app.quit}
-    ]
-  },
-  {
-    label: "&Edit",
-    submenu: [
-      {label: "Undo", accelerator: "CmdOrCtrl+Z", role: "undo"},
-      {label: "Redo", accelerator: "Shift+CmdOrCtrl+Z", role: "redo"},
-      {type: "separator"},
-      {label: "Cut", accelerator: "CmdOrCtrl+X", role: "cut"},
-      {label: "Copy", accelerator: "CmdOrCtrl+C", role: "copy"},
-      {label: "Paste", accelerator: "CmdOrCtrl+V", role: "paste"},
-      {label: "Select All", accelerator: "CmdOrCtrl+A", role: 'selectall'},
-      {type: "separator"},
-      {label: "Find", accelerator: "CmdOrCtrl+F", click: function() { sendShortcut('CmdOrCtrl+f'); }
-      },
-      {label: "Replace", accelerator: "CmdOrCtrl+Shift+F", click: function() { sendShortcut('CmdOrCtrl+shift+f'); }
-      },
-      {type: "separator"},
-      {label: "Auto-Indent", accelerator: "CmdOrCtrl+Shift+A", click: function() { sendShortcut('ctrl+shift+a'); }
-      },
-      {label: "Indent Left", accelerator: "CmdOrCtrl+Left", click: function() { sendShortcut('CmdOrCtrl+left'); }
-      },
-      {label: "Indent Right", accelerator: "CmdOrCtrl+Right", click: function() { sendShortcut('CmdOrCtrl+right'); }
-      },
-      {type: "separator"},
-      {label: "Toggle Comment", accelerator: "CmdOrCtrl+/", click: function() { sendShortcut('CmdOrCtrl+/'); }
-      }
-    ]
-  },
-  {
-    label: "&View",
-    submenu: [
-      { label: "Reload", accelerator:"CmdOrCtrl+R", click: function() { sendShortcut('CmdOrCtrl+r'); }
-      },
-      {type: "separator"},
-      { label: "Themes",
-        submenu: [
-          { label: "Monokai", click: function(){
-            var cm = CodeMirror.fromTextArea(myTextArea);
-            cm.setOption("theme", "monokai");
-          }},
-          { label: "Solarized", click: function(){
-            func.pickTheme(this, "solarized");
-          }}
-        ]},
-      {type: "separator"},
-      { label: "Toggle Menu", accelerator:"CmdOrCtrl+M", click: function() { sendShortcut('CmdOrCtrl+m'); }
-      },
-      { label: "Toggle Toolbar", accelerator:"CmdOrCtrl+.", click: function() { sendShortcut('CmdOrCtrl+.'); }
-      },
-      { label: "Toggle Preview", accelerator:"CmdOrCtrl+P", click: function() { sendShortcut("CmdOrCtrl+p"); }
-      },
-      { label: "Toggle Full Screen", accelerator:"F11", click: function() {
-        var focusedWindow = BrowserWindow.getFocusedWindow();
-        let isFullScreen = focusedWindow.isFullScreen();
-        focusedWindow.setFullScreen(!isFullScreen);
-      }},
-      {type: "separator"},
-      {
-      label: 'Toggle Developer Tools',
-      accelerator: (function() {
-        if (process.platform === 'darwin')
-          return 'Command+Alt+I';
-        else
-          return 'Ctrl+Shift+I';
-      }()),
-      click: function(item, focusedWindow) {
-        if (focusedWindow)
-          focusedWindow.toggleDevTools();
-      }}
-    ]
-  },
-  {
-    label: "&Help",
-    submenu: [
-      {label: "Documentation", click: function () {
-        shell.openExternal(mod.repository.docs);
-      }},
-      {label: "Keybindings", click: function () {
-        shell.openExternal(mod.repository.docs);
-      }},
-      {label: "Report Issue", click: function () {
-        shell.openExternal(mod.bugs.url);
-      }},
-      {type: "separator"},
-      {label: "About Hyde", click: function () {
-        dialog.showMessageBox({title: "About Hyde", type:"info", message: "An Electron powered markdown editor for Jekyll users.\nMIT Copyright (c) 2017 Brett Stevenson <brettstevenson.me>", buttons: ["Close"] });
-      }}
-    ]
-  }
+  {label: "&File", submenu: [
+    {label: "New", accelerator: "CmdOrCtrl+N", click: () => { createWindow(); }},
+    {label: "Open", accelerator: "CmdOrCtrl+O", click: () => { sendShortcut('file-open'); }},
+    {type: "separator"},
+    {label: "Save", accelerator: "CmdOrCtrl+S", click: () => { sendShortcut('file-save'); }},
+    {label: "Save As", accelerator: "CmdOrCtrl+Shift+S", click: () => { sendShortcut('file-saveAs'); }},
+    {label: "Export to PDF", click: () => {sendShortcut('file-pdf'); }},
+    {type: "separator"},
+    {label: "Settings", accelerator: "CmdOrCtrl+,", click: () => { openSettings(); }},
+    {type: "separator"},
+    {label: "Quit", accelerator: "CmdOrCtrl+Q", click: () => { sendShortcut('ctrl+q'); }}
+  ]},
+  {label: "&Edit", submenu: [
+    {label: "Undo", accelerator: "CmdOrCtrl+Z", role: "undo"},
+    {label: "Redo", accelerator: "Shift+CmdOrCtrl+Z", role: "redo"},
+    {type: "separator"},
+    {label: "Cut", accelerator: "CmdOrCtrl+X", role: "cut"},
+    {label: "Copy", accelerator: "CmdOrCtrl+C", role: "copy"},
+    {label: "Paste", accelerator: "CmdOrCtrl+V", role: "paste"},
+    {label: "Select All", accelerator: "CmdOrCtrl+A", role: 'selectall'},
+    {type: "separator"},
+    {label: "Find", accelerator: "CmdOrCtrl+F", click: () => { sendShortcut('ctrl+f'); }},
+    {label: "Replace", accelerator: "CmdOrCtrl+Shift+F", click: () => { sendShortcut('ctrl+shift+f'); }},
+    {type: "separator"},
+    {label: "Auto-Indent", accelerator: "CmdOrCtrl+Shift+A", click: () => { sendShortcut('ctrl+shift+a'); }},
+    {label: "Indent Less", accelerator: "CmdOrCtrl+Left", click: () => { sendShortcut('ctrl+left'); }},
+    {label: "Indent More", accelerator: "CmdOrCtrl+Right", click: () => { sendShortcut('ctrl+right'); }},
+    {type: "separator"},
+    {label: "Toggle Comment", accelerator: "CmdOrCtrl+/", click: () => { sendShortcut('ctrl+/'); }}
+  ]},
+  {label: "&View", submenu: [
+    {label: "Reload", accelerator:"CmdOrCtrl+R", click: () => { sendShortcut('CmdOrCtrl+r'); }},
+    {type: "separator"},
+    {label: "Themes", submenu: [
+      {label: "Monokai", click: () => { includeTheme('monokai'); }},
+      {label: "One Dark", click: () => { includeTheme('one-dark'); }},
+      {label: "Solarized", click: () => { includeTheme('solarized'); }}
+    ]},
+    {type: "separator"},
+    {label: "Toggle Menu", accelerator:"CmdOrCtrl+M", click: () => { sendShortcut('ctrl+m'); }},
+    {label: "Toggle Toolbar", accelerator:"CmdOrCtrl+.", click: () => { sendShortcut('ctrl+.'); }},
+    {label: "Toggle Preview", accelerator:"CmdOrCtrl+P", click: () => { sendShortcut("ctrl+p"); }},
+    {label: "Toggle Full Screen", accelerator:"F11", click: () => {
+      var focusedWindow = BrowserWindow.getFocusedWindow(),
+          isFullScreen = focusedWindow.isFullScreen();
+      focusedWindow.setFullScreen(!isFullScreen);
+    }},
+    {type: "separator"},
+    {label: 'Toggle Developer Tools',
+    accelerator: (function() {
+      if (process.platform === 'darwin')
+        return 'Command+Alt+I';
+      else
+        return 'Ctrl+Shift+I';
+    }()),
+    click: function(item, focusedWindow) {
+      if (focusedWindow)
+        focusedWindow.toggleDevTools();
+    }}
+  ]},
+  {label: "&Help", submenu: [
+    {label: "Documentation", click: () => {
+      shell.openExternal(mod.repository.docs);
+    }},
+    {label: "Keybindings", click: () => {
+      shell.openExternal(mod.repository.docs);
+    }},
+    {label: "Report Issue", click: () => {
+      shell.openExternal(mod.bugs.url);
+    }},
+    {type: "separator"},
+    {label: "About Hyde", click: () => {
+      dialog.showMessageBox({title: "About Hyde", type:"info", message: "An Electron powered markdown editor for Jekyll users.\nGPL v3.0 Copyright (c) 2017 Brett Stevenson <brettstevenson.me>", buttons: ["Close"] });
+    }}
+  ]}
 ];
 // const menu = Menu.buildFromTemplate(template);
 // Menu.setApplicationMenu(menu);
@@ -233,14 +197,22 @@ localShortcut.register('CmdOrCtrl+left', () => { sendShortcut('ctrl+left'); });
 localShortcut.register('CmdOrCtrl+right', () => { sendShortcut('ctrl+right'); });
 localShortcut.register('CmdOrCtrl+down', () => { sendShortcut('ctrl+down'); });
 
+
 // This method will be called when Electron has finished initialization
-// app.on('ready', createWindow);
 app.on('ready', function() {
   const menu = Menu.buildFromTemplate(template);
   Menu.setApplicationMenu(menu);
+
+  windowState = windowStateManager({
+    defaultWidth: settings.get('windowWidth'),
+    defaultHeight: settings.get('windowHeight')
+  });
+
   var conf = {
-      width: 1000,
-      height: 600,
+      width: windowState.width,
+      height: windowState.height,
+      x: windowState.x,
+      y: windowState.y,
       show: true,
       frame: false,
       autoHideMenuBar: true
@@ -252,14 +224,14 @@ app.on('ready', function() {
     conf.icon = path.join(__dirname, '/img/icon/icon.ico');
   }
   let mainWindow = new BrowserWindow(conf);
-
+  windowState.manage(mainWindow);
   mainWindow.loadURL('file://' + __dirname + '/index.html');
+  windows.add(mainWindow);
   // mainWindow.webContents.openDevTools();
 
   mainWindow.on('closed', function() {
     mainWindow = null;
   });
-  windows.add(mainWindow);
 
   // Quit when all windows are closed.
   app.on('window-all-closed', function() {
@@ -279,6 +251,7 @@ app.on('ready', function() {
   });
 
   app.on('before-quit', function() {
+    windowState.saveState(mainWindow)
     isQuitting = true;
   });
 });
