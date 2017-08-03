@@ -99,7 +99,7 @@ rules:
   class-methods-use-this: off
   complexity:
     - error
-    - 6
+    - 15
   consistent-return: off
   curly: off
   default-case: off
