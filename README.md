@@ -26,8 +26,8 @@
 # Description  
   
 **Hyde** is an [Electron](http://electron.atom.io)-based markdown editor that aims to improve the accessibility of [Jekyll](https://jekyllrb.com) as a blogging platform for developers and non-developers, alike.  
-As many users already know, [Jekyll](https://jekyllrb.com) holds many benefits over other blogging platforms. Though, it appears that many potential users outside of the developer community are initially intimidated by the foreign Markdown used to compose and format blog posts.  
-**Hyde** aims to counter this issue by providing an approachable modular interface, capable of offering the familiar toolbars and live-preview of a word-processor or the simplicity of a minimalistic editor.  
+As many users already know, [Jekyll](https://jekyllrb.com) holds many benefits over other blogging platforms. Though, it appears that many potential users outside of the developer community are initially intimidated by the Markdown syntax used to compose and format blog posts.   
+**Hyde** aims to counter this issue by providing an approachable modular interface, capable of offering the same familiar toolbars and live-preview that you would find in a typical word-processor or the simplicity and streamlined workflow of a minimalistic text editor.  
   
 <br>
 <p align="center">
@@ -85,7 +85,7 @@ Preprocessor compilation and live-reload functionalities are available via the f
 
 # Contributing  
 
-In case you're looking for an easy way to contribute to this project but aren't sure where to start, I've created a list of minor bugs and/or issues to be fixed before the projects initial release, which you can find [here](https://github.com/JonSn0w/Hyde/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20is%3Ahelpwanted).  
+If you're looking for an easy way to contribute to this project but aren't sure where to start, I've created a list of minor bugs and/or issues to be fixed before the projects initial release, which you can find [here](https://github.com/JonSn0w/Hyde/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20is%3Ahelpwanted) or you can just try the app out and [provide some feedback](https://github.com/JonSn0w/Hyde/issues/new).  
 Also, before submitting a pull-request, I would ask that you first take a look at the projects [Contributing guidelines](https://github.com/JonSn0w/Hyde-MD/blob/master/docs/CONTRIBUTING.md). 
 
 <br>
