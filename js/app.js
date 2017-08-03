@@ -1,27 +1,31 @@
-/*
-* The MIT License (MIT)
-* Copyright (c) 2017 Brett Stevenson <bstevensondev@gmail.com>
-*/
 
 const electron = require('electron');
-var showdown  = require('showdown');
-var remote = electron.remote;
-var ipc = electron.ipcRenderer;
-var dialog = electron.remote.dialog;
-var fs = remote.require('fs');
-const storage = require('electron-json-storage');
-var console = require('console');
-var parsePath = require("parse-filepath");
-const config = require('./config');
-const settings = require('electron-settings');
-const setter = require('./js/settings');
+const app = electron.app;
+const remote = electron.remote;
+const ipc = electron.ipcRenderer;
+const dialog = electron.remote.dialog;
+const fs = remote.require('fs');
+const main = remote.require('./main');
 const func = require('./js/functions');
+const setter = require('./js/settings');
+const config = require('./config');
+const showdown  = require('showdown');
+const parsePath = require("parse-filepath");
+const settings = require('electron-settings');
+const storage = require('electron-json-storage');
 const CMSpellChecker = require('codemirror-spell-checker');
+var console = require('console');
 var os = require("os");
 
+
+const currentWindow = remote.getCurrentWindow();
 var isFileLoadedInitially = false,
     currentTheme = settings.get('editorTheme'),
     currentFile = '';
+
+function openNewWindow() {
+  main.createWindow();
+}
 
 // `remote.require` since `Menu` is a main-process module.
 var buildEditorContextMenu = remote.require('electron-editor-context-menu');
@@ -72,11 +76,15 @@ if(settings.get('enableSpellCheck')) {
 
 var cm = CodeMirror.fromTextArea(document.getElementById("plainText"), conf);
 
+if(os.type() === 'Linux') {
+    $('.CodeMirror').css('font-size', '1em');
+}
+
 function includeTheme(theme) {
-  var head = document.getElementsByTagName('head')[0];
+  var themeTag,
+      head = document.getElementsByTagName('head')[0],
+      editorColor = $('.cm-s-'+theme+'.CodeMirror').css('background-color');
   settings.set('editorTheme', theme);
-  var editorColor = $('.cm-s-'+theme+'.CodeMirror').css('background-color');
-  var themeTag;
   currentTheme = theme;
   if(document.getElementById('themeLink')) {
     themeTag = document.getElementById('themeLink');
@@ -97,11 +105,7 @@ window.onload = function() {
   var plainText = document.getElementById('plainText'),
       markdownArea = document.getElementById('markdown');
 
-  if(os.type === 'linux') {
-      $('.CodeMirror').css('font-size', '1em');
-  }
-
-  cm.on('change',function(cMirror) {
+  cm.on('change', function(cMirror) {
     countWords();
     // get value right from instance
     var markdownText = cMirror.getValue();
@@ -111,10 +115,11 @@ window.onload = function() {
     // Convert emoji's
     markdownText = replaceWithEmojis(markdownText);
     //Markdown -> Preview
-    html = marked(markdownText,{gfm: true});
+    html = marked(markdownText, { gfm: true });
     markdownArea.innerHTML = html;
     //Markdown -> HTML
     converter = new showdown.Converter();
+    // NOTE: preview mode
     html = converter.makeHtml(markdownText);
     document.getElementById("htmlPreview").value = html;
     if(this.isFileLoadedInitially) {
@@ -128,30 +133,28 @@ window.onload = function() {
     }
   });
 
-  // Get the most recently saved file
-  storage.get('markdown-savefile', function(error, data) {
-    if (error) throw error;
-    if ('filename' in data) {
-      fs.readFile(data.filename, 'utf-8', function (err, data) {
-         if(err){
-             alert("An error ocurred while opening the file "+ err.message)
-         }
-         cm.getDoc().setValue(data);
-         cm.getDoc().clearHistory();
-      });
-      this.isFileLoadedInitially = true;
-      this.currentFile = data.filename;
-    }
-  });
-
-
-  document.getElementById("minimize").onclick = function() { remote.BrowserWindow.getFocusedWindow().minimize(); }
-  document.getElementById("close").onclick = function() { closeWindow(window); }
-
-  document.getElementById("unsavedConfirm").onclick = function() { saveFile(); }
-  document.getElementById("unsavedDeny").onclick = function() {
-  remote.BrowserWindow.getFocusedWindow().close();
+  // Open first window with the most recently saved file
+  if(main.getWindows().size === 1) {
+    storage.get('markdown-savefile', function(error, data) {
+      if (error) throw error;
+      if ('filename' in data) {
+        fs.readFile(data.filename, 'utf-8', function (err, data) {
+           if(err)
+               alert("An error ocurred while opening the file "+ err.message)
+           cm.getDoc().setValue(data);
+           cm.getDoc().clearHistory();
+        });
+        this.isFileLoadedInitially = true;
+        this.currentFile = data.filename;
+      }
+    });
   }
+
+
+  $("#minimize").on('click', () => { remote.BrowserWindow.getFocusedWindow().minimize(); });
+  $('#sidebar-new').on('click', () => { main.createWindow(); });
+  $("#unsavedConfirm").on('click', () => { saveFile(); });
+  $("#unsavedDeny").on('click', () => { remote.BrowserWindow.getFocusedWindow().close(); });
 
   $('.dropdown-submenu').mouseover(function() {
     $(this).children('ul').show();
@@ -166,91 +169,85 @@ window.onload = function() {
   * Synchronized scrolling *
   **************************/
 
- var $prev = $('#previewPanel'),
-     $markdown = $('#markdown'),
-     $syncScroll = $('#syncScroll'),
-     isSynced = settings.get('syncScroll');
+var $prev = $('#previewPanel'),
+    $markdown = $('#markdown'),
+    $syncScroll = $('#syncScroll'),
+    isSynced = settings.get('syncScroll');
 
  // Retaining state in boolean since this will be more CPU friendly instead of constantly selecting on each event.
- var toggleSyncScroll = () => {
-    if(settings.get('syncScroll')) {
-      $syncScroll.attr('class', 'fa fa-unlink');
-      isSynced = false;
-      $(window).trigger('resize');
-    } else {
-      $syncScroll.attr('class', 'fa fa-link');
-      isSynced = true;
-      $(window).trigger('resize');
-   }
+var toggleSyncScroll = () => {
+  if(settings.get('syncScroll')) {
+    $syncScroll.attr('class', 'fa fa-unlink');
+    isSynced = false;
+    $(window).trigger('resize');
+  } else {
+    $syncScroll.attr('class', 'fa fa-link');
+    isSynced = true;
+    $(window).trigger('resize');
+  }
    settings.set('syncScroll', isSynced);
- }
- $syncScroll.on('change', toggleSyncScroll());
+}
+$syncScroll.on('change', toggleSyncScroll());
 
- /**
-  * Scrollable height.
-  */
- var codeScrollable = () => {
-   var info = cm.getScrollInfo();
-   return info.height - info.clientHeight;
- }
+// Scrollable height.
+var codeScrollable = () => {
+  var info = cm.getScrollInfo();
+  return info.height - info.clientHeight;
+}
 
- var prevScrollable = () => {
-   return $markdown.height() - $prev.height();
- }
+var prevScrollable = () => {
+  return $markdown.height() - $prev.height();
+}
 
- /**
-  * Temporarily swaps out a scroll handler.
-  */
- var muteScroll = (obj, listener) => {
-   obj.off('scroll', listener);
-   obj.on('scroll', tempHandler);
+// Temporarily swaps out a scroll handler.
+var muteScroll = (obj, listener) => {
+  obj.off('scroll', listener);
+  obj.on('scroll', tempHandler);
 
-   var tempHandler = () => {
-     obj.off('scroll', tempHandler);
-     obj.on('scroll', listener);
+  var tempHandler = () => {
+    obj.off('scroll', tempHandler);
+    obj.on('scroll', listener);
    }
  }
 
- /**
-  * Scroll Event Listeners
-  */
- var codeScroll = () => {
-   var scrollable = codeScrollable();
-   if (scrollable > 0 && isSynced) {
-     var percent = cm.getScrollInfo().top / scrollable;
 
-     // Since we'll be triggering scroll events.
-     muteScroll($prev, prevScroll);
-     $prev.scrollTop(percent * prevScrollable());
-   }
- }
- cm.on('scroll', codeScroll);
- $(window).on('resize', codeScroll);
- $(window).on('resize', function() {
-    settings.set('windowWidth', parseInt($(window).width(),10));
-    settings.set('windowHeight', parseInt($(window).height(),10));
- });
+// Scroll Event Listeners
+var codeScroll = () => {
+  var scrollable = codeScrollable();
+  if (scrollable > 0 && isSynced) {
+    var percent = cm.getScrollInfo().top / scrollable;
 
- var prevScroll = () => {
-     var scrollable = prevScrollable();
-     if (scrollable > 0 && isSynced) {
-       var percent = $(this).scrollTop() / scrollable;
+    // Since we'll be triggering scroll events.
+    muteScroll($prev, prevScroll);
+    $prev.scrollTop(percent * prevScrollable());
+  }
+}
+cm.on('scroll', codeScroll);
+$(window).on('resize', codeScroll);
+$(window).on('resize', function() {
+  settings.set('windowWidth', parseInt($(window).width(),10));
+  settings.set('windowHeight', parseInt($(window).height(),10));
+});
 
-       // Since we'll be triggering scroll events.
-       muteScroll(cm, codeScroll);
-       cm.scrollTo(percent * codeScrollable());
-     }
- }
- $prev.on('scroll', prevScroll);
+var prevScroll = () => {
+    var scrollable = prevScrollable();
+    if (scrollable > 0 && isSynced) {
+      var percent = $(this).scrollTop() / scrollable;
+      // Since we'll be triggering scroll events.
+      muteScroll(cm, codeScroll);
+      cm.scrollTo(percent * codeScrollable());
+    }
+}
+$prev.on('scroll', prevScroll);
 
 
 const BrowserWindow = remote.BrowserWindow;
+let newWindow;
 var path = require('path'),
     appPath = path.resolve(__dirname);
-let newWindow;
 
-function newFile() {
-    var conf = {
+function newFile(target) {
+  var conf = {
       width: 1000,
       height: 600,
       show: true,
@@ -263,21 +260,16 @@ function newFile() {
   } else {
     conf.icon = path.join(__dirname, '/img/icon/icon.ico');
   }
-  // openSettings();
+  if(target === undefined)
+    target = "";
+  else
+    target = path.join(__dirname, target);
   newWindow = new BrowserWindow(conf);
   newWindow.loadURL(path.join('file://', __dirname, '/index.html'));
+  readFileIntoEditor(target);
   newWindow.webContents.on('close', () => {
     newWindow = undefined;
   });
-}
-
-function newFiles() {
-  // if(!this.isClean()) {
-  //   showUnsavedDialog(window);
-  // }
-  fileEntry = null;
-  hasWriteAccess = false;
-  cm.setValue("");
 }
 
 function setFile(theFileEntry, isWritable) {
@@ -286,19 +278,18 @@ function setFile(theFileEntry, isWritable) {
 }
 
 function readFileIntoEditor(theFileEntry) {
+  if(theFileEntry === "") return;
   fs.readFile(theFileEntry.toString(), function (err, data) {
-    if (err) {
-      console.log("Read failed: " + err);
-    }
-    cm.setValue(String(data));
-    cm.getDoc().clearHistory()
+    if(err) { console.log("Read failed: " + err); }
+    this.cm.getDoc().setValue(String(data));
+    this.cm.getDoc().clearHistory()
   });
 }
 
 function writeEditorToFile(theFileEntry) {
-  var str = cm.getValue();
-  fs.writeFile(theFileEntry, cm.getValue(), function (err) {
-    if (err) {
+  var str = this.cm.getValue();
+  fs.writeFile(theFileEntry, this.cm.getValue(), function (err) {
+    if(err) {
       console.log("Write failed: " + err);
       return;
     }
@@ -306,25 +297,10 @@ function writeEditorToFile(theFileEntry) {
   });
 }
 
-function handleNewButton() {
-  if (false) {
-    newFiles();
-    this.cm.setValue("");
-    console.log(cm.getValue().toString())
-  } else {
-    window.open(path.join('file://', __dirname, '/index.html'));
-  }
-  return cm.getValue().toString();
-}
 
-
-/****************
- ** Word Count **
-*****************/
+// Word count
 function countWords() {
     var wordcount = cm.getValue().split(/\b[\s,\.-:;]*/).length;
     document.getElementById("wordcount").innerHTML = "words: " + wordcount.toString();
     return cm.getValue().split(/\b[\s,\.-:;]*/).length;
 }
-
-document.getElementById("plainText").addEventListener("keypress", countWords)
