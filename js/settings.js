@@ -1,7 +1,3 @@
-/*
-* The MIT License (MIT)
-* Copyright (c) 2017 Brett Stevenson <bstevensondev@gmail.com>
-*/
 
 var opt = [
   { name: 'showMenu', action: function() { toggleMenu(); }},
@@ -13,9 +9,9 @@ var opt = [
 ];
 
 function getUserSettings() {
-    setWindowSize();
     opt.forEach(checkSetting)
     opt.forEach(applySettings);
+    formatHead();
     syncScrollCheck();
 }
 
@@ -25,9 +21,10 @@ function checkSetting(opt) {
     }
 }
 
-function setWindowSize() {
-    $(window).css('width', settings.get('windowWidth'));
-    $(window).css('height', settings.get('windowHeight'));
+function applySettings(opt) {
+    if(settings.get(opt.name)) {
+        opt.action();
+    }
 }
 
 function syncScrollCheck() {
@@ -40,43 +37,38 @@ function syncScrollCheck() {
     toggleSyncScroll;
 }
 
-function applySettings(opt) {
-    if(settings.get(opt.name)) {
-        opt.action();
-    }
-}
-
-var formatHead = function() {
-  var editTop = 0,
-      edit = $('#editArea'),
-      toolbar = $('#toolbarArea'),
-      toggle = $('#angleToolBar'),
+var formatHead = () => {
+  var body = $('#body'),
       menu = $('#appMenu'),
       dragArea = $('#draggable'),
-      preview = $('#previewPanel'),
-      menuHeight = parseInt(menu.height(),10);
+      toolbar = $('#toolbarArea');
   if(menu.is(':visible')) {
     toolbar.css({ top: '26px' });
-    if($('#toolbarArea:hidden').length === 0) {
-      $('#body').css('paddingTop', '30px');
+    toolbar.css('z-index', '999');
+    dragArea.css('width', '74%');
+    $('#menuToggle').hide();
+    if(toolbar.is(':visible')) {
+      body.css('paddingTop', '30px');
     } else {
-      $('#body').css('paddingTop', '0px');
+      body.css('paddingTop', '0px');
     }
   } else {
     toolbar.css({ top: '0px' });
-    $('#body').css('paddingTop', '0px');
-    if(toolbar.attr('class') !== 'hidden') {
-      dragArea.css('width', '47%');
-      dragArea.css('left', '45%');
+    toolbar.css('z-index', '99999');
+    body.css('paddingTop', '0px');
+    if(toolbar.is(':visible')) {
+      dragArea.css('width', '46.75%');
     } else {
-      dragArea.css('width', '-webkit-calc(100% - 125px)');
-      dragArea.css('left', '4%');
+      $('#menuToggle').show();
+      dragArea.css({ 'width': 'calc(100% - ' + 117 + 'px)' });
     }
   }
-  if(preview.is(':visible')) {
+  if($('#previewPanel').is(':visible')) {
     toolbar.css('width', '50%');
+    $('.CodeMirror-sizer').css('margin-right', '0');
   } else {
     toolbar.css('width', '100%');
+    $('.CodeMirror-sizer').css('margin-right', '8px');
   }
 }
 
@@ -92,7 +84,7 @@ function toggleMenu() {
     $('#frame').hide();
     $('#draggable-menu').show();
     $('#editArea').css('paddingTop', '0px');
-    $('#menuToggle').hide();
+    // $('#menuToggle').hide();
     settings.set('showMenu', true);
   } else {
     menu.attr('class', 'hidden');
@@ -102,13 +94,13 @@ function toggleMenu() {
     buttons.css('marginBottom', '3px');
     $('#frame').show();
     $('#draggable-menu').hide();
-    $('#menuToggle').show();
+    // $('#menuToggle').show();
     settings.set('showMenu', false);
   }
   formatHead();
 }
 
-var toggleToolbar = function() {
+var toggleToolbar = () => {
   var toolbar = $('#toolbarArea'),
       toggle = $('#angleToolBar');
   if(toolbar.is(':visible')) {
@@ -129,24 +121,39 @@ function togglePreview() {
   if($('#previewPanel').is(':visible')) {
     $('#previewPanel').css('display', 'none');
     $('#leftPanel').width('100%');
+    // $('#rightPanel').width('0%');
+    $('#rightPanel').css('right', '-50%');
+    $('#leftFade').width('100%');
     $('#rightFade').hide();
-    $("#htmlRadio").hide();
-    $("#previewRadio").hide();
-    $("#prevToggle").children().hide();
+    // $("#prevToggle").children().hide();
+    $("#syncScroll").hide();
     $('#togglePreview').attr('class', 'fa fa-eye-slash');
     settings.set('showPreview', true);
   } else {
     $('#previewPanel').css('display', 'block');
-    $("#prevToggle").show();
-    $("#prevToggle").children().show();
-    $("#htmlRadio").hide();
-    $("#previewRadio").hide();
     $('#leftPanel').width('50%');
+    // $('#rightPanel').width('50%');
+    $('#rightPanel').css('right', '0');
+    $('#leftFade').width('50%');
     $('#rightFade').show();
+    // $("#prevToggle").children().show();
+    $("#syncScroll").show();
     $('#togglePreview').attr('class', 'fa fa-eye');
     settings.set('showPreview', false);
   }
   formatHead();
+}
+
+function setPreviewMode(opt) {
+  currentValue = opt.value;
+  if (currentValue === 'markdown') {
+    $('#htmlPreview').css('display', 'none');
+    $('#markdown').css('display', 'block');
+  } else if (currentValue === 'html') {
+    $('#markdown').css('display', 'block');
+    $('#htmlPreview').css('display', 'none');
+  }
+  settings.set('previewMode', opt)
 }
 
 function toggleLineNumbers() {

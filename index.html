@@ -41,9 +41,7 @@
   </head>
 
   <body class="container-fluid" id="body" style="resize: both">
-    <section class="frame" id="frame">
-      <div id="draggable" style="-webkit-app-region:drag"></div>
-    </section>
+    <div id="draggable" style="-webkit-app-region:drag"></div>
     <div id="menuToggle">
       <button id="menuButton" onclick="toggleMenu();" style="cursor: pointer;"><span class="mif-menu"></span></button>
     </div>
@@ -193,14 +191,14 @@
         </ul>
       </section>
       <div id="leftPanel">
-          <!-- <div id="leftFade" class="topFade"></div> -->
+          <div id="leftFade" class="topFade"></div>
           <div class="col-md-6 full-height" style="background:hsl(220, 11%, 18%);" id="textPanel">
             <textarea id="plainText" placeholder="" autofocus></textarea>
           </div>
       </div>
       <div id="rightPanel">
           <div id="rightFade" class="topFade"></div>
-          <div class="col-md-6 full-height" id="previewPanel">
+          <div id="previewPanel" class="col-md-6 full-height slideInRight">
             <div id="markdown"></div>
             <textarea id="htmlPreview" class="mdHtml" readonly></textarea>
           </div>
