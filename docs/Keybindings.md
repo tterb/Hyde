@@ -8,12 +8,12 @@
 |     Open File        |   <kbd>Ctrl + O</kbd>           |  
 |     Save File        |   <kbd>Ctrl + S</kbd>           |  
 |     Save As          |   <kbd>Ctrl + Shift + S</kbd>   |  
-|     Settings         |   <kbd>Ctrl + ,</kbd>           |  
-|     Toggle Menu      |   <kbd>Ctrl + m</kbd>           |  
+|     Toggle Menu      |   <kbd>Ctrl + M</kbd>           |  
 |     Toggle Toolbar   |   <kbd>Ctrl + .</kbd>           |   
-|     Toggle Preview   |   <kbd>Ctrl + Shift + M</kbd>   |  
+|     Toggle Preview   |   <kbd>Ctrl + P</kbd>           |  
 |     Toggle Fullscreen|   <kbd>F11</kbd>                |  
 |     Toggle Dev Tools |   <kbd>Ctrl + Shift + I</kbd>   |  
+|     Open Settings    |   <kbd>Ctrl + ,</kbd>           |  
 
 --------------------  
 
@@ -28,7 +28,8 @@
 |     Paste            |   <kbd>Ctrl + V</kbd>           |
 |     Find             |   <kbd>Ctrl + F</kbd>           |
 |     Replace          |   <kbd>Ctrl + Shift + F</kbd>   |
-|     Toggle Comment   |   <kbd>Ctrl + /</kbd>           |
+|     Indent Less      |   <kbd>Ctrl + left-arrow</kbd>  |
+|     Indent More      |   <kbd>Ctrl + right-arrow</kbd> |
 
 
 --------------------  
@@ -39,11 +40,12 @@
 |:---------------------|:-------------------------------:| 
 |     Header           |   <kbd>Ctrl + H</kbd>           |
 |     Bold             |   <kbd>Ctrl + B</kbd>           |
-|     Italic           |   <kbd>Ctrl + i</kbd>           |
+|     Italic           |   <kbd>Ctrl + I</kbd>           |
 |     Strikethrough    |   <kbd>Ctrl + -</kbd>           |
 |     Create Link      |   <kbd>Ctrl + L</kbd>           |
 |     Create Image     |   <kbd>Ctrl + Alt + I</kbd>     |
-|     Create Table     |   <kbd>Ctrl + Shift + T</kbd>     |
+|     Create Table     |   <kbd>Ctrl + Shift + T</kbd>   |
+|     Toggle Comment   |   <kbd>Ctrl + /</kbd>           |
 |     Horizontal Rule  |   <kbd>Ctrl + Shift + _</kbd>   |
 
 --------------------  
