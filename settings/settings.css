@@ -189,12 +189,12 @@ input[type="checkbox"] + span {
    height: 25px;
    margin: -15px 6px 3px -75px;
    vertical-align: middle;
-   background: url(../img/check.png) 0px top no-repeat;
+   background: url(../img/checkbox.png) 0px top no-repeat;
    cursor: pointer;
 }
 
 input[type="checkbox"]:checked + span {
-   background: url(../img/check.png) -30px top no-repeat;
+   background: url(../img/checkbox.png) -30px top no-repeat;
 }
 
 .content {
