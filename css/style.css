@@ -36,37 +36,13 @@ label {
     background-color: #3e3e3e;
     color: rgba(255, 255, 255, 0.75); }
 
-.frame {
+#draggable {
   position: absolute;
   height: 33px;
-  width: 100%;
+  width: -webkit-calc(100% - 125px);
   top: 0;
-  left: 0;
-  z-index: 9999999; }
-  .frame #draggable {
-    position: absolute;
-    height: 100%;
-    width: -webkit-calc(100% - 125px);
-    top: 0;
-    left: 4%; }
-  .frame .icon > img {
-    display: inline-block;
-    position: fixed;
-    height: 20px;
-    width: 20px;
-    left: 9px;
-    margin: 8px 5px; }
-  .frame #title {
-    position: absolute;
-    display: inline-block;
-    color: #bbb;
-    font-size: 12px;
-    top: 10px;
-    left: 44px; }
-    .frame #title #titlePath {
-      display: inline-block;
-      color: #bbb;
-      font-size: 12px; }
+  right: 80px;
+  z-index: 99999999; }
 
 #menuToggle {
   position: absolute;
@@ -74,7 +50,7 @@ label {
   left: 0.5%;
   outline: none !important;
   cursor: pointer;
-  z-index: 9999999; }
+  z-index: 9999; }
   #menuToggle button {
     display: block;
     font-size: 1.75em;
@@ -170,7 +146,7 @@ label {
       top: 82%;
       border-bottom-left-radius: 5px;
       border-bottom-right-radius: 5px;
-      z-index: 0; }
+      z-index: 99999; }
       #appMenu .btn-group .dropdown-menu li {
         padding: 2px 0;
         cursor: pointer; }
@@ -212,10 +188,6 @@ label {
         #appMenu .btn-group .dropdown-menu .dropdown-divider:hover {
           background: rgba(255, 255, 255, 0.075);
           color: rgba(255, 255, 255, 0.75); }
-  #appMenu #draggable-menu {
-    display: inline-block;
-    height: 100%;
-    width: 75%; }
 
 .caret {
   color: fade(rgba(255, 255, 255, 0.4), 10%);
@@ -228,18 +200,18 @@ label {
   color: rgba(255, 255, 255, 0.65);
   font-size: 11px;
   top: 82%;
-  z-index: 0;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
-  visibility: visible !important; }
+  z-index: 0; }
   .dropdown-submenu .sub {
     top: -5px !important; }
-    .dropdown-submenu .sub li {
+    .dropdown-submenu .sub li > a {
       color: rgba(255, 255, 255, 0.65) !important; }
   .dropdown-submenu .dropdown-menu {
     top: 0;
-    left: 100%;
-    margin-top: -1px; }
+    left: 99.55%;
+    margin-top: -1px;
+    z-index: -9; }
     .dropdown-submenu .dropdown-menu li {
       padding: 2px 0; }
       .dropdown-submenu .dropdown-menu li a {
@@ -405,7 +377,7 @@ input[type="checkbox"] {
       height: 19px;
       margin: 0 6px 3px 5px;
       vertical-align: middle;
-      background: url(../img/check.png) 0 top no-repeat;
+      background: url(../img/checkbox.png) 0 top no-repeat;
       cursor: pointer; }
   input[type="checkbox"] + span {
     display: inline-block;
@@ -413,12 +385,12 @@ input[type="checkbox"] {
     height: 19px;
     margin: 0 6px 3px 5px;
     vertical-align: middle;
-    background: url(../img/check.png) 0 top no-repeat;
+    background: url(../img/checkbox.png) 0 top no-repeat;
     cursor: pointer; }
   input[type="checkbox"]:checked + label span {
-    background: url(../img/check.png) -24px top no-repeat; }
+    background: url(../img/checkbox.png) -24px top no-repeat; }
   input[type="checkbox"]:checked + span {
-    background: url(../img/check.png) -24px top no-repeat; }
+    background: url(../img/checkbox.png) -24px top no-repeat; }
 
 .mode {
   background-color: #282726;
@@ -430,8 +402,8 @@ input[type="checkbox"] {
   border-bottom: 1px solid #323130; }
 
 #side-trigger {
-  display: inline-block;
   position: absolute;
+  display: inline-block;
   background: transparent;
   height: 100%;
   width: 12px;
@@ -470,58 +442,61 @@ input[type="checkbox"] {
   box-shadow: 0 0 16px rgba(0, 0, 0, 0.4);
   transition: left 500ms cubic-bezier(0.17, 0.04, 0.03, 0.75);
   z-index: 99999; }
-  #sidebar #side-logo {
-    position: relative;
-    width: 68%;
-    height: auto;
-    left: 0;
-    margin: 25px 16% 20px;
-    opacity: 0.9; }
-  #sidebar #side-menu {
-    position: relative;
-    font-size: 22px;
-    font-weight: 200;
-    list-style: none;
-    top: 1%;
-    padding: 0; }
-    #sidebar #side-menu li {
-      text-align: center;
-      padding: 2px 0; }
-      #sidebar #side-menu li a {
-        color: rgba(255, 255, 255, 0.75);
-        cursor: pointer; }
-        #sidebar #side-menu li a:hover, #sidebar #side-menu li a:active {
-          color: rgba(255, 255, 255, 0.9);
-          text-decoration: none; }
-      #sidebar #side-menu li:after {
-        display: block;
-        position: relative;
-        content: '';
-        background: rgba(255, 255, 255, 0.1);
-        height: 1px;
-        width: 200px;
-        border: none;
-        margin: 3px auto;
-        padding: 0; }
-  #sidebar #side-icons {
-    width: 40%;
-    text-shadow: 0 2px rgba(0, 0, 0, 0.2);
-    margin: 30px 30% 8px;
-    padding: 0; }
-    #sidebar #side-icons li {
-      position: relative;
-      font-size: 23px;
-      color: #666;
-      padding-right: 12px;
+
+#side-logo {
+  position: relative;
+  width: 68%;
+  height: auto;
+  left: 0;
+  margin: 25px 16% 20px;
+  opacity: 0.9; }
+
+#side-menu {
+  position: relative;
+  font-size: 22px;
+  font-weight: 200;
+  list-style: none;
+  top: 1%;
+  padding: 0; }
+  #side-menu li {
+    text-align: center;
+    padding: 2px 0; }
+    #side-menu li a {
+      color: rgba(255, 255, 255, 0.75);
       cursor: pointer; }
-      #sidebar #side-icons li:first-child {
-        font-size: 27px; }
-      #sidebar #side-icons li:last-child {
-        font-size: 21px;
-        bottom: 3px;
-        padding-right: 0; }
-      #sidebar #side-icons li:hover, #sidebar #side-icons li:active {
-        color: #888; }
+      #side-menu li a:hover, #side-menu li a:active {
+        color: rgba(255, 255, 255, 0.9);
+        text-decoration: none; }
+    #side-menu li:after {
+      display: block;
+      position: relative;
+      content: '';
+      background: rgba(255, 255, 255, 0.1);
+      height: 1px;
+      width: 200px;
+      border: none;
+      margin: 3px auto;
+      padding: 0; }
+
+#side-icons {
+  width: 40%;
+  text-shadow: 0 2px rgba(0, 0, 0, 0.2);
+  margin: 30px 30% 8px;
+  padding: 0; }
+  #side-icons li {
+    position: relative;
+    font-size: 23px;
+    color: #666;
+    padding-right: 12px;
+    cursor: pointer; }
+    #side-icons li:first-child {
+      font-size: 27px; }
+    #side-icons li:last-child {
+      font-size: 21px;
+      bottom: 3px;
+      padding-right: 0; }
+    #side-icons li:hover, #side-icons li:active {
+      color: #888; }
 
 .mdHtml {
   display: block;
@@ -548,6 +523,7 @@ input[type="checkbox"] {
 
 #toolbarArea {
   position: fixed;
+  background-image: -webkit-linear-gradient(top, #353334, #302f2e);
   top: 0;
   left: 0;
   z-index: 9;
@@ -555,21 +531,17 @@ input[type="checkbox"] {
   height: 35px;
   display: none;
   border-bottom: 1px #2a2a2a solid;
-  background-image: -webkit-linear-gradient(top, #353334, #302f2e);
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.75);
-  z-index: 9999; }
-
-#angleToolBar {
-  color: rgba(255, 255, 255, 0.4); }
-  #angleToolBar:hover {
-    color: rgba(255, 255, 255, 0.9); }
+  transition: width 400ms cubic-bezier(0.17, 0.04, 0.03, 0.75);
+  z-index: 999; }
 
 .topFade {
   position: absolute;
-  height: 40px;
-  width: 98%;
   top: 0;
-  z-index: 1010; }
+  height: 40px;
+  width: -webkit-calc(100% - 11px);
+  transition: width 0ms !important;
+  z-index: 1000; }
 
 #textPanel {
   font-family: "Source Code Pro", "Monaco", "Ubuntu Mono", "Dejavu Sans Mono", "Consolas", monospace;
@@ -592,9 +564,12 @@ input[type="checkbox"] {
   position: absolute;
   left: 0;
   width: 50%;
-  height: -webkit-calc(100% - 28px); }
+  height: -webkit-calc(100% - 28px);
+  transition: width 700ms cubic-bezier(0.17, 0.04, 0.03, 0.75); }
   #leftPanel .topFade {
-    left: 0; }
+    background-image: -webkit-linear-gradient(top, #292c33 35%, transparent);
+    left: 0;
+    transition-duration: 0ms; }
 
 .CodeMirror {
   font-size: 0.9em;
@@ -605,7 +580,8 @@ input[type="checkbox"] {
   position: absolute;
   right: 0;
   width: 50%;
-  height: -webkit-calc(100% - 28px); }
+  height: -webkit-calc(100% - 28px);
+  transition: 700ms cubic-bezier(0.17, 0.04, 0.03, 0.55); }
   #rightPanel .topFade {
     background-image: -webkit-linear-gradient(top, #f6f5f4 25%, transparent);
     right: 2%; }
