@@ -4,14 +4,16 @@ const app = electron.app;
 const remote = electron.remote;
 const ipc = electron.ipcRenderer;
 const dialog = electron.remote.dialog;
+const shell = electron.shell;
 const fs = remote.require('fs');
 const main = remote.require('./main');
 const func = require('./js/functions');
 const setter = require('./js/settings');
-const config = require('./config');
+const settings = require('./config');
 const showdown  = require('showdown');
+const path = require('path');
 const parsePath = require("parse-filepath");
-const settings = require('electron-settings');
+// const settings = require('electron-settings');
 const storage = require('electron-json-storage');
 const CMSpellChecker = require('codemirror-spell-checker');
 var HydeSettings = require('./js/settingsMenu');
@@ -89,7 +91,7 @@ function includeTheme(theme) {
   var themeTag,
       head = document.getElementsByTagName('head')[0],
       editorColor = $('.cm-s-'+theme+'.CodeMirror').css('background-color');
-  settings.set('editorTheme', theme);
+  if(theme === undefined) theme = 'one-dark';
   currentTheme = theme;
   if(document.getElementById('themeLink')) {
     themeTag = document.getElementById('themeLink');
@@ -156,10 +158,16 @@ window.onload = function() {
 
 
   $("#minimize").on('click', () => { remote.BrowserWindow.getFocusedWindow().minimize(); });
+  $("#close").on('click', () => { closeWindow(remote.BrowserWindow.getFocusedWindow()); });
   $('#sidebar-new').on('click', () => { main.createWindow(); });
   $("#unsavedConfirm").on('click', () => { saveFile(); });
   $("#unsavedDeny").on('click', () => { remote.BrowserWindow.getFocusedWindow().close(); });
-
+  // Handle link clicks in application
+  $(".link").on('click', function() {
+    event.preventDefault();
+    shell.openExternal($(this).attr('href'))
+  });
+  // Open dropdown sub-menus on hover
   $('.dropdown-submenu').mouseover(function() {
     $(this).children('ul').show();
   }).mouseout(function() {
@@ -177,7 +185,7 @@ var $prev = $('#previewPanel'),
     $syncScroll = $('#syncScroll'),
     isSynced = settings.get('syncScroll');
 
- // Retaining state in boolean since this will be more CPU friendly instead of constantly selecting on each event.
+ // Retaining state in boolean will be more CPU friendly instead of constantly selecting on each event.
 var toggleSyncScroll = () => {
   if(settings.get('syncScroll')) {
     $syncScroll.attr('class', 'fa fa-unlink');
@@ -243,55 +251,30 @@ var prevScroll = () => {
 }
 $prev.on('scroll', prevScroll);
 
-
-const BrowserWindow = remote.BrowserWindow;
-let newWindow;
-var path = require('path'),
-    appPath = path.resolve(__dirname);
-
-function newFile(target) {
-  var conf = {
-      width: 1000,
-      height: 600,
-      show: true,
-      frame: false,
-      autoHideMenuBar: true
-  }
-  if (process.platform === 'darwin') {
-    conf.titleBarStyle = 'hidden';
-    conf.icon = path.join(__dirname, '/img/icon/icon.icns')
-  } else {
-    conf.icon = path.join(__dirname, '/img/icon/icon.ico');
-  }
-  if(target === undefined)
-    target = "";
-  else
-    target = path.join(__dirname, target);
-  newWindow = new BrowserWindow(conf);
-  newWindow.loadURL(path.join('file://', __dirname, '/index.html'));
-  readFileIntoEditor(target);
-  newWindow.webContents.on('close', () => {
-    newWindow = undefined;
-  });
+function openNewFile(target) {
+  var filePath = path.join(__dirname, target);
+  main.createWindow();
+  // var win = Array.from(main.getWindows()).pop();
+  readFileIntoEditor(filePath)
 }
 
-function setFile(theFileEntry, isWritable) {
-  fileEntry = theFileEntry;
+function setFile(file, isWritable) {
+  fileEntry = file;
   hasWriteAccess = isWritable;
 }
 
-function readFileIntoEditor(theFileEntry) {
-  if(theFileEntry === "") return;
-  fs.readFile(theFileEntry.toString(), function (err, data) {
+function readFileIntoEditor(file) {
+  if(file === "") return;
+  fs.readFile(file.toString(), function (err, data) {
     if(err) { console.log("Read failed: " + err); }
-    this.cm.getDoc().setValue(String(data));
-    this.cm.getDoc().clearHistory()
+    cm.getDoc().setValue(String(data));
+    cm.getDoc().clearHistory()
   });
 }
 
-function writeEditorToFile(theFileEntry) {
+function writeEditorToFile(file) {
   var str = this.cm.getValue();
-  fs.writeFile(theFileEntry, this.cm.getValue(), function (err) {
+  fs.writeFile(file, this.cm.getValue(), function (err) {
     if(err) {
       console.log("Write failed: " + err);
       return;
