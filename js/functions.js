@@ -12,17 +12,16 @@ function toggleDeveloper() {
 }
 
 function showUnsavedDialog(win) {
-  var $modal = jQuery('#unsaved-modal'),
-      $text = $('#unsaved-body'),
+  var $modal = $('#unsaved-modal'),
       $filename = $('#bottom-file').text();
-  if($modal.is(':visible') > 0) {
+  if($modal.is(':visible')) {
+    $modal.modal('hide');
+  } else {
     if ($filename === 'New document') {
       $filename = 'This document';
     }
-    $text.text("'"+$filename.toString()+"' has unsaved changes, do you want to save them?");
+    $('#unsaved-body').text("'"+$filename.toString()+"' has unsaved changes, do you want to save them?");
     $modal.modal();
-  } else {
-    $modal.modal('hide');
   }
 }
 
@@ -119,7 +118,6 @@ var updateWindowTitle = function(path) {
 }
 
 function openSettings() {
-    var HydeSettings = require('./js/settingsMenu');
     HydeSettings();
 }
 
@@ -130,7 +128,7 @@ function openModal(opt) {
       autoHideMenuBar: true,
       modal: true
   });
-  var path = 'file://' + __dirname + '/modal/' + opt.toString() + '.html';
+  var path = path.join('file://', __dirname, '/modal/', opt.toString(), '.html');
   win.loadURL(path);
 }
 
