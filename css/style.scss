@@ -153,7 +153,7 @@ label {
         visibility: hidden;
     }
     .btn-group {
-        top: -8px;
+        top: 1px;
         height: 100%;
         &:first-child {
             margin-left: 6px;
@@ -689,7 +689,7 @@ input[type="checkbox"] {
     height: -webkit-calc(100% - 28px);
     transition: width 700ms cubic-bezier(0.17, 0.04, 0.03, 0.75);
     .topFade {
-        background-image: -webkit-linear-gradient(top, hsl(220, 11%, 18%) 35%, transparent);
+        background-image: -webkit-linear-gradient(top, hsl(220, 11%, 18%) 30%, transparent);
         left: 0;
         transition-duration: 0ms;
     }
@@ -1187,6 +1187,7 @@ code {
         color: #333;
         font-size: 28px;
         font-weight: 700;
+        letter-spacing: 0.01em;
         line-height: 1.4;
         border-bottom: 1px solid #e1e3ea;
         margin-bottom: 24px;
