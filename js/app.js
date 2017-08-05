@@ -14,6 +14,7 @@ const parsePath = require("parse-filepath");
 const settings = require('electron-settings');
 const storage = require('electron-json-storage');
 const CMSpellChecker = require('codemirror-spell-checker');
+var HydeSettings = require('./js/settingsMenu');
 var console = require('console');
 var os = require("os");
 
@@ -23,6 +24,7 @@ var isFileLoadedInitially = false,
     currentTheme = settings.get('editorTheme'),
     currentFile = '';
 
+// Allows render process to create new windows
 function openNewWindow() {
   main.createWindow();
 }
@@ -35,12 +37,11 @@ window.addEventListener('contextmenu', function(e) {
   if (!e.target.closest('textarea, input, [contenteditable="true"],section')) return;
 
   var menu = buildEditorContextMenu();
-  // The 'contextmenu' event is emitted after 'selectionchange' has fired but possibly before the
-  // visible selection has changed. Try to wait to show the menu until after that, otherwise the
-  // visible selection will update after the menu dismisses and look weird.
-  setTimeout(function() {
-    menu.popup(remote.getCurrentWindow());
-  }, 30);
+  // The 'contextmenu' event is emitted after 'selectionchange' has fired but
+  // possibly before the visible selection has changed. Try to wait to show the
+  // menu until after that, otherwise the visible selection will update after
+  // the menu dismisses and look weird.
+  setTimeout(function() { menu.popup(remote.getCurrentWindow()); }, 30);
 });
 
 getUserSettings();
@@ -61,7 +62,7 @@ var conf = {
 
 var files = fs.readdirSync('./css/theme'),
     theme = settings.get('editorTheme');
-if (files.includes(theme+'.css')) {
+if(files.includes(theme+'.css')) {
   conf.theme = theme;
 } else {
   conf.theme = "one-dark";
@@ -77,7 +78,11 @@ if(settings.get('enableSpellCheck')) {
 var cm = CodeMirror.fromTextArea(document.getElementById("plainText"), conf);
 
 if(os.type() === 'Linux') {
-    $('.CodeMirror').css('font-size', '1em');
+    $('.CodeMirror').css('font-size', '0.9em');
+    $('.CodeMirror pre').css('line-height', '1.3');
+    $('#dropdownItem').css('font-size', '12px');
+    $('#dropdownMenuButton').css('font-size', '12px');
+    $('.bottom-bar > div').css('font-size', '12px');
 }
 
 function includeTheme(theme) {
@@ -102,8 +107,7 @@ function includeTheme(theme) {
 }
 
 window.onload = function() {
-  var plainText = document.getElementById('plainText'),
-      markdownArea = document.getElementById('markdown');
+  var markdownArea = document.getElementById('markdown');
 
   cm.on('change', function(cMirror) {
     countWords();
@@ -119,9 +123,9 @@ window.onload = function() {
     markdownArea.innerHTML = html;
     //Markdown -> HTML
     converter = new showdown.Converter();
-    // NOTE: preview mode
+    // Set preview mode
     html = converter.makeHtml(markdownText);
-    document.getElementById("htmlPreview").value = html;
+    $('#htmlPreview').attr('value', converter.makeHtml(markdownText));
     if(this.isFileLoadedInitially) {
       this.setClean();
       this.isFileLoadedInitially = false;
@@ -162,7 +166,6 @@ window.onload = function() {
     $(this).children('ul').hide();
   });
 }
-
 
 
 /**************************
