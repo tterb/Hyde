@@ -134,3 +134,7 @@ http://ethanschoonover.com/solarized-dark/img/solarized-dark-palette.png
 .cm-s-solarized-dark .CodeMirror-activeline-background {
   background: rgba(255, 255, 255, 0.06);
 }
+
+#leftFade {
+  background: -webkit-linear-gradient(top, #002b36 35%, transparent);
+}

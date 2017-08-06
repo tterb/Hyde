@@ -42,3 +42,7 @@
 .cm-s-seti span.cm-builtin { color: #9fca56; }
 .cm-s-seti .CodeMirror-activeline-background { background: #101213; }
 .cm-s-seti .CodeMirror-matchingbracket { text-decoration: underline; color: white !important; }
+
+#leftFade {
+  background: -webkit-linear-gradient(top, #151718 35%, transparent);
+}

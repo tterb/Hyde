@@ -39,3 +39,7 @@
 
 .cm-s-tomorrow-night-eighties .CodeMirror-activeline-background { background: #343600; }
 .cm-s-tomorrow-night-eighties .CodeMirror-matchingbracket { text-decoration: underline; color: white !important; }
+
+#leftFade {
+  background: -webkit-linear-gradient(top, #353535 35%, transparent);
+}
