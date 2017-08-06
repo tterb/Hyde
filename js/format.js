@@ -1,7 +1,8 @@
+
 var insertTexts = {
   link: ["[", "](#url#)"],
   image: ["![", "](#url#)"],
-  table: ["", "\n\n| Column 1 | Column 2 | Column 3 |\n| -------- | -------- | -------- |\n| Text     | Text     | Text     |\n\n"],
+  table: ["", "\n| Column 1 | Column 2 | Column 3 |\n| -------- | -------- | -------- |\n| Text     | Text     | Text     |\n"],
   horizontalRule: ["", "\n-------------------\n"]
 };
 
