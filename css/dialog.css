@@ -1,7 +1,7 @@
 .CodeMirror-dialog {
   position: absolute;
   background: #2a2829;
-  color: inherit;
+  color: rgba(255,255,255,0.5);
   font-family: "Roboto","Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
   font-size: 10pt;
   left: 7%;
@@ -21,6 +21,19 @@
   top: 95%;
 }
 
+.CodeMirror-dialog-top:before {
+    position: absolute;
+    background: #302f2e;
+    top: 90%;
+    left: 0;
+    width: 50%;
+    height: 50px;
+    border: 1px outset #424140;
+    border-radius: 5px;
+    z-index: 99999;
+    visibility: hidden;
+}
+
 .CodeMirror-dialog-bottom {
   border-top: 1px solid #444;
   bottom: 0;
@@ -37,4 +50,18 @@
 
 .CodeMirror-dialog button {
   font-size: 70%;
+}
+
+.CodeMirror-search-field {
+    color: rgba(255,255,255,0.7);
+    width: 10em;
+    padding-left: 4px;
+}
+
+.CodeMirror-search-hint {
+    position: absolute;
+    font-size: 12px;
+    color: rgba(255,255,255,0.25);
+    top: 3px;
+    right: 8px;
 }

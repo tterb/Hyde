@@ -11,6 +11,7 @@ $monospaced: "Source Code Pro","Monaco","Ubuntu Mono","Dejavu Sans Mono","Consol
 
 
 html, body, section, .full-height {
+    // box-sizing: border-box !important;
     height: 100%;
 }
 
@@ -78,9 +79,10 @@ label {
         color: rgba(255,255,255,0.07);
         border: none;
         outline: none !important;
+        transition: color 400ms ease-in-out;
         z-index: 99;
         &:hover {
-            color: rgba(255,255,255,0.5);
+            color: rgba(255,255,255,0.45);
         }
     }
     &:hover {
@@ -93,7 +95,7 @@ label {
     top: -2px;
     right: 0.25%;
     z-index: 999999999;
-    button {
+    .winButton {
         display: inline-block;
         background: transparent;
         outline: none;
@@ -101,30 +103,24 @@ label {
         float: right;
         margin: 3px 0;
         padding: 2px 1px;
-        > img {
+        img {
             display: inline-block;
             height: 21px;
             width: 21px;
             padding: 4px;
+            opacity: 1;
+            transition: opacity 300ms ease-in-out;
         }
-    }
-    #minimize:active > img {
-        content: url('../img/min_active.png');
-    }
-    #minimize > img:hover {
-        content: url('../img/min_active.png');
-    }
-    #maximize:active > img {
-        content: url('../img/max_active.png');
-    }
-    #maximize > img:hover {
-        content: url('../img/max_active.png');
+        .active {
+          position: fixed;
+          z-index: -1;
+        }
+        .inactive:hover {
+          opacity: 0;
+        }
     }
     #close {
         margin-right: 8px;
-        &:active > img, > img:hover {
-            content: url('../img/close_active.png');
-        }
     }
 }
 
@@ -138,19 +134,18 @@ label {
     top: 0;
     left: 0;
     // border: 1px inset #323435;
-    border-bottom: 1px outset #494b50;
-    visibility: visible;
+    // border-bottom: 1px outset #494b50;
+    // visibility: visible;
+    transition: top 900ms cubic-bezier(0.17, 0.04, 0.03, 0.75);
     z-index: 9999;
-    :focus,
-    :active:focus,
-    .active:focus,
-    .focus,
-    :active.focus,
-    .active.focus {
+    :focus, :active:focus,.active:focus,
+    .focus,:active.focus,.active.focus {
         outline: none !important;
     }
     .hidden {
-        visibility: hidden;
+        top: -23px;
+        transition: top 900ms cubic-bezier(0.17, 0.04, 0.03, 0.75);
+        // visibility: hidden;
     }
     .btn-group {
         top: 1px;
@@ -158,11 +153,12 @@ label {
         &:first-child {
             margin-left: 6px;
         }
-        > button {
+        #dropdownMenuButton {
             display: inline-block;
             background: transparent;
             color: $text-subtle-color;
             font-size: 11px;
+            letter-spacing: 0.04em;
             height: 23px;
             width: 40px;
             border-radius: 2px;
@@ -171,7 +167,7 @@ label {
             border-right: 1px outset #494b50;
             padding: 3px 0 2px;
             &:hover, &:focus, &:active {
-                background: #312930;
+                background: #313031;
                 color: $text-color;
                 border-top: 1px inset #434443;
                 border-bottom: 1px inset #434443;
@@ -221,19 +217,23 @@ label {
                     }
                     span {
                         font-weight: 400;
-                        color: saturate(lighten($accent-color, 2%), 20%);
+                        color: saturate(lighten($accent-color, 2%), 16%);
                     }
                 }
             }
             .dropdown-divider {
                 background: rgba(255,255,255,0.075);
+                color: rgba(255,255,255,0.65);
                 height: 1px;
                 width: 98%;
                 margin: 4px auto;
                 padding: 0;
+                cursor: default;
                 &:hover {
+                    visibility: visible;
                     background: rgba(255,255,255,0.075);
-                    color: rgba(255,255,255,0.75);
+                    color: rgba(255,255,255,0.65);
+                    cursor: default;
                 }
             }
         }
@@ -352,6 +352,25 @@ label {
     padding: 2px;
     z-index: 99999;
     resize: both;
+    div {
+        cursor: default;
+    }
+    label {
+        display: inline-block;
+        position: absolute;
+        color: #b6b5b4;
+        font-size: 12px;
+        font-weight: 600;
+        right: 1%;
+        margin: 4px 5px;
+    }
+    button {
+        position: absolute;
+        display: inline-block;
+        background: transparent;
+        border: none;
+        outline: none !important;
+    }
     #bottom-file {
         display: inline-block;
         position: relative;
@@ -386,33 +405,29 @@ label {
         top: 0;
         left: 17%;
     }
-    > label {
-        display: inline-block;
-        position: absolute;
-        color: #b6b5b4;
-        font-size: 12px;
-        font-weight: 600;
-        right: 1%;
-        margin: 4px 5px;
-    }
-    button {
-        position: absolute;
-        display: inline-block;
-        background: transparent;
-        border: none;
-        outline: none !important;
-    }
     #syncScroll {
         font-size: 14.5px;
         // right: 4%;
         right: 2.5em;
         margin-top: 4px;
+        &:after {
+            top: -155%;
+            right: -2px;
+            left: auto;
+            opacity: 0.9;
+        }
     }
     #previewToggle {
         font-size: 17.5px;
         // right: 0.75%;
         right: 0.4em;
         margin-top: 1px;
+        &:after {
+            top: -155%;
+            right: -2px;
+            left: auto;
+            opacity: 0.9;
+        }
     }
 }
 
@@ -611,7 +626,8 @@ input[type="checkbox"] {
 }
 
 .mdHtml {
-    display: block;
+    display: none;
+    color: #2a2a2a;
     width: 100%;
     height: 100%;
     resize: none;
@@ -638,14 +654,13 @@ input[type="checkbox"] {
 }
 
 #toolbar {
+    display:none;
     position: fixed;
     background-image: -webkit-linear-gradient(top, #353334, #302f2e);
     top: 0;
     left: 0;
-    z-index: 9;
     width: 50%;
     height: 35px;
-    display:none;
     border-bottom: 1px #2a2a2a solid;
     box-shadow: 0 0 6px rgba(0,0,0,0.75);
     transition: width 400ms cubic-bezier(0.17, 0.04, 0.03, 0.75);
@@ -812,16 +827,19 @@ input[type="checkbox"] {
     .modal-dialog {
         width: 425px;
         margin: 95px auto !important;
-    }
-    .modal-header {
-        padding: 10px;
-        .close {
-            top: 7px;
-            right: 13px;
+        .modal-header {
+            padding: 10px;
+            #close {
+                position: absolute;
+                top: 7px;
+                right: 13px;
+                width: 15px;
+                height: auto;
+            }
         }
-    }
-    .modal-body {
-        padding: 5px 15px;
+        .modal-body {
+            padding: 5px 15px;
+        }
     }
 }
 
@@ -856,7 +874,7 @@ input[type="checkbox"] {
 .close {
     img {
         position: absolute;
-        width: 16px;
+        width: 15px;
         top: 6px;
         right: 1px;
         opacity: 1;
@@ -989,10 +1007,11 @@ input[type="checkbox"] {
         position: relative;
         background: transparent;
         color: rgba(255,255,255,0.7);
-        top: 10%;
-        left: 2%;
+        top: 9%;
+        left: 2.75%;
         width: 5%;
         height: auto;
+        text-shadow: 4px 1px rgba(0,0,0,0.6);
     }
 }
 
@@ -1168,9 +1187,9 @@ code {
 #markdown  {
     color: #2a2a2a;
     font-family: $sans-serif;
-    font-size: 10pt;
+    font-size: 2.2vh;
     letter-spacing: 0.0375em;
-    line-height: 1.45;
+    line-height: 1.5;
     text-rendering: geometricPrecision;
     overflow: auto;
     h1 {
@@ -1220,22 +1239,33 @@ code {
     }
     ol, ul {
         line-height: 1.6;
+        margin-top: 3px;
+        padding-left: 35px;
+        ol, ul {
+            padding-left: 27px;
+            ol, ul {
+                padding-left: 35px;
+            }
+        }
     }
     li {
         margin-bottom: 5px;
     }
     a {
-        color: #237aa7;
+        color: #1c74a0;
         text-decoration: none;
-    }
-    a:focus, a:hover, a:active {
-        color: #23728c;
-        text-decoration: none;
+        transition: 300ms ease;
+        &:hover, &:focus, &:active {
+            color: #3ea3d7;
+            text-decoration: none;
+        }
     }
     hr {
         border-top: 1px solid #ddd;
     }
     p {
+        font-size: 2.2vh;
+        line-height: 1.5;
         margin: 0 0 16px !important;
     }
     pre {
@@ -1302,6 +1332,52 @@ code {
         margin-bottom: 0 !important;
     }
 }
+
+[data-tooltip]:after {
+    display: none;
+    transition: 100ms ease 2s;
+}
+
+[data-tooltip]:hover:after {
+    content: attr(data-tooltip);
+    display: block;
+    position: absolute;
+    background-image: -webkit-linear-gradient(top, #383637, #373635);
+    color: $text-color;
+    font-family: $system-font;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    left: -10%;
+    top: -250%;
+    border-radius: 4px;
+    box-shadow: 0px 0px 4px #222;
+    white-space: nowrap;
+    margin-left: -5px;
+    padding: 4px 8px;
+    border: 1px outset #444;
+    // overflow: visible;
+    opacity: 0.9;
+    transition: 10ms ease 10ms;
+    z-index: 20;
+    // -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    // filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=0);
+}
+
+/* Triangle hack to make tooltip look like a speech bubble */
+// div[data-tooltip]:after {
+//   position: absolute;
+//   top: -250%;
+//   left: 50%;
+//   margin-left: -5px;
+//   width: 0;
+//   border-top: 5px solid #000;
+//   border-top: 5px solid hsla(0, 0%, 20%, 0.9);
+//   border-right: 5px solid transparent;
+//   border-left: 5px solid transparent;
+//   content: " ";
+//   font-size: 0;
+//   line-height: 0;
+// }
 
 .fa-link {
     color: rgba(255,255,255,0.65);

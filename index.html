@@ -46,11 +46,11 @@
       <button id="menuButton" onclick="toggleMenu();" style="cursor: pointer;"><span class="mif-menu"></span></button>
     </div>
     <div id="metacity">
-      <button id="close" style="cursor: pointer;"><img src="img/close.png" alt="Close" onclick="closeWindow(window);"/></button>
-      <button id="maximize" style="cursor: pointer;"><img src="img/max.png" alt="Maximize" onclick="toggleFullscreen();"/></button>
-      <button id="minimize" style="cursor: pointer;"><img src="img/min.png" alt="Minimize"/></button>
+      <button id="close" class="winButton" style="cursor: pointer;"><img class="active" src="img/close_active.png" alt="Close"/><img class="inactive" src="img/close.png" alt="Close"/></button>
+      <button id="maximize" class="winButton" style="cursor: pointer;"><img class="active" src="img/max_active.png" alt="Maximize" onclick="toggleFullscreen();"/><img class="inactive" src="img/max.png" alt="Maximize" onclick="toggleFullscreen();"/></button>
+      <button id="minimize" class="winButton" style="cursor: pointer;"><img class="active" src="img/min_active.png" alt="Minimize"/><img class="inactive" src="img/min.png" alt="Minimize"/></button>
     </div>
-    <div id="appMenu" class="hidden" style="visibility:hidden;">
+    <div id="appMenu" class="hidden">
       <!-- File -->
       <div class="btn-group">
         <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">File</button>
@@ -141,9 +141,9 @@
         <ul class="dropdown-menu">
           <li tabindex="-1" href="#" data-toggle="modal" data-target="#markdown-modal"><a id="dropdownItem">Markdown Help</a></li>
           <li class="dropdown-divider"></li>
-          <li tabindex="-1" href="#"><a id="dropdownItem">Documentation</a></li>
-          <li tabindex="-1" href="#" onclick="newFile('/docs/keybindings.md')"><a id="dropdownItem">Keybindings</a></li>
-          <li tabindex="-1" href="https://github.com/JonSn0w/Hyde-MD/issues/new"><a id="dropdownItem">Report an Issue</a></li>
+          <li tabindex="-1" href="#"><a id="dropdownItem" class="link" href="https://github.com/JonSn0w/Hyde/wiki">Documentation</a></li>
+          <li tabindex="-1" href="#" onclick="openNewFile('/docs/keybindings.md')"><a id="dropdownItem">Keybindings</a></li>
+          <li tabindex="-1"><a id="dropdownItem" class="link" href="https://github.com/JonSn0w/Hyde/issues/new">Report an Issue</a></li>
           <li class="dropdown-divider"></li>
           <li tabindex="-1" href="#" data-toggle="modal" data-target="#about-modal"><a id="dropdownItem">About Hyde</a></li>
         </ul>
@@ -205,7 +205,7 @@
     </section>
     <div class="search-dialog" id="search-container"><span id="search-icon" class="fa fa-search"></span></div>
     <div class="bottom-bar">
-      <div id="bottom-file">New Document</div><span id="file-status">*</span>
+      <div id="bottom-file" data-tooltip=""></div><span id="file-status">*</span>
       <div id="wordcount"></div>
       <div id="draggable" style="-webkit-app-region:drag"></div>
       <button id="syncScroll" onclick="toggleSyncScroll();"></button>
@@ -337,6 +337,7 @@
     <script src="js/codemirror/marked.min.js"></script>
     <script src="js/codemirror/search.js"></script>
     <script src="js/codemirror/searchcursor.js"></script>
+    <script src="node_modules/codemirror-revisedsearch/src/revised-search.js"></script>
     <script src="js/settings.js"></script>
     <script src="js/app.js"></script>
     <script src="js/format.js"></script>

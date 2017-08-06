@@ -58,9 +58,10 @@ label {
     color: rgba(255, 255, 255, 0.07);
     border: none;
     outline: none !important;
+    transition: color 400ms ease-in-out;
     z-index: 99; }
     #menuToggle button:hover {
-      color: rgba(255, 255, 255, 0.5); }
+      color: rgba(255, 255, 255, 0.45); }
   #menuToggle:hover {
     color: rgba(255, 255, 255, 0.75); }
 
@@ -69,7 +70,7 @@ label {
   top: -2px;
   right: 0.25%;
   z-index: 999999999; }
-  #metacity button {
+  #metacity .winButton {
     display: inline-block;
     background: transparent;
     outline: none;
@@ -77,23 +78,20 @@ label {
     float: right;
     margin: 3px 0;
     padding: 2px 1px; }
-    #metacity button > img {
+    #metacity .winButton img {
       display: inline-block;
       height: 21px;
       width: 21px;
-      padding: 4px; }
-  #metacity #minimize:active > img {
-    content: url("../img/min_active.png"); }
-  #metacity #minimize > img:hover {
-    content: url("../img/min_active.png"); }
-  #metacity #maximize:active > img {
-    content: url("../img/max_active.png"); }
-  #metacity #maximize > img:hover {
-    content: url("../img/max_active.png"); }
+      padding: 4px;
+      opacity: 1;
+      transition: opacity 300ms ease-in-out; }
+    #metacity .winButton .active {
+      position: fixed;
+      z-index: -1; }
+    #metacity .winButton .inactive:hover {
+      opacity: 0; }
   #metacity #close {
     margin-right: 8px; }
-    #metacity #close:active > img, #metacity #close > img:hover {
-      content: url("../img/close_active.png"); }
 
 #appMenu {
   position: fixed;
@@ -104,28 +102,25 @@ label {
   height: 0;
   top: 0;
   left: 0;
-  border-bottom: 1px outset #494b50;
-  visibility: visible;
+  transition: top 900ms cubic-bezier(0.17, 0.04, 0.03, 0.75);
   z-index: 9999; }
-  #appMenu :focus,
-  #appMenu :active:focus,
-  #appMenu .active:focus,
-  #appMenu .focus,
-  #appMenu :active.focus,
-  #appMenu .active.focus {
+  #appMenu :focus, #appMenu :active:focus, #appMenu .active:focus,
+  #appMenu .focus, #appMenu :active.focus, #appMenu .active.focus {
     outline: none !important; }
   #appMenu .hidden {
-    visibility: hidden; }
+    top: -23px;
+    transition: top 900ms cubic-bezier(0.17, 0.04, 0.03, 0.75); }
   #appMenu .btn-group {
     top: 1px;
     height: 100%; }
     #appMenu .btn-group:first-child {
       margin-left: 6px; }
-    #appMenu .btn-group > button {
+    #appMenu .btn-group #dropdownMenuButton {
       display: inline-block;
       background: transparent;
       color: rgba(255, 255, 255, 0.4);
       font-size: 11px;
+      letter-spacing: 0.04em;
       height: 23px;
       width: 40px;
       border-radius: 2px;
@@ -133,8 +128,8 @@ label {
       border-left: 1px outset #37393d;
       border-right: 1px outset #494b50;
       padding: 3px 0 2px; }
-      #appMenu .btn-group > button:hover, #appMenu .btn-group > button:focus, #appMenu .btn-group > button:active {
-        background: #312930;
+      #appMenu .btn-group #dropdownMenuButton:hover, #appMenu .btn-group #dropdownMenuButton:focus, #appMenu .btn-group #dropdownMenuButton:active {
+        background: #313031;
         color: rgba(255, 255, 255, 0.75);
         border-top: 1px inset #434443;
         border-bottom: 1px inset #434443; }
@@ -178,16 +173,20 @@ label {
             color: #f0f0f0; }
           #appMenu .btn-group .dropdown-menu li:hover span, #appMenu .btn-group .dropdown-menu li:active span {
             font-weight: 400;
-            color: #f34957; }
+            color: #ef4d5a; }
       #appMenu .btn-group .dropdown-menu .dropdown-divider {
         background: rgba(255, 255, 255, 0.075);
+        color: rgba(255, 255, 255, 0.65);
         height: 1px;
         width: 98%;
         margin: 4px auto;
-        padding: 0; }
+        padding: 0;
+        cursor: default; }
         #appMenu .btn-group .dropdown-menu .dropdown-divider:hover {
+          visibility: visible;
           background: rgba(255, 255, 255, 0.075);
-          color: rgba(255, 255, 255, 0.75); }
+          color: rgba(255, 255, 255, 0.65);
+          cursor: default; }
 
 .caret {
   color: fade(rgba(255, 255, 255, 0.4), 10%);
@@ -283,6 +282,22 @@ label {
   padding: 2px;
   z-index: 99999;
   resize: both; }
+  .bottom-bar div {
+    cursor: default; }
+  .bottom-bar label {
+    display: inline-block;
+    position: absolute;
+    color: #b6b5b4;
+    font-size: 12px;
+    font-weight: 600;
+    right: 1%;
+    margin: 4px 5px; }
+  .bottom-bar button {
+    position: absolute;
+    display: inline-block;
+    background: transparent;
+    border: none;
+    outline: none !important; }
   .bottom-bar #bottom-file {
     display: inline-block;
     position: relative;
@@ -313,28 +328,24 @@ label {
     width: -webkit-calc(100% - 240px);
     top: 0;
     left: 17%; }
-  .bottom-bar > label {
-    display: inline-block;
-    position: absolute;
-    color: #b6b5b4;
-    font-size: 12px;
-    font-weight: 600;
-    right: 1%;
-    margin: 4px 5px; }
-  .bottom-bar button {
-    position: absolute;
-    display: inline-block;
-    background: transparent;
-    border: none;
-    outline: none !important; }
   .bottom-bar #syncScroll {
     font-size: 14.5px;
     right: 2.5em;
     margin-top: 4px; }
+    .bottom-bar #syncScroll:after {
+      top: -155%;
+      right: -2px;
+      left: auto;
+      opacity: 0.9; }
   .bottom-bar #previewToggle {
     font-size: 17.5px;
     right: 0.4em;
     margin-top: 1px; }
+    .bottom-bar #previewToggle:after {
+      top: -155%;
+      right: -2px;
+      left: auto;
+      opacity: 0.9; }
 
 .prevToggle {
   position: absolute;
@@ -499,7 +510,8 @@ input[type="checkbox"] {
       color: #888; }
 
 .mdHtml {
-  display: block;
+  display: none;
+  color: #2a2a2a;
   width: 100%;
   height: 100%;
   resize: none;
@@ -522,14 +534,13 @@ input[type="checkbox"] {
     outline: 1px solid #ECE6E6; }
 
 #toolbar {
+  display: none;
   position: fixed;
   background-image: -webkit-linear-gradient(top, #353334, #302f2e);
   top: 0;
   left: 0;
-  z-index: 9;
   width: 50%;
   height: 35px;
-  display: none;
   border-bottom: 1px #2a2a2a solid;
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.75);
   transition: width 400ms cubic-bezier(0.17, 0.04, 0.03, 0.75);
@@ -668,13 +679,16 @@ input[type="checkbox"] {
 #unsaved-modal .modal-dialog {
   width: 425px;
   margin: 95px auto !important; }
-#unsaved-modal .modal-header {
-  padding: 10px; }
-  #unsaved-modal .modal-header .close {
-    top: 7px;
-    right: 13px; }
-#unsaved-modal .modal-body {
-  padding: 5px 15px; }
+  #unsaved-modal .modal-dialog .modal-header {
+    padding: 10px; }
+    #unsaved-modal .modal-dialog .modal-header #close {
+      position: absolute;
+      top: 7px;
+      right: 13px;
+      width: 15px;
+      height: auto; }
+  #unsaved-modal .modal-dialog .modal-body {
+    padding: 5px 15px; }
 
 #unsaved-body {
   color: rgba(255, 255, 255, 0.75);
@@ -700,7 +714,7 @@ input[type="checkbox"] {
 
 .close img {
   position: absolute;
-  width: 16px;
+  width: 15px;
   top: 6px;
   right: 1px;
   opacity: 1;
@@ -800,10 +814,11 @@ input[type="checkbox"] {
     position: relative;
     background: transparent;
     color: rgba(255, 255, 255, 0.7);
-    top: 10%;
-    left: 2%;
+    top: 9%;
+    left: 2.75%;
     width: 5%;
-    height: auto; }
+    height: auto;
+    text-shadow: 4px 1px rgba(0, 0, 0, 0.6); }
 
 /* fancy Button */
 .modal-button {
@@ -931,9 +946,9 @@ code {
 #markdown {
   color: #2a2a2a;
   font-family: "Open Sans", "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
-  font-size: 10pt;
+  font-size: 2.2vh;
   letter-spacing: 0.0375em;
-  line-height: 1.45;
+  line-height: 1.5;
   text-rendering: geometricPrecision;
   overflow: auto; }
   #markdown h1 {
@@ -976,18 +991,27 @@ code {
     vertical-align: middle;
     box-sizing: content-box; }
   #markdown ol, #markdown ul {
-    line-height: 1.6; }
+    line-height: 1.6;
+    margin-top: 3px;
+    padding-left: 35px; }
+    #markdown ol ol, #markdown ol ul, #markdown ul ol, #markdown ul ul {
+      padding-left: 27px; }
+      #markdown ol ol ol, #markdown ol ol ul, #markdown ol ul ol, #markdown ol ul ul, #markdown ul ol ol, #markdown ul ol ul, #markdown ul ul ol, #markdown ul ul ul {
+        padding-left: 35px; }
   #markdown li {
     margin-bottom: 5px; }
   #markdown a {
-    color: #237aa7;
-    text-decoration: none; }
-  #markdown a:focus, #markdown a:hover, #markdown a:active {
-    color: #23728c;
-    text-decoration: none; }
+    color: #1c74a0;
+    text-decoration: none;
+    transition: 300ms ease; }
+    #markdown a:hover, #markdown a:focus, #markdown a:active {
+      color: #3ea3d7;
+      text-decoration: none; }
   #markdown hr {
     border-top: 1px solid #ddd; }
   #markdown p {
+    font-size: 2.2vh;
+    line-height: 1.5;
     margin: 0 0 16px !important; }
   #markdown pre {
     background: #424242;
@@ -1040,6 +1064,32 @@ code {
   #markdown > *:last-child {
     margin-bottom: 0 !important; }
 
+[data-tooltip]:after {
+  display: none;
+  transition: 100ms ease 2s; }
+
+[data-tooltip]:hover:after {
+  content: attr(data-tooltip);
+  display: block;
+  position: absolute;
+  background-image: -webkit-linear-gradient(top, #383637, #373635);
+  color: rgba(255, 255, 255, 0.75);
+  font-family: "Roboto", "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  left: -10%;
+  top: -250%;
+  border-radius: 4px;
+  box-shadow: 0px 0px 4px #222;
+  white-space: nowrap;
+  margin-left: -5px;
+  padding: 4px 8px;
+  border: 1px outset #444;
+  opacity: 0.9;
+  transition: 10ms ease 10ms;
+  z-index: 20; }
+
+/* Triangle hack to make tooltip look like a speech bubble */
 .fa-link {
   color: rgba(255, 255, 255, 0.65); }
 

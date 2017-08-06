@@ -114,7 +114,7 @@ var updateWindowTitle = function(path) {
   }
   document.title = title;
   activeFile.html(filename);
-  activeFile.title = path.toString();
+  activeFile.attr('data-tooltip', path.toString())
 }
 
 function openSettings() {
