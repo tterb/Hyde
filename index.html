@@ -110,11 +110,16 @@
               <li href="#" onclick="includeTheme('base16-light');"><a id="dropdownItem">Base16 Light</a></li>
               <li href="#" onclick="includeTheme('dracula');"><a id="dropdownItem">Dracula</a></li>
               <li href="#" onclick="includeTheme('duotone-dark');"><a id="dropdownItem">Duotone Dark</a></li>
+              <li href="#" onclick="includeTheme('eclipse');"><a id="dropdownItem">Eclipse</a></li>
               <li href="#" onclick="includeTheme('hopscotch');"><a id="dropdownItem">Hopscotch</a></li>
+              <li href="#" onclick="includeTheme('itg-flat');"><a id="dropdownItem">Itg Flat</a></li>
               <li href="#" onclick="includeTheme('material');"><a id="dropdownItem">Material</a></li>
               <li href="#" onclick="includeTheme('monokai');"><a id="dropdownItem">Monokai</a></li>
+              <li href="#" onclick="includeTheme('neo');"><a id="dropdownItem">Neo</a></li>
+              <li href="#" onclick="includeTheme('oceanic');"><a id="dropdownItem">Oceanic</a></li>
               <li href="#" onclick="includeTheme('one-dark');"><a id="dropdownItem">One Dark</a></li>
               <li href="#" onclick="includeTheme('panda');"><a id="dropdownItem">Panda</a></li>
+              <li href="#" onclick="includeTheme('railscasts');"><a id="dropdownItem">Railscasts</a></li>
               <li href="#" onclick="includeTheme('seti');"><a id="dropdownItem">Seti</a></li>
               <li href="#" onclick="includeTheme('solarized-dark');"><a id="dropdownItem">Solarized Dark</a></li>
               <li href="#"onclick="includeTheme('solarized-light');"><a id="dropdownItem">Solarized Light</a></li>
@@ -205,13 +210,12 @@
     </section>
     <div class="search-dialog" id="search-container"><span id="search-icon" class="fa fa-search"></span></div>
     <div class="bottom-bar">
-      <div id="bottom-file" data-tooltip=""></div><span id="file-status">*</span>
+      <div id="bottom-file" data-tooltip=""></div><span id="file-status" data-tooltip="unsaved changes">*</span>
       <div id="wordcount"></div>
       <div id="draggable" style="-webkit-app-region:drag"></div>
-      <button id="syncScroll" onclick="toggleSyncScroll();"></button>
-      <button id="previewToggle" class="fa fa-eye" onclick="togglePreview();"></button>
+      <button id="syncScroll" data-tooltip="Sync Scrolling" onclick="toggleSyncScroll();"></button>
+      <button id="previewToggle" class="fa fa-eye" data-tooltip="Toggle Preview" onclick="togglePreview();"></button>
     </div>
-    <!-- <link rel="import" href="modal/markdown.html"> -->
     <!-- Markdown Help Modal -->
     <div class="modal fade" id="markdown-modal" tabindex="-1" role="dialog">
       <div class="modal-dialog">
@@ -337,7 +341,6 @@
     <script src="js/codemirror/marked.min.js"></script>
     <script src="js/codemirror/search.js"></script>
     <script src="js/codemirror/searchcursor.js"></script>
-    <script src="node_modules/codemirror-revisedsearch/src/revised-search.js"></script>
     <script src="js/settings.js"></script>
     <script src="js/app.js"></script>
     <script src="js/format.js"></script>
