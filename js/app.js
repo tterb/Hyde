@@ -89,6 +89,7 @@ if(os.type() === 'Linux') {
 
 function includeTheme(theme) {
   var themeTag,
+      // cm = CodeMirror.fromTextArea(document.getElementById('textPanel')),
       head = document.getElementsByTagName('head')[0],
       editorColor = $('.cm-s-'+theme+'.CodeMirror').css('background-color');
   if(theme === undefined) theme = 'one-dark';
@@ -106,12 +107,13 @@ function includeTheme(theme) {
     head.appendChild(themeTag);
   }
   settings.set('editorTheme', theme);
+  // cm.setOption('theme', theme);
 }
 
-window.onload = function() {
+window.onload = () => {
   var markdownArea = document.getElementById('markdown');
 
-  cm.on('change', function(cMirror) {
+  cm.on('change', (cMirror) => {
     countWords();
     // get value right from instance
     var markdownText = cMirror.getValue();
@@ -144,7 +146,7 @@ window.onload = function() {
     storage.get('markdown-savefile', function(error, data) {
       if (error) throw error;
       if ('filename' in data) {
-        fs.readFile(data.filename, 'utf-8', function (err, data) {
+        fs.readFile(data.filename, 'utf-8', function(err, data) {
            if(err)
                alert("An error ocurred while opening the file "+ err.message)
            cm.getDoc().setValue(data);
@@ -163,14 +165,14 @@ window.onload = function() {
   $("#unsavedConfirm").on('click', () => { saveFile(); });
   $("#unsavedDeny").on('click', () => { remote.BrowserWindow.getFocusedWindow().close(); });
   // Handle link clicks in application
-  $(".link").on('click', function() {
+  $(".link").on('click', () => {
     event.preventDefault();
     shell.openExternal($(this).attr('href'))
   });
   // Open dropdown sub-menus on hover
-  $('.dropdown-submenu').mouseover(function() {
+  $('.dropdown-submenu').mouseover( () => {
     $(this).children('ul').show();
-  }).mouseout(function() {
+  }).mouseout(() => {
     $(this).children('ul').hide();
   });
 }
@@ -235,7 +237,7 @@ var codeScroll = () => {
 }
 cm.on('scroll', codeScroll);
 $(window).on('resize', codeScroll);
-$(window).on('resize', function() {
+$(window).on('resize', () => {
   settings.set('windowWidth', parseInt($(window).width(),10));
   settings.set('windowHeight', parseInt($(window).height(),10));
 });
@@ -283,6 +285,14 @@ function writeEditorToFile(file) {
   });
 }
 
+// Resize toolbar when window is below necessary width
+$(window).on('resize', () => {
+  if(parseInt($('#body').width()) > 924 && $('#previewPanel').is(':visible')) {
+    toolbar.css('width', '50%');
+  } else {
+    toolbar.css('width', '100%');
+  }
+});
 
 // Word count
 function countWords() {

@@ -8,12 +8,13 @@ var body = $('#body'),
     syncScroll = $('#syncScroll');
 
 var opt = [
-  { name: 'showMenu', action: function() { toggleMenu(); }},
-  { name: 'showToolbar', action: function() { toggleToolbar(); }},
-  { name: 'showPreview', action: function() { togglePreview(); }},
-  { name: 'syncScroll', action: function() { toggleSyncScroll; }},
-  { name: 'isFullscreen', action: function() { toggleFullscreen(); }},
-  { name: 'lineNumbers', action: function() { toggleLineNumbers(); }}
+  { name: 'showMenu', action: () => { toggleMenu(); }},
+  { name: 'showToolbar', action: () => { toggleToolbar(); }},
+  { name: 'showPreview', action: () => { togglePreview(); }},
+  { name: 'syncScroll', action: () => { toggleSyncScroll; }},
+  { name: 'isFullscreen', action: () => { toggleFullscreen(); }},
+  { name: 'lineNumbers', action: () => { toggleLineNumbers(); }},
+  { name: 'lineWrapping' }
 ];
 
 function getUserSettings() {
@@ -30,7 +31,7 @@ function checkSetting(opt) {
 }
 
 function applySettings(opt) {
-    if(settings.get(opt.name)) {
+    if(settings.get(opt.name) && opt.action) {
         opt.action();
     }
 }
@@ -50,7 +51,7 @@ var formatHead = () => {
   if(menu.is(':visible')) {
     toolbar.css({ top: '26px' });
     toolbar.css('z-index', '999');
-    dragArea.css('width', '74%');
+    dragArea.css('width', '-webkit-calc(100% - 255px)');
     menuToggle.hide();
     if(toolbar.is(':visible')) {
       body.css('paddingTop', '30px');
@@ -62,13 +63,13 @@ var formatHead = () => {
     toolbar.css('z-index', '99999');
     body.css('paddingTop', '0px');
     if(toolbar.is(':visible')) {
-      dragArea.css('width', '46.75%');
+      dragArea.css('width', '-webkit-calc(50% - 50px)');
     } else {
       menuToggle.show();
-      dragArea.css({ 'width': 'calc(100% - ' + 117 + 'px)' });
+      dragArea.css({ 'width': 'calc(100% - 117px)' });
     }
   }
-  if(preview.is(':visible')) {
+  if(preview.is(':visible') && parseInt($('#body').width()) > 924) {
     toolbar.css('width', '50%');
     $('.CodeMirror-sizer').css('margin-right', '0');
   } else {
