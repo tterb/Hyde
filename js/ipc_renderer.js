@@ -72,7 +72,7 @@ ipc.on('file-save-as', saveAs);
 
 
 // Handling file opening through IPCRenderer
-ipc.on('file-open', function() {
+ipc.on('file-open', () => {
   storage.get('markdown-savefile', function(error, data) {
     if (error) alert(error);
     var options = {
@@ -86,7 +86,7 @@ ipc.on('file-open', function() {
       options.defaultPath = data.filename;
     }
 
-    dialog.showOpenDialog(options, function (file) {
+    dialog.showOpenDialog(options, (file)  => {
       if (file === undefined) {
         console.log("You didn't open the file");
         return;
@@ -94,7 +94,7 @@ ipc.on('file-open', function() {
 
       storage.set('markdown-savefile', {'filename' : file[0]}, function(error) { if (error) alert(error); });
 
-      var mdValue = cm.getValue();
+      // var mdValue = cm.getValue();
       // fileName is a string that contains the path and filename created in the save file dialog.
       fs.readFile(file[0], 'utf-8', function (err, data) {
         if (err) { alert("An error ocurred while opening the file "+ err.message); }
@@ -107,12 +107,7 @@ ipc.on('file-open', function() {
   });
 });
 
-function copySelected() {
-    var content = window.getSelection().toString();
-    console.log(window.getSelection().toString());
-    clipboard.writeText(content);
-}
-
+ipc.on('ctrl+q', () => { closeWindow(remote.BrowserWindow.getFocusedWindow()); });
 ipc.on('ctrl+b', () => { toggleFormat('bold'); });
 ipc.on('ctrl+i', () => { toggleFormat('italic'); });
 ipc.on('ctrl+-', () => { toggleFormat('strikethrough'); });
@@ -131,8 +126,7 @@ ipc.on('ctrl+r', () => { reloadWin(); });
 ipc.on('ctrl+m', () => { toggleMenu(); });
 ipc.on('ctrl+.', () => { toggleToolbar(); });
 ipc.on('ctrl+p', () => { togglePreview(); });
-ipc.on('ctrl+,', () => { openSettings(); });
-// ipc.on('ctrl+p', () => { ipcRenderer.send('show-settings-window'); });
+ipc.on('ctrl+,', () => { toggleSettings(); });
 ipc.on('ctrl+up', () => { cm.execCommand('goDocStart'); });
 ipc.on('ctrl+down', () => { cm.execCommand('goDocEnd'); });
 ipc.on('file-pdf', () => {
