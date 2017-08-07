@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="css/fonts/source-code-pro.css">
     <link rel="stylesheet" href="css/dialog.css">
     <link rel="stylesheet" href="css/scrollbar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+    <!-- <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet"> -->
     <script src="js/codemirror/codemirror.js"></script>
     <script src="node_modules/codemirror/mode/markdown/markdown.js"></script>
     <script src="node_modules/codemirror/mode/gfm/gfm.js"></script>
@@ -194,6 +196,78 @@
           <li class="fa fa-file-text" alt="Read the Docs"><a href="https://github.com/JonSn0w/Hyde-MD"></a></li>
         </ul>
       </section>
+      <!-- Settings Menu -->
+      <section id="settings-menu">
+        <div class="title">
+          <img id="cog" src="img/cog.png"/><h2>Settings</h2>
+        </div>
+        <div id="editor-section" class="settings-section">
+          <h3>Editor</h3>
+          <ul id="options">
+            <li id="editor-font" class="menu"><span>Font: </span>
+              <select class="selectpicker" data-width="fit" title="monospaced">
+                <option>serif</option>
+                <option>sans-serif</option>
+                <option>monospaced</option>
+              </select>
+            </li>
+            <li id="editor-fontsize" class="input"><span>Font size: </span>
+              <div class="input-group spinner">
+                <input id="editor-font-input" type="text" class="form-control" value="9.5">
+                <div class="input-group-btn-vertical">
+                  <button id="editor-font-up" class="btn btn-default" type="button"><i class="fa fa-caret-up"></i></button>
+                  <button id="editor-font-down" class="btn btn-default" type="button"><i class="fa fa-caret-down"></i></button>
+                </div>
+              </div>
+            </li>
+            <li id="editor-theme" class="menu"><span>Theme: </span>
+              <select id="theme-select" class="selectpicker" title="One Dark" data-width="fit">
+                <option>Base16 Dark</option><option>Base16 light</option>
+                <option>Dracula</option><option>Duotone Dark</option>
+                <option>Eclipse</option><option>Hopscotch</option>
+                <option>Itg Flat</option><option>Material</option>
+                <option>Monokai</option><option>Neo</option>
+                <option>Oceanic</option><option>One Dark</option>
+                <option>Panda</option><option>Railscasts</option>
+                <option>Seti</option><option>Solarized Dark</option>
+                <option>Solarized Light</option><option>Tomorrow Night Eighties</option><option>Yeti</option><option>Zenburn</option>
+              </select>
+            </li>
+            <li id="line-numbers" class="toggle"><input type="checkbox" value=""><span></span><span>Line numbers</span></li>
+            <li id="spell-check" class="toggle"><input type="checkbox" value=""><span></span><span>Enable spell checking</span></li>
+            <li id="trailing-space" class="toggle"><input type="checkbox" value="" checked><span></span><span>Show trailing whitespace</span></li>
+          </ul>
+          <hr>
+        </div>
+        <div id="preview-section" class="settings-section">
+          <h3>Preview</h3>
+          <ul id="options">
+            <li id="preveiw-mode" class="menu"><span>Mode: </span>
+              <select class="selectpicker" data-width="fit">
+                <option>Markdown</option>
+                <option>HTML</option>
+              </select>
+            </li>
+            <li id="preview-font" class="menu"><span>Font: </span>
+              <select class="selectpicker" data-width="fit">
+                <option>serif</option>
+                <option>sans-serif</option>
+                <option>monospaced</option>
+              </select>
+            </li>
+            <li id="preview-fontsize" class="input"><span>Font size: </span>
+              <div class="input-group spinner">
+                <input id="editor-font-input" type="text" class="form-control" value="9.5">
+                <div class="input-group-btn-vertical">
+                  <button id="editor-font-up" class="btn btn-default" type="button"><i class="fa fa-caret-up"></i></button>
+                  <button id="editor-font-down" class="btn btn-default" type="button"><i class="fa fa-caret-down"></i></button>
+                </div>
+              </div>
+            </li>
+            <li id="remove-yaml" class="toggle"><input type="checkbox" value="" checked><span></span><span>Hide YAML frontmatter</span></li>
+          </ul>
+        </div>
+      </section>
       <div id="leftPanel">
           <div id="leftFade" class="topFade"></div>
           <div class="col-md-6 full-height" style="background:hsl(220, 11%, 18%);" id="textPanel">
@@ -329,6 +403,7 @@
     <script>if (window.module) module = window.module;</script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
     <script>
       $(document).ready(function(){
         $('.dropdown-submenu a.test').on("click", function(e){

@@ -1,3 +1,4 @@
+@charset "UTF-8";
 html, body, section, .full-height {
   height: 100%; }
 
@@ -366,14 +367,14 @@ label {
       color: rgba(255, 255, 255, 0.75); }
       .prevToggle input[type="radio"] + label span {
         display: inline-block;
-        width: 19px;
-        height: 19px;
+        width: 20px;
+        height: 20px;
         margin: 0 6px 3px 5px;
         vertical-align: middle;
-        background: url(../img/radio.png) 0 top no-repeat;
+        background: url(../img/radio.png) -2px top no-repeat;
         cursor: pointer; }
     .prevToggle input[type="radio"]:checked + label span {
-      background: url(../img/radio.png) -24px top no-repeat; }
+      background: url(../img/radio.png) -33px top no-repeat; }
 
 input[type="checkbox"] {
   display: inline-block;
@@ -388,7 +389,7 @@ input[type="checkbox"] {
       height: 19px;
       margin: 0 6px 3px 5px;
       vertical-align: middle;
-      background: url(../img/checkbox.png) 0 top no-repeat;
+      background: url(../img/checkbox.png) -2px top no-repeat;
       cursor: pointer; }
   input[type="checkbox"] + span {
     display: inline-block;
@@ -396,12 +397,12 @@ input[type="checkbox"] {
     height: 19px;
     margin: 0 6px 3px 5px;
     vertical-align: middle;
-    background: url(../img/checkbox.png) 0 top no-repeat;
+    background: url(../img/checkbox.png) -2px top no-repeat;
     cursor: pointer; }
   input[type="checkbox"]:checked + label span {
-    background: url(../img/checkbox.png) -24px top no-repeat; }
+    background: url(../img/checkbox.png) -33px top no-repeat; }
   input[type="checkbox"]:checked + span {
-    background: url(../img/checkbox.png) -24px top no-repeat; }
+    background: url(../img/checkbox.png) -33px top no-repeat; }
 
 .mode {
   background-color: #282726;
@@ -438,7 +439,7 @@ input[type="checkbox"] {
     height: 56px;
     width: 28px;
     top: 0;
-    left: -2px;
+    left: -3px;
     cursor: pointer; }
 
 #sidebar {
@@ -509,6 +510,176 @@ input[type="checkbox"] {
     #side-icons li:hover, #side-icons li:active {
       color: #888; }
 
+#settings-menu {
+  display: block;
+  position: absolute;
+  background-image: -webkit-linear-gradient(#343233 40%, #292728);
+  color: rgba(255, 255, 255, 0.75);
+  height: 100%;
+  width: 340px;
+  top: 0;
+  left: -350px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.4);
+  transition: left 500ms cubic-bezier(0.17, 0.04, 0.03, 0.75);
+  padding: 12px 12px 10px 16px;
+  outline: none !important;
+  z-index: 99999; }
+  #settings-menu .title {
+    padding-top: 0;
+    padding-left: 4px;
+    vertical-align: middle; }
+    #settings-menu .title img {
+      display: inline-block;
+      height: 34px;
+      width: auto;
+      margin: -15px 10px 10px 2px; }
+    #settings-menu .title h2 {
+      display: inline-block;
+      font-size: 48px;
+      font-weight: 200;
+      margin-top: 12px;
+      margin-bottom: 12px; }
+  #settings-menu .settings-section {
+    padding: 4px 4px 6px 16px; }
+    #settings-menu .settings-section h3 {
+      font-size: 32px;
+      font-weight: 200;
+      margin-top: 4px;
+      margin-bottom: 8px; }
+    #settings-menu .settings-section ul {
+      list-style: none;
+      padding-left: 13px; }
+      #settings-menu .settings-section ul li {
+        font-size: 17px;
+        font-weight: 300;
+        letter-spacing: 0.035em;
+        line-height: 32px; }
+        #settings-menu .settings-section ul li .btn-group {
+          position: absolute;
+          left: 41.5%;
+          max-width: 50%; }
+          #settings-menu .settings-section ul li .btn-group .btn.btn-default {
+            background: -webkit-linear-gradient(bottom, #31302f, #403f3e);
+            color: rgba(255, 255, 255, 0.75);
+            top: 7px;
+            letter-spacing: 0.04em;
+            border: 1px outset #404243;
+            box-shadow: 0.5px 0.25px 0px rgba(0, 0, 0, 0.2);
+            padding: 2px 8px 0 10px;
+            outline: none !important; }
+          #settings-menu .settings-section ul li .btn-group .caret {
+            position: relative;
+            top: -10px;
+            left: 9px; }
+        #settings-menu .settings-section ul li .btn-group.open {
+          z-index: 999; }
+    #settings-menu .settings-section .dropdown-menu {
+      background: #2f2d2e;
+      color: rgba(255, 255, 255, 0.6);
+      top: 28px;
+      border: 1px outset #3e3c3d;
+      border-radius: 5px;
+      padding: 0; }
+      #settings-menu .settings-section .dropdown-menu ul {
+        padding-left: 0; }
+        #settings-menu .settings-section .dropdown-menu ul li:hover, #settings-menu .settings-section .dropdown-menu ul li:active, #settings-menu .settings-section .dropdown-menu ul li:focus {
+          background: #3b393a; }
+        #settings-menu .settings-section .dropdown-menu ul li a {
+          color: rgba(255, 255, 255, 0.6);
+          font-size: 14px;
+          padding: 3px 12px; }
+          #settings-menu .settings-section .dropdown-menu ul li a:hover, #settings-menu .settings-section .dropdown-menu ul li a:active, #settings-menu .settings-section .dropdown-menu ul li a:focus {
+            background: #2f2d2e;
+            color: #de545f;
+            outline: none !important; }
+          #settings-menu .settings-section .dropdown-menu ul li a:hover {
+            background: #3d3b3c;
+            box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.4); }
+    #settings-menu .settings-section .input-group.spinner {
+      position: relative;
+      display: inline-block;
+      left: 11px;
+      width: 20% !important;
+      vertical-align: middle; }
+      #settings-menu .settings-section .input-group.spinner .form-control {
+        background: #333132;
+        color: rgba(255, 255, 255, 0.7);
+        font-weight: 300;
+        left: -1px;
+        height: 26px;
+        border: 1px inset #403e3f;
+        border-radius: 6px;
+        box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.4);
+        padding: 0 8px 1px;
+        z-index: -99; }
+    #settings-menu .settings-section .input-group-btn-vertical {
+      position: relative;
+      white-space: nowrap;
+      float: right;
+      top: -0.2px;
+      left: -3px;
+      width: 0%;
+      vertical-align: middle;
+      display: table-cell; }
+      #settings-menu .settings-section .input-group-btn-vertical .btn {
+        display: block;
+        position: relative;
+        float: none;
+        width: 100%;
+        max-width: 100%;
+        padding: 6px 7.5px;
+        margin-left: -1px;
+        border: 1px outset #4a4e4f;
+        border-radius: 0;
+        outline: none !important; }
+        #settings-menu .settings-section .input-group-btn-vertical .btn:first-child {
+          background: -webkit-linear-gradient(bottom, #2c2a2b 5%, #3d3b3c, #2c2a2b 99%);
+          border-top-right-radius: 6px; }
+        #settings-menu .settings-section .input-group-btn-vertical .btn:last-child {
+          background: -webkit-linear-gradient(top, #2c2a2b 5%, #3d3b3c, #2c2a2b 99%);
+          border-bottom-right-radius: 6px;
+          margin-top: -2px; }
+        #settings-menu .settings-section .input-group-btn-vertical .btn:active i, #settings-menu .settings-section .input-group-btn-vertical .btn:focus i {
+          color: #de545f; }
+      #settings-menu .settings-section .input-group-btn-vertical i {
+        position: absolute;
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 11px;
+        top: -0.7px;
+        left: 4.5px; }
+    #settings-menu .settings-section #editor-theme {
+      margin-bottom: 3px; }
+    #settings-menu .settings-section #preview-fontsize {
+      margin-bottom: 3px; }
+      #settings-menu .settings-section #preview-fontsize .input-group-btn-vertical {
+        top: 1px; }
+    #settings-menu .settings-section .menu, #settings-menu .settings-section .input {
+      line-height: 38px;
+      vertical-align: middle; }
+    #settings-menu .settings-section .toggle {
+      position: relative;
+      left: -15px; }
+      #settings-menu .settings-section .toggle input[type="checkbox"] {
+        margin-top: 0; }
+      #settings-menu .settings-section .toggle input[type="checkbox"] + span {
+        margin: 0 10px 5px 0; }
+    #settings-menu .settings-section hr {
+      position: relative;
+      border-top: 1px outset rgba(255, 255, 255, 0.125);
+      left: -4px;
+      margin-top: 20px;
+      margin-bottom: 5px; }
+  ΓÇï
+  #settings-menu::-webkit-scrollbar {
+    background: transparent; }
+  #settings-menu::-webkit-scrollbar-track {
+    background: transparent; }
+  #settings-menu::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 15px; }
+
 .mdHtml {
   display: none;
   color: #2a2a2a;
@@ -543,7 +714,7 @@ input[type="checkbox"] {
   height: 35px;
   border-bottom: 1px #2a2a2a solid;
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.75);
-  transition: width 400ms cubic-bezier(0.17, 0.04, 0.03, 0.75);
+  transition: width 600ms cubic-bezier(0.17, 0.04, 0.03, 0.75);
   z-index: 999; }
 
 .topFade {
@@ -578,7 +749,6 @@ input[type="checkbox"] {
   height: -webkit-calc(100% - 28px);
   transition: width 700ms cubic-bezier(0.17, 0.04, 0.03, 0.75); }
   #leftPanel .topFade {
-    background-image: -webkit-linear-gradient(top, #292c33 35%, transparent);
     left: 0;
     transition-duration: 0ms; }
 
@@ -796,8 +966,7 @@ input[type="checkbox"] {
 .cm-trailingspace,
 .cm-trailing-space-a,
 .cm-trailing-space-new-line {
-  color: rgba(255, 255, 255, 0.15) !important;
-  text-decoration: underline; }
+  color: rgba(255, 255, 255, 0.15) !important; }
 
 .search-dialog {
   position: absolute;
@@ -1089,7 +1258,6 @@ code {
   transition: 10ms ease 10ms;
   z-index: 20; }
 
-/* Triangle hack to make tooltip look like a speech bubble */
 .fa-link {
   color: rgba(255, 255, 255, 0.65); }
 

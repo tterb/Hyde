@@ -9,11 +9,11 @@ const fs = remote.require('fs');
 const main = remote.require('./main');
 const func = require('./js/functions');
 const setter = require('./js/settings');
-const settings = require('./config');
+const config = require('./config');
 const showdown  = require('showdown');
 const path = require('path');
 const parsePath = require("parse-filepath");
-// const settings = require('electron-settings');
+const settings = require('electron-settings');
 const storage = require('electron-json-storage');
 const CMSpellChecker = require('codemirror-spell-checker');
 var HydeSettings = require('./js/settingsMenu');
@@ -62,9 +62,9 @@ var conf = {
     }
 }
 
-var files = fs.readdirSync('./css/theme'),
+var themeFiles = fs.readdirSync('./css/theme'),
     theme = settings.get('editorTheme');
-if(files.includes(theme+'.css')) {
+if(themeFiles.includes(theme+'.css')) {
   conf.theme = theme;
 } else {
   conf.theme = "one-dark";
@@ -220,8 +220,8 @@ var muteScroll = (obj, listener) => {
   var tempHandler = () => {
     obj.off('scroll', tempHandler);
     obj.on('scroll', listener);
-   }
- }
+  }
+}
 
 
 // Scroll Event Listeners
@@ -243,13 +243,13 @@ $(window).on('resize', () => {
 });
 
 var prevScroll = () => {
-    var scrollable = prevScrollable();
-    if (scrollable > 0 && isSynced) {
-      var percent = $(this).scrollTop() / scrollable;
-      // Since we'll be triggering scroll events.
-      muteScroll(cm, codeScroll);
-      cm.scrollTo(percent * codeScrollable());
-    }
+  var scrollable = prevScrollable();
+  if (scrollable > 0 && isSynced) {
+    var percent = $(this).scrollTop() / scrollable;
+    // Since we'll be triggering scroll events.
+    muteScroll(cm, codeScroll);
+    cm.scrollTo(percent * codeScrollable());
+  }
 }
 $prev.on('scroll', prevScroll);
 
@@ -292,6 +292,14 @@ $(window).on('resize', () => {
   } else {
     toolbar.css('width', '100%');
   }
+});
+
+$('#editor-font-up').on('click', () => {
+  var val = $('#editor-font-input').val();
+  $('#editor-font-input').val(parseFloat(val)+1)
+});
+$('#editor-font-down').on('click', () => {
+  $('#editor-font-input').val($('#editor-font-input').val()-1);
 });
 
 // Word count
