@@ -10,6 +10,8 @@ const jetpack = require('fs-jetpack');
 const config = JSON.parse(fs.readFileSync('package.json'));
 const appVersion = config.version;
 const shell = require('gulp-shell');
+var rebuild = require('electron-rebuild');
+var process = require('process');
 var electronPackage = require('electron/package.json');
 var electronVersion = electronPackage.version;
 
@@ -33,8 +35,6 @@ gulp.task('launch', () => {
 });
 
 gulp.task('rebuild', () => {
-  var rebuild = require('electron-rebuild');
-  var process = require('process');
   var arch = process.arch;
 
   rebuild.default(__dirname, electronVersion, arch)
@@ -54,7 +54,7 @@ gulp.task('liveReload', () => {
 	//watch css files, but only reload (no restart necessary)
 	gulp.watch(['./css/*.css'], electron.reload);
 	gulp.watch(['./**/**/*.css'], electron.reload);
-    gulp.watch(['./**/*.scss'], ['scss']);
+  gulp.watch(['./**/*.scss'], ['scss']);
 	//watch html
 	gulp.watch(['./index.html'], electron.restart);
 });
@@ -64,19 +64,19 @@ gulp.task('scss', () => {
   .pipe(plumber())
   .pipe(scss())
   .pipe(gulp.dest(destDir.path('css')));
-  electron.reload
 });
 
 gulp.task('build:linux', () => {
 	// @TODO
 });
 
-gulp.task('build:windows', () => {
-	options.arch = 'x64';
-	options.platform = 'win';
+gulp.task('build:windows', (done) => {
+	options.arch = 'ia32';
+	options.platform = 'win32';
 	options.icon = './img/icon/icon.ico';
-	options['app-bundle-id'] = 'com.brettstevenson.hyde';
-	options['helper-bundle-id'] = 'com.brettstevenson.hyde.helper';
+  options.out = 'dist';
+  options.prune = true;
+  options.asar = true;
 	packager(options, (err, paths) => {
 		if (err) { console.error(err); }
 		done();
@@ -87,8 +87,9 @@ gulp.task('build:osx', (done) => {
 	options.arch = 'x64';
 	options.platform = 'darwin';
 	options.icon = './img/icon/icon.icns';
-	options['app-bundle-id'] = 'com.brettstevenson.hyde';
-	options['helper-bundle-id'] = 'com.brettstevenson.hyde.helper';
+  options.out='dist'
+  options.prune = true;
+  options.asar = true;
 	packager(options, (err, paths) => {
 		if (err) { console.error(err); }
 		done();
