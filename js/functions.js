@@ -51,6 +51,15 @@ function toggleSidebar() {
   }
 }
 
+function toggleSettings() {
+  var settingsMenu = $('#settings-menu');
+  if(parseInt(settingsMenu.css('left'), 10) < 0) {
+    settingsMenu.css('left', '0px');
+  } else {
+    settingsMenu.css('left', '-350px');
+  }
+}
+
 
 function copySelected() {
     clipboard.writeText(cm.getSelection().toString());
@@ -91,7 +100,7 @@ var setClean = () => { this.latestGeneration = this.getGeneration(); }
 var isClean = () => { return this.cm.doc.isClean(this.latestGeneration); }
 
 // Update window title on various events
-var updateWindowTitle = function(path) {
+var updateWindowTitle = (path) => {
   var appName = "Hyde",
       activeFile = $('#bottom-file'),
       status = $('#file-status'),
