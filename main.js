@@ -1,3 +1,20 @@
+/*
+ * HYDE - markdown editor
+ * Copyright (c) 2017 Brett Stevenson <bstevensondev@gmail.com
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 
 'use strict';
 const electron = require('electron');
@@ -33,7 +50,8 @@ const createWindow = exports.createWindow = (file) => {
       height: windowState.height,
       show: false,
       frame: false,
-      autoHideMenuBar: true
+      autoHideMenuBar: true,
+      icon: path.join(__dirname, 'img/icon/png/64x64.png')
   }
   if (process.platform === 'darwin') {
     conf.titleBarStyle = 'hidden';
@@ -44,11 +62,12 @@ const createWindow = exports.createWindow = (file) => {
   let newWindow = new BrowserWindow(conf);
   windows.add(newWindow)
   newWindow.loadURL(mainPage);
-
-  newWindow.once('ready-to-show', () => { newWindow.show(); });
+  if(file !== undefined)
+    readFileIntoEditor(file);
+  newWindow.once('ready-to-show', () => { newWindow.show(); return file; });
 
   // Open the DevTools.
-  // newWindow.webContents.openDevTools();
+  newWindow.webContents.openDevTools();
 
   if(keepInTray) {
     newWindow.on('close', e => {
@@ -217,24 +236,41 @@ app.on('ready', function() {
       frame: false,
       autoHideMenuBar: true
   }
+
   if (process.platform === 'darwin') {
     conf.titleBarStyle = 'hidden';
     conf.icon = path.join(__dirname, '/img/icon/icon.icns');
-  } else {
+  } else if (process.platform === 'win32') {
     conf.icon = path.join(__dirname, '/img/icon/icon.ico');
+  } else {
+    conf.icon = path.join(__dirname, '/img/icon/icon.png');
   }
+
   let mainWindow = new BrowserWindow(conf);
   windowState.manage(mainWindow);
-  mainWindow.loadURL('file://' + __dirname + '/index.html');
+  mainWindow.loadURL(mainPage);
   windows.add(mainWindow);
-  // mainWindow.webContents.openDevTools();
+  mainWindow.webContents.openDevTools();
 
-  mainWindow.on('closed', function() {
+  if(keepInTray) {
+    mainWindow.on('close', e => {
+      if (!isQuitting) {
+        e.preventDefault();
+        if (process.platform === 'darwin') {
+          app.hide();
+        } else {
+          mainWindow.hide();
+        }
+      }
+    });
+  }
+
+  mainWindow.on('closed', () => {
     mainWindow = null;
   });
 
   // Quit when all windows are closed.
-  app.on('window-all-closed', function() {
+  app.on('window-all-closed', () => {
     // On OS X it is common for applications and their menu bar
     // to stay active until the user quits explicitly with Cmd + Q
     if (process.platform !== 'darwin') {
@@ -242,7 +278,7 @@ app.on('ready', function() {
     }
   });
 
-  app.on('activate', function() {
+  app.on('activate', () => {
     // On OS X it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
     if (mainWindow === null) {
@@ -250,7 +286,7 @@ app.on('ready', function() {
     }
   });
 
-  app.on('before-quit', function() {
+  app.on('before-quit', () => {
     windowState.saveState(mainWindow)
     isQuitting = true;
   });

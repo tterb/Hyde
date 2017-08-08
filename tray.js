@@ -2,14 +2,13 @@
 const path = require('path');
 const electron = require('electron');
 const app = electron.app;
+const iconPath = path.join(__dirname, 'img/icon/png/48x48.png');
 let tray = null;
 
 exports.create = function(mainWindow) {
   if (process.platform === 'darwin' || tray) {
     return;
   }
-
-  const iconPath = path.join(__dirname, 'img/icon/iconTray.png');
 
   const toggleWin = function(){
     if (mainWindow.isVisible()) {
@@ -20,20 +19,12 @@ exports.create = function(mainWindow) {
   };
 
   const contextMenu = electron.Menu.buildFromTemplate([
-    {
-      label: 'Toggle',
-      click() {
-        toggleWin();
-      }
+    {label: 'Toggle',
+      click() { toggleWin(); }
     },
-    {
-      type: 'separator'
-    },
-    {
-      label: 'Quit',
-      click() {
-        app.quit();
-      }
+    { type: 'separator' },
+    { label: 'Quit',
+      click() { app.quit(); }
     }
   ]);
 
