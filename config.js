@@ -28,8 +28,9 @@ module.exports = new Config ({
     previewFont: 'sans-serif',
     previewFontSize: 10,
     previewLineHeight: 1.45,
-    previewFrontMatter: false,
+    hideYAMLFrontMatter: true,
     // Other
+    showTooltips: true,
     keepInTray: false
   }
 });
