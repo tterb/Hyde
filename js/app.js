@@ -16,7 +16,6 @@ const parsePath = require("parse-filepath");
 const settings = require('electron-settings');
 const storage = require('electron-json-storage');
 const CMSpellChecker = require('codemirror-spell-checker');
-var HydeSettings = require('./js/settingsMenu');
 var console = require('console');
 var os = require("os");
 

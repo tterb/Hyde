@@ -126,10 +126,6 @@ var updateWindowTitle = (path) => {
   activeFile.attr('data-tooltip', path.toString())
 }
 
-function openSettings() {
-    HydeSettings();
-}
-
 function openModal(opt) {
   let win = new remote.BrowserWindow({
       parent: remote.getCurrentWindow(),
