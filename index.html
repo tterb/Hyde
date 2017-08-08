@@ -204,24 +204,24 @@
         <div id="editor-section" class="settings-section">
           <h3>Editor</h3>
           <ul id="options">
-            <li id="editor-font" class="menu"><span>Font: </span>
+            <li id="editorFont" class="menu"><span>Font: </span>
               <select class="selectpicker" data-width="fit" title="monospaced">
                 <option>serif</option>
                 <option>sans-serif</option>
                 <option>monospaced</option>
               </select>
             </li>
-            <li id="editor-fontsize" class="input"><span>Font size: </span>
+            <li id="editorFontSze" class="input"><span>Font size: </span>
               <div class="input-group spinner">
-                <input id="editor-font-input" type="text" class="form-control" value="9.5">
+                <input id="editorFont-input" type="text" class="form-control" value="9.5">
                 <div class="input-group-btn-vertical">
-                  <button id="editor-font-up" class="btn btn-default" type="button"><i class="fa fa-caret-up"></i></button>
-                  <button id="editor-font-down" class="btn btn-default" type="button"><i class="fa fa-caret-down"></i></button>
+                  <button id="editorFont-up" class="btn btn-default" type="button"><i class="fa fa-caret-up"></i></button>
+                  <button id="editorFont-down" class="btn btn-default" type="button"><i class="fa fa-caret-down"></i></button>
                 </div>
               </div>
             </li>
-            <li id="editor-theme" class="menu"><span>Theme: </span>
-              <select id="theme-select" class="selectpicker" title="One Dark" data-width="fit">
+            <li id="editor-theme" class="menu" style="margin-bottom:3px;padding-bottom:3px;"><span>Theme: </span>
+              <select id="editorTheme" class="selectpicker" title="One Dark" data-width="fit">
                 <option>Base16 Dark</option><option>Base16 light</option>
                 <option>Dracula</option><option>Duotone Dark</option>
                 <option>Eclipse</option><option>Hopscotch</option>
@@ -233,38 +233,49 @@
                 <option>Solarized Light</option><option>Tomorrow Night Eighties</option><option>Yeti</option><option>Zenburn</option>
               </select>
             </li>
-            <li id="line-numbers" class="toggle"><input type="checkbox" value=""><span></span><span>Line numbers</span></li>
-            <li id="spell-check" class="toggle"><input type="checkbox" value=""><span></span><span>Enable spell checking</span></li>
-            <li id="trailing-space" class="toggle"><input type="checkbox" value="" checked><span></span><span>Show trailing whitespace</span></li>
+            <li id="lineNumbers" class="toggle"><input type="checkbox" value=""><span></span><span>Line numbers</span></li>
+            <li id="enableSpellCheck" class="toggle"><input type="checkbox" value=""><span></span><span>Enable spell checking</span></li>
+            <li id="matchBrackets" class="toggle"><input type="checkbox" value=""><span></span><span>Match Brackets</span></li>
+            <li id="showTrailingSpace" class="toggle"><input type="checkbox" value=""><span></span><span>Show trailing whitespace</span></li>
           </ul>
           <hr>
         </div>
         <div id="preview-section" class="settings-section">
           <h3>Preview</h3>
           <ul id="options">
-            <li id="preveiw-mode" class="menu"><span>Mode: </span>
+            <li id="previewMode" class="menu"><span>Mode: </span>
               <select class="selectpicker" data-width="fit">
                 <option>Markdown</option>
                 <option>HTML</option>
               </select>
             </li>
-            <li id="preview-font" class="menu"><span>Font: </span>
+            <li id="previewFont" class="menu"><span>Font: </span>
               <select class="selectpicker" data-width="fit">
                 <option>serif</option>
                 <option>sans-serif</option>
                 <option>monospaced</option>
               </select>
             </li>
-            <li id="preview-fontsize" class="input"><span>Font size: </span>
+            <li id="previewFontSize" class="input" style="margin-bottom:3px;padding-bottom:3px;"><span>Font size: </span>
               <div class="input-group spinner">
-                <input id="editor-font-input" type="text" class="form-control" value="9.5">
-                <div class="input-group-btn-vertical">
-                  <button id="editor-font-up" class="btn btn-default" type="button"><i class="fa fa-caret-up"></i></button>
-                  <button id="editor-font-down" class="btn btn-default" type="button"><i class="fa fa-caret-down"></i></button>
+                <input id="previewFont-input" type="text" class="form-control" value="9.5">
+                <div class="input-group-btn-vertical" style="top:1px;">
+                  <button id="previewFont-up" class="btn btn-default" type="button"><i class="fa fa-caret-up"></i></button>
+                  <button id="previewFont-down" class="btn btn-default" type="button"><i class="fa fa-caret-down"></i></button>
                 </div>
               </div>
             </li>
-            <li id="remove-yaml" class="toggle"><input type="checkbox" value="" checked><span></span><span>Hide YAML frontmatter</span></li>
+            <li id="hideYAMLFrontMatter" class="toggle"><input type="checkbox" value=""><span></span><span>Hide YAML frontmatter</span></li>
+          </ul>
+          <hr>
+        </div>
+        <div id="app-section" class="settings-section">
+          <h3 style="margin-bottom:10px;">App</h3>
+          <ul id="options">
+            <li id="showTooltips" class="toggle"><input type="checkbox"
+             value=""><span></span><span>Show UI-tooltips</span></li>
+             <li id="keepInTray" class="toggle"><input type="checkbox"
+              value=""><span></span><span>Keep in Tray</span></li>
           </ul>
         </div>
       </section>
@@ -287,7 +298,7 @@
       <div id="bottom-file" data-tooltip=""></div><span id="file-status" data-tooltip="unsaved changes">*</span>
       <div id="wordcount"></div>
       <div id="draggable" style="-webkit-app-region:drag"></div>
-      <button id="syncScroll" data-tooltip="Sync Scrolling" onclick="toggleSyncScroll();"></button>
+      <button id="syncScrollButton" data-tooltip="Sync Scrolling" onclick="toggleSyncScroll();"></button>
       <button id="previewToggle" class="fa fa-eye" data-tooltip="Toggle Preview" onclick="togglePreview();"></button>
     </div>
     <!-- Markdown Help Modal -->

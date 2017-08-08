@@ -5,7 +5,7 @@ var body = $('#body'),
     leftFade = $('#leftFade'),
     rightFade = $('#rightFade'),
     preview = $('#previewPanel'),
-    syncScroll = $('#syncScroll');
+    syncScroll = $('#syncScrollToggle');
 
 var opt = [
   { name: 'showMenu', action: () => { toggleMenu(); }},
@@ -14,7 +14,8 @@ var opt = [
   { name: 'syncScroll', action: () => { toggleSyncScroll; }},
   { name: 'isFullscreen', action: () => { toggleFullscreen(); }},
   { name: 'lineNumbers', action: () => { toggleLineNumbers(); }},
-  { name: 'lineWrapping' }
+  { name: 'showTrailingSpace', action: () => { toggleWhitespace() }},
+  { name: 'lineWrapping' }, { name: 'editorFont' }, { name: 'editorFontSize' }, { name: 'editorLineHeight' }, { name: 'tabSize' }, { name: 'enableSpellCheck' }, { name: 'previewMode' }, { name: 'previewFont' }, { name: 'previewFontSize' }, { name: 'previewLineHeight' }, { name: 'hideYAMLFrontMatter' }, { name: 'matchBrackets' }, { name: 'keepInTray' }
 ];
 
 function getUserSettings() {
@@ -24,25 +25,33 @@ function getUserSettings() {
     syncScrollCheck();
 }
 
+// If there are no settings for option, sets default
 function checkSetting(opt) {
     if(!settings.has(opt.name)) {
         settings.set(opt.name, config.get(opt.name));
     }
 }
 
+var set = [];
 function applySettings(opt) {
-    if(settings.get(opt.name) && opt.action) {
-        opt.action();
+  var selector = $('#'+opt.name.toString()),
+      checkbox = selector.find('input');
+  if(settings.get(opt.name) && opt.action)
+      opt.action();
+  if(selector.length && checkbox.length) {
+    if(checkbox.is(':checked') !== settings.get(opt.name)) {
+      checkbox.prop("checked", !checkbox.prop("checked"));
     }
+  }
 }
 
 function syncScrollCheck() {
-    if(settings.get('syncScroll')) {
-        syncScroll.attr('class', 'fa fa-link');
-    } else {
-        syncScroll.attr('class', 'fa fa-unlink');
-    }
-    toggleSyncScroll;
+  if(settings.get('syncScroll')) {
+      syncScroll.attr('class', 'fa fa-link');
+  } else {
+      syncScroll.attr('class', 'fa fa-unlink');
+  }
+  toggleSyncScroll;
 }
 
 var formatHead = () => {
@@ -161,6 +170,17 @@ function toggleLineNumbers() {
     settings.set('lineNumbers', true);
   }
   // cm.execCommand('reload');
+}
+
+function toggleWhitespace() {
+  if(settings.get('showTrailingSpace')) {
+    $('.cm-trailing-space-a').css('text-decoration', 'underline');
+    $('.cm-trailing-space-new-line').css('text-decoration', 'underline');
+  } else {
+    $('.cm-trailing-space-a').css('text-decoration', 'none');
+    $('.cm-trailing-space-new-line').css('text-decoration', 'none');
+  }
+  return settings.get('showTrailingSpace');
 }
 
 function toggleFullscreen() {

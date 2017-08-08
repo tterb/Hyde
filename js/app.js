@@ -118,7 +118,7 @@ window.onload = () => {
     // get value right from instance
     var markdownText = cMirror.getValue();
     // Remove the YAML frontmatter from live-preview
-    if(!settings.get('previewFrontMatter'))
+    if(settings.get('hideYAMLFrontMatter'))
       markdownText = removeFrontMatter(markdownText);
     // Convert emoji's
     markdownText = replaceWithEmojis(markdownText);
@@ -184,7 +184,7 @@ window.onload = () => {
 
 var $prev = $('#previewPanel'),
     $markdown = $('#markdown'),
-    $syncScroll = $('#syncScroll'),
+    $syncScroll = $('#syncScrollToggle'),
     isSynced = settings.get('syncScroll');
 
  // Retaining state in boolean will be more CPU friendly instead of constantly selecting on each event.
@@ -294,12 +294,19 @@ $(window).on('resize', () => {
   }
 });
 
-$('#editor-font-up').on('click', () => {
-  var val = $('#editor-font-input').val();
-  $('#editor-font-input').val(parseFloat(val)+1)
+$('#editorFont-up').on('click', () => {
+  var val = $('#editorFont-input').val();
+  $('#editorFont-input').val(parseFloat(val)+1)
 });
-$('#editor-font-down').on('click', () => {
-  $('#editor-font-input').val($('#editor-font-input').val()-1);
+$('#editorFont-down').on('click', () => {
+  $('#editorFont-input').val($('#editorFont-input').val()-1);
+});
+$('#previewFont-up').on('click', () => {
+  var val = $('#previewFont-input').val();
+  $('#previewFont-input').val(parseFloat(val)+1)
+});
+$('#previewFont-down').on('click', () => {
+  $('#previewFont-input').val($('#previewFont-input').val()-1);
 });
 
 // Word count
