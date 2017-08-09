@@ -19,7 +19,6 @@ const CMSpellChecker = require('codemirror-spell-checker');
 var console = require('console');
 var os = require("os");
 
-
 const currentWindow = remote.getCurrentWindow();
 var isFileLoadedInitially = false,
     currentTheme = settings.get('editorTheme'),
@@ -108,26 +107,33 @@ function includeTheme(theme) {
 }
 
 window.onload = () => {
-  var markdownArea = document.getElementById('markdown'),
+  var markdownPreview = document.getElementById('markdown'),
       htmlPreview = $('#htmlPreview');
 
-  cm.on('change', (cMirror) => {
+  cm.on('change', (cm) => {
     countWords();
     // get value right from instance
-    var markdownText = cMirror.getValue();
+    var markdownText = cm.getValue();
     // Remove the YAML frontmatter from live-preview
     if(settings.get('hideYAMLFrontMatter'))
       markdownText = removeFrontMatter(markdownText);
     // Convert emoji's
     markdownText = replaceWithEmojis(markdownText);
     // Markdown -> Preview
-    html = marked(markdownText, { gfm: true });
-    markdownArea.innerHTML = html;
+    converter = new showdown.Converter({
+      ghCompatibleHeaderId: true,
+      tablesHeaderId: true,
+      simplifiedAutoLink: true,
+      excludeTrailingPunctuationFromURLs: true,
+      tasklists: true,
+      simpleLineBreaks: true,
+      smoothLivePreview: true
+    });
+    renderedMD = converter.makeHtml(markdownText);
+    markdownPreview.innerHTML = renderedMD;
     // Markdown -> HTML
-    converter = new showdown.Converter();
-    // Set preview mode
     html = converter.makeHtml(markdownText);
-    htmlPreview.text(converter.makeHtml(markdownText));
+    htmlPreview.text(html);
     if(this.isFileLoadedInitially) {
       this.setClean();
       this.isFileLoadedInitially = false;

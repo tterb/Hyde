@@ -178,7 +178,7 @@
     </div>
     <!-- <div id="editorFade"></div><div id="previewFade"></div> -->
     <section id="editArea" class="row">
-      <div id="side-trigger">
+      <div class="trigger left" id="side-trigger">
         <button id="side-button" onclick="toggleSidebar()" style="visibility:hidden;"/><img id="side-img" src="img/right-arrow.png"/>
       </div>
       <section id="sidebar">
@@ -279,6 +279,9 @@
           </ul>
         </div>
       </section>
+      <div class="trigger left" id="settings-trigger">
+        <button id="settings-button" onclick="toggleSettings()" style="visibility:hidden;"/><img id="settings-arrow" src="img/left-arrow.png"/>
+      </div>
       <div id="leftPanel">
           <div id="leftFade" class="topFade"></div>
           <div class="col-md-6 full-height" style="background:hsl(220, 11%, 18%);" id="textPanel">
@@ -424,7 +427,6 @@
         });
       });
     </script> -->
-    <script src="js/codemirror/marked.min.js"></script>
     <script src="js/codemirror/search.js"></script>
     <script src="js/codemirror/searchcursor.js"></script>
     <script src="js/showdown-icon.js"></script>
