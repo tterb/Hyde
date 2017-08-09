@@ -88,7 +88,6 @@ if(os.type() === 'Linux') {
 
 function includeTheme(theme) {
   var themeTag,
-      // cm = CodeMirror.fromTextArea(document.getElementById('textPanel')),
       head = document.getElementsByTagName('head')[0],
       editorColor = $('.cm-s-'+theme+'.CodeMirror').css('background-color');
   if(theme === undefined) theme = 'one-dark';
@@ -106,11 +105,11 @@ function includeTheme(theme) {
     head.appendChild(themeTag);
   }
   settings.set('editorTheme', theme);
-  // cm.setOption('theme', theme);
 }
 
 window.onload = () => {
-  var markdownArea = document.getElementById('markdown');
+  var markdownArea = document.getElementById('markdown'),
+      htmlPreview = $('#htmlPreview');
 
   cm.on('change', (cMirror) => {
     countWords();
@@ -121,14 +120,14 @@ window.onload = () => {
       markdownText = removeFrontMatter(markdownText);
     // Convert emoji's
     markdownText = replaceWithEmojis(markdownText);
-    //Markdown -> Preview
+    // Markdown -> Preview
     html = marked(markdownText, { gfm: true });
     markdownArea.innerHTML = html;
-    //Markdown -> HTML
+    // Markdown -> HTML
     converter = new showdown.Converter();
     // Set preview mode
     html = converter.makeHtml(markdownText);
-    $('#htmlPreview').attr('value', converter.makeHtml(markdownText));
+    htmlPreview.text(converter.makeHtml(markdownText));
     if(this.isFileLoadedInitially) {
       this.setClean();
       this.isFileLoadedInitially = false;
@@ -169,9 +168,9 @@ window.onload = () => {
     shell.openExternal($(this).attr('href'))
   });
   // Open dropdown sub-menus on hover
-  $('.dropdown-submenu').mouseover( () => {
+  $('.dropdown-submenu').mouseover(function() {
     $(this).children('ul').show();
-  }).mouseout(() => {
+  }).mouseout(function() {
     $(this).children('ul').hide();
   });
 }
@@ -221,7 +220,6 @@ var muteScroll = (obj, listener) => {
     obj.on('scroll', listener);
   }
 }
-
 
 // Scroll Event Listeners
 var codeScroll = () => {

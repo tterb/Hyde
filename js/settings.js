@@ -19,7 +19,8 @@ var opt = [
 ];
 
 function getUserSettings() {
-    opt.forEach(checkSetting)
+    opt.forEach(checkSetting);
+    setPreviewMode(settings.get('previewMode'));
     opt.forEach(applySettings);
     formatHead();
     syncScrollCheck();
@@ -148,15 +149,22 @@ function togglePreview() {
 }
 
 function setPreviewMode(opt) {
-  currentValue = opt.value;
-  if (currentValue === 'markdown') {
-    document.getElementById('htmlPreview').css('display', 'none');
-    document.getElementById('markdown').css('display', 'block');
-  } else if (currentValue === 'html') {
-    document.getElementById('markdown').css('display', 'block');
-    document.getElementById('htmlPreview').css('display', 'none');
+  var markdown = $('#markdown'),
+      html = $('#htmlPreview');
+      htmlText = "";
+  if(markdown.is(':visible') && opt !== 'markdown') {
+    markdown.hide();
+    html.show();
+    htmlText = html[0].innerHTML.replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+    html.text(htmlText);
+    preview.css('padding', '27px 0 0 15px');
+  } else if(html.is(':visible') && opt !== 'html') {
+    html.hide();
+    markdown.show();
+    preview.css('padding', '32px 15px 27px');
+    settings.set('previewMode', 'markdown');
   }
-  settings.set('previewMode', opt)
+  settings.set('previewMode', opt);
 }
 
 function toggleLineNumbers() {
