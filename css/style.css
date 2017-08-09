@@ -369,6 +369,13 @@ label {
     .prevToggle input[type="radio"]:checked + label span {
       background: url(../img/radio.png) -33px top no-repeat; }
 
+#previewPanel input[type="checkbox"] {
+  color: #000;
+  left: 0;
+  opacity: 1; }
+  #previewPanel input[type="checkbox"][disabled] {
+    cursor: default; }
+
 input[type="checkbox"] {
   display: inline-block;
   position: relative;
@@ -406,7 +413,7 @@ input[type="checkbox"] {
   padding: 2px 10px 2px;
   border-bottom: 1px solid #323130; }
 
-#side-trigger {
+.trigger {
   position: absolute;
   display: inline-block;
   background: transparent;
@@ -416,7 +423,11 @@ input[type="checkbox"] {
   margin: 0;
   transition: left 500ms cubic-bezier(0.17, 0.04, 0.03, 0.75);
   z-index: 9999; }
-  #side-trigger:hover button img {
+  .trigger.left {
+    left: 0; }
+  .trigger.right {
+    right: 0; }
+  .trigger:hover button img {
     visibility: visible; }
 
 #side-button {
@@ -509,9 +520,9 @@ input[type="checkbox"] {
   background-image: -webkit-linear-gradient(#343233 20%, #292728);
   color: rgba(255, 255, 255, 0.75);
   height: 95.5%;
-  width: 340px;
+  width: 320px;
   top: 0;
-  left: -350px;
+  left: -330px;
   overflow-x: hidden;
   overflow-y: scroll;
   box-shadow: 0 0 16px rgba(0, 0, 0, 0.4);
@@ -525,7 +536,7 @@ input[type="checkbox"] {
     position: fixed;
     background: -webkit-linear-gradient(top, #343233 73%, transparent);
     top: 0;
-    width: 32%;
+    width: 30%;
     padding: 5px 4px 10px;
     vertical-align: middle;
     z-index: 99999999999; }
@@ -660,6 +671,8 @@ input[type="checkbox"] {
       margin-top: 0; }
     #settings-menu .toggle input[type="checkbox"] + span {
       margin: 1.5px 10px 5px 0; }
+    #settings-menu .toggle:hover:after {
+      transition: 600ms ease; }
   #settings-menu hr {
     position: relative;
     border-top: 1px outset rgba(255, 255, 255, 0.125);
@@ -688,7 +701,27 @@ input[type="checkbox"] {
     box-shadow: none;
     word-wrap: break-word;
     white-space: normal;
-    padding: 0 4px 2px; }
+    padding: 0 4px 2px;
+    transition: 600ms ease; }
+
+#settings-trigger {
+  left: -320px; }
+
+#settings-button {
+  position: absolute;
+  background: transparent;
+  border: none;
+  top: 45%;
+  left: 0px;
+  cursor: pointer;
+  z-index: -99; }
+  #settings-button > img {
+    position: absolute;
+    height: 56px;
+    width: 28px;
+    top: 0;
+    left: -3px;
+    cursor: pointer; }
 
 .optContainer {
   position: fixed;
@@ -1202,6 +1235,7 @@ code {
     padding: 9.5px 18px; }
   #markdown pre code {
     font-family: "Source Code Pro", "Monaco", "Ubuntu Mono", "Dejavu Sans Mono", "Consolas", monospace !important;
+    background: #4d4d4d;
     color: rgba(255, 255, 255, 0.75);
     letter-spacing: 0.045em;
     border-radius: 10px;
@@ -1239,7 +1273,7 @@ code {
     font-size: 8pt;
     border: solid 1px #c6cbd1;
     border-bottom-color: #959da5;
-    border-radius: 6px;
+    border-radius: 4px;
     box-shadow: inset 0 -0.5px 0 #959da5; }
   #markdown > *:first-child {
     margin-top: 0 !important; }
