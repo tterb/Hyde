@@ -18,6 +18,7 @@ const storage = require('electron-json-storage');
 const CMSpellChecker = require('codemirror-spell-checker');
 var console = require('console');
 var os = require("os");
+require('showdown-youtube');
 
 const currentWindow = remote.getCurrentWindow();
 var isFileLoadedInitially = false,
@@ -127,7 +128,8 @@ window.onload = () => {
       excludeTrailingPunctuationFromURLs: true,
       tasklists: true,
       simpleLineBreaks: true,
-      smoothLivePreview: true
+      smoothLivePreview: true,
+      extensions: ['youtube']
     });
     renderedMD = converter.makeHtml(markdownText);
     markdownPreview.innerHTML = renderedMD;
