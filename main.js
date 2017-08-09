@@ -53,11 +53,14 @@ const createWindow = exports.createWindow = (file) => {
       autoHideMenuBar: true,
       icon: path.join(__dirname, 'img/icon/png/64x64.png')
   }
+
   if (process.platform === 'darwin') {
     conf.titleBarStyle = 'hidden';
-    conf.icon = path.join(__dirname, '/img/icon/icon.icns');
+    conf.icon = path.join(__dirname, '/img/icon/icns/icon.icns');
+  } else if (process.platform === 'win32') {
+    conf.icon = path.join(__dirname, '/img/icon/ico/icon.ico');
   } else {
-    conf.icon = path.join(__dirname, '/img/icon/icon.ico');
+    conf.icon = path.join(__dirname, '/img/icon/png/64x64.png');
   }
   let newWindow = new BrowserWindow(conf);
   windows.add(newWindow)
@@ -67,7 +70,7 @@ const createWindow = exports.createWindow = (file) => {
   newWindow.once('ready-to-show', () => { newWindow.show(); return file; });
 
   // Open the DevTools.
-  newWindow.webContents.openDevTools();
+  // newWindow.webContents.openDevTools();
 
   if(keepInTray) {
     newWindow.on('close', e => {
@@ -118,7 +121,7 @@ var template = [
     {label: "Save As", accelerator: "CmdOrCtrl+Shift+S", click: () => { sendShortcut('file-saveAs'); }},
     {label: "Export to PDF", click: () => {sendShortcut('file-pdf'); }},
     {type: "separator"},
-    {label: "Settings", accelerator: "CmdOrCtrl+,", click: () => { openSettings(); }},
+    {label: "Settings", accelerator: "CmdOrCtrl+,", click: () => { toggleSettings(); }},
     {type: "separator"},
     {label: "Quit", accelerator: "CmdOrCtrl+Q", click: () => { sendShortcut('ctrl+q'); }}
   ]},
@@ -239,11 +242,11 @@ app.on('ready', function() {
 
   if (process.platform === 'darwin') {
     conf.titleBarStyle = 'hidden';
-    conf.icon = path.join(__dirname, '/img/icon/icon.icns');
+    conf.icon = path.join(__dirname, '/img/icon/icns/icon.icns');
   } else if (process.platform === 'win32') {
-    conf.icon = path.join(__dirname, '/img/icon/icon.ico');
+    conf.icon = path.join(__dirname, '/img/icon/ico/icon.ico');
   } else {
-    conf.icon = path.join(__dirname, '/img/icon/icon.png');
+    conf.icon = path.join(__dirname, '/img/icon/png/64x64.png');
   }
 
   let mainWindow = new BrowserWindow(conf);
