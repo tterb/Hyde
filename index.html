@@ -5,16 +5,16 @@
     <title>Hyde - New document</title>
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap-select.min.css">
     <link rel="stylesheet" href="css/codemirror.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="css/fonts/metro-icons.min.css">
+    <link rel="stylesheet" href="css/fonts/lora.css">
     <link rel="stylesheet" href="css/fonts/open-sans.css">
     <link rel="stylesheet" href="css/fonts/source-code-pro.css">
     <link rel="stylesheet" href="css/dialog.css">
     <link rel="stylesheet" href="css/scrollbar.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
-    <!-- <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet"> -->
     <script src="js/codemirror/codemirror.js"></script>
     <script src="node_modules/codemirror/mode/markdown/markdown.js"></script>
     <script src="node_modules/codemirror/mode/gfm/gfm.js"></script>
@@ -182,12 +182,12 @@
         <button id="side-button" onclick="toggleSidebar()" style="visibility:hidden;"/><img id="side-img" src="img/right-arrow.png"/>
       </div>
       <section id="sidebar">
-        <img id="side-logo" src="img/icon/icon.png"/>
+        <img id="side-logo" src="img/icon/png/64x64.png"/>
         <ul id="side-menu">
           <li id="sidebar-new"><a onclick="openNewWindow();">New</a></li>
           <li id="sidebar-open"><a>Open</a></li>
           <li id="sidebar-save"><a onclick="saveFile();">Save</a></li>
-          <li id="sidebar-settings"><a onclick="openSettings();">Settings</a></li>
+          <li id="sidebar-settings"><a onclick="toggleSettings();">Settings</a></li>
           <li id="sidebar-about"><a href="#" data-toggle="modal" data-target="#about-modal" onclick="toggleSidebar()">About</a></li>
         </ul>
         <ul id="side-icons">
@@ -234,9 +234,9 @@
               </select>
             </li>
             <li id="lineNumbers" class="toggle"><input type="checkbox" value=""><span></span><span>Line numbers</span></li>
-            <li id="enableSpellCheck" class="toggle"><input type="checkbox" value=""><span></span><span>Enable spell checking</span></li>
-            <li id="matchBrackets" class="toggle"><input type="checkbox" value=""><span></span><span>Match Brackets</span></li>
-            <li id="showTrailingSpace" class="toggle"><input type="checkbox" value=""><span></span><span>Show trailing whitespace</span></li>
+            <li id="enableSpellCheck" class="toggle"><input type="checkbox"  value=""><span></span><span>Enable spell checking</span></li>
+            <li id="matchBrackets" class="toggle" data-tooltip="Adds auto-completion for the following: &quot;&quot;, '', ``, (), [], {}, "><input type="checkbox" value=""><span></span><span>Match Brackets</span></li>
+            <li id="showTrailingSpace" class="toggle" data-tooltip="Provides a faint underline to identify newlines"><input type="checkbox" value=""><span></span><span>Show trailing whitespace</span></li>
           </ul>
           <hr>
         </div>
@@ -265,16 +265,16 @@
                 </div>
               </div>
             </li>
-            <li id="hideYAMLFrontMatter" class="toggle"><input type="checkbox" value=""><span></span><span>Hide YAML frontmatter</span></li>
+            <li id="hideYAMLFrontMatter" class="toggle" data-tooltip="Preferred by Jekyll users, has no effect on other content."><input type="checkbox" value=""><span></span><span>Hide YAML frontmatter</span></li>
           </ul>
           <hr>
         </div>
         <div id="app-section" class="settings-section">
           <h3 style="margin-bottom:10px;">App</h3>
           <ul id="options">
-            <li id="showTooltips" class="toggle"><input type="checkbox"
+            <li id="showTooltips" data-tooltip="Show helpful tooltips like this!" class="toggle"><input type="checkbox"
              value=""><span></span><span>Show UI-tooltips</span></li>
-             <li id="keepInTray" class="toggle"><input type="checkbox"
+             <li id="keepInTray" class="toggle" data-tooltip="Allow app to stay active in tray on close"><input type="checkbox"
               value=""><span></span><span>Keep in Tray</span></li>
           </ul>
         </div>
@@ -289,7 +289,7 @@
           <div id="rightFade" class="topFade"></div>
           <div id="previewPanel" class="col-md-6 full-height slideInRight">
             <div id="markdown"></div>
-            <textarea id="htmlPreview" class="mdHtml" readonly></textarea>
+            <div id="htmlPreview"></div>
           </div>
       </div>
     </section>
@@ -298,7 +298,7 @@
       <div id="bottom-file" data-tooltip=""></div><span id="file-status" data-tooltip="unsaved changes">*</span>
       <div id="wordcount"></div>
       <div id="draggable" style="-webkit-app-region:drag"></div>
-      <button id="syncScrollButton" data-tooltip="Sync Scrolling" onclick="toggleSyncScroll();"></button>
+      <button id="syncScrollToggle" data-tooltip="Sync Scrolling" onclick="toggleSyncScroll();"></button>
       <button id="previewToggle" class="fa fa-eye" data-tooltip="Toggle Preview" onclick="togglePreview();"></button>
     </div>
     <!-- Markdown Help Modal -->
@@ -415,7 +415,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
-    <script>
+    <!-- <script>
       $(document).ready(function(){
         $('.dropdown-submenu a.test').on("click", function(e){
           $(this).next('ul').toggle();
@@ -423,7 +423,7 @@
           e.preventDefault();
         });
       });
-    </script>
+    </script> -->
     <script src="js/codemirror/marked.min.js"></script>
     <script src="js/codemirror/search.js"></script>
     <script src="js/codemirror/searchcursor.js"></script>
