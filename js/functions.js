@@ -52,11 +52,18 @@ function toggleSidebar() {
 }
 
 function toggleSettings() {
-  var settingsMenu = $('#settings-menu');
+  var settingsMenu = $('#settings-menu'),
+      trigger = $('#settings-trigger'),
+      button = $('#settings-button');
   if(parseInt(settingsMenu.css('left'), 10) < 0) {
+    button.css('visibility','hidden');
     settingsMenu.css('left', '0px');
+    trigger.css('left','320px');
+    trigger.show();
   } else {
-    settingsMenu.css('left', '-350px');
+    button.css('visibility','hidden');
+    settingsMenu.css('left', '-320px');
+    trigger.hide();
   }
 }
 
