@@ -37,7 +37,7 @@ const windowStateManager = require('electron-window-state');
 // Keep a global reference of the window object
 var windows = new Set();
 let isQuitting = false;
-let windowState;
+let windowState, mainWindow;
 
 // Allows render process to access active windows
 const getWindows = exports.getWindows = () => {
@@ -161,19 +161,21 @@ var template = [
       focusedWindow.setFullScreen(!isFullScreen);
     }},
     {type: "separator"},
-    {label: 'Toggle Developer Tools',
-    accelerator: (function() {
-      if (process.platform === 'darwin')
-        return 'Command+Alt+I';
-      else
-        return 'Ctrl+Shift+I';
-    }()),
-    click: function(item, focusedWindow) {
-      if (focusedWindow)
-        focusedWindow.toggleDevTools();
-    }}
+    {role: 'toggledevtools'}
   ]},
-  {label: "&Help", submenu: [
+  {label: "&Window", submenu: [
+    {label: "Minimize", click: () => {
+      BrowserWindow.getFocusedWindow().minimize();
+    }},
+    {label: "Zoom", click: () => {
+      toggleFullscreen();
+    }},
+    {type: "separator"},
+    {label: "Bring to Front", click: () => {
+      windows[0].show();
+    }},
+  ]},
+  {role: 'help', submenu: [
     {label: "Documentation", click: () => {
       shell.openExternal(mod.repository.docs);
     }},
@@ -182,15 +184,35 @@ var template = [
     }},
     {label: "Report Issue", click: () => {
       shell.openExternal(mod.bugs.url);
-    }},
-    {type: "separator"},
-    {label: "About Hyde", click: () => {
-      dialog.showMessageBox({title: "About Hyde", type:"info", message: "An Electron powered markdown editor for Jekyll users.\nGPL v3.0 Copyright (c) 2017 Brett Stevenson <brettstevenson.me>", buttons: ["Close"] });
     }}
-  ]}
+  ]},
 ];
-// const menu = Menu.buildFromTemplate(template);
-// Menu.setApplicationMenu(menu);
+
+if (process.platform === 'darwin') {
+  template.unshift({
+    label: "Hyde",
+    submenu: [
+      {role: 'about'},
+      {type: 'separator'},
+      {role: 'services', submenu: []},
+      {type: 'separator'},
+      {role: 'hide'},
+      {role: 'hideothers'},
+      {role: 'unhide'},
+      {type: 'separator'},
+      {role: 'quit'}
+    ]
+  })
+
+  // Window menu
+  template[4].submenu = [
+    {role: 'minimize'},
+    {role: 'zoom'},
+    {type: 'separator'},
+    {role: 'front'}
+  ]
+}
+
 
 function sendShortcut(cmd) {
   var focusedWindow = BrowserWindow.getFocusedWindow();
@@ -249,7 +271,7 @@ app.on('ready', function() {
     conf.icon = path.join(__dirname, '/img/icon/png/64x64.png');
   }
 
-  let mainWindow = new BrowserWindow(conf);
+  mainWindow = new BrowserWindow(conf);
   windowState.manage(mainWindow);
   mainWindow.loadURL(mainPage);
   windows.add(mainWindow);

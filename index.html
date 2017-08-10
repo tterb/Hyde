@@ -65,7 +65,7 @@
           <li class="dropdown-divider"></li>
           <li tabindex="-1" href="#" onclick="exportToPDF();"><a id="dropdownItem">Export to PDF</a></li>
           <li class="dropdown-divider"></li>
-          <li tabindex="-1" href="#" onclick="openSettings();"><a id="dropdownItem">Settings</a><span>Ctrl + ,</span></li>
+          <li tabindex="-1" href="#" onclick="toggleSettings();"><a id="dropdownItem">Settings</a><span>Ctrl + ,</span></li>
           <li class="dropdown-divider"></li>
           <li tabindex="-1" href="#" onclick="closeWindow(this)"><a id="dropdownItem">Close</a></li>
         </ul>
@@ -176,13 +176,13 @@
         <a data-toggle="modal" data-target="#markdown-modal" title="Markdown Help" class="fa fa-question-circle editor-toolbar"></a>
       </div>
     </div>
-    <!-- <div id="editorFade"></div><div id="previewFade"></div> -->
+    <!-- Editor Area -->
     <section id="editArea" class="row">
       <div class="trigger left" id="side-trigger">
         <button id="side-button" onclick="toggleSidebar()" style="visibility:hidden;"/><img id="side-img" src="img/right-arrow.png"/>
       </div>
       <section id="sidebar">
-        <img id="side-logo" src="img/icon/png/64x64.png"/>
+        <img id="side-logo" src="img/icon/png/logo.png"/>
         <ul id="side-menu">
           <li id="sidebar-new"><a onclick="openNewWindow();">New</a></li>
           <li id="sidebar-open"><a>Open</a></li>
@@ -292,7 +292,7 @@
           <div id="rightFade" class="topFade"></div>
           <div id="previewPanel" class="col-md-6 full-height slideInRight">
             <div id="markdown"></div>
-            <div id="htmlPreview"></div>
+            <textarea id="htmlPreview"></textarea>
           </div>
       </div>
     </section>
