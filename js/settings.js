@@ -19,11 +19,18 @@ var opt = [
 ];
 
 function getUserSettings() {
+    if(process.platform === 'darwin')
+      $('.btn-group').remove();
     opt.forEach(checkSetting);
     setPreviewMode(settings.get('previewMode'));
     opt.forEach(applySettings);
     formatHead();
     syncScrollCheck();
+    if(process.platform === 'darwin') {
+      $('.btn-group').remove();
+      $('#menuToggle').remove();
+      $('#metacity').hide();
+    }
 }
 
 // If there are no settings for option, sets default
@@ -75,11 +82,12 @@ var formatHead = () => {
     if(toolbar.is(':visible')) {
       dragArea.css('width', '-webkit-calc(50% - 50px)');
     } else {
-      menuToggle.show();
+      // if(process.platform !== 'darwin')
+        menuToggle.show();
       dragArea.css({ 'width': 'calc(100% - 117px)' });
     }
   }
-  if(preview.is(':visible') && parseInt($('#body').width()) > 924) {
+  if(preview.is(':visible') && parseInt($('#body').width(),10) > 924) {
     toolbar.css('width', '50%');
     $('.CodeMirror-sizer').css('margin-right', '0');
   } else {
@@ -118,6 +126,10 @@ var toggleToolbar = () => {
   } else {
     toolbar.css('display', 'block');
     settings.set('showToolbar', true);
+  }
+  if(process.platform === 'darwin') {
+    toggleMenu();
+    return;
   }
   formatHead();
 };

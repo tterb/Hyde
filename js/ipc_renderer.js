@@ -123,7 +123,7 @@ ipc.on('ctrl+shift+a', () => { cm.execCommand('indentAuto'); });
 ipc.on('ctrl+left', () => { cm.execCommand('indentLess'); });
 ipc.on('ctrl+right', () => { cm.execCommand('indentMore'); });
 ipc.on('ctrl+r', () => { reloadWin(); });
-ipc.on('ctrl+m', () => { toggleMenu(); });
+ipc.on('ctrl+m', () => { if(process.platform !== 'darwin') toggleMenu(); });
 ipc.on('ctrl+.', () => { toggleToolbar(); });
 ipc.on('ctrl+p', () => { togglePreview(); });
 ipc.on('ctrl+,', () => { toggleSettings(); });

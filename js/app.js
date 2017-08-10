@@ -19,6 +19,7 @@ const CMSpellChecker = require('codemirror-spell-checker');
 var console = require('console');
 var os = require("os");
 require('showdown-youtube');
+require('showdown-prettify');
 
 const currentWindow = remote.getCurrentWindow();
 var isFileLoadedInitially = false,
@@ -111,6 +112,18 @@ window.onload = () => {
   var markdownPreview = document.getElementById('markdown'),
       htmlPreview = $('#htmlPreview');
 
+  var converter = new showdown.Converter({
+      ghCompatibleHeaderId: true,
+      simplifiedAutoLink: true,
+      excludeTrailingPunctuationFromURLs: true,
+      tasklists: true,
+      strikethrough: true,
+      simpleLineBreaks: true,
+      parseImgDimensions: true,
+      smoothLivePreview: true,
+      extensions: ['youtube', 'prettify']
+  });
+
   cm.on('change', (cm) => {
     countWords();
     // get value right from instance
@@ -121,21 +134,13 @@ window.onload = () => {
     // Convert emoji's
     markdownText = replaceWithEmojis(markdownText);
     // Markdown -> Preview
-    converter = new showdown.Converter({
-      ghCompatibleHeaderId: true,
-      tablesHeaderId: true,
-      simplifiedAutoLink: true,
-      excludeTrailingPunctuationFromURLs: true,
-      tasklists: true,
-      simpleLineBreaks: true,
-      smoothLivePreview: true,
-      extensions: ['youtube']
-    });
     renderedMD = converter.makeHtml(markdownText);
     markdownPreview.innerHTML = renderedMD;
     // Markdown -> HTML
+    converter.setOption('noHeaderId', true);
     html = converter.makeHtml(markdownText);
-    htmlPreview.text(html);
+    htmlPreview.val(html);
+
     if(this.isFileLoadedInitially) {
       this.setClean();
       this.isFileLoadedInitially = false;
