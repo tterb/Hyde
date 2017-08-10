@@ -1,19 +1,22 @@
-<p align="center"> 
-  <img src="https://user-images.githubusercontent.com/16360374/28908506-e58c3a38-77d8-11e7-8177-00610617d7a9.png" height="350"/>
+<p align="left"> 
+  <img src="https://user-images.githubusercontent.com/16360374/29168418-a2647ff8-7d83-11e7-96c8-495f7e5e3a35.png" height="140"/>
 </p>
-<h3 align="center">An <a href="http://electron.atom.io" target="_blank"><img src="https://user-images.githubusercontent.com/16360374/27318472-58bebca2-5541-11e7-9870-68d4a4f8f957.png" width="22"/> Electron</a> powered markdown editor for  <a href="https://jekyllrb.com" target="_blank"><img src="https://user-images.githubusercontent.com/16360374/27342564-662358d6-5595-11e7-944d-309b695d238a.png" width="65"/></a> users.</h3>
+<h3 align="left">An <a href="http://electron.atom.io" target="_blank"><img src="https://user-images.githubusercontent.com/16360374/27318472-58bebca2-5541-11e7-9870-68d4a4f8f957.png" width="22"/> Electron</a> powered markdown editor for <a href="https://jekyllrb.com" target="_blank"><img src="https://user-images.githubusercontent.com/16360374/29168998-84c8393c-7d86-11e7-943c-50abf259af4e.png" height="23"/>Jekyll</a> users.</h3>
 <br>  
-<p align="center">
-  <a href="https://badge.fury.io/gh/JonSn0w%2FHyde-MD">
-    <img src="https://badge.fury.io/gh/JonSn0w%2FHyde-MD.svg" height="21" alt="version">&nbsp;
+<p align="right">
+  <a href="https://travis-ci.org/JonSn0w/Hyde">
+    <img src="https://travis-ci.org/JonSn0w/Hyde.svg?branch=master" height="21" title="Build Status">&nbsp;
   </a>
   <a href="https://www.gnu.org/licenses/">
-    <img src="https://img.shields.io/badge/License-GPL%20v3-yellow.svg" height="21" title="License">&nbsp;
+  <img src="https://img.shields.io/badge/License-GPL%20v3-yellow.svg" height="21" title="License">&nbsp;
+</a>
+  <a href="https://badge.fury.io/gh/JonSn0w%2FHyde-MD">
+    <img src="https://badge.fury.io/gh/JonSn0w%2FHyde-MD.svg" height="21" alt="version">&nbsp;
   </a>
   <a href="https://codeclimate.com/github/JonSn0w/Hyde">
     <img src="https://codeclimate.com/github/JonSn0w/Hyde/badges/gpa.svg"  height="21" alt="Code Climate"/>&nbsp;
   </a>
-  <a href="https://jekyllrb.com/">
+  <a href="https://electron.atom.io/">
     <img src="https://img.shields.io/badge/powered_by-Electron-blue.svg" height="21" title="Electron">&nbsp;
   </a>
   <a href="https://jekyllrb.com/">
@@ -27,6 +30,7 @@
   
 **Hyde** is an [Electron](http://electron.atom.io)-based markdown editor that aims to improve the accessibility of [Jekyll](https://jekyllrb.com) as a blogging platform for developers and non-developers, alike.  
 As many users already know, [Jekyll](https://jekyllrb.com) holds many benefits over other blogging platforms. Though, it appears that many potential users outside of the developer community are initially intimidated by the Markdown syntax used to compose and format blog posts.   
+
 **Hyde** aims to counter this issue by providing an approachable modular interface, capable of offering the same familiar toolbars and live-preview that you would find in a typical word-processor or the simplicity and streamlined workflow of a minimalistic text editor.  
   
 <br>
@@ -45,8 +49,8 @@ As many users already know, [Jekyll](https://jekyllrb.com) holds many benefits o
 * GitHub Flavored Markdown (GFM)
 * User-friendly formatting via the toolbar
 * Syntax highlighting for Markdown, GFM-compatible HTML, and YAML frontmatter
-* A large collection of popular syntax-themes
-* :tada: Emoji support :tada:
+* A collection of 20+ popular syntax-themes
+* :tada: FontAwesome, Glyphicon, and Emoji support :tada: 
 * Full screen mode
   - Write free of all distractions
 * Integrated spell-checking and word count
@@ -61,10 +65,10 @@ As many users already know, [Jekyll](https://jekyllrb.com) holds many benefits o
 
 # Installation
 
-After cloning this repository, install and run the application using the command:
+After cloning and unzipping the repository, install and run the application using the command:
 
 ```shell
->$ npm install && npm start
+$ npm install && npm start
 ```
 
 <br>
@@ -76,7 +80,7 @@ After cloning this repository, install and run the application using the command
 Preprocessor compilation and live-reload functionalities are available via the following command:
 
 ```shell
->$ gulp watch
+$ gulp watch
 ```
 
 <br>
