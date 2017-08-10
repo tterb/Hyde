@@ -1,5 +1,5 @@
 <p align="left"> 
-  <img src="https://user-images.githubusercontent.com/16360374/29168418-a2647ff8-7d83-11e7-96c8-495f7e5e3a35.png" height="140"/>
+  <img src="https://user-images.githubusercontent.com/16360374/29169160-6d1c8fbc-7d87-11e7-82dc-d0a1b7078c02.png" height="150"/>
 </p>
 <h3 align="left">An <a href="http://electron.atom.io" target="_blank"><img src="https://user-images.githubusercontent.com/16360374/27318472-58bebca2-5541-11e7-9870-68d4a4f8f957.png" width="22"/> Electron</a> powered markdown editor for <a href="https://jekyllrb.com" target="_blank"><img src="https://user-images.githubusercontent.com/16360374/29168998-84c8393c-7d86-11e7-943c-50abf259af4e.png" height="23"/>Jekyll</a> users.</h3>
 <br>  
