@@ -23,14 +23,11 @@
     <img src="https://img.shields.io/badge/built for-Jekyll-red.svg" height="21" title="Jekyll">&nbsp;
   </a>
 </p>
-
-<br>
-
+  
 # Description  
   
 **Hyde** is an [Electron](http://electron.atom.io)-based markdown editor that aims to improve the accessibility of [Jekyll](https://jekyllrb.com) as a blogging platform for developers and non-developers, alike.  
 As many users already know, [Jekyll](https://jekyllrb.com) holds many benefits over other blogging platforms. Though, it appears that many potential users outside of the developer community are initially intimidated by the Markdown syntax used to compose and format blog posts.   
-
 **Hyde** aims to counter this issue by providing an approachable modular interface, capable of offering the same familiar toolbars and live-preview that you would find in a typical word-processor or the simplicity and streamlined workflow of a minimalistic text editor.  
   
 <br>
