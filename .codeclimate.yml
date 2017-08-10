@@ -26,6 +26,9 @@ engines:
         enabled: false
   fixme:
     enabled: true
+    checks:
+      TODO:
+        enabled: false
 
 ratings:
   paths:
@@ -43,6 +46,7 @@ exclude_paths:
   - "css/font-awesome.min.css"
   - "css/fonts/*"
   - "js/codemirror/*"
+  - "js/showdown-icon.js"
   - "img/*"
 
 parserOptions:
