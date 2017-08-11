@@ -49,7 +49,14 @@
 }
 
 .CodeMirror-dialog button {
-  font-size: 70%;
+  background-image: -webkit-linear-gradient(#454746, #242625);
+  color: $text-color;
+  border: 1px outset #4a4f4d;
+  border-radius: 4px;
+  font-size: 80%;
+  width: 32px;
+  height: auto;
+  outline: none !important;
 }
 
 .CodeMirror-search-field {
