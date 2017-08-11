@@ -25,6 +25,22 @@ function showUnsavedDialog(win) {
   }
 }
 
+// FIXME
+function openNewFile(file) {
+  let wins;
+  file = path.join(__dirname, file);
+  fs.readFile(file, 'utf-8', (err, data) => {
+    if (err) { alert("An error ocurred while opening the file "+ err.message); }
+    // cm.getDoc().setValue(data);
+    openNewWindow();
+    // app.addRecentDocument(file);
+    this.isFileLoadedInitially = true;
+    this.currentFile = file;
+  });
+  wins = Array.from(main.getWindows());
+  return wins;
+}
+
 function closeWindow(win) {
   if(!this.isClean()) {
     showUnsavedDialog(win);
@@ -54,15 +70,18 @@ function toggleSidebar() {
 function toggleSettings() {
   var settingsMenu = $('#settings-menu'),
       trigger = $('#settings-trigger'),
-      button = $('#settings-button');
-  if(parseInt(settingsMenu.css('left'), 10) < 0) {
+      button = $('#settings-button'),
+      title = $('#settings-title');
+  if(parseInt(settingsMenu.css('left'),10) < 0) {
     button.css('visibility','hidden');
     settingsMenu.css('left', '0px');
     trigger.css('left','320px');
+    title.css('display', 'block');
     trigger.show();
   } else {
     button.css('visibility','hidden');
     settingsMenu.css('left', '-320px');
+    title.css('display', 'none');
     trigger.hide();
   }
 }
