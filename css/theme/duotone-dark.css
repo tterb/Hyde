@@ -5,7 +5,7 @@ Author: by Bram de Haan, adapted from DuoTone themes by Simurai (http://simurai.
 CodeMirror template by Jan T. Sott (https://github.com/idleberg), adapted by Bram de Haan (https://github.com/atelierbram/)
 */
 
-.cm-s-duotone-dark.CodeMirror { background: #24242e; color: #61667e; }
+.cm-s-duotone-dark.CodeMirror { background: #24242e; color: #71768e; }
 .cm-s-duotone-dark div.CodeMirror-selected { background: #54517b!important; }
 .cm-s-duotone-dark .CodeMirror-gutters { background: #24242E; border-right: 0px; }
 .cm-s-duotone-dark .CodeMirror-linenumber { color: #42424e; }

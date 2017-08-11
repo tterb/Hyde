@@ -34,7 +34,7 @@
 .cm-s-itg-flat .cm-keyword {	color: #DB5149; }
 /*.cm-s-itg-flat .cm-variable { color: #F2AAEC; }*/
 .cm-s-itg-flat .cm-def { font-style: italic; color: #EACF5A; }
-.cm-s-itg-flat .cm-variable-2 { color: #5CE9C0; }
+/*.cm-s-itg-flat .cm-variable-2 { color: #5CE9C0; }*/
 .cm-s-itg-flat .cm-property { color: #FC973E; }
 .cm-s-itg-flat .cm-operator { color: #CAD0D5; }
 .cm-s-itg-flat .CodeMirror-linenumber { color: #536574; }
@@ -46,7 +46,8 @@
 .cm-s-itg-flat .cm-hr{ color: rgba(255,255,255,0.2); }
 .cm-s-itg-flat .cm-em { color: #EACF5A }
 .cm-s-itg-flat .cm-strong { color: #FC973E; }
-.cm-s-itg-flat .cm-em.cm-strong { color: #FC973E; }
+.cm-s-itg-flat .cm-em.cm-strong { color: #F2AAEC; }
+.cm-s-itg-flat .cm-builtin { color: #F2AAEC; }
 
 #leftFade {
   background: -webkit-linear-gradient(top, #272A33 35%, transparent);

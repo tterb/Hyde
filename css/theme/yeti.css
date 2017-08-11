@@ -1,19 +1,14 @@
 /*
-
     Name:       yeti
     Author:     Michael Kaminsky (http://github.com/mkaminsky11)
-
     Original yeti color scheme by Jesse Weed (https://github.com/jesseweed/yeti-syntax)
-
 */
-
 
 .cm-s-yeti.CodeMirror {
   background-color: #ECEAE8 !important;
   color: rgba(0,0,0,0.5) !important;
   border: none;
 }
-
 .cm-s-yeti .CodeMirror-gutters {
   color: #adaba6;
   background-color: #E5E1DB;
@@ -50,5 +45,4 @@
 #leftFade {
   background: -webkit-linear-gradient(top, #ECEAE8 35%, transparent);
 }
-
 #previewPanel { box-shadow: -4px 0 12px rgba(0,0,0,0.075); }
