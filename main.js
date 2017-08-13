@@ -111,6 +111,19 @@ ipcMain.on('export-to-pdf', (event, filePath) => {
   })
 });
 
+const getThemes = exports.getThemes = () =>  {
+  var themeFiles = fs.readdirSync('./css/theme'),
+      themes = [];
+  themeFiles.forEach((str) => {
+    var theme = { label: str.slice(0,-4), click: () => {str.slice(0,-4)} };
+    if(str.indexOf('-') > -1)
+      theme.label = theme.label.replace(/-/g , " ");
+    theme.label = theme.label.replace(/\w\S*/g, function(txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
+    themes.push(theme);
+  });
+  return themes;
+}
+
 //Set native menubar
 var template = [
   {label: "&File", submenu: [
@@ -146,11 +159,7 @@ var template = [
   {label: "&View", submenu: [
     {label: "Reload", accelerator:"CmdOrCtrl+R", click: () => { sendShortcut('CmdOrCtrl+r'); }},
     {type: "separator"},
-    {label: "Themes", submenu: [
-      {label: "Monokai", click: () => { includeTheme('monokai'); }},
-      {label: "One Dark", click: () => { includeTheme('one-dark'); }},
-      {label: "Solarized", click: () => { includeTheme('solarized'); }}
-    ]},
+    {label: "Themes", submenu: []},
     {type: "separator"},
     {label: "Toggle Menu", accelerator:"CmdOrCtrl+M", click: () => { sendShortcut('ctrl+m'); }},
     {label: "Toggle Toolbar", accelerator:"CmdOrCtrl+.", click: () => { sendShortcut('ctrl+.'); }},
@@ -204,6 +213,9 @@ if (process.platform === 'darwin') {
     ]
   })
 
+  // Add syntax-themes to menu
+  template[3].submenu[3].submenu = getThemes();
+
   // Window menu
   template[4].submenu = [
     {role: 'minimize'},
@@ -211,8 +223,9 @@ if (process.platform === 'darwin') {
     {type: 'separator'},
     {role: 'front'}
   ]
+} else {
+  template[2].submenu[2].submenu = getThemes();
 }
-
 
 function sendShortcut(cmd) {
   var focusedWindow = BrowserWindow.getFocusedWindow();
