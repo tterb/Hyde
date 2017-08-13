@@ -134,7 +134,7 @@ var template = [
     {label: "Save As", accelerator: "CmdOrCtrl+Shift+S", click: () => { sendShortcut('file-saveAs'); }},
     {label: "Export to PDF", click: () => {sendShortcut('file-pdf'); }},
     {type: "separator"},
-    {label: "Settings", accelerator: "CmdOrCtrl+,", click: () => { toggleSettings(); }},
+    {label: "Settings", accelerator: "CmdOrCtrl+,", click: () => { ipc.send('ctrl+,') }},
     {type: "separator"},
     {label: "Quit", accelerator: "CmdOrCtrl+Q", click: () => { sendShortcut('ctrl+q'); }}
   ]},
@@ -159,8 +159,6 @@ var template = [
   {label: "&View", submenu: [
     {label: "Reload", accelerator:"CmdOrCtrl+R", click: () => { sendShortcut('CmdOrCtrl+r'); }},
     {type: "separator"},
-    {label: "Themes", submenu: []},
-    {type: "separator"},
     {label: "Toggle Menu", accelerator:"CmdOrCtrl+M", click: () => { sendShortcut('ctrl+m'); }},
     {label: "Toggle Toolbar", accelerator:"CmdOrCtrl+.", click: () => { sendShortcut('ctrl+.'); }},
     {label: "Toggle Preview", accelerator:"CmdOrCtrl+P", click: () => { sendShortcut("ctrl+p"); }},
@@ -169,6 +167,13 @@ var template = [
           isFullScreen = focusedWindow.isFullScreen();
       focusedWindow.setFullScreen(!isFullScreen);
     }},
+    {type: "separator"},
+    {label: "Themes", submenu: []},
+    {type: "separator"},
+    {label: "Preview Mode", submenu: [
+      {label: "Markdown", click: () => {setPreviewMode('markdown')}},
+      {label: "HTML", click: () => {setPreviewMode('html')}},
+    ]},
     {type: "separator"},
     {role: 'toggledevtools'}
   ]},
@@ -185,6 +190,11 @@ var template = [
     }},
   ]},
   {role: 'help', submenu: [
+    {label: "Markdown Help", click: () => {
+      BrowserWindow.getFocusedWindow().webContents.send('markdown-modal');
+      // toggleModal('markdown-modal');
+    }},
+    {type: "separator"},
     {label: "Documentation", click: () => {
       shell.openExternal(mod.repository.docs);
     }},
@@ -193,15 +203,21 @@ var template = [
     }},
     {label: "Report Issue", click: () => {
       shell.openExternal(mod.bugs.url);
+    }},
+    {type: 'separator'},
+    {label: "About Hyde", click: () => {
+      BrowserWindow.getFocusedWindow().webContents.send('about-modal');
     }}
-  ]},
+  ]}
 ];
 
 if (process.platform === 'darwin') {
   template.unshift({
     label: "Hyde",
     submenu: [
-      {role: 'about'},
+      {role: 'about', click: () => {
+      BrowserWindow.getFocusedWindow().webContents.send('about-modal');
+      }},
       {type: 'separator'},
       {role: 'services', submenu: []},
       {type: 'separator'},
@@ -213,8 +229,10 @@ if (process.platform === 'darwin') {
     ]
   })
 
+  template[3].submenu.splice(2,1);
+
   // Add syntax-themes to menu
-  template[3].submenu[3].submenu = getThemes();
+  template[3].submenu[7].submenu = getThemes();
 
   // Window menu
   template[4].submenu = [
@@ -224,7 +242,7 @@ if (process.platform === 'darwin') {
     {role: 'front'}
   ]
 } else {
-  template[2].submenu[2].submenu = getThemes();
+  template[2].submenu[7].submenu = getThemes();
 }
 
 function sendShortcut(cmd) {
@@ -271,8 +289,8 @@ app.on('ready', function() {
       x: windowState.x,
       y: windowState.y,
       show: true,
-      frame: false,
-      autoHideMenuBar: true
+      frame: true,
+      autoHideMenuBar: false
   }
 
   if (process.platform === 'darwin') {
