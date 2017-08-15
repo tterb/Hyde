@@ -112,7 +112,7 @@ ipcMain.on('export-to-pdf', (event, filePath) => {
 });
 
 const getThemes = exports.getThemes = () =>  {
-  var themeFiles = fs.readdirSync('./css/theme'),
+  var themeFiles = fs.readdirSync(path.join(__dirname, '/css/theme')),
       themes = [];
   themeFiles.forEach((str) => {
     var theme = { label: str.slice(0,-4), click: () => {str.slice(0,-4)} };

@@ -62,7 +62,8 @@ var conf = {
     }
 }
 
-var themeFiles = fs.readdirSync('./css/theme'),
+// var themeFiles = fs.readdirSync(path.join(process.resourcesPath, '/css/theme')),
+var themeFiles = fs.readdirSync(path.join(__dirname, '/css/theme')),
     theme = settings.get('editorTheme');
 if(themeFiles.includes(theme+'.css')) {
   conf.theme = theme;
