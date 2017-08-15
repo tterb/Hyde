@@ -289,8 +289,8 @@ app.on('ready', function() {
       x: windowState.x,
       y: windowState.y,
       show: true,
-      frame: true,
-      autoHideMenuBar: false
+      frame: false,
+      autoHideMenuBar: true
   }
 
   if (process.platform === 'darwin') {
