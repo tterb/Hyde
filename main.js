@@ -73,7 +73,7 @@ const createWindow = exports.createWindow = (file) => {
   // newWindow.webContents.openDevTools();
 
   if(keepInTray) {
-    newWindow.on('close', e => {
+    newWindow.on('close', () => {
       if (!isQuitting) {
         e.preventDefault();
         if (process.platform === 'darwin') {
@@ -115,7 +115,8 @@ const getThemes = exports.getThemes = () =>  {
   var themeFiles = fs.readdirSync(path.join(__dirname, '/css/theme')),
       themes = [];
   themeFiles.forEach((str) => {
-    var theme = { label: str.slice(0,-4), click: () => {str.slice(0,-4)} };
+    // FIXME: how to includeTheme()?
+    var theme = { label: str.slice(0,-4), click: () => { sendShortcut("theme", str.slice(0,-4)); } };
     if(str.indexOf('-') > -1)
       theme.label = theme.label.replace(/-/g , " ");
     theme.label = theme.label.replace(/\w\S*/g, function(txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
@@ -145,7 +146,7 @@ var template = [
     {label: "Cut", accelerator: "CmdOrCtrl+X", role: "cut"},
     {label: "Copy", accelerator: "CmdOrCtrl+C", role: "copy"},
     {label: "Paste", accelerator: "CmdOrCtrl+V", role: "paste"},
-    {label: "Select All", accelerator: "CmdOrCtrl+A", role: 'selectall'},
+    {label: "Select All", accelerator: "CmdOrCtrl+A", click: () => { sendShortcut('ctrl+a'); }},
     {type: "separator"},
     {label: "Find", accelerator: "CmdOrCtrl+F", click: () => { sendShortcut('ctrl+f'); }},
     {label: "Replace", accelerator: "CmdOrCtrl+Shift+F", click: () => { sendShortcut('ctrl+shift+f'); }},
@@ -192,14 +193,14 @@ var template = [
   {label: "&Help", role: 'help', submenu: [
     {label: "Markdown Help", click: () => {
       sendShortcut('markdown-modal');
-      // toggleModal('markdown-modal');
     }},
     {type: "separator"},
     {label: "Documentation", click: () => {
       shell.openExternal(mod.repository.docs);
     }},
     {label: "Keybindings", click: () => {
-      shell.openExternal(mod.repository.docs);
+      sendShortcut('keybinding-modal');
+      // shell.openExternal(mod.repository.keys);
     }},
     {label: "Report Issue", click: () => {
       shell.openExternal(mod.bugs.url);
@@ -216,7 +217,7 @@ if (process.platform === 'darwin') {
     label: "Hyde",
     submenu: [
       {role: 'about', click: () => {
-      BrowserWindow.getFocusedWindow().webContents.send('about-modal');
+      sendShortcut('about-modal');
       }},
       {type: 'separator'},
       {role: 'services', submenu: []},
@@ -289,8 +290,8 @@ app.on('ready', function() {
       x: windowState.x,
       y: windowState.y,
       show: false,
-      frame: true,
-      autoHideMenuBar: false
+      frame: false,
+      autoHideMenuBar: true
   }
 
   if (process.platform === 'darwin') {
@@ -308,8 +309,12 @@ app.on('ready', function() {
   windows.add(mainWindow);
   mainWindow.webContents.openDevTools();
 
+  mainWindow.once('ready-to-show', () => {
+    mainWindow.show();
+  });
+
   if(keepInTray) {
-    mainWindow.on('close', e => {
+    mainWindow.on('close', () => {
       if (!isQuitting) {
         e.preventDefault();
         if (process.platform === 'darwin') {
@@ -320,10 +325,6 @@ app.on('ready', function() {
       }
     });
   }
-
-  mainWindow.once('ready-to-show', () => {
-    mainWindow.show();
-  });
 
   mainWindow.on('closed', () => {
     mainWindow = null;

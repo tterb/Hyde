@@ -120,6 +120,7 @@ ipc.on('ctrl+shift+t', () => { insert('table'); });
 ipc.on('ctrl+shift+-', () => { insert('hr'); });
 ipc.on('ctrl+f', () => { toggleSearch('find'); });
 ipc.on('ctrl+shift+f', () => { toggleSearch('replace'); });
+ipc.on('ctrl+a', () => { cm.execCommand('selectAll') });
 ipc.on('ctrl+shift+a', () => { cm.execCommand('indentAuto'); });
 ipc.on('ctrl+left', () => { cm.execCommand('indentLess'); });
 ipc.on('ctrl+right', () => { cm.execCommand('indentMore'); });
@@ -143,3 +144,5 @@ ipc.on('file-pdf', () => {
 });
 ipc.on('about-modal', () => { $('#about-modal').modal() });
 ipc.on('markdown-modal', () => { $('#markdown-modal').modal() });
+ipc.on('keybinding-modal', () => { $('#keybinding-modal').modal() });
+ipc.on('theme', () => { includeTheme(this); })
