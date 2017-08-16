@@ -185,27 +185,27 @@ function setPreviewMode(opt) {
 }
 
 function toggleLineNumbers() {
-  if(settings.get('lineNumbers')) {
+  var state = settings.get('lineNumbers');
+  if(state) {
     $('.CodeMirror-code > div').css('padding-left', '15px');
     $('.CodeMirror-gutters').hide();
-    settings.set('lineNumbers', false);
   } else {
     $('.CodeMirror-code > div').css('padding-left', '22px');
     $('.CodeMirror-gutters').show();
-    settings.set('lineNumbers', true);
   }
-  // cm.execCommand('reload');
+  settings.set('lineNumbers', !state);
 }
 
 function toggleWhitespace() {
-  if(settings.get('showTrailingSpace')) {
-    $('.cm-trailing-space-a').css('text-decoration', 'underline');
-    $('.cm-trailing-space-new-line').css('text-decoration', 'underline');
-  } else {
+  var state = settings.get('showTrailingSpace');
+  if(state) {
     $('.cm-trailing-space-a').css('text-decoration', 'none');
     $('.cm-trailing-space-new-line').css('text-decoration', 'none');
+  } else {
+    $('.cm-trailing-space-a').css('text-decoration', 'underline');
+    $('.cm-trailing-space-new-line').css('text-decoration', 'underline');
   }
-  return settings.get('showTrailingSpace');
+  return settings.set('showTrailingSpace', !state);
 }
 
 function toggleFullscreen() {
@@ -231,4 +231,29 @@ $('#editorFont-input, #editorFont-up, #editorFont-down').bind('keyup mouseup', f
 $('#editorTheme').on('changed.bs.select', function (e, clickedIndex, newValue, oldValue) {
     var theme = $(e.currentTarget).val().toLowerCase().replace(/ /g,"-");
     includeTheme(theme);
+});
+
+$('#previewMode').on('changed.bs.select', function (e, clickedIndex, newValue, oldValue) {
+    var mode = $(e.currentTarget).val().toLowerCase();
+    setPreviewMode(mode);
+});
+
+$('#previewFont-input, #previewFont-up, #previewFont-down').bind('keyup mouseup', function () {
+  var editor = $('#textPanel > div'),
+      value = $('#previewFont-input').val();
+  editor.css('fontSize', value.toString()+'px');
+  settings.set('previewFontSize', value);
+});
+
+
+$('.settings-toggle').change(() => {
+  opt.forEach((temp) => {
+    if(temp.name === $('.settings-toggle').attr('setting'))
+      if (temp.action)
+        temp.action();
+      else
+        var name = $('.settings-toggle').attr('setting');
+        settings.set(name, !settings.get(name));
+        settings.set($('.settings-toggle').attr('setting'))
+  });
 });

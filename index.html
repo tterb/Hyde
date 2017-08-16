@@ -232,18 +232,18 @@
                 <option>Solarized Light</option><option>Tomorrow Night Eighties</option><option>Yeti</option><option>Zenburn</option>
               </select>
             </li>
-            <li id="lineNumbers" class="toggle"><input type="checkbox" value=""><span></span><span>Line numbers</span></li>
-            <li id="enableSpellCheck" class="toggle"><input type="checkbox"  value=""><span></span><span>Enable spell checking</span></li>
-            <li id="matchBrackets" class="toggle" data-tooltip="Adds auto-completion for the following: &quot;&quot;, '', ``, (), [], {}, "><input type="checkbox" value=""><span></span><span>Match Brackets</span></li>
-            <li id="showTrailingSpace" class="toggle" data-tooltip="Provides a faint underline to identify newlines"><input type="checkbox" value=""><span></span><span>Show trailing whitespace</span></li>
+            <li id="lineNumbers" class="toggle"><input class="settings-toggle" type="checkbox" value="" setting="lineNumbers"><span></span><span>Line numbers</span></li>
+            <li id="enableSpellCheck" class="toggle"><input class="settings-toggle" type="checkbox" value="" setting="enableSpellCheck"><span></span><span>Enable spell checking</span></li>
+            <li id="matchBrackets" class="toggle" data-tooltip="Adds auto-completion for the following: &quot;&quot;, '', ``, (), [], {}, "><input class="settings-toggle" type="checkbox" value="" setting="matchBrackets"><span></span><span>Match brackets</span></li>
+            <li id="showTrailingSpace" class="toggle" data-tooltip="Provides a faint underline to identify newlines"><input class="settings-toggle" type="checkbox" value="" setting="showTrailingSpace"><span></span><span>Show trailing whitespace</span></li>
           </ul>
           <hr>
         </div>
         <div id="preview-section" class="settings-section">
           <h3>Preview</h3>
           <ul id="options">
-            <li id="previewMode" class="menu"><span>Mode: </span>
-              <select class="selectpicker" data-width="fit">
+            <li class="menu"><span>Mode: </span>
+              <select id="previewMode" class="selectpicker" data-width="fit">
                 <option>Markdown</option>
                 <option>HTML</option>
               </select>
