@@ -62,8 +62,7 @@ var conf = {
     }
 }
 
-// var themeFiles = fs.readdirSync(path.join(process.resourcesPath, '/css/theme')),
-var themeFiles = fs.readdirSync(path.join(__dirname, '/css/theme')),
+var themeFiles = fs.readdirSync('./css/theme'),
     theme = settings.get('editorTheme');
 if(themeFiles.includes(theme+'.css')) {
   conf.theme = theme;
@@ -106,7 +105,27 @@ function includeTheme(theme) {
     themeTag.setAttribute('href', 'css/theme/'+theme+'.css');
     head.appendChild(themeTag);
   }
+  var title = theme.replace(/-/g , " ").replace(/\w\S*/g, function(txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
+  $('#editorTheme').attr('title', title);
   settings.set('editorTheme', theme);
+}
+
+function listThemes() {
+  var themeMenu = $('#theme-menu');
+  fs.readdirSync('./css/theme').forEach((str) => {
+    var theme = str.slice(0,-4);
+    if(str.indexOf('-') > -1)
+      theme = theme.replace(/-/g , " ");
+    theme = theme.replace(/\w\S*/g, function(txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
+    themeTag = document.createElement('li');
+    themeTag.setAttribute('href', '#');
+    themeTag.setAttribute('onclick', 'includeTheme(\"'+str.slice(0,-4)+'\")');
+    themeLink = document.createElement('a');
+    themeLink.setAttribute('id', 'dropdownItem');
+    themeLink.setAttribute('innerHTML', theme);
+    themeTag.appendChild(themeLink);
+    themeMenu.appendChild(themeTag)
+  });
 }
 
 window.onload = () => {
