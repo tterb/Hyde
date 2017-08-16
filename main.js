@@ -131,10 +131,10 @@ var template = [
     {label: "Open", accelerator: "CmdOrCtrl+O", click: () => { sendShortcut('file-open'); }},
     {type: "separator"},
     {label: "Save", accelerator: "CmdOrCtrl+S", click: () => { sendShortcut('file-save'); }},
-    {label: "Save As", accelerator: "CmdOrCtrl+Shift+S", click: () => { sendShortcut('file-saveAs'); }},
-    {label: "Export to PDF", click: () => {sendShortcut('file-pdf'); }},
+    {label: "Save As", accelerator: "CmdOrCtrl+Shift+S", click: () => { sendShortcut('file-save-as'); }},
+    {label: "Export to PDF", click: () => { sendShortcut('file-pdf'); }},
     {type: "separator"},
-    {label: "Settings", accelerator: "CmdOrCtrl+,", click: () => { ipc.send('ctrl+,') }},
+    {label: "Settings", accelerator: "CmdOrCtrl+,", click: () => { sendShortcut('ctrl+,') }},
     {type: "separator"},
     {label: "Quit", accelerator: "CmdOrCtrl+Q", click: () => { sendShortcut('ctrl+q'); }}
   ]},
@@ -157,7 +157,7 @@ var template = [
     {label: "Toggle Comment", accelerator: "CmdOrCtrl+/", click: () => { sendShortcut('ctrl+/'); }}
   ]},
   {label: "&View", submenu: [
-    {label: "Reload", accelerator:"CmdOrCtrl+R", click: () => { sendShortcut('CmdOrCtrl+r'); }},
+    {label: "Reload", accelerator:"CmdOrCtrl+R", click: () => { sendShortcut('ctrl+r'); }},
     {type: "separator"},
     {label: "Toggle Menu", accelerator:"CmdOrCtrl+M", click: () => { sendShortcut('ctrl+m'); }},
     {label: "Toggle Toolbar", accelerator:"CmdOrCtrl+.", click: () => { sendShortcut('ctrl+.'); }},
@@ -189,9 +189,9 @@ var template = [
       windows[0].show();
     }},
   ]},
-  {role: 'help', submenu: [
+  {label: "&Help", role: 'help', submenu: [
     {label: "Markdown Help", click: () => {
-      BrowserWindow.getFocusedWindow().webContents.send('markdown-modal');
+      sendShortcut('markdown-modal');
       // toggleModal('markdown-modal');
     }},
     {type: "separator"},
@@ -206,7 +206,7 @@ var template = [
     }},
     {type: 'separator'},
     {label: "About Hyde", click: () => {
-      BrowserWindow.getFocusedWindow().webContents.send('about-modal');
+      sendShortcut('about-modal');
     }}
   ]}
 ];
@@ -288,9 +288,9 @@ app.on('ready', function() {
       height: windowState.height,
       x: windowState.x,
       y: windowState.y,
-      show: true,
-      frame: false,
-      autoHideMenuBar: true
+      show: false,
+      frame: true,
+      autoHideMenuBar: false
   }
 
   if (process.platform === 'darwin') {
@@ -320,6 +320,10 @@ app.on('ready', function() {
       }
     });
   }
+
+  mainWindow.once('ready-to-show', () => {
+    mainWindow.show();
+  });
 
   mainWindow.on('closed', () => {
     mainWindow = null;

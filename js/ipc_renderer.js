@@ -73,7 +73,7 @@ ipc.on('file-save-as', saveAs);
 
 // Handling file opening through IPCRenderer
 ipc.on('file-open', () => {
-  storage.get('markdown-savefile', function(error, data) {
+  storage.get('markdown-savefile', (error, data) => {
     if (error) alert(error);
     var options = {
       'properties': ['openFile'],
@@ -92,11 +92,12 @@ ipc.on('file-open', () => {
         return;
       }
 
-      storage.set('markdown-savefile', {'filename' : file[0]}, function(error) { if (error) alert(error); });
+      storage.set('markdown-savefile', {
+        'filename' : file[0]}, (error) => { if (error) alert(error); });
 
       // var mdValue = cm.getValue();
       // fileName is a string that contains the path and filename created in the save file dialog.
-      fs.readFile(file[0], 'utf-8', function (err, data) {
+      fs.readFile(file[0], 'utf-8', (err, data) => {
         if (err) { alert("An error ocurred while opening the file "+ err.message); }
         cm.getDoc().setValue(data);
       });
@@ -123,7 +124,7 @@ ipc.on('ctrl+shift+a', () => { cm.execCommand('indentAuto'); });
 ipc.on('ctrl+left', () => { cm.execCommand('indentLess'); });
 ipc.on('ctrl+right', () => { cm.execCommand('indentMore'); });
 ipc.on('ctrl+r', () => { reloadWin(); });
-ipc.on('ctrl+m', () => { toggleMenu(); });
+ipc.on('ctrl+m', () => { if(process.platform !== 'darwin') toggleMenu(); });
 ipc.on('ctrl+.', () => { toggleToolbar(); });
 ipc.on('ctrl+p', () => { togglePreview(); });
 ipc.on('ctrl+,', () => { toggleSettings(); });
@@ -136,16 +137,9 @@ ipc.on('file-pdf', () => {
       {name: 'PDF', extensions: ['pdf']}
     ]
   };
-
   dialog.showSaveDialog(options, (fileName) => {
     ipc.send('export-to-pdf', fileName);
   });
-
 });
-
-ipc.on('markdown-modal', () => {
-  $('#markdown-modal').modal();
-});
-ipc.on('about-modal', () => {
-  $('#about-modal').modal();
-});
+ipc.on('about-modal', () => { $('#about-modal').modal() });
+ipc.on('markdown-modal', () => { $('#markdown-modal').modal() });
