@@ -11,7 +11,9 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/JonSn0w/Hyde.git",
-    "docs": "https://github.com/JonSn0w/Hyde/blob/master/README.md"
+    "docs": "https://github.com/JonSn0w/Hyde/tree/master/docs",
+    "keys": "https://github.com/JonSn0w/Hyde/blob/master/docs/Keybindings.md",
+    "bugs": "https://github.com/JonSn0w/Hyde/issues/new"
   },
   "keywords": [
     "electron",
@@ -36,7 +38,7 @@
   "author": "Brett Stevenson <brettstevenson.me>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/JonSn0w/Hyde/issues"
+    "url": "https://github.com/JonSn0w/Hyde/issues/new"
   },
   "homepage": "https://github.com/JonSn0w/Hyde#readme",
   "_npmUser": {
