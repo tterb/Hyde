@@ -64,7 +64,8 @@ function syncScrollCheck() {
 
 var formatHead = () => {
   var dragArea = $('#draggable'),
-      menuToggle = $('#menuToggle');
+      menuToggle = $('#menuToggle'),
+      codeMirror = $('#textPanel > div');
   if(menu.is(':visible')) {
     toolbar.css({ top: '26px' });
     toolbar.css('z-index', '999');
@@ -72,8 +73,10 @@ var formatHead = () => {
     menuToggle.hide();
     if(toolbar.is(':visible')) {
       body.css('paddingTop', '30px');
+      codeMirror.css('paddingTop', '10px');
     } else {
       body.css('paddingTop', '0px');
+      codeMirror.css('paddingTop', '0px');
     }
   } else {
     toolbar.css({ top: '0px' });
@@ -81,10 +84,12 @@ var formatHead = () => {
     body.css('paddingTop', '0px');
     if(toolbar.is(':visible')) {
       dragArea.css('width', '-webkit-calc(50% - 50px)');
+      codeMirror.css('paddingTop', '7px');
     } else {
       // if(process.platform !== 'darwin')
-        menuToggle.show();
+      menuToggle.show();
       dragArea.css({ 'width': 'calc(100% - 117px)' });
+      codeMirror.css('paddingTop', '0px');
     }
   }
   if(preview.is(':visible') && parseInt($('#body').width(),10) > 924) {
@@ -213,3 +218,17 @@ function toggleFullscreen() {
     settings.set('isFullscreen', false);
   }
 }
+
+
+// Handle settings-menu changes
+$('#editorFont-input, #editorFont-up, #editorFont-down').bind('keyup mouseup', function () {
+  var editor = $('#textPanel > div'),
+      value = $('#editorFont-input').val();
+  editor.css('fontSize', value.toString()+'px');
+  settings.set('editorFontSize', value);
+});
+
+$('#editorTheme').on('changed.bs.select', function (e, clickedIndex, newValue, oldValue) {
+    var theme = $(e.currentTarget).val().toLowerCase().replace(/ /g,"-");
+    includeTheme(theme);
+});
