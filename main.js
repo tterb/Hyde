@@ -44,16 +44,16 @@ const getWindows = exports.getWindows = () => {
   return windows;
 }
 
-const createWindow = exports.createWindow = (file) => {
+function getConfig() {
   var conf = {
-      width: windowState.width,
-      height: windowState.height,
-      show: false,
-      frame: false,
-      autoHideMenuBar: true,
-      icon: path.join(__dirname, 'img/icon/png/64x64.png')
+    width: windowState.width,
+    height: windowState.height,
+    x: windowState.x,
+    y: windowState.y,
+    show: false,
+    frame: false,
+    autoHideMenuBar: true,
   }
-
   if (process.platform === 'darwin') {
     conf.titleBarStyle = 'hidden';
     conf.icon = path.join(__dirname, '/img/icon/icns/icon.icns');
@@ -62,28 +62,20 @@ const createWindow = exports.createWindow = (file) => {
   } else {
     conf.icon = path.join(__dirname, '/img/icon/png/64x64.png');
   }
-  let newWindow = new BrowserWindow(conf);
+  return conf;
+}
+
+const createWindow = exports.createWindow = (file) => {
+
+  let newWindow = new BrowserWindow(getConfig());
   windows.add(newWindow)
   newWindow.loadURL(mainPage);
   if(file !== undefined)
-    readFileIntoEditor(file);
+  readFileIntoEditor(file);
   newWindow.once('ready-to-show', () => { newWindow.show(); return file; });
 
   // Open the DevTools.
   // newWindow.webContents.openDevTools();
-
-  if(keepInTray) {
-    newWindow.on('close', () => {
-      if (!isQuitting) {
-        e.preventDefault();
-        if (process.platform === 'darwin') {
-          app.hide();
-        } else {
-          newWindow.hide();
-        }
-      }
-    });
-  }
 
   // Emitted when the window is closed.
   newWindow.on('closed', () => {
@@ -111,14 +103,14 @@ ipcMain.on('export-to-pdf', (event, filePath) => {
   })
 });
 
-const getThemes = exports.getThemes = () =>  {
+const getThemes = exports.getThemes = () => {
   var themeFiles = fs.readdirSync(path.join(__dirname, '/css/theme')),
-      themes = [];
+  themes = [];
   themeFiles.forEach((str) => {
     // FIXME: how to includeTheme()?
     var theme = { label: str.slice(0,-4), click: () => { sendShortcut("theme", str.slice(0,-4)); } };
     if(str.indexOf('-') > -1)
-      theme.label = theme.label.replace(/-/g , " ");
+    theme.label = theme.label.replace(/-/g , " ");
     theme.label = theme.label.replace(/\w\S*/g, function(txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
     themes.push(theme);
   });
@@ -165,7 +157,7 @@ var template = [
     {label: "Toggle Preview", accelerator:"CmdOrCtrl+P", click: () => { sendShortcut("ctrl+p"); }},
     {label: "Toggle Full Screen", accelerator:"F11", click: () => {
       var focusedWindow = BrowserWindow.getFocusedWindow(),
-          isFullScreen = focusedWindow.isFullScreen();
+      isFullScreen = focusedWindow.isFullScreen();
       focusedWindow.setFullScreen(!isFullScreen);
     }},
     {type: "separator"},
@@ -173,7 +165,7 @@ var template = [
     {type: "separator"},
     {label: "Preview Mode", submenu: [
       {label: "Markdown", click: () => {setPreviewMode('markdown')}},
-      {label: "HTML", click: () => {setPreviewMode('html')}},
+      {label: "HTML", click: () => {setPreviewMode('html')}}
     ]},
     {type: "separator"},
     {role: 'toggledevtools'}
@@ -188,7 +180,7 @@ var template = [
     {type: "separator"},
     {label: "Bring to Front", click: () => {
       windows[0].show();
-    }},
+    }}
   ]},
   {label: "&Help", role: 'help', submenu: [
     {label: "Markdown Help", click: () => {
@@ -217,7 +209,7 @@ if (process.platform === 'darwin') {
     label: "Hyde",
     submenu: [
       {role: 'about', click: () => {
-      sendShortcut('about-modal');
+        sendShortcut('about-modal');
       }},
       {type: 'separator'},
       {role: 'services', submenu: []},
@@ -229,12 +221,9 @@ if (process.platform === 'darwin') {
       {role: 'quit'}
     ]
   })
-
   template[3].submenu.splice(2,1);
-
   // Add syntax-themes to menu
   template[3].submenu[7].submenu = getThemes();
-
   // Window menu
   template[4].submenu = [
     {role: 'minimize'},
@@ -251,8 +240,8 @@ function sendShortcut(cmd) {
   focusedWindow.webContents.send(cmd);
 }
 
-// Regestering local shortcuts for formatting markdown
-localShortcut.register('CmdOrCtrl+b', () =>  { sendShortcut('ctrl+b'); });
+// Register local keyboard shortcuts for formatting Markdown
+localShortcut.register('CmdOrCtrl+b', () => { sendShortcut('ctrl+b'); });
 localShortcut.register('CmdOrCtrl+i',() => { sendShortcut('ctrl+i'); });
 localShortcut.register('CmdOrCtrl+-',() => { sendShortcut('ctrl+-'); });
 localShortcut.register('CmdOrCtrl+/', () => { sendShortcut('ctrl+/'); });
@@ -274,47 +263,28 @@ localShortcut.register('CmdOrCtrl+right', () => { sendShortcut('ctrl+right'); })
 localShortcut.register('CmdOrCtrl+down', () => { sendShortcut('ctrl+down'); });
 
 
-// This method will be called when Electron has finished initialization
+// Called when Electron has finished initialization
 app.on('ready', function() {
+  // Create native application menu
   const menu = Menu.buildFromTemplate(template);
   Menu.setApplicationMenu(menu);
-
+  // Initialize windowStateManager
   windowState = windowStateManager({
     defaultWidth: settings.get('windowWidth'),
     defaultHeight: settings.get('windowHeight')
   });
-
-  var conf = {
-      width: windowState.width,
-      height: windowState.height,
-      x: windowState.x,
-      y: windowState.y,
-      show: false,
-      frame: false,
-      autoHideMenuBar: true
-  }
-
-  if (process.platform === 'darwin') {
-    conf.titleBarStyle = 'hidden';
-    conf.icon = path.join(__dirname, '/img/icon/icns/icon.icns');
-  } else if (process.platform === 'win32') {
-    conf.icon = path.join(__dirname, '/img/icon/ico/icon.ico');
-  } else {
-    conf.icon = path.join(__dirname, '/img/icon/png/64x64.png');
-  }
-
-  mainWindow = new BrowserWindow(conf);
+  // Create main BrowserWindow
+  mainWindow = new BrowserWindow(getConfig());
   windowState.manage(mainWindow);
   mainWindow.loadURL(mainPage);
   windows.add(mainWindow);
-  mainWindow.webContents.openDevTools();
-
+  // mainWindow.webContents.openDevTools();
   mainWindow.once('ready-to-show', () => {
     mainWindow.show();
   });
 
   if(keepInTray) {
-    mainWindow.on('close', () => {
+    mainWindow.on('close', e => {
       if (!isQuitting) {
         e.preventDefault();
         if (process.platform === 'darwin') {
@@ -348,6 +318,7 @@ app.on('ready', function() {
   });
 
   app.on('before-quit', () => {
+    // Store current window state
     windowState.saveState(mainWindow)
     isQuitting = true;
   });
