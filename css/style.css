@@ -121,7 +121,7 @@ label {
       white-space: nowrap;
       border-left: 1px outset #37393d;
       border-right: 1px outset #494b50;
-      padding: 3px 0 2px; }
+      padding: 1px 0 2px; }
       #appMenu .btn-group #dropdownMenuButton:hover, #appMenu .btn-group #dropdownMenuButton:focus, #appMenu .btn-group #dropdownMenuButton:active {
         background: #313031;
         color: rgba(255, 255, 255, 0.75);
@@ -556,11 +556,13 @@ input[type="checkbox"] {
     top: 70px;
     padding: 4px 4px 6px 16px; }
     #settings-menu .settings-section h3 {
+      color: rgba(255, 255, 255, 0.85);
       font-size: 32px;
       font-weight: 200;
       margin-top: 4px;
       margin-bottom: 8px; }
     #settings-menu .settings-section ul {
+      color: rgba(255, 255, 255, 0.65);
       list-style: none;
       padding-left: 13px; }
       #settings-menu .settings-section ul li {
@@ -619,12 +621,12 @@ input[type="checkbox"] {
       background: #333132;
       color: rgba(255, 255, 255, 0.7);
       font-weight: 300;
-      left: -1px;
+      left: 0;
       height: 26px;
       border: 1px inset #403e3f;
       border-radius: 6px;
       box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.4);
-      padding: 0 9px 1px;
+      padding: 0 0 1px 5px;
       z-index: -99; }
   #settings-menu .input-group-btn-vertical {
     position: relative;
@@ -762,7 +764,8 @@ input[type="checkbox"] {
   overflow-y: auto;
   text-rendering: geometricPrecision; }
   #textPanel > div {
-    font-size: 8.5pt;
+    font-size: 11.5px;
+    letter-spacing: 0.0275em;
     line-height: 1.5;
     padding-top: 0; }
   #textPanel #plainText {
