@@ -147,7 +147,9 @@ var template = [
     {label: "Indent Less", accelerator: "CmdOrCtrl+Left", click: () => { sendShortcut('ctrl+left'); }},
     {label: "Indent More", accelerator: "CmdOrCtrl+Right", click: () => { sendShortcut('ctrl+right'); }},
     {type: "separator"},
-    {label: "Toggle Comment", accelerator: "CmdOrCtrl+/", click: () => { sendShortcut('ctrl+/'); }}
+    {label: "Toggle Comment", accelerator: "CmdOrCtrl+/", click: () => { sendShortcut('ctrl+/'); }},
+    {type: "separator"},
+    {label: "Insert YAML-frontmatter", accelerator: "CmdOrCtrl+Shift+Y", click: () => { sendShortcut('insert-yaml'); }}
   ]},
   {label: "&View", submenu: [
     {label: "Reload", accelerator:"CmdOrCtrl+R", click: () => { sendShortcut('ctrl+r'); }},

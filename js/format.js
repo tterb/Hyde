@@ -1,3 +1,4 @@
+yaml = require('js-yaml');
 
 var insertTexts = {
   link: ["[", "](#url#)"],
@@ -276,7 +277,54 @@ function _replaceSelection(cm, active, startEnd, url) {
   cm.focus();
 }
 
-function removeFrontMatter(text) {
+// Inserts YAML-frontmatter from template file
+function insertFrontMatter() {
+  var path = config.get('frontMatterTemplate'),
+      extensions = ["yaml", "yml", "md", "markdown", "txt", "text"];
+  if(path.length < 1)
+    return alert("There is no specified frontmatter template");
+  if(!extensions.includes(path.split('.').pop()))
+    return alert("Invalid specified template file");
+  fs.readFile(path, 'utf8', function (err, data) {
+    if(err) return alert(err);
+    else {
+      cm.execCommand('goDocStart');
+      var text = insertDate(data, formatDate());
+      cm.replaceSelection(insertDate(data, formatDate()));
+      cm.execCommand('newlineAndIndent');
+      cm.setCursor(1);
+      cm.execCommand('goLineRight');
+    }
+  });
+  insertDate(formatDate());
+}
+
+// Returns todays date in Jekyll-compatible format
+function formatDate() {
+  var today = new Date(),
+      day = today.getDate(),
+      month = today.getMonth()+1,
+      year = today.getFullYear();
+  if(month < 10) month = '0'+month;
+  if(day < 10) day = '0'+day;
+  return year+'-'+month+'-'+day;
+}
+
+// Automatically sets 'date' parameters to the current date
+function insertDate(doc, date) {
+  var str = "";
+  var arr = [];
+  doc.split('\n').forEach((line) => {
+    arr.push(line);
+    line = line.replace(/ \n/g,'');
+    if(line.match(/date:/i))
+      line = line+" "+date;
+    str += line+'\n';
+  });
+  return str;
+}
+
+function removeYAMLPreview(text) {
     var re = new RegExp(/((---\n))(\w|\d|\n|[().,\-:;@#$%^&*\[\]\"\'+–\/\/®°⁰!?{}|`~]| )+?((---))/gm, "mg");
     return text.replace(re, "<br>");
 }

@@ -13,15 +13,12 @@ function saveAs() {
         console.log("You didn't save the file");
         return;
       }
-
       storage.set('markdown-savefile', {'filename' : fileName}, function(error) { if (error) alert(error); });
 
       var mdValue = cm.getValue();
       // fileName is a string that contains the path and filename created in the save dialog.
       fs.writeFile(fileName, mdValue, function (err) {
-        if(err) {
-          alert("An error ocurred creating the file "+ err.message)
-        }
+        if(err) alert("An error ocurred creating the file "+ err.message);
       });
       this.setClean();
       this.currentFile = fileName;
@@ -49,15 +46,14 @@ ipc.on('file-save', function() {
         console.log("You didn't save the file");
         return;
       }
-
       storage.set('markdown-savefile', {'filename' : fileName}, function(error) { if (error) alert(error); });
 
       var mdValue = cm.getValue();
       // fileName is a string that contains the path and filename created in the save file dialog.
       fs.writeFile(fileName, mdValue, function (err) {
-       if(err){
-         alert("An error ocurred creating the file "+ err.message)
-       }
+        if(err){
+          alert("An error ocurred creating the file "+ err.message)
+        }
       });
       this.setClean();
       this.currentFile = fileName;
@@ -85,18 +81,16 @@ ipc.on('file-open', () => {
     if ('filename' in data) {
       options.defaultPath = data.filename;
     }
-
-    dialog.showOpenDialog(options, (file)  => {
+    dialog.showOpenDialog(options, (file) => {
       if (file === undefined) {
         console.log("You didn't open the file");
         return;
       }
-
       storage.set('markdown-savefile', {
         'filename' : file[0]}, (error) => { if (error) alert(error); });
 
-      // var mdValue = cm.getValue();
-      // fileName is a string that contains the path and filename created in the save file dialog.
+        // var mdValue = cm.getValue();
+        // fileName is a string that contains the path and filename created in the save file dialog.
       fs.readFile(file[0], 'utf-8', (err, data) => {
         if (err) { alert("An error ocurred while opening the file "+ err.message); }
         cm.getDoc().setValue(data);
@@ -142,6 +136,7 @@ ipc.on('file-pdf', () => {
     ipc.send('export-to-pdf', fileName);
   });
 });
+ipc.on('insert-yaml', () => { insertFrontMatter(); });
 ipc.on('about-modal', () => { $('#about-modal').modal() });
 ipc.on('markdown-modal', () => { $('#markdown-modal').modal() });
 ipc.on('keybinding-modal', () => { $('#keybinding-modal').modal() });
