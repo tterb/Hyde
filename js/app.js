@@ -150,7 +150,7 @@ window.onload = () => {
     var markdownText = cm.getValue();
     // Remove the YAML frontmatter from live-preview
     if(settings.get('hideYAMLFrontMatter'))
-      markdownText = removeFrontMatter(markdownText);
+      markdownText = removeYAMLPreview(markdownText);
     // Convert emoji's
     markdownText = replaceWithEmojis(markdownText);
     // Markdown -> Preview
