@@ -25,6 +25,11 @@ function showUnsavedDialog(win) {
   }
 }
 
+function toggleModal(id) {
+  id = "#"+id;
+  $(id).modal();
+}
+
 // FIXME
 function openNewFile(file) {
   let wins;
