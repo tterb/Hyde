@@ -365,10 +365,10 @@ label {
         height: 20px;
         margin: 0 6px 3px 5px;
         vertical-align: middle;
-        background: url(../img/radio.png) -2px top no-repeat;
+        background: url(../img/buttons/radio.png) -2px top no-repeat;
         cursor: pointer; }
     .prevToggle input[type="radio"]:checked + label span {
-      background: url(../img/radio.png) -33px top no-repeat; }
+      background: url(../img/buttons/radio.png) -33px top no-repeat; }
 
 #previewPanel input[type="checkbox"] {
   color: #000;
@@ -390,7 +390,7 @@ input[type="checkbox"] {
       height: 20px;
       margin: 0 6px 3px 5px;
       vertical-align: middle;
-      background: url(../img/checkbox.png) -2px top no-repeat;
+      background: url(../img/buttons/checkbox.png) -2px top no-repeat;
       cursor: pointer; }
   input[type="checkbox"] + span {
     display: inline-block;
@@ -398,12 +398,12 @@ input[type="checkbox"] {
     height: 20px;
     margin: 0 6px 3px 5px;
     vertical-align: middle;
-    background: url(../img/checkbox.png) -2px top no-repeat;
+    background: url(../img/buttons/checkbox.png) -2px top no-repeat;
     cursor: pointer; }
   input[type="checkbox"]:checked + label span {
-    background: url(../img/checkbox.png) -33px top no-repeat; }
+    background: url(../img/buttons/checkbox.png) -33px top no-repeat; }
   input[type="checkbox"]:checked + span {
-    background: url(../img/checkbox.png) -33px top no-repeat; }
+    background: url(../img/buttons/checkbox.png) -33px top no-repeat; }
 
 .mode {
   background-color: #282726;
@@ -929,7 +929,7 @@ input[type="checkbox"] {
   opacity: 1;
   filter: none; }
 .close:active > img, .close > img:hover {
-  content: url("../img/close_active.png"); }
+  content: url("../img/buttons/close_active.png"); }
 
 #markdown-modal .close img {
   top: 13px;
@@ -964,7 +964,7 @@ input[type="checkbox"] {
     top: 12px;
     right: 14px; }
   #about-modal .close:active > img, #about-modal .close > img:hover {
-    content: url("../img/close_active.png"); }
+    content: url("../img/buttons/close_active.png"); }
   #about-modal #hyde-img {
     width: 75%;
     height: auto;

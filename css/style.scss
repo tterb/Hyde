@@ -11,7 +11,6 @@ $monospaced: "Source Code Pro","Monaco","Ubuntu Mono","Dejavu Sans Mono","Consol
 
 
 html, body, section, .full-height {
-  // box-sizing: border-box !important;
   height: 100%;
 }
 
@@ -125,9 +124,6 @@ label {
   height: 0;
   top: 0;
   left: 0;
-  // border: 1px inset #323435;
-  // border-bottom: 1px outset #494b50;
-  // visibility: visible;
   transition: top 900ms cubic-bezier(0.17, 0.04, 0.03, 0.75);
   z-index: 9999;
   :focus, :active:focus,.active:focus,
@@ -137,7 +133,6 @@ label {
   .hidden {
     top: -23px;
     transition: top 900ms cubic-bezier(0.17, 0.04, 0.03, 0.75);
-    // visibility: hidden;
   }
   .btn-group {
     top: 1px;
@@ -225,12 +220,6 @@ label {
         margin: 4px auto;
         padding: 0;
         cursor: default;
-        // &:hover {
-        //   visibility: visible;
-        //   background: rgba(255,255,255,0.075);
-        //   color: rgba(255,255,255,0.65);
-        //   cursor: default;
-        // }
       }
     }
   }
@@ -338,7 +327,6 @@ label {
 
 .bottom-bar {
   position: absolute;
-  // background-image: -webkit-linear-gradient(top, #2d2a2c, #232220);
   background-image: -webkit-linear-gradient(top, #333231, #252423);
   color: #b6b5b4;
   font-size: 11px;
@@ -405,7 +393,6 @@ label {
   }
   #syncScrollToggle {
     font-size: 14.5px;
-    // right: 4%;
     right: 2.5em;
     margin-top: 4px;
     &:after {
@@ -417,7 +404,6 @@ label {
   }
   #previewToggle {
     font-size: 17.5px;
-    // right: 0.75%;
     right: 0.4em;
     margin-top: 1px;
     &:after {
@@ -455,12 +441,12 @@ label {
         height: 20px;
         margin: 0 6px 3px 5px;
         vertical-align: middle;
-        background: url(../img/radio.png) -2px top no-repeat;
+        background: url(../img/buttons/radio.png) -2px top no-repeat;
         cursor: pointer;
       }
     }
     &:checked + label span {
-      background: url(../img/radio.png) -33px top no-repeat;
+      background: url(../img/buttons/radio.png) -33px top no-repeat;
     }
   }
 }
@@ -489,7 +475,7 @@ input[type="checkbox"] {
       height: 20px;
       margin: 0 6px 3px 5px;
       vertical-align: middle;
-      background: url(../img/checkbox.png) -2px top no-repeat;
+      background: url(../img/buttons/checkbox.png) -2px top no-repeat;
       cursor: pointer;
     }
   }
@@ -499,14 +485,14 @@ input[type="checkbox"] {
     height: 20px;
     margin: 0 6px 3px 5px;
     vertical-align: middle;
-    background: url(../img/checkbox.png) -2px top no-repeat;
+    background: url(../img/buttons/checkbox.png) -2px top no-repeat;
     cursor: pointer;
   }
   &:checked + label span {
-    background: url(../img/checkbox.png) -33px top no-repeat;
+    background: url(../img/buttons/checkbox.png) -33px top no-repeat;
   }
   &:checked + span {
-    background: url(../img/checkbox.png) -33px top no-repeat;
+    background: url(../img/buttons/checkbox.png) -33px top no-repeat;
   }
 }
 
@@ -537,9 +523,6 @@ input[type="checkbox"] {
     right: 0;
   }
   &:hover {
-    // button img {
-    //   visibility: visible;
-    // }
     #side-button {
       visibility: visible !important;
       i {
@@ -574,14 +557,12 @@ input[type="checkbox"] {
 #sidebar {
   display: block;
   position: absolute;
-  // font-family: $sans-serif;
   background-image: -webkit-linear-gradient(#343233 40%, #292728);
   color: $text-color;
   height: 100%;
   width: 240px;
   top: 0;
   left: -250px;
-  // border: 1px outset #888786;
   box-shadow: 0 0 16px rgba(0,0,0,0.4);
   transition: left 500ms cubic-bezier(0.17, 0.04, 0.03, 0.75);
   z-index: 99999;
@@ -967,7 +948,6 @@ input[type="checkbox"] {
   height: -webkit-calc(100% - 28px);
   transition: width 700ms cubic-bezier(0.17, 0.04, 0.03, 0.75);
   .topFade {
-    // background-image: -webkit-linear-gradient(top, hsl(220, 11%, 18%) 35%, transparent);
     left: 0;
     transition-duration: 0ms;
   }
@@ -1144,7 +1124,7 @@ input[type="checkbox"] {
     filter: none;
   }
   &:active > img, > img:hover {
-    content: url('../img/close_active.png');
+    content: url('../img/buttons/close_active.png');
   }
 }
 
@@ -1190,7 +1170,7 @@ input[type="checkbox"] {
       right: 14px;
     }
     &:active > img, > img:hover {
-      content: url('../img/close_active.png');
+      content: url('../img/buttons/close_active.png');
     }
   }
   #hyde-img {
@@ -1250,7 +1230,6 @@ input[type="checkbox"] {
 
 .bg-gradient1 span,
 .bg-gradient1:before {
-  // @include gradientBg(180deg, #fa7e29, #F6682F);
   @include gradientBg(180deg, #3e3d3c, #2f2e2d);
 }
 
@@ -1259,7 +1238,6 @@ input[type="checkbox"] {
 .cm-trailing-space-a,
 .cm-trailing-space-new-line {
   color: rgba(255,255,255,0.15) !important;
-  // text-decoration: underline;
 }
 
 .search-dialog {
@@ -1439,20 +1417,16 @@ code {
 }
 
 ::-webkit-scrollbar {
-  // background-color: rgba(76,75,72,0.3);
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
   background: transparent;
-  // border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
   background: #42403E;
   border-radius: 10px;
-  // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
 }
 
 #htmlPreview {
@@ -1464,7 +1438,6 @@ code {
   height: 100%;
   letter-spacing: 0.0375em;
   line-height: 1.5;
-  // resize: none;
   border: none;
   word-wrap: break-word;
   text-rendering: geometricPrecision;
