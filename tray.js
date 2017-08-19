@@ -28,6 +28,11 @@ exports.create = function(mainWindow) {
     }
   ]);
 
+  if (process.platform === 'darwin')
+    iconPath = 'img/icon/icns/icon.icns';
+  else if(process.platform === 'win32')
+    iconPath = 'img/icon/ico/icon.ico';
+
   tray = new electron.Tray(iconPath);
   tray.setToolTip('Hyde');
   tray.setContextMenu(contextMenu);
