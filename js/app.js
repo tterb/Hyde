@@ -34,7 +34,7 @@ function openNewWindow() {
 // `remote.require` since `Menu` is a main-process module.
 var buildEditorContextMenu = remote.require('electron-editor-context-menu');
 
-window.addEventListener('contextmenu', function(e) {
+window.addEventListener('contextmenu', (e) => {
   // Only show the context menu in text editors.
   if (!e.target.closest('textarea, input, [contenteditable="true"],section')) return;
 
@@ -52,6 +52,7 @@ var conf = {
     mode: "yaml-frontmatter",
     base: "gfm",
     viewportMargin: 100000000000,
+    tabSize: 2,
     lineNumbers: settings.get('lineNumbers'),
     lineWrapping: settings.get('lineWrapping'),
     showTrailingSpace: settings.get('showTrailingSpace'),
@@ -116,7 +117,9 @@ function listThemes() {
     var theme = str.slice(0,-4);
     if(str.indexOf('-') > -1)
       theme = theme.replace(/-/g , " ");
-    theme = theme.replace(/\w\S*/g, function(txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
+    theme = theme.replace(/\w\S*/g, (txt) => {
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
     themeTag = document.createElement('li');
     themeTag.setAttribute('href', '#');
     themeTag.setAttribute('onclick', 'includeTheme(\"'+str.slice(0,-4)+'\")');
@@ -136,6 +139,7 @@ window.onload = () => {
       ghCompatibleHeaderId: true,
       simplifiedAutoLink: true,
       excludeTrailingPunctuationFromURLs: true,
+      tables: true,
       tasklists: true,
       strikethrough: true,
       simpleLineBreaks: true,
@@ -178,10 +182,10 @@ window.onload = () => {
       if (error) throw error;
       if ('filename' in data) {
         fs.readFile(data.filename, 'utf-8', function(err, data) {
-           if(err)
-               alert("An error ocurred while opening the file "+ err.message)
-           cm.getDoc().setValue(data);
-           cm.getDoc().clearHistory();
+          if(err)
+            alert("An error ocurred while opening the file "+ err.message)
+          cm.getDoc().setValue(data);
+          cm.getDoc().clearHistory();
         });
         this.isFileLoadedInitially = true;
         this.currentFile = data.filename;
