@@ -98,7 +98,7 @@ label {
     img {
       display: inline-block;
       height: 21px;
-      width: 21px;
+      width: auto;
       padding: 4px;
       opacity: 1;
       transition: opacity 300ms ease-in-out;
@@ -112,7 +112,7 @@ label {
     }
   }
   #close {
-    margin-right: 8px;
+    margin-right: 9px;
   }
 }
 
@@ -145,7 +145,7 @@ label {
     &:first-child {
       margin-left: 6px;
     }
-    #dropdownMenuButton {
+    #dropdown-menu-button {
       display: inline-block;
       background: transparent;
       color: $text-subtle-color;
@@ -157,7 +157,7 @@ label {
       white-space: nowrap;
       border-left: 1px outset #37393d;
       border-right: 1px outset #494b50;
-      padding: 1px 0 2px;
+      padding: 3px 0 2px;
       &:hover, &:focus, &:active {
         background: #313031;
         color: $text-color;
@@ -171,9 +171,13 @@ label {
       font-size: 11px;
       min-width: 175px;
       top: 82%;
-      border-bottom-left-radius: 5px;
-      border-bottom-right-radius: 5px;
-      z-index: 99999;
+      box-shadow: 1px 3px 12px rgba(0,0,0,0.5);
+      border-top-left-radius: 0;
+      border-top-right-radius: 6px;
+      border-bottom-left-radius: 6px;
+      border-bottom-right-radius: 6px;
+      margin: 3px 0 0;
+      z-index: 9;
       li {
         padding: 2px 0;
         cursor: pointer;
@@ -221,12 +225,12 @@ label {
         margin: 4px auto;
         padding: 0;
         cursor: default;
-        &:hover {
-          visibility: visible;
-          background: rgba(255,255,255,0.075);
-          color: rgba(255,255,255,0.65);
-          cursor: default;
-        }
+        // &:hover {
+        //   visibility: visible;
+        //   background: rgba(255,255,255,0.075);
+        //   color: rgba(255,255,255,0.65);
+        //   cursor: default;
+        // }
       }
     }
   }
@@ -256,7 +260,9 @@ label {
   .dropdown-menu {
     top: 0;
     left: 99.55%;
-    margin-top: -1px;
+    max-height: 1500%;
+    margin-top: 1px;
+    overflow-y: auto;
     z-index: -9;
     li {
       padding: 2px 0;
@@ -531,28 +537,38 @@ input[type="checkbox"] {
     right: 0;
   }
   &:hover {
-    button img {
-      visibility: visible;
+    // button img {
+    //   visibility: visible;
+    // }
+    #side-button {
+      visibility: visible !important;
+      i {
+        visibility: visible !important;
+      }
     }
   }
 }
 
 #side-button {
-  position: absolute;
-  background: transparent;
-  border: none;
-  top: 45%;
-  left: 0;
-  cursor: pointer;
-  z-index: -99;
-  > img {
-    position: absolute;
-    height: 56px;
-    width: 28px;
-    top: 0;
-    left: -3px;
-    cursor: pointer;
-  }
+	position: absolute;
+	background: #302e2f;
+	height: 50px;
+	width: 50px;
+	top: -webkit-calc(50% - 25px);
+	left: -210%;
+	border-radius: 100px;
+  border: 1px solid  #3a3839;
+  box-shadow: 1px 1px 8px rgba(0,0,0,0.7);
+	i {
+		display: block;
+		position: relative;
+		font-size: 1em;
+		top: -webkit-calc(50% - 0.45em);
+		left: 65%;
+		&:before {
+			color: rgba(255,255,255,0.8);
+		}
+	}
 }
 
 #sidebar {
@@ -609,10 +625,10 @@ input[type="checkbox"] {
     }
   }
 }
-#side-icons {
+#sidebar-icons {
   width: 40%;
   text-shadow: 0 2px rgba(0,0,0,0.2);
-  margin: 30px 30% 8px;
+  margin: 45px 30% 8px;
   padding: 0;
   li {
     position: relative;
@@ -725,7 +741,6 @@ input[type="checkbox"] {
     color: rgba(255,255,255,0.6);
     top: 28px;
     border: 1px outset #3e3c3d;
-    border-radius: 5px;
     padding: 0;
     ul {
       padding-left: 0;
@@ -866,6 +881,9 @@ input[type="checkbox"] {
 
 #settings-trigger {
   left: -320px;
+  div {
+    left: -210%;
+  }
 }
 
 #settings-button {
@@ -1140,7 +1158,7 @@ input[type="checkbox"] {
 #about-modal {
   font-family: $sans-serif;
   .modal-dialog {
-    width: 42%;
+    width: 35%;
     border-radius: 20px;
     margin: 80px auto;
   }
@@ -1157,12 +1175,12 @@ input[type="checkbox"] {
   }
   .about-content {
     color: rgba(255,255,255,0.5);
-    font-size: 16px;
-    font-weight: 300;
+    font-size: 22px;
+    font-weight: 400;
     letter-spacing: 0.035em;
     width: 90%;
     text-align: center;
-    margin: 20px auto 10px;
+    margin: 35px auto 20px;
   }
   .close {
     img {
@@ -1176,10 +1194,10 @@ input[type="checkbox"] {
     }
   }
   #hyde-img {
-    width: 50%;
+    width: 75%;
     height: auto;
     margin: auto;
-    margin: 8px 4px 5px;
+    margin: 17px 12% 5px;
   }
   a {
     color: $accent-color;
@@ -1210,6 +1228,15 @@ input[type="checkbox"] {
     a:hover, a:active {
       font-weight: 600;
       border-bottom: none !important;
+    }
+  }
+  #name {
+    color: rgba(255,255,255,0.5);
+    font-weight: 400;
+    letter-spacing: 0.035em;
+    &:hover {
+      color: $accent-color;
+      text-decoration: none !important;
     }
   }
 }

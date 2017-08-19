@@ -57,18 +57,22 @@ function closeWindow(win) {
 function toggleSidebar() {
   var sidebar = $('#sidebar'),
       button = $('#side-button'),
-      buttonImg = $('#side-img'),
-      trigger = $('#side-trigger');
+      buttonIcon = $('#side-icon'),
+      trigger = $('#left-trigger');
   if(parseInt(sidebar.css('left'), 10) < 0) {
     button.css('visibility','hidden');
     sidebar.css('left', '0px');
     trigger.css('left','240px');
-    buttonImg.attr('src','img/left-arrow.png');
+    buttonIcon.css('left', '62%');
+    buttonIcon.css('visibility', 'hidden');
+    buttonIcon.attr('class', 'fa fa-chevron-left');
   } else {
     button.css('visibility','hidden');
     sidebar.css('left', '-240px');
     trigger.css('left','0px');
-    buttonImg.attr('src','img/right-arrow.png');
+    buttonIcon.css('left', '65%');
+    buttonIcon.css('visibility', 'hidden');
+    buttonIcon.attr('class', 'fa fa-chevron-right');
   }
 }
 

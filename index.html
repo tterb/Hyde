@@ -54,7 +54,7 @@
     <div id="appMenu" class="hidden">
       <!-- File -->
       <div class="btn-group">
-        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">File</button>
+        <button class="btn dropdown-toggle" type="button" id="dropdown-menu-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">File</button>
         <ul class="dropdown-menu">
           <li tabindex="-1" href="#" onclick="openNewWindow();"><a id="dropdownItem">New</a><span>Ctrl + N</span></li>
           <li tabindex="-1" href="#" onclick="openFile();"><a id="dropdownItem">Open</a><span>Ctrl + O</span></li>
@@ -71,7 +71,7 @@
       </div>
       <!-- Edit -->
       <div class="btn-group">
-        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Edit</button>
+        <button class="btn dropdown-toggle" type="button" id="dropdown-menu-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Edit</button>
         <ul class="dropdown-menu">
           <li tabindex="-1" href="#" onclick="cm.execCommand('undo');"><a id="dropdownItem">Undo</a><span>Ctrl + Z</span></li>
           <li tabindex="-1" href="#" onclick="cm.execCommand('redo');"><a id="dropdownItem">Redo</a><span>Ctrl + Shift + Z</span></li>
@@ -95,7 +95,7 @@
       </div>
       <!-- View -->
       <div class="btn-group">
-        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">View</button>
+        <button class="btn dropdown-toggle" type="button" id="dropdown-menu-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">View</button>
         <ul class="dropdown-menu">
           <li tabindex="-1" href="#" onclick="reloadWin()"><a id="dropdownItem">Reload</a><span>Ctrl + R</span></li>
           <!-- <li class="dropdown-divider"></li> -->
@@ -145,7 +145,7 @@
       </div>
        <!-- Help -->
       <div class="btn-group">
-        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Help</button>
+        <button class="btn dropdown-toggle" type="button" id="dropdown-menu-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Help</button>
         <ul class="dropdown-menu">
           <li tabindex="-1" href="#" data-toggle="modal" data-target="#markdown-modal"><a id="dropdownItem">Markdown Help</a></li>
           <li class="dropdown-divider"></li>
@@ -179,8 +179,10 @@
     </div>
     <!-- Editor Area -->
     <section id="editArea" class="row">
-      <div class="trigger left" id="side-trigger">
-        <button id="side-button" onclick="toggleSidebar()" style="visibility:hidden;"/><img id="side-img" src="img/right-arrow.png"/>
+      <div class="trigger left" id="left-trigger">
+        <div id="side-button" onclick="toggleSidebar()" style="visibility:hidden;">
+          <i id="side-icon" class="fa fa-chevron-right"></i>
+        </div>
       </div>
       <section id="sidebar">
         <img id="side-logo" src="img/logo.png"/>
@@ -191,7 +193,7 @@
           <li id="sidebar-settings"><a onclick="toggleSettings();">Settings</a></li>
           <li id="sidebar-about"><a href="#" data-toggle="modal" data-target="#about-modal" onclick="toggleSidebar()">About</a></li>
         </ul>
-        <ul id="side-icons">
+        <ul id="sidebar-icons">
           <li class="fa fa-github" alt="View on GitHub"><a href="https://github.com/JonSn0w/Hyde-MD"></a></li>
           <li class="fa fa-bug" alt="Report an Issue"><a href="https://github.com/JonSn0w/Hyde-MD/issues/new"></a></li>
           <li class="fa fa-file-text" alt="Read the Docs"><a href="https://github.com/JonSn0w/Hyde-MD"></a></li>
@@ -281,7 +283,9 @@
         </div>
       </section>
       <div class="trigger left" id="settings-trigger">
-        <button id="settings-button" onclick="toggleSettings()" style="visibility:hidden;"/><img id="settings-arrow" src="img/left-arrow.png"/>
+        <div id="side-button" onclick="toggleSidebar()" style="visibility:hidden;">
+          <i id="side-icon" class="fa fa-chevron-left"></i>
+        </div>
       </div>
       <div id="leftPanel">
           <div id="leftFade" class="topFade"></div>
@@ -381,7 +385,7 @@
             <img id="hyde-img" src="./img/Hyde.png"/>
             <div class="about-content">
               <ul class="about-info">
-                <li>Created by <a href="https://JonSn0w.github.io/">Brett Stevenson</a></li>
+                <li>Created by <a href="https://JonSn0w.github.io/" id="name">Brett Stevenson</a></li>
                 <li>License: <a id="license" href="http://www.gnu.org/licenses/gpl.txt">GPL v3.0</a></li>
                 <li>Version: <a id="version" href="https://github.com/JonSn0w/PlayMusic/releases/tag/v0.0.1">v0.0.1</a></li>
                 <li id="check-updates"><a href="https://github.com/JonSn0w/Hyde/releases/latest">Check for Updates</a></li>

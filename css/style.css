@@ -75,7 +75,7 @@ label {
     #metacity .winButton img {
       display: inline-block;
       height: 21px;
-      width: 21px;
+      width: auto;
       padding: 4px;
       opacity: 1;
       transition: opacity 300ms ease-in-out; }
@@ -85,7 +85,7 @@ label {
     #metacity .winButton .inactive:hover {
       opacity: 0; }
   #metacity #close {
-    margin-right: 8px; }
+    margin-right: 9px; }
 
 #appMenu {
   position: fixed;
@@ -109,7 +109,7 @@ label {
     height: 100%; }
     #appMenu .btn-group:first-child {
       margin-left: 6px; }
-    #appMenu .btn-group #dropdownMenuButton {
+    #appMenu .btn-group #dropdown-menu-button {
       display: inline-block;
       background: transparent;
       color: rgba(255, 255, 255, 0.4);
@@ -121,8 +121,8 @@ label {
       white-space: nowrap;
       border-left: 1px outset #37393d;
       border-right: 1px outset #494b50;
-      padding: 1px 0 2px; }
-      #appMenu .btn-group #dropdownMenuButton:hover, #appMenu .btn-group #dropdownMenuButton:focus, #appMenu .btn-group #dropdownMenuButton:active {
+      padding: 3px 0 2px; }
+      #appMenu .btn-group #dropdown-menu-button:hover, #appMenu .btn-group #dropdown-menu-button:focus, #appMenu .btn-group #dropdown-menu-button:active {
         background: #313031;
         color: rgba(255, 255, 255, 0.75);
         border-top: 1px inset #434443;
@@ -133,9 +133,13 @@ label {
       font-size: 11px;
       min-width: 175px;
       top: 82%;
-      border-bottom-left-radius: 5px;
-      border-bottom-right-radius: 5px;
-      z-index: 99999; }
+      box-shadow: 1px 3px 12px rgba(0, 0, 0, 0.5);
+      border-top-left-radius: 0;
+      border-top-right-radius: 6px;
+      border-bottom-left-radius: 6px;
+      border-bottom-right-radius: 6px;
+      margin: 3px 0 0;
+      z-index: 9; }
       #appMenu .btn-group .dropdown-menu li {
         padding: 2px 0;
         cursor: pointer; }
@@ -176,11 +180,6 @@ label {
         margin: 4px auto;
         padding: 0;
         cursor: default; }
-        #appMenu .btn-group .dropdown-menu .dropdown-divider:hover {
-          visibility: visible;
-          background: rgba(255, 255, 255, 0.075);
-          color: rgba(255, 255, 255, 0.65);
-          cursor: default; }
 
 .caret {
   color: fade(rgba(255, 255, 255, 0.4), 10%);
@@ -203,7 +202,9 @@ label {
   .dropdown-submenu .dropdown-menu {
     top: 0;
     left: 99.55%;
-    margin-top: -1px;
+    max-height: 1500%;
+    margin-top: 1px;
+    overflow-y: auto;
     z-index: -9; }
     .dropdown-submenu .dropdown-menu li {
       padding: 2px 0; }
@@ -427,24 +428,29 @@ input[type="checkbox"] {
     left: 0; }
   .trigger.right {
     right: 0; }
-  .trigger:hover button img {
-    visibility: visible; }
+  .trigger:hover #side-button {
+    visibility: visible !important; }
+    .trigger:hover #side-button i {
+      visibility: visible !important; }
 
 #side-button {
   position: absolute;
-  background: transparent;
-  border: none;
-  top: 45%;
-  left: 0;
-  cursor: pointer;
-  z-index: -99; }
-  #side-button > img {
-    position: absolute;
-    height: 56px;
-    width: 28px;
-    top: 0;
-    left: -3px;
-    cursor: pointer; }
+  background: #302e2f;
+  height: 50px;
+  width: 50px;
+  top: -webkit-calc(50% - 25px);
+  left: -210%;
+  border-radius: 100px;
+  border: 1px solid  #3a3839;
+  box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.7); }
+  #side-button i {
+    display: block;
+    position: relative;
+    font-size: 1em;
+    top: -webkit-calc(50% - 0.45em);
+    left: 65%; }
+    #side-button i:before {
+      color: rgba(255, 255, 255, 0.8); }
 
 #sidebar {
   display: block;
@@ -494,24 +500,24 @@ input[type="checkbox"] {
       margin: 3px auto;
       padding: 0; }
 
-#side-icons {
+#sidebar-icons {
   width: 40%;
   text-shadow: 0 2px rgba(0, 0, 0, 0.2);
-  margin: 30px 30% 8px;
+  margin: 45px 30% 8px;
   padding: 0; }
-  #side-icons li {
+  #sidebar-icons li {
     position: relative;
     font-size: 23px;
     color: #666;
     padding-right: 12px;
     cursor: pointer; }
-    #side-icons li:first-child {
+    #sidebar-icons li:first-child {
       font-size: 27px; }
-    #side-icons li:last-child {
+    #sidebar-icons li:last-child {
       font-size: 21px;
       bottom: 3px;
       padding-right: 0; }
-    #side-icons li:hover, #side-icons li:active {
+    #sidebar-icons li:hover, #sidebar-icons li:active {
       color: #888; }
 
 #settings-menu {
@@ -594,7 +600,6 @@ input[type="checkbox"] {
     color: rgba(255, 255, 255, 0.6);
     top: 28px;
     border: 1px outset #3e3c3d;
-    border-radius: 5px;
     padding: 0; }
     #settings-menu .dropdown-menu ul {
       padding-left: 0; }
@@ -708,6 +713,8 @@ input[type="checkbox"] {
 
 #settings-trigger {
   left: -320px; }
+  #settings-trigger div {
+    left: -210%; }
 
 #settings-button {
   position: absolute;
@@ -931,7 +938,7 @@ input[type="checkbox"] {
 #about-modal {
   font-family: "Open Sans", "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif; }
   #about-modal .modal-dialog {
-    width: 42%;
+    width: 35%;
     border-radius: 20px;
     margin: 80px auto; }
   #about-modal .modal-header {
@@ -945,12 +952,12 @@ input[type="checkbox"] {
     padding-top: 0; }
   #about-modal .about-content {
     color: rgba(255, 255, 255, 0.5);
-    font-size: 16px;
-    font-weight: 300;
+    font-size: 22px;
+    font-weight: 400;
     letter-spacing: 0.035em;
     width: 90%;
     text-align: center;
-    margin: 20px auto 10px; }
+    margin: 35px auto 20px; }
   #about-modal .close img {
     position: absolute;
     width: 15px;
@@ -959,10 +966,10 @@ input[type="checkbox"] {
   #about-modal .close:active > img, #about-modal .close > img:hover {
     content: url("../img/close_active.png"); }
   #about-modal #hyde-img {
-    width: 50%;
+    width: 75%;
     height: auto;
     margin: auto;
-    margin: 8px 4px 5px; }
+    margin: 17px 12% 5px; }
   #about-modal a {
     color: #de545f;
     font-size: 14px;
@@ -987,6 +994,13 @@ input[type="checkbox"] {
     #about-modal #check-updates a:hover, #about-modal #check-updates a:active {
       font-weight: 600;
       border-bottom: none !important; }
+  #about-modal #name {
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 400;
+    letter-spacing: 0.035em; }
+    #about-modal #name:hover {
+      color: #de545f;
+      text-decoration: none !important; }
 
 .bg-gradient1 span,
 .bg-gradient1:before {
