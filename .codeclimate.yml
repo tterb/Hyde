@@ -29,6 +29,10 @@ engines:
     checks:
       TODO:
         enabled: false
+      FIXME:
+        enabled: false
+      NOTE:
+        enabled: false
 
 ratings:
   paths:
