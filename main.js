@@ -32,7 +32,6 @@ const {Menu, MenuItem, ipcMain} = require('electron');
 const dialog = require('electron').dialog;
 const shell = require('electron').shell;
 const localShortcut = require('electron-localshortcut');
-const windowManager = require('electron-window-manager');
 const windowStateManager = require('electron-window-state');
 
 // Keep a global reference of the window object
@@ -53,7 +52,7 @@ function getConfig() {
     y: windowState.y,
     show: false,
     frame: false,
-    autoHideMenuBar: true,
+    autoHideMenuBar: true
   }
   if (process.platform === 'darwin') {
     conf.titleBarStyle = 'hidden';

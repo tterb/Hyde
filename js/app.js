@@ -16,7 +16,6 @@ const parsePath = require("parse-filepath");
 const settings = require('electron-settings');
 const storage = require('electron-json-storage');
 const CMSpellChecker = require('codemirror-spell-checker');
-const windowManager = remote.require('electron-window-manager');
 var console = require('console');
 var os = require("os");
 require('showdown-youtube');
@@ -322,7 +321,7 @@ function writeEditorToFile(file) {
 
 // Resize toolbar when window is below necessary width
 $(window).on('resize', () => {
-  if(parseInt($('#body').width()) > 924 && $('#previewPanel').is(':visible')) {
+  if(parseInt($('#body').width(),10) > 924 && $('#previewPanel').is(':visible')) {
     toolbar.css('width', '50%');
   } else {
     toolbar.css('width', '100%');
