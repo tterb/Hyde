@@ -44,7 +44,7 @@
   <body class="container-fluid" id="body" style="resize: both">
     <div id="draggable" style="-webkit-app-region:drag"></div>
     <div id="menuToggle">
-      <button id="menuButton" onclick="toggleMenu();" style="cursor: pointer;"><span class="mif-menu"></span></button>
+      <button id="menuButton" onclick="toggleMenu()" style="cursor: pointer;"><span class="mif-menu"></span></button>
     </div>
     <div id="metacity">
       <button id="close" class="winButton" style="cursor: pointer;"><img class="active" src="img/buttons/close_active.png" alt="Close"/><img class="inactive" src="img/buttons/close.png" alt="Close"/></button>
@@ -66,7 +66,7 @@
           <li class="dropdown-divider"></li>
           <li tabindex="-1" href="#" onclick="toggleSettings();"><a id="dropdownItem">Settings</a><span>Ctrl + ,</span></li>
           <li class="dropdown-divider"></li>
-          <li tabindex="-1" href="#" onclick="closeWindow(this)"><a id="dropdownItem">Close</a></li>
+          <li tabindex="-1" href="#" onclick="closeWindow(this)"><a id="dropdownItem">Quit</a><span>Ctrl + Q</span></li>
         </ul>
       </div>
       <!-- Edit -->
@@ -149,9 +149,9 @@
         <ul class="dropdown-menu">
           <li tabindex="-1" href="#" data-toggle="modal" data-target="#markdown-modal"><a id="dropdownItem">Markdown Help</a></li>
           <li class="dropdown-divider"></li>
-          <li tabindex="-1" href="#"><a id="dropdownItem" class="link" href="https://github.com/JonSn0w/Hyde/wiki">Documentation</a></li>
-          <li tabindex="-1" href="#" onclick="openNewFile('/docs/keybindings.md')"><a id="dropdownItem">Keybindings</a></li>
-          <li tabindex="-1"><a id="dropdownItem" class="link" href="https://github.com/JonSn0w/Hyde/issues/new">Report an Issue</a></li>
+          <li tabindex="-1" href="#"><a id="dropdownItem" class="link" onclick="openInBrowser('https://github.com/JonSn0w/Hyde/wiki')">Documentation</a></li>
+          <li tabindex="-1" href="#" onclick="sendShortcut('keybinding-modal')"><a id="dropdownItem">Keybindings</a></li>
+          <li tabindex="-1"><a id="dropdownItem" class="link" onclick="openInBrowser('https://github.com/JonSn0w/Hyde/issues/new')">Report an Issue</a></li>
           <li class="dropdown-divider"></li>
           <li tabindex="-1" href="#" data-toggle="modal" data-target="#about-modal"><a id="dropdownItem">About Hyde</a></li>
         </ul>
@@ -194,9 +194,9 @@
           <li id="sidebar-about"><a href="#" data-toggle="modal" data-target="#about-modal" onclick="toggleSidebar()">About</a></li>
         </ul>
         <ul id="sidebar-icons">
-          <li class="fa fa-github" alt="View on GitHub"><a href="https://github.com/JonSn0w/Hyde-MD"></a></li>
-          <li class="fa fa-bug" alt="Report an Issue"><a href="https://github.com/JonSn0w/Hyde-MD/issues/new"></a></li>
-          <li class="fa fa-file-text" alt="Read the Docs"><a href="https://github.com/JonSn0w/Hyde-MD"></a></li>
+          <li class="fa fa-github" data-tooltip="View on GitHub"><a onclick="openInBrowser('https://github.com/JonSn0w/Hyde')"></a></li>
+          <li class="fa fa-bug" data-tooltip="Report an Issue" onclick="openInBrowser('https://github.com/JonSn0w/Hyde/issues/new')"></li>
+          <li class="fa fa-file-text" data-tooltip="Read the Docs"><a onclick="openInBrowser('https://github.com/JonSn0w/Hyde/tree/master/docs')"></a></li>
         </ul>
       </section>
       <!-- Settings Menu -->
@@ -347,7 +347,7 @@
                       <td>&gt; blockquote</td>
                     </tr>
                     <tr>
-                      <td><a href="https://github.com/JonSn0w/Hyde-MD" target="_rick">Link</a></td>
+                      <td><a href="https://github.com/JonSn0w/Hyde" target="_rick">Link</a></td>
                       <td>[title](http://)</td>
                     </tr>
                     <tr>

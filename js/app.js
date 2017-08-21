@@ -16,6 +16,7 @@ const parsePath = require("parse-filepath");
 const settings = require('electron-settings');
 const storage = require('electron-json-storage');
 const CMSpellChecker = require('codemirror-spell-checker');
+const windowManager = remote.require('electron-window-manager');
 var console = require('console');
 var os = require("os");
 require('showdown-youtube');
@@ -27,7 +28,7 @@ var isFileLoadedInitially = false,
     currentFile = '';
 
 // Allows render process to create new windows
-function openNewWindow() {
+function openNewWindow(file) {
   main.createWindow();
 }
 
@@ -177,7 +178,7 @@ window.onload = () => {
   });
 
   // Open first window with the most recently saved file
-  if(main.getWindows().size === 1) {
+  if(main.getWindows().size <= 1) {
     storage.get('markdown-savefile', function(error, data) {
       if (error) throw error;
       if ('filename' in data) {
@@ -348,4 +349,8 @@ function countWords() {
     var wordcount = cm.getValue().split(/\b[\s,\.-:;]*/).length;
     document.getElementById("wordcount").innerHTML = "words: " + wordcount.toString();
     return cm.getValue().split(/\b[\s,\.-:;]*/).length;
+}
+
+function openInBrowser(url) {
+  shell.openExternal('https://github.com/JonSn0w/Hyde/issues/new');
 }

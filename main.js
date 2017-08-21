@@ -32,6 +32,7 @@ const {Menu, MenuItem, ipcMain} = require('electron');
 const dialog = require('electron').dialog;
 const shell = require('electron').shell;
 const localShortcut = require('electron-localshortcut');
+const windowManager = require('electron-window-manager');
 const windowStateManager = require('electron-window-state');
 
 // Keep a global reference of the window object
@@ -66,13 +67,11 @@ function getConfig() {
 }
 
 const createWindow = exports.createWindow = (file) => {
-
   let newWindow = new BrowserWindow(getConfig());
   windows.add(newWindow)
-  newWindow.loadURL(mainPage);
-  if(file !== undefined)
-  readFileIntoEditor(file);
-  newWindow.once('ready-to-show', () => { newWindow.show(); return file; });
+  // newWindow.loadURL(mainPage);
+  // readFileIntoEditor(file);
+  newWindow.once('ready-to-show', () => { newWindow.show(); });
 
   // Open the DevTools.
   // newWindow.webContents.openDevTools();
@@ -88,14 +87,13 @@ const createWindow = exports.createWindow = (file) => {
     e.preventDefault();
     shell.openExternal(url);
   });
-
   tray.create(newWindow);
 }
 
 ipcMain.on('export-to-pdf', (event, filePath) => {
-  const win = BrowserWindow.fromWebContents(event.sender)
+  const win = BrowserWindow.fromWebContents(event.sender);
   // Use default printing options
-  win.webContents.printToPDF({}, (error, data) => {
+  win.webContents.printToPDF({pageSize: 'A4'}, (error, data) => {
     if (error) throw error
     fs.writeFile(filePath, data, (error) => {
       if (error) { throw error; }
@@ -190,14 +188,14 @@ var template = [
     }},
     {type: "separator"},
     {label: "Documentation", click: () => {
-      shell.openExternal(mod.repository.docs);
+      shell.openExternal('https://github.com/JonSn0w/Hyde/tree/master/docs');
     }},
     {label: "Keybindings", click: () => {
       sendShortcut('keybinding-modal');
       // shell.openExternal(mod.repository.keys);
     }},
     {label: "Report Issue", click: () => {
-      shell.openExternal(mod.bugs.url);
+      shell.openExternal('https://github.com/JonSn0w/Hyde/issues/new');
     }},
     {type: 'separator'},
     {label: "About Hyde", click: () => {
@@ -264,12 +262,12 @@ localShortcut.register('CmdOrCtrl+left', () => { sendShortcut('ctrl+left'); });
 localShortcut.register('CmdOrCtrl+right', () => { sendShortcut('ctrl+right'); });
 localShortcut.register('CmdOrCtrl+down', () => { sendShortcut('ctrl+down'); });
 
-
 // Called when Electron has finished initialization
 app.on('ready', function() {
   // Create native application menu
   const menu = Menu.buildFromTemplate(template);
   Menu.setApplicationMenu(menu);
+
   // Initialize windowStateManager
   windowState = windowStateManager({
     defaultWidth: settings.get('windowWidth'),
@@ -280,6 +278,7 @@ app.on('ready', function() {
   windowState.manage(mainWindow);
   mainWindow.loadURL(mainPage);
   windows.add(mainWindow);
+
   // mainWindow.webContents.openDevTools();
   mainWindow.once('ready-to-show', () => {
     mainWindow.show();
