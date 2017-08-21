@@ -83,11 +83,13 @@ var formatHead = () => {
     toolbar.css('z-index', '99999');
     body.css('paddingTop', '0px');
     if(toolbar.is(':visible')) {
+      body.css('paddingTop', '7px');
       dragArea.css('width', '-webkit-calc(50% - 50px)');
       codeMirror.css('paddingTop', '7px');
     } else {
       // if(process.platform !== 'darwin')
       menuToggle.show();
+      body.css('paddingTop', '0px');
       dragArea.css({ 'width': 'calc(100% - 117px)' });
       codeMirror.css('paddingTop', '0px');
     }

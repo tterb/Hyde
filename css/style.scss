@@ -58,22 +58,27 @@ label {
 
 #menuToggle {
   position: absolute;
-  top: -0.75%;
+  top: -1.25%;
   left: 0.5%;
   outline: none !important;
   cursor: pointer;
   z-index: 9999;
   button {
     display: block;
-    font-size: 1.75em;
+    font-size: 1.95em;
     background: transparent;
     color: rgba(255,255,255,0.07);
     border: none;
     outline: none !important;
-    transition: color 400ms ease-in-out;
+    transform: scale(1);
+    transition: color 300ms ease-in-out;
+    transition: all 200ms ease-in-out;
     z-index: 99;
     &:hover {
       color: rgba(255,255,255,0.45);
+    }
+    &:active, &:visited {
+      transform: scale(0.85);
     }
   }
   &:hover {
@@ -153,7 +158,14 @@ label {
       border-left: 1px outset #37393d;
       border-right: 1px outset #494b50;
       padding: 3px 0 2px;
-      &:hover, &:focus, &:active {
+      // transition: all .145s .2s ease-out;
+      &:hover {
+        background: transparent;
+        color: $text-color;
+      }
+    }
+    &.open {
+      #dropdown-menu-button {
         background: #313031;
         color: $text-color;
         border-top: 1px inset #434443;
@@ -176,13 +188,14 @@ label {
       li {
         padding: 2px 0;
         cursor: pointer;
+        transition: all 100ms ease-in;
         a {
           display: inline;
           background-color: transparent;
           color: rgba(255,255,255,0.65);
           font-size: 11px;
           font-weight: 300;
-          letter-spacing: 0.06em;
+          letter-spacing: 0.09em;
           text-decoration: none !important;
           padding: 3px 15px 3px 10px;
           &:hover, &:active {
@@ -201,7 +214,7 @@ label {
           padding-top: 1.5px;
         }
         &:hover, &:active {
-          background: #3a393b;
+          background: #3a373a;
           box-shadow: inset 0 0 2px rgba(0,0,0,0.4);
           a {
             color: $text-emphasis-color;
@@ -580,16 +593,17 @@ input[type="checkbox"] {
   font-size: 22px;
   font-weight: 200;
   list-style: none;
-  top: 1%;
+  top: 1.5%;
   padding: 0;
   li {
     text-align: center;
     padding: 2px 0;
     a {
-      color: $text-color;
+      color: rgba(255,255,255,0.65);
       cursor: pointer;
       &:hover, &:active {
-        color: rgba(255,255,255,0.9);
+        color: rgba(255,255,255,0.8);
+        font-weight: 300;
         text-decoration: none;
       }
     }
@@ -609,24 +623,36 @@ input[type="checkbox"] {
 #sidebar-icons {
   width: 40%;
   text-shadow: 0 2px rgba(0,0,0,0.2);
-  margin: 45px 30% 8px;
+  margin: 55px 30% 8px;
   padding: 0;
   li {
     position: relative;
-    font-size: 23px;
-    color: #666;
-    padding-right: 12px;
+    font-size: 25px;
+    color: rgba(255,255,255,0.3);
+    padding-right: 13px;
     cursor: pointer;
     &:first-child {
-      font-size: 27px;
+      font-size: 27.5px;
+      top: 0;
+      padding-right: 10px;
     }
     &:last-child {
-      font-size: 21px;
-      bottom: 3px;
+      font-size: 22px;
+      top: -2px;
       padding-right: 0;
     }
     &:hover, &:active {
       color: #888;
+    }
+    &:hover:after {
+      visibility: visible;
+    }
+    &:after {
+      position: absolute;
+      top: 125%;
+      left: 25%;
+      visibility: hidden;
+      transition: visibility 1s ease;
     }
   }
 }
