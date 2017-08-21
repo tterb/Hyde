@@ -5,22 +5,22 @@
 <br>  
 <p align="right">
   <a href="https://travis-ci.org/JonSn0w/Hyde">
-    <img src="https://travis-ci.org/JonSn0w/Hyde.svg?branch=master" height="21" title="Build Status">&nbsp;
-  </a>
+    <img src="https://travis-ci.org/JonSn0w/Hyde.svg?branch=master" height="21" title="Build Status"/>&nbsp;
+  </a> 
   <a href="https://www.gnu.org/licenses/">
-  <img src="https://img.shields.io/badge/License-GPL%20v3-yellow.svg" height="21" title="License">&nbsp;
+  <img src="https://img.shields.io/badge/License-GPL%20v3-yellow.svg" height="21" title="License"/>&nbsp;
 </a>
-  <a href="https://badge.fury.io/gh/JonSn0w%2FHyde-MD">
-    <img src="https://badge.fury.io/gh/JonSn0w%2FHyde-MD.svg" height="21" alt="version">&nbsp;
+  <a href="https://badge.fury.io/gh/JonSn0w%2FHyde">
+    <img src="https://badge.fury.io/gh/JonSn0w%2FHyde.svg" height="21" alt="version"/>&nbsp;
   </a>
   <a href="https://codeclimate.com/github/JonSn0w/Hyde">
     <img src="https://codeclimate.com/github/JonSn0w/Hyde/badges/gpa.svg"  height="21" alt="Code Climate"/>&nbsp;
   </a>
   <a href="https://electron.atom.io/">
-    <img src="https://img.shields.io/badge/powered_by-Electron-blue.svg" height="21" title="Electron">&nbsp;
+    <img src="https://img.shields.io/badge/powered_by-Electron-blue.svg" height="21" title="Electron"/>&nbsp;
   </a>
   <a href="https://jekyllrb.com/">
-    <img src="https://img.shields.io/badge/built for-Jekyll-red.svg" height="21" title="Jekyll">&nbsp;
+    <img src="https://img.shields.io/badge/built for-Jekyll-red.svg" height="21" title="Jekyll"/>&nbsp;
   </a>
 </p>
   
@@ -87,6 +87,6 @@ $ gulp watch
 # Contributing  
 
 If you're looking for an easy way to contribute to this project but aren't sure where to start, I've created a list of minor bugs and/or issues to be fixed before the projects initial release, which you can find [here](https://github.com/JonSn0w/Hyde/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20is%3Ahelpwanted) or you can just try the app out and [provide some feedback](https://github.com/JonSn0w/Hyde/issues/new).  
-Also, before submitting a pull-request, I would ask that you first take a look at the projects [Contributing guidelines](https://github.com/JonSn0w/Hyde-MD/blob/master/docs/CONTRIBUTING.md). 
+Also, before submitting a pull-request, I would ask that you first take a look at the projects [Contributing guidelines](https://github.com/JonSn0w/Hyde/blob/master/docs/CONTRIBUTING.md). 
 
 <br>
