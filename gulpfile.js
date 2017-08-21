@@ -3,6 +3,8 @@
 const gulp = require('gulp');
 const fs = require('fs');
 const scss = require('gulp-scss');
+const process = require('process');
+const rebuild = require('electron-rebuild');
 const packager = require('electron-packager');
 const electron = require('electron-connect').server.create();
 const plumber = require('gulp-plumber');
@@ -10,14 +12,11 @@ const jetpack = require('fs-jetpack');
 const config = JSON.parse(fs.readFileSync('package.json'));
 const appVersion = config.version;
 const shell = require('gulp-shell');
-var rebuild = require('electron-rebuild');
-var process = require('process');
-var electronPackage = require('electron/package.json');
-var electronVersion = electronPackage.version;
-
 const projectDir = jetpack;
 const srcDir = jetpack.cwd('./');
 const destDir = jetpack.cwd('./');
+var electronPackage = require('electron/package.json');
+var electronVersion = electronPackage.version;
 
 const options = {
 	asar: true,
@@ -36,7 +35,6 @@ gulp.task('launch', () => {
 
 gulp.task('rebuild', () => {
   var arch = process.arch;
-
   rebuild.default(__dirname, electronVersion, arch)
     .then(() => {
       console.info('Electron Rebuild Successful');
@@ -70,7 +68,7 @@ gulp.task('build:linux', () => {
 	// @TODO
 });
 
-gulp.task('build:windows', (done) => {
+gulp.task('build:win', (done) => {
 	options.arch = 'ia32';
 	options.platform = 'win32';
 	options.icon = './img/icon/icon.ico';
@@ -96,6 +94,8 @@ gulp.task('build:osx', (done) => {
 	});
 });
 
+
+gulp.task('default', ['rebuild', 'scss', 'launch']);
 
 gulp.task('start', ['rebuild', 'scss', 'launch']);
 
