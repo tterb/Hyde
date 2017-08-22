@@ -527,8 +527,8 @@ html, body {
   font-size: 7em;
   font-weight: 100 !important;
   letter-spacing: 0.03em;
-  line-height: 0.5;
-  margin: 1.25em 6% 0.75em;
+  line-height: 1;
+  margin: 1em 6% 0.75em;
 }
 
 .document {
@@ -549,7 +549,8 @@ html, body {
     color: rgba(255,255,255,0.7);
     font-size: 3em;
     font-weight: 300;
-    margin-bottom: 0.75em;
+    line-height: 1;
+    margin-bottom: 0.5em;
     padding-left: 0 !important;
     text-shadow: 3px 5px 10px rgba(0,0,0,0.8);
   }
@@ -622,10 +623,10 @@ html, body {
 
 #TOC {
   position: relative;
+  background: #292C33;
   color: rgba(255,255,255,0.65);
-  padding-left: 7.5%;
-  margin-top: 5em;
-  margin-bottom: 6em;
+  padding: 1.75em 7.5% 1em;
+  // margin-bottom: 6em;
   h3 {
     color: rgba(255,255,255,0.7);
     font-size: 2.35em;
@@ -638,6 +639,7 @@ html, body {
     line-height: 1.6;
     list-style-image: url('./img/bullet_small.png');
     margin-left: 47px;
+    padding-bottom: 2em;
     li {
       padding-left: 9px;
       padding-bottom: 5px;
