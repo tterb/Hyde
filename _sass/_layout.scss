@@ -528,7 +528,7 @@ html, body {
   font-weight: 100 !important;
   letter-spacing: 0.03em;
   line-height: 1;
-  margin: 1em 6% 0.75em;
+  margin: 1em 6% 0.5em;
 }
 
 .document {
@@ -556,10 +556,18 @@ html, body {
   }
   h3 {
     color: rgba(255,255,255,0.7);
-    font-size: 2.5em;
+    font-size: 2.25em;
     font-weight: 300;
     margin-bottom: 0.5em;
     text-shadow: 3px 5px 10px rgba(0,0,0,0.8);
+  }
+  a {
+    color: rgba(255,255,255,0.7);
+    font-weight: 400;
+    border-bottom: none;
+    &:hover, &:active {
+      border-bottom: 2px dotted rgba(255,255,255,0.6);
+    }
   }
   hr {
     position: relative;
@@ -604,6 +612,7 @@ html, body {
       padding: 9px 9px 9px 15px;
       span {
         color: rgba(255,255,255,0.4);
+        margin-left: 0;
       }
     }
     .table-shortcut {
