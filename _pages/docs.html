@@ -1,7 +1,7 @@
 ---
 key: 2
 title: Docs
-permalink: /documentation
+permalink: /docs
 desc: Documentation for Hyde
 layout: page
 options: fullwidth
@@ -16,11 +16,10 @@ sitemap:
 <section id="TOC" class="document-toc">
   <h3>Table of Contents</h3>
   <ul class="toc-list">
-    <li>About</li>
-    <li>Keybindings</li>
-    <li>FAQ</li>
-    <li>Changelog</li>
-    <li>Contributing</li>
+    <li><a href="http://JonSn0w.github.io/Hyde/docs#about">About</a></li>
+    <li><a href="http://JonSn0w.github.io/Hyde/docs#keybindings">Keybindings</li>
+    <li><a href="http://JonSn0w.github.io/Hyde/docs#changelog">Changelog</li>
+    <li><a href="http://JonSn0w.github.io/Hyde/docs#contributing">Contributing</li>
   </ul>
 </section>
 <section id="about" class="document-section">
@@ -85,6 +84,57 @@ sitemap:
       </tr>
     </tbody>
   </table>
+  <table id="table-edit" class="document-table">
+    <h3>Editing</h3>
+    <thead>
+      <tr>
+        <th id="table-header">Commands</th>
+        <th id="table-header" style="border-left:none">Shortcut</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="table-command">Undo</td>
+        <td class="table-shortcut"><kbd>Ctrl + Z</kbd></td>
+      </tr>
+      <tr>
+        <td class="table-command">Redo</td>
+        <td class="table-shortcut"><kbd>Ctrl + Shift + Z</kbd></td>
+      </tr>
+      <tr>
+        <td class="table-command">Cut</td>
+        <td class="table-shortcut"><kbd>Ctrl + X</kbd></td>
+      </tr>
+      <tr>
+        <td class="table-command">Copy</td>
+        <td class="table-shortcut"><kbd>Ctrl + C</kbd></td>
+      </tr>
+      <tr>
+        <td class="table-command">Paste</td>
+        <td class="table-shortcut"><kbd>Ctrl + V</kbd></td>
+      </tr>
+      <tr>
+        <td class="table-command">Find</td>
+        <td class="table-shortcut"><kbd>Ctrl + F</kbd></td>
+      </tr>
+      <tr>
+        <td class="table-command">Replace</td>
+        <td class="table-shortcut"><kbd>Ctrl + Shift + F</kbd></td>
+      </tr>
+      <tr>
+        <td class="table-command">Toggle Comment</td>
+        <td class="table-shortcut"><kbd>Ctrl + /</kbd></td>
+      </tr>
+      <tr>
+        <td class="table-command">Indent Less</td>
+        <td class="table-shortcut"><kbd>Ctrl + Left-Arrow</kbd></td>
+      </tr>
+      <tr>
+        <td class="table-command">Indent More</td>
+        <td class="table-shortcut"><kbd>Ctrl + Right-Arrow</kbd></td>
+      </tr>
+    </tbody>
+  </table>
   <table id="table-format" class="document-table">
     <h3>Formatting</h3>
     <thead>
@@ -142,18 +192,10 @@ sitemap:
   </table>
   <hr>
 </section>
-<section id="FAQ" class="document-section">
-  <h2>FAQ</h2>
-  <ul class="faq-list">
-    <li class="faq-question">How do I use Hyde?</li>
-    <li class="faq-answer">Using Hyde is simple, to get started you first need to...</li>
-  </ul>
-  <hr>
-</section>
 <section id="changelog" class="document-section">
   <h2>Changelog</h2>
   <div class="version">
-    <div class="version-title"><span>v</span>0.0.1</div>
+    <div id="v0.0.1" class="version-title"><span>v</span>0.0.1</div>
     <hr class="version-rule">
     <ul class="version-changes">
       <li>All features added</li>
@@ -165,3 +207,4 @@ sitemap:
 <section id="contributing" class="document-section">
   <h2>Contributing</h2>
   <p>If you're looking for an easy way to contribute to this project but aren't sure where to start, I've created a list of minor bugs and/or issues to be fixed before the projects initial release, which you can find <a href="https://github.com/JonSn0w/Hyde/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20is%3Ahelpwanted">here</a> or you can just try the app out and provide some <a href="https://github.com/JonSn0w/Hyde/issues/new">feedback</a>. <br>Also, before submitting a pull-request, I would ask that you first take a look at the projects Contributing guidelines.</p>
+</section>
