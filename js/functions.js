@@ -158,7 +158,10 @@ var updateWindowTitle = (path) => {
   }
   document.title = title;
   activeFile.html(filename);
-  activeFile.attr('data-tooltip', path.toString())
+  if(path !== undefined)
+    activeFile.attr('data-tooltip', path.toString());
+  else
+    activeFile.attr('data-tooltip', 'None');
 }
 
 function openModal(opt) {
