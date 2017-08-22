@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="css/fonts/source-code-pro.css">
     <link rel="stylesheet" href="css/dialog.css">
     <link rel="stylesheet" href="css/scrollbar.css">
+    <link rel="stylesheet" href="css/export-pdf.css">
     <script src="js/codemirror/codemirror.js"></script>
     <script src="node_modules/codemirror/mode/markdown/markdown.js"></script>
     <script src="node_modules/codemirror/mode/gfm/gfm.js"></script>
@@ -61,8 +62,9 @@
           <li class="dropdown-divider"></li>
           <li tabindex="-1" href="#" onclick="saveFile();"><a id="dropdownItem">Save</a><span>Ctrl + S</span></li>
           <li tabindex="-1" href="#" onclick="saveFileAs();"><a id="dropdownItem">Save As</a><span>Ctrl + Shift + S</span></li>
-          <li class="dropdown-divider"></li>
           <li tabindex="-1" href="#" onclick="exportToPDF();"><a id="dropdownItem">Export to PDF</a></li>
+          <li class="dropdown-divider"></li>
+          <li tabindex="-1" href="#" onclick="shell.showItemInFolder(currentFile);"><a id="dropdownItem">Show in Explorer</a></li>
           <li class="dropdown-divider"></li>
           <li tabindex="-1" href="#" onclick="toggleSettings();"><a id="dropdownItem">Settings</a><span>Ctrl + ,</span></li>
           <li class="dropdown-divider"></li>

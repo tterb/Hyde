@@ -68,7 +68,7 @@ function getConfig() {
 const createWindow = exports.createWindow = (file) => {
   let newWindow = new BrowserWindow(getConfig());
   windows.add(newWindow)
-  // newWindow.loadURL(mainPage);
+  newWindow.loadURL(mainPage);
   // readFileIntoEditor(file);
   newWindow.once('ready-to-show', () => { newWindow.show(); });
 
@@ -89,13 +89,15 @@ const createWindow = exports.createWindow = (file) => {
   tray.create(newWindow);
 }
 
-ipcMain.on('export-to-pdf', (event, filePath) => {
+ipcMain.on('export-to-pdf', (event, pdfPath) => {
   const win = BrowserWindow.fromWebContents(event.sender);
   // Use default printing options
   win.webContents.printToPDF({pageSize: 'A4'}, (error, data) => {
     if (error) throw error
-    fs.writeFile(filePath, data, (error) => {
-      if (error) { throw error; }
+    fs.writeFile(pdfPath, data, (error) => {
+      if (error) throw error
+      shell.openExternal('file://' + pdfPath)
+      event.sender.send('wrote-pdf', pdfPath)
     })
   })
 });
@@ -123,6 +125,8 @@ var template = [
     {label: "Save", accelerator: "CmdOrCtrl+S", click: () => { sendShortcut('file-save'); }},
     {label: "Save As", accelerator: "CmdOrCtrl+Shift+S", click: () => { sendShortcut('file-save-as'); }},
     {label: "Export to PDF", click: () => { sendShortcut('file-pdf'); }},
+    {type: "separator"},
+    {label: "Show in File Manager", click: () => { ipc.send('open-file-manager') }},
     {type: "separator"},
     {label: "Settings", accelerator: "CmdOrCtrl+,", click: () => { sendShortcut('ctrl+,') }},
     {type: "separator"},
@@ -187,11 +191,11 @@ var template = [
     }},
     {type: "separator"},
     {label: "Documentation", click: () => {
-      shell.openExternal('https://github.com/JonSn0w/Hyde/tree/master/docs');
+      shell.openExternal('https://JonSn0w.github.io/Hyde/documentation');
     }},
     {label: "Keybindings", click: () => {
-      sendShortcut('keybinding-modal');
-      // shell.openExternal(mod.repository.keys);
+      // sendShortcut('keybinding-modal');
+      shell.openExternal('https://JonSn0w.github.io/Hyde/documentation#keybindings');
     }},
     {label: "Report Issue", click: () => {
       shell.openExternal('https://github.com/JonSn0w/Hyde/issues/new');
@@ -220,6 +224,8 @@ if (process.platform === 'darwin') {
       {role: 'quit'}
     ]
   })
+  template[1].submenu[7] = {label: "Show in Finder", click: () => { sendShortcut('open-file-manager') }};
+
   template[3].submenu.splice(2,1);
   // Add syntax-themes to menu
   template[3].submenu[7].submenu = getThemes();
@@ -231,6 +237,7 @@ if (process.platform === 'darwin') {
     {role: 'front'}
   ]
 } else {
+  template[0].submenu[7] = {label: "Show in Explorer", click: () => { sendShortcut('open-file-manager') }};
   template[2].submenu[7].submenu = getThemes();
 }
 
