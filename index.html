@@ -277,6 +277,10 @@
         <div id="app-section" class="settings-section">
           <h3 style="margin-bottom:10px;">App</h3>
           <ul id="options">
+            <li id="frontMatterTemplate" class="form-group">
+              <label for="yamlPath">Frontmatter Template:</label>
+              <input type="text" id="yamlPath" class="form-control" value="">
+            </li>
             <li id="showTooltips" data-tooltip="Show helpful tooltips like this!" class="toggle"><input type="checkbox"
              value=""><span></span><span>Show UI-tooltips</span></li>
              <li id="keepInTray" class="toggle" data-tooltip="Allow app to stay active in tray on close"><input type="checkbox"
@@ -285,7 +289,7 @@
         </div>
       </section>
       <div class="trigger left" id="settings-trigger">
-        <div id="side-button" onclick="toggleSidebar()" style="visibility:hidden;">
+        <div id="side-button" onclick="toggleSettings()" style="visibility:hidden;">
           <i id="side-icon" class="fa fa-chevron-left"></i>
         </div>
       </div>
