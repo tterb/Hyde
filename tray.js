@@ -2,7 +2,7 @@
 const path = require('path');
 const electron = require('electron');
 const app = electron.app;
-const iconPath = path.join(__dirname, 'img/icon/png/48x48.png');
+var iconPath = path.join(__dirname, 'img/icon/png/48x48.png');
 let tray = null;
 
 exports.create = function(mainWindow) {
