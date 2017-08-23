@@ -31,6 +31,7 @@ module.exports = new Config ({
     hideYAMLFrontMatter: true,
     // Other
     showTooltips: true,
-    keepInTray: false
+    keepInTray: false,
+    frontMatterTemplate: ""
   }
 });
