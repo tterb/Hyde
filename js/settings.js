@@ -15,7 +15,7 @@ var opt = [
   { name: 'isFullscreen', action: () => { toggleFullscreen(); }},
   { name: 'lineNumbers', action: () => { toggleLineNumbers(); }},
   { name: 'showTrailingSpace', action: () => { toggleWhitespace() }},
-  { name: 'lineWrapping' }, { name: 'editorFont' }, { name: 'editorFontSize' }, { name: 'editorLineHeight' }, { name: 'tabSize' }, { name: 'enableSpellCheck' }, { name: 'previewMode' }, { name: 'previewFont' }, { name: 'previewFontSize' }, { name: 'previewLineHeight' }, { name: 'hideYAMLFrontMatter' }, { name: 'matchBrackets' }, { name: 'keepInTray' }
+  { name: 'lineWrapping' }, { name: 'editorFont' }, { name: 'editorFontSize' }, { name: 'editorLineHeight' }, { name: 'tabSize' }, { name: 'enableSpellCheck' }, { name: 'previewMode' }, { name: 'previewFont' }, { name: 'previewFontSize' }, { name: 'previewLineHeight' }, { name: 'hideYAMLFrontMatter' }, { name: 'matchBrackets' }, { name: 'keepInTray' }, { name: 'frontMatterTemplate' }
 ];
 
 function getUserSettings() {
@@ -35,30 +35,31 @@ function getUserSettings() {
 
 // If there are no settings for option, sets default
 function checkSetting(opt) {
-    if(!settings.has(opt.name)) {
-        settings.set(opt.name, config.get(opt.name));
-    }
+  if(!settings.has(opt.name))
+    settings.set(opt.name, config.get(opt.name));
 }
 
-var set = [];
 function applySettings(opt) {
   var selector = $('#'+opt.name.toString()),
-      checkbox = selector.find('input');
+      input = selector.find('input'),
+      type = input.attr('type');
   if(settings.get(opt.name) && opt.action)
-      opt.action();
-  if(selector.length && checkbox.length) {
-    if(checkbox.is(':checked') !== settings.get(opt.name)) {
-      checkbox.prop("checked", !checkbox.prop("checked"));
+    opt.action();
+  if(type === 'checkbox') {
+    if(selector.length && input.length) {
+      if(input.is(':checked') !== settings.get(opt.name))
+        input.prop("checked", !input.prop("checked"));
     }
+  } else if(type === 'text') {
+    input.val(settings.get(opt.name));
   }
 }
 
 function syncScrollCheck() {
-  if(settings.get('syncScroll')) {
-      syncScroll.attr('class', 'fa fa-link');
-  } else {
-      syncScroll.attr('class', 'fa fa-unlink');
-  }
+  if(settings.get('syncScroll'))
+    syncScroll.attr('class', 'fa fa-link');
+  else
+    syncScroll.attr('class', 'fa fa-unlink');
   toggleSyncScroll;
 }
 
@@ -66,6 +67,10 @@ var formatHead = () => {
   var dragArea = $('#draggable'),
       menuToggle = $('#menuToggle'),
       codeMirror = $('#textPanel > div');
+  if(process.platfrom === 'darwin') {
+    if(menu.is(':visible') !== toolbar.is(':visible'))
+      toggleMenu();
+  }
   if(menu.is(':visible')) {
     toolbar.css({ top: '26px' });
     toolbar.css('z-index', '999');
@@ -87,7 +92,6 @@ var formatHead = () => {
       dragArea.css('width', '-webkit-calc(50% - 50px)');
       codeMirror.css('paddingTop', '7px');
     } else {
-      // if(process.platform !== 'darwin')
       menuToggle.show();
       body.css('paddingTop', '0px');
       dragArea.css({ 'width': 'calc(100% - 117px)' });
@@ -169,7 +173,7 @@ function togglePreview() {
 
 function setPreviewMode(opt) {
   var markdown = $('#markdown'),
-      html = $('#htmlPreview');
+      html = $('#htmlPreview'),
       htmlText = "";
   if(markdown.is(':visible') && opt !== 'markdown') {
     markdown.hide();
@@ -250,12 +254,14 @@ $('#previewFont-input, #previewFont-up, #previewFont-down').bind('keyup mouseup'
 
 $('.settings-toggle').change(() => {
   opt.forEach((temp) => {
-    if(temp.name === $('.settings-toggle').attr('setting'))
-      if (temp.action)
+    if(temp.name === $('.settings-toggle').attr('setting')) {
+      if (temp.action) {
         temp.action();
-      else
+      } else {
         var name = $('.settings-toggle').attr('setting');
         settings.set(name, !settings.get(name));
         settings.set($('.settings-toggle').attr('setting'))
+      }
+    }
   });
 });
