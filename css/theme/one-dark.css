@@ -41,7 +41,7 @@
 .cm-s-one-dark .cm-variable { color: hsl(95, 38%, 62%); }
 .cm-s-one-dark .cm-variable-2 { color: #hsl(220, 14%, 71%); }
 .cm-s-one-dark .cm-variable-3 { color: #hsl(220, 14%, 71%); }
-.cm-s-one-dark .cm-link { color: hsl(180, 49%, 60%); }
+.cm-s-one-dark .cm-link { color: hsl(180, 49%, 60%); text-decoration: none; }
 .cm-s-one-dark .cm-tag { color: hsl(355, 65%, 65%); }
 .cm-s-one-dark .cm-bracket { color: hsl(220, 14%, 71%) !important; }
 .cm-s-one-dark .cm-url { color: hsl(95, 38%, 62%); }
