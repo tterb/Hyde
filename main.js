@@ -28,7 +28,8 @@ const keepInTray = settings.get('keepInTray');
 const fs = require('fs');
 const path = require('path');
 const mainPage = (`file://${__dirname}/index.html`);
-const {Menu, MenuItem, ipcMain} = require('electron');
+const {Menu, MenuItem} = require('electron');
+const ipc = electron.ipcMain;
 const dialog = require('electron').dialog;
 const shell = require('electron').shell;
 const localShortcut = require('electron-localshortcut');
@@ -81,7 +82,7 @@ const createWindow = exports.createWindow = (file) => {
     newWindow = null
   });
 
-  //Open anchor links in browser
+  // Open anchor links in browser
   newWindow.webContents.on('will-navigate', function(e, url) {
     e.preventDefault();
     shell.openExternal(url);
@@ -89,7 +90,7 @@ const createWindow = exports.createWindow = (file) => {
   tray.create(newWindow);
 }
 
-ipcMain.on('export-to-pdf', (event, pdfPath) => {
+ipc.on('export-to-pdf', (event, pdfPath) => {
   const win = BrowserWindow.fromWebContents(event.sender);
   // Use default printing options
   win.webContents.printToPDF({pageSize: 'A4'}, (error, data) => {
@@ -329,4 +330,29 @@ app.on('ready', function() {
     windowState.saveState(mainWindow)
     isQuitting = true;
   });
+});
+
+const contextMenu = new Menu();
+contextMenu.append(new MenuItem({role: 'undo'}))
+contextMenu.append(new MenuItem({role: 'redo'}))
+contextMenu.append(new MenuItem({type: 'separator'}))
+contextMenu.append(new MenuItem({label: "Cut", role: "cut"}))
+contextMenu.append(new MenuItem({label: "Copy", role: "copy"}))
+contextMenu.append(new MenuItem({label: "Paste", role: "paste"}))
+contextMenu.append(new MenuItem({label: "Select All", click: () => {sendShortcut('ctrl+a');}}))
+contextMenu.append(new MenuItem({type: 'separator'}))
+contextMenu.append(new MenuItem({label: 'Show in File Manager', click: () => { sendShortcut('open-file-manager');}}))
+contextMenu.append(new MenuItem({type: 'separator'}))
+contextMenu.append(new MenuItem({role: 'toggledevtools'}))
+
+
+app.on('browser-window-created', function (event, win) {
+  win.webContents.on('context-menu', function (e, params) {
+    contextMenu.popup(win, params.x, params.y);
+  });
+});
+
+ipc.on('show-context-menu', function (event) {
+  const win = BrowserWindow.fromWebContents(event.sender);
+  contextMenu.popup(win);
 });

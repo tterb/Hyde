@@ -103,8 +103,8 @@ ipc.on('file-open', () => {
 });
 
 ipc.on('ctrl+q', () => { closeWindow(remote.BrowserWindow.getFocusedWindow()); });
-ipc.on('ctrl+b', () => { toggleFormat('bold'); });
-ipc.on('ctrl+i', () => { toggleFormat('italic'); });
+ipc.on('ctrl+b', () => { toggleFormat('strong'); });
+ipc.on('ctrl+i', () => { toggleFormat('em'); });
 ipc.on('ctrl+-', () => { toggleFormat('strikethrough'); });
 ipc.on('ctrl+/', () => { toggleComment(); });
 ipc.on('ctrl+h', () => { toggleHeading(); });
@@ -129,15 +129,21 @@ ipc.on('file-pdf', () => {
   // Only save PDF files
   options = {
     filters: [
-      {name: 'PDF', extensions: ['pdf']}
+      { name: 'PDF', extensions: ['pdf'] }
     ]
   };
-  dialog.showSaveDialog(options, (fileName) => {
-    ipc.send('export-to-pdf', fileName);
+  dialog.showSaveDialog(options, (filePath) => {
+    ipc.send('export-to-pdf', filePath);
   });
 });
 ipc.on('insert-yaml', () => { insertFrontMatter(); });
 ipc.on('about-modal', () => { $('#about-modal').modal() });
 ipc.on('markdown-modal', () => { $('#markdown-modal').modal() });
 ipc.on('keybinding-modal', () => { $('#keybinding-modal').modal() });
+ipc.on('open-file-manager', () => { shell.showItemInFolder(currentFile); })
 ipc.on('theme', () => { includeTheme(this); })
+
+const contextMenuBtn = document.getElementById('context-menu')
+contextMenuBtn.addEventListener('click', function () {
+  ipc.send('show-context-menu')
+})

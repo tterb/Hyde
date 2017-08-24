@@ -15,7 +15,7 @@ const path = require('path');
 const parsePath = require("parse-filepath");
 const settings = require('electron-settings');
 const storage = require('electron-json-storage');
-const CMSpellChecker = require('codemirror-spell-checker');
+const spellChecker = require('codemirror-spell-checker');
 var console = require('console');
 var os = require("os");
 require('showdown-youtube');
@@ -27,24 +27,9 @@ var isFileLoadedInitially = false,
     currentFile = '';
 
 // Allows render process to create new windows
-function openNewWindow(file) {
+function openNewWindow() {
   main.createWindow();
 }
-
-// `remote.require` since `Menu` is a main-process module.
-var buildEditorContextMenu = remote.require('electron-editor-context-menu');
-
-window.addEventListener('contextmenu', (e) => {
-  // Only show the context menu in text editors.
-  if (!e.target.closest('textarea, input, [contenteditable="true"],section')) return;
-
-  var menu = buildEditorContextMenu();
-  // The 'contextmenu' event is emitted after 'selectionchange' has fired but
-  // possibly before the visible selection has changed. Try to wait to show the
-  // menu until after that, otherwise the visible selection will update after
-  // the menu dismisses and look weird.
-  setTimeout(function() { menu.popup(remote.getCurrentWindow()); }, 30);
-});
 
 getUserSettings();
 
@@ -75,17 +60,17 @@ includeTheme(theme);
 if(settings.get('enableSpellCheck')) {
     conf.mode = "spell-checker";
     conf.backdrop = "yaml-frontmatter";
-    CMSpellChecker({ codeMirrorInstance: CodeMirror });
+    spellChecker({ codeMirrorInstance: CodeMirror });
 }
 
 var cm = CodeMirror.fromTextArea(document.getElementById("plainText"), conf);
 
-if(os.type() === 'Linux') {
-    $('.CodeMirror').css('font-size', '0.9em');
-    $('.CodeMirror pre').css('line-height', '1.3');
-    $('#dropdownItem').css('font-size', '12px');
-    $('#dropdownMenuButton').css('font-size', '12px');
-    $('.bottom-bar > div').css('font-size', '12px');
+if(os.type() === 'Darwin') {
+  $('#settings-title').css('paddingTop', '0.9em');
+  $('#settings-title > img').css('marginTop', '-13px');
+  $('#settings-title > h2').css('font-size', '3.175em');
+  $('#settings-section h3').css('letter-spacing', '0.045em');
+  $('#settings-section ul li').css('letter-spacing', '0.075em');
 }
 
 function includeTheme(theme) {
