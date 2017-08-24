@@ -720,12 +720,17 @@ input[type="checkbox"] {
         line-height: 2.1;
         .btn-group {
           position: absolute;
+          font-size: 16px;
           left: 41.5%;
           max-width: 50%;
+          padding-top: 4px;
+          .filter-option {
+            font-size: 13px;
+          }
           .btn.btn-default {
             background: -webkit-linear-gradient(bottom, #31302f, #403f3e);
             color: rgba(255,255,255,0.75);
-            top: 4px;
+            top: 3px;
             letter-spacing: 0.04em;
             border: 1px outset #404243;
             box-shadow: 0.5px 0.25px 0px rgba(0,0,0,0.2);
@@ -759,15 +764,18 @@ input[type="checkbox"] {
         border: 1px inset #3A3A3A;
         border-radius: 12px;
         padding: 4px 10px;
+        margin-bottom: 6px;
       }
     }
   }
   .dropdown-menu {
     background: #2f2d2e;
     color: rgba(255,255,255,0.6);
-    top: 28px;
+    top: 31px;
     border: 1px outset #3e3c3d;
     padding: 0;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.3);
+    z-index: -9;
     ul {
       padding-left: 0;
       li {
@@ -859,7 +867,10 @@ input[type="checkbox"] {
     position: relative;
     left: -15px;
     input[type="checkbox"] {
-      margin-top: 0;
+      height: 20px;
+      width: auto;
+      margin: 4px 5px -9px -10px;
+      cursor: pointer;
     }
     input[type="checkbox"] + span {
       margin: 1.5px 10px 5px 0;
@@ -1506,7 +1517,7 @@ code {
     line-height: 1.45;
     border-bottom: 1px solid #e1e3ea;
     margin-top: 22px;
-    margin-bottom: 27px;
+    margin-bottom: 25px;
   }
   h2 {
     color: #333;
