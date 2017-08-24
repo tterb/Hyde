@@ -109,11 +109,12 @@ label {
     top: -23px;
     transition: top 900ms cubic-bezier(0.17, 0.04, 0.03, 0.75); }
   #appMenu .btn-group {
+    font-size: 11px;
     top: 1px;
     height: 100%; }
     #appMenu .btn-group:first-child {
       margin-left: 6px; }
-    #appMenu .btn-group #dropdown-menu-button {
+    #appMenu .btn-group .dropdown-toggle {
       display: inline-block;
       background: transparent;
       color: rgba(255, 255, 255, 0.4);
@@ -126,10 +127,10 @@ label {
       border-left: 1px outset #37393d;
       border-right: 1px outset #494b50;
       padding: 3px 0 2px; }
-      #appMenu .btn-group #dropdown-menu-button:hover {
+      #appMenu .btn-group .dropdown-toggle:hover {
         background: transparent;
         color: rgba(255, 255, 255, 0.75); }
-    #appMenu .btn-group.open #dropdown-menu-button {
+    #appMenu .btn-group.open .dropdown-toggle {
       background: #313031;
       color: rgba(255, 255, 255, 0.75);
       border-top: 1px inset #434443;
@@ -1275,7 +1276,7 @@ code {
   #markdown hr {
     border-top: 1px solid #ddd; }
   #markdown p {
-    font-size: 2.2vh;
+    font-size: 2.25vh;
     line-height: 1.5;
     margin: 0 0 16px !important; }
   #markdown pre {
@@ -1367,3 +1368,25 @@ code {
 
 .fa-eye-slash {
   color: #666564; }
+
+@media screen and (max-device-width: 2750px) {
+  .CodeMirror pre {
+    font-size: 0.95em !important; }
+
+  .dropdown-toggle, .dropdown-menu, .dropdown-item,
+  .bottom-bar > div {
+    font-size: 10.5px !important; } }
+@media screen and (max-device-width: 2000px) {
+  .CodeMirror pre {
+    font-size: 1em !important; }
+
+  .dropdown-toggle, .dropdown-menu, .dropdown-item,
+  .bottom-bar > div {
+    font-size: 11px !important; } }
+@media screen and (max-device-width: 1400px) {
+  .CodeMirror pre {
+    font-size: 1.05em !important; }
+
+  .dropdown-toggle, .dropdown-menu, .dropdown-item,
+  .bottom-bar > div {
+    font-size: 12px !important; } }
