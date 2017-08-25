@@ -108,7 +108,7 @@ ipc.on('ctrl+-', () => { toggleFormat('strikethrough'); });
 ipc.on('ctrl+/', () => { toggleComment(); });
 ipc.on('ctrl+h', () => { toggleHeading(); });
 ipc.on('ctrl+l', () => { insert('link'); });
-ipc.on('ctrl+alt+i', () => { insert('image'); });
+ipc.on('ctrl+k', () => { insert('image'); });
 ipc.on('ctrl+shift+t', () => { insert('table'); });
 ipc.on('ctrl+shift+-', () => { insert('hr'); });
 ipc.on('ctrl+f', () => { toggleSearch('find'); });
@@ -117,13 +117,13 @@ ipc.on('ctrl+a', () => { cm.execCommand('selectAll') });
 ipc.on('ctrl+shift+a', () => { cm.execCommand('indentAuto'); });
 ipc.on('ctrl+left', () => { cm.execCommand('indentLess'); });
 ipc.on('ctrl+right', () => { cm.execCommand('indentMore'); });
+ipc.on('ctrl+up', () => { cm.execCommand('goDocStart'); });
+ipc.on('ctrl+down', () => { cm.execCommand('goDocEnd'); });
 ipc.on('ctrl+r', () => { reloadWin(); });
 ipc.on('ctrl+m', () => { if(process.platform !== 'darwin') toggleMenu(); });
 ipc.on('ctrl+.', () => { toggleToolbar(); });
 ipc.on('ctrl+p', () => { togglePreview(); });
 ipc.on('ctrl+,', () => { toggleSettings(); });
-ipc.on('ctrl+up', () => { cm.execCommand('goDocStart'); });
-ipc.on('ctrl+down', () => { cm.execCommand('goDocEnd'); });
 ipc.on('file-pdf', () => {
   // Only save PDF files
   options = {
