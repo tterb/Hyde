@@ -1,28 +1,26 @@
-yaml = require('js-yaml');
 
 var insertTexts = {
   link: ["[", "](#url#)"],
   image: ["![", "](#url#)"],
-  table: ["", "\n| Column 1 | Column 2 | Column 3 |\n| -------- | -------- | -------- |\n| Text     | Text     | Text     |\n"],
+  table: ["", "| Column 1 | Column 2 | Column 3 |\n| -------- | -------- | -------- |\n| Text     | Text     | Text     |\n"],
   horizontalRule: ["", "\n-------------------\n"]
 };
 
 function toggleFormat(type) {
   'use strict';
-  let modifiers = [];
-  if(type === "bold") {
-    modifiers = ["**"];
-  } else if(type === "italic") {
-    modifiers = ["*"];
+  let modifiers;
+  if(type === "strong") {
+    modifiers = ["**", "__"];
+  } else if(type === "em") {
+    modifiers = ["*", "_"];
   } else if(type === "strikethrough") {
     modifiers = ["~~"];
   } else if(type === "code") {
     modifiers = ["`"];
-  } else if(type === "comment") {
-    modifiers = ["<!-- ", " -->"];
   }
   cm.operation(() => { _toggleFormat(modifiers); })
 }
+
 
 function _toggleFormat(modifiers) {
   'use strict';
@@ -31,38 +29,40 @@ function _toggleFormat(modifiers) {
   let allModifiers = ["*", "_", '**', "__", "~~", "`"];
   let startPoint = cm.getCursor("start");
   let endPoint = cm.getCursor("end");
-  // get containing word if no selection
-  if(startPoint.ch === endPoint.ch) {
-    var word = cm.findWordAt(cm.getCursor())
+  // get containing word if there's no selection
+  if(!cm.somethingSelected()) {
+    var word = cm.findWordAt(cm.getCursor());
     startPoint = word.anchor;
     endPoint = word.head;
-  }
-  for (let bFound = true; bFound; ) {
-    bFound = false;
-    for (let i = 0, len = allModifiers.length; i < len; i++) {
-      let modi = allModifiers[i];
-      if (cm.getSelection().startsWith(modi) && cm.getSelection().endsWith(modi)
-        && endPoint.ch - startPoint.ch >= 2 * modi.length) {
-        bFound = true;
-        startPoint.ch += modi.length;
-        endPoint.ch -= modi.length;
-        break;
+    cm.setSelection(startPoint, endPoint);
+  } else {
+    for (let bFound = true; bFound; ) {
+      bFound = false;
+      for (let i = 0, len = allModifiers.length; i < len; i++) {
+        let modi = allModifiers[i];
+        if (cm.getSelection().startsWith(modi) &&
+          cm.getSelection().endsWith(modi) &&
+          endPoint.ch - startPoint.ch >= 2 * modi.length) {
+          bFound = true;
+          startPoint.ch += modi.length;
+          endPoint.ch -= modi.length;
+          break;
+        }
       }
     }
+    cm.setSelection(startPoint, endPoint);
   }
-  cm.setSelection(startPoint, endPoint);
 
   // find modifiers around selection
   let foundModifiers = [];
   let modifierWidth = 0;
   let rangeStart = new CodeMirror.Pos(startPoint.line, startPoint.ch);
   let rangeEnd = new CodeMirror.Pos(endPoint.line, endPoint.ch);
-  let lineLength = cm.getLine(rangeEnd.line).length;
   for (let bFound = true; bFound; ) {
     bFound = false;
     for (let i = 0, len = allModifiers.length; i < len; i++) {
       let modi = allModifiers[i];
-      if (rangeStart.ch < modi.length || rangeEnd.ch > lineLength - modi.length) {
+      if (rangeStart.ch < modi.length || rangeEnd.ch > cm.getLine(rangeEnd.line).length - modi.length) {
         continue;
       }
       rangeStart.ch -= modi.length;
@@ -82,7 +82,7 @@ function _toggleFormat(modifiers) {
   let modifierIndex = -1;
   for (let i = 0; i < modifiers.length; i++) {
     modifierIndex = foundModifiers.indexOf(modifiers[i]);
-    if (modifierIndex !== -1) { break; }
+    if (modifierIndex !== -1) break;
   }
 
   // if modifier found, delete it from array(boundModifiers). or push it to array
@@ -114,7 +114,6 @@ function getState(cm, pos) {
   pos = pos || cm.getCursor("start");
   var stat = cm.getTokenAt(pos);
   if(!stat.type) return {};
-
   var types = stat.type.split(" ");
   var ret = {}, data, text;
   for(var i = 0; i < types.length; i++) {
@@ -277,12 +276,40 @@ function _replaceSelection(cm, active, startEnd, url) {
   cm.focus();
 }
 
+var temp = "";
+
+function setFrontMatterTemplate() {
+  storage.get('markdown-savefile', (error, data) => {
+    if (error) alert(error);
+    var options = {
+      'properties': ['openFile'],
+      'filters': [
+        { name: 'All', 'extensions': ["yaml", "yml", "md", "markdown", "txt", "text"] },
+        { name: 'YAML', 'extensions': ["yaml", "yml"] },
+        { name: 'Markdown', 'extensions': ["md", "markdown"] },
+        { name: 'Text', 'extensions': [ "txt", "text"] }
+      ]
+    };
+    dialog.showOpenDialog(options, (file) => {
+      if (file === undefined)
+        return alert("You didn't select a file");
+      fs.readFile(file[0], 'utf-8', (err, data) => {
+        if (err)
+          alert("An error ocurred while opening the file "+err.message);
+        settings.set('frontMatterTemplate', file[0]);
+      });
+    });
+  });
+}
+
 // Inserts YAML-frontmatter from template file
 function insertFrontMatter() {
-  var path = config.get('frontMatterTemplate'),
+  var path = settings.get('frontMatterTemplate'),
       extensions = ["yaml", "yml", "md", "markdown", "txt", "text"];
-  if(path.length < 1)
+  if(path.length < 1) {
+    setFrontMatterTemplate();
     return alert("There is no specified frontmatter template");
+  }
   if(!extensions.includes(path.split('.').pop()))
     return alert("Invalid specified template file");
   fs.readFile(path, 'utf8', function (err, data) {
