@@ -89,8 +89,7 @@ ipc.on('file-open', () => {
       storage.set('markdown-savefile', {
         'filename' : file[0]}, (error) => { if (error) alert(error); });
 
-        // var mdValue = cm.getValue();
-        // fileName is a string that contains the path and filename created in the save file dialog.
+      // file is a string that contains the path and filename created in the save file dialog.
       fs.readFile(file[0], 'utf-8', (err, data) => {
         if (err) { alert("An error ocurred while opening the file "+ err.message); }
         cm.getDoc().setValue(data);
@@ -142,8 +141,3 @@ ipc.on('markdown-modal', () => { $('#markdown-modal').modal() });
 ipc.on('keybinding-modal', () => { $('#keybinding-modal').modal() });
 ipc.on('open-file-manager', () => { shell.showItemInFolder(currentFile); })
 ipc.on('theme', () => { includeTheme(this); })
-
-const contextMenuBtn = document.getElementById('context-menu')
-contextMenuBtn.addEventListener('click', function () {
-  ipc.send('show-context-menu')
-})
