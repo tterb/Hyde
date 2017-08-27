@@ -31,13 +31,13 @@
 
 .cm-s-oceanic .cm-header { color: #E47D80; }
 .cm-s-oceanic .cm-tag { color: #E47D80; }
-.cm-s-oceanic .cm-link { color: #8AD6F2; }
+.cm-s-oceanic .cm-link { color: #8AD6F2; text-decoration: none; }
 .cm-s-oceanic .cm-url { color: #BAE682; }
 .cm-s-oceanic .cm-hr{ color: rgba(255,255,255,0.2); }
 .cm-s-oceanic .cm-em { color: #FFD2A6 }
 .cm-s-oceanic .cm-strong { color: #F2AAEC; }
 .cm-s-oceanic .cm-em.cm-strong { color: #FFB266; }
 
-#leftFade {
+/*#leftFade {
   background: -webkit-linear-gradient(top, #1B2630 35%, transparent);
-}
+}*/

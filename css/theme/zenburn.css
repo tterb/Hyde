@@ -11,7 +11,7 @@
 .cm-s-zenburn .CodeMirror-gutters { background: #393939 !important; }
 .cm-s-zenburn .CodeMirror-foldgutter-open, .CodeMirror-foldgutter-folded { color: #999; }
 .cm-s-zenburn .CodeMirror-cursor { border-left: 2px solid white; }
-.cm-s-zenburn { background-color: #3f3f3f; color: #dcdccc; }
+.cm-s-zenburn { background-color: #3a3a3a; color: #dcdccc; }
 .cm-s-zenburn span.cm-builtin { color: #dcdccc; font-weight: bold; }
 .cm-s-zenburn span.cm-comment { color: #7FA97E; }
 .cm-s-zenburn span.cm-keyword { color: #f0dfaf; font-weight: bold; }
@@ -29,6 +29,7 @@
 .cm-s-zenburn span.cm-meta { color: #f0dfaf; }
 .cm-s-zenburn span.cm-header { color: #f0efd0; }
 .cm-s-zenburn span.cm-operator { color: #f0efd0; }
+.cm-s-zenburn span.cm-em { text-decoration: none; }
 .cm-s-zenburn span.cm-em { color: #dfaf8f; }
 .cm-s-zenburn span.cm-strong { color: #93e0e3; }
 .cm-s-zenburn span.CodeMirror-matchingbracket { box-sizing: border-box; background: transparent; border-bottom: 1px solid; }
@@ -38,6 +39,6 @@
 .cm-s-zenburn div.CodeMirror-selected { background: #545454; }
 .cm-s-zenburn .CodeMirror-focused div.CodeMirror-selected { background: #4f4f4f; }
 
-#leftFade {
+/*#leftFade {
   background: -webkit-linear-gradient(top, #393939 35%, transparent);
-}
+}*/

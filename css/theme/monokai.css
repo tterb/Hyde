@@ -31,7 +31,7 @@
 .cm-s-monokai span.cm-atom { color: #FD971F; }
 .cm-s-monokai span.cm-tag { color: #F92672; }
 .cm-s-monokai span.cm-header { color: #F92672; }
-.cm-s-monokai span.cm-link { color: #66D9EF; }
+.cm-s-monokai span.cm-link { color: #66D9EF; text-decoration: none;}
 .cm-s-monokai span.cm-url { color: #A6E22E; }
 .cm-s-monokai span.cm-hr { color: #FD971F; }
 .cm-s-monokai span.cm-error { background: #FD2632; color: #F8F8F0; }
@@ -40,6 +40,6 @@
 .cm-s-monokai span.cm-em.cm-strong { color: #FD971F; }
 .cm-s-one-dark .CodeMirror-matchingbracket { color: white !important; text-decoration: underline; }
 
-#leftFade {
+/*#leftFade {
   background: -webkit-linear-gradient(top, #272822 35%, transparent);
-}
+}*/

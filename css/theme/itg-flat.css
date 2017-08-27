@@ -41,7 +41,7 @@
 
 .cm-s-itg-flat .cm-header { color: #FF4D42; }
 .cm-s-itg-flat .cm-tag { color: #DB5149; }
-.cm-s-itg-flat .cm-link { color: #5CE9C0; }
+.cm-s-itg-flat .cm-link { color: #5CE9C0; text-decoration: none; }
 .cm-s-itg-flat .cm-url { color: #A7E73D; }
 .cm-s-itg-flat .cm-hr{ color: rgba(255,255,255,0.2); }
 .cm-s-itg-flat .cm-em { color: #EACF5A }
@@ -49,6 +49,6 @@
 .cm-s-itg-flat .cm-em.cm-strong { color: #F2AAEC; }
 .cm-s-itg-flat .cm-builtin { color: #F2AAEC; }
 
-#leftFade {
+/*#leftFade {
   background: -webkit-linear-gradient(top, #272A33 35%, transparent);
-}
+}*/

@@ -31,7 +31,7 @@
 .cm-s-tomorrow-night-eighties span.cm-def { color: #f99157; }
 .cm-s-tomorrow-night-eighties span.cm-bracket { color: #CCCCCC; }
 .cm-s-tomorrow-night-eighties span.cm-tag { color: #f27c7b; }
-.cm-s-tomorrow-night-eighties span.cm-link { color: #d6acd6; }
+.cm-s-tomorrow-night-eighties span.cm-link { color: #d6acd6; text-decoration: none; }
 .cm-s-tomorrow-night-eighties span.cm-header { color: #f27c7b; }
 .cm-s-tomorrow-night-eighties span.cm-em { color: #d6acd6; }
 .cm-s-tomorrow-night-eighties span.cm-strong { color: #76aaaf; }
@@ -40,6 +40,6 @@
 .cm-s-tomorrow-night-eighties .CodeMirror-activeline-background { background: #343600; }
 .cm-s-tomorrow-night-eighties .CodeMirror-matchingbracket { text-decoration: underline; color: white !important; }
 
-#leftFade {
+/*#leftFade {
   background: -webkit-linear-gradient(top, #353535 35%, transparent);
-}
+}*/

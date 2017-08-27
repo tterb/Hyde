@@ -30,8 +30,9 @@
   background: rgba(155,157,162,0.37);
   z-index: 1;
 }
+.cm-s-neo .cm-link { text-decoration: none; }
 
-#leftFade {
+/*#leftFade {
   background: -webkit-linear-gradient(top, #f2f2f2 35%, transparent);
-}
+}*/
 #previewPanel { box-shadow: -4px 0 10px rgba(0,0,0,0.15); }

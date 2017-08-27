@@ -16,7 +16,7 @@
 .cm-s-eclipse span.cm-bracket { color: #cc7; }
 .cm-s-eclipse span.cm-tag { color: #170; }
 .cm-s-eclipse span.cm-attribute { color: #00c; }
-.cm-s-eclipse span.cm-link { color: #219; }
+.cm-s-eclipse span.cm-link { color: #219; text-decoration: none;}
 .cm-s-eclipse span.cm-error { color: #f00; }
 
 .cm-s-eclipse .CodeMirror-activeline-background { background: #e8f2ff; }
@@ -25,3 +25,4 @@
 /*#leftFade {
   background: -webkit-linear-gradient(top, #322931 35%, transparent);
 }*/
+#previewPanel { box-shadow: -4px 0 12px rgba(0,0,0,0.075); }

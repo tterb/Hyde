@@ -42,7 +42,7 @@
 .cm-s-yeti .CodeMirror-activeline-background { background: #E7E4E0; }
 .cm-s-yeti .CodeMirror-matchingbracket { text-decoration: underline; }
 
-#leftFade {
+/*#leftFade {
   background: -webkit-linear-gradient(top, #ECEAE8 35%, transparent);
-}
+}*/
 #previewPanel { box-shadow: -4px 0 12px rgba(0,0,0,0.075); }

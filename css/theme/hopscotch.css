@@ -8,7 +8,7 @@
 
 */
 
-.cm-s-hopscotch.CodeMirror {background: #322931; color: rgba(255,255,255,0.65);}
+.cm-s-hopscotch.CodeMirror {background: #2e252d; color: rgba(255,255,255,0.65);}
 .cm-s-hopscotch div.CodeMirror-selected {background: #433b42 !important;}
 .cm-s-hopscotch .CodeMirror-gutters {background: #322931; border-right: 0px;}
 .cm-s-hopscotch .CodeMirror-linenumber {color: #797379;}
@@ -25,7 +25,7 @@
 .cm-s-hopscotch span.cm-error {background: #ed3636; color: #989498;}
 .cm-s-hopscotch span.cm-bracket {color: #d5d3d5;}
 .cm-s-hopscotch span.cm-tag {color: #ed3636;}
-.cm-s-hopscotch span.cm-link {color: #c86d8c;}
+.cm-s-hopscotch span.cm-link {color: #c86d8c; text-decoration: none;}
 .cm-s-hopscotch .CodeMirror-matchingbracket { text-decoration: underline; color: white !important;}
 .cm-s-hopscotch .CodeMirror-activeline-background { background: #302020; }
 
@@ -35,6 +35,6 @@
 .cm-s-hopscotch span.cm-em.cm-strong {color: #8fca3e;}
 .cm-s-hopscotch span.cm-builtin {color: #8fca3e;}
 
-#leftFade {
+/*#leftFade {
   background: -webkit-linear-gradient(top, #322931 35%, transparent);
-}
+}*/
