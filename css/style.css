@@ -32,7 +32,7 @@ label {
 
 #draggable {
   position: absolute;
-  height: 33px;
+  height: 26px;
   width: -webkit-calc(100% - 125px);
   top: 0;
   right: 80px;
@@ -93,21 +93,26 @@ label {
 
 #appMenu {
   position: fixed;
-  background-image: -webkit-linear-gradient(top, #303030, #262524);
+  background-image: -webkit-linear-gradient(top, #2f2f2f 1%, #2b2b2b 25%, #222120, #161514);
   color: rgba(255, 255, 255, 0.75) !important;
   font-size: 11px;
   width: 100%;
-  height: 0;
+  height: 27px;
   top: 0;
   left: 0;
-  transition: top 900ms cubic-bezier(0.17, 0.04, 0.03, 0.75);
+  border: 1px outset #2b2d30;
+  border-bottom: 2px solid #212121;
+  box-shadow: 0 1px 20px rgba(0, 0, 0, 0.3);
+  transition-delay: 3s;
+  transition: top 5000ms ease;
   z-index: 9999; }
   #appMenu :focus, #appMenu :active:focus, #appMenu .active:focus,
   #appMenu .focus, #appMenu :active.focus, #appMenu .active.focus {
     outline: none !important; }
   #appMenu .hidden {
     top: -23px;
-    transition: top 900ms cubic-bezier(0.17, 0.04, 0.03, 0.75); }
+    transition-delay: 3s;
+    transition: top 5000ms ease; }
   #appMenu .btn-group {
     font-size: 11px;
     top: 1px;
@@ -116,27 +121,33 @@ label {
       margin-left: 6px; }
     #appMenu .btn-group .dropdown-toggle {
       display: inline-block;
-      background: transparent;
+      background: -webkit-linear-gradient(top, #2d2d2d 5%, #262524 40%, #222120, #121110);
       color: rgba(255, 255, 255, 0.4);
       font-size: 11px;
-      letter-spacing: 0.04em;
-      height: 23px;
+      font-weight: 300;
+      letter-spacing: 0.07em;
+      height: 25px;
       width: 40px;
+      top: -1px;
       border-radius: 2px;
       white-space: nowrap;
+      border: 1px outset #4a4a4a;
       border-left: 1px outset #37393d;
-      border-right: 1px outset #494b50;
-      padding: 3px 0 2px; }
+      border-top: none;
+      border-bottom: none;
+      padding: 2px 0;
+      transition: all .0145s .02s ease-out; }
       #appMenu .btn-group .dropdown-toggle:hover {
         background: transparent;
         color: rgba(255, 255, 255, 0.75); }
     #appMenu .btn-group.open .dropdown-toggle {
-      background: #313031;
+      background: #323131;
       color: rgba(255, 255, 255, 0.75);
-      border-top: 1px inset #434443;
-      border-bottom: 1px inset #434443; }
+      border: 1px inset #434443;
+      border-right: none;
+      box-shadow: inset 0 1px 6px rgba(0, 0, 0, 0.2); }
     #appMenu .btn-group .dropdown-menu {
-      background-color: #2c2b2c;
+      background-color: #2c2b2b;
       color: rgba(255, 255, 255, 0.65);
       font-size: 11px;
       min-width: 175px;
@@ -275,18 +286,20 @@ label {
 
 .bottom-bar {
   position: absolute;
-  background-image: -webkit-linear-gradient(top, #333231, #252423);
+  background: -webkit-linear-gradient(top, #2f2f2f 5%, #2b2b2b 35%, #222120, #1d1d1d 98%);
   color: #b6b5b4;
   font-size: 11px;
   height: 28px;
   width: 100%;
   bottom: 0;
   left: 0;
-  border-top: 1px solid #363534;
+  border: 1px outset #2d2c2c;
+  box-shadow: 0 -1px 28px rgba(0, 0, 0, 0.2);
   padding: 2px;
   z-index: 99999;
   resize: both; }
   .bottom-bar div {
+    letter-spacing: 0.025em;
     cursor: default; }
   .bottom-bar label {
     display: inline-block;
@@ -427,39 +440,55 @@ input[type="checkbox"] {
   position: absolute;
   display: inline-block;
   background: transparent;
-  height: 100%;
-  width: 12px;
-  left: 0;
   margin: 0;
   transition: left 500ms cubic-bezier(0.17, 0.04, 0.03, 0.75);
   z-index: 9999; }
+  .trigger.top {
+    height: 12px;
+    width: 100%;
+    top: 26px;
+    left: 0; }
   .trigger.left {
+    height: 100%;
+    width: 12px;
     left: 0; }
   .trigger.right {
+    height: 100%;
+    width: 12px;
     right: 0; }
-  .trigger:hover #side-button {
+  .trigger:hover .trigger-button {
     visibility: visible !important; }
-    .trigger:hover #side-button i {
+    .trigger:hover .trigger-button i {
       visibility: visible !important; }
 
-#side-button {
+.trigger-button {
   position: absolute;
   background: #302e2f;
   height: 50px;
   width: 50px;
-  top: -webkit-calc(50% - 25px);
-  left: -210%;
   border-radius: 100px;
   border: 1px solid  #3a3839;
   box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.7); }
-  #side-button i {
+  .trigger-button i {
     display: block;
     position: relative;
     font-size: 1em;
     top: -webkit-calc(50% - 0.45em);
     left: 65%; }
-    #side-button i:before {
+    .trigger-button i:before {
       color: rgba(255, 255, 255, 0.8); }
+
+#top-button {
+  left: -webkit-calc(50% - 25px);
+  top: -220%;
+  z-index: -9; }
+  #top-button i {
+    top: -webkit-calc(70% - 0.45em);
+    left: 39%; }
+
+#side-button {
+  top: -webkit-calc(50% - 50px);
+  left: -210%; }
 
 #sidebar {
   display: block;
@@ -527,7 +556,7 @@ input[type="checkbox"] {
       padding-right: 10px; }
     #sidebar-icons li:last-child {
       font-size: 22px;
-      top: -2px;
+      top: -1px;
       padding-right: 0; }
     #sidebar-icons li:hover, #sidebar-icons li:active {
       color: #888; }
@@ -546,7 +575,7 @@ input[type="checkbox"] {
   background-image: -webkit-linear-gradient(#343233 20%, #292728);
   color: rgba(255, 255, 255, 0.75);
   height: 95.5%;
-  width: 320px;
+  width: 31%;
   top: 0;
   left: -330px;
   overflow-x: hidden;
@@ -562,8 +591,8 @@ input[type="checkbox"] {
     position: fixed;
     background: -webkit-linear-gradient(top, #343233 73%, transparent);
     top: 0;
-    width: 30%;
-    padding: 5px 4px 10px;
+    width: 28%;
+    padding: 5px 0 10px;
     vertical-align: middle;
     z-index: 99999999999; }
     #settings-menu .title img {
@@ -580,7 +609,7 @@ input[type="checkbox"] {
   #settings-menu .settings-section {
     position: relative;
     top: 70px;
-    padding: 4px 4px 6px 16px; }
+    padding: 4px 0 6px 16px; }
     #settings-menu .settings-section h3 {
       color: rgba(255, 255, 255, 0.85);
       font-size: 32px;
@@ -599,7 +628,7 @@ input[type="checkbox"] {
         #settings-menu .settings-section ul li .btn-group {
           position: absolute;
           font-size: 16px;
-          left: 41.5%;
+          left: 45.5%;
           max-width: 50%;
           padding-top: 4px; }
           #settings-menu .settings-section ul li .btn-group .filter-option {
@@ -636,10 +665,10 @@ input[type="checkbox"] {
         padding: 4px 10px;
         margin-bottom: 6px; }
   #settings-menu .dropdown-menu {
-    background: #2f2d2e;
+    background: #2b292a;
     color: rgba(255, 255, 255, 0.6);
     top: 31px;
-    border: 1px outset #3e3c3d;
+    border: 1px outset #333132;
     padding: 0;
     box-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
     z-index: -9; }
@@ -662,7 +691,7 @@ input[type="checkbox"] {
     position: relative;
     display: inline-block;
     left: 16px;
-    width: 19% !important;
+    width: 19.5% !important;
     vertical-align: middle; }
     #settings-menu .input-group.spinner .form-control {
       background: #333132;
@@ -676,14 +705,14 @@ input[type="checkbox"] {
       padding: 0 0 1px 5px;
       z-index: -99; }
   #settings-menu .input-group-btn-vertical {
+    display: table-cell;
     position: relative;
     white-space: nowrap;
     float: right;
     top: 1px;
     left: -3px;
     width: 0%;
-    vertical-align: middle;
-    display: table-cell; }
+    vertical-align: middle; }
     #settings-menu .input-group-btn-vertical .btn {
       display: block;
       position: relative;
@@ -702,7 +731,7 @@ input[type="checkbox"] {
         background: -webkit-linear-gradient(top, #2c2a2b 5%, #3d3b3c, #2c2a2b 99%);
         border-bottom-right-radius: 6px;
         margin-top: -2px; }
-      #settings-menu .input-group-btn-vertical .btn:active i, #settings-menu .input-group-btn-vertical .btn:focus i {
+      #settings-menu .input-group-btn-vertical .btn:active i {
         color: #de545f; }
     #settings-menu .input-group-btn-vertical i {
       position: absolute;
@@ -956,7 +985,8 @@ input[type="checkbox"] {
 
 .modal-body-inset {
   background-image: -webkit-linear-gradient(top, #302928, #232221);
-  color: #343332; }
+  color: #343332;
+  padding: 2.5%; }
 
 .modal-footer {
   border-top-color: #494949; }
@@ -1150,7 +1180,7 @@ input[type="checkbox"] {
     transition: all 0.2s ease-out; }
 
 pre {
-  background: #454545;
+  background: #454540;
   color: #eee;
   border-radius: 10px; }
 
@@ -1222,14 +1252,14 @@ code {
 #markdown {
   color: #2a2a2a;
   font-family: "Open Sans", "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
-  font-size: 2.2vh;
+  font-size: 2.3vh;
   letter-spacing: 0.0375em;
   line-height: 1.5;
   text-rendering: geometricPrecision;
   overflow: auto; }
   #markdown h1 {
     color: #333;
-    font-size: 36px;
+    font-size: 2.618em;
     font-weight: 700;
     letter-spacing: 0.02em;
     line-height: 1.45;
@@ -1238,7 +1268,7 @@ code {
     margin-bottom: 25px; }
   #markdown h2 {
     color: #333;
-    font-size: 28px;
+    font-size: 2.118em;
     font-weight: 700;
     letter-spacing: 0.01em;
     line-height: 1.4;
@@ -1246,19 +1276,19 @@ code {
     margin-bottom: 24px; }
   #markdown h3 {
     color: #333;
-    font-size: 23px;
+    font-size: 1.618em;
     font-weight: 700;
     line-height: 1.3;
     margin-bottom: 21px; }
   #markdown h4 {
     color: #333;
-    font-size: 20px;
+    font-size: 1.118em;
     font-weight: 600;
     line-height: 1.25;
     margin-bottom: 16px; }
   #markdown h5 {
     color: #666;
-    font-size: 16px;
+    font-size: 1.118em;
     font-weight: 600;
     line-height: 1.25;
     margin-bottom: 14px; }
@@ -1275,6 +1305,7 @@ code {
       #markdown ol ol ol, #markdown ol ol ul, #markdown ol ul ol, #markdown ol ul ul, #markdown ul ol ol, #markdown ul ol ul, #markdown ul ul ol, #markdown ul ul ul {
         padding-left: 35px; }
   #markdown li {
+    letter-spacing: 0.03em;
     margin-bottom: 5px; }
   #markdown a {
     color: #1c74a0;
@@ -1286,22 +1317,22 @@ code {
   #markdown hr {
     border-top: 1px solid #ddd; }
   #markdown p {
-    font-size: 2.25vh;
+    font-size: 2.3vh;
     line-height: 1.5;
     margin: 0 0 16px !important; }
   #markdown pre {
-    background: #424242;
+    background: #3d3d3d;
     color: rgba(255, 255, 255, 0.75);
+    border: 1px inset #fff;
     border-radius: 10px;
     margin: 15px 0;
-    padding: 9.5px 18px; }
-  #markdown pre code {
-    font-family: "Source Code Pro", "Monaco", "Ubuntu Mono", "Dejavu Sans Mono", "Consolas", monospace !important;
-    background: #4d4d4d;
-    color: rgba(255, 255, 255, 0.75);
-    letter-spacing: 0.045em;
-    border-radius: 10px;
-    box-shadow: inset 0 -2px 20px rgba(0, 0, 0, 0.3); }
+    padding: 9.5px 18px;
+    box-shadow: inset 0 0 14px rgba(0, 0, 0, 0.5); }
+    #markdown pre code {
+      font-family: "Source Code Pro", "Monaco", "Ubuntu Mono", "Dejavu Sans Mono", "Consolas", monospace !important;
+      color: rgba(255, 255, 255, 0.75);
+      letter-spacing: 0.045em;
+      border-radius: 10px; }
   #markdown blockquote {
     background: rgba(0, 0, 0, 0.05);
     color: rgba(0, 0, 0, 0.65);
