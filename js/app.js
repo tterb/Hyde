@@ -1,6 +1,6 @@
 
 const electron = require('electron');
-const app = electron.app;
+const {app} = require('electron')
 const remote = electron.remote;
 const ipc = electron.ipcRenderer;
 const dialog = electron.remote.dialog;
@@ -20,6 +20,7 @@ var console = require('console');
 var os = require("os");
 require('showdown-youtube');
 require('showdown-prettify');
+require('showdown-highlightjs-extension');
 
 const currentWindow = remote.getCurrentWindow();
 var isFileLoadedInitially = false,
@@ -48,9 +49,9 @@ var conf = {
     }
 }
 
-var themeFiles = fs.readdirSync('./css/theme'),
-    theme = settings.get('editorTheme');
-if(themeFiles.includes(theme+'.css')) {
+// var themeFiles = fs.readdirSync('./css/theme'),
+var theme = settings.get('editorTheme');
+if(main.getThemes().filter((temp) => { return temp.value === theme })) {
   conf.theme = theme;
 } else {
   conf.theme = "one-dark";
@@ -75,10 +76,11 @@ if(os.type() === 'Darwin') {
 
 function includeTheme(theme) {
   var themeTag,
-      head = document.getElementsByTagName('head')[0],
-      editorColor = $('.cm-s-'+theme+'.CodeMirror').css('background-color');
-  if(theme === undefined) theme = 'one-dark';
-  currentTheme = theme;
+      head = document.getElementsByTagName('head')[0];
+  //     editorColor = $('.cm-s-'+theme).css('background-color');
+  // $('#leftFade').css('background', '-webkit-linear-gradient(top,  '+editorColor+' 35%, transparent');
+  if(theme === undefined)
+    theme = 'one-dark';
   if(document.getElementById('themeLink')) {
     themeTag = document.getElementById('themeLink');
     themeTag.setAttribute('href', 'css/theme/'+theme+'.css');
@@ -94,26 +96,10 @@ function includeTheme(theme) {
   var title = theme.replace(/-/g , " ").replace(/\w\S*/g, function(txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
   $('#editorTheme').attr('title', title);
   settings.set('editorTheme', theme);
-}
-
-function listThemes() {
-  var themeMenu = $('#theme-menu');
-  fs.readdirSync('./css/theme').forEach((str) => {
-    var theme = str.slice(0,-4);
-    if(str.indexOf('-') > -1)
-      theme = theme.replace(/-/g , " ");
-    theme = theme.replace(/\w\S*/g, (txt) => {
-      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-    });
-    themeTag = document.createElement('li');
-    themeTag.setAttribute('href', '#');
-    themeTag.setAttribute('onclick', 'includeTheme(\"'+str.slice(0,-4)+'\")');
-    themeLink = document.createElement('a');
-    themeLink.setAttribute('id', 'dropdownItem');
-    themeLink.setAttribute('innerHTML', theme);
-    themeTag.appendChild(themeLink);
-    themeMenu.appendChild(themeTag)
-  });
+  if(currentTheme !== theme) {
+    currentTheme = theme;
+    reloadWin();
+  }
 }
 
 window.onload = () => {
@@ -122,6 +108,7 @@ window.onload = () => {
 
   var converter = new showdown.Converter({
       ghCompatibleHeaderId: true,
+      ghCodeBlocks: true,
       simplifiedAutoLink: true,
       excludeTrailingPunctuationFromURLs: true,
       tables: true,
@@ -130,7 +117,7 @@ window.onload = () => {
       simpleLineBreaks: true,
       parseImgDimensions: true,
       smoothLivePreview: true,
-      extensions: ['youtube', 'prettify']
+      extensions: ['youtube', 'prettify', 'highlightjs']
   });
 
   cm.on('change', (cm) => {
@@ -195,6 +182,7 @@ window.onload = () => {
   }).mouseout(function() {
     $(this).children('ul').hide();
   });
+  $('#yamlPath').on('click', () => { setFrontMatterTemplate() });
 }
 
 
@@ -277,6 +265,7 @@ function openNewFile(target) {
   main.createWindow();
   // var win = Array.from(main.getWindows()).pop();
   readFileIntoEditor(filePath)
+  app.addRecentDocument(filePath)
 }
 
 function setFile(file, isWritable) {
@@ -313,19 +302,26 @@ $(window).on('resize', () => {
   }
 });
 
-$('#editorFont-up').on('click', () => {
-  var val = $('#editorFont-input').val();
-  $('#editorFont-input').val(parseFloat(val)+1)
+$('#version-modal').text('v'+main.appVersion())
+
+// editor & preview font size inputs
+$('.spinner .btn:first-of-type').on('click', function() {
+  var btn = $(this);
+  var input = btn.closest('.spinner').find('input');
+  if (input.attr('max') == undefined || parseInt(input.val()) < parseInt(input.attr('max'))) {
+    input.val(parseInt(input.val(),10) + 1);
+  } else {
+    btn.next("disabled", true);
+  }
 });
-$('#editorFont-down').on('click', () => {
-  $('#editorFont-input').val($('#editorFont-input').val()-1);
-});
-$('#previewFont-up').on('click', () => {
-  var val = $('#previewFont-input').val();
-  $('#previewFont-input').val(parseFloat(val)+1)
-});
-$('#previewFont-down').on('click', () => {
-  $('#previewFont-input').val($('#previewFont-input').val()-1);
+$('.spinner .btn:last-of-type').on('click', function() {
+  var btn = $(this);
+  var input = btn.closest('.spinner').find('input');
+  if (input.attr('min') == undefined || parseInt(input.val()) > parseInt(input.attr('min'))) {
+    input.val(parseInt(input.val(),10) - 1);
+  } else {
+    btn.prev("disabled", true);
+  }
 });
 
 // Word count
@@ -336,5 +332,5 @@ function countWords() {
 }
 
 function openInBrowser(url) {
-  shell.openExternal('https://github.com/JonSn0w/Hyde/issues/new');
+  shell.openExternal(url);
 }
