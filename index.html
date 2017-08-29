@@ -151,8 +151,8 @@
         <ul class="dropdown-menu">
           <li tabindex="-1" href="#" data-toggle="modal" data-target="#markdown-modal"><a class="dropdown-item">Markdown Help</a></li>
           <li class="dropdown-divider"></li>
-          <li tabindex="-1" href="#"><a class="dropdown-item" class="link" onclick="openInBrowser('https://github.com/JonSn0w/Hyde/wiki')">Documentation</a></li>
-          <li tabindex="-1" href="#" onclick="sendShortcut('keybinding-modal')"><a class="dropdown-item">Keybindings</a></li>
+          <li tabindex="-1" href="#"><a class="dropdown-item" class="link" onclick="openInBrowser('https://JonSn0w.github.io/Hyde/docs')">Documentation</a></li>
+          <li tabindex="-1" href="#" onclick="openInBrowser('https://JonSn0w.github.io/Hyde/docs#keybindings')"><a class="dropdown-item">Keybindings</a></li>
           <li tabindex="-1"><a class="dropdown-item" class="link" onclick="openInBrowser('https://github.com/JonSn0w/Hyde/issues/new')">Report an Issue</a></li>
           <li class="dropdown-divider"></li>
           <li tabindex="-1" href="#" data-toggle="modal" data-target="#about-modal"><a class="dropdown-item">About Hyde</a></li>
@@ -182,7 +182,7 @@
     <!-- Editor Area -->
     <section id="editArea" class="row">
       <div class="trigger left" id="left-trigger">
-        <div id="side-button" onclick="toggleSidebar()" style="visibility:hidden;">
+        <div id="side-button" class="trigger-button" onclick="toggleSidebar()" style="visibility:hidden;">
           <i id="side-icon" class="fa fa-chevron-right"></i>
         </div>
       </div>
@@ -198,7 +198,7 @@
         <ul id="sidebar-icons">
           <li class="fa fa-github" data-tooltip="View on GitHub"><a onclick="openInBrowser('https://github.com/JonSn0w/Hyde')"></a></li>
           <li class="fa fa-bug" data-tooltip="Report an Issue" onclick="openInBrowser('https://github.com/JonSn0w/Hyde/issues/new')"></li>
-          <li class="fa fa-file-text" data-tooltip="Read the Docs"><a onclick="openInBrowser('https://github.com/JonSn0w/Hyde/tree/master/docs')"></a></li>
+          <li class="fa fa-file-text" data-tooltip="Read the Docs"><a onclick="openInBrowser('https://JonSn0w.github.io/Hyde/docs')"></a></li>
         </ul>
       </section>
       <!-- Settings Menu -->
@@ -218,7 +218,7 @@
             </li>
             <li id="editorFontSze" class="input"><span>Font size: </span>
               <div class="input-group spinner">
-                <input id="editorFont-input" type="number" class="form-control" value="11.5" step="0.5">
+                <input id="editorFont-input" type="text" class="form-control" value="11.5" min="8" max="20">
                 <div class="input-group-btn-vertical">
                   <button id="editorFont-up" class="btn btn-default" type="button"><i class="fa fa-caret-up"></i></button>
                   <button id="editorFont-down" class="btn btn-default" type="button"><i class="fa fa-caret-down"></i></button>
@@ -289,7 +289,7 @@
         </div>
       </section>
       <div class="trigger left" id="settings-trigger">
-        <div id="side-button" onclick="toggleSettings()" style="visibility:hidden;">
+        <div id="side-button" class="trigger-button" onclick="toggleSettings()" style="visibility:hidden;">
           <i id="side-icon" class="fa fa-chevron-left"></i>
         </div>
       </div>
@@ -391,10 +391,10 @@
             <img id="hyde-img" src="./img/Hyde.png"/>
             <div class="about-content">
               <ul class="about-info">
-                <li>Created by <a href="https://JonSn0w.github.io/" id="name">Brett Stevenson</a></li>
-                <li>License: <a id="license" href="http://www.gnu.org/licenses/gpl.txt">GPL v3.0</a></li>
-                <li>Version: <a id="version" href="https://github.com/JonSn0w/PlayMusic/releases/tag/v0.0.1">v0.0.1</a></li>
-                <li id="check-updates"><a href="https://github.com/JonSn0w/Hyde/releases/latest">Check for Updates</a></li>
+                <li>Created by <a href="openInBrowser('https://JonSn0w.github.io/'')" id="name">Brett Stevenson</a></li>
+                <li>License: <a id="license-modal" href="openInBrowser('http://www.gnu.org/licenses/gpl.txt')">GPL v3.0</a></li>
+                <li>Version: <a id="version-modal" href="openInBrowser('https://github.com/JonSn0w/Hyde/releases/latest')">v0.0.1</a></li>
+                <li id="check-updates-modal"><a href="openInBrowser('https://github.com/JonSn0w/Hyde/releases/latest')">Check for Updates</a></li>
               </ul>
             </div>
           </div>
