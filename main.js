@@ -34,6 +34,8 @@ const dialog = require('electron').dialog;
 const shell = require('electron').shell;
 const localShortcut = require('electron-localshortcut');
 const windowStateManager = require('electron-window-state');
+// var opts = require("nomnom").parse();
+// console.log(opts);
 
 // Keep a global reference of the window object
 var windows = new Set();
@@ -53,7 +55,10 @@ function getConfig() {
     y: windowState.y,
     show: false,
     frame: false,
-    autoHideMenuBar: true
+    autoHideMenuBar: true,
+    darkTheme: true,
+    transparent: true
+    // icon = path.join(__dirname, '/img/icon/png/64x64.png')
   }
   if (process.platform === 'darwin') {
     conf.titleBarStyle = 'hidden';
@@ -61,7 +66,7 @@ function getConfig() {
   } else if (process.platform === 'win32') {
     conf.icon = path.join(__dirname, '/img/icon/ico/icon.ico');
   } else {
-    conf.icon = path.join(__dirname, '/img/icon/png/64x64.png');
+    conf.icon = path.join(__dirname, '/img/icon/png/64x64.png')
   }
   return conf;
 }
@@ -104,18 +109,30 @@ ipc.on('export-to-pdf', (event, pdfPath) => {
 });
 
 const getThemes = exports.getThemes = () => {
-  var themeFiles = fs.readdirSync(path.join(__dirname, '/css/theme')),
-  themes = [];
-  themeFiles.forEach((str) => {
-    // FIXME: how to includeTheme()?
-    var theme = { label: str.slice(0,-4), click: () => { sendShortcut("theme", str.slice(0,-4)); } };
-    if(str.indexOf('-') > -1)
-    theme.label = theme.label.replace(/-/g , " ");
-    theme.label = theme.label.replace(/\w\S*/g, function(txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
-    themes.push(theme);
-  });
+  var themes = [
+    {'name': 'Base16 Dark', 'value': 'base16-dark'},
+    {'name': 'Base16 Light', 'value': 'base16-light'},
+    {'name': 'Duotone Dark', 'value': 'duotone-dark'},
+    {'name': 'Eclipse', 'value': 'eclipse'},
+    {'name': 'Hopscotch', 'value': 'hopscotch'},
+    {'name': 'ITG Flat', 'value': 'itg-flat'},
+    {'name': 'Material', 'value': 'material'},
+    {'name': 'Monokai', 'value': 'monokai'},
+    {'name': 'Neo', 'value': 'neo'},
+    {'name': 'Oceanic', 'value': 'oceanic'},
+    {'name': 'One Dark', 'value': 'one-dark'},
+    {'name': 'Panda', 'value': 'panda'},
+    {'name': 'Railscasts', 'value': 'railscasts'},
+    {'name': 'Seti', 'value': 'seti'},
+    {'name': 'Solarized Dark', 'value': 'solarized-dark'},
+    {'name': 'Solarized Light', 'value': 'solarized-light'},
+    {'name': 'Tomorrow Night', 'value': 'tomorrow-night'},
+    {'name': 'Yeti', 'value': 'yeti'},
+    {'name': 'Zenburn', 'value': 'zenburn'}
+  ];
   return themes;
 }
+
 
 //Set native menubar
 var template = [
@@ -356,3 +373,7 @@ ipc.on('show-context-menu', function (event) {
   const win = BrowserWindow.fromWebContents(event.sender);
   contextMenu.popup(win);
 });
+
+const appVersion = exports.appVersion = () => {
+  return app.getVersion();
+}
