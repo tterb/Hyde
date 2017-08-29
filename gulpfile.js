@@ -10,13 +10,20 @@ const electron = require('electron-connect').server.create();
 const plumber = require('gulp-plumber');
 const jetpack = require('fs-jetpack');
 const config = JSON.parse(fs.readFileSync('package.json'));
+const exec = require('child_process').exec;
 const appVersion = config.version;
-const shell = require('gulp-shell');
 const projectDir = jetpack;
 const srcDir = jetpack.cwd('./');
 const destDir = jetpack.cwd('./');
 var electronPackage = require('electron/package.json');
 var electronVersion = electronPackage.version;
+var minimist = require('minimist');
+var runElectron = require("gulp-run-electron");
+var args = minimist(process.argv.slice(2), knownOptions);
+var knownOptions = {
+  string: 'env',
+  default: { env: process.env.NODE_ENV || 'production' }
+};
 
 const options = {
 	asar: true,
@@ -26,11 +33,27 @@ const options = {
 	overwrite: true,
 	prune: true,
 	version: electronVersion,
-	'app-version': appVersion
+	appVersion: appVersion,
+  ignore: [
+    ".github/*",
+    ".gulp-scss-cache/*",
+    ".sass-cache/*",
+    "modal/*",
+    ".codeclimate.yml",
+    ".travis.yml",
+    "frontMatter.yml",
+    "Hyde.lnk",
+    "TODO.md",
+    "test.md"
+  ]
 };
 
+
 gulp.task('launch', () => {
-	electron.start();
+	if(args.env === 'dev')
+    gulp.start('liveReload');
+  else
+  	electron.start();
 });
 
 gulp.task('rebuild', () => {
@@ -50,7 +73,7 @@ gulp.task('liveReload', () => {
 	gulp.watch(['./*.js'], electron.restart);
 	gulp.watch(['./js/**/*.js'], electron.restart);
 	//watch css files, but only reload (no restart necessary)
-	gulp.watch(['./css/*.css'], electron.reload);
+	gulp.watch(['./**/*.css'], electron.reload);
 	gulp.watch(['./**/**/*.css'], electron.reload);
   gulp.watch(['./**/*.scss'], ['scss']);
 	//watch html
@@ -64,6 +87,13 @@ gulp.task('scss', () => {
   .pipe(gulp.dest(destDir.path('css')));
 });
 
+gulp.task('clean', () => {
+  exec('rm -rf ./dist', function (err, stdout, stderr) {
+    console.log(stdout);
+    console.log(stderr);
+  });
+})
+
 gulp.task('build:linux', () => {
 	// @TODO
 });
@@ -71,10 +101,10 @@ gulp.task('build:linux', () => {
 gulp.task('build:win', (done) => {
 	options.arch = 'ia32';
 	options.platform = 'win32';
-	options.icon = './img/icon/icon.ico';
+	options.icon = '/img/icon/ico/icon.ico';
   options.out = 'dist';
   options.prune = true;
-  options.asar = true;
+  options.asar = false;
 	packager(options, (err, paths) => {
 		if (err) { console.error(err); }
 		done();
@@ -84,10 +114,10 @@ gulp.task('build:win', (done) => {
 gulp.task('build:osx', (done) => {
 	options.arch = 'x64';
 	options.platform = 'darwin';
-	options.icon = './img/icon/icon.icns';
-  options.out='dist'
+	options.icon = '/img/icon/icns/icon.icns';
+  options.out = 'dist'
   options.prune = true;
-  options.asar = true;
+  options.asar = false;
 	packager(options, (err, paths) => {
 		if (err) { console.error(err); }
 		done();
@@ -95,10 +125,12 @@ gulp.task('build:osx', (done) => {
 });
 
 
+gulp.task('test', ['launch']);
+
 gulp.task('default', ['rebuild', 'scss', 'launch']);
 
 gulp.task('start', ['rebuild', 'scss', 'launch']);
 
 gulp.task('watch', ['rebuild', 'scss', 'liveReload']);
 
-gulp.task('build', ['build:osx', 'build:linux', 'build:windows', 'compile-scss']);
+gulp.task('build', ['clean', 'scss', 'build:osx', 'build:linux', 'build:win']);
