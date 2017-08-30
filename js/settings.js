@@ -19,8 +19,6 @@ var opt = [
 ];
 
 function getUserSettings() {
-    if(process.platform === 'darwin')
-      $('.btn-group').remove();
     opt.forEach(checkSetting);
     setPreviewMode(settings.get('previewMode'));
     opt.forEach(applySettings);
@@ -78,9 +76,11 @@ var formatHead = () => {
     menuToggle.hide();
     if(toolbar.is(':visible')) {
       body.css('paddingTop', '30px');
+      menu.css('box-shadow', 'none');
       codeMirror.css('paddingTop', '10px');
     } else {
       body.css('paddingTop', '0px');
+      menu.css('box-shadow', '0 1px 20px rgba(0,0,0,0.3)');
       codeMirror.css('paddingTop', '0px');
     }
   } else {
@@ -109,17 +109,17 @@ var formatHead = () => {
 
 function toggleMenu() {
   var winButtons = $('#metacity').children('button');
-  if(menu.attr('class') === 'hidden') {
-    menu.attr('class', '');
+  if(menu.attr('class').includes('hidden')) {
+    menu.attr('class', 'slideInDown');
     menu.css('visibility', 'visible');
-    menu.css('height', '26px');
+    menu.css('height', '27px');
     winButtons.css('marginTop', '2px');
     winButtons.css('marginBottom', '4px');
     $('#editArea').css('paddingTop', '0px');
     leftFade.css('top', '8px');
     settings.set('showMenu', true);
   } else {
-    menu.attr('class', 'hidden');
+    menu.attr('class', 'hidden slideInDown');
     menu.css('visibility', 'hidden');
     menu.css('height', '0px');
     winButtons.css('marginTop', '3px');
@@ -181,10 +181,12 @@ function setPreviewMode(opt) {
     htmlText = html[0].innerHTML.replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
     html.text(htmlText);
     preview.css('padding', '27px 0 0 15px');
+    preview.css('overflow', 'hidden');
   } else if(html.is(':visible') && opt !== 'html') {
     html.hide();
     markdown.show();
     preview.css('padding', '32px 15px 27px');
+    preview.css('overflow-y', 'auto');
     settings.set('previewMode', 'markdown');
   }
   settings.set('previewMode', opt);
