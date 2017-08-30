@@ -2,23 +2,17 @@
 
 const gulp = require('gulp');
 const fs = require('fs');
-const scss = require('gulp-scss');
+const sass = require('gulp-sass');
 const process = require('process');
 const rebuild = require('electron-rebuild');
 const packager = require('electron-packager');
 const electron = require('electron-connect').server.create();
-const plumber = require('gulp-plumber');
-const jetpack = require('fs-jetpack');
 const config = JSON.parse(fs.readFileSync('package.json'));
 const exec = require('child_process').exec;
 const appVersion = config.version;
-const projectDir = jetpack;
-const srcDir = jetpack.cwd('./');
-const destDir = jetpack.cwd('./');
 var electronPackage = require('electron/package.json');
 var electronVersion = electronPackage.version;
 var minimist = require('minimist');
-var runElectron = require("gulp-run-electron");
 var args = minimist(process.argv.slice(2), knownOptions);
 var knownOptions = {
   string: 'env',
@@ -32,6 +26,7 @@ const options = {
 	out: 'dist',
 	overwrite: true,
 	prune: true,
+  asar: false,
 	version: electronVersion,
 	appVersion: appVersion,
   ignore: [
@@ -75,16 +70,16 @@ gulp.task('liveReload', () => {
 	//watch css files, but only reload (no restart necessary)
 	gulp.watch(['./**/*.css'], electron.reload);
 	gulp.watch(['./**/**/*.css'], electron.reload);
-  gulp.watch(['./**/*.scss'], ['scss']);
+  gulp.watch(['./css/*.scss'], ['scss']);
 	//watch html
 	gulp.watch(['./index.html'], electron.restart);
 });
 
 gulp.task('scss', () => {
-  return gulp.src(srcDir.path('css/style.scss'))
-  .pipe(plumber())
-  .pipe(scss())
-  .pipe(gulp.dest(destDir.path('css')));
+  gulp.src('./css/*.scss')
+    .pipe(sass().on('error', sass.logError))
+    .pipe(gulp.dest('./css/'));
+    electron.reload;
 });
 
 gulp.task('clean', () => {
@@ -102,9 +97,6 @@ gulp.task('build:win', (done) => {
 	options.arch = 'ia32';
 	options.platform = 'win32';
 	options.icon = '/img/icon/ico/icon.ico';
-  options.out = 'dist';
-  options.prune = true;
-  options.asar = false;
 	packager(options, (err, paths) => {
 		if (err) { console.error(err); }
 		done();
@@ -115,9 +107,6 @@ gulp.task('build:osx', (done) => {
 	options.arch = 'x64';
 	options.platform = 'darwin';
 	options.icon = '/img/icon/icns/icon.icns';
-  options.out = 'dist'
-  options.prune = true;
-  options.asar = false;
 	packager(options, (err, paths) => {
 		if (err) { console.error(err); }
 		done();
