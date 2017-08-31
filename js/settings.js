@@ -5,6 +5,7 @@ var body = $('#body'),
     leftFade = $('#leftFade'),
     rightFade = $('#rightFade'),
     preview = $('#previewPanel'),
+    editor = $('.CodeMirror-wrap'),
     syncScroll = $('#syncScrollToggle');
 
 var opt = [
@@ -63,8 +64,7 @@ function syncScrollCheck() {
 
 var formatHead = () => {
   var dragArea = $('#draggable'),
-      menuToggle = $('#menuToggle'),
-      codeMirror = $('#textPanel > div');
+      menuToggle = $('#menuToggle');
   if(process.platfrom === 'darwin') {
     if(menu.is(':visible') !== toolbar.is(':visible'))
       toggleMenu();
@@ -77,11 +77,13 @@ var formatHead = () => {
     if(toolbar.is(':visible')) {
       body.css('paddingTop', '30px');
       menu.css('box-shadow', 'none');
-      codeMirror.css('paddingTop', '10px');
+      leftFade.css('top', '8px');
+      $('#textPanel').css('paddingTop', '10px');
     } else {
       body.css('paddingTop', '0px');
       menu.css('box-shadow', '0 1px 20px rgba(0,0,0,0.3)');
-      codeMirror.css('paddingTop', '0px');
+      leftFade.css('top', '0');
+      $('#textPanel').css('paddingTop', '0px');
     }
   } else {
     toolbar.css({ top: '0px' });
@@ -90,12 +92,12 @@ var formatHead = () => {
     if(toolbar.is(':visible')) {
       body.css('paddingTop', '7px');
       dragArea.css('width', '-webkit-calc(50% - 50px)');
-      codeMirror.css('paddingTop', '7px');
+      editor.css('paddingTop', '7px');
     } else {
       menuToggle.show();
       body.css('paddingTop', '0px');
       dragArea.css({ 'width': 'calc(100% - 117px)' });
-      codeMirror.css('paddingTop', '0px');
+      editor.css('paddingTop', '0px');
     }
   }
   if(preview.is(':visible') && parseInt($('#body').width(),10) > 924) {
@@ -116,7 +118,6 @@ function toggleMenu() {
     winButtons.css('marginTop', '2px');
     winButtons.css('marginBottom', '4px');
     $('#editArea').css('paddingTop', '0px');
-    leftFade.css('top', '8px');
     settings.set('showMenu', true);
   } else {
     menu.attr('class', 'hidden slideInDown');
@@ -124,7 +125,6 @@ function toggleMenu() {
     menu.css('height', '0px');
     winButtons.css('marginTop', '3px');
     winButtons.css('marginBottom', '3px');
-    leftFade.css('top', '0');
     settings.set('showMenu', false);
   }
   formatHead();
@@ -230,8 +230,7 @@ function toggleFullscreen() {
 
 // Handle settings-menu changes
 $('#editorFont-input, #editorFont-up, #editorFont-down').bind('keyup mouseup', function () {
-  var editor = $('#textPanel > div'),
-      value = $('#editorFont-input').val();
+  var value = $('#editorFont-input').val();
   editor.css('fontSize', value.toString()+'px');
   settings.set('editorFontSize', value);
 });
@@ -247,8 +246,7 @@ $('#previewMode').on('changed.bs.select', function (e, clickedIndex, newValue, o
 });
 
 $('#previewFont-input, #previewFont-up, #previewFont-down').bind('keyup mouseup', function () {
-  var editor = $('#textPanel > div'),
-      value = $('#previewFont-input').val();
+  var value = $('#previewFont-input').val();
   editor.css('fontSize', value.toString()+'px');
   settings.set('previewFontSize', value);
 });
