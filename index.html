@@ -161,22 +161,22 @@
     </div>
     <div id="toolbar">
       <div class="toolbar-buttons" style="padding:5px 12px 2px;">
-        <a onclick="toggleHeading();" style="padding-left:4x;" title="Header (Ctrl+H)" class="fa fa-header editor-toolbar"></a>
-        <a onclick="toggleFormat('strong');" title="Bold (Ctrl+B)" class="mif-bold editor-toolbar"></a>
-        <a onclick="toggleFormat('em');" title="Italic (Ctrl+I)" class="mif-italic editor-toolbar"></a>
+        <a onclick="toggleHeading();" style="padding-left:4x;" data-tooltip="Header (Ctrl+H)" class="fa fa-header editor-toolbar"></a>
+        <a onclick="toggleFormat('strong');" data-tooltip="Bold (Ctrl+B)" class="mif-bold editor-toolbar"></a>
+        <a onclick="toggleFormat('em');" data-tooltip="Italic (Ctrl+I)" class="mif-italic editor-toolbar"></a>
         <a onclick="toggleFormat('strikethrough');" title="Strikethrough (Ctrl+-)" class="mif-strikethrough editor-toolbar"></a>
         <i class="separator">|</i>
-        <a onclick="toggleBlockquote();" title="Quote" class="fa fa-quote-left editor-toolbar"></a>
-        <a onclick="toggleFormat('code');" title="Code Block" class="fa fa-code editor-toolbar"></a>
-        <a onclick="toggleUnorderedList();" title="Unordered List" class="mif-list2 editor-toolbar"></a>
-        <a onclick="toggleOrderedList();" title="Ordered List" class="mif-list-numbered editor-toolbar"></a>
+        <a onclick="toggleBlockquote();" data-tooltip="Quote" class="fa fa-quote-left editor-toolbar"></a>
+        <a onclick="toggleFormat('code');" data-tooltip="Code Block" class="fa fa-code editor-toolbar"></a>
+        <a onclick="toggleUnorderedList();" data-tooltip="Unordered List" class="mif-list2 editor-toolbar"></a>
+        <a onclick="toggleOrderedList();" data-tooltip="Ordered List" class="mif-list-numbered editor-toolbar"></a>
         <i class="separator">|</i>
-        <a onclick="insert('link');" title="Create Link (Ctrl+L)" class="mif-link editor-toolbar"></a>
-        <a onclick="insert('image');" title="Insert Image (Ctrl+Alt+I)" class="fa fa-picture-o editor-toolbar"></a>
-        <a onclick="insert('table');" title="Insert Table (Ctrl+Shift+T)" class="fa fa-table editor-toolbar"></a>
-        <a onclick="insert('hr');" title="Insert Horizontal Rule (Ctrl+Shift+_)" class="fa fa-minus editor-toolbar"></a>
+        <a onclick="insert('link');" data-tooltip="Create Link (Ctrl+L)" class="mif-link editor-toolbar"></a>
+        <a onclick="insert('image');" data-tooltip="Insert Image (Ctrl+Alt+I)" class="fa fa-picture-o editor-toolbar"></a>
+        <a onclick="insert('table');" data-tooltip="Insert Table (Ctrl+Shift+T)" class="fa fa-table editor-toolbar"></a>
+        <a onclick="insert('hr');" data-tooltip="Insert Horizontal Rule (Ctrl+Shift+_)" class="fa fa-minus editor-toolbar"></a>
         <i class="separator">|</i>
-        <a data-toggle="modal" data-target="#markdown-modal" title="Markdown Help" class="fa fa-question-circle editor-toolbar"></a>
+        <a data-toggle="modal" data-target="#markdown-modal" data-tooltip="Markdown Help" class="fa fa-question-circle editor-toolbar"></a>
       </div>
     </div>
     <!-- Editor Area -->
@@ -301,7 +301,7 @@
       </div>
       <div id="rightPanel">
           <div id="rightFade" class="topFade"></div>
-          <div id="previewPanel" class="col-md-6 full-height slideInRight">
+          <div id="previewPanel" class="col-md-6 full-height">
             <div id="markdown"></div>
             <textarea id="htmlPreview"></textarea>
           </div>
@@ -438,5 +438,6 @@
     <script src="js/functions.js"></script>
     <script src="js/ipc_renderer.js"></script>
     <script src="js/emoji.js"></script>
+    <!-- <script src="js/registerHandler.js"></script> -->
   </body>
 </html>
