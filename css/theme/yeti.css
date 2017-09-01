@@ -6,7 +6,7 @@
 
 .cm-s-yeti.CodeMirror {
   background-color: #ECEAE8 !important;
-  color: rgba(0,0,0,0.5) !important;
+  color: rgba(0,0,0,0.7) !important;
   border: none;
 }
 .cm-s-yeti .CodeMirror-gutters {
@@ -14,7 +14,7 @@
   background-color: #E5E1DB;
   border: none;
 }
-.cm-s-yeti .CodeMirror-cursor { border-left: 2px solid #d1c9c0; }
+.cm-s-yeti .CodeMirror-cursor { border-left: 1.5px solid #978e86 !important; }
 .cm-s-yeti .CodeMirror-linenumber { color: #adaba6; }
 .cm-s-yeti.CodeMirror-focused div.CodeMirror-selected { background: #DCD8D2; }
 .cm-s-yeti .CodeMirror-line::selection, .cm-s-yeti .CodeMirror-line > span::selection, .cm-s-yeti .CodeMirror-line > span > span::selection { background: #DCD8D2; }
@@ -42,7 +42,13 @@
 .cm-s-yeti .CodeMirror-activeline-background { background: #E7E4E0; }
 .cm-s-yeti .CodeMirror-matchingbracket { text-decoration: underline; }
 
-/*#leftFade {
+#leftFade {
   background: -webkit-linear-gradient(top, #ECEAE8 35%, transparent);
-}*/
-#previewPanel { box-shadow: -4px 0 12px rgba(0,0,0,0.075); }
+}
+#previewPanel { box-shadow: -4px 0 16px rgba(0,0,0,0.1); }
+#menuToggle > button {
+  color: rgba(50, 50, 50, 0.1);
+}
+#menuToggle > button:hover {
+  color: rgba(50, 50, 50, 0.45)
+}

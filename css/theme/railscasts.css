@@ -36,6 +36,6 @@
 .cm-s-railscasts .CodeMirror-matchingbracket { text-decoration: underline; color: white !important;}
 .cm-s-railscasts .CodeMirror-activeline-background { background: #303040; }
 
-/*#leftFade {
+#leftFade {
   background: -webkit-linear-gradient(top, #2b2b2b 35%, transparent);
-}*/
+}

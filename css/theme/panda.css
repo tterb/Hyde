@@ -52,6 +52,6 @@
 }
 .cm-s-panda .CodeMirror-linenumber { color: #e6e6e6; opacity: 0.6; }
 
-/*#leftFade {
+#leftFade {
   background: -webkit-linear-gradient(top, #292A2B 35%, transparent);
-}*/
+}

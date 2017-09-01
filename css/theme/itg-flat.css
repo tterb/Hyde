@@ -49,6 +49,6 @@
 .cm-s-itg-flat .cm-em.cm-strong { color: #F2AAEC; }
 .cm-s-itg-flat .cm-builtin { color: #F2AAEC; }
 
-/*#leftFade {
+#leftFade {
   background: -webkit-linear-gradient(top, #272A33 35%, transparent);
-}*/
+}

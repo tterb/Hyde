@@ -22,7 +22,7 @@
 .cm-s-eclipse .CodeMirror-activeline-background { background: #e8f2ff; }
 .cm-s-eclipse .CodeMirror-matchingbracket { outline:1px solid grey; color:black !important; }
 
-/*#leftFade {
+#leftFade {
   background: -webkit-linear-gradient(top, #322931 35%, transparent);
-}*/
+}
 #previewPanel { box-shadow: -4px 0 12px rgba(0,0,0,0.075); }

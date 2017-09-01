@@ -35,6 +35,6 @@
 .cm-s-hopscotch span.cm-em.cm-strong {color: #8fca3e;}
 .cm-s-hopscotch span.cm-builtin {color: #8fca3e;}
 
-/*#leftFade {
+#leftFade {
   background: -webkit-linear-gradient(top, #322931 35%, transparent);
-}*/
+}

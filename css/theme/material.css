@@ -9,7 +9,7 @@
 
 .cm-s-material.CodeMirror {
   background-color: #263239;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.7);
 }
 .cm-s-material .CodeMirror-gutters {
   background: #263238;
@@ -57,6 +57,6 @@
   color: white !important;
 }
 
-/*#leftFade {
+#leftFade {
   background: -webkit-linear-gradient(top, #263239 35%, transparent);
-}*/
+}
