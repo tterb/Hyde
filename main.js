@@ -30,12 +30,25 @@ const path = require('path');
 const mainPage = (`file://${__dirname}/index.html`);
 const {Menu, MenuItem} = require('electron');
 const ipc = electron.ipcMain;
+const window = require('electron-window');
 const dialog = require('electron').dialog;
 const shell = require('electron').shell;
 const localShortcut = require('electron-localshortcut');
 const windowStateManager = require('electron-window-state');
-// var opts = require("nomnom").parse();
-// console.log(opts);
+var opts = require("nomnom")
+  .option('dev', {
+      abbr: 'd',
+      flag: true,
+      help: 'Enable developer mode'
+   })
+   .option('version', {
+      abbr: 'v',
+      flag: true,
+      help: 'Print app version and exit',
+      callback: () => {
+         return "v"+app.getVersion();
+      }
+  }).parse();
 
 // Keep a global reference of the window object
 var windows = new Set();
@@ -71,15 +84,28 @@ function getConfig() {
   return conf;
 }
 
+var readFile = null;
+// Check for file from commandline
+process.argv.forEach(function (val, index, array) {
+  if (index >= 2 && val.includes('.md')) {
+    readFile = val;
+  }
+});
+
 const createWindow = exports.createWindow = (file) => {
-  let newWindow = new BrowserWindow(getConfig());
+  let newWindow = window.createWindow(getConfig());
+  let args = {
+    file: readFile
+  };
   windows.add(newWindow)
-  newWindow.loadURL(mainPage);
+  newWindow.showUrl(mainPage, args);
+  // newWindow.loadURL(mainPage);
   // readFileIntoEditor(file);
   newWindow.once('ready-to-show', () => { newWindow.show(); });
 
   // Open the DevTools.
-  // newWindow.webContents.openDevTools();
+  if(opts.dev)
+    newWindow.webContents.openDevTools();
 
   // Emitted when the window is closed.
   newWindow.on('closed', () => {
@@ -93,11 +119,11 @@ const createWindow = exports.createWindow = (file) => {
     shell.openExternal(url);
   });
   tray.create(newWindow);
+  return newWindow;
 }
 
 ipc.on('export-to-pdf', (event, pdfPath) => {
   const win = BrowserWindow.fromWebContents(event.sender);
-  // Use default printing options
   win.webContents.printToPDF({pageSize: 'A4'}, (error, data) => {
     if (error) throw error
     fs.writeFile(pdfPath, data, (error) => {
@@ -115,7 +141,7 @@ const getThemes = exports.getThemes = () => {
     {'name': 'Duotone Dark', 'value': 'duotone-dark'},
     {'name': 'Eclipse', 'value': 'eclipse'},
     {'name': 'Hopscotch', 'value': 'hopscotch'},
-    {'name': 'ITG Flat', 'value': 'itg-flat'},
+    {'name': 'Itg Flat', 'value': 'itg-flat'},
     {'name': 'Material', 'value': 'material'},
     {'name': 'Monokai', 'value': 'monokai'},
     {'name': 'Neo', 'value': 'neo'},
@@ -133,6 +159,16 @@ const getThemes = exports.getThemes = () => {
   return themes;
 }
 
+function menuThemes() {
+  var themeFiles = fs.readdirSync(path.join(__dirname, '/css/theme')),
+      themes = [];
+  getThemes().forEach((str) => {
+    // FIXME: how to includeTheme()?
+    var theme = { label: str.name, click: () => { sendShortcut("set-theme", str.val); }};
+    themes.push(theme);
+  });
+  return themes;
+}
 
 //Set native menubar
 var template = [
@@ -144,9 +180,9 @@ var template = [
     {label: "Save As", accelerator: "CmdOrCtrl+Shift+S", click: () => { sendShortcut('file-save-as'); }},
     {label: "Export to PDF", click: () => { sendShortcut('file-pdf'); }},
     {type: "separator"},
-    {label: "Show in File Manager", click: () => { ipc.send('open-file-manager') }},
+    {label: "Show in File Manager", click: () => { ipc.send('open-file-manager'); }},
     {type: "separator"},
-    {label: "Settings", accelerator: "CmdOrCtrl+,", click: () => { sendShortcut('ctrl+,') }},
+    {label: "Settings", accelerator: "CmdOrCtrl+,", click: () => { sendShortcut('ctrl+,'); }},
     {type: "separator"},
     {label: "Quit", accelerator: "CmdOrCtrl+Q", click: () => { sendShortcut('ctrl+q'); }}
   ]},
@@ -182,11 +218,11 @@ var template = [
       focusedWindow.setFullScreen(!isFullScreen);
     }},
     {type: "separator"},
-    {label: "Themes", submenu: []},
+    {label: "Themes" },
     {type: "separator"},
     {label: "Preview Mode", submenu: [
-      {label: "Markdown", click: () => {setPreviewMode('markdown')}},
-      {label: "HTML", click: () => {setPreviewMode('html')}}
+      {label: "Markdown", click: () => { sendShortcut('markdown-preview'); }},
+      {label: "HTML", click: () => { sendShortcut('html-preview'); }}
     ]},
     {type: "separator"},
     {role: 'toggledevtools'}
@@ -226,8 +262,9 @@ var template = [
 ];
 
 if (process.platform === 'darwin') {
+  const name = require('electron').remote.app.getName();
   template.unshift({
-    label: "Hyde",
+    label: name,
     submenu: [
       {role: 'about', click: () => {
         sendShortcut('about-modal');
@@ -242,11 +279,10 @@ if (process.platform === 'darwin') {
       {role: 'quit'}
     ]
   })
-  template[1].submenu[7] = {label: "Show in Finder", click: () => { sendShortcut('open-file-manager') }};
-
+  template[1].submenu[7] = {label: "Show in Finder", click: () => { sendShortcut('open-file-manager'); }};
   template[3].submenu.splice(2,1);
   // Add syntax-themes to menu
-  template[3].submenu[7].submenu = getThemes();
+  template[3].submenu[7].submenu = menuThemes();
   // Window menu
   template[4].submenu = [
     {role: 'minimize'},
@@ -255,8 +291,8 @@ if (process.platform === 'darwin') {
     {role: 'front'}
   ]
 } else {
-  template[0].submenu[7] = {label: "Show in Explorer", click: () => { sendShortcut('open-file-manager') }};
-  template[2].submenu[7].submenu = getThemes();
+  template[0].submenu[7] = {label: "Show in Explorer", click: () => { sendShortcut('open-file-manager'); }};
+  template[2].submenu[7].submenu = menuThemes();
 }
 
 function sendShortcut(cmd) {
@@ -298,12 +334,17 @@ app.on('ready', function() {
     defaultHeight: settings.get('windowHeight')
   });
   // Create main BrowserWindow
-  mainWindow = new BrowserWindow(getConfig());
+  mainWindow = window.createWindow(getConfig());
+  let args = {
+    file: readFile
+  };
+  mainWindow.showUrl(path.join(__dirname, 'index.html'), args);
   windowState.manage(mainWindow);
-  mainWindow.loadURL(mainPage);
   windows.add(mainWindow);
 
-  // mainWindow.webContents.openDevTools();
+  if(opts.dev)
+    mainWindow.webContents.openDevTools();
+
   mainWindow.once('ready-to-show', () => {
     mainWindow.show();
   });
@@ -327,8 +368,8 @@ app.on('ready', function() {
 
   // Quit when all windows are closed.
   app.on('window-all-closed', () => {
-    // On OS X it is common for applications and their menu bar
-    // to stay active until the user quits explicitly with Cmd + Q
+    // On OSX it is common for applications and their menu bar
+    // to stay active until the user quits explicitly with Cmd+Q
     if (process.platform !== 'darwin') {
       app.quit();
     }
