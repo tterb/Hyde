@@ -2,9 +2,9 @@
 var insertTexts = {
   link: ["[", "](#url#)"],
   image: ["![", "](#url#)"],
-  table: ["", "| Column 1 | Column 2 | Column 3 |\n| -------- | -------- | -------- |\n| Text     | Text     | Text     |\n"],
   horizontalRule: ["", "\n-------------------\n"]
 };
+
 
 function toggleFormat(type) {
   'use strict';
@@ -191,11 +191,29 @@ function insert(obj) {
       _replaceSelection(cm, stat.link, insertTexts.link, "http://");
     else if(obj === 'image')
       _replaceSelection(cm, stat.image, insertTexts.image, "http://");
-    else if(obj === 'table')
-      _replaceSelection(cm, stat.table, insertTexts.table);
     else if(obj === 'hr')
       _replaceSelection(cm, stat.image, insertTexts.horizontalRule);
     else return;
+}
+
+function createTable(cols, rows) {
+  var startPoint = cm.getCursor("start"),
+      text = cm.getLine(startPoint.line),
+      start = text.slice(0, startPoint.ch),
+      end = text.slice(startPoint.ch),
+      table = "| ",
+      sep = "| ",
+      body = "| ";
+  for(let i = 1; i <= cols; i++) {
+    table += "Column "+i+" |";
+    sep += "-------- |";
+    body += "Text     |";
+  }
+  table += "  \n"+sep+"  \n";
+  for(let i = 0; i < rows; i++) {
+    table += body+"  \n";
+  }
+  cm.replaceSelection(start + table + end);
 }
 
 // function for adding heading

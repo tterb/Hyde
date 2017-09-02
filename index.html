@@ -173,7 +173,8 @@
         <i class="separator">|</i>
         <a onclick="insert('link');" data-tooltip="Create Link (Ctrl+L)" class="mif-link editor-toolbar"></a>
         <a onclick="insert('image');" data-tooltip="Insert Image (Ctrl+Alt+I)" class="fa fa-picture-o editor-toolbar"></a>
-        <a onclick="insert('table');" data-tooltip="Insert Table (Ctrl+Shift+T)" class="fa fa-table editor-toolbar"></a>
+        <!-- <a onclick="insert('table');" data-tooltip="Insert Table (Ctrl+Shift+T)" class="fa fa-table editor-toolbar"></a> -->
+        <a data-toggle="modal" data-target="#table-modal" data-tooltip="Insert Table (Ctrl+Shift+T)" class="fa fa-table editor-toolbar"></a>
         <a onclick="insert('hr');" data-tooltip="Insert Horizontal Rule (Ctrl+Shift+_)" class="fa fa-minus editor-toolbar"></a>
         <i class="separator">|</i>
         <a data-toggle="modal" data-target="#markdown-modal" data-tooltip="Markdown Help" class="fa fa-question-circle editor-toolbar"></a>
@@ -315,10 +316,35 @@
       <button id="syncScrollToggle" data-tooltip="Sync Scrolling" onclick="toggleSyncScroll();"></button>
       <button id="previewToggle" class="fa fa-eye" data-tooltip="Toggle Preview" onclick="togglePreview();"></button>
     </div>
+    <!-- Table Modal -->
+    <div class="modal fade" id="table-modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="modal-header">
+              <button id="close" type="button" class="close" data-dismiss="modal"><img src="./img/buttons/close.png"></img></button>
+              <h4 class="modal-title">Table</h4>
+            </div>
+            <div class="table-content">
+              <ul id="table-input">
+                <li id="table-columns" class="form-group">
+                  <input type="number" id="columns" placeholder="Columns" class="form-control" value="">
+                </li>
+                <li id="table-rows" class="form-group">
+                  <input type="number" id="rows" placeholder="Rows" class="form-control" value="">
+                </li>
+                <li>
+                  <button id="table-button"><i class="fa fa-arrow-right"></i></button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- Markdown Help Modal -->
     <div class="modal fade" id="markdown-modal" tabindex="-1" role="dialog">
       <div class="modal-dialog">
-        <!-- Modal content-->
         <div class="modal-content modal-inset">
           <div class="modal-header">
             <button id="close" type="button" class="close" data-dismiss="modal"><img src="./img/buttons/close.png"></img></button>
@@ -382,7 +408,6 @@
     <!-- About Modal -->
     <div class="modal fade" id="about-modal" tabindex="-1" role="dialog">
       <div class="modal-dialog">
-        <!-- Modal content-->
         <div class="modal-content">
           <div class="modal-body">
             <div class="modal-header">
@@ -404,7 +429,6 @@
     <!-- Close-Unsaved Modal -->
     <div class="modal fade" id="unsaved-modal" tabindex="-1" role="dialog">
       <div class="modal-dialog">
-        <!-- Modal content-->
         <div class="modal-content">
           <div class="modal-header">
             <button id="close" type="button" class="close" data-dismiss="modal"><img src="./img/buttons/close.png"><img></button>

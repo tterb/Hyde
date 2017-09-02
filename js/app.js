@@ -176,6 +176,7 @@ window.onload = () => {
     $(this).children('ul').hide();
   });
   $('#yamlPath').on('click', () => { setFrontMatterTemplate() });
+  $('#table-button').on('click', () => { createTable($('#columns').val(),$('#rows').val()) });
 }
 
 
@@ -292,19 +293,21 @@ $('#version-modal').text('v'+main.appVersion())
 
 // editor & preview font size inputs
 $('.spinner .btn:first-of-type').on('click', function() {
-  var btn = $(this);
-  var input = btn.closest('.spinner').find('input');
-  if (input.attr('max') == undefined || parseInt(input.val()) < parseInt(input.attr('max'))) {
-    input.val(parseInt(input.val(),10) + 1);
+  var btn = $(this),
+      input = btn.closest('.spinner').find('input'),
+      value = parseInt(input.val(), 10);
+  if (input.attr('max') === undefined || value < parseInt(input.attr('max'), 10)) {
+    input.val(value + 1);
   } else {
     btn.next("disabled", true);
   }
 });
 $('.spinner .btn:last-of-type').on('click', function() {
-  var btn = $(this);
-  var input = btn.closest('.spinner').find('input');
-  if (input.attr('min') == undefined || parseInt(input.val()) > parseInt(input.attr('min'))) {
-    input.val(parseInt(input.val(),10) - 1);
+  var btn = $(this),
+      input = btn.closest('.spinner').find('input'),
+      value = parseInt(input.val(), 10);
+  if (input.attr('min') === undefined || value > parseInt(input.attr('min'), 10)) {
+    input.val(value - 1);
   } else {
     btn.prev("disabled", true);
   }
