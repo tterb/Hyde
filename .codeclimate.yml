@@ -11,6 +11,8 @@ engines:
         enabled: false
       known-properties:
         enabled: false
+      box-sizing:
+        enabled: false
   duplication:
     enabled: true
     config:
