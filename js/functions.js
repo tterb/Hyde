@@ -35,23 +35,23 @@ function openNewFile(file) {
   let wins;
   file = path.join(__dirname, file);
   fs.readFile(file, 'utf-8', (err, data) => {
-    if (err) { alert("An error ocurred while opening the file "+ err.message); }
+    if(err)
+      notify("An error ocurred while opening the file "+ err.message, "error");
     // cm.getDoc().setValue(data);
     openNewWindow();
-    // app.addRecentDocument(file);
     this.isFileLoadedInitially = true;
     this.currentFile = file;
+    // app.addRecentDocument(file);
   });
   wins = Array.from(main.getWindows());
   return wins;
 }
 
 function closeWindow(win) {
-  if(!this.isClean()) {
+  if(!this.isClean())
     showUnsavedDialog(win);
-  } else {
+  else
     win.close();
-  }
 }
 
 function toggleSidebar() {
@@ -97,7 +97,7 @@ function toggleSettings() {
 
 
 function copySelected() {
-    clipboard.writeText(cm.getSelection().toString());
+  clipboard.writeText(cm.getSelection().toString());
 }
 
 function pasteSelected() {
@@ -105,12 +105,7 @@ function pasteSelected() {
 }
 
 function openFile() {
-  if(this.cm.getValue === "")
-    electron.remote.getCurrentWindow().webContents.send('file-open');
-  else {
-    // TODO Open file in new window
-    electron.remote.getCurrentWindow().webContents.send('file-open');
-  }
+  electron.remote.getCurrentWindow().webContents.send('file-open');
 }
 
 function saveFile() {

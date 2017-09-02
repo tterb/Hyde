@@ -3,57 +3,58 @@ const ipcRenderer = electron.ipcRenderer;
 
 // Handling file saving through IPCRenderer
 function saveAs() {
-  storage.get('markdown-savefile', function(error, data) {
+  storage.get('markdown-savefile', function(err, data) {
     options = {};
     if ('filename' in data) {
       options.defaultPath = data.filename;
     }
     dialog.showSaveDialog(options, function (fileName) {
-      if (fileName === undefined){
-        console.log("You didn't save the file");
-        return;
-      }
-      storage.set('markdown-savefile', {'filename' : fileName}, function(error) { if (error) alert(error); });
+      if (fileName === undefined)
+        return notify("You didn't save the file", "info");
+      storage.set('markdown-savefile', {'filename' : fileName}, function(err) {
+        if (err) notify(err, "error");
+      });
 
       var mdValue = cm.getValue();
-      // fileName is a string that contains the path and filename created in the save dialog.
-      fs.writeFile(fileName, mdValue, function (err) {
-        if(err) alert("An error ocurred creating the file "+ err.message);
+      // filename is a string that contains the path and filename created in the save dialog.
+      fs.writeFile(filename, mdValue, function (err) {
+        if(err) notify("An error ocurred creating the file "+ err.message, "error");
       });
       this.setClean();
-      this.currentFile = fileName;
-      this.updateWindowTitle(fileName);
+      this.currentFile = filename;
+      this.updateWindowTitle(filename);
     });
   });
 }
 
 ipc.on('file-new', function() {
-  storage.set('markdown-savefile', {}, function(error) { if (error) alert(error); });
+  storage.set('markdown-savefile', {}, function(err) {
+    if(err) notify(err, "error");
+  });
   currentFile = '';
   cm.getDoc().setValue("");
 });
 
 // Handling file saving through IPCRenderer
 ipc.on('file-save', function() {
-  storage.get('markdown-savefile', function(error, data) {
-    if (error) {
+  storage.get('markdown-savefile', function(err, data) {
+    if(err) {
       saveAs();
       return;
     }
-    if ('filename' in data) {
+    if('filename' in data) {
       var fileName = data.filename;
-      if (fileName === undefined){
-        console.log("You didn't save the file");
-        return;
-      }
-      storage.set('markdown-savefile', {'filename' : fileName}, function(error) { if (error) alert(error); });
+      if(fileName === undefined)
+        return notify("You didn't save the file", "info");
+      storage.set('markdown-savefile', {'filename' : fileName}, function(err) {
+        if(err) notify(err, "error");
+      });
 
       var mdValue = cm.getValue();
       // fileName is a string that contains the path and filename created in the save file dialog.
       fs.writeFile(fileName, mdValue, function (err) {
-        if(err){
-          alert("An error ocurred creating the file "+ err.message)
-        }
+        if(err)
+          notify("An error ocurred creating the file "+ err.message, "error");
       });
       this.setClean();
       this.currentFile = fileName;
@@ -66,11 +67,10 @@ ipc.on('file-save', function() {
 
 ipc.on('file-save-as', saveAs);
 
-
 // Handling file opening through IPCRenderer
 ipc.on('file-open', () => {
-  storage.get('markdown-savefile', (error, data) => {
-    if (error) alert(error);
+  storage.get('markdown-savefile', (err, data) => {
+    if(err) notify(err, "error");
     var options = {
       'properties': ['openFile'],
       'filters': [{
@@ -78,16 +78,17 @@ ipc.on('file-open', () => {
         'extensions': ['md']
       }]
     };
-    if ('filename' in data) {
+    if ('filename' in data)
       options.defaultPath = data.filename;
-    }
     dialog.showOpenDialog(options, (file) => {
       if (file === undefined) {
         console.log("You didn't open the file");
         return;
       }
       storage.set('markdown-savefile', {
-        'filename' : file[0]}, (error) => { if (error) alert(error); });
+        'filename' : file[0] }, (err) => {
+          if (err) notify(err, "error");
+        });
 
       // file is a string that contains the path and filename created in the save file dialog.
       fs.readFile(file[0], 'utf-8', (err, data) => {
@@ -124,6 +125,7 @@ ipc.on('ctrl+m', () => { if(process.platform !== 'darwin') toggleMenu(); });
 ipc.on('ctrl+.', () => { toggleToolbar(); });
 ipc.on('ctrl+p', () => { togglePreview(); });
 ipc.on('ctrl+,', () => { toggleSettings(); });
+
 ipc.on('file-pdf', () => {
   // Only save PDF files
   options = {
@@ -136,8 +138,11 @@ ipc.on('file-pdf', () => {
   });
 });
 ipc.on('insert-yaml', () => { insertFrontMatter(); });
+ipc.on('markdown-preview', () => { setPreviewMode('markdown'); });
+ipc.on('html-preview', () => { setPreviewMode('html'); });
 ipc.on('about-modal', () => { $('#about-modal').modal() });
 ipc.on('markdown-modal', () => { $('#markdown-modal').modal() });
 ipc.on('keybinding-modal', () => { $('#keybinding-modal').modal() });
 ipc.on('open-file-manager', () => { shell.showItemInFolder(currentFile); })
-ipc.on('theme', () => { includeTheme(this); })
+var setTheme = remote.getGlobal('setTheme');
+ipc.on('set-theme', () => { includeTheme(theme); })
