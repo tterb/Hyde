@@ -9,105 +9,90 @@ var insertTexts = {
 function toggleFormat(type) {
   'use strict';
   let modifiers;
-  if(type === "strong") {
+  if(type === "strong")
     modifiers = ["**", "__"];
-  } else if(type === "em") {
+  else if(type === "em")
     modifiers = ["*", "_"];
-  } else if(type === "strikethrough") {
+  else if(type === "strikethrough")
     modifiers = ["~~"];
-  } else if(type === "code") {
+  else if(type === "code")
     modifiers = ["`"];
-  }
-  cm.operation(() => { _toggleFormat(modifiers); })
+  cm.operation(() => { toggleState(type, modifiers); })
 }
 
-
-function _toggleFormat(modifiers) {
-  'use strict';
-  if (modifiers.length === 0) return;
-  // exclude modifiers from selection
-  let allModifiers = ["*", "_", '**', "__", "~~", "`"];
+function toggleState(type, modifiers) {
+  if(modifiers.length === 0) return;
   let startPoint = cm.getCursor("start");
   let endPoint = cm.getCursor("end");
-  // get containing word if there's no selection
+  // get word at cursor if there's no selection
   if(!cm.somethingSelected()) {
     var word = cm.findWordAt(cm.getCursor());
     startPoint = word.anchor;
     endPoint = word.head;
-    cm.setSelection(startPoint, endPoint);
-  } else {
-    for (let bFound = true; bFound; ) {
-      bFound = false;
-      for (let i = 0, len = allModifiers.length; i < len; i++) {
-        let modi = allModifiers[i];
-        if (cm.getSelection().startsWith(modi) &&
-          cm.getSelection().endsWith(modi) &&
-          endPoint.ch - startPoint.ch >= 2 * modi.length) {
-          bFound = true;
-          startPoint.ch += modi.length;
-          endPoint.ch -= modi.length;
-          break;
-        }
-      }
+  }
+  var currentState = cm.getTokenTypeAt(startPoint),
+      selection = cm.getRange(startPoint, endPoint),
+      modiLength = modifiers[0].length,
+      outerStart = {line:startPoint.line, ch:startPoint.ch - modiLength},
+      outerEnd = {line:endPoint.line, ch:endPoint.ch + modiLength},
+      outerSelection = cm.getRange(outerStart, outerEnd),
+      text = selection.substring(modiLength, selection.length - modiLength),
+      cursorPOS;
+  if(currentState && currentState.includes(type)) {
+    modifiers.forEach(function(modi, index) {
+      if(selection === modi+text+modi) {
+        text = selection.substring(modiLength, selection.length - modiLength);
+        cursorPOS = {line:endPoint.line, char:endPoint.ch - (modiLength*2)};
+      } else if(outerSelection === modi+selection+modi) {
+        startPoint = outerStart;
+        endPoint = outerEnd;
+        text = outerSelection.substring(modiLength, outerSelection.length - modiLength);
+        cursorPOS = {line:endPoint.line, char:endPoint.ch - (modiLength*2)};
+      } //else if(outerSelection.includes(modi+selection)) {
+      //   startPoint = outerStart;
+      //   endPoint = findBreak(endPoint, 1);
+      //   text = getRange(startPoint, endPoint).substring(modiLength, outerSelection.length);
+      //   txt = text;
+      //   select = cm.getRange(startPoint, endPoint);
+      //   cursorPOS = {line:endPoint.line, char:endPoint.ch - (modiLength*2)};
+      // } else if(outerSelection.includes(selection+modi)) {
+      //   endPoint = outerEnd;
+      //   startPoint = findBreak(startPoint, 1);
+      //   text = getRange(startPoint, endPoint).substring(0, outerSelection.length-modiLength);
+      //   txt = text;
+      //   select = cm.getRange(startPoint, endPoint);
+      //   cursorPOS = {line:endPoint.line, char:endPoint.ch - (modiLength*2)};
+      // }
+    });
+    if(text === undefined) {
+      startPoint = findBreak(startPoint, "1");
+      endPoint = findBreak(endPoint, "-1");
+      text = modifiers[0]+cm.getRange(startPoint, endPoint)+modifiers[0];
+      cursorPOS = {line:endPoint.line, char:endPoint.ch + (modiLength*2)};
     }
-    cm.setSelection(startPoint, endPoint);
-  }
-
-  // find modifiers around selection
-  let foundModifiers = [];
-  let modifierWidth = 0;
-  let rangeStart = new CodeMirror.Pos(startPoint.line, startPoint.ch);
-  let rangeEnd = new CodeMirror.Pos(endPoint.line, endPoint.ch);
-  for (let bFound = true; bFound; ) {
-    bFound = false;
-    for (let i = 0, len = allModifiers.length; i < len; i++) {
-      let modi = allModifiers[i];
-      if (rangeStart.ch < modi.length || rangeEnd.ch > cm.getLine(rangeEnd.line).length - modi.length) {
-        continue;
-      }
-      rangeStart.ch -= modi.length;
-      rangeEnd.ch += modi.length;
-      let text = cm.getRange(rangeStart, rangeEnd);
-      if (text.startsWith(modi) && text.endsWith(modi)) {
-        bFound = true;
-        foundModifiers.push(modi);
-        break;
-      }
-      rangeStart.ch += modi.length;
-      rangeEnd.ch -= modi.length;
-    }
-  }
-
-  // find given modifier in array(foundModifiers)
-  let modifierIndex = -1;
-  for (let i = 0; i < modifiers.length; i++) {
-    modifierIndex = foundModifiers.indexOf(modifiers[i]);
-    if (modifierIndex !== -1) break;
-  }
-
-  // if modifier found, delete it from array(boundModifiers). or push it to array
-  let modifierLength = 0;
-  if (modifierIndex !== -1) {
-    modifierLength = -foundModifiers[modifierIndex].length;
-    foundModifiers.splice(modifierIndex, 1);
   } else {
-    foundModifiers.unshift(modifiers[0]);
-    modifierLength = modifiers[0].length;
-  }
-
-  // replace text with modified modifiers
-  let prefix = foundModifiers.join("");
-  let suffix = foundModifiers.reverse().join("");
-  cm.replaceRange(suffix, endPoint, rangeEnd);
-  cm.replaceRange(prefix, rangeStart, startPoint);
-
-  startPoint.ch += modifierLength;
-  // only change endpoint when selection is in single line
-  if (startPoint.line === endPoint.line) {
-    endPoint.ch += modifierLength;
+    // Add modifiers to selection
+    text = modifiers[0]+selection+modifiers[0];
+    cursorPOS = {line:endPoint.line, char:endPoint.ch + (modiLength*2)};
   }
   cm.setSelection(startPoint, endPoint);
-  cm.focus();
+  cm.replaceSelection(text, startPoint, endPoint);
+  cm.setCursor(cursorPOS.line, cursorPOS.char);
+}
+
+function findBreak(point, dir) {
+  var char, temp;
+  while(char !== ' ') {
+    temp = {line:point.line, ch:point.ch};
+    if(dir === "-1") {
+      point = {line:point.line, ch:(point.ch + 1)};
+      char = cm.getRange(temp, point);
+    } else {
+      point = {line:point.line, ch:(point.ch - 1)};
+      char = cm.getRange(point, temp);
+    }
+  }
+  return point;
 }
 
 function getState(cm, pos) {
@@ -206,8 +191,6 @@ function insert(obj) {
       _replaceSelection(cm, stat.link, insertTexts.link, "http://");
     else if(obj === 'image')
       _replaceSelection(cm, stat.image, insertTexts.image, "http://");
-    else if(obj === 'image')
-      _replaceSelection(cm, stat.image, insertTexts.image, "http://");
     else if(obj === 'table')
       _replaceSelection(cm, stat.table, insertTexts.table);
     else if(obj === 'hr')
@@ -279,8 +262,8 @@ function _replaceSelection(cm, active, startEnd, url) {
 var temp = "";
 
 function setFrontMatterTemplate() {
-  storage.get('markdown-savefile', (error, data) => {
-    if (error) alert(error);
+  storage.get('markdown-savefile', (err, data) => {
+    if(err) notify(err, "error");
     var options = {
       'properties': ['openFile'],
       'filters': [
@@ -291,11 +274,11 @@ function setFrontMatterTemplate() {
       ]
     };
     dialog.showOpenDialog(options, (file) => {
-      if (file === undefined)
-        return alert("You didn't select a file");
+      if(file === undefined)
+        return notify("You didn't select a file", "error");
       fs.readFile(file[0], 'utf-8', (err, data) => {
-        if (err)
-          alert("An error ocurred while opening the file "+err.message);
+        if(err)
+          notify("An error ocurred while opening the file "+err.message, "error");
         settings.set('frontMatterTemplate', file[0]);
       });
     });
@@ -308,12 +291,12 @@ function insertFrontMatter() {
       extensions = ["yaml", "yml", "md", "markdown", "txt", "text"];
   if(path.length < 1) {
     setFrontMatterTemplate();
-    return alert("There is no specified frontmatter template");
+    return notify("There is no specified frontmatter template", "error");
   }
   if(!extensions.includes(path.split('.').pop()))
-    return alert("Invalid specified template file");
+    return notify("Invalid specified template file", "error");
   fs.readFile(path, 'utf8', function (err, data) {
-    if(err) return alert(err);
+    if(err) return notify(err, "error");
     else {
       cm.execCommand('goDocStart');
       var text = insertDate(data, formatDate());
