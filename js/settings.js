@@ -78,7 +78,7 @@ var formatHead = () => {
       body.css('paddingTop', '30px');
       menu.css('box-shadow', 'none');
       leftFade.css('top', '8px');
-      $('#textPanel').css('paddingTop', '10px');
+      $('#textPanel').css('paddingTop', '7px');
     } else {
       body.css('paddingTop', '0px');
       menu.css('box-shadow', '0 1px 20px rgba(0,0,0,0.3)');
@@ -89,6 +89,7 @@ var formatHead = () => {
     toolbar.css({ top: '0px' });
     toolbar.css('z-index', '99999');
     body.css('paddingTop', '0px');
+    $('#textPanel').css('paddingTop', '0px');
     if(toolbar.is(':visible')) {
       body.css('paddingTop', '7px');
       dragArea.css('width', '-webkit-calc(50% - 50px)');

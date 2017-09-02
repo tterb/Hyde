@@ -102,7 +102,6 @@ label {
   left: 0;
   border: 1px outset #2b2d30;
   border-bottom: 2px solid #212121;
-  box-shadow: 0 1px 20px rgba(0, 0, 0, 0.3);
   transition-delay: 3s;
   transition: top 5000ms ease;
   z-index: 9999; }
@@ -816,7 +815,7 @@ input[type="checkbox"] {
   left: 0px;
   cursor: pointer;
   z-index: -99; }
-  #settings-button > img {
+  #settings-button img {
     position: absolute;
     height: 56px;
     width: 28px;
@@ -1124,12 +1123,12 @@ input[type="checkbox"] {
   .search-dialog #search-icon {
     position: relative;
     background: transparent;
-    color: rgba(255, 255, 255, 0.7);
-    top: 9%;
-    left: 2.75%;
+    color: rgba(255, 255, 255, 0.6);
+    top: 8.5%;
+    left: 2.5%;
     width: 5%;
     height: auto;
-    text-shadow: 4px 1px rgba(0, 0, 0, 0.6); }
+    text-shadow: 4px 0px 1px rgba(0, 0, 0, 0.6); }
 
 /* fancy Button */
 .modal-button {
@@ -1278,7 +1277,8 @@ code {
   letter-spacing: 0.0375em;
   line-height: 1.5;
   text-rendering: geometricPrecision;
-  overflow: auto; }
+  overflow: auto;
+  margin-top: 0px; }
   #markdown h1 {
     color: #333;
     font-size: 2.618em;
@@ -1286,7 +1286,7 @@ code {
     letter-spacing: 0.02em;
     line-height: 1.45;
     border-bottom: 1px solid #e1e3ea;
-    margin-top: 22px;
+    margin-top: 0px;
     margin-bottom: 25px; }
   #markdown h2 {
     color: #333;
@@ -1327,7 +1327,8 @@ code {
       #markdown ol ol ol, #markdown ol ol ul, #markdown ol ul ol, #markdown ol ul ul, #markdown ul ol ol, #markdown ul ol ul, #markdown ul ul ol, #markdown ul ul ul {
         padding-left: 35px; }
   #markdown li {
-    letter-spacing: 0.03em;
+    font-size: 2.4vh;
+    letter-spacing: 0.0375em;
     margin-bottom: 5px; }
   #markdown a {
     color: #1c74a0;
@@ -1339,11 +1340,12 @@ code {
   #markdown hr {
     border-top: 1px solid #ddd; }
   #markdown p {
-    font-size: 2.3vh;
+    font-size: 2.4vh;
+    letter-spacing: 0.0375em;
     line-height: 1.5;
     margin: 0 0 16px !important; }
   #markdown pre {
-    background: #3d3d3d;
+    background: #404040;
     color: rgba(255, 255, 255, 0.75);
     border: 1px inset #fff;
     border-radius: 10px;
@@ -1352,6 +1354,7 @@ code {
     box-shadow: inset 0 0 14px rgba(0, 0, 0, 0.5); }
     #markdown pre code {
       font-family: "Source Code Pro", "Monaco", "Ubuntu Mono", "Dejavu Sans Mono", "Consolas", monospace !important;
+      background: #404040;
       color: rgba(255, 255, 255, 0.75);
       letter-spacing: 0.045em;
       border-radius: 10px; }
@@ -1395,9 +1398,27 @@ code {
   #markdown > *:last-child {
     margin-bottom: 0 !important; }
 
-.alert-danger {
+.alert-success, .alert-info, .alert-danger {
   width: auto !important;
-  padding-right: 50px !important; }
+  padding: 10px 80px 10px 15px !important;
+  margin-top: 25px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  outline: none !important; }
+  .alert-success span, .alert-info span, .alert-danger span {
+    letter-spacing: 0.05em !important;
+    line-height: 1.25;
+    vertical-align: middle; }
+    .alert-success span strong, .alert-info span strong, .alert-danger span strong {
+      font-size: 1.15em !important; }
+    .alert-success span:before, .alert-info span:before, .alert-danger span:before {
+      position: relative !important;
+      font-size: 1.85em !important;
+      top: -0.35px !important;
+      margin-right: 3px !important;
+      margin-bottom: 20px !important; }
+  .alert-success button, .alert-info button, .alert-danger button {
+    top: 26.65% !important;
+    outline: none !important; }
 
 [data-tooltip]:after {
   content: "";
