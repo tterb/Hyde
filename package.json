@@ -6,8 +6,7 @@
   "productName": "Hyde",
   "scripts": {
     "start": "gulp start",
-    "build": "rm -rf dist && gulp build",
-    "test": "echo \"There isn't a specified test\" && exit 1"
+    "build": "rm -rf dist && gulp build"
   },
   "bin": {
     "hyde": "./bin/hyde"
