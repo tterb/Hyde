@@ -1,22 +1,23 @@
 
 const electron = require('electron');
-const {app} = require('electron')
+const {app} = require('electron');
 const remote = electron.remote;
 const ipc = electron.ipcRenderer;
 const dialog = electron.remote.dialog;
 const shell = electron.shell;
 const fs = remote.require('fs');
 const main = remote.require('./main');
-const func = require('./js/functions');
-const setter = require('./js/settings');
+const path = require('path');
 const config = require('./config');
 const showdown  = require('showdown');
-const path = require('path');
+const func = require('./js/functions');
+const setter = require('./js/settings');
+const notify = require('./js/notify')
 const parsePath = require("parse-filepath");
 const settings = require('electron-settings');
 const storage = require('electron-json-storage');
 const spellChecker = require('codemirror-spell-checker');
-var console = require('console');
+var isBinaryFile = require("isbinaryfile");
 var os = require("os");
 require('showdown-youtube');
 require('showdown-prettify');
@@ -27,29 +28,23 @@ var isFileLoadedInitially = false,
     currentTheme = settings.get('editorTheme'),
     currentFile = '';
 
-// Allows render process to create new windows
-function openNewWindow() {
-  main.createWindow();
-}
-
 getUserSettings();
 
 var conf = {
-    mode: "yaml-frontmatter",
-    base: "gfm",
-    viewportMargin: 100000000000,
-    tabSize: 2,
-    lineNumbers: settings.get('lineNumbers'),
-    lineWrapping: settings.get('lineWrapping'),
-    showTrailingSpace: settings.get('showTrailingSpace'),
-    autoCloseBrackets: settings.get('matchBrackets'),
-    autoCloseTags: settings.get('matchBrackets'),
-    extraKeys: {
-      Enter: 'newlineAndIndentContinueMarkdownList'
-    }
+  mode: "yaml-frontmatter",
+  base: "gfm",
+  viewportMargin: 100000000000,
+  tabSize: 2,
+  lineNumbers: settings.get('lineNumbers'),
+  lineWrapping: settings.get('lineWrapping'),
+  showTrailingSpace: settings.get('showTrailingSpace'),
+  autoCloseBrackets: settings.get('matchBrackets'),
+  autoCloseTags: settings.get('matchBrackets'),
+  extraKeys: {
+    Enter: 'newlineAndIndentContinueMarkdownList'
+  }
 }
 
-// var themeFiles = fs.readdirSync('./css/theme'),
 var theme = settings.get('editorTheme');
 if(main.getThemes().filter((temp) => { return temp.value === theme })) {
   conf.theme = theme;
@@ -59,12 +54,12 @@ if(main.getThemes().filter((temp) => { return temp.value === theme })) {
 includeTheme(theme);
 
 if(settings.get('enableSpellCheck')) {
-    conf.mode = "spell-checker";
-    conf.backdrop = "yaml-frontmatter";
-    spellChecker({ codeMirrorInstance: CodeMirror });
+  conf.mode = "spell-checker";
+  conf.backdrop = "yaml-frontmatter";
+  spellChecker({ codeMirrorInstance: CodeMirror });
 }
 
-var cm = CodeMirror.fromTextArea(document.getElementById("plainText"), conf);
+var cm = CodeMirror.fromTextArea(document.getElementById('plainText'), conf);
 
 if(os.type() === 'Darwin') {
   $('#settings-title').css('paddingTop', '0.9em');
@@ -77,8 +72,6 @@ if(os.type() === 'Darwin') {
 function includeTheme(theme) {
   var themeTag,
       head = document.getElementsByTagName('head')[0];
-  //     editorColor = $('.cm-s-'+theme).css('background-color');
-  // $('#leftFade').css('background', '-webkit-linear-gradient(top,  '+editorColor+' 35%, transparent');
   if(theme === undefined)
     theme = 'one-dark';
   if(document.getElementById('themeLink')) {
@@ -122,7 +115,6 @@ window.onload = () => {
 
   cm.on('change', (cm) => {
     countWords();
-    // get value right from instance
     var markdownText = cm.getValue();
     // Remove the YAML frontmatter from live-preview
     if(settings.get('hideYAMLFrontMatter'))
@@ -136,7 +128,6 @@ window.onload = () => {
     converter.setOption('noHeaderId', true);
     html = converter.makeHtml(markdownText);
     htmlPreview.val(html);
-
     if(this.isFileLoadedInitially) {
       this.setClean();
       this.isFileLoadedInitially = false;
@@ -147,15 +138,18 @@ window.onload = () => {
       this.updateWindowTitle();
     }
   });
-
+  // Read file if given from commandline
+  if(__args__.file !== null) {
+    if(__args__.file.includes('.md')) {
+      readFileIntoEditor(path.join(process.cwd(), __args__.file));
+    }
   // Open first window with the most recently saved file
-  if(main.getWindows().size <= 1) {
-    storage.get('markdown-savefile', function(error, data) {
-      if (error) throw error;
-      if ('filename' in data) {
+} else if(main.getWindows().size <= 1) {
+    storage.get('markdown-savefile', function(err, data) {
+      if(err) throw err;
+      if('filename' in data) {
         fs.readFile(data.filename, 'utf-8', function(err, data) {
-          if(err)
-            alert("An error ocurred while opening the file "+ err.message)
+          if(err) notify("An error ocurred while opening the file" + err.message, "error");
           cm.getDoc().setValue(data);
           cm.getDoc().clearHistory();
         });
@@ -164,7 +158,6 @@ window.onload = () => {
       }
     });
   }
-
 
   $("#minimize").on('click', () => { remote.BrowserWindow.getFocusedWindow().minimize(); });
   $("#close").on('click', () => { closeWindow(remote.BrowserWindow.getFocusedWindow()); });
@@ -195,7 +188,7 @@ var $prev = $('#previewPanel'),
     $syncScroll = $('#syncScrollToggle'),
     isSynced = settings.get('syncScroll');
 
- // Retaining state in boolean will be more CPU friendly instead of constantly selecting on each event.
+ // Retaining state in boolean will be more CPU friendly rather than selecting on each event.
 var toggleSyncScroll = () => {
   if(settings.get('syncScroll')) {
     $syncScroll.attr('class', 'fa fa-unlink');
@@ -215,7 +208,6 @@ var codeScrollable = () => {
   var info = cm.getScrollInfo();
   return info.height - info.clientHeight;
 }
-
 var prevScrollable = () => {
   return $markdown.height() - $prev.height();
 }
@@ -224,7 +216,6 @@ var prevScrollable = () => {
 var muteScroll = (obj, listener) => {
   obj.off('scroll', listener);
   obj.on('scroll', tempHandler);
-
   var tempHandler = () => {
     obj.off('scroll', tempHandler);
     obj.on('scroll', listener);
@@ -236,8 +227,6 @@ var codeScroll = () => {
   var scrollable = codeScrollable();
   if (scrollable > 0 && isSynced) {
     var percent = cm.getScrollInfo().top / scrollable;
-
-    // Since we'll be triggering scroll events.
     muteScroll($prev, prevScroll);
     $prev.scrollTop(percent * prevScrollable());
   }
@@ -253,7 +242,6 @@ var prevScroll = () => {
   var scrollable = prevScrollable();
   if (scrollable > 0 && isSynced) {
     var percent = $(this).scrollTop() / scrollable;
-    // Since we'll be triggering scroll events.
     muteScroll(cm, codeScroll);
     cm.scrollTo(percent * codeScrollable());
   }
@@ -263,7 +251,6 @@ $prev.on('scroll', prevScroll);
 function openNewFile(target) {
   var filePath = path.join(__dirname, target);
   main.createWindow();
-  // var win = Array.from(main.getWindows()).pop();
   readFileIntoEditor(filePath)
   app.addRecentDocument(filePath)
 }
@@ -275,21 +262,20 @@ function setFile(file, isWritable) {
 
 function readFileIntoEditor(file) {
   if(file === "") return;
-  fs.readFile(file.toString(), function (err, data) {
-    if(err) { console.log("Read failed: " + err); }
+  fs.readFile(file, function (err, data) {
+    if(err) notify("Read failed: " + err, "error");
     cm.getDoc().setValue(String(data));
     cm.getDoc().clearHistory()
   });
+  this.isFileLoadedInitially = true;
+  this.currentFile = file;
 }
 
 function writeEditorToFile(file) {
   var str = this.cm.getValue();
   fs.writeFile(file, this.cm.getValue(), function (err) {
-    if(err) {
-      console.log("Write failed: " + err);
-      return;
-    }
-    console.log("Write completed.");
+    if(err) return notify("Write failed: " + err, "error");
+    notify("Write completed.", "success");
   });
 }
 
@@ -326,9 +312,14 @@ $('.spinner .btn:last-of-type').on('click', function() {
 
 // Word count
 function countWords() {
-    var wordcount = cm.getValue().split(/\b[\s,\.-:;]*/).length;
-    document.getElementById("wordcount").innerHTML = "words: " + wordcount.toString();
-    return cm.getValue().split(/\b[\s,\.-:;]*/).length;
+  var wordcount = cm.getValue().split(/\b[\s,\.-:;]*/).length;
+  document.getElementById("wordcount").innerHTML = "words: " + wordcount.toString();
+  return cm.getValue().split(/\b[\s,\.-:;]*/).length;
+}
+
+// Allows render process to create new windows
+function openNewWindow() {
+  main.createWindow();
 }
 
 function openInBrowser(url) {
