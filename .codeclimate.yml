@@ -13,12 +13,16 @@ engines:
         enabled: false
       box-sizing:
         enabled: false
+      outline-none:
+        enabled: false
+      duplicate-background-images:
+        enabled: false
   duplication:
     enabled: true
     config:
       languages:
         javascript:
-          mass_threshold: 50
+          mass_threshold: 85
   eslint:
     enabled: true
     checks:
@@ -40,10 +44,6 @@ ratings:
   - "**.inc"
   - "**.js"
   - "**.jsx"
-  - "**.module"
-  - "**.php"
-  - "**.py"
-  - "**.rb"
 exclude_paths:
   - "css/bootstrap.min.css"
   - "css/metro-icons.min.css"
@@ -329,3 +329,4 @@ rules:
   symbol-description: off
   template-curly-spacing: off
   yield-star-spacing: off
+  "complexity": ["error", 15]
