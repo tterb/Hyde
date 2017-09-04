@@ -176,7 +176,10 @@ window.onload = () => {
     $(this).children('ul').hide();
   });
   $('#yamlPath').on('click', () => { setFrontMatterTemplate() });
-  $('#table-button').on('click', () => { createTable($('#columns').val(),$('#rows').val()) });
+  $('#table-button').on('click', () => {
+    $('#table-modal').modal();
+    createTable($('#columns').val(),$('#rows').val());
+  });
 }
 
 
@@ -234,10 +237,7 @@ var codeScroll = () => {
 }
 cm.on('scroll', codeScroll);
 $(window).on('resize', codeScroll);
-$(window).on('resize', () => {
-  settings.set('windowWidth', parseInt($(window).width(),10));
-  settings.set('windowHeight', parseInt($(window).height(),10));
-});
+$(window).on('resize', manageWindowSize());
 
 var prevScroll = () => {
   var scrollable = prevScrollable();
@@ -248,6 +248,7 @@ var prevScroll = () => {
   }
 }
 $prev.on('scroll', prevScroll);
+
 
 function openNewFile(target) {
   var filePath = path.join(__dirname, target);
@@ -292,24 +293,22 @@ $(window).on('resize', () => {
 $('#version-modal').text('v'+main.appVersion())
 
 // editor & preview font size inputs
-$('.spinner .btn:first-of-type').on('click', function() {
+$('.spinner').on('click', function() {
   var btn = $(this),
       input = btn.closest('.spinner').find('input'),
-      value = parseInt(input.val(), 10);
-  if (input.attr('max') === undefined || value < parseInt(input.attr('max'), 10)) {
-    input.val(value + 1);
-  } else {
-    btn.next("disabled", true);
-  }
-});
-$('.spinner .btn:last-of-type').on('click', function() {
-  var btn = $(this),
-      input = btn.closest('.spinner').find('input'),
-      value = parseInt(input.val(), 10);
-  if (input.attr('min') === undefined || value > parseInt(input.attr('min'), 10)) {
-    input.val(value - 1);
-  } else {
-    btn.prev("disabled", true);
+      value = parseFloat(input.val());
+  if(btn.attr('id').includes('up')) {
+    if (!input.attr('max') || value < parseFloat(input.attr('max'))) {
+      input.val(value + 0.5);
+    } else {
+      btn.next("disabled", true);
+    }
+  } else if(btn.attr('id').includes('down')) {
+    if (!input.attr('min') || value > parseFloat(input.attr('min'))) {
+      input.val(value - 0.5);
+    } else {
+      btn.prev("disabled", true);
+    }
   }
 });
 

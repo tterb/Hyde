@@ -1,6 +1,5 @@
 
-var body = $('#body'),
-    menu = $('#appMenu'),
+var menu = $('#appMenu'),
     toolbar = $('#toolbar'),
     leftFade = $('#leftFade'),
     rightFade = $('#rightFade'),
@@ -64,50 +63,54 @@ function syncScrollCheck() {
 
 var formatHead = () => {
   var dragArea = $('#draggable'),
+      textPanel = $('#textPanel'),
       menuToggle = $('#menuToggle');
-  if(process.platfrom === 'darwin') {
+  if(process.platfrom === 'darwin')
     if(menu.is(':visible') !== toolbar.is(':visible'))
       toggleMenu();
-  }
   if(menu.is(':visible')) {
     toolbar.css({ top: '26px' });
-    toolbar.css('z-index', '999');
     dragArea.css('width', '-webkit-calc(100% - 255px)');
     menuToggle.hide();
     if(toolbar.is(':visible')) {
-      body.css('paddingTop', '30px');
       menu.css('box-shadow', 'none');
       leftFade.css('top', '8px');
-      $('#textPanel').css('paddingTop', '7px');
+      textPanel.css('paddingTop', '35px');
     } else {
-      body.css('paddingTop', '0px');
+      textPanel.css('paddingTop', '0px');
       menu.css('box-shadow', '0 1px 20px rgba(0,0,0,0.3)');
       leftFade.css('top', '0');
-      $('#textPanel').css('paddingTop', '0px');
+      textPanel.css('paddingTop', '0px');
     }
   } else {
     toolbar.css({ top: '0px' });
-    toolbar.css('z-index', '99999');
-    body.css('paddingTop', '0px');
-    $('#textPanel').css('paddingTop', '0px');
+    textPanel.css('paddingTop', '0px');
     if(toolbar.is(':visible')) {
-      body.css('paddingTop', '7px');
+      textPanel.css('paddingTop', '7px');
       dragArea.css('width', '-webkit-calc(50% - 50px)');
       editor.css('paddingTop', '7px');
     } else {
       menuToggle.show();
-      body.css('paddingTop', '0px');
+      textPanel.css('paddingTop', '0px');
       dragArea.css({ 'width': 'calc(100% - 117px)' });
       editor.css('paddingTop', '0px');
     }
   }
+}
+
+function manageWindowSize() {
+  var codeMirror = $('.CodeMirror-sizer');
   if(preview.is(':visible') && parseInt($('#body').width(),10) > 924) {
     toolbar.css('width', '50%');
-    $('.CodeMirror-sizer').css('margin-right', '0');
+    codeMirror.css('margin-right', '0');
   } else {
     toolbar.css('width', '100%');
-    $('.CodeMirror-sizer').css('margin-right', '8px');
+    codeMirror.css('margin-right', '8px');
+    if(!menu.is(':visible') && toolbar.is(':visible'))
+      $('#draggable').css('width','calc(36% - 50px)');
   }
+  settings.set('windowWidth', parseInt($(window).width(),10));
+  settings.set('windowHeight', parseInt($(window).height(),10));
 }
 
 function toggleMenu() {
@@ -170,6 +173,7 @@ function togglePreview() {
     settings.set('showPreview', false);
   }
   formatHead();
+  manageWindowSize();
 }
 
 function setPreviewMode(opt) {
@@ -248,7 +252,7 @@ $('#previewMode').on('changed.bs.select', function (e, clickedIndex, newValue, o
 
 $('#previewFont-input, #previewFont-up, #previewFont-down').bind('keyup mouseup', function () {
   var value = $('#previewFont-input').val();
-  editor.css('fontSize', value.toString()+'px');
+  preview.css('fontSize', value.toString()+'px');
   settings.set('previewFontSize', value);
 });
 
