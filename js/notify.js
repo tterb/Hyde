@@ -8,6 +8,9 @@ function notify(text, type) {
   } else if(type === 'info') {
     title = '<strong>Info: </strong>';
     icon = 'fa fa-info-circle';
+  } else if(type === 'warning') {
+    title = '<strong>Warning: </strong>';
+    icon = 'fa fa-exclamation-triangle';
   } else if(type === 'error') {
     title = '<strong>Error: </strong>';
     icon = 'fa fa-exclamation-circle';
@@ -23,7 +26,7 @@ function notify(text, type) {
       from: "top",
       align: "right"
     },
-    offset: 2,
+    offset: 5,
     spacing: 10,
     z_index: 99999,
   });
