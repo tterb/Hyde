@@ -162,7 +162,7 @@
     <div id="toolbar">
       <div class="toolbar-buttons" style="padding:5px 12px 2px;">
         <a onclick="toggleHeading();" style="padding-left:4x;" data-tooltip="Header (Ctrl+H)" class="fa fa-header editor-toolbar"></a>
-        <a onclick="toggleFormat('strong');" data-tooltip="Bold (Ctrl+B)" class="mif-bold editor-toolbar"></a>
+        <a onclick="toggleFormat('strong');" data-tooltip="Bold (Ctrl+B)" class="fa fa-bold editor-toolbar"></a>
         <a onclick="toggleFormat('em');" data-tooltip="Italic (Ctrl+I)" class="mif-italic editor-toolbar"></a>
         <a onclick="toggleFormat('strikethrough');" title="Strikethrough (Ctrl+-)" class="mif-strikethrough editor-toolbar"></a>
         <i class="separator">|</i>
@@ -172,9 +172,8 @@
         <a onclick="toggleOrderedList();" data-tooltip="Ordered List" class="mif-list-numbered editor-toolbar"></a>
         <i class="separator">|</i>
         <a onclick="insert('link');" data-tooltip="Create Link (Ctrl+L)" class="mif-link editor-toolbar"></a>
-        <a onclick="insert('image');" data-tooltip="Insert Image (Ctrl+Alt+I)" class="fa fa-picture-o editor-toolbar"></a>
-        <!-- <a onclick="insert('table');" data-tooltip="Insert Table (Ctrl+Shift+T)" class="fa fa-table editor-toolbar"></a> -->
-        <a data-toggle="modal" data-target="#table-modal" data-tooltip="Insert Table (Ctrl+Shift+T)" class="fa fa-table editor-toolbar"></a>
+        <a onclick="insert('image');" data-tooltip="Insert Image (Ctrl+K)" class="fa fa-picture-o editor-toolbar"></a>
+        <a data-toggle="modal" data-target="#table-modal" data-tooltip="Insert Table (Ctrl+Shift+T)" class="fa mif-table editor-toolbar"></a>
         <a onclick="insert('hr');" data-tooltip="Insert Horizontal Rule (Ctrl+Shift+_)" class="fa fa-minus editor-toolbar"></a>
         <i class="separator">|</i>
         <a data-toggle="modal" data-target="#markdown-modal" data-tooltip="Markdown Help" class="fa fa-question-circle editor-toolbar"></a>
@@ -322,7 +321,7 @@
         <div class="modal-content">
           <div class="modal-body">
             <div class="modal-header">
-              <button id="close" type="button" class="close" data-dismiss="modal"><img src="./img/buttons/close.png"></img></button>
+              <button type="button" class="modal-close" data-dismiss="modal"><img class="inactive" src="img/buttons/close.png" alt="Close"/><img class="active" src="img/buttons/close_active.png" alt="Close"/></button>
               <h4 class="modal-title">Table</h4>
             </div>
             <div class="table-content">
@@ -334,7 +333,7 @@
                   <input type="number" id="rows" placeholder="Rows" class="form-control" value="">
                 </li>
                 <li>
-                  <button id="table-button"><i class="fa fa-arrow-right"></i></button>
+                  <button id="table-button" data-dismiss="modal"><i class="fa fa-arrow-right"></i></button>
                 </li>
               </ul>
             </div>
@@ -347,7 +346,7 @@
       <div class="modal-dialog">
         <div class="modal-content modal-inset">
           <div class="modal-header">
-            <button id="close" type="button" class="close" data-dismiss="modal"><img src="./img/buttons/close.png"></img></button>
+            <button type="button" class="modal-close" data-dismiss="modal"><img src="./img/buttons/close.png"></img></button>
             <h4 class="modal-title">Markdown Help</h4>
           </div>
           <div class="modal-body-inset">
@@ -411,7 +410,7 @@
         <div class="modal-content">
           <div class="modal-body">
             <div class="modal-header">
-              <button id="close" type="button" class="close" data-dismiss="modal"><img src="./img/buttons/close.png"></img></button>
+              <button type="button" class="modal-close" data-dismiss="modal"><img src="./img/buttons/close.png"></img></button>
             </div>
             <img id="hyde-img" src="./img/Hyde.png"/>
             <div class="about-content">
@@ -431,13 +430,13 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <button id="close" type="button" class="close" data-dismiss="modal"><img src="./img/buttons/close.png"><img></button>
+            <button type="button" class="modal-close" data-dismiss="modal"><img src="./img/buttons/close.png"><img></button>
             <h4 class="modal-title">Unsaved Changes</h4>
           </div>
           <div class="modal-body">
             <section class="modal--default__content" id="modal-body-region">
               <div class="unsaved-close">
-                <span id="unsaved-body" class="body"></span>
+                <span id="unsaved-body"></span>
                 <div class="unsaved-buttons">
                   <a href="#" id="unsavedConfirm" class="modal-button bg-gradient1"><span>Save</span></a>
                   <a href="#" id="unsavedDeny" class="modal-button bg-gradient1"><span>Don't Save</span></a>
