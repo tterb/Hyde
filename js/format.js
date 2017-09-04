@@ -188,26 +188,25 @@ function _toggleLine(cm, name) {
 function insert(obj) {
     var stat = getState(cm);
     if(obj === 'link')
-      _replaceSelection(cm, stat.link, insertTexts.link, "http://");
+      insertLink(cm, obj);
     else if(obj === 'image')
-      _replaceSelection(cm, stat.image, insertTexts.image, "http://");
+      insertLink(cm, obj);
     else if(obj === 'hr')
-      _replaceSelection(cm, stat.image, insertTexts.horizontalRule);
+      insertHorizontalLine();
     else return;
 }
 
 function createTable(cols, rows) {
+  if(!cols || !rows) return notify('Invalid table parameters', 'error');
   var startPoint = cm.getCursor("start"),
       text = cm.getLine(startPoint.line),
       start = text.slice(0, startPoint.ch),
       end = text.slice(startPoint.ch),
-      table = "| ",
-      sep = "| ",
-      body = "| ";
+      table = sep = body = "| ";
   for(let i = 1; i <= cols; i++) {
     table += "Column "+i+" |";
     sep += "-------- |";
-    body += "Text     |";
+    body += " Text     |";
   }
   table += "  \n"+sep+"  \n";
   for(let i = 0; i < rows; i++) {
@@ -251,56 +250,36 @@ function _toggleHeading(direction) {
   cm.focus();
 }
 
-function _replaceSelection(cm, active, startEnd, url) {
+// Insert link or image-link syntax
+function insertLink(cm, type) {
   var startPoint = cm.getCursor("start"),
       endPoint = cm.getCursor("end"),
-      start = startEnd[0],
-      end = startEnd[1],
-      text;
-  if(url) {
-    end = end.replace("#url#", url);
+      modi = ['[','](http://)'];
+  if(type === 'image')
+    modi[0] = '!'+modi[0];
+  if(!cm.somethingSelected()) {
+    var word = cm.findWordAt(cm.getCursor());
+    startPoint = word.anchor;
+    endPoint = word.head;
   }
-  if(active) {
-    text = cm.getLine(startPoint.line);
-    start = text.slice(0, startPoint.ch);
-    end = text.slice(startPoint.ch);
-    cm.replaceRange(start + end, {line: startPoint.line, ch: 0});
-  } else {
-    text = cm.getSelection();
-    cm.replaceSelection(start + text + end);
-    startPoint.ch += start.length;
-    if(startPoint !== endPoint) {
-      endPoint.ch += start.length;
-    }
-  }
+  var text = cm.getRange(startPoint, endPoint);
   cm.setSelection(startPoint, endPoint);
+  cm.replaceSelection(modi[0]+text+modi[1]);
+  startPoint.ch += modi[0].length;
+  if(startPoint !== endPoint) {
+    endPoint.ch += modi[0].length;
+  }
+  cm.setCursor(endPoint.line, endPoint.ch+(end.length-1));
   cm.focus();
 }
 
-var temp = "";
-
-function setFrontMatterTemplate() {
-  storage.get('markdown-savefile', (err, data) => {
-    if(err) notify(err, "error");
-    var options = {
-      'properties': ['openFile'],
-      'filters': [
-        { name: 'All', 'extensions': ["yaml", "yml", "md", "markdown", "txt", "text"] },
-        { name: 'YAML', 'extensions': ["yaml", "yml"] },
-        { name: 'Markdown', 'extensions': ["md", "markdown"] },
-        { name: 'Text', 'extensions': [ "txt", "text"] }
-      ]
-    };
-    dialog.showOpenDialog(options, (file) => {
-      if(file === undefined)
-        return notify("You didn't select a file", "error");
-      fs.readFile(file[0], 'utf-8', (err, data) => {
-        if(err)
-          notify("An error ocurred while opening the file "+err.message, "error");
-        settings.set('frontMatterTemplate', file[0]);
-      });
-    });
-  });
+function insertHorizontalLine() {
+  var startPoint = cm.getCursor('start'),
+      endPoint = cm.getCursor('end'),
+      text = '\n-------------------\n';
+  if(startPoint.ch > 2 || startPoint !== endPoint)
+    text = '\n'+text+'\n';
+  cm.replaceSelection(text);
 }
 
 // Inserts YAML-frontmatter from template file
@@ -340,8 +319,8 @@ function formatDate() {
 
 // Automatically sets 'date' parameters to the current date
 function insertDate(doc, date) {
-  var str = "";
-  var arr = [];
+  var arr = [],
+      str = "";
   doc.split('\n').forEach((line) => {
     arr.push(line);
     line = line.replace(/ \n/g,'');
@@ -352,7 +331,7 @@ function insertDate(doc, date) {
   return str;
 }
 
-function removeYAMLPreview(text) {
+function removeYAMLPreview(preview) {
     var re = new RegExp(/((---\n))(\w|\d|\n|[().,\-:;@#$%^&*\[\]\"\'+–\/\/®°⁰!?{}|`~]| )+?((---))/gm, "mg");
-    return text.replace(re, "<br>");
+    return preview.replace(re, "<br>");
 }
