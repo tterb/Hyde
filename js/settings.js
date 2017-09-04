@@ -232,6 +232,30 @@ function toggleFullscreen() {
   }
 }
 
+function setFrontMatterTemplate() {
+  storage.get('markdown-savefile', (err, data) => {
+    if(err) notify(err, "error");
+    var options = {
+      'properties': ['openFile'],
+      'filters': [
+        { name: 'All', 'extensions': ["yaml", "yml", "md", "markdown", "txt", "text"] },
+        { name: 'YAML', 'extensions': ["yaml", "yml"] },
+        { name: 'Markdown', 'extensions': ["md", "markdown"] },
+        { name: 'Text', 'extensions': [ "txt", "text"] }
+      ]
+    };
+    dialog.showOpenDialog(options, (file) => {
+      if(file === undefined)
+        return notify("You didn't select a file", "error");
+      fs.readFile(file[0], 'utf-8', (err, data) => {
+        if(err)
+          notify("An error ocurred while opening the file "+err.message, "error");
+        settings.set('frontMatterTemplate', file[0]);
+      });
+    });
+  });
+}
+
 
 // Handle settings-menu changes
 $('#editorFont-input, #editorFont-up, #editorFont-down').bind('keyup mouseup', function () {
