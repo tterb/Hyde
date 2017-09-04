@@ -626,7 +626,6 @@ pre {
       }
     }
     .table-shortcut {
-      // text-align: center;
       font-family: _font(family-fixed);
       border-left: none;
       padding-left: 18px;
@@ -658,7 +657,7 @@ pre {
     line-height: 1.6;
     list-style-image: url('./img/bullet_small.png');
     margin-left: 47px;
-    padding-bottom: 2em;
+    padding-bottom: 1em;
     li {
       a {
         color: rgba(255,255,255,0.65);
@@ -742,6 +741,33 @@ pre {
         padding-bottom: 20px;
         &:before {
           font-size: 1.65em;
+        }
+      }
+    }
+  }
+}
+
+#credits {
+  position: relative;
+  background: #292C33;
+  padding-bottom: 2em;
+  .credits-list {
+    background: #292C33;
+    padding: 0 35px 12px;
+    margin-left: 5em;
+    margin-bottom: 1em;
+    list-style-image: url('./img/bullet_small.png');
+    li {
+      padding-left: 9px;
+      padding-bottom: 5px;
+      a {
+        font-size: 1.55em;
+        letter-spacing: 0.05em;
+        line-height: 1.5;
+        color: rgba(255,255,255,0.6);
+        transition: all 300ms ease;
+        &:hover {
+          font-weight: 500;
         }
       }
     }
