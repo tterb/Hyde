@@ -43,11 +43,11 @@ As many users already know, [Jekyll](https://jekyllrb.com) holds many benefits o
   - Instantly observe changes to your documents in rendered Markdown or HTML as you create them
   - YAML frontmatter recongition ensures that only your intended content is rendered
 * Sync-scrolling allows the preview to keep up with you as you type
-* GitHub Flavored Markdown (GFM)
+* GitHub Flavored Markdown ([GFM](https://github.github.com/gfm/))
 * User-friendly formatting via the toolbar
 * Syntax highlighting for Markdown, GFM-compatible HTML, and YAML frontmatter
 * A collection of 20+ popular syntax-themes
-* :tada: FontAwesome, Glyphicon, and Emoji support :tada: 
+* :tada: [Font Awesome](http://fontawesome.io), [Glyphicon](http://glyphicons.com/), and [Emoji](https://www.webpagefx.com/tools/emoji-cheat-sheet/) support :tada: 
 * Full screen mode
   - Write free of all distractions
 * Integrated spell-checking and word count
@@ -62,12 +62,24 @@ As many users already know, [Jekyll](https://jekyllrb.com) holds many benefits o
 
 # Installation
 
-After cloning and unzipping the repository, install and run the application using the command:
+Cloning, installing, and running **Hyde** is as simple as executing the following commands:
 
-```shell
-$ npm install && npm start
+```sh
+# Clone the repository
+$ git clone https://github.com/jonsn0w/hyde
+
+# Navigate to the directory
+$ cd hyde
+
+# Install Hyde 
+$ npm install -g ./
 ```
 
+Now, **Hyde** can easily be launched from anywhere using the following command:
+
+```sh
+$ hyde <filename>
+```
 <br>
 
 -------------------
@@ -76,7 +88,7 @@ $ npm install && npm start
 
 Preprocessor compilation and live-reload functionalities are available via the following command:
 
-```shell
+```sh
 $ gulp watch
 ```
 
