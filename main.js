@@ -301,17 +301,18 @@ function sendShortcut(cmd) {
 }
 
 // Register local keyboard shortcuts for formatting Markdown
+localShortcut.register('CmdOrCtrl+Shift+a', () => { sendShortcut('ctrl+shift+a'); });
 localShortcut.register('CmdOrCtrl+b', () => { sendShortcut('ctrl+b'); });
-localShortcut.register('CmdOrCtrl+i',() => { sendShortcut('ctrl+i'); });
-localShortcut.register('CmdOrCtrl+-',() => { sendShortcut('ctrl+-'); });
+localShortcut.register('CmdOrCtrl+i', () => { sendShortcut('ctrl+i'); });
+localShortcut.register('CmdOrCtrl+-', () => { sendShortcut('ctrl+-'); });
+localShortcut.register('CmdOrCtrl+Shift+-', () => { sendShortcut('ctrl+shift+-'); });
 localShortcut.register('CmdOrCtrl+/', () => { sendShortcut('ctrl+/'); });
 localShortcut.register('CmdOrCtrl+l', () => { sendShortcut('ctrl+l'); });
 localShortcut.register('CmdOrCtrl+f', () => { sendShortcut('ctrl+f'); });
 localShortcut.register('CmdOrCtrl+Shift+f', () => { sendShortcut('ctrl+shift+f'); });
 localShortcut.register('CmdOrCtrl+h', () => { sendShortcut('ctrl+h'); });
 localShortcut.register('CmdOrCtrl+k', () => { sendShortcut('ctrl+k'); });
-localShortcut.register('CmdOrCtrl+Shift+t', () => { sendShortcut('ctrl+shift+t'); });
-localShortcut.register('CmdOrCtrl+Shift+-', () => { sendShortcut('ctrl+shift+-'); });
+localShortcut.register('CmdOrCtrl+t', () => { sendShortcut('table-modal'); });
 localShortcut.register('CmdOrCtrl+r', () => { sendShortcut('ctrl+r'); });
 localShortcut.register('CmdOrCtrl+m', () => { sendShortcut('ctrl+m'); });
 localShortcut.register('CmdOrCtrl+.', () => { sendShortcut('ctrl+.'); });
