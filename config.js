@@ -13,7 +13,6 @@ module.exports = new Config ({
     isFullscreen: false,
     // Editor
     editorTheme: 'one-dark',
-    editorFont: 'monospaced',
     editorFontSize: 9.5,
     editorLineHeight: 1.5,
     dynamicFontSize: false,
@@ -25,7 +24,7 @@ module.exports = new Config ({
     enableSpellCheck: false,
     // Preview
     previewMode: 'markdown',
-    previewFont: 'sans-serif',
+    previewProfile: 'Default',
     previewFontSize: 10,
     previewLineHeight: 1.45,
     hideYAMLFrontMatter: true,
