@@ -7,23 +7,23 @@ var menu = $('#appMenu'),
     editor = $('.CodeMirror-wrap'),
     syncScroll = $('#syncScrollToggle');
 
-var opt = [
+var opts = [
   { name: 'showMenu', action: () => { toggleMenu(); }},
   { name: 'showToolbar', action: () => { toggleToolbar(); }},
   { name: 'showPreview', action: () => { togglePreview(); }},
   { name: 'previewProfile' },
   { name: 'syncScroll', action: () => { toggleSyncScroll; }},
-  { name: 'isFullscreen', action: () => { toggleFullscreen(); }},
+  { name: 'isMaximized', action: () => { toggleMaximize(); }},
   { name: 'lineNumbers', action: () => { toggleLineNumbers(); }},
   { name: 'showTrailingSpace', action: () => { toggleWhitespace() }},
   { name: 'lineWrapping' }, { name: 'editorFontSize' }, { name: 'tabSize' }, { name: 'enableSpellCheck' }, { name: 'previewMode' }, { name: 'previewFontSize' }, { name: 'previewLineHeight' }, { name: 'hideYAMLFrontMatter' }, { name: 'matchBrackets' }, { name: 'keepInTray' }, { name: 'frontMatterTemplate' }
 ];
 
 function getUserSettings() {
-    opt.forEach(checkSetting);
+    opts.forEach(checkSetting);
     setPreviewMode(settings.get('previewMode'));
     setPreviewProfile(settings.get('previewProfile'));
-    opt.forEach(applySettings);
+    opts.forEach(applySettings);
     formatHead();
     syncScrollCheck();
     if(process.platform === 'darwin') {
@@ -37,6 +37,18 @@ function getUserSettings() {
 function checkSetting(opt) {
   if(!settings.has(opt.name))
     settings.set(opt.name, config.get(opt.name));
+}
+
+
+function toggleSetting(opt) {
+  var arr = [];
+  opts.forEach((opt) => {
+    if(opt.name === element && opt.action)
+      opt.action();
+  })
+  // var index = opt.indexOf(element);
+  // if(index > -1 && opts[index].action)
+  return arr;
 }
 
 function applySettings(opt) {
@@ -224,7 +236,9 @@ function toggleLineNumbers() {
   settings.set('lineNumbers', !state);
 }
 
+var act;
 function toggleWhitespace() {
+  act = settings.get('showTrailingSpace');
   var state = settings.get('showTrailingSpace');
   if(state) {
     $('.cm-trailing-space-a').css('text-decoration', 'none');
@@ -236,14 +250,14 @@ function toggleWhitespace() {
   return settings.set('showTrailingSpace', !state);
 }
 
-function toggleFullscreen() {
+function toggleMaximize() {
   var window = electron.remote.getCurrentWindow();
-  if(!window.isFullScreen()) {
-    window.setFullScreen(true);
-    settings.set('isFullscreen', true);
+  if(window.isMaximized) {
+    window.unmaximize();
+    settings.set('isMaximized', false);
   } else {
-    window.setFullScreen(false);
-    settings.set('isFullscreen', false);
+    window.maximize();
+    settings.set('isMaximized', true);
   }
 }
 
@@ -279,22 +293,16 @@ $('#editorFontSize-input, #editorFontSize-up, #editorFontSize-down').bind('keyup
   settings.set('editorFontSize', value);
 });
 
-$('#editorTheme','#previewProfile').on('changed.bs.select', function (e, clickedIndex, newValue, oldValue) {
+$('#editorTheme').on('changed.bs.select', function (e, clickedIndex, newValue, oldValue) {
   var theme = $(e.currentTarget).val().toLowerCase().replace(/ /g,"-");
   includeTheme(theme);
 });
 
-var ci,vnv,ov;
 $('#previewProfile').on('changed.bs.select', function (e, clickedIndex, newValue, oldValue) {
-  ci = clickedIndex; nv = newValue; ov = oldValue;
   var profile = $(e.currentTarget).val();
   $('#previewProfile').attr('title', profile);
   setPreviewProfile(profile);
 });
-
-function getInfo() {
-  return 'newValue: '+nv.toString()+'\noldValue: '+ol.toString()+'\n';
-}
 
 $('#previewMode').on('changed.bs.select', function (e, clickedIndex, newValue, oldValue) {
   var mode = $(e.currentTarget).val().toLowerCase();
@@ -307,17 +315,17 @@ $('#previewFontSize-input, #previewFontSize-up, #previewFontSize-down').bind('ke
   settings.set('previewFontSize', value);
 });
 
-
-$('.settings-toggle').change(() => {
-  opt.forEach((temp) => {
-    if(temp.name === $('.settings-toggle').attr('setting')) {
+var thi;
+$('.switch__input').change(function() {
+  thi = $(this);
+  var val = $(this).val(),
+      name = $(this).attr('setting');
+  opts.forEach((temp) => {
+    if(temp.name === name) {
       if (temp.action) {
         temp.action();
-      } else {
-        var name = $('.settings-toggle').attr('setting');
-        settings.set(name, !settings.get(name));
-        settings.set($('.settings-toggle').attr('setting'))
       }
+      settings.set(name, val === 'on');
     }
   });
 });

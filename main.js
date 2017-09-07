@@ -84,8 +84,8 @@ function getConfig() {
   return conf;
 }
 
-var readFile = null;
 // Check for file from commandline
+var readFile = null;
 process.argv.forEach(function(val, index, array) {
   if (index >= 2 && val.includes('.md')) {
     readFile = val;
@@ -97,8 +97,6 @@ const createWindow = exports.createWindow = (file) => {
   let args = { file: readFile };
   windows.add(newWindow);
   newWindow.showUrl(mainPage, args);
-  // newWindow.loadURL(mainPage);
-  // readFileIntoEditor(file);
   newWindow.once('ready-to-show', () => { newWindow.show(); });
 
   // Open the DevTools.
@@ -210,11 +208,7 @@ var template = [
     {label: "Toggle Menu", accelerator:"CmdOrCtrl+M", click: () => { sendShortcut('ctrl+m'); }},
     {label: "Toggle Toolbar", accelerator:"CmdOrCtrl+.", click: () => { sendShortcut('ctrl+.'); }},
     {label: "Toggle Preview", accelerator:"CmdOrCtrl+P", click: () => { sendShortcut("ctrl+p"); }},
-    {label: "Toggle Full Screen", accelerator:"F11", click: () => {
-      var focusedWindow = BrowserWindow.getFocusedWindow(),
-      isFullScreen = focusedWindow.isFullScreen();
-      focusedWindow.setFullScreen(!isFullScreen);
-    }},
+    {label: "Toggle Full Screen", accelerator:"F11", click: () => { sendShortcut("mazimize"); }},
     {type: "separator"},
     {label: "Themes" },
     {type: "separator"},
@@ -230,7 +224,7 @@ var template = [
       BrowserWindow.getFocusedWindow().minimize();
     }},
     {label: "Zoom", click: () => {
-      toggleFullscreen();
+      toggleMaximize();
     }},
     {type: "separator"},
     {label: "Bring to Front", click: () => {
@@ -246,7 +240,6 @@ var template = [
       shell.openExternal('https://JonSn0w.github.io/Hyde/documentation');
     }},
     {label: "Keybindings", click: () => {
-      // sendShortcut('keybinding-modal');
       shell.openExternal('https://JonSn0w.github.io/Hyde/documentation#keybindings');
     }},
     {label: "Report Issue", click: () => {
@@ -301,6 +294,7 @@ function sendShortcut(cmd) {
 // Register local keyboard shortcuts for formatting Markdown
 localShortcut.register('CmdOrCtrl+Shift+a', () => { sendShortcut('ctrl+shift+a'); });
 localShortcut.register('CmdOrCtrl+b', () => { sendShortcut('ctrl+b'); });
+localShortcut.register('CmdOrCtrl+d', () => { sendShortcut('ctrl+d'); });
 localShortcut.register('CmdOrCtrl+i', () => { sendShortcut('ctrl+i'); });
 localShortcut.register('CmdOrCtrl+-', () => { sendShortcut('ctrl+-'); });
 localShortcut.register('CmdOrCtrl+Shift+-', () => { sendShortcut('ctrl+shift+-'); });
@@ -341,8 +335,7 @@ app.on('ready', function() {
   windowState.manage(mainWindow);
   windows.add(mainWindow);
 
-  if (opts.dev)
-    mainWindow.webContents.openDevTools();
+  if (opts.dev) { mainWindow.webContents.openDevTools(); }
 
   mainWindow.once('ready-to-show', () => {
     mainWindow.show();

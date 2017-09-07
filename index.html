@@ -51,7 +51,7 @@
     </div>
     <div id="metacity">
       <button id="close" class="winButton" style="cursor: pointer;"><img class="active" src="img/buttons/close_active.png" alt="Close"/><img class="inactive" src="img/buttons/close.png" alt="Close"/></button>
-      <button id="maximize" class="winButton" style="cursor: pointer;"><img class="active" src="img/buttons/max_active.png" alt="Maximize" onclick="toggleFullscreen();"/><img class="inactive" src="img/buttons/max.png" alt="Maximize" onclick="toggleFullscreen();"/></button>
+      <button id="maximize" class="winButton" style="cursor: pointer;"><img class="active" src="img/buttons/max_active.png" alt="Maximize" onclick="toggleMaximize();"/><img class="inactive" src="img/buttons/max.png" alt="Maximize" onclick="toggleMaximize();"/></button>
       <button id="minimize" class="winButton" style="cursor: pointer;"><img class="active" src="img/buttons/min_active.png" alt="Minimize"/><img class="inactive" src="img/buttons/min.png" alt="Minimize"/></button>
     </div>
     <div id="appMenu" class="hidden">
@@ -106,7 +106,7 @@
           <li tabindex="-1" href="#" onclick="toggleMenu();"><a class="dropdown-item">Toggle Menu Bar</a><span>Ctrl + M</span></li>
           <li tabindex="-1" href="#" onclick="toggleToolbar();"><a class="dropdown-item">Toggle Toolbar</a><span>Ctrl + .</span></li>
           <li tabindex="-1" href="#" onclick="togglePreview();"><a class="dropdown-item">Toggle Preview</a><span>Ctrl + P</span></li>
-          <li tabindex="-1" href="#" onclick="toggleFullscreen();"><a class="dropdown-item">Toggle Full Screen</a><span>F11</span></li>
+          <li tabindex="-1" href="#" onclick="toggleMaximize();"><a class="dropdown-item">Toggle Full Screen</a><span>F11</span></li>
           <li class="dropdown-divider"></li>
           <li class="dropdown-submenu">
             <a class="test" tabindex="-1" href="#" data-toggle="dropdown" class="dropdown-item">Themes <span class="caret"></span></a>
@@ -128,7 +128,7 @@
               <li href="#" onclick="includeTheme('seti');"><a class="dropdown-item">Seti</a></li>
               <li href="#" onclick="includeTheme('solarized-dark');"><a class="dropdown-item">Solarized Dark</a></li>
               <li href="#"onclick="includeTheme('solarized-light');"><a class="dropdown-item">Solarized Light</a></li>
-              <li href="#" onclick="includeTheme('tomorrow-night-eighties');"><a class="dropdown-item">Tomorrow Night</a></li>
+              <li href="#" onclick="includeTheme('tomorrow-night');"><a class="dropdown-item">Tomorrow Night</a></li>
               <li href="#" onclick="includeTheme('yeti');"><a class="dropdown-item">Yeti</a></li>
               <li href="#" onclick="includeTheme('zenburn');"><a class="dropdown-item">Zenburn</a></li>
             </ul>
@@ -209,7 +209,7 @@
         <div id="editor-section" class="settings-section">
           <h3>Editor</h3>
           <ul id="options">
-          <li id="editorFontSze" class="input"><span>Font size: </span>
+            <li id="editorFontSze" class="input"><span>Font size: </span>
               <div class="input-group spinner">
                 <input id="editorFontSize-input" type="text" class="form-control" value="">
                 <div class="input-group-btn-vertical">
@@ -241,6 +241,7 @@
               </label>
               <span>Line numbers</span>
             </li>
+
             <li id="enableSpellCheck" class="toggle">
               <label class="switch switch--material">
               <input type="checkbox" class="switch__input switch--material__input" value="" setting="enableSpellCheck">
@@ -321,11 +322,11 @@
             </li>
             <li id="showTooltips" class="toggle">
               <label class="switch switch--material">
-              <input type="checkbox" class="switch__input switch--material__input" value="" setting="showTooltips">
-              <div class="switch__toggle switch--material__toggle">
-                <div class="switch__handle switch--material__handle">
+                <input type="checkbox" class="switch__input switch--material__input" value="" setting="showTooltips">
+                <div class="switch__toggle switch--material__toggle">
+                  <div class="switch__handle switch--material__handle">
+                  </div>
                 </div>
-              </div>
               </label>
               <span>Show UI-tooltips</span>
             </li>
