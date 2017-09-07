@@ -11,16 +11,18 @@ var opt = [
   { name: 'showMenu', action: () => { toggleMenu(); }},
   { name: 'showToolbar', action: () => { toggleToolbar(); }},
   { name: 'showPreview', action: () => { togglePreview(); }},
+  { name: 'previewProfile' },
   { name: 'syncScroll', action: () => { toggleSyncScroll; }},
   { name: 'isFullscreen', action: () => { toggleFullscreen(); }},
   { name: 'lineNumbers', action: () => { toggleLineNumbers(); }},
   { name: 'showTrailingSpace', action: () => { toggleWhitespace() }},
-  { name: 'lineWrapping' }, { name: 'editorFont' }, { name: 'editorFontSize' }, { name: 'editorLineHeight' }, { name: 'tabSize' }, { name: 'enableSpellCheck' }, { name: 'previewMode' }, { name: 'previewFont' }, { name: 'previewFontSize' }, { name: 'previewLineHeight' }, { name: 'hideYAMLFrontMatter' }, { name: 'matchBrackets' }, { name: 'keepInTray' }, { name: 'frontMatterTemplate' }
+  { name: 'lineWrapping' }, { name: 'editorFontSize' }, { name: 'tabSize' }, { name: 'enableSpellCheck' }, { name: 'previewMode' }, { name: 'previewFontSize' }, { name: 'previewLineHeight' }, { name: 'hideYAMLFrontMatter' }, { name: 'matchBrackets' }, { name: 'keepInTray' }, { name: 'frontMatterTemplate' }
 ];
 
 function getUserSettings() {
     opt.forEach(checkSetting);
     setPreviewMode(settings.get('previewMode'));
+    setPreviewProfile(settings.get('previewProfile'));
     opt.forEach(applySettings);
     formatHead();
     syncScrollCheck();
@@ -51,6 +53,8 @@ function applySettings(opt) {
   } else if(type === 'text') {
     input.val(settings.get(opt.name));
   }
+  $('#editorFontSize-input').val(settings.get('editorFontSize'));
+  $('#previewFontSize-input').val(settings.get('previewFontSize'));
 }
 
 function syncScrollCheck() {
@@ -197,6 +201,17 @@ function setPreviewMode(opt) {
   settings.set('previewMode', opt);
 }
 
+function setPreviewProfile(profile) {
+  var profileTag = $('#profileTag'),
+      current = profileTag.attr('href').slice(14,-4),
+      profiles = ['default','github','user'],
+      index = profiles.indexOf(profile.toLowerCase());
+  if(index <= -1) return;
+  if(current !== profiles[index])
+    profileTag.attr('href', 'css/preview/'+profiles[index]+'.css');
+  settings.set('previewProfile', profile.toString());
+}
+
 function toggleLineNumbers() {
   var state = settings.get('lineNumbers');
   if(state) {
@@ -258,24 +273,36 @@ function setFrontMatterTemplate() {
 
 
 // Handle settings-menu changes
-$('#editorFont-input, #editorFont-up, #editorFont-down').bind('keyup mouseup', function () {
-  var value = $('#editorFont-input').val();
+$('#editorFontSize-input, #editorFontSize-up, #editorFontSize-down').bind('keyup mouseup', function () {
+  var value = parseFloat($('#editorFontSize-input').val());
   editor.css('fontSize', value.toString()+'px');
   settings.set('editorFontSize', value);
 });
 
-$('#editorTheme').on('changed.bs.select', function (e, clickedIndex, newValue, oldValue) {
-    var theme = $(e.currentTarget).val().toLowerCase().replace(/ /g,"-");
-    includeTheme(theme);
+$('#editorTheme','#previewProfile').on('changed.bs.select', function (e, clickedIndex, newValue, oldValue) {
+  var theme = $(e.currentTarget).val().toLowerCase().replace(/ /g,"-");
+  includeTheme(theme);
 });
+
+var ci,vnv,ov;
+$('#previewProfile').on('changed.bs.select', function (e, clickedIndex, newValue, oldValue) {
+  ci = clickedIndex; nv = newValue; ov = oldValue;
+  var profile = $(e.currentTarget).val();
+  $('#previewProfile').attr('title', profile);
+  setPreviewProfile(profile);
+});
+
+function getInfo() {
+  return 'newValue: '+nv.toString()+'\noldValue: '+ol.toString()+'\n';
+}
 
 $('#previewMode').on('changed.bs.select', function (e, clickedIndex, newValue, oldValue) {
-    var mode = $(e.currentTarget).val().toLowerCase();
-    setPreviewMode(mode);
+  var mode = $(e.currentTarget).val().toLowerCase();
+  setPreviewMode(mode);
 });
 
-$('#previewFont-input, #previewFont-up, #previewFont-down').bind('keyup mouseup', function () {
-  var value = $('#previewFont-input').val();
+$('#previewFontSize-input, #previewFontSize-up, #previewFontSize-down').bind('keyup mouseup', function () {
+  var value = parseFloat($('#previewFontSize-input').val());
   preview.css('fontSize', value.toString()+'px');
   settings.set('previewFontSize', value);
 });

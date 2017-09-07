@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="css/bootstrap-select.min.css">
     <link rel="stylesheet" href="css/codemirror.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/modal.css">
+    <link rel="stylesheet" id="profileTag" href="css/preview/default.css">
     <link rel="stylesheet" href="css/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="css/fonts/metro-icons.min.css">
     <link rel="stylesheet" href="css/fonts/lora.css">
@@ -100,8 +102,6 @@
         <button class="btn dropdown-toggle" type="button" id="view-menu-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">View</button>
         <ul class="dropdown-menu">
           <li tabindex="-1" href="#" onclick="reloadWin()"><a class="dropdown-item">Reload</a><span>Ctrl + R</span></li>
-          <!-- <li class="dropdown-divider"></li> -->
-          <!-- <li><a tabindex="-1" href="#" onclick="toggleDynamicFontSizing();">Toggle Dynamic Editor</a></li> -->
           <li class="dropdown-divider"></li>
           <li tabindex="-1" href="#" onclick="toggleMenu();"><a class="dropdown-item">Toggle Menu Bar</a><span>Ctrl + M</span></li>
           <li tabindex="-1" href="#" onclick="toggleToolbar();"><a class="dropdown-item">Toggle Toolbar</a><span>Ctrl + .</span></li>
@@ -166,8 +166,8 @@
         <a onclick="toggleFormat('em');" data-tooltip="Italic (Ctrl+I)" class="mif-italic editor-toolbar"></a>
         <a onclick="toggleFormat('strikethrough');" title="Strikethrough (Ctrl+-)" class="mif-strikethrough editor-toolbar"></a>
         <i class="separator">|</i>
-        <a onclick="toggleBlockquote();" data-tooltip="Quote" class="fa fa-quote-left editor-toolbar"></a>
-        <a onclick="toggleFormat('code');" data-tooltip="Code Block" class="fa fa-code editor-toolbar"></a>
+        <a onclick="toggleBlockquote();" data-tooltip="Quote (Ctrl+')" class="fa fa-quote-left editor-toolbar"></a>
+        <a onclick="toggleFormat('code');" data-tooltip="Code Block (Ctrl+;)" class="fa fa-code editor-toolbar"></a>
         <a onclick="toggleUnorderedList();" data-tooltip="Unordered List" class="mif-list2 editor-toolbar"></a>
         <a onclick="toggleOrderedList();" data-tooltip="Ordered List" class="mif-list-numbered editor-toolbar"></a>
         <i class="separator">|</i>
@@ -209,23 +209,16 @@
         <div id="editor-section" class="settings-section">
           <h3>Editor</h3>
           <ul id="options">
-            <li id="editorFont" class="menu"><span>Font: </span>
-              <select class="selectpicker" data-width="fit" title="monospaced">
-                <option>serif</option>
-                <option>sans-serif</option>
-                <option>monospaced</option>
-              </select>
-            </li>
-            <li id="editorFontSze" class="input"><span>Font size: </span>
+          <li id="editorFontSze" class="input"><span>Font size: </span>
               <div class="input-group spinner">
-                <input id="editorFont-input" type="text" class="form-control" value="11.5" min="8" max="20">
+                <input id="editorFontSize-input" type="text" class="form-control" value="">
                 <div class="input-group-btn-vertical">
-                  <button id="editorFont-up" class="btn btn-default" type="button"><i class="fa fa-caret-up"></i></button>
-                  <button id="editorFont-down" class="btn btn-default" type="button"><i class="fa fa-caret-down"></i></button>
+                  <button id="editorFontSize-up" class="spinner-btn btn" type="button"><i class="fa fa-caret-up"></i></button>
+                  <button id="editorFontSize-down" class="spinner-btn btn" type="button"><i class="fa fa-caret-down"></i></button>
                 </div>
               </div>
             </li>
-            <li id="editor-theme" class="menu" style="margin-bottom:3px;padding-bottom:3px;"><span>Theme: </span>
+            <li id="editor-theme" class="menu"><span>Theme: </span>
               <select id="editorTheme" class="selectpicker" title="One Dark" data-width="fit">
                 <option>Base16 Dark</option><option>Base16 light</option>
                 <option>Dracula</option><option>Duotone Dark</option>
@@ -238,10 +231,46 @@
                 <option>Solarized Light</option><option>Tomorrow Night</option><option>Yeti</option><option>Zenburn</option>
               </select>
             </li>
-            <li id="lineNumbers" class="toggle"><input class="settings-toggle" type="checkbox" value="" setting="lineNumbers"><span></span><span>Line numbers</span></li>
-            <li id="enableSpellCheck" class="toggle"><input class="settings-toggle" type="checkbox" value="" setting="enableSpellCheck"><span></span><span>Enable spell checking</span></li>
-            <li id="matchBrackets" class="toggle" data-tooltip="Adds auto-completion for the following: &quot;&quot;, '', ``, (), [], {}, "><input class="settings-toggle" type="checkbox" value="" setting="matchBrackets"><span></span><span>Match brackets</span></li>
-            <li id="showTrailingSpace" class="toggle" data-tooltip="Provides a faint underline to identify newlines"><input class="settings-toggle" type="checkbox" value="" setting="showTrailingSpace"><span></span><span>Show trailing whitespace</span></li>
+            <li id="lineNumbers" class="toggle">
+              <label class="switch switch--material">
+              <input type="checkbox" class="switch__input switch--material__input" value="" setting="lineNumbers">
+              <div class="switch__toggle switch--material__toggle">
+                <div class="switch__handle switch--material__handle">
+                </div>
+              </div>
+              </label>
+              <span>Line numbers</span>
+            </li>
+            <li id="enableSpellCheck" class="toggle">
+              <label class="switch switch--material">
+              <input type="checkbox" class="switch__input switch--material__input" value="" setting="enableSpellCheck">
+              <div class="switch__toggle switch--material__toggle">
+                <div class="switch__handle switch--material__handle">
+                </div>
+              </div>
+              </label>
+              <span>Enable spell checking</span>
+            </li>
+            <li id="matchBrackets" class="toggle">
+              <label class="switch switch--material">
+              <input type="checkbox" class="switch__input switch--material__input" setting="matchBrackets" checked>
+              <div class="switch__toggle switch--material__toggle">
+                <div class="switch__handle switch--material__handle">
+                </div>
+              </div>
+              </label>
+              <span>Match brackets</span>
+            </li>
+            <li id="showTrailingSpace" class="toggle">
+              <label class="switch switch--material">
+              <input type="checkbox" class="switch__input switch--material__input" setting="showTrailingSpace" checked>
+              <div class="switch__toggle switch--material__toggle">
+                <div class="switch__handle switch--material__handle">
+                </div>
+              </div>
+              </label>
+              <span>Show trailing whitespace</span>
+            </li>
           </ul>
           <hr>
         </div>
@@ -254,23 +283,32 @@
                 <option>HTML</option>
               </select>
             </li>
-            <li id="previewFont" class="menu"><span>Font: </span>
-              <select class="selectpicker" data-width="fit">
-                <option>serif</option>
-                <option>sans-serif</option>
-                <option>monospaced</option>
+            <li class="menu"><span>Profile: </span>
+              <select id="previewProfile" class="selectpicker" data-width="fit">
+                <option>Default</option>
+                <option>GitHub</option>
+                <option>Custom </option>
               </select>
             </li>
-            <li id="previewFontSize" class="input" style="margin-bottom:3px;padding-bottom:3px;"><span>Font size: </span>
+            <li id="previewFontSize" class="input"><span>Font size: </span>
               <div class="input-group spinner">
-                <input id="previewFont-input" type="text" class="form-control" value="9.5">
+                <input id="previewFontSize-input" type="text" class="form-control" value="">
                 <div class="input-group-btn-vertical" style="top:1px;">
-                  <button id="previewFont-up" class="btn btn-default" type="button"><i class="fa fa-caret-up"></i></button>
-                  <button id="previewFont-down" class="btn btn-default" type="button"><i class="fa fa-caret-down"></i></button>
+                  <button id="previewFontSize-up" class="spinner-btn btn" type="button"><i class="fa fa-caret-up"></i></button>
+                  <button id="previewFontSize-down" class="spinner-btn btn" type="button"><i class="fa fa-caret-down"></i></button>
                 </div>
               </div>
             </li>
-            <li id="hideYAMLFrontMatter" class="toggle" data-tooltip="Preferred by Jekyll users, has no effect on other content."><input type="checkbox" value=""><span></span><span>Hide YAML frontmatter</span></li>
+            <li id="hideYAMLFrontMatter" class="toggle">
+              <label class="switch switch--material">
+              <input type="checkbox" class="switch__input switch--material__input" setting="hideYAMLFrontMatter" checked>
+              <div class="switch__toggle switch--material__toggle">
+                <div class="switch__handle switch--material__handle">
+                </div>
+              </div>
+              </label>
+              <span>Hide YAML-frontmatter</span>
+            </li>
           </ul>
           <hr>
         </div>
@@ -281,10 +319,26 @@
               <label for="yamlPath">Frontmatter Template:</label>
               <input type="text" id="yamlPath" class="form-control" value="">
             </li>
-            <li id="showTooltips" data-tooltip="Show helpful tooltips like this!" class="toggle"><input type="checkbox"
-             value=""><span></span><span>Show UI-tooltips</span></li>
-             <li id="keepInTray" class="toggle" data-tooltip="Allow app to stay active in tray on close"><input type="checkbox"
-              value=""><span></span><span>Keep in Tray</span></li>
+            <li id="showTooltips" class="toggle">
+              <label class="switch switch--material">
+              <input type="checkbox" class="switch__input switch--material__input" value="" setting="showTooltips">
+              <div class="switch__toggle switch--material__toggle">
+                <div class="switch__handle switch--material__handle">
+                </div>
+              </div>
+              </label>
+              <span>Show UI-tooltips</span>
+            </li>
+             <li id="keepInTray" class="toggle">
+              <label class="switch switch--material">
+              <input type="checkbox" class="switch__input switch--material__input" value="" setting="keepInTray">
+              <div class="switch__toggle switch--material__toggle">
+                <div class="switch__handle switch--material__handle">
+                </div>
+              </div>
+              </label>
+              <span>Keep in tray</span>
+            </li>
           </ul>
         </div>
       </section>
@@ -346,7 +400,7 @@
       <div class="modal-dialog">
         <div class="modal-content modal-inset">
           <div class="modal-header">
-            <button type="button" class="modal-close" data-dismiss="modal"><img src="./img/buttons/close.png"></img></button>
+            <button type="button" class="modal-close" data-dismiss="modal"><img class="inactive" src="img/buttons/close.png" alt="Close"/><img class="active" src="img/buttons/close_active.png" alt="Close"/></button>
             <h4 class="modal-title">Markdown Help</h4>
           </div>
           <div class="modal-body-inset">
@@ -410,7 +464,7 @@
         <div class="modal-content">
           <div class="modal-body">
             <div class="modal-header">
-              <button type="button" class="modal-close" data-dismiss="modal"><img src="./img/buttons/close.png"></img></button>
+              <button type="button" class="modal-close" data-dismiss="modal"><img class="inactive" src="img/buttons/close.png" alt="Close"/><img class="active" src="img/buttons/close_active.png" alt="Close"/></button>
             </div>
             <img id="hyde-img" src="./img/Hyde.png"/>
             <div class="about-content">
@@ -430,7 +484,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="modal-close" data-dismiss="modal"><img src="./img/buttons/close.png"><img></button>
+            <button type="button" class="modal-close" data-dismiss="modal"><img class="inactive" src="img/buttons/close.png" alt="Close"/><img class="active" src="img/buttons/close_active.png" alt="Close"/></button>
             <h4 class="modal-title">Unsaved Changes</h4>
           </div>
           <div class="modal-body">
@@ -438,8 +492,8 @@
               <div class="unsaved-close">
                 <span id="unsaved-body"></span>
                 <div class="unsaved-buttons">
-                  <a href="#" id="unsavedConfirm" class="modal-button bg-gradient1"><span>Save</span></a>
-                  <a href="#" id="unsavedDeny" class="modal-button bg-gradient1"><span>Don't Save</span></a>
+                  <button href="#" id="unsavedConfirm" class=" modal-button"><span>Save</span></button>
+                  <button href="#" id="unsavedDeny" class="modal-button"><span>Don't Save</span></button>
                 </div>
               </div>
             </section>
@@ -462,6 +516,5 @@
     <script src="js/functions.js"></script>
     <script src="js/ipc_renderer.js"></script>
     <script src="js/emoji.js"></script>
-    <!-- <script src="js/registerHandler.js"></script> -->
   </body>
 </html>
