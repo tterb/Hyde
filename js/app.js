@@ -290,27 +290,32 @@ $(window).on('resize', () => {
   }
 });
 
-$('#version-modal').text('v'+main.appVersion())
+$('#version-modal').text('v'+main.appVersion());
 
-// editor & preview font size inputs
-$('.spinner').on('click', function() {
+$('.spinner .btn:first-of-type').on('click', function() {
   var btn = $(this),
       input = btn.closest('.spinner').find('input'),
       value = parseFloat(input.val());
-  if(btn.attr('id').includes('up')) {
-    if (!input.attr('max') || value < parseFloat(input.attr('max'))) {
-      input.val(value + 0.5);
-    } else {
-      btn.next("disabled", true);
-    }
-  } else if(btn.attr('id').includes('down')) {
-    if (!input.attr('min') || value > parseFloat(input.attr('min'))) {
-      input.val(value - 0.5);
-    } else {
-      btn.prev("disabled", true);
-    }
+  if (input.attr('max') === undefined || value < parseFloat(input.attr('max'))) {
+    input.val(value + 0.5);
+  } else {
+    btn.next("disabled", true);
   }
+  settings.set(btn.attr('id').split('-')[0], input.val());
 });
+
+$('.spinner .btn:last-of-type').on('click', function() {
+  var btn = $(this),
+      input = btn.closest('.spinner').find('input'),
+      value = parseFloat(input.val());
+  if (input.attr('min') === undefined || value > parseFloat(input.attr('min'))) {
+    input.val(value - 0.5);
+  } else {
+    btn.prev("disabled", true);
+  }
+  settings.set(btn.attr('id').split('-')[0], input.val());
+});
+
 
 // Word count
 function countWords() {
