@@ -20,7 +20,6 @@ var knownOptions = {
 };
 
 const options = {
-	asar: true,
 	dir: '.',
 	name: 'Hyde',
 	out: 'dist',
@@ -68,8 +67,8 @@ gulp.task('liveReload', () => {
 	gulp.watch(['./*.js'], electron.restart);
 	gulp.watch(['./js/**/*.js'], electron.restart);
 	//watch css files, but only reload (no restart necessary)
-	gulp.watch(['./**/*.css'], electron.reload);
 	gulp.watch(['./**/**/*.css'], electron.reload);
+	gulp.watch(['./**/*.css'], electron.reload);
   gulp.watch(['./css/*.scss'], ['scss']);
 	//watch html
 	gulp.watch(['./index.html'], electron.restart);
@@ -79,7 +78,6 @@ gulp.task('scss', () => {
   gulp.src('./css/*.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(gulp.dest('./css/'));
-    electron.reload;
 });
 
 gulp.task('clean', () => {
