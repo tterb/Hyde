@@ -117,6 +117,8 @@ ipc.on('ctrl+a', () => { cm.execCommand('selectAll') });
 ipc.on('ctrl+shift+a', () => { cm.execCommand('indentAuto'); });
 ipc.on('ctrl+r', () => { reloadWin(); });
 ipc.on('ctrl+m', () => { if(process.platform !== 'darwin') toggleMenu(); });
+ipc.on('ctrl+;', () => { toggleFormat('code'); });
+ipc.on("ctrl+'", () => { toggleBlockquote(); });
 ipc.on('ctrl+.', () => { toggleToolbar(); });
 ipc.on('ctrl+p', () => { togglePreview(); });
 ipc.on('ctrl+,', () => { toggleSettings(); });

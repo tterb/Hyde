@@ -37,17 +37,17 @@ const localShortcut = require('electron-localshortcut');
 const windowStateManager = require('electron-window-state');
 var opts = require("nomnom")
   .option('dev', {
-      abbr: 'd',
-      flag: true,
-      help: 'Enable developer mode'
-   })
-   .option('version', {
-      abbr: 'v',
-      flag: true,
-      help: 'Print app version and exit',
-      callback: () => {
-         return "v"+app.getVersion();
-      }
+    abbr: 'd',
+    flag: true,
+    help: 'Enable developer mode'
+  })
+  .option('version', {
+    abbr: 'v',
+    flag: true,
+    help: 'Print app version and exit',
+    callback: () => {
+        return "v" + app.getVersion();
+    }
   }).parse();
 
 // Keep a global reference of the window object
@@ -79,14 +79,14 @@ function getConfig() {
   } else if (process.platform === 'win32') {
     conf.icon = path.join(__dirname, '/img/icon/ico/icon.ico');
   } else {
-    conf.icon = path.join(__dirname, '/img/icon/png/64x64.png')
+    conf.icon = path.join(__dirname, '/img/icon/png/64x64.png');
   }
   return conf;
 }
 
 var readFile = null;
 // Check for file from commandline
-process.argv.forEach(function (val, index, array) {
+process.argv.forEach(function(val, index, array) {
   if (index >= 2 && val.includes('.md')) {
     readFile = val;
   }
@@ -94,23 +94,21 @@ process.argv.forEach(function (val, index, array) {
 
 const createWindow = exports.createWindow = (file) => {
   let newWindow = window.createWindow(getConfig());
-  let args = {
-    file: readFile
-  };
-  windows.add(newWindow)
+  let args = { file: readFile };
+  windows.add(newWindow);
   newWindow.showUrl(mainPage, args);
   // newWindow.loadURL(mainPage);
   // readFileIntoEditor(file);
   newWindow.once('ready-to-show', () => { newWindow.show(); });
 
   // Open the DevTools.
-  if(opts.dev)
+  if (opts.dev)
     newWindow.webContents.openDevTools();
 
   // Emitted when the window is closed.
   newWindow.on('closed', () => {
-    windows.delete(newWindow)
-    newWindow = null
+    windows.delete(newWindow);
+    newWindow = null;
   });
 
   // Open anchor links in browser
@@ -124,14 +122,14 @@ const createWindow = exports.createWindow = (file) => {
 
 ipc.on('export-to-pdf', (event, pdfPath) => {
   const win = BrowserWindow.fromWebContents(event.sender);
-  win.webContents.printToPDF({pageSize: 'A4'}, (error, data) => {
-    if (error) throw error
+  win.webContents.printToPDF({ pageSize: 'A4' }, (error, data) => {
+    if (error) throw error;
     fs.writeFile(pdfPath, data, (error) => {
-      if (error) throw error
-      shell.openExternal('file://' + pdfPath)
-      event.sender.send('wrote-pdf', pdfPath)
-    })
-  })
+      if (error) throw error;
+      shell.openExternal('file://' + pdfPath);
+      event.sender.send('wrote-pdf', pdfPath);
+    });
+  });
 });
 
 const getThemes = exports.getThemes = () => {
@@ -161,10 +159,10 @@ const getThemes = exports.getThemes = () => {
 
 function menuThemes() {
   var themeFiles = fs.readdirSync(path.join(__dirname, '/css/theme')),
-      themes = [];
-  getThemes().forEach((str) => {
+    themes = [];
+getThemes().forEach((str) => {
     // FIXME: how to includeTheme()?
-    var theme = { label: str.name, click: () => { sendShortcut("set-theme", str.val); }};
+    var theme = { label: str.name, click: () => { sendShortcut("set-theme", str.val); } };
     themes.push(theme);
   });
   return themes;
@@ -315,6 +313,8 @@ localShortcut.register('CmdOrCtrl+k', () => { sendShortcut('ctrl+k'); });
 localShortcut.register('CmdOrCtrl+t', () => { sendShortcut('table-modal'); });
 localShortcut.register('CmdOrCtrl+r', () => { sendShortcut('ctrl+r'); });
 localShortcut.register('CmdOrCtrl+m', () => { sendShortcut('ctrl+m'); });
+localShortcut.register('CmdOrCtrl+;', () => { sendShortcut('ctrl+;'); });
+localShortcut.register("CmdOrCtrl+'", () => { sendShortcut("ctrl+'"); });
 localShortcut.register('CmdOrCtrl+.', () => { sendShortcut('ctrl+.'); });
 localShortcut.register('CmdOrCtrl+p', () => { sendShortcut('ctrl+p'); });
 localShortcut.register('CmdOrCtrl+,', () => { sendShortcut('ctrl+,'); });
@@ -336,21 +336,19 @@ app.on('ready', function() {
   });
   // Create main BrowserWindow
   mainWindow = window.createWindow(getConfig());
-  let args = {
-    file: readFile
-  };
+  let args = { file: readFile };
   mainWindow.showUrl(path.join(__dirname, 'index.html'), args);
   windowState.manage(mainWindow);
   windows.add(mainWindow);
 
-  if(opts.dev)
+  if (opts.dev)
     mainWindow.webContents.openDevTools();
 
   mainWindow.once('ready-to-show', () => {
     mainWindow.show();
   });
 
-  if(keepInTray) {
+  if (keepInTray) {
     mainWindow.on('close', e => {
       if (!isQuitting) {
         e.preventDefault();
@@ -392,26 +390,26 @@ app.on('ready', function() {
 });
 
 const contextMenu = new Menu();
-contextMenu.append(new MenuItem({role: 'undo'}))
-contextMenu.append(new MenuItem({role: 'redo'}))
-contextMenu.append(new MenuItem({type: 'separator'}))
-contextMenu.append(new MenuItem({label: "Cut", role: "cut"}))
-contextMenu.append(new MenuItem({label: "Copy", role: "copy"}))
-contextMenu.append(new MenuItem({label: "Paste", role: "paste"}))
-contextMenu.append(new MenuItem({label: "Select All", click: () => {sendShortcut('ctrl+a');}}))
-contextMenu.append(new MenuItem({type: 'separator'}))
-contextMenu.append(new MenuItem({label: 'Show in File Manager', click: () => { sendShortcut('open-file-manager');}}))
-contextMenu.append(new MenuItem({type: 'separator'}))
-contextMenu.append(new MenuItem({role: 'toggledevtools'}))
+contextMenu.append(new MenuItem({ role: 'undo' }))
+contextMenu.append(new MenuItem({ role: 'redo' }))
+contextMenu.append(new MenuItem({ type: 'separator' }))
+contextMenu.append(new MenuItem({ label: "Cut", role: "cut" }))
+contextMenu.append(new MenuItem({ label: "Copy", role: "copy" }))
+contextMenu.append(new MenuItem({ label: "Paste", role: "paste" }))
+contextMenu.append(new MenuItem({ label: "Select All", click: () => { sendShortcut('ctrl+a'); } }))
+contextMenu.append(new MenuItem({ type: 'separator' }))
+contextMenu.append(new MenuItem({ label: 'Show in File Manager', click: () => { sendShortcut('open-file-manager'); } }))
+contextMenu.append(new MenuItem({ type: 'separator' }))
+contextMenu.append(new MenuItem({ role: 'toggledevtools' }))
 
 
-app.on('browser-window-created', function (event, win) {
-  win.webContents.on('context-menu', function (e, params) {
+app.on('browser-window-created', function(event, win) {
+  win.webContents.on('context-menu', function(e, params) {
     contextMenu.popup(win, params.x, params.y);
   });
 });
 
-ipc.on('show-context-menu', function (event) {
+ipc.on('show-context-menu', function(event) {
   const win = BrowserWindow.fromWebContents(event.sender);
   contextMenu.popup(win);
 });
