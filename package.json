@@ -5,7 +5,7 @@
   "main": "main.js",
   "productName": "Hyde",
   "scripts": {
-    "start": "gulp start",
+    "start": "electron main.js",
     "build": "rm -rf dist && gulp build"
   },
   "bin": {
@@ -51,30 +51,29 @@
     "email": "bstevensondev@gmail.com"
   },
   "devDependencies": {
+    "electron-connect": "^0.6.1",
     "electron-packager": "^9.0.0",
-    "electron-rebuild": "^1.5.11"
+    "electron-rebuild": "^1.5.11",
+    "gulp": "^3.9.1",
+    "gulp-sass": "^3.1.0",
+    "gulp-shell": "^0.6.3",
+    "minimist": "^1.2.0"
   },
   "dependencies": {
     "codemirror": "^5.18.2",
     "codemirror-spell-checker": "^1.1.2",
     "electron": "^1.4.0",
     "electron-config": "^0.2.1",
-    "electron-connect": "^0.6.1",
     "electron-context-menu": "^0.9.1",
-    "electron-editor-context-menu": "^1.1.1",
     "electron-json-storage": "latest",
     "electron-localshortcut": "^0.6.1",
     "electron-regedit": "^1.0.6",
     "electron-settings": "^3.1.1",
     "electron-window": "^0.8.1",
     "electron-window-state": "^4.1.1",
-    "gulp": "^3.9.1",
-    "gulp-sass": "^3.1.0",
-    "gulp-shell": "^0.6.3",
     "isbinaryfile": "^3.0.2",
     "js-yaml": "3.9.1",
     "jquery": "^3.1.0",
-    "minimist": "^1.2.0",
     "nomnom": "^1.8.1",
     "parse-filepath": "1.0.1",
     "showdown": "^1.7.2",
