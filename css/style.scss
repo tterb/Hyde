@@ -158,17 +158,16 @@ label {
     .dropdown-toggle {
       display: inline-block;
       background: -webkit-linear-gradient(top, #2d2d2d 5%, #262524 40%, #222120, #121110);
-      // background: -webkit-linear-gradient(top, #404040 3%, #303030 10%, #222120, #121110);
-      color: $text-subtle-color;
+      color: rgba(255,255,255,0.5);
       font-size: 11px;
       font-weight: 300;
-      letter-spacing: 0.07em;
+      letter-spacing: 0.08em;
       height: 25px;
       width: 40px;
       top: -1px;
       border-radius: 2px;
       white-space: nowrap;
-      border: 1px outset #4a4a4a;
+      border: 1px outset #6a6a6a;
       border-left: 1px outset #37393d;
       border-top: none;
       border-bottom: none;
@@ -368,6 +367,7 @@ label {
     top: 150% !important;
     left: 20% !important;
     font-weight: 300;
+    transition: opacity 200ms linear 1s;
   }
 }
 
@@ -381,7 +381,6 @@ label {
   bottom: 0;
   left: 0;
   border: 1px outset #2d2c2c;
-  // border-top: 1px solid lighten(#282726, 5.5%);
   box-shadow: 0 -1px 28px rgba(0,0,0,0.2);
   padding: 2px;
   z-index: 99999;
@@ -446,9 +445,14 @@ label {
     margin-top: 4px;
     &:after {
       top: -190%;
-      right: -2px;
+      right: 0px;
       left: auto;
+      opacity: 0;
+      transition: opacity 200ms linear 1s;
+    }
+    &:hover:after {
       opacity: 0.9;
+      transition: opacity 200ms linear 1s;
     }
   }
   #previewToggle {
@@ -457,9 +461,14 @@ label {
     margin-top: 1px;
     &:after {
       top: -150%;
-      right: -2px;
+      right: 0px;
       left: auto;
+      opacity: 0;
+      transition: opacity 200ms linear 1s;
+    }
+    &:hover:after {
       opacity: 0.9;
+      transition: opacity 200ms linear 1s;
     }
   }
 }
@@ -559,9 +568,6 @@ input[type="checkbox"] {
   position: absolute;
   display: inline-block;
   background: transparent;
-  // height: 100%;
-  // width: 12px;
-  // left: 0;
   margin: 0;
   transition: left 500ms cubic-bezier(0.17, 0.04, 0.03, 0.75);
   z-index: 9999;
@@ -603,7 +609,7 @@ input[type="checkbox"] {
 		display: block;
 		position: relative;
 		font-size: 1em;
-		top: -webkit-calc(50% - 0.45em);
+		top: -webkit-calc(50% - 0.4em);
 		left: 65%;
 		&:before {
 			color: rgba(255,255,255,0.8);
@@ -616,7 +622,7 @@ input[type="checkbox"] {
 	top: -220%;
   z-index: -9;
   i {
-    top: -webkit-calc(70% - 0.45em);
+    top: -webkit-calc(70% - 0.4em);
 		left: 39%;
   }
 }
@@ -1070,7 +1076,7 @@ input[type="checkbox"] {
   transition: 700ms cubic-bezier(0.17, 0.04, 0.03, 0.55);
   .topFade {
     background-image: -webkit-linear-gradient(top, #f6f5f5 25%, transparent);
-    right: 2%;
+    right: 10px;
   }
 }
 
@@ -1139,10 +1145,11 @@ input[type="checkbox"] {
   input[type="text"] {
     background: #3a3a3a;
     color: rgba(255,255,255,0.6);
+    letter-spacing: 0.03em;
     box-shadow: inset 0 0 8px rgba(0,0,0,0.6);
     border: 1px inset #3d3d3d;
     border-radius: 12px;
-    padding: 4px 10px 5px 9px;
+    padding: 4px 10px 5px;
     margin-top: 3px;
     margin-bottom: 5px;
   }
@@ -1234,60 +1241,74 @@ code {
   resize: none;
 }
 
-.alert-success, .alert-info, .alert-warning, .alert-danger {
-  width: auto !important;
-  min-width: 250px !important;
-  padding: 10px 40px 10px 15px !important;
-  margin-top: 25px !important;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-  outline: none !important;
-  span {
-    letter-spacing: 0.05em !important;
-    line-height: 1.25;
-    vertical-align: middle;
-    strong {
-      font-size: 1.15em !important;
-    }
-    &:before {
-      position: relative !important;
-      font-size: 1.85em !important;
-      top: -0.35px !important;
-      margin-right: 3px !important;
-      margin-bottom: 20px !important;
-    }
-  }
-  button {
-    top: 26.65% !important;
-    outline: none !important;
-  }
-}
-.alert-success {
-  border: 1px solid #3c763d;
-  .close {
-    color: rgba(#3c763d, 0.95) !important;
-  }
-}
-.alert-info {
-  // border: 1px solid #31708f;
-  .close {
-    color: #31708f !important;
-  }
-}
-.alert-warning {
-  background: #f8eccc;
-  color: #8a6c3a !important;
-  // color: #9a814b !important;
-  // border: 1px solid #9a814b;
-  .close {
-    color: #9a814b !important;
-  }
-}
-.alert-danger {
-  // border: 1px solid #a94442;
-  .close {
-    color: #a94442 !important;
-  }
-}
+// .alert-success, .alert-info, .alert-warning, .alert-danger {
+//   width: auto !important;
+//   min-width: 250px !important;
+//   max-width: 350px !important;
+//   box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+//   margin-top: 20px !important;
+//   padding: 9px 30px 10px 12px !important;
+//   outline: none !important;
+//   span {
+//     letter-spacing: 0.05em !important;
+//     line-height: 1.35;
+//     vertical-align: middle;
+//     &:nth-child(4) {
+//       display: block;
+//       width: 90% !important;
+//       max-height: 36px !important;
+//       text-overflow: ellipsis;
+//       overflow: hidden;
+//       padding-left: 10px;
+//     }
+//     &:nth-child(2) {
+//       width: 8% !important;
+//       float: left !important;
+//       // padding-left: 10px;
+//     }
+//     strong {
+//       font-size: 1.15em !important;
+//     }
+//     &:before {
+//       position: relative !important;
+//       font-size: 1.85em !important;
+//       top: -0.35px !important;
+//       margin-right: 3px !important;
+//       margin-bottom: 20px !important;
+//     }
+//   }
+//   button {
+//     top: 26.65% !important;
+//     outline: none !important;
+//   }
+// }
+// .alert-success {
+//   // border: 1px solid #3c763d;
+//   .close {
+//     color: rgba(#3c763d, 0.95) !important;
+//   }
+// }
+// .alert-info {
+//   // border: 1px solid #31708f;
+//   .close {
+//     color: #31708f !important;
+//   }
+// }
+// .alert-warning {
+//   background: #f8eccc;
+//   color: #8a6c3a !important;
+//   // color: #9a814b !important;
+//   // border: 1px solid #9a814b;
+//   .close {
+//     color: #9a814b !important;
+//   }
+// }
+// .alert-danger {
+//   // border: 1px solid #a94442;
+//   .close {
+//     color: #a94442 !important;
+//   }
+// }
 
 
 [data-tooltip]:after {
@@ -1299,14 +1320,12 @@ code {
   font-family: $system-font;
   font-size: 12px;
   letter-spacing: 0.05em;
-  // left: 5%;
-  // top: -250%;
   border-radius: 4px;
   white-space: nowrap;
   margin-left: -5px;
   padding: 4px 6px;
   opacity: 0;
-  transition: opacity 200ms linear 0.5s;
+  transition: opacity 200ms linear 1s;
   z-index: 20;
 }
 
@@ -1328,7 +1347,7 @@ code {
   padding: 4px 6px;
   border: 1px outset #444;
   opacity: 0.9;
-  transition: opacity 200ms linear 0.5s;
+  transition: opacity 200ms linear 1s;
   z-index: 20;
 }
 
