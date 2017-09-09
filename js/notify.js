@@ -1,4 +1,3 @@
-var octicons = require("octicons");
 
 function notify(text, type) {
   var title, icon;
