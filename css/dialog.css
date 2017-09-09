@@ -17,21 +17,22 @@
 
 .CodeMirror-dialog-top {
   border-bottom: 1px solid #444;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.5) !important;
   /*top: 0;*/
   top: 95%;
 }
 
 .CodeMirror-dialog-top:before {
-    position: absolute;
-    background: #302f2e;
-    top: 90%;
-    left: 0;
-    width: 50%;
-    height: 50px;
-    border: 1px outset #424140;
-    border-radius: 5px;
-    z-index: 99999;
-    visibility: hidden;
+  position: absolute;
+  background: #302f2e;
+  top: 90%;
+  left: 0;
+  width: 50%;
+  height: 50px;
+  border: 1px outset #3d3c3b;
+  border-radius: 5px;
+  visibility: hidden;
+  z-index: 99999;
 }
 
 .CodeMirror-dialog-bottom {
@@ -60,15 +61,15 @@
 }
 
 .CodeMirror-search-field {
-    color: rgba(255,255,255,0.7);
-    width: 10em;
-    padding-left: 4px;
+  color: rgba(255,255,255,0.7);
+  width: 10em;
+  padding-left: 4px;
 }
 
 .CodeMirror-search-hint {
-    position: absolute;
-    font-size: 12px;
-    color: rgba(255,255,255,0.25);
-    top: 3px;
-    right: 8px;
+  position: absolute;
+  font-size: 12px;
+  color: rgba(255,255,255,0.25);
+  top: 3px;
+  right: 8px;
 }
