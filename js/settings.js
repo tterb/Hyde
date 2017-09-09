@@ -15,8 +15,9 @@ var opts = [
   { name: 'syncScroll', action: () => { toggleSyncScroll; }},
   { name: 'isMaximized', action: () => { toggleMaximize(); }},
   { name: 'lineNumbers', action: () => { toggleLineNumbers(); }},
-  { name: 'showTrailingSpace', action: () => { toggleWhitespace() }},
-  { name: 'lineWrapping' }, { name: 'editorFontSize' }, { name: 'tabSize' }, { name: 'enableSpellCheck' }, { name: 'previewMode' }, { name: 'previewFontSize' }, { name: 'previewLineHeight' }, { name: 'hideYAMLFrontMatter' }, { name: 'matchBrackets' }, { name: 'keepInTray' }, { name: 'frontMatterTemplate' }
+  { name: 'showTrailingSpace', action: () => { toggleWhitespace(); }},
+  { name: 'dynamicEditor', action: () => { toggleDynamicFont(); }},
+  { name: 'editorFontSize' }, { name: 'tabSize' }, { name: 'enableSpellCheck' }, { name: 'previewMode' }, { name: 'previewFontSize' }, { name: 'previewLineHeight' }, { name: 'hideYAMLFrontMatter' }, { name: 'matchBrackets' }, { name: 'keepInTray' }, { name: 'frontMatterTemplate' }
 ];
 
 function getUserSettings() {
@@ -52,7 +53,7 @@ function toggleSetting(opt) {
 }
 
 function applySettings(opt) {
-  var selector = $('#'+opt.name.toString()),
+  var selector = $('#'+opt.name),
       input = selector.find('input'),
       type = input.attr('type');
   if(settings.get(opt.name) && opt.action)
@@ -236,9 +237,22 @@ function toggleLineNumbers() {
   settings.set('lineNumbers', !state);
 }
 
-var act;
+function toggleDynamicFont() {
+  var tag,
+      head = document.getElementsByTagName('head')[0];
+  if(settings.get('dynamicEditor')) {
+    tag = document.createElement('link');
+    tag.setAttribute('id', 'dynamicTag');
+    tag.setAttribute('rel', 'stylesheet');
+    tag.setAttribute('href', 'css/dynamicEditor.css');
+    head.appendChild(tag);
+  } else {
+    $('#dynamicTag').remove();
+    reloadWin();
+  }
+}
+
 function toggleWhitespace() {
-  act = settings.get('showTrailingSpace');
   var state = settings.get('showTrailingSpace');
   if(state) {
     $('.cm-trailing-space-a').css('text-decoration', 'none');
@@ -315,17 +329,15 @@ $('#previewFontSize-input, #previewFontSize-up, #previewFontSize-down').bind('ke
   settings.set('previewFontSize', value);
 });
 
-var thi;
+// Settings toggle listeners
 $('.switch__input').change(function() {
-  thi = $(this);
-  var val = $(this).val(),
+  var val = $(this).is(':checked'),
       name = $(this).attr('setting');
   opts.forEach((temp) => {
     if(temp.name === name) {
-      if (temp.action) {
+      if (temp.action)
         temp.action();
-      }
-      settings.set(name, val === 'on');
+      settings.set(name, val);
     }
   });
 });

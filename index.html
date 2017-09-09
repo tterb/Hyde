@@ -3,9 +3,11 @@
   <head>
     <meta name="viewport" charset="UTF-8" content="width=device-width"/>
     <title>Hyde - New document</title>
+    <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-select.min.css">
     <link rel="stylesheet" href="css/codemirror.css">
+    <!-- <link rel="stylesheet" id="dynamicEditor" href="css/dynamicEditor.css"> -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/modal.css">
     <link rel="stylesheet" id="profileTag" href="css/preview/default.css">
@@ -102,6 +104,8 @@
         <button class="btn dropdown-toggle" type="button" id="view-menu-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">View</button>
         <ul class="dropdown-menu">
           <li tabindex="-1" href="#" onclick="reloadWin()"><a class="dropdown-item">Reload</a><span>Ctrl + R</span></li>
+          <!-- <li class="dropdown-divider"></li> -->
+          <!-- <li><a tabindex="-1" href="#" onclick="toggleDynamicFontSizing();">Toggle Dynamic Editor</a></li> -->
           <li class="dropdown-divider"></li>
           <li tabindex="-1" href="#" onclick="toggleMenu();"><a class="dropdown-item">Toggle Menu Bar</a><span>Ctrl + M</span></li>
           <li tabindex="-1" href="#" onclick="toggleToolbar();"><a class="dropdown-item">Toggle Toolbar</a><span>Ctrl + .</span></li>
@@ -231,17 +235,16 @@
                 <option>Solarized Light</option><option>Tomorrow Night</option><option>Yeti</option><option>Zenburn</option>
               </select>
             </li>
-            <li id="lineNumbers" class="toggle">
+            <li id="dynamicEditor" class="toggle">
               <label class="switch switch--material">
-              <input type="checkbox" class="switch__input switch--material__input" value="" setting="lineNumbers">
+              <input type="checkbox" class="switch__input switch--material__input" value="" setting="dynamicEditor">
               <div class="switch__toggle switch--material__toggle">
                 <div class="switch__handle switch--material__handle">
                 </div>
               </div>
               </label>
-              <span>Line numbers</span>
+              <span>Dynamic Editor</span>
             </li>
-
             <li id="enableSpellCheck" class="toggle">
               <label class="switch switch--material">
               <input type="checkbox" class="switch__input switch--material__input" value="" setting="enableSpellCheck">
@@ -319,16 +322,6 @@
             <li id="frontMatterTemplate" class="form-group">
               <label for="yamlPath">Frontmatter Template:</label>
               <input type="text" id="yamlPath" class="form-control" value="">
-            </li>
-            <li id="showTooltips" class="toggle">
-              <label class="switch switch--material">
-                <input type="checkbox" class="switch__input switch--material__input" value="" setting="showTooltips">
-                <div class="switch__toggle switch--material__toggle">
-                  <div class="switch__handle switch--material__handle">
-                  </div>
-                </div>
-              </label>
-              <span>Show UI-tooltips</span>
             </li>
              <li id="keepInTray" class="toggle">
               <label class="switch switch--material">
@@ -517,5 +510,6 @@
     <script src="js/functions.js"></script>
     <script src="js/ipc_renderer.js"></script>
     <script src="js/emoji.js"></script>
+    <!-- <script src="js/registerHandler.js"></script> -->
   </body>
 </html>

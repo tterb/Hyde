@@ -14,7 +14,7 @@ module.exports = new Config ({
     // Editor
     editorTheme: 'one-dark',
     editorFontSize: 9.5,
-    dynamicFontSize: false,
+    dynamicEditor: false,
     tabSize: 2,
     lineNumbers: false,
     showTrailingSpace: true,
