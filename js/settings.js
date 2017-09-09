@@ -237,6 +237,13 @@ function toggleLineNumbers() {
   settings.set('lineNumbers', !state);
 }
 
+function toggleStylesheet(id) {
+  var state = $('#'+id).get(0).disabled;
+  if(state === settings.get(id)) {
+    $('#'+id).get(0).disabled = settings.get(id);
+  }
+}
+
 function toggleDynamicFont() {
   var tag,
       head = document.getElementsByTagName('head')[0];
@@ -248,7 +255,7 @@ function toggleDynamicFont() {
     head.appendChild(tag);
   } else {
     $('#dynamicTag').remove();
-    reloadWin();
+    $('#dynamicTag').attr('href', 'css/style.css');
   }
 }
 
@@ -330,14 +337,20 @@ $('#previewFontSize-input, #previewFontSize-up, #previewFontSize-down').bind('ke
 });
 
 // Settings toggle listeners
+var element, changes = [];
 $('.switch__input').change(function() {
   var val = $(this).is(':checked'),
       name = $(this).attr('setting');
+      element = $(this);
   opts.forEach((temp) => {
     if(temp.name === name) {
-      if (temp.action)
+      if(temp.action)
         temp.action();
       settings.set(name, val);
     }
   });
+  if(element.hasClass('req-reload') && changes.indexOf(element.attr('setting')) <= -1) {
+    notify('These changes will take effect once the app has been reloaded (ctrl+r)', 'info');
+  }
+  changes.push(element.attr('setting'));
 });

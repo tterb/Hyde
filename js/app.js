@@ -69,29 +69,34 @@ if(os.type() === 'Darwin') {
   $('#settings-section ul li').css('letter-spacing', '0.075em');
 }
 
+var themes = [],
+    head = $('head');
+main.getThemes().filter((temp) => {
+  themes.push(temp.value)
+});
+if(theme === undefined)
+  theme = 'one-dark';
+themes.forEach(function(index) {
+  temp = document.createElement('link');
+  temp.setAttribute('rel', 'stylesheet');
+  temp.setAttribute('href', 'css/theme/'+index+'.css');
+  head.append(temp);
+});
+
 function includeTheme(theme) {
-  var themeTag,
-      head = document.getElementsByTagName('head')[0];
+  var themeTag;
   if(theme === undefined)
     theme = 'one-dark';
-  if(document.getElementById('themeLink')) {
-    themeTag = document.getElementById('themeLink');
-    themeTag.setAttribute('href', 'css/theme/'+theme+'.css');
-    head.appendChild(themeTag);
-    remote.getCurrentWindow().reload();
-  } else {
-    themeTag = document.createElement('link');
-    themeTag.setAttribute('id', 'themeLink');
-    themeTag.setAttribute('rel', 'stylesheet');
-    themeTag.setAttribute('href', 'css/theme/'+theme+'.css');
-    head.appendChild(themeTag);
-  }
-  var title = theme.replace(/-/g , " ").replace(/\w\S*/g, function(txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
+  themeTag = $('link[href="css/theme/'+theme.toString()+'.css"]');
+  themeTag.attr('id', 'themeLink');
+  var title = theme.replace(/-/g , " ").replace(/\w\S*/g, function(str) {
+    return str.charAt(0).toUpperCase() + str.substr(1).toLowerCase();
+  });
   $('#editorTheme').attr('title', title);
   settings.set('editorTheme', theme);
   if(currentTheme !== theme) {
     currentTheme = theme;
-    reloadWin();
+    cm.setOption("theme", theme);
   }
 }
 
