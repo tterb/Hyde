@@ -127,7 +127,7 @@ ipc.on('ctrl+left', () => { cm.execCommand('indentLess'); });
 ipc.on('ctrl+right', () => { cm.execCommand('indentMore'); });
 ipc.on('ctrl+up', () => { cm.execCommand('goDocStart'); });
 ipc.on('ctrl+down', () => { cm.execCommand('goDocEnd'); });
-ipc.on('maximize', () => { toggleMaximize(); }
+ipc.on('maximize', () => { toggleMaximize(); })
 ipc.on('file-pdf', () => {
   // Only save PDF files
   options = {
