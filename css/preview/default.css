@@ -1,7 +1,7 @@
 #markdown {
   color: #2a2a2a;
   font-family: "Open Sans", "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
-  font-size: 2.3vh;
+  font-size: 10pt;
   letter-spacing: 0.0375em;
   line-height: 1.5;
   text-rendering: geometricPrecision;
@@ -10,7 +10,7 @@
 }
 #markdown h1 {
   color: #333;
-  font-size: 2.618em;
+  font-size: 2.62em;
   font-weight: 700;
   letter-spacing: 0.02em;
   line-height: 1.45;
