@@ -302,7 +302,7 @@
               <select id="previewProfile" class="selectpicker" data-width="fit">
                 <option>Default</option>
                 <option>GitHub</option>
-                <option>Custom </option>
+                <option>Custom</option>
               </select>
             </li>
             <li id="previewFontSize" class="input"><span>Font size: </span>
@@ -405,6 +405,12 @@
                   <button id="table-button" data-dismiss="modal"><i class="fa fa-arrow-right"></i></button>
                 </li>
               </ul>
+              <div id="alignButtons" class="align-buttons">
+                <span>Align: </span>
+                <button id="leftAlign" class="modal-button button-group on"><i class="fa fa-align-left"></i></button>
+                <button id="centerAlign" class="modal-button button-group"><i class="fa fa-align-center"></i></button>
+                <button id="rightAlign" class="modal-button button-group"><i class="fa fa-align-right"></i></button>
+              </div>
             </div>
           </div>
         </div>
@@ -494,6 +500,24 @@
         </div>
       </div>
     </div>
+    <!-- Custom CSS Modal -->
+    <div class="modal fade" id="custom-css-modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content modal-inset">
+          <div class="modal-header">
+            <button type="button" class="modal-close" data-dismiss="modal"><img class="inactive" src="img/buttons/close.png" alt="Close"/><img class="active" src="img/buttons/close_active.png" alt="Close"/></button>
+            <h4 class="modal-title">Custom CSS</h4>
+          </div>
+          <div class="modal-body-inset">
+            <section class="modal--default__content text-input" id="modal-body-region">
+              <textarea id="custom-css" rows="17" cols="75" placeholder="Paste your CSS here" wrap="soft" autofocus>
+              </textarea>
+              <button id="custom-css-button" class="custom-css-button modal-button">Save</button>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- Close-Unsaved Modal -->
     <div class="modal fade" id="unsaved-modal" tabindex="-1" role="dialog">
       <div class="modal-dialog">
@@ -531,5 +555,6 @@
     <script src="js/functions.js"></script>
     <script src="js/ipc_renderer.js"></script>
     <script src="js/emoji.js"></script>
+    <!-- <script src="js/registerHandler.js"></script> -->
   </body>
 </html>

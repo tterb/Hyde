@@ -35,8 +35,8 @@ var conf = {
   base: "gfm",
   viewportMargin: 100000000000,
   tabSize: 2,
+  lineWrapping: true,
   lineNumbers: settings.get('lineNumbers'),
-  lineWrapping: settings.get('lineWrapping'),
   showTrailingSpace: settings.get('showTrailingSpace'),
   autoCloseBrackets: settings.get('matchBrackets'),
   autoCloseTags: settings.get('matchBrackets'),
@@ -183,7 +183,7 @@ window.onload = () => {
   $('#yamlPath').on('click', () => { setFrontMatterTemplate() });
   $('#table-button').on('click', () => {
     $('#table-modal').modal();
-    createTable($('#columns').val(),$('#rows').val());
+    createTable($('#columns').val(),$('#rows').val(),$('.on').attr('id').slice(0,-5));
   });
 }
 
@@ -321,6 +321,12 @@ $('.spinner .btn:last-of-type').on('click', function() {
   settings.set(btn.attr('id').split('-')[0], input.val());
 });
 
+var te;
+$('#leftAlign, #centerAlign, #rightAlign').on('click', function() {
+  $('.on').removeClass('on');
+  $(this).addClass('on');
+  te = $(this).attr('id').slice(0, -5);
+});
 
 // Word count
 function countWords() {

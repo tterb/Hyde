@@ -15,7 +15,7 @@ function toggleFormat(type) {
     modifiers = ["*", "_"];
   else if(type === "strikethrough")
     modifiers = ["~~"];
-  else if(type === "code")
+  else if(type === "code") //TODO inline vs code block
     modifiers = ["`"];
   cm.operation(() => { toggleState(type, modifiers); })
 }
@@ -196,19 +196,28 @@ function insert(obj) {
     else return;
 }
 
-function createTable(cols, rows) {
+function createTable(cols, rows, align) {
   if(!cols || !rows) return notify('Invalid table parameters', 'error');
   var startPoint = cm.getCursor("start"),
       text = cm.getLine(startPoint.line),
       start = text.slice(0, startPoint.ch),
       end = text.slice(startPoint.ch),
-      table = sep = body = "| ";
-  for(let i = 1; i <= cols; i++) {
-    table += "Column "+i+" |";
-    sep += "-------- |";
-    body += " Text     |";
+      table = separator = body = "| ",
+      alignment = " | ";
+  if(align === 'center') {
+    separator = "|:"
+    alignment = ":|:"
   }
-  table += "  \n"+sep+"  \n";
+  else if(align === 'right') {
+    alignment = ":| "
+  }
+
+  for(let i = 1; i <= cols; i++) {
+    table += "Column "+i+" | ";
+    separator += "--------"+alignment;
+    body += " Text     | ";
+  }
+  table += "  \n"+separator.slice(0,-1)+"  \n";
   for(let i = 0; i < rows; i++) {
     table += body+"  \n";
   }
@@ -248,6 +257,20 @@ function _toggleHeading(direction) {
     cm.replaceRange(text, {line: i, ch: 0}, {line: i, ch: 99999999999999});
   }
   cm.focus();
+}
+
+function selectWord() {
+  var startPoint, endPoint;
+  if(!cm.somethingSelected()) {
+    var word = cm.findWordAt(cm.getCursor());
+    startPoint = word.anchor;
+    endPoint = word.head;
+  } else {
+    var word = cm.findWordAt(cm.getSelection());
+    startPoint = word.anchor;
+    endPoint = word.head;
+  }
+  cm.setSelection(startPoint, endPoint);
 }
 
 // Insert link or image-link syntax
