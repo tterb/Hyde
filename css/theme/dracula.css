@@ -43,7 +43,3 @@
 
 .cm-s-dracula .CodeMirror-activeline-background { background: rgba(255,255,255,0.1); }
 .cm-s-dracula .CodeMirror-matchingbracket { text-decoration: underline; color: white !important; }
-
-#leftFade {
-  background: -webkit-linear-gradient(top, #282a36 35%, transparent);
-}

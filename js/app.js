@@ -17,6 +17,7 @@ const parsePath = require("parse-filepath");
 const settings = require('electron-settings');
 const storage = require('electron-json-storage');
 const spellChecker = require('codemirror-spell-checker');
+var Color = require('color');
 var isBinaryFile = require("isbinaryfile");
 var os = require("os");
 require('showdown-youtube');
@@ -52,6 +53,7 @@ if(main.getThemes().filter((temp) => { return temp.value === theme })) {
   conf.theme = "one-dark";
 }
 includeTheme(theme);
+var tool = "hello";
 
 if(settings.get('enableSpellCheck')) {
   conf.mode = "spell-checker";
@@ -74,14 +76,14 @@ var themes = [],
 main.getThemes().filter((temp) => {
   themes.push(temp.value)
 });
-if(theme === undefined)
-  theme = 'one-dark';
 themes.forEach(function(index) {
   temp = document.createElement('link');
   temp.setAttribute('rel', 'stylesheet');
   temp.setAttribute('href', 'css/theme/'+index+'.css');
   head.append(temp);
 });
+var themeColor = $('.cm-s-'+theme).css('background-color');
+adaptTheme(themeColor, Color(themeColor).luminosity());
 
 function includeTheme(theme) {
   var themeTag;
@@ -98,6 +100,8 @@ function includeTheme(theme) {
     currentTheme = theme;
     cm.setOption("theme", theme);
   }
+  var themeColor = $('.cm-s-'+theme).css('background-color');
+  adaptTheme(themeColor, Color(themeColor).luminosity());
 }
 
 window.onload = () => {
@@ -117,6 +121,8 @@ window.onload = () => {
       smoothLivePreview: true,
       extensions: ['youtube', 'prettify', 'highlightjs']
   });
+
+  createEmojiModal();
 
   cm.on('change', (cm) => {
     countWords();

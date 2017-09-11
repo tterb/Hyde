@@ -37,7 +37,3 @@
 .cm-s-oceanic .cm-em { color: #FFD2A6 }
 .cm-s-oceanic .cm-strong { color: #F2AAEC; }
 .cm-s-oceanic .cm-em.cm-strong { color: #FFB266; }
-
-#leftFade {
-  background: -webkit-linear-gradient(top, #1B2630 35%, transparent);
-}

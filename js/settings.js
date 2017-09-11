@@ -1,4 +1,4 @@
-
+var Color = require('color');
 var menu = $('#appMenu'),
     toolbar = $('#toolbar'),
     leftFade = $('#leftFade'),
@@ -11,7 +11,7 @@ var opts = [
   { name: 'showMenu', action: () => { toggleMenu(); }},
   { name: 'showToolbar', action: () => { toggleToolbar(); }},
   { name: 'showPreview', action: () => { togglePreview(); }},
-  { name: 'previewProfile' },
+  { name: 'previewProfile', action: () => { setPreviewProfile() }},
   { name: 'syncScroll', action: () => { toggleSyncScroll; }},
   { name: 'isMaximized', action: () => { toggleMaximize(); }},
   { name: 'lineNumbers', action: () => { toggleLineNumbers(); }},
@@ -100,8 +100,9 @@ var formatHead = () => {
       textPanel.css('paddingTop', '0px');
     }
   } else {
-    toolbar.css({ top: '0px' });
-    textPanel.css('paddingTop', '0px');
+    toolbar.css({ top: '0' });
+    textPanel.css('paddingTop', '0');
+    leftFade.css('top', '0');
     if(toolbar.is(':visible')) {
       textPanel.css('paddingTop', '7px');
       dragArea.css('width', '-webkit-calc(50% - 50px)');
@@ -128,6 +129,29 @@ function manageWindowSize() {
   }
   settings.set('windowWidth', parseInt($(window).width(),10));
   settings.set('windowHeight', parseInt($(window).height(),10));
+}
+
+var the;
+function adaptTheme(color, luminosity) {
+  var theme = settings.get('editorTheme'),
+      menuButton = $('#menuButton');
+      the = luminosity;
+  leftFade.css('background','-webkit-linear-gradient(top, '+color+' 35%, transparent)');
+  if(luminosity >= 0.6) {
+    menuButton.css('color', 'rgba(50, 50, 50, 0.1)');
+    menuButton.mouseover(function() {
+      $(this).css('color', 'rgba(50, 50, 50, 0.3)');
+    }).mouseout(function() {
+      $(this).css('color', 'rgba(50, 50, 50, 0.1)');
+    });
+  } else {
+    menuButton.css('color', 'rgba(255, 255, 255, 0.07)');
+    menuButton.mouseover(function() {
+      $(this).css('color', 'rgba(255, 255, 255, 0.45)');
+    }).mouseout(function() {
+      $(this).css('color', 'rgba(255, 255, 255, 0.07)');
+    });
+  }
 }
 
 function toggleMenu() {
@@ -217,12 +241,19 @@ function setPreviewMode(opt) {
 function setPreviewProfile(profile) {
   var profileTag = $('#profileTag'),
       current = profileTag.attr('href').slice(14,-4),
-      profiles = ['default','github','user'],
-      index = profiles.indexOf(profile.toLowerCase());
+      profiles = ['default','github','custom'],
+      index;
+  if(!profile)
+    profile = settings.get('previewProfile');
+  index = profiles.indexOf(profile.toLowerCase());
   if(index <= -1) return;
-  if(current !== profiles[index])
+  if(current !== profiles[index]) {
+    if(profile === "Custom")
+      $('#custom-css-modal').modal();
     profileTag.attr('href', 'css/preview/'+profiles[index]+'.css');
+  }
   settings.set('previewProfile', profile.toString());
+  $('#previewProfile').attr('title', profile);
 }
 
 function toggleLineNumbers() {
@@ -349,8 +380,23 @@ $('.switch__input').change(function() {
       settings.set(name, val);
     }
   });
-  if(element.hasClass('req-reload') && changes.indexOf(element.attr('setting')) <= -1) {
+  if(element.hasClass('req-reload') && !$('.alert-info').is(':visible')) {
     notify('These changes will take effect once the app has been reloaded (ctrl+r)', 'info');
   }
   changes.push(element.attr('setting'));
 });
+
+function getStates() {
+  var str = "";
+  $('.switch__input').each(function() {
+    var val = $(this).is(':checked'),
+        name = $(this).attr('setting');
+    str += name+': '+val+'\n';
+  });
+  str += 'changes: [ ';
+  changes.forEach(function(temp) {
+    str += temp.attr('setting')+', '
+  });
+  str += ']'
+  return str;
+}

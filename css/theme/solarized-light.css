@@ -131,13 +131,4 @@ http://ethanschoonover.com/solarized-light/img/solarized-light-palette.png
   background: rgba(0, 0, 0, 0.06);
 }
 
-#leftFade {
-  background: -webkit-linear-gradient(top, #fdf6e3 35%, transparent);
-}
 #previewPanel { box-shadow: -8px 0 18px rgba(0,0,0,0.2); }
-#menuToggle > button {
-  color: rgba(50, 50, 50, 0.1);
-}
-#menuToggle > button:hover {
-  color: rgba(50, 50, 50, 0.45)
-}

@@ -32,13 +32,4 @@
 }
 .cm-s-neo .cm-link { text-decoration: none; }
 
-#leftFade {
-  background: -webkit-linear-gradient(top, #f2f2f2 35%, transparent);
-}
 #previewPanel { box-shadow: -4px 0 10px rgba(0,0,0,0.15); }
-#menuToggle > button {
-  color: rgba(50, 50, 50, 0.1);
-}
-#menuToggle > button:hover {
-  color: rgba(50, 50, 50, 0.45)
-}

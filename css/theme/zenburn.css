@@ -38,7 +38,3 @@
 .cm-s-zenburn .CodeMirror-activeline-background { background: #000000; }
 .cm-s-zenburn div.CodeMirror-selected { background: #545454; }
 .cm-s-zenburn .CodeMirror-focused div.CodeMirror-selected { background: #4f4f4f; }
-
-#leftFade {
-  background: -webkit-linear-gradient(top, #393939 35%, transparent);
-}

@@ -9,7 +9,7 @@
 */
 
 .cm-s-railscasts.CodeMirror {background: #2b2b2b; color: #f4f1ed;}
-.cm-s-railscasts div.CodeMirror-selected {background: #272935 !important;}
+.cm-s-railscasts div.CodeMirror-selected {background: #404040 !important;}
 .cm-s-railscasts .CodeMirror-gutters {background: #2b2b2b; border-right: 0px;}
 .cm-s-railscasts .CodeMirror-linenumber {color: #5a647e;}
 .cm-s-railscasts .CodeMirror-cursor {border-left: 2px solid #d4cfc9 !important;}
@@ -35,7 +35,3 @@
 
 .cm-s-railscasts .CodeMirror-matchingbracket { text-decoration: underline; color: white !important;}
 .cm-s-railscasts .CodeMirror-activeline-background { background: #303040; }
-
-#leftFade {
-  background: -webkit-linear-gradient(top, #2b2b2b 35%, transparent);
-}

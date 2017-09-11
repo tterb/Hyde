@@ -42,13 +42,4 @@
 .cm-s-yeti .CodeMirror-activeline-background { background: #E7E4E0; }
 .cm-s-yeti .CodeMirror-matchingbracket { text-decoration: underline; }
 
-#leftFade {
-  background: -webkit-linear-gradient(top, #ECEAE8 35%, transparent);
-}
 #previewPanel { box-shadow: -4px 0 16px rgba(0,0,0,0.1); }
-#menuToggle > button {
-  color: rgba(50, 50, 50, 0.1);
-}
-#menuToggle > button:hover {
-  color: rgba(50, 50, 50, 0.45)
-}

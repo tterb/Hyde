@@ -38,13 +38,4 @@
 .cm-s-base16-light .CodeMirror-activeline-background { background: #DDDCDC; }
 .cm-s-base16-light .CodeMirror-matchingbracket { text-decoration: underline; color: white !important; }
 
-#leftFade {
-  background: -webkit-linear-gradient(top, #f5f5f5 35%, transparent);
-}
 #previewPanel { box-shadow: -4px 0 10px rgba(0,0,0,0.15); }
-#menuToggle > button {
-  color: rgba(50, 50, 50, 0.1);
-}
-#menuToggle > button:hover {
-  color: rgba(50, 50, 50, 0.45)
-}

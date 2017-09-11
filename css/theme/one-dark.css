@@ -57,7 +57,3 @@
   color: white !important;
   text-decoration: underline;
 }
-
-#leftFade {
-  background: -webkit-linear-gradient(top, hsl(220, 11%, 18%) 35%, transparent) !important;
-}
