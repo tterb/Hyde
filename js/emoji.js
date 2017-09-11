@@ -307,7 +307,6 @@ const EMOJI = [
     'flower_playing_cards',
     'flushed',
     'foggy',
-    'foo.txt',
     'football',
     'fork_and_knife',
     'fountain',
@@ -895,4 +894,15 @@ this.replacer = function(match, name){
 
 function replaceWithEmojis(emoji) {
   return emoji.replace(REGEX_EMOJI, this.replacer);
+}
+
+function createEmojiModal() {
+  var table = $('#emoji-table');
+  EMOJI.forEach((temp) => {
+    var div = $("<div>", {"class": "emoji-list"});
+    div.click(function() { insertEmoji(temp); });
+    var img = $("<img>", {"src": "./img/emoji/"+temp+".png", "title": temp});
+    div.append(img);
+    table.append(div);
+  })
 }

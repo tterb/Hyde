@@ -292,7 +292,7 @@ function insertLink(cm, type) {
   if(startPoint !== endPoint) {
     endPoint.ch += modi[0].length;
   }
-  cm.setCursor(endPoint.line, endPoint.ch+(end.length-1));
+  cm.setCursor(endPoint.line, endPoint.ch+(modi[1].length-1));
   cm.focus();
 }
 
@@ -327,6 +327,24 @@ function insertFrontMatter() {
     }
   });
   insertDate(formatDate());
+}
+
+function insertEmoji(emoji) {
+  var startPoint = cm.getCursor("start"),
+      endPoint = cm.getCursor("end");
+  if(!cm.somethingSelected()) {
+    var word = cm.findWordAt(cm.getCursor());
+    startPoint = word.anchor;
+    endPoint = word.head;
+  }
+  cm.setSelection(startPoint, endPoint);
+  cm.replaceSelection(':'+emoji+':');
+  startPoint.ch += 1;
+  if(startPoint !== endPoint) {
+    endPoint.ch += 1;
+  }
+  cm.setCursor(endPoint.line, endPoint.ch);
+  cm.focus();
 }
 
 // Returns todays date in Jekyll-compatible format

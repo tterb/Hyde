@@ -296,6 +296,7 @@ function sendShortcut(cmd) {
 localShortcut.register('CmdOrCtrl+Shift+a', () => { sendShortcut('ctrl+shift+a'); });
 localShortcut.register('CmdOrCtrl+b', () => { sendShortcut('ctrl+b'); });
 localShortcut.register('CmdOrCtrl+d', () => { sendShortcut('ctrl+d'); });
+localShortcut.register('CmdOrCtrl+e', () => { sendShortcut('ctrl+e'); });
 localShortcut.register('CmdOrCtrl+i', () => { sendShortcut('ctrl+i'); });
 localShortcut.register('CmdOrCtrl+-', () => { sendShortcut('ctrl+-'); });
 localShortcut.register('CmdOrCtrl+Shift+-', () => { sendShortcut('ctrl+shift+-'); });
@@ -381,8 +382,8 @@ app.on('ready', function() {
   });
 });
 
-let rightClickPos = null;
 
+let rightClickPos = null;
 const contextMenu = new Menu();
 contextMenu.append(new MenuItem({ role: 'undo' }))
 contextMenu.append(new MenuItem({ role: 'redo' }))

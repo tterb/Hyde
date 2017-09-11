@@ -145,6 +145,7 @@ ipc.on('html-preview', () => { setPreviewMode('html'); });
 ipc.on('about-modal', () => { $('#about-modal').modal(); });
 ipc.on('markdown-modal', () => { $('#markdown-modal').modal(); });
 ipc.on('table-modal', () => { $('#table-modal').modal(); });
+ipc.on('ctrl+e', () => { $('#emoji-modal').modal(); });
 ipc.on('keybinding-modal', () => { $('#keybinding-modal').modal(); });
 ipc.on('open-file-manager', () => { shell.showItemInFolder(currentFile); })
 var setTheme = remote.getGlobal('setTheme');
