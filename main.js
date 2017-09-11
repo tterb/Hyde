@@ -19,22 +19,23 @@
 'use strict';
 const electron = require('electron');
 const app = electron.app;
+const ipc = electron.ipcMain;
+const dialog = electron.dialog;
+const shell = electron.shell;
 const BrowserWindow = electron.BrowserWindow;
+const {Menu, MenuItem} = require('electron');
 const tray = require('./tray');
 const func = require('./js/functions');
+const notify = require('./js/notify')
 const mod = require('./package.json');
 const settings = require('./config');
 const keepInTray = settings.get('keepInTray');
 const fs = require('fs');
 const path = require('path');
-const mainPage = (`file://${__dirname}/index.html`);
-const {Menu, MenuItem} = require('electron');
-const ipc = electron.ipcMain;
 const window = require('electron-window');
-const dialog = require('electron').dialog;
-const shell = require('electron').shell;
 const localShortcut = require('electron-localshortcut');
 const windowStateManager = require('electron-window-state');
+const mainPage = (`file://${__dirname}/index.html`);
 var opts = require("nomnom")
   .option('dev', {
     abbr: 'd',
@@ -97,11 +98,11 @@ const createWindow = exports.createWindow = (file) => {
   let args = { file: readFile };
   windows.add(newWindow);
   newWindow.showUrl(mainPage, args);
+  // newWindow.showUrl(mainPage);
   newWindow.once('ready-to-show', () => { newWindow.show(); });
 
   // Open the DevTools.
-  if (opts.dev)
-    newWindow.webContents.openDevTools();
+  if (opts.dev) { newWindow.webContents.openDevTools(); }
 
   // Emitted when the window is closed.
   newWindow.on('closed', () => {
@@ -253,7 +254,7 @@ var template = [
 ];
 
 if (process.platform === 'darwin') {
-  const name = require('electron').remote.app.getName();
+  const name = app.getName();
   template.unshift({
     label: name,
     submenu: [
@@ -322,7 +323,6 @@ app.on('ready', function() {
   // Create native application menu
   const menu = Menu.buildFromTemplate(template);
   Menu.setApplicationMenu(menu);
-
   // Initialize windowStateManager
   windowState = windowStateManager({
     defaultWidth: settings.get('windowWidth'),
@@ -332,20 +332,19 @@ app.on('ready', function() {
   mainWindow = window.createWindow(getConfig());
   let args = { file: readFile };
   mainWindow.showUrl(path.join(__dirname, 'index.html'), args);
+  // mainWindow.showUrl(path.join(__dirname, 'index.html'));
   windowState.manage(mainWindow);
   windows.add(mainWindow);
-
-  if (opts.dev) { mainWindow.webContents.openDevTools(); }
-
+  // Show Dev Tools
+  if(opts.dev) { mainWindow.webContents.openDevTools(); }
   mainWindow.once('ready-to-show', () => {
     mainWindow.show();
   });
-
-  if (keepInTray) {
+  if(keepInTray) {
     mainWindow.on('close', e => {
       if (!isQuitting) {
         e.preventDefault();
-        if (process.platform === 'darwin') {
+        if(process.platform === 'darwin') {
           app.hide();
         } else {
           mainWindow.hide();
@@ -362,7 +361,7 @@ app.on('ready', function() {
   app.on('window-all-closed', () => {
     // On OSX it is common for applications and their menu bar
     // to stay active until the user quits explicitly with Cmd+Q
-    if (process.platform !== 'darwin') {
+    if(process.platform !== 'darwin') {
       app.quit();
     }
   });
@@ -382,6 +381,8 @@ app.on('ready', function() {
   });
 });
 
+let rightClickPos = null;
+
 const contextMenu = new Menu();
 contextMenu.append(new MenuItem({ role: 'undo' }))
 contextMenu.append(new MenuItem({ role: 'redo' }))
@@ -393,11 +394,12 @@ contextMenu.append(new MenuItem({ label: "Select All", click: () => { sendShortc
 contextMenu.append(new MenuItem({ type: 'separator' }))
 contextMenu.append(new MenuItem({ label: 'Show in File Manager', click: () => { sendShortcut('open-file-manager'); } }))
 contextMenu.append(new MenuItem({ type: 'separator' }))
-contextMenu.append(new MenuItem({ role: 'toggledevtools' }))
+contextMenu.append(new MenuItem({ label: 'Inspect Element', click: () => { mainWindow.inspectElement(rightClickPos.x, rightClickPos.y) }}))
 
 
 app.on('browser-window-created', function(event, win) {
   win.webContents.on('context-menu', function(e, params) {
+    rightClickPos = { x: params.x, y: params.y };
     contextMenu.popup(win, params.x, params.y);
   });
 });
