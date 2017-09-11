@@ -131,11 +131,9 @@ function manageWindowSize() {
   settings.set('windowHeight', parseInt($(window).height(),10));
 }
 
-var the;
 function adaptTheme(color, luminosity) {
   var theme = settings.get('editorTheme'),
       menuButton = $('#menuButton');
-      the = luminosity;
   leftFade.css('background','-webkit-linear-gradient(top, '+color+' 35%, transparent)');
   if(luminosity >= 0.6) {
     menuButton.css('color', 'rgba(50, 50, 50, 0.1)');

@@ -82,8 +82,6 @@ themes.forEach(function(index) {
   temp.setAttribute('href', 'css/theme/'+index+'.css');
   head.append(temp);
 });
-var themeColor = $('.cm-s-'+theme).css('background-color');
-adaptTheme(themeColor, Color(themeColor).luminosity());
 
 function includeTheme(theme) {
   var themeTag;
@@ -122,6 +120,8 @@ window.onload = () => {
       extensions: ['youtube', 'prettify', 'highlightjs']
   });
 
+  var themeColor = $('.cm-s-'+theme).css('background-color');
+  adaptTheme(themeColor, Color(themeColor).luminosity());
   createEmojiModal();
 
   cm.on('change', (cm) => {
