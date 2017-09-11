@@ -56,7 +56,7 @@
         padding-left: 35px; }
   #markdown li {
     font-size: 2.4vh;
-    letter-spacing: 0.0375em;
+    letter-spacing: 0.0275em;
     margin-bottom: 5px; }
   #markdown a {
     color: #1c74a0;
@@ -69,7 +69,7 @@
     border-top: 1px solid #ddd; }
   #markdown p {
     font-size: 2.4vh;
-    letter-spacing: 0.0375em;
+    letter-spacing: 0.0275em;
     line-height: 1.5;
     margin: 0 0 16px !important; }
   #markdown pre {

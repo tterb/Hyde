@@ -58,7 +58,7 @@
 }
 #markdown li {
   font-size: 2.4vh;
-  letter-spacing: 0.0375em;
+  letter-spacing: 0.0275em;
   margin-bottom: 5px;
 }
 #markdown li + li {
@@ -82,7 +82,7 @@
 }
 #markdown p {
   font-size: 2.4vh;
-  letter-spacing: 0.0375em;
+  letter-spacing: 0.0275em;
   line-height: 1.5;
   margin: 0 0 16px !important;
 }
