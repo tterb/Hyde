@@ -662,7 +662,7 @@ input[type="checkbox"] {
           #settings-menu .settings-section ul li .btn-group .filter-option {
             font-size: 13.5px;
             font-weight: 300;
-            letter-spacing: 0.05em; }
+            letter-spacing: 0.055em; }
           #settings-menu .settings-section ul li .btn-group .btn.btn-default {
             background: -webkit-linear-gradient(bottom, #2d2c2d, #3d3c3d);
             color: rgba(255, 255, 255, 0.75);
@@ -679,6 +679,15 @@ input[type="checkbox"] {
             left: 9px; }
         #settings-menu .settings-section ul li .btn-group.open {
           z-index: 999; }
+    #settings-menu .settings-section hr {
+      position: relative;
+      background: rgba(255, 255, 255, 0.06);
+      height: 1px;
+      left: -4px;
+      border-top: none;
+      box-shadow: 0 2px 3px rgba(0, 0, 0, 0.45);
+      margin-top: 20px;
+      margin-bottom: 5px; }
   #settings-menu .dropdown-menu {
     background: #2b292a;
     color: rgba(255, 255, 255, 0.6);

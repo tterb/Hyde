@@ -3,8 +3,8 @@ $text-subtle-color: rgba(255,255,255,0.4);
 $text-emphasis-color: #f0f0f0;
 $accent-color: hsl(355, 68%, 60%);
 
-$system-font: "Roboto","Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
-$sans-serif: "Open Sans","Helvetica Neue","Segoe UI",Helvetica,Arial,sans-serif;
+$sans-serif: "Roboto","Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+$preview-font: "Open Sans","Helvetica Neue","Segoe UI",Helvetica,Arial,sans-serif;
 $serif: "Lora",Garamond,Times,Georgia,serif;
 $monospaced: "Source Code Pro","Monaco","Ubuntu Mono","Dejavu Sans Mono","Consolas",monospace;
 
@@ -15,7 +15,7 @@ html, body, section, .full-height {
 
 body {
   background: #f6f5f5;
-  font-family: $system-font !important;
+  font-family: $sans-serif !important;
   font-size: 13.5px;
   resize: both;
   overflow: hidden;
@@ -793,7 +793,7 @@ input[type="checkbox"] {
           .filter-option {
             font-size: 13.5px;
             font-weight: 300;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.055em;
           }
           .btn.btn-default {
             background: -webkit-linear-gradient(bottom, #2d2c2d, #3d3c3d);
@@ -816,6 +816,16 @@ input[type="checkbox"] {
           z-index: 999;
         }
       }
+    }
+    hr {
+      position: relative;
+      background: rgba(255,255,255,0.06);
+      height: 1px;
+      left: -4px;
+      border-top: none;
+      box-shadow: 0 2px 3px rgba(0,0,0,0.45);
+      margin-top: 20px;
+      margin-bottom: 5px;
     }
   }
   .dropdown-menu {
@@ -1082,7 +1092,7 @@ input[type="checkbox"] {
 
 #previewPanel {
   background: #f6f5f5;
-  font-family: $sans-serif;
+  font-family: $preview-font;
   height: 100%;
   width: 100%;
   padding: 27px 15px 27px;
@@ -1226,7 +1236,7 @@ code {
 
 #htmlPreview {
   display: none;
-  font-family: $sans-serif;
+  font-family: $preview-font;
   background: #f6f5f5;
   color: #2a2a2a;
   width: 100%;
@@ -1317,7 +1327,7 @@ code {
   position: absolute;
   background: transparent;
   color: $text-color;
-  font-family: $system-font;
+  font-family: $sans-serif;
   font-size: 12px;
   letter-spacing: 0.05em;
   border-radius: 4px;
@@ -1335,7 +1345,7 @@ code {
   position: absolute;
   background-image: -webkit-linear-gradient(top, #383637, #373635);
   color: $text-color;
-  font-family: $system-font;
+  font-family: $sans-serif;
   font-size: 12px;
   letter-spacing: 0.05em;
   left: 5%;
