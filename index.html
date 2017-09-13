@@ -50,7 +50,7 @@
   <body class="container-fluid" id="body" style="resize: both">
     <div id="draggable" style="-webkit-app-region:drag"></div>
     <div id="menuToggle">
-      <button id="menuButton" onclick="toggleMenu()" style="cursor: pointer;"><span class="mif-menu"></span></button>
+      <button id="menuButton" onclick="toggleMenu()"><span class="mif-menu"></span></button>
     </div>
     <div id="metacity">
       <button id="close" class="winButton" style="cursor: pointer;"><img class="active" src="img/buttons/close_active.png" alt="Close"/><img class="inactive" src="img/buttons/close.png" alt="Close"/></button>
@@ -318,10 +318,10 @@
             <li id="hideYAMLFrontMatter" class="toggle">
               <label class="switch switch--material">
               <input type="checkbox" class="switch__input switch--material__input" setting="hideYAMLFrontMatter" checked>
-              <div class="switch__toggle switch--material__toggle">
-                <div class="switch__handle switch--material__handle">
+                <div class="switch__toggle switch--material__toggle">
+                  <div class="switch__handle switch--material__handle">
+                  </div>
                 </div>
-              </div>
               </label>
               <span>Hide YAML-frontmatter</span>
             </li>
@@ -386,154 +386,15 @@
       <button id="previewToggle" class="fa fa-eye" data-tooltip="Toggle Preview" onclick="togglePreview();"></button>
     </div>
     <!-- Table Modal -->
-    <div class="modal fade" id="table-modal" tabindex="-1" role="dialog">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-body">
-            <div class="modal-header">
-              <button type="button" class="modal-close" data-dismiss="modal"><img class="inactive" src="img/buttons/close.png" alt="Close"/><img class="active" src="img/buttons/close_active.png" alt="Close"/></button>
-              <h4 class="modal-title">Table</h4>
-            </div>
-            <div class="table-content">
-              <ul id="table-input">
-                <li id="table-columns" class="form-group">
-                  <input type="number" id="columns" placeholder="Columns" class="form-control" value="">
-                </li>
-                <li id="table-rows" class="form-group">
-                  <input type="number" id="rows" placeholder="Rows" class="form-control" value="">
-                </li>
-                <li>
-                  <button id="table-button" data-dismiss="modal"><i class="fa fa-arrow-right"></i></button>
-                </li>
-              </ul>
-              <div id="alignButtons" class="align-buttons">
-                <span>Align: </span>
-                <button id="leftAlign" class="modal-button button-group on"><i class="fa fa-align-left"></i></button>
-                <button id="centerAlign" class="modal-button button-group"><i class="fa fa-align-center"></i></button>
-                <button id="rightAlign" class="modal-button button-group"><i class="fa fa-align-right"></i></button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div class="modal fade" id="table-modal" tabindex="-1" role="dialog"></div>
     <!-- Markdown Help Modal -->
-    <div class="modal fade" id="markdown-modal" tabindex="-1" role="dialog">
-      <div class="modal-dialog">
-        <div class="modal-content modal-inset">
-          <div class="modal-header">
-            <button type="button" class="modal-close" data-dismiss="modal"><img class="inactive" src="img/buttons/close.png" alt="Close"/><img class="active" src="img/buttons/close_active.png" alt="Close"/></button>
-            <h4 class="modal-title">Markdown Help</h4>
-          </div>
-          <div class="modal-body-inset">
-            <section class="modal--default__content" id="modal-body-region">
-              <table class="markdown-help-content">
-                <tbody>
-                    <tr>
-                      <td id="header">Header</td>
-                      <td># Header</td>
-                    </tr>
-                    <tr>
-                      <td><strong>Bold</strong></td>
-                      <td>**bold**</td>
-                    </tr>
-                    <tr>
-                      <td><i>Italics</i></td>
-                      <td>*italics*</td>
-                    </tr>
-                    <tr>
-                      <td><del>Strikethrough</del></td>
-                      <td>~~strikethrough~~</td>
-                    </tr>
-                    <tr>
-                      <td><ul><li>item</li></ul></td>
-                      <td>* item</td>
-                    </tr>
-                    <tr>
-                      <td>Blockquote</td>
-                      <td>&gt; blockquote</td>
-                    </tr>
-                    <tr>
-                      <td><a href="https://github.com/JonSn0w/Hyde" target="_rick">Link</a></td>
-                      <td>[title](http://)</td>
-                    </tr>
-                    <tr>
-                      <td>Image</td>
-                      <td>![alt](http://)</td>
-                    </tr>
-                    <tr>
-                      <td id="code"><code>code</code></td>
-                      <td>`code`</td>
-                    </tr>
-                    <tr>
-                      <td>L<sup>a</sup>T<sub>e</sub>X</td>
-                      <td>$$LaTeX code$$</td>
-                    </tr>
-                    <tr>
-                      <td id="code-block"><pre style="display: inline-block; margin: 8px 0 2px"><code><span class="keyword">var </span>code = <span class="string">"formatted"</span>;</code></pre></td>
-                      <td style="line-height: 100%">``` <i style="color: rgba(0,0,0,0.5)">(shift+enter for line break)</i><br>var code = "formatted";<br>```</td>
-                    </tr>
-                </tbody>
-              </table>
-            </section>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div class="modal fade" id="markdown-modal" tabindex="-1" role="dialog"></div>
     <!-- About Modal -->
-    <div class="modal fade" id="about-modal" tabindex="-1" role="dialog">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-body">
-            <div class="modal-header">
-              <button type="button" class="modal-close" data-dismiss="modal"><img class="inactive" src="img/buttons/close.png" alt="Close"/><img class="active" src="img/buttons/close_active.png" alt="Close"/></button>
-            </div>
-            <img id="hyde-img" src="./img/Hyde.png"/>
-            <div class="about-content">
-              <ul class="about-info">
-                <li>Created by <a href="openInBrowser('https://JonSn0w.github.io/'')" id="name">Brett Stevenson</a></li>
-                <li>License: <a id="license-modal" href="openInBrowser('http://www.gnu.org/licenses/gpl.txt')">GPL v3.0</a></li>
-                <li>Version: <a id="version-modal" href="openInBrowser('https://github.com/JonSn0w/Hyde/releases/latest')">v0.0.1</a></li>
-                <li id="check-updates-modal"><a href="openInBrowser('https://github.com/JonSn0w/Hyde/releases/latest')">Check for Updates</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div class="modal fade" id="about-modal" tabindex="-1" role="dialog"></div>
     <!-- Custom CSS Modal -->
-    <div class="modal fade" id="custom-css-modal" tabindex="-1" role="dialog">
-      <div class="modal-dialog">
-        <div class="modal-content modal-inset">
-          <div class="modal-header">
-            <button type="button" class="modal-close" data-dismiss="modal"><img class="inactive" src="img/buttons/close.png" alt="Close"/><img class="active" src="img/buttons/close_active.png" alt="Close"/></button>
-            <h4 class="modal-title">Custom CSS</h4>
-          </div>
-          <div class="modal-body-inset">
-            <section class="modal--default__content text-input" id="modal-body-region">
-              <textarea id="custom-css" rows="17" cols="75" placeholder="Paste your CSS here" wrap="soft" autofocus>
-              </textarea>
-              <button id="custom-css-button" class="custom-css-button modal-button">Save</button>
-            </section>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div class="modal fade" id="custom-css-modal" tabindex="-1" role="dialog"></div>
     <!-- Emoji Modal -->
-    <div class="modal fade" id="emoji-modal" tabindex="-1" role="dialog">
-      <div class="modal-dialog">
-        <div class="modal-content modal-inset">
-          <div class="modal-header">
-            <button type="button" class="modal-close" data-dismiss="modal"><img class="inactive" src="img/buttons/close.png" alt="Close"/><img class="active" src="img/buttons/close_active.png" alt="Close"/></button>
-            <h4 class="modal-title">Emoji</h4>
-          </div>
-          <div class="modal-body-inset">
-            <section class="modal--default__content text-input" id="emoji-table">
-            </section>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div class="modal fade" id="emoji-modal" tabindex="-1" role="dialog"></div>
     <!-- Close-Unsaved Modal -->
     <div class="modal fade" id="unsaved-modal" tabindex="-1" role="dialog">
       <div class="modal-dialog">
@@ -570,6 +431,8 @@
     <script src="js/format.js"></script>
     <script src="js/functions.js"></script>
     <script src="js/ipc_renderer.js"></script>
+    <script src="js/modal.js"></script>
+    <!-- <script src="js/notify.js"></script> -->
     <script src="js/emoji.js"></script>
     <!-- <script src="js/registerHandler.js"></script> -->
   </body>

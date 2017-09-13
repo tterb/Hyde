@@ -1,6 +1,6 @@
 .modal-content {
   position: relative;
-  background: #353433;
+  background: -webkit-linear-gradient(top, #272625, #232221) !important;
   color: #e5e5e5;
   top: 20px;
   border-radius: 15px;
@@ -19,11 +19,12 @@
   background: -webkit-linear-gradient(top, #272625, #232221) !important;
   overflow: hidden; }
   .modal-inset .modal-header {
+    background: transparent;
     border-bottom: none; }
   .modal-inset .modal-close {
     position: absolute;
-    top: 8px;
-    right: 18px; }
+    top: 9px;
+    right: 20px; }
   .modal-inset .modal--default__content {
     position: relative;
     box-sizing: border-box;
@@ -34,7 +35,7 @@
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.6); }
 
 .modal-header {
-  background-image: -webkit-linear-gradient(top, #333231, #292827);
+  background: transparent;
   border: none;
   padding: 8px 15px; }
 
@@ -46,7 +47,12 @@
   margin: 0 0 0 6px; }
 
 #unsaved-modal .modal-body {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 14.5px;
   padding: 3px 15px; }
+  #unsaved-modal .modal-body .unsaved-buttons {
+    margin-top: 3px;
+    margin-bottom: 5px; }
 
 #unsaved-modal .modal-dialog {
   width: 425px;
@@ -57,12 +63,12 @@
       position: absolute;
       background: transparent !important;
       top: 7px;
-      right: 13px;
+      right: 15px;
       width: 15px;
       height: auto;
       float: right; }
 
-#unsaved-modal #unsaved-body {
+#unsaved-modal #unsaved-body img {
   color: rgba(255, 255, 255, 0.75);
   padding: 2px 0 12px; }
 
@@ -84,6 +90,8 @@
   left: -2px;
   border-top-left-radius: 15px !important;
   border-bottom-left-radius: 15px !important; }
+  .align-buttons #leftAlign i {
+    left: 1px; }
 
 .align-buttons #centerAlign {
   position: relative;
@@ -94,10 +102,12 @@
   left: -17px;
   border-top-right-radius: 15px !important;
   border-bottom-right-radius: 15px !important; }
+  .align-buttons #rightAlign i {
+    right: 1px; }
 
 .button-group {
-  background: -webkit-linear-gradient(top, #3c3a3b, #2d2b2c);
-  height: 30px;
+  background: -webkit-linear-gradient(top, #454344, #2a2829);
+  height: 28px;
   border-radius: 0px !important;
   margin-top: 10px !important;
   margin-left: 0 !important;
@@ -107,15 +117,16 @@
   transition: box-shadow 50ms ease-in-out; }
   .button-group i {
     position: relative;
+    color: rgba(255, 255, 255, 0.5);
     font-size: 0.55em;
-    top: -3px; }
+    top: -5px; }
   .button-group.on {
     background: #393738;
-    color: #de545f;
     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.6); }
     .button-group.on i {
       position: relative;
-      top: -2px;
+      color: #de545f;
+      top: -3px;
       font-size: 0.7em; }
     .button-group.on:hover {
       background: #393738;
@@ -139,7 +150,10 @@
       top: 3px;
       left: 5px;
       border-radius: 15px;
+      border-color: transparent;
       padding: 3px;
+      padding-top: 6px;
+      padding-left: 6px;
       resize: none; }
       .modal-body-inset .text-input textarea ::-webkit-input-placeholder {
         color: rgba(0, 0, 0, 0.7); }
@@ -204,6 +218,7 @@
     position: relative;
     font-size: 0.75em;
     font-weight: 300;
+    top: -2px;
     margin-right: 4px; }
 
 #table-modal .modal-close {
@@ -245,8 +260,10 @@
         color: rgba(255, 255, 255, 0.7); }
     #table-modal ul li #table-button {
       display: inline-block;
-      background-image: -webkit-linear-gradient(bottom, #252525, #404040);
-      border: 1px outset #4a4a4a;
+      text-shadow: -2px 2px #323031;
+      background-image: -webkit-linear-gradient(top, #555354, #2d2b2c);
+      box-shadow: inset 0 0 0 1px #2c2a2b;
+      border: none;
       border-radius: 100px;
       color: rgba(255, 255, 255, 0.6) !important;
       text-align: center;
@@ -269,9 +286,12 @@
     #table-modal ul li:last-child {
       width: 15%; }
 
+#custom-css-modal .modal-dialog {
+  width: 500px; }
+
 #markdown-modal .modal-close img {
-  top: 13px;
-  right: 12px; }
+  top: 3px;
+  right: -3px; }
 
 #markdown-modal .markdown-help-content {
   width: 100%;
@@ -338,8 +358,8 @@
     #about-modal .modal-close img {
       position: absolute;
       width: 15px;
-      top: 12px;
-      right: 14px; }
+      top: 3px;
+      right: -4px; }
     #about-modal .modal-close:active > img, #about-modal .modal-close > img:hover {
       content: url("../img/buttons/close_active.png"); }
   #about-modal #hyde-img {

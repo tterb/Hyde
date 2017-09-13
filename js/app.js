@@ -122,6 +122,7 @@ window.onload = () => {
 
   var themeColor = $('.cm-s-'+theme).css('background-color');
   adaptTheme(themeColor, Color(themeColor).luminosity());
+  createModals();
   createEmojiModal();
 
   cm.on('change', (cm) => {
