@@ -24,7 +24,7 @@ label {
   margin-bottom: 5px; }
 
 #pad {
-  font-family: "Source Code Pro", "Monaco", "Ubuntu Mono", "Dejavu Sans Mono", "Consolas", monospace;
+  font-family: "Fira Code", "Source Code Pro", "Monaco", "Ubuntu Mono", "Dejavu Sans Mono", "Consolas", monospace;
   border: none;
   overflow: auto;
   outline: none;
@@ -56,8 +56,9 @@ label {
     border: none;
     outline: none !important;
     transform: scale(1);
-    transition: color 300ms ease-in-out;
-    transition: all 200ms ease-in-out;
+    transition: color 1000ms cubic-bezier(0.17, 0.04, 0.03, 0.75);
+    transition: all 200ms cubic-bezier(0.17, 0.04, 0.03, 0.75);
+    padding-left: 4px;
     z-index: 99; }
     #menuToggle button:hover {
       color: rgba(255, 255, 255, 0.45); }
@@ -304,7 +305,7 @@ label {
 
 .bottom-bar {
   position: absolute;
-  background: -webkit-linear-gradient(top, #2f2f2f 5%, #2b2b2b 35%, #222120, #1d1d1d 98%);
+  background: -webkit-linear-gradient(top, #2f2f2f 5%, #2b2b2b 35%, #222120, #1d1d1d 98%), -webkit-radial-gradient(top, circle cover, #242223 20%, #323031 50%, #242223 80%);
   color: #b6b5b4;
   font-size: 11px;
   height: 28px;
@@ -418,13 +419,6 @@ label {
     .prevToggle input[type="radio"]:checked + label span {
       background: url(../img/buttons/radio.png) -33px top no-repeat; }
 
-#previewPanel input[type="checkbox"] {
-  color: #000;
-  left: 0;
-  opacity: 1; }
-  #previewPanel input[type="checkbox"][disabled] {
-    cursor: default; }
-
 input[type="checkbox"] {
   display: inline-block;
   position: relative;
@@ -519,7 +513,7 @@ input[type="checkbox"] {
 #sidebar {
   display: block;
   position: absolute;
-  background-image: -webkit-linear-gradient(#343233 40%, #292728);
+  background-image: -webkit-radial-gradient(top, circle cover, #343233 30%, #292728 90%);
   color: rgba(255, 255, 255, 0.75);
   height: 100%;
   width: 240px;
@@ -534,13 +528,14 @@ input[type="checkbox"] {
   width: 68%;
   height: auto;
   left: 0;
-  margin: 25px 16% 20px;
+  margin: 25px 16% 17px;
   opacity: 0.9; }
 
 #side-menu {
   position: relative;
-  font-size: 22px;
+  font-size: 25px;
   font-weight: 200;
+  letter-spacing: 0.025em;
   list-style: none;
   top: 1.5%;
   padding: 0; }
@@ -549,26 +544,28 @@ input[type="checkbox"] {
     padding: 2px 0; }
     #side-menu li a {
       color: rgba(255, 255, 255, 0.65);
+      transition: all 300ms linear;
       cursor: pointer; }
       #side-menu li a:hover, #side-menu li a:active {
-        color: rgba(255, 255, 255, 0.8);
+        color: rgba(255, 255, 255, 0.7);
         font-weight: 300;
         text-decoration: none; }
     #side-menu li:after {
       display: block;
       position: relative;
       content: '';
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.085);
       height: 1px;
       width: 200px;
       border: none;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
       margin: 3px auto;
       padding: 0; }
 
 #sidebar-icons {
   width: 40%;
   text-shadow: 0 2px rgba(0, 0, 0, 0.2);
-  margin: 55px 30% 8px;
+  margin: 55px 72px 8px;
   padding: 0; }
   #sidebar-icons li {
     position: relative;
@@ -598,7 +595,7 @@ input[type="checkbox"] {
 #settings-menu {
   display: block;
   position: absolute;
-  background-image: -webkit-linear-gradient(#313031 10%, #2a2a2a);
+  background-image: -webkit-radial-gradient(top, circle cover, #343233 25%, #292728 80%);
   color: rgba(255, 255, 255, 0.75);
   height: 95.5%;
   width: 310px;
@@ -864,7 +861,7 @@ input[type="checkbox"] {
   z-index: 100; }
 
 #textPanel {
-  font-family: "Source Code Pro", "Monaco", "Ubuntu Mono", "Dejavu Sans Mono", "Consolas", monospace;
+  font-family: "Fira Code", "Source Code Pro", "Monaco", "Ubuntu Mono", "Dejavu Sans Mono", "Consolas", monospace;
   height: 100%;
   width: 100%;
   padding: 0;
@@ -911,9 +908,16 @@ input[type="checkbox"] {
   font-family: "Open Sans", "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
   height: 100%;
   width: 100%;
-  padding: 27px 15px 27px;
+  padding: 25px 15px 27px;
+  margin-top: 2px;
   overflow-y: auto;
   text-rendering: geometricPrecision; }
+  #previewPanel input[type="checkbox"] {
+    color: #000;
+    left: 0;
+    opacity: 1; }
+    #previewPanel input[type="checkbox"][disabled] {
+      cursor: default; }
 
 .editor-toolbar {
   display: inline-block;
@@ -1009,7 +1013,7 @@ pre {
   border-radius: 10px; }
 
 code {
-  font-family: "Source Code Pro", "Monaco", "Ubuntu Mono", "Dejavu Sans Mono", "Consolas", monospace !important;
+  font-family: "Fira Code", "Source Code Pro", "Monaco", "Ubuntu Mono", "Dejavu Sans Mono", "Consolas", monospace !important;
   background: #515151;
   color: rgba(255, 255, 255, 0.75);
   white-space: nowrap;
