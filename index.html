@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="css/modal.css">
     <link rel="stylesheet" href="css/notification.css">
     <link rel="stylesheet" id="profileTag" href="css/preview/default.css">
+    <!-- <link rel="stylesheet" id="customCSSTag" href="css/preview/custom.css"> -->
     <link rel="stylesheet" href="css/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="css/fonts/metro-icons.min.css">
     <link rel="stylesheet" href="css/fonts/octicons.css">
@@ -303,7 +304,6 @@
               <select id="previewProfile" class="selectpicker" data-width="fit">
                 <option>Default</option>
                 <option>GitHub</option>
-                <option>Custom</option>
               </select>
             </li>
             <li id="previewFontSize" class="input"><span>Font size: </span>
@@ -314,6 +314,16 @@
                   <button id="previewFontSize-down" class="spinner-btn btn" type="button"><i class="fa fa-caret-down"></i></button>
                 </div>
               </div>
+            </li>
+            <li id="customCSS" class="toggle">
+              <label class="switch switch--material">
+              <input type="checkbox" class="switch__input switch--material__input" setting="customCSS" checked>
+                <div class="switch__toggle switch--material__toggle">
+                  <div class="switch__handle switch--material__handle">
+                  </div>
+                </div>
+              </label>
+              <span>Use custom CSS</span>
             </li>
             <li id="hideYAMLFrontMatter" class="toggle">
               <label class="switch switch--material">
@@ -394,7 +404,21 @@
     <!-- Custom CSS Modal -->
     <div class="modal fade" id="custom-css-modal" tabindex="-1" role="dialog"></div>
     <!-- Emoji Modal -->
-    <div class="modal fade" id="emoji-modal" tabindex="-1" role="dialog"></div>
+    <div class="modal fade" id="emoji-modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content modal-inset">
+          <div class="modal-header">
+            <button type="button" class="modal-close" data-dismiss="modal"><img class="inactive" src="img/buttons/close.png" alt="Close"/>
+              <img class="active" src="img/buttons/close_active.png" alt="Close"/>
+            </button>
+            <h4 class="modal-title">Emoji</h4>
+          </div>
+          <div class="modal-body-inset">
+            <section class="modal--default__content text-input" id="emoji-table"></section>'
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- Close-Unsaved Modal -->
     <div class="modal fade" id="unsaved-modal" tabindex="-1" role="dialog">
       <div class="modal-dialog">

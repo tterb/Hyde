@@ -17,7 +17,8 @@ var opts = [
   { name: 'lineNumbers', action: () => { toggleLineNumbers(); }},
   { name: 'showTrailingSpace', action: () => { toggleWhitespace(); }},
   { name: 'dynamicEditor', action: () => { toggleDynamicFont(); }},
-  { name: 'editorFontSize' }, { name: 'tabSize' }, { name: 'enableSpellCheck' }, { name: 'previewMode' }, { name: 'previewFontSize' }, { name: 'previewLineHeight' }, { name: 'hideYAMLFrontMatter' }, { name: 'matchBrackets' }, { name: 'keepInTray' }, { name: 'frontMatterTemplate' }
+  { name: 'customCSS', action: () => { toggleCustomCSS(); }},
+  { name: 'editorFontSize' }, { name: 'tabSize' }, { name: 'enableSpellCheck' }, { name: 'previewMode' }, { name: 'previewFontSize' }, { name: 'hideYAMLFrontMatter' }, { name: 'matchBrackets' }, { name: 'keepInTray' }, { name: 'frontMatterTemplate' }
 ];
 
 function getUserSettings() {
@@ -236,22 +237,50 @@ function setPreviewMode(opt) {
   settings.set('previewMode', opt);
 }
 
+// TODO: Add custom css input to 'css/preview/custom.css'
 function setPreviewProfile(profile) {
   var profileTag = $('#profileTag'),
       current = profileTag.attr('href').slice(14,-4),
-      profiles = ['default','github','custom'],
+      profiles = ['default','github'],
       index;
   if(!profile)
     profile = settings.get('previewProfile');
   index = profiles.indexOf(profile.toLowerCase());
   if(index <= -1) return;
   if(current !== profiles[index]) {
-    if(profile === "Custom")
-      $('#custom-css-modal').modal();
     profileTag.attr('href', 'css/preview/'+profiles[index]+'.css');
   }
   settings.set('previewProfile', profile.toString());
   $('#previewProfile').attr('title', profile);
+}
+
+// TODO: Add handling for custom CSS
+function toggleCustomCSS() {
+  var state = settings.get('customCSS'),
+      file = path.join('css/preview/custom.css'),
+      tag = $('#customCSSTag');
+  if(!state)
+    tag.remove();
+  if(state) {
+    if(!tag.length) {
+      var tag = document.createElement('link');
+      tag.setAttribute('rel', 'stylesheet');
+      tag.setAttribute('id', 'customCSSTag');
+      tag.setAttribute('href', file);
+      $('head').append(tag);
+    }
+    fs.readFile(file, 'utf-8', (err, data) => {
+      if (err)
+        return notify("An error ocurred while accessing the custom CSS file", 'error');
+      if(data.toString().length < 2) {
+        $('#settings-menu').css('left', '-310px');
+        $('#custom-css-modal').modal();
+      } else {
+        $('#custom-css').attr("value", data);
+      }
+    });
+  }
+  settings.get('customCSS', !state);
 }
 
 function toggleLineNumbers() {

@@ -3,7 +3,7 @@ const {clipboard} = require('electron');
 const {webContents} = require('electron');
 
 function reloadWin() {
-  remote.getCurrentWindow().reload();
+    remote.getCurrentWindow().reload();
 }
 
 function toggleDeveloper() {
@@ -12,25 +12,19 @@ function toggleDeveloper() {
 }
 
 function showUnsavedDialog(win) {
-  var $modal = $('#unsaved-modal'),
-      $filename = $('#bottom-file').text();
-  if($modal.is(':visible')) {
-    $modal.modal('hide');
+  var modal = $('#unsaved-modal'),
+      filename = $('#bottom-file').text();
+  if(modal.is(':visible')) {
+    modal.modal('hide');
   } else {
-    if ($filename === 'New document') {
-      $filename = 'This document';
-    }
-    $('#unsaved-body').text("'"+$filename.toString()+"' has unsaved changes, do you want to save them?");
-    $modal.modal();
+    if (filename === 'New document')
+      filename = 'This document';
+    $('#unsaved-body').text("'"+filename.toString()+"' has unsaved changes, do you want to save them?");
+    modal.modal();
   }
 }
 
-function toggleModal(id) {
-  id = "#"+id;
-  $(id).modal();
-}
-
-// FIXME
+// FIXME: Fix open file in new window
 function openNewFile(file) {
   let wins;
   file = path.join(__dirname, file);
@@ -84,12 +78,12 @@ function toggleSettings() {
   if(parseInt(settingsMenu.css('left'),10) < 0) {
     button.css('visibility','hidden');
     settingsMenu.css('left', '0px');
-    trigger.css('left','320px');
+    trigger.css('left','310px');
     title.css('display', 'block');
     trigger.show();
   } else {
     button.css('visibility','hidden');
-    settingsMenu.css('left', '-320px');
+    settingsMenu.css('left', '-310px');
     title.css('display', 'none');
     trigger.hide();
   }
@@ -159,17 +153,6 @@ var updateWindowTitle = (path) => {
     activeFile.attr('data-tooltip', 'None');
 }
 
-function openModal(opt) {
-  let win = new remote.BrowserWindow({
-      parent: remote.getCurrentWindow(),
-      frame: false,
-      autoHideMenuBar: true,
-      modal: true
-  });
-  var path = path.join('file://', __dirname, '/modal/', opt.toString(), '.html');
-  win.loadURL(path);
-}
-
 function toggleSearch(opt) {
   var dialog = $('#search-container'),
       searchBar = $('.CodeMirror-dialog-top');
@@ -181,4 +164,12 @@ function toggleSearch(opt) {
       cm.execCommand('replace');
     else return;
   }
+}
+
+function appendCustomCSS() {
+  var input = $('#custom-css').val();
+  if(input.length <= 1) return;
+  fs.writeFileSync(path.join(__dirname, 'css/preview/', 'custom.css'), input);
+  toggleCustomCSS();
+  $('#custom-css-modal').modal();
 }
