@@ -25,6 +25,7 @@ module.exports = new Config ({
     previewProfile: 'Default',
     previewFontSize: 10,
     previewLineHeight: 1.45,
+    customCSS: false,
     hideYAMLFrontMatter: true,
     // Other
     showTooltips: true,
