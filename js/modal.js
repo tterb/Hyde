@@ -65,16 +65,16 @@ function createTableModal() {
 
 function createCustomCSSModal() {
   var content = '<section class="modal--default__content text-input" id="modal-body-region">' +
-  '<textarea id="custom-css" rows="17" cols="75" placeholder="Paste your CSS here..." wrap="soft" autofocus></textarea>' +
-  '<button id="custom-css-button" class="custom-css-button modal-button">Save</button>' + '</section>';
+  '<textarea id="custom-css" rows="17" cols="69" placeholder="Paste your CSS here..." wrap="soft" autofocus></textarea>' +
+  '<button id="custom-css-button" class="custom-css-button modal-button" onclick="appendCustomCSS()">Save</button>' + '</section>';
   var modal = createInsetModal('Custom CSS', content);
   $('#custom-css-modal').append(modal);
 }
 
-function createEmojiModal() {
+function fillEmojiModal() {
   var content = '<section class="modal--default__content text-input" id="emoji-table"></section>';
   var modal = createInsetModal('Emoji', content);
-  $('#emoji-table').append(modal);
+  $('#emoji-modal').append(modal);
 }
 
 function createModal(title, content) {

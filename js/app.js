@@ -47,13 +47,11 @@ var conf = {
 }
 
 var theme = settings.get('editorTheme');
-if(main.getThemes().filter((temp) => { return temp.value === theme })) {
-  conf.theme = theme;
-} else {
-  conf.theme = "one-dark";
-}
 includeTheme(theme);
-var tool = "hello";
+if(main.getThemes().filter((temp) => { return temp.value === theme }))
+  conf.theme = theme;
+else
+  conf.theme = "one-dark";
 
 if(settings.get('enableSpellCheck')) {
   conf.mode = "spell-checker";
@@ -74,13 +72,13 @@ if(os.type() === 'Darwin') {
 var themes = [],
     head = $('head');
 main.getThemes().filter((temp) => {
-  themes.push(temp.value)
+  themes.push(temp.value);
 });
 themes.forEach(function(index) {
-  temp = document.createElement('link');
-  temp.setAttribute('rel', 'stylesheet');
-  temp.setAttribute('href', 'css/theme/'+index+'.css');
-  head.append(temp);
+  var tag = document.createElement('link');
+  tag.setAttribute('rel', 'stylesheet');
+  tag.setAttribute('href', 'css/theme/'+index+'.css');
+  head.append(tag);
 });
 
 function includeTheme(theme) {
@@ -123,7 +121,7 @@ window.onload = () => {
   var themeColor = $('.cm-s-'+theme).css('background-color');
   adaptTheme(themeColor, Color(themeColor).luminosity());
   createModals();
-  createEmojiModal();
+  fillEmojiModal();
 
   cm.on('change', (cm) => {
     countWords();
@@ -328,11 +326,9 @@ $('.spinner .btn:last-of-type').on('click', function() {
   settings.set(btn.attr('id').split('-')[0], input.val());
 });
 
-var te;
 $('#leftAlign, #centerAlign, #rightAlign').on('click', function() {
   $('.on').removeClass('on');
   $(this).addClass('on');
-  te = $(this).attr('id').slice(0, -5);
 });
 
 // Word count

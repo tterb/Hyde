@@ -896,7 +896,7 @@ function replaceWithEmojis(emoji) {
   return emoji.replace(REGEX_EMOJI, this.replacer);
 }
 
-function createEmojiModal() {
+function fillEmojiModal() {
   var table = $('#emoji-table');
   EMOJI.forEach((temp) => {
     var div = $("<div>", {"class": "emoji-list"});
