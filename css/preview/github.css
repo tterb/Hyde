@@ -5,7 +5,6 @@
   line-height: 1.5;
   text-rendering: geometricPrecision;
   margin-top: 0;
-  margin-left: 15px;
   overflow: auto;
 }
 #markdown h1, #markdown h2, #markdown h3, #markdown h4, #markdown h5, #markdown h6 {
