@@ -75,8 +75,7 @@
     "nomnom": "^1.8.1",
     "parse-filepath": "1.0.1",
     "showdown": "^1.7.2",
-    "showdown-highlightjs-extension": "^0.1.2",
-    "showdown-prettify": "^1.3.0",
+    "showdown-highlight": "^1.0.2",
     "showdown-youtube": "^1.2.1"
   }
 }
