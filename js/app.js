@@ -105,16 +105,17 @@ window.onload = () => {
       htmlPreview = $('#htmlPreview');
 
   var converter = new showdown.Converter({
-      ghCompatibleHeaderId: true,
       ghCodeBlocks: true,
-      simplifiedAutoLink: true,
-      excludeTrailingPunctuationFromURLs: true,
+      ghCompatibleHeaderId: true,
       tables: true,
       tasklists: true,
       strikethrough: true,
       simpleLineBreaks: true,
-      parseImgDimensions: true,
       smoothLivePreview: true,
+      parseImgDimensions: true,
+      simplifiedAutoLink: false,
+      excludeTrailingPunctuationFromURLs: true,
+      disableForced4SpacesIndentedSublists: true,
       extensions: ['youtube', 'prettify', 'highlightjs']
   });
 
@@ -293,7 +294,7 @@ function writeEditorToFile(file) {
 
 // Resize toolbar when window is below necessary width
 $(window).on('resize', () => {
-  if(parseInt($('#body').width(),10) > 924 && $('#previewPanel').is(':visible')) {
+  if(parseInt($('#body').width(),10) > 987 && $('#previewPanel').is(':visible')) {
     toolbar.css('width', '50%');
   } else {
     toolbar.css('width', '100%');
