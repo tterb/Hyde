@@ -1,9 +1,9 @@
 .cm-s-monokai {
-	/*line-height: 1.5em;
+	line-height: 1.5em;
 	letter-spacing: 0.3px;
-	word-spacing: 1px;*/
+	word-spacing: 1px;
 	background: #272822;
-	color: rgba(255,255,255,0.75);
+	color: rgba(255,255,255,0.7);
 }
 .cm-s-monokai .CodeMirror-gutters {
 	box-shadow: 1px 0 2px 0 rgba(0, 0, 0, 0.5);
@@ -38,4 +38,5 @@
 .cm-s-monokai span.cm-strong { color: #AE81FF; }
 .cm-s-monokai span.cm-em { color: #E6DB74; }
 .cm-s-monokai span.cm-em.cm-strong { color: #FD971F; }
+.cm-s-monokai span.cm-strikethrough { color: #F92672; }
 .cm-s-one-dark .CodeMirror-matchingbracket { color: white !important; text-decoration: underline; }

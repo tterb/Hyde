@@ -84,6 +84,7 @@ http://ethanschoonover.com/solarized-dark/img/solarized-dark-palette.png
 }
 .cm-s-solarized-dark .cm-strong { color: #6c71c4; }
 .cm-s-one-dark span.cm-em.cm-strong { color: #cb4b16; }
+.cm-s-one-dark span.cm-strikethrough { color: #d33682; }
 .cm-s-solarized-dark .cm-error,
 .cm-s-solarized-dark .cm-invalidchar {
   color: #586e75;

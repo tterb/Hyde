@@ -47,7 +47,8 @@
 .cm-s-one-dark .cm-url { color: hsl(95, 38%, 62%); }
 .cm-s-one-dark .cm-em { color: hsl(39, 67%, 69%); }
 .cm-s-one-dark .cm-strong { color: hsl(286, 60%, 67%); }
-.cm-s-one-dark span.cm-em.cm-strong { color: hsl(25, 54%, 61%); }
+.cm-s-one-dark span.cm-em.cm-strong { color: hsl(25, 54%, 61%) !important; }
+.cm-s-one-dark .cm-strikethrough { color: hsl(355, 65%, 65%); }
 .cm-s-one-dark .cm-comment { color: hsl(220, 10%, 40%); font-style: italic; }
 .cm-s-one-dark .cm-error {
   background-color: hsl(5, 48%, 51%);

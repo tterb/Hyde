@@ -37,6 +37,7 @@
 .cm-s-tomorrow-night span.cm-em { color: #d6acd6; }
 .cm-s-tomorrow-night span.cm-strong { color: #76aaaf; }
 .cm-s-tomorrow-night span.cm-strong.cm-em { color: #78aad6; }
+.cm-s-tomorrow-night span.cm-strikethrough { color: #a16a94; }
 .cm-s-tomorrow-night span.cm-error { background: #f27c7b; color: #6A6A6A; }
 
 .cm-s-tomorrow-night .CodeMirror-activeline-background { background: #343600; }

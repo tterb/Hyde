@@ -10,7 +10,7 @@
 
 .cm-s-dracula.CodeMirror, .cm-s-dracula .CodeMirror-gutters {
   background-color: #282a36 !important;
-  color: #f8f8f2 !important;
+  color: rgba(255,255,255,0.85) !important;
   border: none;
 }
 .cm-s-dracula .CodeMirror-gutters { color: #282a36; }
@@ -22,7 +22,8 @@
 .cm-s-dracula span.cm-comment { color: #6272a0; }
 .cm-s-dracula span.cm-number { color: #bd93f9; }
 .cm-s-dracula span.cm-variable { color: #50fa7b; }
-.cm-s-dracula span.cm-variable-2 { color: white; }
+/*.cm-s-dracula span.cm-variable-2 { color: white; }*/
+/*.cm-s-dracula span.cm-variable-3 { color: #ffb86c; }*/
 .cm-s-dracula span.cm-def { color: #50fa7b; }
 .cm-s-dracula span.cm-operator { color: #ff79c6; }
 .cm-s-dracula span.cm-keyword { color: #ff79c6; }
@@ -33,13 +34,13 @@
 .cm-s-dracula span.cm-qualifier { color: #50fa7b; }
 .cm-s-dracula span.cm-property { color: #66d9ef; }
 .cm-s-dracula span.cm-builtin { color: #50fa7b; }
-.cm-s-dracula span.cm-variable-3 { color: #ffb86c; }
 .cm-s-dracula span.cm-header { color: #ff79c6; }
 .cm-s-dracula span.cm-link { color: #50fa7b; text-decoration: none; }
 .cm-s-dracula span.cm-string, .cm-s-dracula span.cm-string-2 { color: #f1fa8c; text-decoration: none; }
 .cm-s-dracula span.cm-url { color: #66d9ef; }
 .cm-s-dracula span.cm-em { color: #f1fa8c; }
-.cm-s-dracula span.cm-strong { color: #bd93f9;
+.cm-s-dracula span.cm-strong { color: #bd93f9; }
+.cm-s-dracula span.cm-strikethrough { color: #ffb86c; }
 
 .cm-s-dracula .CodeMirror-activeline-background { background: rgba(255,255,255,0.1); }
 .cm-s-dracula .CodeMirror-matchingbracket { text-decoration: underline; color: white !important; }

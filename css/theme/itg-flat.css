@@ -24,7 +24,7 @@
 /* #FC973E */
 /* #EACF5A */
 .cm-s-itg-flat .CodeMirror-lines {	padding: 8px 0; }
-.cm-s-itg-flat div.CodeMirror-cursor {	border-left: 3px solid #DAE0E5; }
+.cm-s-itg-flat div.CodeMirror-cursor {	border-left: 1px solid #D8DDE2; }
 .cm-s-itg-flat .CodeMirror-activeline-background {	background: rgba(255,255,255,0.125); }
 .cm-s-itg-flat .CodeMirror-selected {	background: #41454F; }
 .cm-s-itg-flat .cm-comment {	color: #536574; }
@@ -33,8 +33,8 @@
 .cm-s-itg-flat .cm-atom { color: #FC973E; }
 .cm-s-itg-flat .cm-keyword {	color: #DB5149; }
 /*.cm-s-itg-flat .cm-variable { color: #F2AAEC; }*/
-.cm-s-itg-flat .cm-def { font-style: italic; color: #EACF5A; }
 /*.cm-s-itg-flat .cm-variable-2 { color: #5CE9C0; }*/
+.cm-s-itg-flat .cm-def { font-style: italic; color: #EACF5A; }
 .cm-s-itg-flat .cm-property { color: #FC973E; }
 .cm-s-itg-flat .cm-operator { color: #CAD0D5; }
 .cm-s-itg-flat .CodeMirror-linenumber { color: #536574; }
@@ -47,4 +47,5 @@
 .cm-s-itg-flat .cm-em { color: #EACF5A }
 .cm-s-itg-flat .cm-strong { color: #FC973E; }
 .cm-s-itg-flat .cm-em.cm-strong { color: #F2AAEC; }
+.cm-s-itg-flat .cm-strikethrough { color: #DB5149; }
 .cm-s-itg-flat .cm-builtin { color: #F2AAEC; }

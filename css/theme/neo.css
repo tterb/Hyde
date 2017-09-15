@@ -4,7 +4,7 @@
 
 .cm-s-neo.CodeMirror {
   background-color:#ebebec;
-  color:#2e383c;
+  color: rgba(0,0,0,0.75);
   line-height:1.4375;
 }
 .cm-s-neo .cm-comment { color:#75787b; }
@@ -31,5 +31,12 @@
   z-index: 1;
 }
 .cm-s-neo .cm-link { text-decoration: none; }
+.cm-s-neo .cm-header { color: #2e383c; }
+.cm-s-neo .cm-link { color: #1d75b3; text-decoration: none; }
+.cm-s-neo .cm-url { color: #047d65; }
+.cm-s-neo .cm-em { color: #b35e14 }
+.cm-s-neo .cm-strong { color: #75438a; }
+.cm-s-neo .cm-em.cm-strong { color: #b35e14; }
+.cm-s-neo .cm-strikethrough { color: #9c3328; }
 
 #previewPanel { box-shadow: -4px 0 10px rgba(0,0,0,0.15); }

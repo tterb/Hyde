@@ -84,6 +84,7 @@ http://ethanschoonover.com/solarized-light/img/solarized-light-palette.png
 }
 .cm-s-solarized-light .cm-strong { color: #d33682; font-weight: 500; }
 .cm-s-solarized-light span.cm-strong.cm-em { color: #6c71c4; }
+.cm-s-solarized-light span.cm-strikethrough { color: #6c71c4; }
 .cm-s-solarized-light .cm-error,
 .cm-s-solarized-light .cm-invalidchar {
   color: #586e75;

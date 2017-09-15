@@ -40,6 +40,7 @@
 .cm-s-panda .cm-url { color: #09E9C8; }
 .cm-s-panda .cm-em { color: #ff9ac1; }
 .cm-s-panda .cm-strong { color: #b084eb; }
+.cm-s-panda .cm-strikethrough { color: #ff2c6d; }
 
 .cm-s-panda .CodeMirror-matchingbracket {
     border-bottom: 1px dotted #09E9C8;

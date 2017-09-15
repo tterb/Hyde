@@ -8,7 +8,7 @@
 
 */
 
-.cm-s-hopscotch.CodeMirror {background: #2e252d; color: rgba(255,255,255,0.65);}
+.cm-s-hopscotch.CodeMirror {background: #2e252d; color: rgba(255,255,255,0.6);}
 .cm-s-hopscotch div.CodeMirror-selected {background: #433b42 !important;}
 .cm-s-hopscotch .CodeMirror-gutters {background: #322931; border-right: 0px;}
 .cm-s-hopscotch .CodeMirror-linenumber {color: #797379;}
@@ -33,4 +33,5 @@
 .cm-s-hopscotch span.cm-em {color: #fdcc59;}
 .cm-s-hopscotch span.cm-strong {color: #32a5d5;}
 .cm-s-hopscotch span.cm-em.cm-strong {color: #8fca3e;}
+.cm-s-hopscotch span.cm-strikethrough {color: #fd8b19;}
 .cm-s-hopscotch span.cm-builtin {color: #8fca3e;}

@@ -24,6 +24,7 @@ CodeMirror template by Jan T. Sott (https://github.com/idleberg), adapted by Bra
 .cm-s-duotone-dark span.cm-operator { color: #ffad5c; }
 .cm-s-duotone-dark span.cm-positive { color: #6a51f6; }
 .cm-s-duotone-dark span.cm-strong { color: #7c7793; }
+.cm-s-duotone-dark span.cm-strikethrough { color: #7c7793; }
 
 .cm-s-duotone-dark span.cm-variable-2, .cm-s-duotone-dark span.cm-variable-3, .cm-s-duotone-dark span.cm-string-2, .cm-s-duotone-dark span.cm-url { color: #7a63fe; }
 .cm-s-duotone-dark span.cm-def, .cm-s-duotone-dark span.cm-builtin, .cm-s-duotone-dark span.cm-qualifier, .cm-s-duotone-dark span.cm-header, .cm-s-duotone-dark span.cm-em { color: #eed3ff; }
