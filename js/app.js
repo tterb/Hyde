@@ -17,12 +17,11 @@ const parsePath = require("parse-filepath");
 const settings = require('electron-settings');
 const storage = require('electron-json-storage');
 const spellChecker = require('codemirror-spell-checker');
+const highlight = require("showdown-highlight");
 var Color = require('color');
 var isBinaryFile = require("isbinaryfile");
 var os = require("os");
 require('showdown-youtube');
-require('showdown-prettify');
-require('showdown-highlightjs-extension');
 
 const currentWindow = remote.getCurrentWindow();
 var isFileLoadedInitially = false,
@@ -110,13 +109,14 @@ window.onload = () => {
       tables: true,
       tasklists: true,
       strikethrough: true,
+      tablesHeaderId: true,
       simpleLineBreaks: true,
       smoothLivePreview: true,
       parseImgDimensions: true,
       simplifiedAutoLink: false,
       excludeTrailingPunctuationFromURLs: true,
       disableForced4SpacesIndentedSublists: true,
-      extensions: ['youtube', 'prettify', 'highlightjs']
+      extensions: ['youtube', highlight]
   });
 
   var themeColor = $('.cm-s-'+theme).css('background-color');
