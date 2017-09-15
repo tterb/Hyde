@@ -13,7 +13,8 @@
 |     Toggle Preview   |   <kbd>Ctrl + P</kbd>           |  
 |     Toggle Fullscreen|   <kbd>F11</kbd>                |  
 |     Toggle Dev Tools |   <kbd>Ctrl + Shift + I</kbd>   |  
-|     Open Settings    |   <kbd>Ctrl + ,</kbd>           |  
+|     Toggle Settings  |   <kbd>Ctrl + ,</kbd>           |  
+|     Markdown Help    |   <kbd>Ctrl + Shift + ?</kbd>   |  
 
 --------------------  
 
@@ -30,6 +31,8 @@
 |     Replace          |   <kbd>Ctrl + Shift + F</kbd>   |
 |     Indent Less      |   <kbd>Ctrl + left-arrow</kbd>  |
 |     Indent More      |   <kbd>Ctrl + right-arrow</kbd> |
+|     Page Up          |   <kbd>Ctrl + up-arrow</kbd>    |
+|     Page Down        |   <kbd>Ctrl + down-arrow</kbd>  |
 
 
 --------------------  
@@ -42,10 +45,13 @@
 |     Bold             |   <kbd>Ctrl + B</kbd>           |
 |     Italic           |   <kbd>Ctrl + I</kbd>           |
 |     Strikethrough    |   <kbd>Ctrl + -</kbd>           |
-|     Create Link      |   <kbd>Ctrl + L</kbd>           |
-|     Create Image     |   <kbd>Ctrl + Alt + I</kbd>     |
-|     Create Table     |   <kbd>Ctrl + Shift + T</kbd>   |
+|     Insert Link      |   <kbd>Ctrl + L</kbd>           |
+|     Insert Image     |   <kbd>Ctrl + K</kbd>           |
+|     Insert Emoji     |   <kbd>Ctrl + E</kbd>           |
+|     Create Table     |   <kbd>Ctrl + T</kbd>           |
+|     Toggle Code      |   <kbd>Ctrl + ;</kbd>           |
 |     Toggle Comment   |   <kbd>Ctrl + /</kbd>           |
+|     Toggle Blockquote|   <kbd>Ctrl + '</kbd>           |
 |     Horizontal Rule  |   <kbd>Ctrl + Shift + _</kbd>   |
 
 --------------------  
