@@ -6,7 +6,12 @@
   "productName": "Hyde",
   "scripts": {
     "start": "electron main.js",
-    "build": "rm -rf dist && gulp build"
+    "build": "rm -rf release && gulp build",
+    "package-mac": "electron-packager . --overwrite --asar=true --platform=darwin --arch=x64 --icon=img/icon/icns/icon.icns --prune=true --out=release",
+    "package-win": "electron-packager . --overwrite --asar=true --platform=win32 --arch=ia32 --icon=img/icon/ico/icon.ico --prune=true --out=release --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Hyde\"",
+    "package-linux": "electron-packager . --overwrite --asar=true --platform=linux --arch=x64 --icon=img/icon/png/1024x1024.png --prune=true --out=release",
+    "create-installer-mac": "electron-installer-dmg ./release/Hyde-darwin-x64/Hyde.app hyde --out=release --overwrite --icon=img/icon/icns/icon.icns",
+    "create-installer-win": "node installers/windows/createinstaller.js"
   },
   "bin": {
     "hyde": "./bin/hyde"
@@ -51,10 +56,11 @@
     "email": "bstevensondev@gmail.com"
   },
   "devDependencies": {
-    "devtron": "^1.4.0",
     "electron-connect": "^0.6.1",
+    "electron-installer-dmg": "^0.2.1",
     "electron-packager": "^9.0.0",
     "electron-rebuild": "^1.5.11",
+    "electron-winstaller": "^2.6.3",
     "gulp": "^3.9.1",
     "gulp-sass": "^3.1.0",
     "minimist": "^1.2.0"
@@ -63,6 +69,7 @@
     "codemirror": "^5.18.2",
     "codemirror-spell-checker": "^1.1.2",
     "color": "^2.0.0",
+    "devtron": "^1.4.0",
     "electron": "^1.6.13",
     "electron-config": "^0.2.1",
     "electron-json-storage": "latest",
@@ -72,10 +79,10 @@
     "electron-window-state": "^4.1.1",
     "isbinaryfile": "^3.0.2",
     "jquery": "^3.1.0",
-    "nomnom": "^1.8.1",
     "parse-filepath": "1.0.1",
     "showdown": "^1.7.2",
     "showdown-highlight": "^1.0.2",
-    "showdown-youtube": "^1.2.1"
+    "showdown-youtube": "^1.2.1",
+    "yargs": "^8.0.2"
   }
 }
