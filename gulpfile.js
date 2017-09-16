@@ -22,7 +22,7 @@ var knownOptions = {
 const options = {
 	dir: '.',
 	name: 'Hyde',
-	out: 'dist',
+	out: 'release',
 	overwrite: true,
 	prune: true,
   asar: false,
@@ -44,9 +44,9 @@ const options = {
 
 
 gulp.task('launch', () => {
-	if(args.env === 'dev')
-    gulp.start('liveReload');
-  else
+	// if(args.env === 'dev')
+  //   gulp.start('liveReload');
+  // else
   	electron.start();
 });
 
@@ -81,14 +81,14 @@ gulp.task('scss', () => {
 });
 
 gulp.task('clean', () => {
-  exec('rm -rf ./dist', function (err, stdout, stderr) {
+  exec('rm -rf ./release', function (err, stdout, stderr) {
     console.log(stdout);
     console.log(stderr);
   });
 })
 
 gulp.task('build:linux', () => {
-	// @TODO
+	// TODO: Linux package build process
 });
 
 gulp.task('build:win', (done) => {
@@ -120,4 +120,4 @@ gulp.task('start', ['rebuild', 'scss', 'launch']);
 
 gulp.task('watch', ['rebuild', 'scss', 'liveReload']);
 
-gulp.task('build', ['clean', 'scss', 'build:osx', 'build:linux', 'build:win']);
+gulp.task('build', ['build:osx', 'build:win', 'build:linux']);
