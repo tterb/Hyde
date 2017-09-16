@@ -17,6 +17,13 @@
  */
 
 'use strict';
+//handle setupevents as quickly as possible
+const setupEvents = require('./installers/setupEvents');
+if (setupEvents.handleSquirrelEvent()) {
+   // squirrel event handled and app will exit in 1000ms,
+   // so don't do anything else
+   return;
+}
 const electron = require('electron');
 const app = electron.app;
 const ipc = electron.ipcMain;
@@ -26,7 +33,7 @@ const BrowserWindow = electron.BrowserWindow;
 const {Menu, MenuItem} = require('electron');
 const tray = require('./tray');
 const func = require('./js/functions');
-const notify = require('./js/notify')
+// const notify = require('./js/notify')
 const mod = require('./package.json');
 const settings = require('./config');
 const keepInTray = settings.get('keepInTray');
@@ -36,20 +43,25 @@ const window = require('electron-window');
 const localShortcut = require('electron-localshortcut');
 const windowStateManager = require('electron-window-state');
 const mainPage = (`file://${__dirname}/index.html`);
-var opts = require("nomnom")
-  .option('dev', {
-    abbr: 'd',
-    flag: true,
-    help: 'Enable developer mode'
-  })
-  .option('version', {
-    abbr: 'v',
-    flag: true,
-    help: 'Print app version and exit',
-    callback: () => {
-        return "v" + app.getVersion();
-    }
-  }).parse();
+const yargs = require('yargs')
+const args = yargs(process.argv)
+    .alias('d', 'dev')
+    .argv
+
+// var args = require("nomnom")
+//   .option('dev', {
+//     abbr: 'd',
+//     flag: true,
+//     help: 'Enable developer mode'
+//   })
+//   .option('version', {
+//     abbr: 'v',
+//     flag: true,
+//     help: 'Print app version and exit',
+//     callback: () => {
+//         return "v" + app.getVersion();
+//     }
+//   }).parse();
 
 // Keep a global reference of the window object
 var windows = new Set();
@@ -72,7 +84,7 @@ function getConfig() {
     autoHideMenuBar: true,
     darkTheme: true,
     transparent: true
-    // icon = path.join(__dirname, '/img/icon/png/64x64.png')
+    // icon: path.join(__dirname, '/img/icon/png/64x64.png')
   }
   if (process.platform === 'darwin') {
     conf.titleBarStyle = 'hidden';
@@ -102,7 +114,7 @@ const createWindow = exports.createWindow = (file) => {
   newWindow.once('ready-to-show', () => { newWindow.show(); });
 
   // Open the DevTools.
-  if (opts.dev) { newWindow.webContents.openDevTools(); }
+  if (args.dev) { newWindow.webContents.openDevTools(); }
 
   // Emitted when the window is closed.
   newWindow.on('closed', () => {
@@ -135,6 +147,7 @@ const getThemes = exports.getThemes = () => {
   var themes = [
     {'name': 'Base16 Dark', 'value': 'base16-dark'},
     {'name': 'Base16 Light', 'value': 'base16-light'},
+    {'name': 'Dracula', 'value': 'dracula'},
     {'name': 'Duotone Dark', 'value': 'duotone-dark'},
     {'name': 'Eclipse', 'value': 'eclipse'},
     {'name': 'Hopscotch', 'value': 'hopscotch'},
@@ -314,6 +327,7 @@ localShortcut.register("CmdOrCtrl+'", () => { sendShortcut("ctrl+'"); });
 localShortcut.register('CmdOrCtrl+.', () => { sendShortcut('ctrl+.'); });
 localShortcut.register('CmdOrCtrl+p', () => { sendShortcut('ctrl+p'); });
 localShortcut.register('CmdOrCtrl+,', () => { sendShortcut('ctrl+,'); });
+localShortcut.register('CmdOrCtrl+Shift+/', () => { sendShortcut('markdown-modal'); });
 localShortcut.register('CmdOrCtrl+up', () => { sendShortcut('ctrl+up'); });
 localShortcut.register('CmdOrCtrl+left', () => { sendShortcut('ctrl+left'); });
 localShortcut.register('CmdOrCtrl+right', () => { sendShortcut('ctrl+right'); });
@@ -321,6 +335,7 @@ localShortcut.register('CmdOrCtrl+down', () => { sendShortcut('ctrl+down'); });
 
 // Called when Electron has finished initialization
 app.on('ready', function() {
+  require('devtron').install();
   // Create native application menu
   const menu = Menu.buildFromTemplate(template);
   Menu.setApplicationMenu(menu);
@@ -337,7 +352,7 @@ app.on('ready', function() {
   windowState.manage(mainWindow);
   windows.add(mainWindow);
   // Show Dev Tools
-  if(opts.dev) { mainWindow.webContents.openDevTools(); }
+  if(args.dev) { mainWindow.webContents.openDevTools(); }
   mainWindow.once('ready-to-show', () => {
     mainWindow.show();
   });
@@ -380,8 +395,21 @@ app.on('ready', function() {
     windowState.saveState(mainWindow)
     isQuitting = true;
   });
+
+  mainWindow.on('unresponsive', (err) => {
+    console.error(err);
+  });
+
+  //Listen for crashes
+  mainWindow.webContents.on('crashed', (err) => {
+    console.error(err);
+  });
 });
 
+// Listen for uncaughtExceptions
+process.on('uncaughtException', (err) => {
+  console.error(er)
+});
 
 let rightClickPos = null;
 const contextMenu = new Menu();
@@ -395,7 +423,7 @@ contextMenu.append(new MenuItem({ label: "Select All", click: () => { sendShortc
 contextMenu.append(new MenuItem({ type: 'separator' }))
 contextMenu.append(new MenuItem({ label: 'Show in File Manager', click: () => { sendShortcut('open-file-manager'); } }))
 contextMenu.append(new MenuItem({ type: 'separator' }))
-contextMenu.append(new MenuItem({ label: 'Inspect Element', click: () => { mainWindow.inspectElement(rightClickPos.x, rightClickPos.y) }}))
+contextMenu.append(new MenuItem({ label: 'Inspect Element', click: () => { mainWindow.inspectElement(rightClickPos.x, rightClickPos.y); }}))
 
 
 app.on('browser-window-created', function(event, win) {
@@ -413,3 +441,28 @@ ipc.on('show-context-menu', function(event) {
 const appVersion = exports.appVersion = () => {
   return app.getVersion();
 }
+
+const Tray = electron.Tray
+let appIcon = null
+
+ipc.on('put-in-tray', function (event) {
+  const iconName = process.platform === 'win32' ? 'windows-icon.png' : 'iconTemplate.png'
+  const iconPath = path.join(__dirname, iconName)
+  appIcon = new Tray(iconPath)
+  const contextMenu = Menu.buildFromTemplate([{
+    label: 'Remove',
+    click: function () {
+      event.sender.send('tray-removed')
+    }
+  }])
+  appIcon.setToolTip('Electron Demo in the tray.')
+  appIcon.setContextMenu(contextMenu)
+})
+
+ipc.on('remove-tray', function () {
+  appIcon.destroy()
+})
+
+app.on('window-all-closed', function () {
+  if (appIcon) appIcon.destroy()
+})
