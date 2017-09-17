@@ -107,13 +107,14 @@
   padding: 2px 4px 3px;
 }
 #markdown blockquote {
-  background: rgba(0, 0, 0, 0.05);
+  display: flex;
+  background: rgba(0, 0, 0, 0.04);
   color: rgba(0, 0, 0, 0.65);
   font-size: 13.5px;
   border-left: 3px solid rgba(0, 0, 0, 0.5);
   border-radius: 5px;
-  margin-top: 15px;
-  padding: 10px 20px 1px;
+  margin: 15px 10px;
+  padding: 10px 20px 11px;
 }
 #markdown blockquote > p {
   margin-bottom: 0;
@@ -148,7 +149,7 @@
   border: solid 1px #c6cbd1;
   border-bottom-color: #959da5;
   border-radius: 4px;
-  box-shadow: inset 0 -0.5px 0 #959da5;
+  box-shadow: 0 0.5px 2px rgba(0,0,0,0.25);
 }
 #markdown *:first-child {
   margin-top: 0 !important;

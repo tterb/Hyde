@@ -74,7 +74,7 @@
 }
 #markdown hr {
   background: #e4e4e4;
-  height: 0.25em;
+  height: 2px;
   border: none;
   margin: 24px 0;
   padding: 0;
@@ -147,7 +147,7 @@
   background-color: #ecedee;
 }
 #markdown table th {
-  font-size: 10.5pt;
+  font-size: 17px;
   font-weight: 600;
   padding: 8px 13px !important;
 }
