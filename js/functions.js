@@ -70,7 +70,7 @@ function toggleSidebar() {
   }
 }
 
-function toggleSettings() {
+function toggleSettingsMenu() {
   var settingsMenu = $('#settings-menu'),
       trigger = $('#settings-trigger'),
       button = $('#settings-button'),
@@ -114,10 +114,6 @@ function exportToPDF() {
   electron.remote.getCurrentWindow().webContents.send('file-pdf');
 }
 
-function selectMarkdown() {
-  $('#previewPanel').focus();
-}
-
 // Generations and clean state of CodeMirror
 var getGeneration = () => { return this.cm.doc.changeGeneration(); }
 var setClean = () => { this.latestGeneration = this.getGeneration(); }
@@ -151,6 +147,17 @@ var updateWindowTitle = (path) => {
     activeFile.attr('data-tooltip', path.toString());
   else
     activeFile.attr('data-tooltip', 'None');
+}
+
+function toggleMaximize() {
+  var window = electron.remote.getCurrentWindow();
+  if(window.isMaximized) {
+    window.unmaximize();
+    settings.set('isMaximized', false);
+  } else {
+    window.maximize();
+    settings.set('isMaximized', true);
+  }
 }
 
 function toggleSearch(opt) {
