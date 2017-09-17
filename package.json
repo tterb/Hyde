@@ -79,6 +79,7 @@
     "electron-window-state": "^4.1.1",
     "isbinaryfile": "^3.0.2",
     "jquery": "^3.1.0",
+    "mathjax": "^2.7.2",
     "parse-filepath": "1.0.1",
     "showdown": "^1.7.2",
     "showdown-highlight": "^1.0.2",
