@@ -145,36 +145,40 @@ label {
         background: transparent;
         color: rgba(255, 255, 255, 0.75); }
     #appMenu .btn-group.open .dropdown-toggle {
-      background: #323131;
+      background: #373537;
       color: rgba(255, 255, 255, 0.75);
       border: 1px inset #434443;
       border-right: none;
-      box-shadow: inset 0 1px 6px rgba(0, 0, 0, 0.2); }
+      box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.25); }
     #appMenu .btn-group .dropdown-menu {
-      background-color: #2c2b2b;
+      background-color: #373537;
       color: rgba(255, 255, 255, 0.65);
       font-size: 11px;
-      min-width: 175px;
-      top: 82%;
-      box-shadow: 1px 3px 12px rgba(0, 0, 0, 0.5);
+      min-width: 178px;
+      top: 90%;
+      box-shadow: 1px 3px 7px rgba(0, 0, 0, 0.5);
       border-top-left-radius: 0;
       border-top-right-radius: 6px;
       border-bottom-left-radius: 6px;
       border-bottom-right-radius: 6px;
-      margin: 3px 0 0;
+      margin: 0;
+      padding: 3px 0;
       z-index: 9; }
       #appMenu .btn-group .dropdown-menu li {
+        height: 24px;
         padding: 2px 0;
         cursor: pointer;
         transition: all 100ms ease-in; }
         #appMenu .btn-group .dropdown-menu li a {
           display: inline;
+          position: relative;
           background-color: transparent;
           color: rgba(255, 255, 255, 0.65);
           font-size: 11px;
           font-weight: 300;
           letter-spacing: 0.09em;
           text-decoration: none !important;
+          top: 2.5px;
           padding: 3px 15px 3px 10px; }
           #appMenu .btn-group .dropdown-menu li a:hover, #appMenu .btn-group .dropdown-menu li a:active {
             color: #f0f0f0; }
@@ -187,32 +191,41 @@ label {
           text-align: right;
           right: 10px;
           float: right;
+          margin-top: 1px;
           padding-top: 1.5px; }
         #appMenu .btn-group .dropdown-menu li:hover, #appMenu .btn-group .dropdown-menu li:active {
-          background: #3a373a;
-          box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.4); }
+          background: #343031;
+          box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.4); }
           #appMenu .btn-group .dropdown-menu li:hover a, #appMenu .btn-group .dropdown-menu li:active a {
             color: #f0f0f0; }
           #appMenu .btn-group .dropdown-menu li:hover span, #appMenu .btn-group .dropdown-menu li:active span {
             font-weight: 400;
             color: #ef4d5a; }
       #appMenu .btn-group .dropdown-menu .dropdown-divider {
-        background: rgba(255, 255, 255, 0.075);
         color: rgba(255, 255, 255, 0.65);
-        height: 1px;
+        height: 0px;
         width: 98%;
-        margin: 4px auto;
+        border-top: 1px solid rgba(0, 0, 0, 0.125);
+        margin: 1.5px auto;
         padding: 0;
         cursor: default; }
+        #appMenu .btn-group .dropdown-menu .dropdown-divider:hover {
+          background: none;
+          border-radius: 0;
+          border-top: 1px solid rgba(0, 0, 0, 0.125);
+          box-shadow: none; }
+      #appMenu .btn-group .dropdown-menu .caret {
+        color: fade(rgba(255, 255, 255, 0.4), 10%);
+        float: right;
+        margin: 7px 9px 0 0 !important; }
 
 .caret {
   color: fade(rgba(255, 255, 255, 0.4), 10%);
   float: right;
-  margin: 5px 9px 0 0; }
+  margin: 4px 9px 0 0 !important; }
 
 .dropdown-submenu {
   position: relative;
-  background-color: #2c2b2c;
   color: rgba(255, 255, 255, 0.65);
   font-size: 11px;
   top: 82%;
@@ -220,7 +233,8 @@ label {
   border-bottom-right-radius: 5px;
   z-index: 0; }
   .dropdown-submenu .sub {
-    top: -5px !important; }
+    top: -3px !important;
+    border-radius: 3px !important; }
     .dropdown-submenu .sub li > a {
       color: rgba(255, 255, 255, 0.65) !important; }
   .dropdown-submenu .dropdown-menu {
@@ -655,25 +669,28 @@ input[type="checkbox"] {
           font-size: 16px;
           left: 45.5%;
           max-width: 50%;
-          padding-top: 4px; }
+          padding-top: 3px; }
           #settings-menu .settings-section ul li .btn-group .filter-option {
+            position: relative;
             font-size: 13.5px;
             font-weight: 300;
-            letter-spacing: 0.055em; }
+            letter-spacing: 0.055em;
+            top: 2px; }
           #settings-menu .settings-section ul li .btn-group .btn.btn-default {
             background: -webkit-linear-gradient(bottom, #2d2c2d, #3d3c3d);
             color: rgba(255, 255, 255, 0.75);
-            top: 3px;
+            top: 1px;
             left: -4px;
+            height: 31px;
             letter-spacing: 0.04em;
             border: 1px outset #3c3c3c;
             box-shadow: 0.5px 0.75px 4px rgba(0, 0, 0, 0.2);
-            padding: 2px 8px 0 10px;
+            padding: 1px 8px 0 10px;
             outline: none !important; }
           #settings-menu .settings-section ul li .btn-group .caret {
             position: relative;
-            top: -10px;
-            left: 9px; }
+            top: -13px;
+            left: 8px; }
         #settings-menu .settings-section ul li .btn-group.open {
           z-index: 999; }
     #settings-menu .settings-section hr {
@@ -686,12 +703,13 @@ input[type="checkbox"] {
       margin-top: 20px;
       margin-bottom: 5px; }
   #settings-menu .dropdown-menu {
-    background: #2b292a;
+    background: #353335;
     color: rgba(255, 255, 255, 0.6);
-    top: 31px;
-    border: 1px outset #333132;
+    top: 34px;
+    left: -4px;
+    border: 1px solid #353335;
     padding: 0;
-    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
     z-index: -9; }
     #settings-menu .dropdown-menu ul {
       padding-left: 0; }
@@ -700,14 +718,15 @@ input[type="checkbox"] {
       #settings-menu .dropdown-menu ul li a {
         color: rgba(255, 255, 255, 0.6);
         font-size: 14px;
+        font-weight: 300;
         padding: 3px 12px; }
         #settings-menu .dropdown-menu ul li a:hover, #settings-menu .dropdown-menu ul li a:active, #settings-menu .dropdown-menu ul li a:focus {
-          background: #2b292a;
+          background: #323032;
           color: #de545f;
+          font-weight: 400;
           outline: none !important; }
         #settings-menu .dropdown-menu ul li a:hover {
-          background: #383736;
-          box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.4); }
+          background: #2f2d2f; }
   #settings-menu .input-group.spinner {
     position: relative;
     display: inline-block;
@@ -984,7 +1003,8 @@ input[type="checkbox"] {
 .cm-trailingspace,
 .cm-trailing-space-a,
 .cm-trailing-space-new-line {
-  color: rgba(255, 255, 255, 0.15) !important; }
+  color: rgba(255, 255, 255, 0.1) !important;
+  text-decoration-style: solid; }
 
 .search-dialog {
   position: absolute;

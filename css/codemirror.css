@@ -103,7 +103,7 @@
 .cm-header, .cm-strong {font-weight: bold;}
 .cm-em {font-style: italic;}
 .cm-link {text-decoration: underline;}
-.cm-strikethrough {text-decoration: line-through;}
+.cm-strikethrough {text-decoration: none;}
 
 .cm-s-default .cm-keyword {color: #708;}
 .cm-s-default .cm-atom {color: #219;}
@@ -139,8 +139,7 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
 .CodeMirror-matchingtag { background: rgba(255, 150, 0, .3); }
 .CodeMirror-activeline-background {background: #e8f2ff;}
 
-/* STOP */
-
+/** STOP **/
 /* The rest of this file contains styles related to the mechanics of
    the editor. You probably shouldn't touch them. */
 
@@ -151,25 +150,23 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
 }
 
 .CodeMirror-scroll {
-  overflow: scroll !important; /* Things will break if this is overridden */
-  /* 30px is the magic margin used to hide the element's real scrollbars */
-  /* See overflow: hidden in .CodeMirror */
+  overflow: scroll !important;
   margin-bottom: -30px; margin-right: -30px;
   padding: 30px 0;
   height: -webkit-calc(100% - 30px);
-  outline: none; /* Prevent dragging from highlighting the element */
+  outline: none;  /* Prevent dragging from highlighting the element */
   position: relative;
 }
 .CodeMirror-sizer {
   position: relative;
   margin-left: 4px !important;
   border-right: 30px solid transparent;
-  padding: 0 4px 0 5px;
+  padding: 0 4px 0 7px;
 }
 
 /* The fake, visible scrollbars. Used to force redraw during scrolling
-   before actual scrolling happens, thus preventing shaking and
-   flickering artifacts. */
+ * before actual scrolling happens, thus preventing shaking and
+ * flickering artifacts. */
 .CodeMirror-vscrollbar, .CodeMirror-hscrollbar, .CodeMirror-scrollbar-filler, .CodeMirror-gutter-filler {
   position: absolute;
   z-index: 6;
@@ -205,7 +202,7 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
   background: rgba(0,0,0,0.075);
   white-space: normal;
   height: 100%;
-  width: 25px !important;
+  width: 25px;
   vertical-align: top;
   border-right: 1px solid rgba(240,240,240,0.065);
   padding-right: 3px;

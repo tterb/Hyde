@@ -33,6 +33,10 @@ span.cm-em.cm-strong {
   font-style: italic !important;
 }
 
+.cm-strikethrough {
+  text-decoration: line-through !important;
+}
+
 .cm-hr {
   letter-spacing: -0.275vw;
 }
