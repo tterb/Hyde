@@ -1,6 +1,5 @@
 'use strict';
 const Config = require('electron-config');
-
 module.exports = new Config ({
   defaults: {
     // UI Elements
@@ -17,7 +16,7 @@ module.exports = new Config ({
     dynamicEditor: false,
     tabSize: 2,
     lineNumbers: false,
-    showTrailingSpace: true,
+    showTrailingSpace: false,
     matchBrackets: true,
     enableSpellCheck: false,
     // Preview
@@ -26,6 +25,7 @@ module.exports = new Config ({
     previewFontSize: 10,
     previewLineHeight: 1.45,
     customCSS: false,
+    mathRendering: true,
     hideYAMLFrontMatter: true,
     // Other
     showTooltips: true,
