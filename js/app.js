@@ -17,6 +17,7 @@ const parsePath = require("parse-filepath");
 const settings = require('electron-settings');
 const storage = require('electron-json-storage');
 const spellChecker = require('codemirror-spell-checker');
+// const MathJax = require('mathjax-electron');
 const highlight = require("showdown-highlight");
 var Color = require('color');
 var isBinaryFile = require("isbinaryfile");
@@ -46,7 +47,7 @@ var conf = {
 }
 
 var theme = settings.get('editorTheme');
-includeTheme(theme);
+setTheme(theme);
 if(main.getThemes().filter((temp) => { return temp.value === theme }))
   conf.theme = theme;
 else
@@ -80,7 +81,7 @@ themes.forEach(function(index) {
   head.append(tag);
 });
 
-function includeTheme(theme) {
+function setTheme(theme) {
   var themeTag;
   if(theme === undefined)
     theme = 'one-dark';
@@ -124,6 +125,8 @@ window.onload = () => {
   createModals();
   fillEmojiModal();
 
+
+
   cm.on('change', (cm) => {
     countWords();
     var markdownText = cm.getValue();
@@ -134,6 +137,9 @@ window.onload = () => {
     markdownText = replaceWithEmojis(markdownText);
     // Markdown -> Preview
     renderedMD = converter.makeHtml(markdownText);
+    // Render LaTex
+    if(settings.get('mathRendering'))
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
     markdownPreview.innerHTML = renderedMD;
     // Markdown -> HTML
     converter.setOption('noHeaderId', true);

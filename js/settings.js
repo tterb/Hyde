@@ -2,6 +2,7 @@ var Color = require('color');
 var menu = $('#appMenu'),
     toolbar = $('#toolbar'),
     leftFade = $('#leftFade'),
+    dragArea = $('#draggable'),
     rightFade = $('#rightFade'),
     preview = $('#previewPanel'),
     editor = $('.CodeMirror-wrap'),
@@ -11,14 +12,17 @@ var opts = [
   { name: 'showMenu', action: () => { toggleMenu(); }},
   { name: 'showToolbar', action: () => { toggleToolbar(); }},
   { name: 'showPreview', action: () => { togglePreview(); }},
-  { name: 'previewProfile', action: () => { setPreviewProfile() }},
   { name: 'syncScroll', action: () => { toggleSyncScroll; }},
-  { name: 'isMaximized', action: () => { toggleMaximize(); }},
   { name: 'lineNumbers', action: () => { toggleLineNumbers(); }},
-  { name: 'showTrailingSpace', action: () => { toggleWhitespace(); }},
   { name: 'dynamicEditor', action: () => { toggleDynamicFont(); }},
+  { name: 'matchBrackets', action: () => { toggleMatchBrackets(); }},
+  { name: 'showTrailingSpace', action: () => { toggleWhitespace(); }},
+  { name: 'previewProfile', action: () => { setPreviewProfile() }},
   { name: 'customCSS', action: () => { toggleCustomCSS(); }},
-  { name: 'editorFontSize' }, { name: 'tabSize' }, { name: 'enableSpellCheck' }, { name: 'previewMode' }, { name: 'previewFontSize' }, { name: 'hideYAMLFrontMatter' }, { name: 'matchBrackets' }, { name: 'keepInTray' }, { name: 'frontMatterTemplate' }
+  { name: 'mathRendering'}, { name: 'editorFontSize' },
+  { name: 'enableSpellCheck' }, { name: 'previewMode' },
+  { name: 'previewFontSize' }, { name: 'hideYAMLFrontMatter' },
+  { name: 'frontMatterTemplate' }, { name: 'keepInTray' }
 ];
 
 function getUserSettings() {
@@ -39,18 +43,6 @@ function getUserSettings() {
 function checkSetting(opt) {
   if(!settings.has(opt.name))
     settings.set(opt.name, config.get(opt.name));
-}
-
-
-function toggleSetting(opt) {
-  var arr = [];
-  opts.forEach((opt) => {
-    if(opt.name === element && opt.action)
-      opt.action();
-  })
-  // var index = opt.indexOf(element);
-  // if(index > -1 && opts[index].action)
-  return arr;
 }
 
 function applySettings(opt) {
@@ -80,8 +72,7 @@ function syncScrollCheck() {
 }
 
 var formatHead = () => {
-  var dragArea = $('#draggable'),
-      textPanel = $('#textPanel'),
+  var textPanel = $('#textPanel'),
       menuToggle = $('#menuToggle');
   if(process.platfrom === 'darwin')
     if(menu.is(':visible') !== toolbar.is(':visible'))
@@ -115,21 +106,6 @@ var formatHead = () => {
       editor.css('paddingTop', '0px');
     }
   }
-}
-
-function manageWindowSize() {
-  var codeMirror = $('.CodeMirror-sizer');
-  if(preview.is(':visible') && parseInt($('#body').width(),10) > 924) {
-    toolbar.css('width', '50%');
-    codeMirror.css('margin-right', '0');
-  } else {
-    toolbar.css('width', '100%');
-    codeMirror.css('margin-right', '8px');
-    if(!menu.is(':visible') && toolbar.is(':visible'))
-      $('#draggable').css('width','calc(36% - 50px)');
-  }
-  settings.set('windowWidth', parseInt($(window).width(),10));
-  settings.set('windowHeight', parseInt($(window).height(),10));
 }
 
 function adaptTheme(color, luminosity) {
@@ -237,24 +213,18 @@ function setPreviewMode(opt) {
   settings.set('previewMode', opt);
 }
 
-// TODO: Add custom css input to 'css/preview/custom.css'
 function setPreviewProfile(profile) {
   var profileTag = $('#profileTag'),
-      current = profileTag.attr('href').slice(14,-4),
-      profiles = ['default','github'],
-      index;
+      current = profileTag.attr('href').slice(14,-4);
   if(!profile)
     profile = settings.get('previewProfile');
-  index = profiles.indexOf(profile.toLowerCase());
-  if(index <= -1) return;
-  if(current !== profiles[index]) {
-    profileTag.attr('href', 'css/preview/'+profiles[index]+'.css');
+  if(current !== profile.toLowerCase()) {
+    profileTag.attr('href', 'css/preview/'+profile.toLowerCase()+'.css');
   }
   settings.set('previewProfile', profile.toString());
   $('#previewProfile').attr('title', profile);
 }
 
-// TODO: Add handling for custom CSS
 function toggleCustomCSS() {
   var state = settings.get('customCSS'),
       file = path.join('css/preview/custom.css'),
@@ -272,9 +242,10 @@ function toggleCustomCSS() {
     fs.readFile(file, 'utf-8', (err, data) => {
       if (err)
         return notify("An error ocurred while accessing the custom CSS file", 'error');
-      if(data.toString().length < 2) {
-        $('#settings-menu').css('left', '-310px');
+      if(data.toString().length < 6) {
         $('#custom-css-modal').modal();
+        if($('#settings-menu').css('left') < 0)
+          toggleSettingsMenu();
       } else {
         $('#custom-css').attr("value", data);
       }
@@ -284,27 +255,19 @@ function toggleCustomCSS() {
 }
 
 function toggleLineNumbers() {
-  var state = settings.get('lineNumbers');
   if(state) {
-    $('.CodeMirror-code > div').css('padding-left', '15px');
-    $('.CodeMirror-gutters').hide();
-  } else {
     $('.CodeMirror-code > div').css('padding-left', '22px');
     $('.CodeMirror-gutters').show();
+  } else {
+    $('.CodeMirror-code > div').css('padding-left', '15px');
+    $('.CodeMirror-gutters').hide();
   }
-  settings.set('lineNumbers', !state);
-}
-
-function toggleStylesheet(id) {
-  var state = $('#'+id).get(0).disabled;
-  if(state === settings.get(id)) {
-    $('#'+id).get(0).disabled = settings.get(id);
-  }
+  cm.setOption('lineNumbers', settings.get('lineNumbers'));
 }
 
 function toggleDynamicFont() {
-  var tag,
-      head = document.getElementsByTagName('head')[0];
+  var head = document.getElementsByTagName('head')[0],
+      tag;
   if(settings.get('dynamicEditor')) {
     tag = document.createElement('link');
     tag.setAttribute('id', 'dynamicTag');
@@ -317,26 +280,22 @@ function toggleDynamicFont() {
   }
 }
 
-function toggleWhitespace() {
-  var state = settings.get('showTrailingSpace');
-  if(state) {
-    $('.cm-trailing-space-a').css('text-decoration', 'none');
-    $('.cm-trailing-space-new-line').css('text-decoration', 'none');
-  } else {
-    $('.cm-trailing-space-a').css('text-decoration', 'underline');
-    $('.cm-trailing-space-new-line').css('text-decoration', 'underline');
+function toggleMatchBrackets() {
+  var state = settings.get('matchBrackets');
+  if(cm === undefined) return;
+  else if (state !== cm.getOption('autoCloseBrackets')) {
+    cm.setOption('autoCloseBrackets', state);
+    cm.setOption('autoCloseTags', state);
   }
-  return settings.set('showTrailingSpace', !state);
 }
 
-function toggleMaximize() {
-  var window = electron.remote.getCurrentWindow();
-  if(window.isMaximized) {
-    window.unmaximize();
-    settings.set('isMaximized', false);
+function toggleWhitespace() {
+  if(settings.get('showTrailingSpace')) {
+    $('.cm-trailing-space-a').css('text-decoration', 'underline');
+    $('.cm-trailing-space-new-line').css('text-decoration', 'underline');
   } else {
-    window.maximize();
-    settings.set('isMaximized', true);
+    $('.cm-trailing-space-a').css('text-decoration', 'none');
+    $('.cm-trailing-space-new-line').css('text-decoration', 'none');
   }
 }
 
@@ -364,17 +323,31 @@ function setFrontMatterTemplate() {
   });
 }
 
+function manageWindowSize() {
+  var codeMirror = $('.CodeMirror-sizer');
+  if(preview.is(':visible') && parseInt($('#body').width(),10) > 987) {
+    toolbar.css('width', '50%');
+    codeMirror.css('margin-right', '0');
+  } else {
+    toolbar.css('width', '100%');
+    codeMirror.css('margin-right', '8px');
+    if(!menu.is(':visible') && toolbar.is(':visible'))
+      dragArea.css('width','calc(36% - 50px)');
+  }
+  settings.set('windowWidth', parseInt($(window).width(),10));
+  settings.set('windowHeight', parseInt($(window).height(),10));
+}
 
 // Handle settings-menu changes
 $('#editorFontSize-input, #editorFontSize-up, #editorFontSize-down').bind('keyup mouseup', function () {
   var value = parseFloat($('#editorFontSize-input').val());
-  editor.css('fontSize', value.toString()+'px');
+  $('#textPanel > div').css('fontSize', value.toString()+'px');
   settings.set('editorFontSize', value);
 });
 
 $('#editorTheme').on('changed.bs.select', function (e, clickedIndex, newValue, oldValue) {
   var theme = $(e.currentTarget).val().toLowerCase().replace(/ /g,"-");
-  includeTheme(theme);
+  setTheme(theme);
 });
 
 $('#previewProfile').on('changed.bs.select', function (e, clickedIndex, newValue, oldValue) {
@@ -390,25 +363,25 @@ $('#previewMode').on('changed.bs.select', function (e, clickedIndex, newValue, o
 
 $('#previewFontSize-input, #previewFontSize-up, #previewFontSize-down').bind('keyup mouseup', function () {
   var value = parseFloat($('#previewFontSize-input').val());
-  preview.css('fontSize', value.toString()+'px');
+  $('#markdown').css('fontSize', value.toString()+'px');
   settings.set('previewFontSize', value);
 });
 
-// Settings toggle listeners
+// Settings menu toggle listeners
 var element, changes = [];
 $('.switch__input').change(function() {
   var val = $(this).is(':checked'),
-      name = $(this).attr('setting');
+      setting = $(this).attr('setting');
       element = $(this);
   opts.forEach((temp) => {
-    if(temp.name === name) {
+    if(temp.name === setting) {
       if(temp.action)
         temp.action();
-      settings.set(name, val);
+      settings.set(setting, val);
     }
   });
-  if(element.hasClass('req-reload') && !$('.alert-info').is(':visible')) {
-    notify('These changes will take effect once the app has been reloaded (ctrl+r)', 'info');
+  if(element.hasClass('require-reload') && !$('.alert-info').is(':visible')) {
+    notify('This change will take effect once the app has been reloaded (ctrl+r)', 'info');
   }
   changes.push(element.attr('setting'));
 });
