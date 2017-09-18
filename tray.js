@@ -2,7 +2,7 @@
 const path = require('path');
 const electron = require('electron');
 const app = electron.app;
-var iconPath = path.join(__dirname, 'img/icon/png/48x48.png');
+var iconPath = path.join(__dirname, 'img/icon/ico/icon.ico');
 let tray = null;
 
 exports.create = function(mainWindow) {
@@ -10,7 +10,7 @@ exports.create = function(mainWindow) {
     return;
   }
 
-  const toggleWin = function(){
+  const toggleHide = () => {
     if (mainWindow.isVisible()) {
       mainWindow.hide();
     } else {
@@ -19,22 +19,20 @@ exports.create = function(mainWindow) {
   };
 
   const contextMenu = electron.Menu.buildFromTemplate([
-    {label: 'Toggle',
-      click() { toggleWin(); }
-    },
+    {label: 'Show/Hide', click() { toggleHide(); }},
     { type: 'separator' },
-    { label: 'Quit',
-      click() { app.quit(); }
-    }
+    { label: 'Quit', click() { app.quit(); }}
   ]);
 
   if (process.platform === 'darwin')
-    iconPath = 'img/icon/icns/icon.icns';
+    iconPath = path.join(__dirname, 'img/icon/icns/icon.icns');
   else if(process.platform === 'win32')
-    iconPath = 'img/icon/ico/icon.ico';
+    iconPath = path.join(__dirname, 'img/icon/ico/icon.ico');
+  else
+    iconPath = path.join(__dirname, 'img/icon/png/48x48.png');
 
   tray = new electron.Tray(iconPath);
   tray.setToolTip('Hyde');
   tray.setContextMenu(contextMenu);
-  tray.on('click', toggleWin);
+  tray.on('click', toggleHide);
 };
