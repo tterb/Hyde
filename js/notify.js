@@ -1,23 +1,28 @@
 
 function notify(text, type) {
-  var title, icon;
+  var head, icon;
   if(type === 'success') {
-    title = '<strong></strong>';
+    head = '<strong>Success </strong>';
+    // icon = 'octicon octicon-check';
     icon = 'fa fa-check-circle';
   } else if(type === 'info') {
-    title = '<strong>Info: </strong>';
+    head = '<strong>Info </strong>';
     icon = 'octicon octicon-info';
+    // icon = 'fa fa-info-circle';
   } else if(type === 'warning') {
-    title = '<strong>Warning: </strong>';
+    head = '<strong>Warning </strong>';
     icon = 'octicon octicon-issue-opened';
+    // icon = 'fa fa-warning';
   } else if(type === 'error') {
-    title = '<strong>Error: </strong>';
+    head = '<strong>Error </strong>';
     icon = 'octicon octicon-stop';
+    // icon = 'fa fa-exclamation-circle';
     type = 'danger';
   }
   $.notify({
+    title: head,
     icon: icon,
-    message: title+'  '+text
+    message: text
   },{
     type: type,
     placement: {
