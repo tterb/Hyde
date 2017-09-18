@@ -14,7 +14,6 @@ function saveAs() {
       storage.set('markdown-savefile', {'filename' : fileName}, function(err) {
         if (err) notify(err, "error");
       });
-
       var mdValue = cm.getValue();
       // filename is a string that contains the path and filename created in the save dialog.
       fs.writeFile(filename, mdValue, function (err) {
@@ -148,5 +147,4 @@ ipc.on('table-modal', () => { $('#table-modal').modal(); });
 ipc.on('ctrl+e', () => { $('#emoji-modal').modal(); });
 ipc.on('keybinding-modal', () => { $('#keybinding-modal').modal(); });
 ipc.on('open-file-manager', () => { shell.showItemInFolder(currentFile); })
-var setTheme = remote.getGlobal('setTheme');
-ipc.on('set-theme', () => { setTheme(theme); })
+ipc.on('set-theme', function(event , data) { setEditorTheme(data); })

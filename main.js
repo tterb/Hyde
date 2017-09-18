@@ -19,11 +19,7 @@
 'use strict';
 //handle setupevents as quickly as possible
 const setupEvents = require('./installers/setupEvents');
-if (setupEvents.handleSquirrelEvent()) {
-   // squirrel event handled and app will exit in 1000ms,
-   // so don't do anything else
-   return;
-}
+if (setupEvents.handleSquirrelEvent()) { return; }
 const electron = require('electron');
 const app = electron.app;
 const ipc = electron.ipcMain;
@@ -33,7 +29,6 @@ const BrowserWindow = electron.BrowserWindow;
 const {Menu, MenuItem} = require('electron');
 const tray = require('./tray');
 const func = require('./js/functions');
-// const notify = require('./js/notify')
 const mod = require('./package.json');
 const settings = require('./config');
 const keepInTray = settings.get('keepInTray');
@@ -47,21 +42,6 @@ const yargs = require('yargs')
 const args = yargs(process.argv)
     .alias('d', 'dev')
     .argv
-
-// var args = require("nomnom")
-//   .option('dev', {
-//     abbr: 'd',
-//     flag: true,
-//     help: 'Enable developer mode'
-//   })
-//   .option('version', {
-//     abbr: 'v',
-//     flag: true,
-//     help: 'Print app version and exit',
-//     callback: () => {
-//         return "v" + app.getVersion();
-//     }
-//   }).parse();
 
 // Keep a global reference of the window object
 var windows = new Set();
@@ -84,7 +64,6 @@ function getConfig() {
     autoHideMenuBar: true,
     darkTheme: true,
     transparent: true
-    // icon: path.join(__dirname, '/img/icon/png/64x64.png')
   }
   if (process.platform === 'darwin') {
     conf.titleBarStyle = 'hidden';
@@ -172,9 +151,10 @@ const getThemes = exports.getThemes = () => {
 function menuThemes() {
   var themeFiles = fs.readdirSync(path.join(__dirname, '/css/theme')),
     themes = [];
-getThemes().forEach((str) => {
-    // FIXME: how to includeTheme()?
-    var theme = { label: str.name, click: () => { sendShortcut("set-theme", str.val); } };
+  getThemes().forEach((str) => {
+    var theme = { label: str.name, click: () => {
+      var focusedWindow = BrowserWindow.getFocusedWindow();
+      focusedWindow.webContents.send("set-theme", str.value.toString()); }};
     themes.push(theme);
   });
   return themes;
