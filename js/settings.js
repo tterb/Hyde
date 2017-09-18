@@ -347,7 +347,7 @@ $('#editorFontSize-input, #editorFontSize-up, #editorFontSize-down').bind('keyup
 
 $('#editorTheme').on('changed.bs.select', function (e, clickedIndex, newValue, oldValue) {
   var theme = $(e.currentTarget).val().toLowerCase().replace(/ /g,"-");
-  setTheme(theme);
+  setEditorTheme(theme);
 });
 
 $('#previewProfile').on('changed.bs.select', function (e, clickedIndex, newValue, oldValue) {

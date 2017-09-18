@@ -17,7 +17,6 @@ const parsePath = require("parse-filepath");
 const settings = require('electron-settings');
 const storage = require('electron-json-storage');
 const spellChecker = require('codemirror-spell-checker');
-// const MathJax = require('mathjax-electron');
 const highlight = require("showdown-highlight");
 var Color = require('color');
 var isBinaryFile = require("isbinaryfile");
@@ -47,7 +46,7 @@ var conf = {
 }
 
 var theme = settings.get('editorTheme');
-setTheme(theme);
+setEditorTheme(theme);
 if(main.getThemes().filter((temp) => { return temp.value === theme }))
   conf.theme = theme;
 else
@@ -81,7 +80,7 @@ themes.forEach(function(index) {
   head.append(tag);
 });
 
-function setTheme(theme) {
+function setEditorTheme(theme) {
   var themeTag;
   if(theme === undefined)
     theme = 'one-dark';

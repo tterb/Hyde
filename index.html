@@ -125,26 +125,26 @@
         <li class="dropdown-submenu">
           <a class="test" tabindex="-1" href="#" data-toggle="dropdown" class="dropdown-item">Themes <span class="caret"></span></a>
           <ul class="dropdown-menu sub" id="themes-menu">
-            <li href="#" onclick="setTheme('base16-dark');"><a class="dropdown-item">Base16 Dark</a></li>
-            <li href="#" onclick="setTheme('base16-light');"><a class="dropdown-item">Base16 Light</a></li>
-            <li href="#" onclick="setTheme('dracula');"><a class="dropdown-item">Dracula</a></li>
-            <li href="#" onclick="setTheme('duotone-dark');"><a class="dropdown-item">Duotone Dark</a></li>
-            <li href="#" onclick="setTheme('eclipse');"><a class="dropdown-item">Eclipse</a></li>
-            <li href="#" onclick="setTheme('hopscotch');"><a class="dropdown-item">Hopscotch</a></li>
-            <li href="#" onclick="setTheme('itg-flat');"><a class="dropdown-item">Itg Flat</a></li>
-            <li href="#" onclick="setTheme('material');"><a class="dropdown-item">Material</a></li>
-            <li href="#" onclick="setTheme('monokai');"><a class="dropdown-item">Monokai</a></li>
-            <li href="#" onclick="setTheme('neo');"><a class="dropdown-item">Neo</a></li>
-            <li href="#" onclick="setTheme('oceanic');"><a class="dropdown-item">Oceanic</a></li>
-            <li href="#" onclick="setTheme('one-dark');"><a class="dropdown-item">One Dark</a></li>
-            <li href="#" onclick="setTheme('panda');"><a class="dropdown-item">Panda</a></li>
-            <li href="#" onclick="setTheme('railscasts');"><a class="dropdown-item">Railscasts</a></li>
-            <li href="#" onclick="setTheme('seti');"><a class="dropdown-item">Seti</a></li>
-            <li href="#" onclick="setTheme('solarized-dark');"><a class="dropdown-item">Solarized Dark</a></li>
-            <li href="#"onclick="setTheme('solarized-light');"><a class="dropdown-item">Solarized Light</a></li>
-            <li href="#" onclick="setTheme('tomorrow-night');"><a class="dropdown-item">Tomorrow Night</a></li>
-            <li href="#" onclick="setTheme('yeti');"><a class="dropdown-item">Yeti</a></li>
-            <li href="#" onclick="setTheme('zenburn');"><a class="dropdown-item">Zenburn</a></li>
+            <li href="#" onclick="setEditorTheme('base16-dark');"><a class="dropdown-item">Base16 Dark</a></li>
+            <li href="#" onclick="setEditorTheme('base16-light');"><a class="dropdown-item">Base16 Light</a></li>
+            <li href="#" onclick="setEditorTheme('dracula');"><a class="dropdown-item">Dracula</a></li>
+            <li href="#" onclick="setEditorTheme('duotone-dark');"><a class="dropdown-item">Duotone Dark</a></li>
+            <li href="#" onclick="setEditorTheme('eclipse');"><a class="dropdown-item">Eclipse</a></li>
+            <li href="#" onclick="setEditorTheme('hopscotch');"><a class="dropdown-item">Hopscotch</a></li>
+            <li href="#" onclick="setEditorTheme('itg-flat');"><a class="dropdown-item">Itg Flat</a></li>
+            <li href="#" onclick="setEditorTheme('material');"><a class="dropdown-item">Material</a></li>
+            <li href="#" onclick="setEditorTheme('monokai');"><a class="dropdown-item">Monokai</a></li>
+            <li href="#" onclick="setEditorTheme('neo');"><a class="dropdown-item">Neo</a></li>
+            <li href="#" onclick="setEditorTheme('oceanic');"><a class="dropdown-item">Oceanic</a></li>
+            <li href="#" onclick="setEditorTheme('one-dark');"><a class="dropdown-item">One Dark</a></li>
+            <li href="#" onclick="setEditorTheme('panda');"><a class="dropdown-item">Panda</a></li>
+            <li href="#" onclick="setEditorTheme('railscasts');"><a class="dropdown-item">Railscasts</a></li>
+            <li href="#" onclick="setEditorTheme('seti');"><a class="dropdown-item">Seti</a></li>
+            <li href="#" onclick="setEditorTheme('solarized-dark');"><a class="dropdown-item">Solarized Dark</a></li>
+            <li href="#"onclick="setEditorTheme('solarized-light');"><a class="dropdown-item">Solarized Light</a></li>
+            <li href="#" onclick="setEditorTheme('tomorrow-night');"><a class="dropdown-item">Tomorrow Night</a></li>
+            <li href="#" onclick="setEditorTheme('yeti');"><a class="dropdown-item">Yeti</a></li>
+            <li href="#" onclick="setEditorTheme('zenburn');"><a class="dropdown-item">Zenburn</a></li>
           </ul>
         </li>
         <li class="dropdown-divider"></li>
@@ -217,7 +217,7 @@
       </ul>
     </section>
     <!-- Settings Menu -->
-    <section id="settings-menu">
+    <section id="settings-menu" onblur="toggleSettingsMenu()">
       <div id="settings-title" class="title">
         <img id="cog" src="img/cog.png"/><h2>Settings</h2>
       </div>
@@ -233,7 +233,7 @@
               </div>
             </div>
           </li>
-          <li id="editor-theme" class="menu"><span>Theme: </span>
+          <li id="editor-theme" class="menu select" style="margin-bottom: 6px;"><span>Theme: </span>
             <select id="editorTheme" class="selectpicker" title="One Dark" data-width="fit">
               <option>Base16 Dark</option><option>Base16 light</option>
               <option>Dracula</option><option>Duotone Dark</option>
@@ -302,19 +302,19 @@
       <div id="preview-section" class="settings-section">
         <h3>Preview</h3>
         <ul id="options">
-          <li class="menu"><span>Mode: </span>
+          <li class="menu select"><span>Mode: </span>
             <select id="previewMode" class="selectpicker" data-width="fit">
               <option>Markdown</option>
               <option>HTML</option>
             </select>
           </li>
-          <li class="menu"><span>Profile: </span>
+          <li class="menu select"><span>Profile: </span>
             <select id="previewProfile" class="selectpicker" data-width="fit">
               <option>Default</option>
               <option>GitHub</option>
             </select>
           </li>
-          <li id="previewFontSize" class="input"><span>Font size: </span>
+          <li id="previewFontSize" class="input" style="margin-top: 7px;"><span>Font size: </span>
             <div class="input-group spinner">
               <input id="previewFontSize-input" type="text" class="form-control" value="">
               <div class="input-group-btn-vertical" style="top:1px;">
