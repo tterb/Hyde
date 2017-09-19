@@ -63,7 +63,7 @@ function getConfig() {
     frame: false,
     autoHideMenuBar: true,
     darkTheme: true,
-    transparent: true
+    transparent: false
   }
   if (process.platform === 'darwin') {
     conf.titleBarStyle = 'hidden';
@@ -88,13 +88,11 @@ const createWindow = exports.createWindow = (file) => {
   let newWindow = window.createWindow(getConfig());
   let args = { file: readFile };
   windows.add(newWindow);
-  newWindow.showUrl(mainPage, args);
+  newWindow.showUrl(path.join(__dirname, 'index.html'), args);
   // newWindow.showUrl(mainPage);
   newWindow.once('ready-to-show', () => { newWindow.show(); });
-
   // Open the DevTools.
   if (args.dev) { newWindow.webContents.openDevTools(); }
-
   // Emitted when the window is closed.
   newWindow.on('closed', () => {
     windows.delete(newWindow);
@@ -267,7 +265,7 @@ if (process.platform === 'darwin') {
   template[1].submenu[7] = {label: "Show in Finder", click: () => { sendShortcut('open-file-manager'); }};
   template[3].submenu.splice(2,1);
   // Add syntax-themes to menu
-  template[3].submenu[7].submenu = menuThemes();
+  template[3].submenu[6].submenu = menuThemes();
   // Window menu
   template[4].submenu = [
     {role: 'minimize'},
