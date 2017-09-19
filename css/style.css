@@ -78,7 +78,7 @@ label {
     outline: none;
     border: none;
     margin: 3px 0;
-    padding: 2px 1px;
+    padding: 2px 0.75px;
     float: right; }
     #metacity .winButton img {
       display: inline-block;
@@ -319,7 +319,7 @@ label {
 
 .bottom-bar {
   position: absolute;
-  background: -webkit-linear-gradient(top, #2f2f2f 5%, #2b2b2b 35%, #222120, #1d1d1d 98%), -webkit-radial-gradient(top, circle cover, #242223 20%, #323031 50%, #242223 80%);
+  background: -webkit-linear-gradient(top, #2b2b2b 5%, #2b2b2b 35%, #222120, #1d1d1d 98%), -webkit-radial-gradient(top, circle cover, #242223 20%, #323031 50%, #242223 80%);
   color: #b6b5b4;
   font-size: 11px;
   height: 28px;
@@ -623,6 +623,8 @@ input[type="checkbox"] {
   padding: 12px 12px 30px 16px;
   outline: none !important;
   z-index: 99999; }
+  #settings-menu:focus, #settings-menu.active {
+    background: white !important; }
   #settings-menu .title {
     display: none;
     position: fixed;
@@ -659,7 +661,7 @@ input[type="checkbox"] {
       list-style: none;
       padding-left: 10px; }
       #settings-menu .settings-section ul li {
-        font-size: 16px;
+        font-size: 15.5px;
         font-weight: 300;
         letter-spacing: 0.045em;
         line-height: 2.1;
@@ -680,7 +682,7 @@ input[type="checkbox"] {
             background: -webkit-linear-gradient(bottom, #2d2c2d, #3d3c3d);
             color: rgba(255, 255, 255, 0.75);
             top: 1px;
-            left: -4px;
+            left: -6px;
             height: 31px;
             letter-spacing: 0.04em;
             border: 1px outset #3c3c3c;
@@ -693,6 +695,8 @@ input[type="checkbox"] {
             left: 8px; }
         #settings-menu .settings-section ul li .btn-group.open {
           z-index: 999; }
+      #settings-menu .settings-section ul .select {
+        margin-bottom: 7px; }
     #settings-menu .settings-section hr {
       position: relative;
       background: rgba(255, 255, 255, 0.06);
@@ -742,7 +746,7 @@ input[type="checkbox"] {
       border: 1px inset #403e3f;
       border-radius: 6px;
       box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.35), 0px 0.25px 4px rgba(255, 255, 255, 0.15);
-      padding: 0 0 0 9px;
+      padding: 1px 0 0 8px;
       z-index: -99; }
   #settings-menu .input-group-btn-vertical {
     position: relative;
@@ -810,22 +814,24 @@ input[type="checkbox"] {
     border-radius: 15px;
     cursor: grab; }
   #settings-menu [data-tooltip]:hover:after {
-    position: relative;
-    background: transparent;
-    color: rgba(255, 255, 255, 0.4);
-    font-size: 12px;
+    content: attr(data-tooltip);
+    display: block;
+    position: absolute;
+    background-image: -webkit-linear-gradient(top, #444345, #383736);
+    color: rgba(255, 255, 255, 0.75);
+    font-family: "Roboto", "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 12.5px;
     font-weight: 300;
-    line-height: 1.7;
-    top: 100%;
-    left: 15%;
+    letter-spacing: 0.07em;
+    line-height: 1.55;
+    top: 98%;
+    left: 22%;
     max-width: 100%;
-    border: none;
-    box-shadow: none;
-    word-wrap: break-word;
+    border-radius: 8px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
     white-space: normal;
-    opacity: 0;
-    padding: 0 4px 2px;
-    transition: opacity 0s linear 1s; }
+    padding: 4px 8px;
+    transition: opacity 225ms linear 1.25s; }
 
 #settings-trigger {
   left: -310px; }
@@ -928,7 +934,7 @@ input[type="checkbox"] {
   height: 100%;
   width: 100%;
   padding: 25px 15px 27px;
-  margin-top: 2px;
+  margin-top: 0.5px;
   overflow-y: auto;
   text-rendering: geometricPrecision; }
   #previewPanel input[type="checkbox"] {
@@ -1046,8 +1052,8 @@ code {
   background: transparent; }
 
 ::-webkit-scrollbar-thumb {
-  background-image: -webkit-linear-gradient(left, #4d4c4b, #353433);
-  border-radius: 10px; }
+  background-image: -webkit-linear-gradient(right, #4d4c4b, #252423);
+  border-radius: 15px; }
 
 #htmlPreview {
   display: none;
@@ -1117,21 +1123,21 @@ code {
 
 @media screen and (max-device-width: 2750px) {
   .CodeMirror pre {
-    font-size: 0.95em !important; }
+    font-size: 0.95em; }
   .dropdown-toggle, .dropdown-menu, .dropdown-item,
   .bottom-bar > div {
     font-size: 10.5px !important; } }
 
 @media screen and (max-device-width: 2000px) {
   .CodeMirror pre {
-    font-size: 1em !important; }
+    font-size: 1em; }
   .dropdown-toggle, .dropdown-menu, .dropdown-item,
   .bottom-bar > div {
     font-size: 11px !important; } }
 
 @media screen and (max-device-width: 1400px) {
   .CodeMirror pre {
-    font-size: 1.05em !important; }
+    font-size: 1.05em; }
   .dropdown-toggle, .dropdown-menu, .dropdown-item,
   .bottom-bar > div {
     font-size: 12px !important; } }
@@ -1228,6 +1234,7 @@ input:disabled + .switch__toggle {
 .switch.switch--material {
   width: 36px;
   height: 24px;
+  margin-top: 5px;
   margin-left: 5px;
   padding: 0 10px;
   min-width: 36px; }
