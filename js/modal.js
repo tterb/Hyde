@@ -21,21 +21,21 @@ function createAboutModal() {
 
 function createMarkdownModal() {
   var content = '<section class="modal--default__content" id="modal-body-region">' +
-  '<table class="markdown-help-content">' +
-      '<tbody>' +
-        '<tr><td id="header">Header</td><td># Header</td></tr>' +
-        '<tr><td><strong>Bold</strong></td><td>**bold**</td></tr>' +
-        '<tr><td><i>Italics</i></td><td>*italics*</td></tr>' +
-        '<tr><td><del>Strikethrough</del></td><td>~~strikethrough~~</td></tr>' +
-        '<tr><td><ul><li>item</li></ul></td><td>* item</td></tr>' +
-        '<tr><td>Blockquote</td><td>&gt; blockquote</td></tr>' +
-        '<tr><td><a href="https://github.com/JonSn0w/Hyde" target="_rick">Link</a></td><td>[title](http://)</td></tr>' +
-        '<tr><td>Image</td><td>![alt](http://)</td></tr>' +
-        '<tr><td id="code"><code>code</code></td><td>`code`</td></tr>' + '<tr><td>L<sup>a</sup>T<sub>e</sub>X</td><td>$$LaTeX code$$</td></tr>' +
-        '<tr><td id="code-block"><pre style="display: inline-block; margin: 8px 0 2px"><code><span class="keyword">var </span>code = <span class="string">"formatted"</span>;</code></pre></td>' +
-          '<td style="line-height: 100%">``` <i style="color: rgba(0,0,0,0.5)">(shift+enter for line break)</i><br>var code = "formatted";<br>```</td>' +
-        '</tr>' +
-      '</tbody>' +
+    '<table class="markdown-help-content" role="presentation">' +
+      '<tr><td id="header">Header</td><td># Header</td></tr>' +
+      '<tr><td><strong>Bold</strong></td><td>**bold**</td></tr>' +
+      '<tr><td><i>Italics</i></td><td>*italics*</td></tr>' +
+      '<tr><td><del>Strikethrough</del></td><td>~~strikethrough~~</td></tr>' +
+      '<tr><td><ul><li>item</li></ul></td><td>* item</td></tr>' +
+      '<tr><td>Blockquote</td><td>&gt; blockquote</td></tr>' +
+      '<tr><td><a href='+packageJSON.repository.url+' target="_rick">Link</a></td><td>[title](http://)</td></tr>' +
+      '<tr><td>Image</td><td>![alt](http://)</td></tr>' +
+      '<tr><td id="code"><code>code</code></td><td>`code`</td></tr>' +
+      '<tr><td id="code-block"><pre style="display: inline-block; margin: 12px 0 2px"><code><span class="keyword">var </span>code = <span class="string">"formatted"</span>;</code></pre></td>' +
+        '<td style="line-height: 150%">``` <i style="color: rgba(0,0,0,0.5)">(shift+enter for line break)</i><br>var code = "formatted";<br>```</td>' +
+      '</tr>' +
+      '<tr><td style="font-size:125%;padding:0 17px">L<sup>a</sup>T<sub>e</sub>X</td><td>$$LaTeX$$</td></tr>' +
+      '<tr><td style="padding:6px 15px 8px"><img src="img/emoji/smile.png" height="27"/></td><td>:smile:' +
     '</table>' +
   '</section>';
   var modal = createInsetModal('Markdown Help', content)

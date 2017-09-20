@@ -293,6 +293,13 @@
   top: 3px;
   right: -3px; }
 
+#markdown-modal .modal-body-inset {
+  max-height: 450px; }
+
+#markdown-modal .modal--default__content {
+  max-height: 420px;
+  overflow-y: auto; }
+
 #markdown-modal .markdown-help-content {
   width: 100%;
   border-spacing: 0; }
