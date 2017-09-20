@@ -18,6 +18,7 @@ const settings = require('electron-settings');
 const storage = require('electron-json-storage');
 const spellChecker = require('codemirror-spell-checker');
 const highlight = require("showdown-highlight");
+var packageJSON = require(__dirname + '/package.json');
 var Color = require('color');
 var isBinaryFile = require("isbinaryfile");
 var os = require("os");
@@ -99,25 +100,25 @@ function setEditorTheme(theme) {
   adaptTheme(themeColor, Color(themeColor).luminosity());
 }
 
+var ps = [];
+var converter = new showdown.Converter({
+    ghCodeBlocks: true,
+    ghCompatibleHeaderId: true,
+    tables: true,
+    tasklists: true,
+    strikethrough: true,
+    tablesHeaderId: true,
+    simpleLineBreaks: true,
+    smoothLivePreview: true,
+    parseImgDimensions: true,
+    simplifiedAutoLink: false,
+    excludeTrailingPunctuationFromURLs: true,
+    disableForced4SpacesIndentedSublists: true,
+    extensions: ['youtube', highlight]
+});
 window.onload = () => {
   var markdownPreview = document.getElementById('markdown'),
       htmlPreview = $('#htmlPreview');
-
-  var converter = new showdown.Converter({
-      ghCodeBlocks: true,
-      ghCompatibleHeaderId: true,
-      tables: true,
-      tasklists: true,
-      strikethrough: true,
-      tablesHeaderId: true,
-      simpleLineBreaks: true,
-      smoothLivePreview: true,
-      parseImgDimensions: true,
-      simplifiedAutoLink: false,
-      excludeTrailingPunctuationFromURLs: true,
-      disableForced4SpacesIndentedSublists: true,
-      extensions: ['youtube', highlight]
-  });
 
   var themeColor = $('.cm-s-'+theme).css('background-color');
   adaptTheme(themeColor, Color(themeColor).luminosity());
@@ -140,18 +141,30 @@ window.onload = () => {
     if(settings.get('mathRendering'))
       MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
     markdownPreview.innerHTML = renderedMD;
+    $('#markdown p').each(function(i) {
+      if($(this).html() === '<br>') {
+        ps.push($(this).html());
+        // $(this).remove();
+        $(this).css('margin-bottom', '0px');
+      }
+    });
     // Markdown -> HTML
     converter.setOption('noHeaderId', true);
     html = converter.makeHtml(markdownText);
     htmlPreview.val(html);
+    // Open preview links in default browser
+    $("#markdown a").on('click', function() {
+      event.preventDefault();
+      openInBrowser($(this).attr('href'))
+    });
     if(this.isFileLoadedInitially) {
       this.setClean();
       this.isFileLoadedInitially = false;
     }
-    if(this.currentFile !== '') {
-      this.updateWindowTitle(this.currentFile);
-    } else {
+    if(this.currentFile === '') {
       this.updateWindowTitle();
+    } else {
+      this.updateWindowTitle(this.currentFile);
     }
   });
   // Read file if given from commandline
@@ -160,7 +173,7 @@ window.onload = () => {
       readFileIntoEditor(path.join(process.cwd(), __args__.file));
     }
   // Open first window with the most recently saved file
-} else if(main.getWindows().size <= 1) {
+  } else if(main.getWindows().size <= 1) {
     storage.get('markdown-savefile', function(err, data) {
       if(err) throw err;
       if('filename' in data) {
@@ -181,9 +194,9 @@ window.onload = () => {
   $("#unsavedConfirm").on('click', () => { saveFile(); });
   $("#unsavedDeny").on('click', () => { remote.BrowserWindow.getFocusedWindow().close(); });
   // Handle link clicks in application
-  $(".link").on('click', () => {
+  $(".link").on('click', function() {
     event.preventDefault();
-    shell.openExternal($(this).attr('href'))
+    openInBrowser($(this).attr('href'))
   });
   // Open dropdown sub-menus on hover
   $('.dropdown-submenu').mouseover(function() {
@@ -221,7 +234,7 @@ var toggleSyncScroll = () => {
   }
    settings.set('syncScroll', isSynced);
 }
-$syncScroll.on('change', toggleSyncScroll());
+$syncScroll.on('change', () => { toggleSyncScroll(); });
 
 // Scrollable height.
 var codeScrollable = () => {
@@ -231,7 +244,6 @@ var codeScrollable = () => {
 var prevScrollable = () => {
   return $markdown.height() - $prev.height();
 }
-
 // Temporarily swaps out a scroll handler.
 var muteScroll = (obj, listener) => {
   obj.off('scroll', listener);
@@ -241,7 +253,6 @@ var muteScroll = (obj, listener) => {
     obj.on('scroll', listener);
   }
 }
-
 // Scroll Event Listeners
 var codeScroll = () => {
   var scrollable = codeScrollable();
@@ -254,7 +265,6 @@ var codeScroll = () => {
 cm.on('scroll', codeScroll);
 $(window).on('resize', codeScroll);
 $(window).on('resize', manageWindowSize());
-
 var prevScroll = () => {
   var scrollable = prevScrollable();
   if (scrollable > 0 && isSynced) {
