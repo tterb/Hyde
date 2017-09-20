@@ -1,9 +1,20 @@
 {
   "name": "hyde",
   "version": "0.0.1",
-  "description": "An Electron-powered markdown editor for Jekyll users",
+  "description": "An modular markdown editor for new and experienced users, with features that cater to Jekyll and documentation writing",
   "main": "main.js",
   "productName": "Hyde",
+  "author": "Brett Stevenson",
+  "license": "GPL-3.0",
+  "homepage": "https://JonSn0w.github.io/Hyde",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JonSn0w/Hyde.git",
+    "docs": "https://github.com/JonSn0w/Hyde/tree/master/docs",
+    "bugs": "https://github.com/JonSn0w/Hyde/issues/new"
+  },
+  "docs": "https://JonSn0w.github.io/Hyde/docs",
+  "keybindings": "https://JonSn0w.github.io/Hyde/docs#keybindings",
   "scripts": {
     "start": "electron main.js",
     "build": "rm -rf release && gulp build",
@@ -16,41 +27,26 @@
   "bin": {
     "hyde": "./bin/hyde"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/JonSn0w/Hyde.git",
-    "docs": "https://github.com/JonSn0w/Hyde/tree/master/docs",
-    "bugs": "https://github.com/JonSn0w/Hyde/issues/new"
-  },
   "keywords": [
-    "electron",
+    "hyde",
     "markdown",
+    "editor",
+    "electron",
     "jekyll",
-    "node",
     "gfm",
     "md",
+    "latex",
     "text",
-    "editor",
     "live",
     "preview",
     "html",
     "desktop",
-    "hyde",
     "notes",
     "blog",
-    "post",
-    "README",
-    "windows",
-    "macos",
-    "osx",
-    "linux"
+    "documentation",
+    "writing",
+    "post"
   ],
-  "author": "Brett Stevenson <brettstevenson.me>",
-  "license": "GPL-3.0",
-  "bugs": {
-    "url": "https://github.com/JonSn0w/Hyde/issues/new"
-  },
-  "homepage": "https://github.com/JonSn0w/Hyde#readme",
   "_npmUser": {
     "name": "bstevenson",
     "email": "bstevensondev@gmail.com"
