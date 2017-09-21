@@ -45,17 +45,6 @@
   <script src="node_modules/codemirror/addon/fold/markdown-fold.js"></script>
   <script src="node_modules/codemirror/addon/selection/active-line.js"></script>
   <script src="node_modules/codemirror/addon/scroll/simplescrollbars.js"></script>
-  <script src="node_modules/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        preview: "none",
-        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-        processEscapes: true
-      },
-      messageStyle: "none"
-    });
-  </script>
 </head>
 
 <body class="container-fluid" id="body" style="resize: both">
@@ -217,7 +206,7 @@
       </ul>
     </section>
     <!-- Settings Menu -->
-    <section id="settings-menu" onblur="toggleSettingsMenu()">
+    <section id="settings-menu">
       <div id="settings-title" class="title">
         <img id="cog" src="img/cog.png"/><h2>Settings</h2>
       </div>
@@ -256,7 +245,7 @@
             </label>
             <span>Line numbers</span>
           </li> -->
-          <li id="dynamicEditor" class="toggle">
+          <li id="dynamicEditor" class="toggle" data-tooltip="Add syntax-driven text formatting to editor">
             <label class="switch switch--material">
             <input type="checkbox" class="switch__input switch--material__input" value="" setting="dynamicEditor">
             <div class="switch__toggle switch--material__toggle">
@@ -286,7 +275,7 @@
             </label>
             <span>Match brackets</span>
           </li>
-          <li id="showTrailingSpace" class="toggle">
+          <li id="showTrailingSpace" class="toggle" data-tooltip="Adds a faint underline to improve line break visibility">
             <label class="switch switch--material">
             <input type="checkbox" class="switch__input switch--material__input" setting="showTrailingSpace">
             <div class="switch__toggle switch--material__toggle">
@@ -343,7 +332,7 @@
             </label>
             <span>Enable LaTex Rendering</span>
           </li>
-          <li id="hideYAMLFrontMatter" class="toggle">
+          <li id="hideYAMLFrontMatter" class="toggle" data-tooltip="Hides unnecessary frontmatter from preview">
             <label class="switch switch--material">
             <input type="checkbox" class="switch__input switch--material__input require-reload" setting="hideYAMLFrontMatter" checked>
               <div class="switch__toggle switch--material__toggle">
@@ -363,9 +352,9 @@
             <label for="yamlPath">Frontmatter Template:</label>
             <input type="text" id="yamlPath" class="form-control" value="">
           </li>
-          <li id="showTooltips" class="toggle">
+          <li id="showTooltips" class="toggle" data-tooltip="Show tooltips like these!">
             <label class="switch switch--material">
-              <input type="checkbox" class="switch__input switch--material__input" value="" setting="showTooltips">
+              <input type="checkbox" class="switch__input switch--material__input" value="" setting="showTooltips" checked>
               <div class="switch__toggle switch--material__toggle">
                 <div class="switch__handle switch--material__handle">
                 </div>
@@ -461,6 +450,7 @@
   </div>
   <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
   <script>if (window.module) module = window.module;</script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.2.0/katex.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
@@ -475,7 +465,5 @@
   <script src="js/ipc_renderer.js"></script>
   <script src="js/modal.js"></script>
   <script src="js/emoji.js"></script>
-  <!-- <script src="js/notify.js"></script> -->
-  <!-- <script src="js/registerHandler.js"></script> -->
 </body>
 </html>
