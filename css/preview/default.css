@@ -2,7 +2,7 @@
   color: #2a2a2a;
   font-family: "Open Sans", "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
   font-size: 13.5;
-  letter-spacing: 0.0375em;
+  letter-spacing: 0.04em;
   line-height: 1.5;
   text-rendering: geometricPrecision;
   overflow: none;
@@ -12,7 +12,7 @@
   color: #333;
   font-size: 2.5em;
   font-weight: 700;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.0175em;
   line-height: 1.45;
   border-bottom: 1px solid #e1e3ea;
   margin-top: 0;
@@ -22,7 +22,7 @@
   color: #333;
   font-size: 2em;
   font-weight: 700;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.0125em;
   line-height: 1.4;
   border-bottom: 1px solid #e1e3ea;
   margin-bottom: 22px;
@@ -31,6 +31,7 @@
   color: #333;
   font-size: 1.42em;
   font-weight: 700;
+  letter-spacing: 0.01em;
   line-height: 1.3;
   margin-top: 5px;
   margin-bottom: 15px;
@@ -39,6 +40,7 @@
   color: #333;
   font-size: 1.25em;
   font-weight: 700;
+  letter-spacing: 0.01em;
   line-height: 1.25;
   margin-bottom: 16px;
 }
@@ -67,7 +69,7 @@
   padding-left: 35px;
 }
 #markdown li {
-  /*letter-spacing: 0.0275em;*/
+  letter-spacing: 0.04em;
   margin-bottom: 5px;
 }
 #markdown ul li p {
@@ -152,10 +154,6 @@
   border-bottom-color: #959da5;
   border-radius: 4px;
   box-shadow: 0 0.5px 2px rgba(0,0,0,0.25);
-}
-#markdown .MathJax_Display {
-  display: flex !important;
-  text-align: left !important;
 }
 #markdown *:first-child {
   margin-top: 0 !important;
