@@ -12,8 +12,10 @@ const config = require('./config');
 const showdown  = require('showdown');
 const func = require('./js/functions');
 const setter = require('./js/settings');
-const notify = require('./js/notify')
+const notify = require('./js/notify');
+const argHandling = require('./js/argHandling');
 const parsePath = require("parse-filepath");
+const katex = require('parse-katex');
 const settings = require('electron-settings');
 const storage = require('electron-json-storage');
 const spellChecker = require('codemirror-spell-checker');
@@ -100,7 +102,6 @@ function setEditorTheme(theme) {
   adaptTheme(themeColor, Color(themeColor).luminosity());
 }
 
-var ps = [];
 var converter = new showdown.Converter({
     ghCodeBlocks: true,
     ghCompatibleHeaderId: true,
@@ -116,6 +117,7 @@ var converter = new showdown.Converter({
     disableForced4SpacesIndentedSublists: true,
     extensions: ['youtube', highlight]
 });
+
 window.onload = () => {
   var markdownPreview = document.getElementById('markdown'),
       htmlPreview = $('#htmlPreview');
@@ -125,26 +127,21 @@ window.onload = () => {
   createModals();
   fillEmojiModal();
 
-
-
   cm.on('change', (cm) => {
-    countWords();
     var markdownText = cm.getValue();
     // Remove the YAML frontmatter from live-preview
     if(settings.get('hideYAMLFrontMatter'))
       markdownText = removeYAMLPreview(markdownText);
     // Convert emoji's
     markdownText = replaceWithEmojis(markdownText);
-    // Markdown -> Preview
-    renderedMD = converter.makeHtml(markdownText);
     // Render LaTex
     if(settings.get('mathRendering'))
-      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+      markdownText = katex.renderLaTeX(markdownText);
+    // Markdown -> Preview
+    renderedMD = converter.makeHtml(markdownText);
     markdownPreview.innerHTML = renderedMD;
     $('#markdown p').each(function(i) {
       if($(this).html() === '<br>') {
-        ps.push($(this).html());
-        // $(this).remove();
         $(this).css('margin-bottom', '0px');
       }
     });
@@ -157,22 +154,24 @@ window.onload = () => {
       event.preventDefault();
       openInBrowser($(this).attr('href'))
     });
+    // Handle preview checkboxes
+    $("#markdown :checkbox").removeAttr("disabled");
+    $("#markdown :checkbox").on('click', function() {
+      event.preventDefault();
+    })
     if(this.isFileLoadedInitially) {
       this.setClean();
       this.isFileLoadedInitially = false;
     }
-    if(this.currentFile === '') {
-      this.updateWindowTitle();
-    } else {
-      this.updateWindowTitle(this.currentFile);
-    }
+    this.updateWindowTitle(this.currentFile);
+    countWords();
   });
-  // Read file if given from commandline
-  if(__args__.file !== null) {
-    if(__args__.file.includes('.md')) {
-      readFileIntoEditor(path.join(process.cwd(), __args__.file));
-    }
-  // Open first window with the most recently saved file
+
+  // Read and handle file if given from commandline
+  var filePath = __args__.file;
+  var extensions = ['.md','.markdown','.mdown','.mkdn','.mkd','.mdwn','.mdtxt','.mdtext'];
+  if(filePath && extensions.indexOf(path.extname(filePath)) > -1) {
+    argHandling(filePath);
   } else if(main.getWindows().size <= 1) {
     storage.get('markdown-savefile', function(err, data) {
       if(err) throw err;
@@ -186,6 +185,7 @@ window.onload = () => {
         this.currentFile = data.filename;
       }
     });
+    if(filePath) notify('The specified file is invalid', 'error');
   }
 
   $("#minimize").on('click', () => { remote.BrowserWindow.getFocusedWindow().minimize(); });
@@ -210,6 +210,9 @@ window.onload = () => {
     createTable($('#columns').val(),$('#rows').val(),$('.on').attr('id').slice(0,-5));
   });
 }
+$('#settings-menu').focus(function() {
+  notify("Handler for .focus() called.", "success");
+});
 
 
 /**************************
