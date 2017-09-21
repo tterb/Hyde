@@ -8,16 +8,16 @@ function saveAs() {
     if ('filename' in data) {
       options.defaultPath = data.filename;
     }
-    dialog.showSaveDialog(options, function (fileName) {
-      if (fileName === undefined)
-        return notify("You didn't save the file", "info");
-      storage.set('markdown-savefile', {'filename' : fileName}, function(err) {
-        if (err) notify(err, "error");
+    dialog.showSaveDialog(options, function(filename) {
+      if(filename === undefined)
+        return notify("You didn't save the file", "warning");
+      storage.set('markdown-savefile', {'filename' : filename}, function(err) {
+        if(err) notify(err, "error");
       });
       var mdValue = cm.getValue();
       // filename is a string that contains the path and filename created in the save dialog.
-      fs.writeFile(filename, mdValue, function (err) {
-        if(err) notify("An error ocurred creating the file "+ err.message, "error");
+      fs.writeFile(filename, mdValue, function(err) {
+        if(err) notify("An error ocurred while creating the file "+ err.message, "error");
       });
       this.setClean();
       this.currentFile = filename;
@@ -42,22 +42,21 @@ ipc.on('file-save', function() {
       return;
     }
     if('filename' in data) {
-      var fileName = data.filename;
-      if(fileName === undefined)
+      var filename = data.filename;
+      if(filename === undefined)
         return notify("You didn't save the file", "info");
-      storage.set('markdown-savefile', {'filename' : fileName}, function(err) {
+      storage.set('markdown-savefile', {'filename' : filename}, function(err) {
         if(err) notify(err, "error");
       });
 
       var mdValue = cm.getValue();
       // fileName is a string that contains the path and filename created in the save file dialog.
-      fs.writeFile(fileName, mdValue, function (err) {
-        if(err)
-          notify("An error ocurred creating the file "+ err.message, "error");
+      fs.writeFile(filename, mdValue, function(err) {
+        if(err) notify("An error ocurred creating the file "+ err.message, "error");
       });
       this.setClean();
-      this.currentFile = fileName;
-      updateWindowTitle(fileName);
+      this.currentFile = filename;
+      updateWindowTitle(filename);
     } else {
       saveAs();
     }
@@ -74,19 +73,18 @@ ipc.on('file-open', () => {
       'properties': ['openFile'],
       'filters': [{
         name: 'Markdown',
-        'extensions': ['md']
+        'extensions': ['md','markdown','mdown','mkdn','mkd','mdwn','mdtxt','mdtext']
       }]
     };
-    if ('filename' in data)
+    if('filename' in data)
       options.defaultPath = data.filename;
     dialog.showOpenDialog(options, (file) => {
-      if (file === undefined) {
-        console.log("You didn't open the file");
-        return;
+      if(file === undefined) {
+        return notify("You didn't select a file to open", "info");
       }
       storage.set('markdown-savefile', {
         'filename' : file[0] }, (err) => {
-          if (err) notify(err, "error");
+          if(err) notify(err, "error");
         });
 
       // file is a string that contains the path and filename created in the save file dialog.
@@ -128,7 +126,7 @@ ipc.on('ctrl+up', () => { cm.execCommand('goDocStart'); });
 ipc.on('ctrl+down', () => { cm.execCommand('goDocEnd'); });
 ipc.on('maximize', () => { toggleMaximize(); })
 ipc.on('file-pdf', () => {
-  // Only save PDF files
+  // Save as PDF file
   options = {
     filters: [
       { name: 'PDF', extensions: ['pdf'] }
@@ -147,4 +145,4 @@ ipc.on('table-modal', () => { $('#table-modal').modal(); });
 ipc.on('ctrl+e', () => { $('#emoji-modal').modal(); });
 ipc.on('keybinding-modal', () => { $('#keybinding-modal').modal(); });
 ipc.on('open-file-manager', () => { shell.showItemInFolder(currentFile); })
-ipc.on('set-theme', function(event , data) { setEditorTheme(data); })
+ipc.on('set-theme', function(event, data) { setEditorTheme(data); })
