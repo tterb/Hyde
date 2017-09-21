@@ -12,14 +12,14 @@ var opts = [
   { name: 'showMenu', action: () => { toggleMenu(); }},
   { name: 'showToolbar', action: () => { toggleToolbar(); }},
   { name: 'showPreview', action: () => { togglePreview(); }},
-  { name: 'syncScroll', action: () => { toggleSyncScroll; }},
+  { name: 'syncScroll' },
   { name: 'lineNumbers', action: () => { toggleLineNumbers(); }},
   { name: 'dynamicEditor', action: () => { toggleDynamicFont(); }},
   { name: 'matchBrackets', action: () => { toggleMatchBrackets(); }},
   { name: 'showTrailingSpace', action: () => { toggleWhitespace(); }},
   { name: 'previewProfile', action: () => { setPreviewProfile() }},
   { name: 'customCSS', action: () => { toggleCustomCSS(); }},
-  { name: 'mathRendering'}, { name: 'editorFontSize' },
+  { name: 'mathRendering' }, { name: 'editorFontSize' },
   { name: 'enableSpellCheck' }, { name: 'previewMode' },
   { name: 'previewFontSize' }, { name: 'hideYAMLFrontMatter' },
   { name: 'frontMatterTemplate' }, { name: 'keepInTray' }
@@ -87,7 +87,7 @@ var formatHead = () => {
       textPanel.css('paddingTop', '35px');
     } else {
       textPanel.css('paddingTop', '0px');
-      menu.css('box-shadow', '0 1px 20px rgba(0,0,0,0.3)');
+      menu.css('box-shadow', '0 1px 10px rgba(0,0,0,0.3)');
       leftFade.css('top', '0');
       textPanel.css('paddingTop', '0px');
     }
@@ -338,6 +338,21 @@ function manageWindowSize() {
   settings.set('windowHeight', parseInt($(window).height(),10));
 }
 
+function getStates() {
+  var str = "";
+  $('.switch__input').each(function() {
+    var val = $(this).is(':checked'),
+        name = $(this).attr('setting');
+    str += name+': '+val+'\n';
+  });
+  str += 'changes: [ ';
+  changes.forEach(function(temp) {
+    str += temp.attr('setting')+', '
+  });
+  str += ']'
+  return str;
+}
+
 // Handle settings-menu changes
 $('#editorFontSize-input, #editorFontSize-up, #editorFontSize-down').bind('keyup mouseup', function () {
   var value = parseFloat($('#editorFontSize-input').val());
@@ -368,11 +383,10 @@ $('#previewFontSize-input, #previewFontSize-up, #previewFontSize-down').bind('ke
 });
 
 // Settings menu toggle listeners
-var element, changes = [];
+var changes = [];
 $('.switch__input').change(function() {
   var val = $(this).is(':checked'),
       setting = $(this).attr('setting');
-      element = $(this);
   opts.forEach((temp) => {
     if(temp.name === setting) {
       if(temp.action)
@@ -380,23 +394,8 @@ $('.switch__input').change(function() {
       settings.set(setting, val);
     }
   });
-  if(element.hasClass('require-reload') && !$('.alert-info').is(':visible')) {
+  if($(this).hasClass('require-reload') && !$('.alert-info').is(':visible')) {
     notify('This change will take effect once the app has been reloaded (ctrl+r)', 'info');
   }
-  changes.push(element.attr('setting'));
+  changes.push(setting);
 });
-
-function getStates() {
-  var str = "";
-  $('.switch__input').each(function() {
-    var val = $(this).is(':checked'),
-        name = $(this).attr('setting');
-    str += name+': '+val+'\n';
-  });
-  str += 'changes: [ ';
-  changes.forEach(function(temp) {
-    str += temp.attr('setting')+', '
-  });
-  str += ']'
-  return str;
-}
