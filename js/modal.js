@@ -1,7 +1,7 @@
 function createModals() {
 	createCustomCSSModal();
 	createAboutModal();
-	createTableModal();
+	// createTableModal();
 	createMarkdownModal();
 }
 

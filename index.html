@@ -403,7 +403,22 @@
     <button id="previewToggle" class="fa fa-eye" data-tooltip="Toggle Preview" onclick="togglePreview();"></button>
   </div>
   <!-- Table Modal -->
-  <div class="modal fade" id="table-modal" tabindex="-1" role="dialog"></div>
+  <div class="modal fade" id="table-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="modal-close" data-dismiss="modal"><img class="inactive" src="img/buttons/close.png" alt="Close"/><img class="active" src="img/buttons/close_active.png" alt="Close"/></button>
+          <h4 class="modal-title">Table</h4>
+        </div>
+        <div class="table-content">
+          <ul id="table-input">
+            <li id="table-columns" class="form-group">
+            <input type="number" id="columns" placeholder="Columns" class="form-control" value=""></li>
+            <li id="table-rows" class="form-group">
+              <input type="number" id="rows" placeholder="Rows" class="form-control" value=""></li><li><button id="table-button" data-dismiss="modal"><i class="fa fa-arrow-right"></i></button></li>
+          </ul>
+    		<div id="alignButtons" class="align-buttons"><span>Align: </span><button id="leftAlign" class="modal-button button-group on"><i class="fa fa-align-left"></i></button><button id="centerAlign" class="modal-button button-group"><i class="fa fa-align-center"></i></button><button id="rightAlign" class="modal-button button-group"><i class="fa fa-align-right"></i></button>
+        </div></div></div></div></div>
   <!-- Markdown Help Modal -->
   <div class="modal fade" id="markdown-modal" tabindex="-1" role="dialog"></div>
   <!-- About Modal -->
@@ -436,7 +451,8 @@
         </div>
         <div class="modal-body">
           <section class="modal--default__content" id="modal-body-region">
-            <div class="unsaved-close">
+            <div>
+              <span class="unsaved-icon fa fa-exclamation-circle"></span>
               <span id="unsaved-body"></span>
               <div class="unsaved-buttons">
                 <button href="#" id="unsavedConfirm" class=" modal-button"><span>Save</span></button>
