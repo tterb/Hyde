@@ -178,7 +178,6 @@ pre,
 code {
     font-size: 15px;
     border-radius: 3px;
-    background-color: $grey-color-light;
 }
 
 code {
@@ -186,7 +185,7 @@ code {
 }
 
 pre {
-    padding: 8px 12px;
+    padding: 10px 12px;
     overflow-x: scroll;
 
     > code {
@@ -195,7 +194,9 @@ pre {
         padding-left: 0;
     }
 }
-
+.highlighter-rouge .highlight {
+  background: #222527 !important;
+}
 
 
 /**
@@ -203,11 +204,13 @@ pre {
  */
 
 .wrapper {
+    background: #292c33;
     max-width: 100%;
     margin-right: auto;
     margin-left: auto;
     padding-right: calc($horizontal-spacing-unit/3);
     padding-left: calc($horizontal-spacing-unit/3);
+    padding-bottom: 3em;
     @extend %clearfix;
 
     @include media-query($on-laptop) {

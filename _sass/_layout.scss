@@ -45,10 +45,11 @@ html, body {
     @include vendor('transition', 'background-color #{_duration(.8s)} ease');
     @include vendor('transition', 'color #{_duration(.8s)} ease');
     display: block;
-    position:fixed;
-    background: transparent;
+    // position:fixed;
+    background: #292c33;
+    @include background-image(linear-gradient(top, #24282e, rgba(#24282e, 0.2)));
     border: none;
-    opacity: 0.85;
+    // opacity: 0.85;
     line-height: 3em;
     left:0px;
     top:0px;
@@ -56,7 +57,7 @@ html, body {
     width:101%;
     z-index: 9999;
     &:hover, &:active {
-        color: $theme-color;
+        color: rgba(255,255,255,0.9);
         // font-weight: _font(normal);
     }
     .logo {
@@ -130,6 +131,14 @@ html, body {
         color: $theme-color;
     }
 }
+
+.keybinding-section {
+  float: left;
+    .right {
+      float: right;
+    }
+}
+
 .site-nav {
     position: absolute;
     float: right;
@@ -175,19 +184,19 @@ html, body {
     width: 100%;
     text-align: left;
     padding-left: 5%;
-    padding-top: 5px;
+    // padding-top: 5px;
     line-height: 2.5em;
     z-index: 25;
     h1 {
         font-family: _font(hdr-family);
-        color: #000;
+        color: #101319;
         font-size: 150px;
         line-height: 1.15;
     }
     h3 {
         font-family: _font(hdr-family);
-        font-size: 28px !important;
-        color: #060606;
+        font-size: 31px !important;
+        color: #101319;
         padding-left: 8px;
     }
     &.landing {
@@ -208,6 +217,7 @@ html, body {
 
 
 .editor-section {
+    height: 114vh;
     padding-top: 1.5em;
 }
 
@@ -227,9 +237,9 @@ html, body {
     opacity: 0.6;
     width: 47%;
     height: auto;
-    top: 32em;
+    top: 31em;
     left: 4%;
-    padding-left: 22px;
+    padding-left: 0px;
     z-index: 9;
     .feature-list {
       list-style-image: url('./img/bullet.png');
@@ -245,7 +255,8 @@ html, body {
     display: inline-block;
     width: 47%;
     height: auto;
-    top: 87em;
+    // top: 87em;
+    top: 191%;
     left: 47%;
     .feature-list {
         list-style-image:  url('./img/bullet_dark.png');
@@ -255,7 +266,7 @@ html, body {
 .feature-list {
     list-style-image:  url('./img/bullet_dark.png');
     font-family: _font(ctrl-family);
-    font-size: 1.45em;
+    font-size: 2.15vw;
     font-weight: 300;
     line-height: 1.35;
     letter-spacing: 0.035em;
@@ -280,6 +291,7 @@ html, body {
     #editor-img {
         position: relative;
         float: right;
+        height: 125%;
         width: 125%;
         right: 0;
     }
@@ -296,6 +308,7 @@ html, body {
     #preview-img {
         position: relative;
         float: left;
+        height: 125%;
         width: 125%;
         left: 0;
         right: 100%;
@@ -360,7 +373,8 @@ html, body {
 #footer {
   	background-color: _palette(accent1, bg);
   	text-align: center;
-  	padding: 2em 3em 0.25em 3em !important;
+  	padding: 1.5em 3em 0.75em 3em !important;
+    box-shadow: 0 -1px 20px rgba(0,0,0,0.2);
   	.icons {
         list-style: none;
     		font-size: 2.5em;
@@ -525,20 +539,21 @@ pre {
   box-shadow: inset 0 0 8px rgba(0,0,0,0.6);
   border: 1px inset #3F3F3F;
   border-radius: 14px;
-  margin: 15px 20px 20px;
-  padding: 8px 14px;
+  margin: 30px 40px;
+  padding: 10px 14px 12px;
   overflow-x: auto;
 }
 
 .page-title {
   position: relative;
   color: rgba(255,255,255,0.7);
-  font-family: "Raleway", Arial, Verdana, Helvetica, sans-serif;
-  font-size: 7em;
+  font-family: _font(hdr-family);
+  // font-family: "Raleway", Arial, Verdana, Helvetica, sans-serif;
+  font-size: 150px;
   font-weight: 100 !important;
   letter-spacing: 0.03em;
-  line-height: 1;
-  margin: 1em 6% 0.5em;
+  line-height: 1.16;
+  margin: 0.05em -0.05em 0.5em;
 }
 
 .document {
@@ -554,7 +569,7 @@ pre {
   position: relative;
   background: #292c33;
   color: rgba(255,255,255,0.65);
-  padding: 1.75em 7%;
+  padding: 1.75em 7% 0;
   h2 {
     color: rgba(255,255,255,0.7);
     font-size: 3em;
@@ -576,7 +591,7 @@ pre {
     font-weight: 400;
     border-bottom: none;
     &:hover, &:active {
-      border-bottom: 2px dotted rgba(255,255,255,0.6);
+      border-bottom: 1px dotted rgba(255,255,255,0.6);
     }
   }
   hr {
@@ -661,6 +676,10 @@ pre {
     li {
       a {
         color: rgba(255,255,255,0.65);
+        &:hover {
+          color: rgba(255,255,255,0.75);
+          font-weight: 300;
+        }
       }
       padding-left: 9px;
       padding-bottom: 5px;
@@ -690,6 +709,12 @@ pre {
   h2 {
     font-size: 3.25em;
     margin-bottom: 1em;
+  }
+  strong {
+    font-weight: 600;
+  }
+  hr {
+    margin-bottom: 40px;
   }
   .faq-list {
     margin-left: 28px;
@@ -724,7 +749,7 @@ pre {
       }
     }
     .version-rule {
-      background-image: -webkit-linear-gradient(left, rgba(255,255,255,0.2), rgba(255,255,255,0));
+      @include background-image(linear-gradient(to right, rgba(255,255,255,0.2), rgba(255,255,255,0)));
       height: 1.5px;
       width: 100%;
       left: 0;
@@ -738,7 +763,7 @@ pre {
       list-style-image: url('./img/bullet_small.png');
       li {
         padding-left: 14px;
-        padding-bottom: 20px;
+        padding-bottom: 10px;
         &:before {
           font-size: 1.65em;
         }
