@@ -1,0 +1,50 @@
+env:
+  es6: true
+  node: true
+extends: 'eslint:recommended'
+parserOptions:
+  sourceType: module
+rules:
+  linebreak-style:
+    - warn
+    - unix
+  quotes:
+    - warn
+    - single
+  semi:
+    - warn
+    - always
+  brace-style:
+    - warn
+    - 1tbs
+    - allowSingleLine: true
+  camelcase: 2
+  func-call-spacing:
+    - warn
+    - never
+  func-names: 0
+  block-spacing:
+    - warn
+    - always
+  semi-spacing:
+    - warn
+    - before: false
+      after: true
+  keyword-spacing: ["warn", { "overrides": {
+    "if": { "after": false },
+    "for": { "after": false },
+    "while": { "after": false }}}]
+  no-unused-vars:
+    - error
+    - vars: all
+      args: all
+  no-undef: 0
+  eqeqeq:
+    - error
+    - always
+  radix:
+    - error
+    - always
+  default-case: 2
+  callback-return: 2
+  no-path-concat: 2
