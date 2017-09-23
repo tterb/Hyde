@@ -94,7 +94,7 @@ label {
   position: absolute;
   top: -2px;
   right: 0.25%;
-  z-index: 99999;
+  z-index: 999;
   .winButton {
     display: inline-block;
     background: transparent;
@@ -127,9 +127,9 @@ label {
 
 #appMenu {
   position: fixed;
-  // background: -webkit-linear-gradient(top, #222 0%, #2a2a2a 40%, #121212 150%), -webkit-linear-gradient(bottom, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.25) 200%);
-  //  background-blend-mode: multiply;
-  background-image: -webkit-linear-gradient(top, #323232 1%, #2d2c2b 25%, #252423, #1a1918);
+  background: -webkit-linear-gradient(top, #222 0%, #2a2a2a 40%, #121212 150%), -webkit-linear-gradient(bottom, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.25) 200%);
+   background-blend-mode: multiply;
+  // background-image: -webkit-linear-gradient(top, #323232 1%, #2d2c2b 25%, #252423, #1a1918);
   color: $text-color !important;
   font-size: 11px;
   width: 100%;
@@ -198,13 +198,14 @@ label {
       font-size: 11px;
       min-width: 178px;
       top: 90%;
-      box-shadow: 1px 3px 7px rgba(0,0,0,0.5);
+      box-shadow: 1px 3px 10px rgba(0,0,0,0.5);
       border-top-left-radius: 0;
       border-top-right-radius: 6px;
       border-bottom-left-radius: 6px;
       border-bottom-right-radius: 6px;
       margin: 0;
       padding: 3px 0;
+      cursor: pointer;
       z-index: 9;
       li {
         height: 24px;
@@ -259,7 +260,6 @@ label {
         border-top: 1px solid rgba(0,0,0,0.125);
         margin: 1.5px auto;
         padding: 0;
-        cursor: default;
         &:hover {
           background: none;
           border-radius: 0;
@@ -398,9 +398,10 @@ label {
 
 .bottom-bar {
   position: absolute;
-  // background: -webkit-linear-gradient(top, #222 0%, #272727 30%, #121212 150%), -webkit-linear-gradient(bottom, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.25) 200%);
-  // background-blend-mode: multiply;
-  background: -webkit-linear-gradient(top, #2b2b2b 5%, #2b2b2b 35%, #222120, #1d1d1d 98%), -webkit-radial-gradient(top, circle cover, #242223 20%, #323031 50%, #242223 80%);
+  background: -webkit-linear-gradient(top, #282628 0%, #2b2a2b 30%, #191919 150%), -webkit-linear-gradient(bottom, rgba(255, 255, 255, 0.4) 0%, rgba(0, 0, 0, 0.025) 200%);
+  // background: -webkit-linear-gradient(top, #222 0%, #292929 30%, #121212 150%), -webkit-linear-gradient(bottom, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.025) 200%);
+  background-blend-mode: multiply;
+  // background: -webkit-linear-gradient(top, #2b2b2b 5%, #2b2b2b 35%, #222120, #1d1d1d 98%), -webkit-radial-gradient(top, circle cover, #242223 20%, #323031 50%, #242223 80%);
   color: #b6b5b4;
   font-size: 11px;
   height: 28px;
@@ -408,7 +409,7 @@ label {
   bottom: 0;
   left: 0;
   border: 1px outset #2d2c2c;
-  box-shadow: 0 -1px 28px rgba(0,0,0,0.2);
+  box-shadow: 0 -1px 20px rgba(0,0,0,0.25);
   padding: 2px;
   z-index: 99999;
   resize: both;
@@ -746,9 +747,11 @@ input[type="checkbox"] {
   display: block;
   position: absolute;
   // background-image: -webkit-linear-gradient(#313031 10%, #2a2a2a);
-  background-image: -webkit-radial-gradient(top, circle cover, #343233 25%, #292728 80%);
+  background-image: -webkit-radial-gradient(top, circle cover, #323032 22%, #2a292d 80%);
+  // background-image: -webkit-radial-gradient(top, circle cover, #343233 25%, #292728 80%);
+  background-blend-mode: multiply;
   color: $text-color;
-  height: 95.5%;
+  height: -webkit-calc(100% - 22px);
   width: 310px;
   top: 0;
   left: -330px;
@@ -766,17 +769,17 @@ input[type="checkbox"] {
   .title {
     display: none;
     position: fixed;
-    background: -webkit-linear-gradient(top, #313031 73%, transparent);
-    top: 0;
+    background: -webkit-linear-gradient(top, #333034 73%, transparent);
+    top: 2px;
     width: 290px;
     padding: 5px 0 10px;
     vertical-align: middle;
     z-index: 99999999999;
     img {
       display: inline-block;
-      height: 34px;
+      height: 36px;
       width: auto;
-      margin: -15px 10px 13px 2px;
+      margin: -15px 12px 13px 2px;
     }
     h2 {
       display: inline-block;
@@ -788,14 +791,14 @@ input[type="checkbox"] {
   }
   .settings-section {
     position: relative;
-    top: 70px;
-    padding: 4px 0 6px 16px;
+    top: 74px;
+    padding: 4px 0 6px 20px;
     h3 {
       color: rgba(255,255,255,0.85);
       font-size: 32px;
       font-weight: 200;
       margin-top: 4px;
-      margin-left: -3px;
+      margin-left: -4px;
       margin-bottom: 8px;
     }
     ul {
@@ -907,7 +910,7 @@ input[type="checkbox"] {
       border: 1px inset #403e3f;
       border-radius: 6px;
       box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.35), 0px 0.25px 4px rgba(255, 255, 255, 0.15);
-      padding: 1px 0 0 8px;
+      padding: 0 0 0 8px;
       z-index: -99;
     }
   }
@@ -1053,13 +1056,13 @@ input[type="checkbox"] {
 #toolbar {
   display:none;
   position: fixed;
-  background-image: -webkit-linear-gradient(top, #343233, #2c2a2b);
+  background-image: -webkit-linear-gradient(top, #343134, #2c2a2c);
   top: 0;
   left: 0;
   width: 50%;
   height: 35px;
   border-bottom: 1px #2a2a2a solid;
-  box-shadow: 0 0 6px rgba(0,0,0,0.75);
+  box-shadow: -2px 0 6px rgba(0,0,0,0.75);
   transition: width 600ms cubic-bezier(0.17, 0.04, 0.03, 0.75);
   z-index: 999;
 }
@@ -1197,7 +1200,7 @@ input[type="checkbox"] {
     margin-bottom: 0;
   }
   input[type="text"] {
-    background: #3a3a3a;
+    background: #3a383c;
     color: rgba(255,255,255,0.6);
     letter-spacing: 0.03em;
     box-shadow: inset 0 0 8px rgba(0,0,0,0.6);
@@ -1205,7 +1208,7 @@ input[type="checkbox"] {
     border-radius: 12px;
     padding: 4px 10px 5px;
     margin-top: 3px;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
   }
 }
 
@@ -1276,6 +1279,7 @@ code {
 
 ::-webkit-scrollbar-thumb {
   background-image: -webkit-linear-gradient(right, #4d4c4b, #252423);
+  // border: 1px solid #3a3938;
   border-radius: 15px;
 }
 
