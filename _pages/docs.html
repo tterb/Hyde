@@ -1,5 +1,5 @@
 ---
-key: 2
+key: 3
 title: Docs
 permalink: /docs
 desc: Documentation for Hyde
@@ -9,14 +9,14 @@ sitemap:
   priority: 0.9
 ---
 
-{% include title.html %}
-<br>
-<div class="document gradient"></div>
-<h1 class="document page-title">Docs</h1>
+<!-- <div class="document gradient"></div> -->
+<!-- <h1 class="document page-title">Docs</h1> -->
 <section id="TOC" class="document-toc">
+  <h1 class="document page-title">Docs</h1>
   <h3>Table of Contents</h3>
   <ul class="toc-list">
     <li><a href="http://JonSn0w.github.io/Hyde/docs#about">About</a></li>
+    <li><a href="http://JonSn0w.github.io/Hyde/docs#install">Install</a></li>
     <li><a href="http://JonSn0w.github.io/Hyde/docs#keybindings">Keybindings</li>
     <li><a href="http://JonSn0w.github.io/Hyde/docs#changelog">Changelog</li>
     <li><a href="http://JonSn0w.github.io/Hyde/docs#contributing">Contributing</li>
@@ -27,10 +27,24 @@ sitemap:
   <p>Hyde is an open-source markdown editor, which utilizes the Electron framework to create a comfortable, cross-platform experience for every type of user. <br>Modularity is at the core of Hyde's interface design, allowing you to cater the UI to what you need. Whether you are a power-user that prefers keyboard shortcuts and a minimalistic interface, a visually-oriented user that prefers the accesibilty of toolbars and menus, or maybe somewhere in between, Hyde is capable of providing you with exactly what you need.</p>
   <hr>
 </section>
+<section id="install" class="document-section">
+  <h2>Install</h2>
+  <p>Though there isn't an installer yet, using Hyde is simple. To use Hyde on any platform, you must first <a href="https://www.npmjs.com/">install npm</a> and download Hyde from the project <a href="https://github.com/JonSn0w/Hyde">repo</a>. Then simply run the following command from within the project directory:
+    <div class="language-shell highlighter-rouge">
+      <pre class="highlight"><code><span class="c"># Clone the repository</span><br><span class="nv">$</span> git clone https://github.com/jonsn0w/hyde<br><br><span class="c"># Navigate to the directory</span><br><span class="nv">$</span> cd hyde<br><br><span class="c"># Install Hyde</span><br><span class="nv">$</span> npm install -g ./</code></pre>
+    </div>
+    Now, <strong>Hyde</strong> can easily be launched from anywhere using the following command:
+    <div class="language-shell highlighter-rouge">
+      <pre class="highlight"><code><span class="nv">$</span> hyde &#60;filename&#62;</code></pre>
+    </div>
+  </p>
+  <hr>
+</section>
 <section id="keybindings" class="document-section">
   <h2>Keyboard Shortcuts</h2>
+  <div class="keybinding-section">
+  <h3>Operations</h3>
   <table id="table-ops" class="document-table">
-    <h3>Operations</h3>
     <thead>
       <tr>
         <th id="table-header">Commands</th>
@@ -84,6 +98,8 @@ sitemap:
       </tr>
     </tbody>
   </table>
+  </div>
+  <div class="keybinding-section right">
   <table id="table-edit" class="document-table">
     <h3>Editing</h3>
     <thead>
@@ -135,6 +151,8 @@ sitemap:
       </tr>
     </tbody>
   </table>
+  </div>
+  <div class="keybinding-section">
   <table id="table-format" class="document-table">
     <h3>Formatting</h3>
     <thead>
@@ -190,6 +208,7 @@ sitemap:
       </tr>
     </tbody>
   </table>
+  </div>
   <hr>
 </section>
 <section id="changelog" class="document-section">

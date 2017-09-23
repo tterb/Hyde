@@ -1,5 +1,5 @@
 ---
-key: 3
+key: 2
 title: FAQ
 permalink: /faq
 desc: Frequently Asked Questions
@@ -9,19 +9,30 @@ sitemap:
   priority: 0.9
 ---
 
-{% include title.html %}
-<br>
-<div class="document gradient"></div>
-<h1 class="document page-title">FAQ</h1>
+<!-- <div class="document gradient"></div>
+<h1 class="document page-title">FAQ</h1> -->
 <section id="FAQ" class="document-section">
+  <h1 class="document page-title">FAQ</h1>
   <ul class="faq-list">
     <li class="faq-question">How do I use Hyde?</li>
-    <li class="faq-answer">Though there isn't an installer yet, using Hyde is simple. To use Hyde on any platform, you must first <a href="">install npm</a> and download Hyde from the project <a href="https://github.com/JonSn0w/Hyde">repo</a>. Then simply run the following command from within the project directory: <pre>$ npm install &amp;&amp; npm start</pre></li>
-
+    <li class="faq-answer">Though there isn't an installer yet, using Hyde is simple. To use Hyde on any platform, you must first <a href="https://www.npmjs.com/">install npm</a> and download Hyde from the project <a href="https://github.com/JonSn0w/Hyde" target="_blank">repo</a>. Then simply run the following command from within the project directory:
+    <div class="language-shell highlighter-rouge">
+    <pre class="highlight"><code><span class="c"># Clone the repository</span><br><span class="nv">$</span> git clone https://github.com/jonsn0w/hyde<br><br><span class="c"># Navigate to the directory</span><br><span class="nv">$</span> cd hyde<br><br><span class="c"># Install Hyde</span><br><span class="nv">$</span> npm install -g ./</code></pre>
+    </div>
+    Now, <strong>Hyde</strong> can easily be launched from anywhere using the following command:
+    <div class="language-shell highlighter-rouge">
+      <pre class="highlight"><code><span class="nv">$</span> hyde &#60;filename&#62;</code></pre>
+    </div>
+    </li>
+    <hr>
     <li class="faq-question">What is the keyboard shortcut to (...)?</li>
     <li class="faq-answer">All of Hyde's keyboard shortcuts can be found <a href="http://JonSn0w.github.io/Hyde/docs#keybindings">here</a>.</li>
+    <hr>
     <li id="frontmatter" class="faq-question">How do I set a YAML-frontmatter template for Jekyll blog posts?</li>
-    <li class="faq-answer">To set a frontmatter template for Jekyll posts, create a <i>.yml</i> file with only the frontmatter used in each of your Jekyll blog posts. If you'd prefer you can also use the default template provided <a href="https://gist.github.com/JonSn0w/c76a3567342f2e230acc6d0b1b287e2d">here</a>. Once this file has been created you can set this as your frontmatter template by opening Hyde's settings menu (<kbd>ctrl + ,</kbd>) and pasting the path to your created file into the textbox labeled <i>Frontmatter Template</i>.</li>
+    <li class="faq-answer">To set a frontmatter template for Jekyll posts, create a <i>.yml</i> file with only the frontmatter used in your Jekyll blog posts or you can also use the default template provided <a href="https://gist.github.com/JonSn0w/c76a3567342f2e230acc6d0b1b287e2d target="_blank"">here</a>. Once this file has been created you can set this as your frontmatter template by opening Hyde's settings menu (<kbd>ctrl + ,</kbd>), selecting the <i>Frontmatter Template</i> text-field and navigating to your created file.</li>
+    <hr>
+    <li class="faq-question">Can I submit feature requests?</li>
+    <li class="faq-answer">Of course, the goal of <strong>Hyde</strong> is to create the most accessible markdown editor possible, and getting feedback from users is a huge part of that. I encourage you to submit feature requests <a href="https://github.com/JonSn0w/Hyde/issues/new" target="_blank">here</a>, where you can discuss your suggested feature with the developers.</li>
+    <hr>
   </ul>
-  <hr>
 </section>
