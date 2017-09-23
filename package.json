@@ -57,6 +57,7 @@
     "electron-packager": "^9.1.0",
     "electron-rebuild": "^1.5.11",
     "electron-winstaller": "^2.6.3",
+    "eslint": "^4.7.2",
     "gulp": "^3.9.1",
     "gulp-sass": "^3.1.0",
     "minimist": "^1.2.0"
@@ -73,7 +74,6 @@
     "electron-settings": "^3.1.1",
     "electron-window": "^0.8.1",
     "electron-window-state": "^4.1.1",
-    "isbinaryfile": "^3.0.2",
     "jquery": "^3.1.0",
     "parse-filepath": "1.0.1",
     "parse-katex": "^0.3.0",
