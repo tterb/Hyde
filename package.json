@@ -18,9 +18,9 @@
   "scripts": {
     "start": "electron main.js",
     "build": "rm -rf release && gulp build",
-    "package-mac": "electron-packager . --overwrite --asar=true --platform=darwin --arch=x64 --icon=img/icon/icns/icon.icns --prune=true --out=release",
-    "package-win": "electron-packager . --overwrite --asar=true --platform=win32 --arch=ia32 --icon=img/icon/ico/icon.ico --prune=true --out=release --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Hyde\"",
-    "package-linux": "electron-packager . --overwrite --asar=true --platform=linux --arch=x64 --icon=img/icon/png/1024x1024.png --prune=true --out=release",
+    "package-mac": "electron-packager . --overwrite --asar --platform=darwin --arch=x64 --icon=img/icon/icns/icon.icns --prune=true --out=release",
+    "package-win": "electron-packager . --overwrite --asar --platform=win32 --arch=ia32 --icon=img/icon/ico/icon.ico --prune=true --out=release --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Hyde\"",
+    "package-linux": "electron-packager . --overwrite --asar --platform=linux --arch=x64 --icon=img/icon/png/1024x1024.png --prune=true --out=release",
     "create-installer-mac": "electron-installer-dmg ./release/Hyde-darwin-x64/Hyde.app hyde --out=release --overwrite --icon=img/icon/icns/icon.icns",
     "create-installer-win": "node installers/windows/createinstaller.js"
   },
