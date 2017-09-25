@@ -36,6 +36,8 @@ var conf = {
 	showTrailingSpace: settings.get('showTrailingSpace'),
 	autoCloseBrackets: settings.get('matchBrackets'),
 	autoCloseTags: settings.get('matchBrackets'),
+  matchBrackets: settings.get('matchBrackets'),
+  matchTags: settings.get('matchBrackets'),
 	extraKeys: {
 		Enter: 'newlineAndIndentContinueMarkdownList'
 	}
@@ -340,9 +342,12 @@ $('.spinner .btn:last-of-type').on('click', function() {
 	settings.set(btn.attr('id').split('-')[0], input.val());
 });
 
+var i = 0;
 $('#leftAlign, #centerAlign, #rightAlign').on('click', function() {
+	var btn = $(this);
 	$('.on').removeClass('on');
-	$(this).addClass('on');
+	btn.addClass('on');
+	i++;
 });
 
 // Word count
