@@ -41,6 +41,5 @@
 .cm-s-yeti span.cm-em { color: #45a5db; }
 .cm-s-yeti span.cm-strikethrough { color: #d5657b; }
 .cm-s-yeti .CodeMirror-activeline-background { background: #E7E4E0; }
-.cm-s-yeti .CodeMirror-matchingbracket { text-decoration: underline; }
 
 #previewPanel { box-shadow: -4px 0 16px rgba(0,0,0,0.1); }

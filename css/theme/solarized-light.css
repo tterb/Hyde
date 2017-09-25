@@ -66,8 +66,6 @@ http://ethanschoonover.com/solarized-light/img/solarized-light-palette.png
 .cm-s-solarized-light .cm-qualifier { color: #b58900; }
 .cm-s-solarized-light .cm-builtin { color: #d33682; }
 .cm-s-solarized-light .cm-bracket { color: #cb4b16; }
-.cm-s-solarized-light .CodeMirror-matchingbracket { color: #859900; }
-.cm-s-solarized-light .CodeMirror-nonmatchingbracket { color: #dc322f; }
 .cm-s-solarized-light .cm-tag { color: #6c71c4; }
 .cm-s-solarized-light .cm-attribute { color: #2aa198; }
 /*.cm-s-solarized-light .cm-hr {

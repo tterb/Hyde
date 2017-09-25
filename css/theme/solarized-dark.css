@@ -66,8 +66,6 @@ http://ethanschoonover.com/solarized-dark/img/solarized-dark-palette.png
 .cm-s-solarized-dark .cm-qualifier { color: #b58900; }
 .cm-s-solarized-dark .cm-builtin { color: #d33682; }
 .cm-s-solarized-dark .cm-bracket { color: #cb4b16; }
-.cm-s-solarized-dark .CodeMirror-matchingbracket { color: #859900; }
-.cm-s-solarized-dark .CodeMirror-nonmatchingbracket { color: #dc322f; }
 .cm-s-solarized-dark .cm-tag { color: #93a1a1; }
 .cm-s-solarized-dark .cm-attribute { color: #2aa198; }
 .cm-s-solarized-dark .cm-hr {

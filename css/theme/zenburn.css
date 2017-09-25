@@ -35,8 +35,6 @@
 .cm-s-zenburn span.cm-strong { color: #93e0e3; }
 .cm-s-zenburn span.cm-em.cm-strong { color: #bfebbf; }
 .cm-s-zenburn span.cm-strikethrough { color: #f0dfaf; }
-.cm-s-zenburn span.CodeMirror-matchingbracket { box-sizing: border-box; background: transparent; border-bottom: 1px solid; }
-.cm-s-zenburn span.CodeMirror-nonmatchingbracket { border-bottom: 1px solid; background: none; }
 .cm-s-zenburn .CodeMirror-activeline { background: #000000; }
 .cm-s-zenburn .CodeMirror-activeline-background { background: #000000; }
 .cm-s-zenburn div.CodeMirror-selected { background: #545454; }

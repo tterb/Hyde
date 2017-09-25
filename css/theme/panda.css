@@ -42,11 +42,6 @@
 .cm-s-panda .cm-strong { color: #b084eb; }
 .cm-s-panda .cm-strikethrough { color: #ff2c6d; }
 
-.cm-s-panda .CodeMirror-matchingbracket {
-    border-bottom: 1px dotted #09E9C8;
-    padding-bottom: 2px;
-    color: #e6e6e6;
-}
 .cm-s-panda .CodeMirror-gutters {
     background: #292a2b;
     border-right-color: rgba(255, 255, 255, 0.1);

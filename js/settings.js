@@ -118,6 +118,8 @@ function adaptTheme(color, luminosity) {
 		}).mouseout(function() {
 			$(this).css('color', 'rgba(50, 50, 50, 0.1)');
 		});
+    $('.CodeMirror-matchingbracket').css('background', 'rgba(255,255,255,0.2)');
+    $('.CodeMirror-matchingbracket').css('background', 'rgba(255,255,255,0.1)');
 	} else {
 		menuButton.css('color', 'rgba(255, 255, 255, 0.07)');
 		menuButton.mouseover(function() {
@@ -125,6 +127,8 @@ function adaptTheme(color, luminosity) {
 		}).mouseout(function() {
 			$(this).css('color', 'rgba(255, 255, 255, 0.07)');
 		});
+    $('.CodeMirror-matchingbracket').css('background', 'rgba(50,50,50,0.4)');
+    $('.CodeMirror-matchingbracket').css('background', 'rgba(50,50,50,0.2)');
 	}
 }
 
@@ -312,7 +316,7 @@ function setFrontMatterTemplate() {
 		};
 		dialog.showOpenDialog(options, (file) => {
 			if(file === undefined)
-				return notify('You didn\'t select a file', 'error');
+				return notify('You didn\'t select a file', 'warning');
 			fs.readFile(file[0], 'utf-8', (err) => {
 				if(err)
 					notify('An error ocurred while opening the file '+err.message, 'error');

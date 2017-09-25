@@ -26,7 +26,6 @@
 .cm-s-hopscotch span.cm-bracket {color: #d5d3d5;}
 .cm-s-hopscotch span.cm-tag {color: #ed3636;}
 .cm-s-hopscotch span.cm-link {color: #c86d8c; text-decoration: none;}
-.cm-s-hopscotch .CodeMirror-matchingbracket { text-decoration: underline; color: white !important;}
 .cm-s-hopscotch .CodeMirror-activeline-background { background: #302020; }
 
 .cm-s-hopscotch span.cm-header {color: #ed3636;}
