@@ -65,7 +65,7 @@ label {
   left: 0.5%;
   outline: none !important;
   cursor: pointer;
-  z-index: 9999;
+  z-index: 900;
   button {
     display: block;
     font-size: 1.95em;
@@ -94,7 +94,7 @@ label {
   position: absolute;
   top: -2px;
   right: 0.25%;
-  z-index: 999;
+  z-index: 1000;
   .winButton {
     display: inline-block;
     background: transparent;
@@ -141,7 +141,7 @@ label {
   // box-shadow: 0 1px 20px rgba(0,0,0,0.3);
   transition-delay: 3s;
   transition: top 5000ms ease;//cubic-bezier(0.17, 0.04, 0.03, 0.75);
-  z-index: 9999;
+  z-index: 999;
   :focus, :active:focus,.active:focus,
   .focus,:active.focus,.active.focus {
     outline: none !important;
@@ -587,7 +587,7 @@ input[type="checkbox"] {
   background: transparent;
   margin: 0;
   transition: left 500ms cubic-bezier(0.17, 0.04, 0.03, 0.75);
-  z-index: 9999;
+  z-index: 999;
   &.top {
     height: 12px;
     width: 100%;
@@ -762,7 +762,7 @@ input[type="checkbox"] {
   margin-bottom: 30px;
   padding: 12px 12px 30px 16px;
   outline: none !important;
-  z-index: 99999;
+  z-index: 1000;
   &:focus, &.active {
     background: white !important;
   }
@@ -1064,7 +1064,7 @@ input[type="checkbox"] {
   border-bottom: 1px #2a2a2a solid;
   box-shadow: -2px 0 6px rgba(0,0,0,0.75);
   transition: width 600ms cubic-bezier(0.17, 0.04, 0.03, 0.75);
-  z-index: 999;
+  z-index: 950;
 }
 
 .topFade {
