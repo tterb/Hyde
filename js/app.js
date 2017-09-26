@@ -15,18 +15,15 @@ const katex = require('parse-katex');
 const settings = require('electron-settings');
 const storage = require('electron-json-storage');
 const spellChecker = require('codemirror-spell-checker');
+const packageJSON = require(path.join(__dirname, '/package.json'));
+const Color = require('color');
+const os = require('os');
 const highlight = require('showdown-highlight');
-var packageJSON = require(path.join(__dirname, '/package.json'));
-var Color = require('color');
-var os = require('os');
 require('showdown-youtube');
 
-var isFileLoadedInitially = false,
-		currentTheme = settings.get('editorTheme');
-
 getUserSettings();
-
-var conf = {
+let currentTheme = settings.get('editorTheme');
+let conf = {
 	mode: 'yaml-frontmatter',
 	base: 'gfm',
 	viewportMargin: 100000000000,
@@ -66,7 +63,7 @@ if(os.type() === 'Darwin') {
 	$('#settings-section ul li').css('letter-spacing', '0.075em');
 }
 
-var themes = [],
+let themes = [],
 		head = $('head');
 main.getThemes().filter((temp) => {
 	themes.push(temp.value);
@@ -113,8 +110,6 @@ var converter = new showdown.Converter({
 		extensions: ['youtube', highlight]
 });
 
-var renderedMD;
-var markdownTxt;
 window.onload = () => {
 	var markdownPreview = document.getElementById('markdown'),
 			htmlPreview = $('#htmlPreview');
@@ -132,9 +127,9 @@ window.onload = () => {
 		// Convert emoji's
 		markdownText = replaceWithEmojis(markdownText);
 		// Render LaTex
+		var renderedMD;
 		if(settings.get('mathRendering'))
-			markdownText = katex.renderLaTeX(markdownText[1]+markdownText);
-		markdownTxt = markdownText;
+			renderedMD = markdownText[0]+katex.renderLaTeX(markdownText);
 		// Markdown -> Preview
 		renderedMD = converter.makeHtml(markdownText);
 		markdownPreview.innerHTML = renderedMD;
@@ -214,28 +209,28 @@ $('#settings-menu').focus(function() {
 
 
 /**************************
-	* Synchronized scrolling *
-	**************************/
+ * Synchronized scrolling *
+ **************************/
 
-var $prev = $('#previewPanel'),
-		$markdown = $('#markdown'),
-		$syncScroll = $('#syncScrollToggle'),
+var preview = $('#previewPanel'),
+		markdown = $('#markdown'),
+		syncScroll = $('#syncScrollToggle'),
 		isSynced = settings.get('syncScroll');
 
  // Retaining state in boolean will be more CPU friendly rather than selecting on each event.
 var toggleSyncScroll = () => {
 	if(settings.get('syncScroll')) {
-		$syncScroll.attr('class', 'fa fa-unlink');
+		syncScroll.attr('class', 'fa fa-unlink');
 		isSynced = false;
 		$(window).trigger('resize');
 	} else {
-		$syncScroll.attr('class', 'fa fa-link');
+		syncScroll.attr('class', 'fa fa-link');
 		isSynced = true;
 		$(window).trigger('resize');
 	}
 	settings.set('syncScroll', isSynced);
 };
-$syncScroll.on('change', () => { toggleSyncScroll(); });
+syncScroll.on('change', () => { toggleSyncScroll(); });
 
 // Scrollable height.
 var codeScrollable = () => {
@@ -243,7 +238,7 @@ var codeScrollable = () => {
 	return info.height - info.clientHeight;
 };
 var prevScrollable = () => {
-	return $markdown.height() - $prev.height();
+	return markdown.height() - preview.height();
 };
 // Temporarily swaps out a scroll handler.
 var muteScroll = (obj, listener) => {
@@ -259,8 +254,8 @@ var codeScroll = () => {
 	var scrollable = codeScrollable();
 	if(scrollable > 0 && isSynced) {
 		var percent = cm.getScrollInfo().top / scrollable;
-		muteScroll($prev, prevScroll);
-		$prev.scrollTop(percent * prevScrollable());
+		muteScroll(preview, prevScroll);
+		preview.scrollTop(percent * prevScrollable());
 	}
 };
 cm.on('scroll', codeScroll);
@@ -274,7 +269,7 @@ var prevScroll = () => {
 		cm.scrollTo(percent * codeScrollable());
 	}
 };
-$prev.on('scroll', prevScroll);
+preview.on('scroll', prevScroll);
 
 
 function openNewFile(target) {
@@ -328,6 +323,8 @@ $('.spinner .btn:first-of-type').on('click', function() {
 		btn.next('disabled', true);
 	}
 	settings.set(btn.attr('id').split('-')[0], input.val());
+  $('#markdown').css('font-size', settings.get('previewFontSize'));
+  $('#textPanel > div').css('font-size', settings.get('editorFontSize'));
 });
 
 $('.spinner .btn:last-of-type').on('click', function() {
@@ -340,9 +337,11 @@ $('.spinner .btn:last-of-type').on('click', function() {
 		btn.prev('disabled', true);
 	}
 	settings.set(btn.attr('id').split('-')[0], input.val());
+	$('#markdown').css('font-size', settings.get('previewFontSize'));
+	$('#textPanel > div').css('font-size', settings.get('editorFontSize'));
+	// $('#markdown').css('font-size', input.val()+'px');
 });
 
-var i = 0;
 $('#leftAlign, #centerAlign, #rightAlign').on('click', function() {
 	var btn = $(this);
 	$('.on').removeClass('on');

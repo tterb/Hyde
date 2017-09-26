@@ -59,6 +59,8 @@ function applySettings(opt) {
 	} else if(type === 'text') {
 		input.val(settings.get(opt.name));
 	}
+	$('#textPanel > div').css('font-size', settings.get('editorFontSize')+'px');
+  $('#markdown').css('font-size', settings.get('previewFontSize')+'px');
 	$('#editorFontSize-input').val(settings.get('editorFontSize'));
 	$('#previewFontSize-input').val(settings.get('previewFontSize'));
 }
@@ -85,11 +87,13 @@ var formatHead = () => {
 			menu.css('box-shadow', 'none');
 			leftFade.css('top', '8px');
 			textPanel.css('paddingTop', '35px');
+			preview.css('paddingTop', '40px');
 		} else {
 			textPanel.css('paddingTop', '0px');
 			menu.css('box-shadow', '0 1px 10px rgba(0,0,0,0.3)');
 			leftFade.css('top', '0');
 			textPanel.css('paddingTop', '0px');
+			preview.css('paddingTop', '35px');
 		}
 	} else {
 		toolbar.css({ top: '0' });
@@ -99,11 +103,13 @@ var formatHead = () => {
 			textPanel.css('paddingTop', '7px');
 			dragArea.css('width', '-webkit-calc(50% - 50px)');
 			editor.css('paddingTop', '7px');
+			preview.css('paddingTop', '35px');
 		} else {
 			menuToggle.show();
 			textPanel.css('paddingTop', '0px');
 			dragArea.css({ 'width': 'calc(100% - 117px)' });
 			editor.css('paddingTop', '0px');
+			preview.css('paddingTop', '35px');
 		}
 	}
 };
@@ -340,21 +346,6 @@ function manageWindowSize() {
 	settings.set('windowWidth', parseInt($(window).width(),10));
 	settings.set('windowHeight', parseInt($(window).height(),10));
 }
-
-// function getStates() {
-// 	var str = '';
-// 	$('.switch__input').each(function() {
-// 		var val = $(this).is(':checked'),
-// 				name = $(this).attr('setting');
-// 		str += name+': '+val+'\n';
-// 	});
-// 	str += 'changes: [ ';
-// 	changes.forEach(function(temp) {
-// 		str += temp.attr('setting')+', ';
-// 	});
-// 	str += ']';
-// 	return str;
-// }
 
 // Handle settings-menu changes
 $('#editorFontSize-input, #editorFontSize-up, #editorFontSize-down').bind('keyup mouseup', function() {
