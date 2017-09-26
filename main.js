@@ -39,11 +39,23 @@ const localShortcut = require('electron-localshortcut');
 const windowStateManager = require('electron-window-state');
 const packageJSON = require(__dirname + '/package.json');
 const mainPage = (`file://${__dirname}/index.html`);
-const yargs = require('yargs')
-const args = yargs(process.argv)
-    .alias('d', 'dev')
-    .argv
+// const yargs = require('yargs');
+const version = app.getVersion();
+const args = require('yargs')
+    .usage('Hyde v'+version+'\n\n Usage: hyde [options] <filename>\n\n If a filename isn\'t specified, the application will open with the most recently opened file. Additionally, if the specified file doesn\'t exist, a new file with the given filename will be created at the specified path.')
+    .option('d', {
+      alias: 'dev',
+      describe: 'Open in development mode',
+      type: 'boolean'
+    })
+    .alias('v', 'version')
+    .version('v'+version)
+    .help('h')
+    .alias('h', 'help')
+    .wrap(60)
+    .argv;
 
+// console.log('args.d: '+args.d+'\nargs.dev: '+args.dev);
 // Keep a global reference of the window objects
 var windows = new Set();
 let isQuitting = false;
@@ -86,9 +98,9 @@ process.argv.forEach(function(val, index, array) {
 
 const createWindow = exports.createWindow = (file) => {
   let newWindow = window.createWindow(getConfig());
-  let args = { file: readFile };
+  let argFile = { file: readFile };
   windows.add(newWindow);
-  newWindow.showUrl(path.join(__dirname, 'index.html'), args);
+  newWindow.showUrl(path.join(__dirname, 'index.html'), argFile);
   // newWindow.showUrl(mainPage);
   newWindow.once('ready-to-show', () => { newWindow.show(); });
   // Open the DevTools.
@@ -242,19 +254,18 @@ app.on('ready', function() {
   });
   // Create main BrowserWindow
   mainWindow = window.createWindow(getConfig());
-  let args = { file: readFile };
-  mainWindow.showUrl(path.join(__dirname, 'index.html'), args);
+  let argFile = { file: readFile };
+  mainWindow.showUrl(path.join(__dirname, 'index.html'), argFile);
   // mainWindow.showUrl(path.join(__dirname, 'index.html'));
   windowState.manage(mainWindow);
   windows.add(mainWindow);
   tray.create(mainWindow);
   // Show Dev Tools
-  require('devtron').install();
   if(args.dev) {
-    // require('devtron').install();
+    require('devtron').install();
     mainWindow.webContents.openDevTools();
   }
-  mainWindow.once('ready-to-show', () => {
+  mainWindow.on('did-finish-load', () => {
     mainWindow.show();
   });
   if(keepInTray) {
@@ -328,9 +339,9 @@ const appVersion = exports.appVersion = () => {
   return app.getVersion();
 }
 
-app.on('window-all-closed', function () {
-  if (appIcon) appIcon.destroy()
-})
+// app.on('window-all-closed', function () {
+//   if (appIcon) appIcon.destroy()
+// })
 
 let rightClickPos = null;
 const contextMenu = new Menu();
