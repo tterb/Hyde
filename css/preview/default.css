@@ -1,6 +1,6 @@
 #markdown {
-  color: #2a2a2a;
-  font-family: "Open Sans", "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
+  color: #333;
+  font-family: "Open Sans", "Roboto", "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
   font-size: 13.5;
   letter-spacing: 0.04em;
   line-height: 1.5;
@@ -29,16 +29,16 @@
 }
 #markdown h3 {
   color: #333;
-  font-size: 1.42em;
+  font-size: 1.65em;
   font-weight: 700;
   letter-spacing: 0.01em;
   line-height: 1.3;
-  margin-top: 5px;
+  margin-top: 10px;
   margin-bottom: 15px;
 }
 #markdown h4 {
   color: #333;
-  font-size: 1.25em;
+  font-size: 1.35em;
   font-weight: 700;
   letter-spacing: 0.01em;
   line-height: 1.25;
@@ -85,12 +85,16 @@
   text-decoration: none;
 }
 #markdown hr {
-  border-top: 1px solid #ddd;
+  border-top: 2px solid #ddd;
 }
 #markdown p {
   letter-spacing: 0.0375em;
   line-height: 1.5;
   margin: 0 0 16px;
+}
+#markdown strong {
+  font-size: 105%;
+  font-weight: 700;
 }
 #markdown pre {
   background: #3a393b;
@@ -109,6 +113,16 @@
   letter-spacing: 0.045em;
   border-radius: 10px;
   padding: 2px 4px 3px;
+}
+#markdown code {
+  background: #434244;
+  color: rgba(255,255,255,0.85);
+  font-family: "Source Code Pro","Monaco", "Ubuntu Mono", "Dejavu Sans Mono", "Consolas", monospace !important;
+  font-size: 85%;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  margin: 0 2px;
+  padding: 3px 5px 3px 6px;
 }
 #markdown blockquote {
   display: flex;

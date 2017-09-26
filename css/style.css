@@ -24,7 +24,7 @@ label {
   margin-bottom: 5px; }
 
 #pad {
-  font-family: "Fira Code", "Source Code Pro", "Monaco", "Ubuntu Mono", "Dejavu Sans Mono", "Consolas", monospace;
+  font-family: "Source Code Pro", "Monaco", "Ubuntu Mono", "Dejavu Sans Mono", "Consolas", monospace;
   border: none;
   overflow: auto;
   outline: none;
@@ -651,7 +651,7 @@ input[type="checkbox"] {
   #settings-menu .settings-section {
     position: relative;
     top: 74px;
-    padding: 4px 0 6px 20px; }
+    padding: 2px 0 6px 20px; }
     #settings-menu .settings-section h3 {
       color: rgba(255, 255, 255, 0.85);
       font-size: 32px;
@@ -673,8 +673,7 @@ input[type="checkbox"] {
           position: absolute;
           font-size: 16px;
           left: 45.5%;
-          max-width: 50%;
-          padding-top: 3px; }
+          max-width: 50%; }
           #settings-menu .settings-section ul li .btn-group .filter-option {
             position: relative;
             font-size: 13.5px;
@@ -684,9 +683,9 @@ input[type="checkbox"] {
           #settings-menu .settings-section ul li .btn-group .btn.btn-default {
             background: -webkit-linear-gradient(bottom, #2d2c2d, #3d3c3d);
             color: rgba(255, 255, 255, 0.75);
-            top: 1px;
-            left: -6px;
-            height: 31px;
+            top: 3px;
+            left: -4px;
+            height: 29px;
             letter-spacing: 0.04em;
             border: 1px outset #3c3c3c;
             box-shadow: 0.5px 0.75px 4px rgba(0, 0, 0, 0.2);
@@ -741,7 +740,7 @@ input[type="checkbox"] {
     width: 25% !important;
     vertical-align: middle; }
     #settings-menu .input-group.spinner .form-control {
-      background: #3a3839;
+      background: #3c393a;
       color: rgba(255, 255, 255, 0.7);
       font-weight: 300;
       left: 0;
@@ -749,7 +748,7 @@ input[type="checkbox"] {
       border: 1px inset #403e3f;
       border-radius: 6px;
       box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.35), 0px 0.25px 4px rgba(255, 255, 255, 0.15);
-      padding: 0 0 0 8px;
+      padding: 0 0 0 7px;
       z-index: -99; }
   #settings-menu .input-group-btn-vertical {
     position: relative;
@@ -889,7 +888,7 @@ input[type="checkbox"] {
   z-index: 100; }
 
 #textPanel {
-  font-family: "Fira Code", "Source Code Pro", "Monaco", "Ubuntu Mono", "Dejavu Sans Mono", "Consolas", monospace;
+  font-family: "Source Code Pro", "Monaco", "Ubuntu Mono", "Dejavu Sans Mono", "Consolas", monospace;
   height: 100%;
   width: 100%;
   padding: 0;
@@ -992,7 +991,7 @@ input[type="checkbox"] {
     line-height: 2.1;
     margin-bottom: 0; }
   .form-group input[type="text"] {
-    background: #3a383c;
+    background: #3c393a;
     color: rgba(255, 255, 255, 0.6);
     letter-spacing: 0.03em;
     box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.6);
@@ -1035,18 +1034,6 @@ input[type="checkbox"] {
     width: 5%;
     height: auto;
     text-shadow: 4px 0 1px rgba(0, 0, 0, 0.6); }
-
-pre {
-  background: #454540;
-  color: #eee;
-  border-radius: 10px; }
-
-code {
-  font-family: "Fira Code", "Source Code Pro", "Monaco", "Ubuntu Mono", "Dejavu Sans Mono", "Consolas", monospace !important;
-  background: #515151;
-  color: rgba(255, 255, 255, 0.75);
-  white-space: nowrap;
-  letter-spacing: 0.05em; }
 
 ::-webkit-scrollbar {
   width: 8px; }
