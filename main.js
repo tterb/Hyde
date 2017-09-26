@@ -30,7 +30,6 @@ const {Menu, MenuItem} = require('electron');
 const mod = require('./package.json');
 const settings = require('./config');
 const tray = require('./tray');
-const func = require('./js/functions');
 const menuTemplate = require('./js/menu');
 const keepInTray = settings.get('keepInTray');
 const fs = require('fs');
@@ -51,21 +50,20 @@ let isQuitting = false;
 let windowState, mainWindow;
 
 // Allows render process to access active windows
-const getWindows = exports.getWindows = () => {
-  return windows;
-}
+const getWindows = exports.getWindows = () => windows;
+const lshortcuts = exports.lshortcuts = () => localShortcut;
 
 function getConfig() {
   var conf = {
-    width: windowState.width,
-    height: windowState.height,
-    x: windowState.x,
-    y: windowState.y,
-    show: false,
-    frame: false,
-    autoHideMenuBar: true,
-    darkTheme: true,
-    transparent: false
+      width: windowState.width,
+      height: windowState.height,
+      x: windowState.x,
+      y: windowState.y,
+      show: false,
+      frame: false,
+      autoHideMenuBar: true,
+      darkTheme: true,
+      transparent: false
   }
   if (process.platform === 'darwin') {
     conf.titleBarStyle = 'hidden';
@@ -102,7 +100,7 @@ const createWindow = exports.createWindow = (file) => {
   });
 
   // Open anchor links in browser
-  newWindow.webContents.on('will-navigate', function(e, url) {
+  newWindow.webContents.on('will-navigate', (e, url) => {
     e.preventDefault();
     shell.openExternal(url);
   });
@@ -124,33 +122,33 @@ ipc.on('export-to-pdf', (event, pdfPath) => {
 
 const getThemes = exports.getThemes = () => {
   var themes = [
-    {'name': 'Base16 Dark', 'value': 'base16-dark'},
-    {'name': 'Base16 Light', 'value': 'base16-light'},
-    {'name': 'Dracula', 'value': 'dracula'},
-    {'name': 'Duotone Dark', 'value': 'duotone-dark'},
-    {'name': 'Eclipse', 'value': 'eclipse'},
-    {'name': 'Hopscotch', 'value': 'hopscotch'},
-    {'name': 'Itg Flat', 'value': 'itg-flat'},
-    {'name': 'Material', 'value': 'material'},
-    {'name': 'Monokai', 'value': 'monokai'},
-    {'name': 'Neo', 'value': 'neo'},
-    {'name': 'Oceanic', 'value': 'oceanic'},
-    {'name': 'One Dark', 'value': 'one-dark'},
-    {'name': 'Panda', 'value': 'panda'},
-    {'name': 'Railscasts', 'value': 'railscasts'},
-    {'name': 'Seti', 'value': 'seti'},
-    {'name': 'Solarized Dark', 'value': 'solarized-dark'},
-    {'name': 'Solarized Light', 'value': 'solarized-light'},
-    {'name': 'Tomorrow Night', 'value': 'tomorrow-night'},
-    {'name': 'Yeti', 'value': 'yeti'},
-    {'name': 'Zenburn', 'value': 'zenburn'}
+      {'name': 'Base16 Dark', 'value': 'base16-dark'},
+      {'name': 'Base16 Light', 'value': 'base16-light'},
+      {'name': 'Dracula', 'value': 'dracula'},
+      {'name': 'Duotone Dark', 'value': 'duotone-dark'},
+      {'name': 'Eclipse', 'value': 'eclipse'},
+      {'name': 'Hopscotch', 'value': 'hopscotch'},
+      {'name': 'Itg Flat', 'value': 'itg-flat'},
+      {'name': 'Material', 'value': 'material'},
+      {'name': 'Monokai', 'value': 'monokai'},
+      {'name': 'Neo', 'value': 'neo'},
+      {'name': 'Oceanic', 'value': 'oceanic'},
+      {'name': 'One Dark', 'value': 'one-dark'},
+      {'name': 'Panda', 'value': 'panda'},
+      {'name': 'Railscasts', 'value': 'railscasts'},
+      {'name': 'Seti', 'value': 'seti'},
+      {'name': 'Solarized Dark', 'value': 'solarized-dark'},
+      {'name': 'Solarized Light', 'value': 'solarized-light'},
+      {'name': 'Tomorrow Night', 'value': 'tomorrow-night'},
+      {'name': 'Yeti', 'value': 'yeti'},
+      {'name': 'Zenburn', 'value': 'zenburn'}
   ];
   return themes;
 }
 
 function menuThemes() {
-  var themeFiles = fs.readdirSync(path.join(__dirname, '/css/theme')),
-    themes = [];
+  var themes = [],
+      themeFiles = fs.readdirSync(path.join(__dirname, '/css/theme'));
   getThemes().forEach((str) => {
     var theme = { label: str.name, click: () => {
       var focusedWindow = BrowserWindow.getFocusedWindow();
@@ -201,32 +199,36 @@ function sendShortcut(cmd) {
 }
 
 // Register local keyboard shortcuts
-localShortcut.register('CmdOrCtrl+Shift+a', () => { sendShortcut('ctrl+shift+a'); });
-localShortcut.register('CmdOrCtrl+b', () => { sendShortcut('ctrl+b'); });
-localShortcut.register('CmdOrCtrl+d', () => { sendShortcut('ctrl+d'); });
-localShortcut.register('CmdOrCtrl+e', () => { sendShortcut('ctrl+e'); });
-localShortcut.register('CmdOrCtrl+i', () => { sendShortcut('ctrl+i'); });
-localShortcut.register('CmdOrCtrl+-', () => { sendShortcut('ctrl+-'); });
-localShortcut.register('CmdOrCtrl+Shift+-', () => { sendShortcut('ctrl+shift+-'); });
-localShortcut.register('CmdOrCtrl+/', () => { sendShortcut('ctrl+/'); });
-localShortcut.register('CmdOrCtrl+l', () => { sendShortcut('ctrl+l'); });
-localShortcut.register('CmdOrCtrl+f', () => { sendShortcut('ctrl+f'); });
-localShortcut.register('CmdOrCtrl+Shift+f', () => { sendShortcut('ctrl+shift+f'); });
-localShortcut.register('CmdOrCtrl+h', () => { sendShortcut('ctrl+h'); });
-localShortcut.register('CmdOrCtrl+k', () => { sendShortcut('ctrl+k'); });
+// var shortcuts = registerShortcuts();
+localShortcut.register('CmdOrCtrl+Shift+a', () => { sendShortcut('auto-indent'); });
+localShortcut.register('CmdOrCtrl+b', () => { sendShortcut('insertBold'); });
+localShortcut.register('CmdOrCtrl+d', () => { sendShortcut('select-word'); });
+localShortcut.register('CmdOrCtrl+e', () => { sendShortcut('insert-emoji'); });
+localShortcut.register('CmdOrCtrl+f', () => { sendShortcut('search-find'); });
+localShortcut.register('CmdOrCtrl+Shift+f', () => { sendShortcut('search-replace'); });
+localShortcut.register('CmdOrCtrl+h', () => { sendShortcut('insert-heading'); });
+localShortcut.register('CmdOrCtrl+i', () => { sendShortcut('inser-italic'); });
+localShortcut.register('CmdOrCtrl+k', () => { sendShortcut('insert-image'); });
+localShortcut.register('CmdOrCtrl+l', () => { sendShortcut('insert-link'); });
+localShortcut.register('CmdOrCtrl+m', () => { sendShortcut('toggle-menu'); });
+localShortcut.register('CmdOrCtrl+n', () => { sendShortcut('file-new'); });
+localShortcut.register('CmdOrCtrl+o', () => { sendShortcut('file-open'); });
+localShortcut.register('CmdOrCtrl+r', () => { sendShortcut('win-reload'); });
+localShortcut.register('CmdOrCtrl+s', () => { sendShortcut('file-save'); });
 localShortcut.register('CmdOrCtrl+t', () => { sendShortcut('table-modal'); });
-localShortcut.register('CmdOrCtrl+r', () => { sendShortcut('ctrl+r'); });
-localShortcut.register('CmdOrCtrl+m', () => { sendShortcut('ctrl+m'); });
-localShortcut.register('CmdOrCtrl+;', () => { sendShortcut('ctrl+;'); });
-localShortcut.register("CmdOrCtrl+'", () => { sendShortcut("ctrl+'"); });
-localShortcut.register('CmdOrCtrl+.', () => { sendShortcut('ctrl+.'); });
-localShortcut.register('CmdOrCtrl+p', () => { sendShortcut('ctrl+p'); });
-localShortcut.register('CmdOrCtrl+,', () => { sendShortcut('ctrl+,'); });
+localShortcut.register('CmdOrCtrl+-', () => { sendShortcut('insert-strikethrough'); });
+localShortcut.register('CmdOrCtrl+Shift+-', () => { sendShortcut('insert-hr'); });
+localShortcut.register('CmdOrCtrl+/', () => { sendShortcut('insert-comment'); });
+localShortcut.register('CmdOrCtrl+;', () => { sendShortcut('insert-code'); });
+localShortcut.register("CmdOrCtrl+'", () => { sendShortcut("insert-blockquote"); });
+localShortcut.register('CmdOrCtrl+.', () => { sendShortcut('toggle-toolbar'); });
+localShortcut.register('CmdOrCtrl+p', () => { sendShortcut('toggle-preview'); });
+localShortcut.register('CmdOrCtrl+s', () => { sendShortcut('file-save'); });
+localShortcut.register('CmdOrCtrl+,', () => { sendShortcut('toggle-settings'); });
 localShortcut.register('CmdOrCtrl+Shift+/', () => { sendShortcut('markdown-modal'); });
-localShortcut.register('CmdOrCtrl+up', () => { sendShortcut('ctrl+up'); });
+localShortcut.register('CmdOrCtrl+up', () => { sendShortcut('page-up'); });
 localShortcut.register('CmdOrCtrl+left', () => { sendShortcut('ctrl+left'); });
 localShortcut.register('CmdOrCtrl+right', () => { sendShortcut('ctrl+right'); });
-localShortcut.register('CmdOrCtrl+down', () => { sendShortcut('ctrl+down'); });
 
 // Called after initialization
 app.on('ready', function() {
@@ -247,8 +249,9 @@ app.on('ready', function() {
   windows.add(mainWindow);
   tray.create(mainWindow);
   // Show Dev Tools
+  require('devtron').install();
   if(args.dev) {
-    require('devtron').install();
+    // require('devtron').install();
     mainWindow.webContents.openDevTools();
   }
   mainWindow.once('ready-to-show', () => {

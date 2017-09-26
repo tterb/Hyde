@@ -1,4 +1,3 @@
-
 const ipcRenderer = electron.ipcRenderer;
 
 // Handling file saving through IPCRenderer
@@ -44,7 +43,7 @@ ipc.on('file-save', function() {
 		if('filename' in data) {
 			var filename = data.filename;
 			if(filename === undefined)
-				return notify("You didn't save the file", "info");
+				return notify("You didn't save the file", "warning");
 			storage.set('markdown-savefile', {'filename' : filename}, function(err) {
 				if(err) notify(err, "error");
 			});
@@ -99,31 +98,31 @@ ipc.on('file-open', () => {
 	});
 });
 
-ipc.on('ctrl+q', () => { closeWindow(remote.BrowserWindow.getFocusedWindow()); });
-ipc.on('ctrl+b', () => { toggleFormat('strong'); });
-ipc.on('ctrl+d', () => { selectWord(); });
-ipc.on('ctrl+i', () => { toggleFormat('em'); });
-ipc.on('ctrl+-', () => { toggleFormat('strikethrough'); });
-ipc.on('ctrl+shift+-', () => { insert('hr'); });
-ipc.on('ctrl+/', () => { toggleComment(); });
-ipc.on('ctrl+h', () => { toggleHeading(); });
-ipc.on('ctrl+l', () => { insert('link'); });
-ipc.on('ctrl+k', () => { insert('image'); });
-ipc.on('ctrl+f', () => { toggleSearch('find'); });
-ipc.on('ctrl+shift+f', () => { toggleSearch('replace'); });
-ipc.on('ctrl+a', () => { cm.execCommand('selectAll') });
-ipc.on('ctrl+shift+a', () => { cm.execCommand('indentAuto'); });
-ipc.on('ctrl+r', () => { reloadWin(); });
-ipc.on('ctrl+m', () => { if(process.platform !== 'darwin') toggleMenu(); });
-ipc.on('ctrl+;', () => { toggleFormat('code'); });
-ipc.on("ctrl+'", () => { toggleBlockquote(); });
-ipc.on('ctrl+.', () => { toggleToolbar(); });
-ipc.on('ctrl+p', () => { togglePreview(); });
-ipc.on('ctrl+,', () => { toggleSettingsMenu(); });
-ipc.on('ctrl+left', () => { cm.execCommand('indentLess'); });
-ipc.on('ctrl+right', () => { cm.execCommand('indentMore'); });
-ipc.on('ctrl+up', () => { cm.execCommand('goDocStart'); });
-ipc.on('ctrl+down', () => { cm.execCommand('goDocEnd'); });
+ipc.on('select-all', () => { cm.execCommand('selectAll') });
+ipc.on('auto-indent', () => { cm.execCommand('indentAuto'); });
+ipc.on('insert-bold', () => { toggleFormat('strong'); });
+ipc.on('select-word', () => { selectWord(); });
+ipc.on('search-find', () => { toggleSearch('find'); });
+ipc.on('search-replace', () => { toggleSearch('replace'); });
+ipc.on('insert-heading', () => { toggleHeading(); });
+ipc.on('insert-italic', () => { toggleFormat('em'); });
+ipc.on('insert-image', () => { insert('image'); });
+ipc.on('insert-link', () => { insert('link'); });
+ipc.on('toggle-menu', () => { if(process.platform !== 'darwin') toggleMenu(); });
+ipc.on('toggle-preview', () => { togglePreview(); });
+ipc.on('win-close', () => { closeWindow(remote.BrowserWindow.getFocusedWindow()); });
+ipc.on('win-reload', () => { reloadWin(); });
+ipc.on('insert-code', () => { toggleFormat('code'); });
+ipc.on('insert-blockquote', () => { toggleBlockquote(); });
+ipc.on('toggle-toolbar', () => { toggleToolbar(); });
+ipc.on('toggle-settings', () => { toggleSettingsMenu(); });
+ipc.on('insert-strikethrough', () => { toggleFormat('strikethrough'); });
+ipc.on('insert-hr', () => { insert('hr'); });
+ipc.on('insert-comment', () => { toggleComment(); });
+ipc.on('page-up', () => { cm.execCommand('goDocStart'); });
+ipc.on('page-down', () => { cm.execCommand('goDocEnd'); });
+ipc.on('indent-less', () => { cm.execCommand('indentLess'); });
+ipc.on('indent-more', () => { cm.execCommand('indentMore'); });
 ipc.on('maximize', () => { toggleMaximize(); })
 ipc.on('file-pdf', () => {
 	// Save as PDF file
