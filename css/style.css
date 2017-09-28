@@ -180,7 +180,7 @@ label {
           font-weight: 300;
           letter-spacing: 0.09em;
           text-decoration: none !important;
-          top: 2.5px;
+          top: 2px;
           padding: 3px 15px 3px 10px; }
           #appMenu .btn-group .dropdown-menu li a:hover, #appMenu .btn-group .dropdown-menu li a:active {
             color: #f0f0f0; }
@@ -193,7 +193,7 @@ label {
           text-align: right;
           right: 10px;
           float: right;
-          margin-top: 1px;
+          margin-top: 2px;
           padding-top: 1.5px; }
         #appMenu .btn-group .dropdown-menu li:hover, #appMenu .btn-group .dropdown-menu li:active {
           background: #343031;
@@ -493,8 +493,10 @@ input[type="checkbox"] {
     width: 12px;
     right: 0; }
   .trigger:hover .trigger-button {
-    visibility: visible !important; }
+    visibility: visible !important;
+    cursor: pointer; }
     .trigger:hover .trigger-button i {
+      width: 20px;
       visibility: visible !important; }
 
 .trigger-button {
@@ -898,7 +900,7 @@ input[type="checkbox"] {
     font-size: 11.5px;
     letter-spacing: 0.0275em;
     line-height: 1.5;
-    padding-top: 0; }
+    padding: 0 0 30px; }
   #textPanel #plainText {
     background: transparent;
     outline: none;
@@ -1047,13 +1049,13 @@ input[type="checkbox"] {
 
 #htmlPreview {
   display: none;
-  font-family: "Open Sans", "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
   background: #f6f5f5;
   color: #2a2a2a;
-  width: 100%;
-  height: 100%;
+  font-family: "Open Sans", "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
   letter-spacing: 0.0375em;
   line-height: 1.5;
+  width: 100%;
+  height: 100%;
   border: none;
   word-wrap: break-word;
   text-rendering: geometricPrecision;

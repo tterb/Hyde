@@ -222,7 +222,7 @@ label {
           font-weight: 300;
           letter-spacing: 0.09em;
           text-decoration: none !important;
-          top: 2.5px;
+          top: 2px;
           padding: 3px 15px 3px 10px;
           &:hover, &:active {
             color: $text-emphasis-color;
@@ -237,7 +237,7 @@ label {
           text-align: right;
           right: 10px;
           float: right;
-          margin-top: 1px;
+          margin-top: 2px;
           padding-top: 1.5px;
         }
         &:hover, &:active {
@@ -608,7 +608,9 @@ input[type="checkbox"] {
   &:hover {
     .trigger-button {
       visibility: visible !important;
+      cursor: pointer;
       i {
+        width: 20px;
         visibility: visible !important;
       }
     }
@@ -1090,7 +1092,7 @@ input[type="checkbox"] {
     font-size: 11.5px;
     letter-spacing: 0.0275em;
     line-height: 1.5;
-    padding-top: 0;
+    padding: 0 0 30px;
   }
   #plainText {
     background: transparent;

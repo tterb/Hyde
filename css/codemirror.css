@@ -10,7 +10,9 @@
 /* PADDING */
 
 .CodeMirror-lines {
-  padding: 5px 0; /* Vertical padding around content */
+  padding: 5px 0 25px; /* Vertical padding around content */
+  min-height: 1px; /* prevents collapsing before first draw */
+  cursor: text;
 }
 .CodeMirror pre {
   font-size: 18px;
@@ -242,10 +244,6 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {
   user-select: none;
 }
 
-.CodeMirror-lines {
-  cursor: text;
-  min-height: 1px; /* prevents collapsing before first draw */
-}
 .CodeMirror pre {
   /* Reset some styles that the rest of the page might have set */
   position: relative;
