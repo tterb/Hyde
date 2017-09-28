@@ -9,10 +9,10 @@
 /* global define:false, require: false, jQuery:false */
 
 (function (factory) {
-	if (typeof define === 'function' && define.amd) {
+	if(typeof define === 'function' && define.amd) {
 		// AMD. Register as an anonymous module.
 		define(['jquery'], factory);
-	} else if (typeof exports === 'object') {
+	} else if(typeof exports === 'object') {
 		// Node/CommonJS
 		factory(require('jquery'));
 	} else {
@@ -24,17 +24,17 @@
 	var defaults = {
 		element: 'body',
 		position: null,
-		type: "info",
+		type: 'info',
 		allow_dismiss: true,
 		allow_duplicates: true,
-		newest_on_top: false,
+		newest_on_top: true,
 		showProgressbar: false,
 		placement: {
-			from: "top",
-			align: "right"
+			from:'top',
+			align: 'right'
 		},
-		offset: 20,
-		spacing: 10,
+		offset: 4,
+		spacing: 5,
 		z_index: 1031,
 		delay: 5000,
 		timer: 1000,
@@ -55,8 +55,8 @@
 
 	String.format = function () {
 		var str = arguments[0];
-		for (var i = 1; i < arguments.length; i++) {
-			str = str.replace(RegExp("\\{" + (i - 1) + "\\}", "gm"), arguments[i]);
+		for(var i = 1; i < arguments.length; i++) {
+			str = str.replace(RegExp('\\{' + (i - 1) + '\\}', 'gm'), arguments[i]);
 		}
 		return str;
 	};
@@ -64,19 +64,19 @@
 	function isDuplicateNotification(notification) {
 		var isDupe = false;
 
-		$('[data-notify="container"]').each(function (i, el) {
+		$('[data-notify="container"]').each(function (el) {
 			var $el = $(el);
 			var title = $el.find('[data-notify="title"]').text().trim();
 			var message = $el.find('[data-notify="message"]').html().trim();
 
 			// The input string might be different than the actual parsed HTML string!
-			// (<br> vs <br /> for example)
+			// (<br> vs <br /> forexample)
 			// So we have to force-parse this as HTML here!
-			var isSameTitle = title === $("<div>" + notification.settings.content.title + "</div>").html().trim();
-			var isSameMsg = message === $("<div>" + notification.settings.content.message + "</div>").html().trim();
+			var isSameTitle = title === $('<div>' + notification.settings.content.title + '</div>').html().trim();
+			var isSameMsg = message === $('<div>' + notification.settings.content.message + '</div>').html().trim();
 			var isSameType = $el.hasClass('alert-' + notification.settings.type);
 
-			if (isSameTitle && isSameMsg && isSameType) {
+			if(isSameTitle && isSameMsg && isSameType) {
 				//we found the dupe. Set the var and stop checking.
 				isDupe = true;
 			}
@@ -101,7 +101,7 @@
 		options = $.extend(true, {}, contentObj, options);
 		this.settings = $.extend(true, {}, defaults, options);
 		this._defaults = defaults;
-		if (this.settings.content.target === "-") {
+		if(this.settings.content.target === '-') {
 			this.settings.content.target = this.settings.url_target;
 		}
 		this.animations = {
@@ -109,15 +109,15 @@
 			end: 'webkitAnimationEnd oanimationend MSAnimationEnd animationend'
 		};
 
-		if (typeof this.settings.offset === 'number') {
+		if(typeof this.settings.offset === 'number') {
 			this.settings.offset = {
 				x: this.settings.offset,
 				y: this.settings.offset
 			};
 		}
 
-		//if duplicate messages are not allowed, then only continue if this new message is not a duplicate of one that it already showing
-		if (this.settings.allow_duplicates || (!this.settings.allow_duplicates && !isDuplicateNotification(this))) {
+		//ifduplicate messages are not allowed, then only continue ifthis new message is not a duplicate of one that it already showing
+		if(this.settings.allow_duplicates || (!this.settings.allow_duplicates && !isDuplicateNotification(this))) {
 			this.init();
 		}
 	}
@@ -127,10 +127,10 @@
 			var self = this;
 
 			this.buildNotify();
-			if (this.settings.content.icon) {
+			if(this.settings.content.icon) {
 				this.setIcon();
 			}
-			if (this.settings.content.url != "#") {
+			if(this.settings.content.url !== '#') {
 				this.styleURL();
 			}
 			this.styleDismiss();
@@ -141,46 +141,46 @@
 				$ele: this.$ele,
 				update: function (command, update) {
 					var commands = {};
-					if (typeof command === "string") {
+					if(typeof command === 'string') {
 						commands[command] = update;
 					} else {
 						commands = command;
 					}
-					for (var cmd in commands) {
+					for(var cmd in commands) {
 						switch (cmd) {
-							case "type":
+							case 'type':
 							this.$ele.removeClass('alert-' + self.settings.type);
 							this.$ele.find('[data-notify="progressbar"] > .progress-bar').removeClass('progress-bar-' + self.settings.type);
 							self.settings.type = commands[cmd];
 							this.$ele.addClass('alert-' + commands[cmd]).find('[data-notify="progressbar"] > .progress-bar').addClass('progress-bar-' + commands[cmd]);
 							break;
-							case "icon":
+							case 'icon':
 							var $icon = this.$ele.find('[data-notify="icon"]');
-							if (self.settings.icon_type.toLowerCase() === 'class') {
+							if(self.settings.icon_type.toLowerCase() === 'class') {
 								$icon.removeClass(self.settings.content.icon).addClass(commands[cmd]);
 							} else {
-								if (!$icon.is('img')) {
+								if(!$icon.is('img')) {
 									$icon.find('img');
 								}
 								$icon.attr('src', commands[cmd]);
 							}
 							break;
-							case "progress":
+							case 'progress':
 							var newDelay = self.settings.delay - (self.settings.delay * (commands[cmd] / 100));
 							this.$ele.data('notify-delay', newDelay);
 							this.$ele.find('[data-notify="progressbar"] > div').attr('aria-valuenow', commands[cmd]).css('width', commands[cmd] + '%');
 							break;
-							case "url":
+							case 'url':
 							this.$ele.find('[data-notify="url"]').attr('href', commands[cmd]);
 							break;
-							case "target":
+							case 'target':
 							this.$ele.find('[data-notify="url"]').attr('target', commands[cmd]);
 							break;
 							default:
 							this.$ele.find('[data-notify="' + cmd + '"]').html(commands[cmd]);
 						}
 					}
-					var posX = this.$ele.outerHeight() + parseInt(self.settings.spacing) + parseInt(self.settings.offset.y);
+					var posX = this.$ele.outerHeight() + parseInt(self.settings.spacing, 10) + parseInt(self.settings.offset.y, 10);
 					self.reposition(posX);
 				},
 				close: function () {
@@ -193,18 +193,18 @@
 			var content = this.settings.content;
 			this.$ele = $(String.format(this.settings.template, this.settings.type, content.title, content.message, content.url, content.target));
 			this.$ele.attr('data-notify-position', this.settings.placement.from + '-' + this.settings.placement.align);
-			if (!this.settings.allow_dismiss) {
+			if(!this.settings.allow_dismiss) {
 				this.$ele.find('[data-notify="dismiss"]').css('display', 'none');
 			}
-			if ((this.settings.delay <= 0 && !this.settings.showProgressbar) || !this.settings.showProgressbar) {
+			if((this.settings.delay <= 0 && !this.settings.showProgressbar) || !this.settings.showProgressbar) {
 				this.$ele.find('[data-notify="progressbar"]').remove();
 			}
 		},
 		setIcon: function () {
-			if (this.settings.icon_type.toLowerCase() === 'class') {
+			if(this.settings.icon_type.toLowerCase() === 'class') {
 				this.$ele.find('[data-notify="icon"]').addClass(this.settings.content.icon);
 			} else {
-				if (this.$ele.find('[data-notify="icon"]').is('img')) {
+				if(this.$ele.find('[data-notify="icon"]').is('img')) {
 					this.$ele.find('[data-notify="icon"]').attr('src', this.settings.content.icon);
 				} else {
 					this.$ele.find('[data-notify="icon"]').append('<img src="' + this.settings.content.icon + '" alt="Notify Icon" />');
@@ -244,50 +244,51 @@
 			settings = this.settings;
 
 			$('[data-notify-position="' + this.settings.placement.from + '-' + this.settings.placement.align + '"]:not([data-closing="true"])').each(function () {
-				offsetAmt = Math.max(offsetAmt, parseInt($(this).css(settings.placement.from)) + parseInt($(this).outerHeight()) + parseInt(settings.spacing));
+				offsetAmt = Math.max(offsetAmt, parseInt($(this).css(settings.placement.from),10) + parseInt($(this).outerHeight(),10) + parseInt(settings.spacing,10));
 			});
-			if (this.settings.newest_on_top === true) {
+			if(this.settings.newest_on_top === true) {
 				offsetAmt = this.settings.offset.y;
 			}
 			css[this.settings.placement.from] = offsetAmt + 'px';
 
 			switch (this.settings.placement.align) {
-				case "left":
-				case "right":
+				case 'left':
+				case 'right':
 				css[this.settings.placement.align] = this.settings.offset.x + 'px';
 				break;
-				case "center":
+				case 'center':
 				css.left = 0;
 				css.right = 0;
 				break;
+				default:
 			}
 			this.$ele.css(css).addClass(this.settings.animate.enter);
-			$.each(Array('webkit-', 'moz-', 'o-', 'ms-', ''), function (index, prefix) {
+			$.each(Array('webkit-', 'moz-', 'o-', 'ms-', ''), function (prefix) {
 				self.$ele[0].style[prefix + 'AnimationIterationCount'] = 1;
 			});
 
 			$(this.settings.element).append(this.$ele);
 
-			if (this.settings.newest_on_top === true) {
-				offsetAmt = (parseInt(offsetAmt) + parseInt(this.settings.spacing)) + this.$ele.outerHeight();
+			if(this.settings.newest_on_top === true) {
+				offsetAmt = (parseInt(offsetAmt,10) + parseInt(this.settings.spacing,10)) + this.$ele.outerHeight();
 				this.reposition(offsetAmt);
 			}
 
-			if ($.isFunction(self.settings.onShow)) {
+			if($.isFunction(self.settings.onShow)) {
 				self.settings.onShow.call(this.$ele);
 			}
 
 			this.$ele.one(this.animations.start, function () {
 				hasAnimation = true;
 			}).one(this.animations.end, function () {
-				if ($.isFunction(self.settings.onShown)) {
+				if($.isFunction(self.settings.onShown)) {
 					self.settings.onShown.call(this);
 				}
 			});
 
 			setTimeout(function () {
-				if (!hasAnimation) {
-					if ($.isFunction(self.settings.onShown)) {
+				if(!hasAnimation) {
+					if($.isFunction(self.settings.onShown)) {
 						self.settings.onShown.call(this);
 					}
 				}
@@ -301,22 +302,22 @@
 			});
 
 			this.$ele.mouseover(function () {
-				$(this).data('data-hover', "true");
+				$(this).data('data-hover', 'true');
 			}).mouseout(function () {
-				$(this).data('data-hover', "false");
+				$(this).data('data-hover', 'false');
 			});
-			this.$ele.data('data-hover', "false");
+			this.$ele.data('data-hover', 'false');
 
-			if (this.settings.delay > 0) {
+			if(this.settings.delay > 0) {
 				self.$ele.data('notify-delay', self.settings.delay);
 				var timer = setInterval(function () {
-					var delay = parseInt(self.$ele.data('notify-delay')) - self.settings.timer;
-					if ((self.$ele.data('data-hover') === 'false' && self.settings.mouse_over === "pause") || self.settings.mouse_over != "pause") {
+					var delay = parseInt(self.$ele.data('notify-delay'),10) - self.settings.timer;
+					if((self.$ele.data('data-hover') === 'false' && self.settings.mouse_over === 'pause') || self.settings.mouse_over !== 'pause') {
 						var percent = ((self.settings.delay - delay) / self.settings.delay) * 100;
 						self.$ele.data('notify-delay', delay);
 						self.$ele.find('[data-notify="progressbar"] > div').attr('aria-valuenow', percent).css('width', percent + '%');
 					}
-					if (delay <= -(self.settings.timer)) {
+					if(delay <= -(self.settings.timer)) {
 						clearInterval(timer);
 						self.close();
 					}
@@ -325,13 +326,13 @@
 		},
 		close: function () {
 			var self = this,
-			posX = parseInt(this.$ele.css(this.settings.placement.from)),
+			posX = parseInt(this.$ele.css(this.settings.placement.from),10),
 			hasAnimation = false;
 
 			this.$ele.attr('data-closing', 'true').addClass(this.settings.animate.exit);
 			self.reposition(posX);
 
-			if ($.isFunction(self.settings.onClose)) {
+			if($.isFunction(self.settings.onClose)) {
 				self.settings.onClose.call(this.$ele);
 			}
 
@@ -339,15 +340,15 @@
 				hasAnimation = true;
 			}).one(this.animations.end, function () {
 				$(this).remove();
-				if ($.isFunction(self.settings.onClosed)) {
+				if($.isFunction(self.settings.onClosed)) {
 					self.settings.onClosed.call(this);
 				}
 			});
 
 			setTimeout(function () {
-				if (!hasAnimation) {
+				if(!hasAnimation) {
 					self.$ele.remove();
-					if (self.settings.onClosed) {
+					if(self.settings.onClosed) {
 						self.settings.onClosed(self.$ele);
 					}
 				}
@@ -357,12 +358,12 @@
 			var self = this,
 			notifies = '[data-notify-position="' + this.settings.placement.from + '-' + this.settings.placement.align + '"]:not([data-closing="true"])',
 			$elements = this.$ele.nextAll(notifies);
-			if (this.settings.newest_on_top === true) {
+			if(this.settings.newest_on_top === true) {
 				$elements = this.$ele.prevAll(notifies);
 			}
 			$elements.each(function () {
 				$(this).css(self.settings.placement.from, posX);
-				posX = (parseInt(posX) + parseInt(self.settings.spacing)) + $(this).outerHeight();
+				posX = (parseInt(posX,10) + parseInt(self.settings.spacing,10)) + $(this).outerHeight();
 			});
 		}
 	});
@@ -376,7 +377,7 @@
 		return defaults;
 	};
 	$.notifyClose = function (command) {
-		if (typeof command === "undefined" || command === "all") {
+		if(typeof command === 'undefined' || command === 'all') {
 			$('[data-notify]').find('[data-notify="dismiss"]').trigger('click');
 		} else {
 			$('[data-notify-position="' + command + '"]').find('[data-notify="dismiss"]').trigger('click');
