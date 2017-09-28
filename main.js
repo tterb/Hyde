@@ -213,13 +213,13 @@ function sendShortcut(cmd) {
 // Register local keyboard shortcuts
 // var shortcuts = registerShortcuts();
 localShortcut.register('CmdOrCtrl+Shift+a', () => { sendShortcut('auto-indent'); });
-localShortcut.register('CmdOrCtrl+b', () => { sendShortcut('insertBold'); });
+localShortcut.register('CmdOrCtrl+b', () => { sendShortcut('insert-bold'); });
 localShortcut.register('CmdOrCtrl+d', () => { sendShortcut('select-word'); });
 localShortcut.register('CmdOrCtrl+e', () => { sendShortcut('insert-emoji'); });
 localShortcut.register('CmdOrCtrl+f', () => { sendShortcut('search-find'); });
 localShortcut.register('CmdOrCtrl+Shift+f', () => { sendShortcut('search-replace'); });
 localShortcut.register('CmdOrCtrl+h', () => { sendShortcut('insert-heading'); });
-localShortcut.register('CmdOrCtrl+i', () => { sendShortcut('inser-italic'); });
+localShortcut.register('CmdOrCtrl+i', () => { sendShortcut('insert-italic'); });
 localShortcut.register('CmdOrCtrl+k', () => { sendShortcut('insert-image'); });
 localShortcut.register('CmdOrCtrl+l', () => { sendShortcut('insert-link'); });
 localShortcut.register('CmdOrCtrl+m', () => { sendShortcut('toggle-menu'); });
@@ -338,10 +338,6 @@ ipc.on('show-context-menu', function(event) {
 const appVersion = exports.appVersion = () => {
   return app.getVersion();
 }
-
-// app.on('window-all-closed', function () {
-//   if (appIcon) appIcon.destroy()
-// })
 
 let rightClickPos = null;
 const contextMenu = new Menu();
