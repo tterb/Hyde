@@ -1,7 +1,7 @@
 #markdown {
   color: #333;
   font-family: "Open Sans", "Roboto", "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
-  font-size: 13.5;
+  font-size: 13.5px;
   letter-spacing: 0.04em;
   line-height: 1.5;
   text-rendering: geometricPrecision;
@@ -9,7 +9,6 @@
   margin-top: 0;
 }
 #markdown h1 {
-  color: #333;
   font-size: 2.5em;
   font-weight: 700;
   letter-spacing: 0.0175em;
@@ -19,7 +18,6 @@
   margin-bottom: 25px;
 }
 #markdown h2 {
-  color: #333;
   font-size: 2em;
   font-weight: 700;
   letter-spacing: 0.0125em;
@@ -28,7 +26,6 @@
   margin-bottom: 22px;
 }
 #markdown h3 {
-  color: #333;
   font-size: 1.65em;
   font-weight: 700;
   letter-spacing: 0.01em;
@@ -37,7 +34,6 @@
   margin-bottom: 15px;
 }
 #markdown h4 {
-  color: #333;
   font-size: 1.35em;
   font-weight: 700;
   letter-spacing: 0.01em;
@@ -76,7 +72,7 @@
   margin-bottom: 0 !important;
 }
 #markdown a {
-  color: #1c74a0;
+  color: #1f70a0;
   text-decoration: none;
   transition: 300ms ease;
 }
@@ -109,18 +105,18 @@
   font-family: "Source Code Pro","Monaco", "Ubuntu Mono", "Dejavu Sans Mono", "Consolas", monospace !important;
   background: transparent;
   color: rgba(255, 255, 255, 0.7);
-  font-size: 12.5px;
+  font-size: 90%;
   letter-spacing: 0.045em;
+  line-height: 1.7;
   border-radius: 10px;
-  padding: 2px 4px 3px;
+  padding: 2px 0 3px;
 }
 #markdown code {
   background: #434244;
   color: rgba(255,255,255,0.85);
   font-family: "Source Code Pro","Monaco", "Ubuntu Mono", "Dejavu Sans Mono", "Consolas", monospace !important;
-  font-size: 85%;
+  font-size: 90%;
   letter-spacing: 0.05em;
-  white-space: nowrap;
   margin: 0 2px;
   padding: 3px 5px 3px 6px;
 }
@@ -128,7 +124,7 @@
   display: flex;
   background: rgba(0, 0, 0, 0.04);
   color: rgba(0, 0, 0, 0.65);
-  font-size: 13.5px;
+  font-size: 95%;
   border-left: 3px solid rgba(0, 0, 0, 0.5);
   border-radius: 5px;
   margin: 15px 10px;
@@ -150,7 +146,7 @@
 }
 #markdown table th {
   background-color: #f4f5f6;
-  font-size: 10.5pt;
+  font-size: 75%;
   font-weight: 600;
 }
 #markdown table th, #markdown table td {
@@ -161,13 +157,14 @@
   line-height: 1.5;
 }
 #markdown kbd {
-  background-image: -webkit-linear-gradient(top, #f5f5f5, #e6e6e6);
-  color: rgba(0, 0, 0, 0.7);
-  font-size: 8pt;
-  border: solid 1px #c6cbd1;
-  border-bottom-color: #959da5;
+  background-image: -webkit-linear-gradient(top, #f4f4f4, #e0e0e0);
+  color: #303030;
+  font-size: 75%;
+  border: 1px outset #ccc;
+  border-bottom-color: #ddd;
   border-radius: 4px;
-  box-shadow: 0 0.5px 2px rgba(0,0,0,0.25);
+  padding: 2px 4px 2.25px;
+  box-shadow: 0 0.5px 3px rgba(0,0,0,0.15);
 }
 #markdown *:first-child {
   margin-top: 0 !important;
@@ -176,6 +173,7 @@
   margin-bottom: 0 !important;
 }
 
+/* Code block syntax-highlighting */
 .hljs-built_in { color: hsl(180, 49%, 60%); }
 .hljs-title { color: hsl(207, 82%, 66%); }
 .hljs-keyword { color: hsl(286, 60%, 67%); }
