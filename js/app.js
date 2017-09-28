@@ -1,8 +1,6 @@
 
 const electron = require('electron');
-const {app} = require('electron');
 const remote = electron.remote;
-const ipc = electron.ipcRenderer;
 const dialog = electron.remote.dialog;
 const shell = electron.shell;
 const fs = remote.require('fs');
@@ -272,18 +270,6 @@ var prevScroll = () => {
 preview.on('scroll', prevScroll);
 
 
-function openNewFile(target) {
-	var filePath = path.join(__dirname, target);
-	main.createWindow();
-	readFileIntoEditor(filePath);
-	app.addRecentDocument(filePath);
-}
-
-function setFile(file, isWritable) {
-	fileEntry = file;
-	hasWriteAccess = isWritable;
-}
-
 function readFileIntoEditor(file) {
 	if(file === '') return;
 	fs.readFile(file, function (err, data) {
@@ -293,13 +279,6 @@ function readFileIntoEditor(file) {
 	});
 	this.isFileLoadedInitially = true;
 	this.currentFile = file;
-}
-
-function writeEditorToFile(file) {
-	fs.writeFile(file, this.cm.getValue(), function (err) {
-		if(err) return notify('Write failed: ' + err, 'error');
-		notify('Write completed.', 'success');
-	});
 }
 
 // Resize toolbar when window is below necessary width
@@ -313,33 +292,25 @@ $(window).on('resize', () => {
 
 $('#version-modal').text('v'+main.appVersion());
 
-$('.spinner .btn:first-of-type').on('click', function() {
+$('.spinner .btn').on('click', function() {
 	var btn = $(this),
 			input = btn.closest('.spinner').find('input'),
 			value = parseFloat(input.val());
-	if(input.attr('max') === undefined || value < parseFloat(input.attr('max'))) {
-		input.val(value + 0.5);
-	} else {
-		btn.next('disabled', true);
-	}
-	settings.set(btn.attr('id').split('-')[0], input.val());
+  if(btn.is(':first-of-type')) {
+    if(input.attr('max') === undefined || value < parseFloat(input.attr('max')))
+      value += 0.5;
+    else
+      btn.next('disabled', true);
+  } else if(btn.is(':last-of-type')) {
+    if(input.attr('min') === undefined || value > parseFloat(input.attr('min')))
+      value -= 0.5;
+    else
+      btn.prev('disabled', true);
+  }
+	input.val(value);
+	settings.set(btn.attr('id').split('-')[0], value);
   $('#markdown').css('font-size', settings.get('previewFontSize'));
   $('#textPanel > div').css('font-size', settings.get('editorFontSize'));
-});
-
-$('.spinner .btn:last-of-type').on('click', function() {
-	var btn = $(this),
-			input = btn.closest('.spinner').find('input'),
-			value = parseFloat(input.val());
-	if(input.attr('min') === undefined || value > parseFloat(input.attr('min'))) {
-		input.val(value - 0.5);
-	} else {
-		btn.prev('disabled', true);
-	}
-	settings.set(btn.attr('id').split('-')[0], input.val());
-	$('#markdown').css('font-size', settings.get('previewFontSize'));
-	$('#textPanel > div').css('font-size', settings.get('editorFontSize'));
-	// $('#markdown').css('font-size', input.val()+'px');
 });
 
 $('#leftAlign, #centerAlign, #rightAlign').on('click', function() {
