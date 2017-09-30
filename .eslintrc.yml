@@ -5,9 +5,6 @@ extends: 'eslint:recommended'
 parserOptions:
   sourceType: module
 rules:
-  linebreak-style:
-    - warn
-    - unix
   quotes:
     - warn
     - single
@@ -39,6 +36,7 @@ rules:
     - vars: all
       args: all
   no-undef: 0
+  no-console: 0
   eqeqeq:
     - error
     - always
