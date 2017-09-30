@@ -1,4 +1,4 @@
-#markdown {
+#mdPreview {
   color: #333;
   font-family: "Open Sans", "Roboto", "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
   font-size: 13.5px;
@@ -8,7 +8,7 @@
   overflow: none;
   margin-top: 0;
 }
-#markdown h1 {
+#mdPreview h1 {
   font-size: 2.5em;
   font-weight: 700;
   letter-spacing: 0.0175em;
@@ -17,7 +17,7 @@
   margin-top: 0;
   margin-bottom: 25px;
 }
-#markdown h2 {
+#mdPreview h2 {
   font-size: 2em;
   font-weight: 700;
   letter-spacing: 0.0125em;
@@ -25,7 +25,7 @@
   border-bottom: 1px solid #e1e3ea;
   margin-bottom: 22px;
 }
-#markdown h3 {
+#mdPreview h3 {
   font-size: 1.65em;
   font-weight: 700;
   letter-spacing: 0.01em;
@@ -33,66 +33,66 @@
   margin-top: 10px;
   margin-bottom: 15px;
 }
-#markdown h4 {
+#mdPreview h4 {
   font-size: 1.35em;
   font-weight: 700;
   letter-spacing: 0.01em;
   line-height: 1.25;
   margin-bottom: 16px;
 }
-#markdown h5 {
+#mdPreview h5 {
   color: #666;
   font-size: 1.12em;
   font-weight: 600;
   line-height: 1.25;
   margin-bottom: 14px;
 }
-#markdown img {
+#mdPreview img {
   max-width: 95%;
   vertical-align: middle;
   box-sizing: content-box;
 }
-#markdown ol, #markdown ul {
+#mdPreview ol, #mdPreview ul {
   line-height: 1.6;
   margin-top: 0;
   margin-bottom: 20px;
   padding-left: 35px;
 }
-#markdown ol ol, #markdown ol ul, #markdown ul ol, #markdown ul ul {
+#mdPreview ol ol, #mdPreview ol ul, #mdPreview ul ol, #mdPreview ul ul {
   padding-left: 27px;
 }
-#markdown ol ol ol, #markdown ol ol ul, #markdown ol ul ol, #markdown ol ul ul, #markdown ul ol ol, #markdown ul ol ul, #markdown ul ul ol, #markdown ul ul ul {
+#mdPreview ol ol ol, #mdPreview ol ol ul, #mdPreview ol ul ol, #mdPreview ol ul ul, #mdPreview ul ol ol, #mdPreview ul ol ul, #mdPreview ul ul ol, #mdPreview ul ul ul {
   padding-left: 35px;
 }
-#markdown li {
+#mdPreview li {
   letter-spacing: 0.04em;
   margin-bottom: 5px;
 }
-#markdown ul li p {
+#mdPreview ul li p {
   margin-bottom: 0 !important;
 }
-#markdown a {
+#mdPreview a {
   color: #1f70a0;
   text-decoration: none;
   transition: 300ms ease;
 }
-#markdown a:hover, #markdown a:focus, #markdown a:active {
+#mdPreview a:hover, #mdPreview a:focus, #mdPreview a:active {
   color: #60b0da;
   text-decoration: none;
 }
-#markdown hr {
+#mdPreview hr {
   border-top: 2px solid #ddd;
 }
-#markdown p {
+#mdPreview p {
   letter-spacing: 0.0375em;
   line-height: 1.5;
   margin: 0 0 16px;
 }
-#markdown strong {
+#mdPreview strong {
   font-size: 105%;
   font-weight: 700;
 }
-#markdown pre {
+#mdPreview pre {
   background: #3a393b;
   color: rgba(255, 255, 255, 0.7);
   border: 1px inset #fff;
@@ -101,7 +101,7 @@
   padding: 10px 18px;
   box-shadow: inset 0 0 14px rgba(0, 0, 0, 0.5);
 }
-#markdown pre code {
+#mdPreview pre code {
   font-family: "Source Code Pro","Monaco", "Ubuntu Mono", "Dejavu Sans Mono", "Consolas", monospace !important;
   background: transparent;
   color: rgba(255, 255, 255, 0.7);
@@ -111,7 +111,7 @@
   border-radius: 10px;
   padding: 2px 0 3px;
 }
-#markdown code {
+#mdPreview code {
   background: #434244;
   color: rgba(255,255,255,0.85);
   font-family: "Source Code Pro","Monaco", "Ubuntu Mono", "Dejavu Sans Mono", "Consolas", monospace !important;
@@ -120,7 +120,7 @@
   margin: 0 2px;
   padding: 3px 5px 3px 6px;
 }
-#markdown blockquote {
+#mdPreview blockquote {
   display: flex;
   background: rgba(0, 0, 0, 0.04);
   color: rgba(0, 0, 0, 0.65);
@@ -130,33 +130,33 @@
   margin: 15px 10px;
   padding: 10px 20px 11px;
 }
-#markdown blockquote > p {
+#mdPreview blockquote > p {
   margin-bottom: 0;
 }
-#markdown table {
+#mdPreview table {
   border-collapse: collapse;
   margin: 20px 10px;
 }
-#markdown table tr {
+#mdPreview table tr {
   background-color: #f4f5f6;
   border: 1px solid #b6bbc1;
 }
-#markdown table tr:nth-child(2n - 1) {
+#mdPreview table tr:nth-child(2n - 1) {
   background-color: #eeeff0;
 }
-#markdown table th {
+#mdPreview table th {
   background-color: #f4f5f6;
   font-size: 75%;
   font-weight: 600;
 }
-#markdown table th, #markdown table td {
+#mdPreview table th, #mdPreview table td {
   border: 1px solid #dfe2e5;
   padding: 6px 13px;
 }
-#markdown table thead tr {
+#mdPreview table thead tr {
   line-height: 1.5;
 }
-#markdown kbd {
+#mdPreview kbd {
   background-image: -webkit-linear-gradient(top, #f4f4f4, #e0e0e0);
   color: #303030;
   font-size: 75%;
@@ -166,10 +166,10 @@
   padding: 2px 4px 2.25px;
   box-shadow: 0 0.5px 3px rgba(0,0,0,0.15);
 }
-#markdown *:first-child {
+#mdPreview *:first-child {
   margin-top: 0 !important;
 }
-#markdown *:last-child {
+#mdPreview *:last-child {
   margin-bottom: 0 !important;
 }
 

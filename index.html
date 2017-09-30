@@ -33,6 +33,7 @@
   <script src="node_modules/codemirror/mode/yaml-frontmatter/yaml-frontmatter.js"></script>
   <script src="node_modules/codemirror/mode/javascript/javascript.js"></script>
   <script src="node_modules/codemirror/mode/jsx/jsx.js"></script>
+  <script src="node_modules/codemirror/mode/stex/stex.js"></script>
   <script src="node_modules/codemirror/mode/meta.js"></script>
   <script src="node_modules/codemirror/addon/mode/overlay.js"></script>
   <script src="node_modules/codemirror/addon/mode/multiplex.js"></script>
@@ -48,7 +49,6 @@
   <script src="node_modules/codemirror/addon/selection/active-line.js"></script>
   <script src="node_modules/codemirror/addon/search/matchesonscrollbar.js"></script>
   <script src="node_modules/codemirror/addon/scroll/simplescrollbars.js"></script>
-  <!-- <link rel="stylesheet" href="node_modules/codemirror/addon/scroll/simplescrollbars.css"> -->
   <script src="node_modules/codemirror/addon/scroll/annotatescrollbar.js"></script>
 </head>
 
@@ -111,7 +111,7 @@
       <ul class="dropdown-menu">
         <li tabindex="-1" href="#" onclick="reloadWin()"><a class="dropdown-item">Reload</a><span>Ctrl + R</span></li>
         <li class="dropdown-divider"></li>
-        <li tabindex="-1" href="#" onclick="toggleMenu();"><a class="dropdown-item">Toggle Menu Bar</a><span>Ctrl + M</span></li>
+        <li tabindex="-1" href="#" onclick="toggleMenu();"><a class="dropdown-item">Toggle Menu</a><span>Ctrl + M</span></li>
         <li tabindex="-1" href="#" onclick="toggleToolbar();"><a class="dropdown-item">Toggle Toolbar</a><span>Ctrl + .</span></li>
         <li tabindex="-1" href="#" onclick="togglePreview();"><a class="dropdown-item">Toggle Preview</a><span>Ctrl + P</span></li>
         <li tabindex="-1" href="#" onclick="toggleMaximize();"><a class="dropdown-item">Toggle Full Screen</a><span>F11</span></li>
@@ -387,15 +387,15 @@
     </div>
     <div id="leftPanel">
         <div id="leftFade" class="topFade"></div>
-        <div class="col-md-6 full-height" style="background:hsl(220, 11%, 18%);" id="textPanel">
-          <textarea id="plainText" placeholder="" autofocus></textarea>
+        <div id="textPanel" class="col-md-6 full-height" style="background:hsl(220, 11%, 18%);">
+          <textarea id="markdownText" placeholder="" autofocus></textarea>
         </div>
     </div>
     <div id="rightPanel">
         <div id="rightFade" class="topFade"></div>
         <div id="previewPanel" class="col-md-6 full-height">
-          <div id="markdown"></div>
-          <textarea id="htmlPreview"></textarea>
+          <div id="mdPreview"></div>
+          <textarea id="htmlPreview" placeholder="" readOnly></textarea>
         </div>
     </div>
   </section>
@@ -422,8 +422,9 @@
             <li id="table-rows" class="form-group">
               <input type="number" id="rows" placeholder="Rows" class="form-control" value=""></li><li><button id="table-button" data-dismiss="modal"><i class="fa fa-arrow-right"></i></button></li>
           </ul>
-    		<div id="alignButtons" class="align-buttons"><span>Align: </span><button id="leftAlign" class="modal-button button-group on"><i class="fa fa-align-left"></i></button><button id="centerAlign" class="modal-button button-group"><i class="fa fa-align-center"></i></button><button id="rightAlign" class="modal-button button-group"><i class="fa fa-align-right"></i></button>
-        </div></div></div></div></div>
+      		<div id="alignButtons" class="align-buttons"><span>Align: </span><button id="leftAlign" class="modal-button button-group on"><i class="fa fa-align-left"></i></button><button id="centerAlign" class="modal-button button-group"><i class="fa fa-align-center"></i></button><button id="rightAlign" class="modal-button button-group"><i class="fa fa-align-right"></i></button>
+        </div></div></div></div>
+  </div>
   <!-- Markdown Help Modal -->
   <div class="modal fade" id="markdown-modal" tabindex="-1" role="dialog"></div>
   <!-- About Modal -->

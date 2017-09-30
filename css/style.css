@@ -901,7 +901,7 @@ input[type="checkbox"] {
     letter-spacing: 0.0275em;
     line-height: 1.5;
     padding: 0 0 30px; }
-  #textPanel #plainText {
+  #textPanel #markdownText {
     background: transparent;
     outline: none;
     border: none;

@@ -60,7 +60,7 @@ function applySettings(opt) {
 		input.val(settings.get(opt.name));
 	}
 	$('#textPanel > div').css('font-size', settings.get('editorFontSize')+'px');
-  $('#markdown').css('font-size', settings.get('previewFontSize')+'px');
+  $('#mdPreview').css('font-size', settings.get('previewFontSize')+'px');
 	$('#editorFontSize-input').val(settings.get('editorFontSize'));
 	$('#previewFontSize-input').val(settings.get('previewFontSize'));
 }
@@ -93,7 +93,7 @@ var formatHead = () => {
 			menu.css('box-shadow', '0 1px 10px rgba(0,0,0,0.3)');
 			leftFade.css('top', '0');
 			textPanel.css('paddingTop', '0px');
-			preview.css('paddingTop', '35px');
+			preview.css('paddingTop', '30px');
 		}
 	} else {
 		toolbar.css({ top: '0' });
@@ -103,13 +103,13 @@ var formatHead = () => {
 			textPanel.css('paddingTop', '7px');
 			dragArea.css('width', '-webkit-calc(50% - 50px)');
 			editor.css('paddingTop', '7px');
-			preview.css('paddingTop', '35px');
+			preview.css('paddingTop', '30px');
 		} else {
 			menuToggle.show();
 			textPanel.css('paddingTop', '0px');
 			dragArea.css({ 'width': 'calc(100% - 117px)' });
 			editor.css('paddingTop', '0px');
-			preview.css('paddingTop', '35px');
+			preview.css('paddingTop', '30px');
 		}
 	}
 };
@@ -202,7 +202,7 @@ function togglePreview() {
 }
 
 function setPreviewMode(opt) {
-	var markdown = $('#markdown'),
+	var markdown = $('#mdPreview'),
 			html = $('#htmlPreview'),
 			htmlText = '';
 	if(markdown.is(':visible') && opt !== 'markdown') {
@@ -210,7 +210,7 @@ function setPreviewMode(opt) {
 		html.show();
 		htmlText = html[0].innerHTML.replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
 		html.text(htmlText);
-		preview.css('padding', '27px 0 0 15px');
+		preview.css('padding', '0');
 		preview.css('overflow', 'hidden');
 	} else if(html.is(':visible') && opt !== 'html') {
 		html.hide();
@@ -372,7 +372,7 @@ $('#previewMode').on('changed.bs.select', function(e) {
 
 $('#previewFontSize-input, #previewFontSize-up, #previewFontSize-down').bind('keyup mouseup', function() {
 	var value = parseFloat($('#previewFontSize-input').val());
-	$('#markdown').css('fontSize', value.toString()+'px');
+	$('#mdPreview').css('fontSize', value.toString()+'px');
 	settings.set('previewFontSize', value);
 });
 

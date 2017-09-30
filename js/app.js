@@ -33,6 +33,9 @@ let conf = {
 	autoCloseTags: settings.get('matchBrackets'),
   matchBrackets: settings.get('matchBrackets'),
   matchTags: settings.get('matchBrackets'),
+  cursorScrollMargin: 50,
+	cursorBlinkRate: 425,
+	autofocus: true,
 	extraKeys: {
 		Enter: 'newlineAndIndentContinueMarkdownList'
 	}
@@ -51,7 +54,7 @@ if(settings.get('enableSpellCheck')) {
 	spellChecker({ codeMirrorInstance: CodeMirror });
 }
 
-var cm = CodeMirror.fromTextArea(document.getElementById('plainText'), conf);
+var cm = CodeMirror.fromTextArea(document.getElementById('markdownText'), conf);
 
 if(os.type() === 'Darwin') {
 	$('#settings-title').css('paddingTop', '0.9em');
@@ -109,8 +112,7 @@ var converter = new showdown.Converter({
 });
 
 window.onload = () => {
-	var markdownPreview = document.getElementById('markdown'),
-			htmlPreview = $('#htmlPreview');
+	var markdownPreview = document.getElementById('mdPreview');
 
 	var themeColor = $('.cm-s-'+theme).css('background-color');
 	adaptTheme(themeColor, Color(themeColor).luminosity());
@@ -119,19 +121,18 @@ window.onload = () => {
 
 	cm.on('change', (cm) => {
 		var markdownText = cm.getValue();
-		// Remove the YAML frontmatter from live-preview
+		// Remove the YAML frontmatter
 		if(settings.get('hideYAMLFrontMatter'))
 			markdownText = removeYAMLPreview(markdownText);
 		// Convert emoji's
 		markdownText = replaceWithEmojis(markdownText);
-		// Render LaTex
-		var renderedMD;
+		var renderedMD = converter.makeHtml(markdownText);
+    // Render LaTex
 		if(settings.get('mathRendering'))
-			renderedMD = markdownText[0]+katex.renderLaTeX(markdownText);
+			renderedMD = katex.renderLaTeX(renderedMD);
 		// Markdown -> Preview
-		renderedMD = converter.makeHtml(markdownText);
 		markdownPreview.innerHTML = renderedMD;
-		$('#markdown p').each(function() {
+		$('#mdPreview p').each(function() {
 			if($(this).html() === '<br>') {
 				$(this).css('margin-bottom', '0px');
 			}
@@ -139,15 +140,15 @@ window.onload = () => {
 		// Markdown -> HTML
 		converter.setOption('noHeaderId', true);
 		html = converter.makeHtml(markdownText);
-		htmlPreview.val(html);
+		// htmlPreview.val(html);
 		// Open preview links in default browser
-		$('#markdown a').on('click', function() {
+		$('#mdPreview a').on('click', function() {
 			event.preventDefault();
 			openInBrowser($(this).attr('href'));
 		});
 		// Handle preview checkboxes
-		$('#markdown :checkbox').removeAttr('disabled');
-		$('#markdown :checkbox').on('click', function() {
+		$('#mdPreview :checkbox').removeAttr('disabled');
+		$('#mdPreview :checkbox').on('click', function() {
 			event.preventDefault();
 		});
 		if(this.isFileLoadedInitially) {
@@ -211,9 +212,11 @@ $('#settings-menu').focus(function() {
  **************************/
 
 var preview = $('#previewPanel'),
-		markdown = $('#markdown'),
+		markdown = $('#mdPreview'),
 		syncScroll = $('#syncScrollToggle'),
 		isSynced = settings.get('syncScroll');
+if(settings.get('previewMode') === 'html')
+  markdown = $('#htmlPreview');
 
  // Retaining state in boolean will be more CPU friendly rather than selecting on each event.
 var toggleSyncScroll = () => {
@@ -309,7 +312,7 @@ $('.spinner .btn').on('click', function() {
   }
 	input.val(value);
 	settings.set(btn.attr('id').split('-')[0], value);
-  $('#markdown').css('font-size', settings.get('previewFontSize'));
+  $('#mdPreview').css('font-size', settings.get('previewFontSize'));
   $('#textPanel > div').css('font-size', settings.get('editorFontSize'));
 });
 
