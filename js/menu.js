@@ -8,6 +8,7 @@ function createMenuTemplate() {
 			{label: 'Save', accelerator: 'CmdOrCtrl+S', click: () => { main.sendShortcut('file-save'); }},
 			{label: 'Save As', accelerator: 'CmdOrCtrl+Shift+S', click: () => { main.sendShortcut('file-save-as'); }},
 			{label: 'Export to PDF', click: () => { main.sendShortcut('file-pdf'); }},
+      {label: 'Export to HTML', click: () => { main.sendShortcut('file-html'); }},
 			{type: 'separator'},
 			{label: 'Show in File Manager', click: () => { ipc.send('open-file-manager'); }},
 			{type: 'separator'},

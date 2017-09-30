@@ -131,6 +131,18 @@ ipc.on('export-to-pdf', (event, pdfPath) => {
     });
   });
 });
+ipc.on('export-to-html', (event, data, htmlPath) => {
+  const win = BrowserWindow.fromWebContents(event.sender);
+  // dialog.showSaveDialog(function(filename) {
+	// 	if(filename === undefined)
+	// 		return notify('You didn\'t save the file', 'warning');
+		// filename is a string that contains the path and filename created in the save dialog.
+		fs.writeFile(htmlPath, data, function(err) {
+			if(err) notify('An error ocurred while creating \''+filename+'\' '+err.message, 'error');
+		});
+    event.sender.send('wrote-html', htmlPath);
+	// });
+});
 
 const getThemes = exports.getThemes = () => {
   var themes = [
@@ -239,8 +251,8 @@ localShortcut.register('CmdOrCtrl+s', () => { sendShortcut('file-save'); });
 localShortcut.register('CmdOrCtrl+,', () => { sendShortcut('toggle-settings'); });
 localShortcut.register('CmdOrCtrl+Shift+/', () => { sendShortcut('markdown-modal'); });
 localShortcut.register('CmdOrCtrl+up', () => { sendShortcut('page-up'); });
-localShortcut.register('CmdOrCtrl+left', () => { sendShortcut('ctrl+left'); });
-localShortcut.register('CmdOrCtrl+right', () => { sendShortcut('ctrl+right'); });
+localShortcut.register('CmdOrCtrl+left', () => { sendShortcut('indent-less'); });
+localShortcut.register('CmdOrCtrl+right', () => { sendShortcut('indent-more'); });
 
 // Called after initialization
 app.on('ready', function() {

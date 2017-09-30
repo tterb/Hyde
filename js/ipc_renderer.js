@@ -136,6 +136,18 @@ ipc.on('file-pdf', () => {
 		ipc.send('export-to-pdf', filePath);
 	});
 });
+ipc.on('file-html', () => {
+	// Save as HTML file
+	options = {
+		filters: [
+			{ name: 'html', extensions: ['html'] }
+		]
+	};
+  // var html = getHTML();
+	dialog.showSaveDialog(options, (filePath) => {
+		ipc.send('export-to-html', getHTML(), filePath);
+	});
+});
 ipc.on('insert-yaml', () => { insertFrontMatter(); });
 ipc.on('markdown-preview', () => { setPreviewMode('markdown'); });
 ipc.on('html-preview', () => { setPreviewMode('html'); });
