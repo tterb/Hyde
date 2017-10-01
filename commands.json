@@ -3,28 +3,28 @@
     "title": "New",
     "category": "File",
     "description": "Create a new file",
-    "shortcut": "CmdOrCtrl+N",
+    "shortcut": "CmdOrCtrl+n",
     "action": "sendIPC('file-new')"
   },
   {
     "title": "Open",
     "category": "File",
     "description": "Open an existing file",
-    "shortcut": "CmdOrCtrl+O",
+    "shortcut": "CmdOrCtrl+o",
     "action": "sendIPC('file-open')"
   },
   {
     "title": "Save",
     "category": "File",
     "description": "Save the current file",
-    "shortcut": "CmdOrCtrl+S",
+    "shortcut": "CmdOrCtrl+s",
     "action": "sendIPC('file-save')"
   },
   {
     "title": "Save As",
     "category": "File",
     "description": "Save the current file",
-    "shortcut": "CmdOrCtrl+Shift+S",
+    "shortcut": "CmdOrCtrl+Shift+s",
     "action": "saveAs()"
   },
   {
@@ -53,21 +53,21 @@
     "title": "Find",
     "category": "Search",
     "description": "Find in the current file",
-    "shortcut": "CmdOrCtrl+F",
+    "shortcut": "CmdOrCtrl+f",
     "action": "sendIPC('search-find')"
   },
   {
     "title": "Replace",
     "category": "Search",
     "description": "Replace in the current file",
-    "shortcut": "CmdOrCtrl+Shift+F",
+    "shortcut": "CmdOrCtrl+Shift+f",
     "action": "sendIPC('search-replace')"
   },
   {
     "title": "Auto Indent",
     "category": "Editor",
     "description": "Automatically indent the current selection",
-    "shortcut": "CmdOrCtrl+Shift+A",
+    "shortcut": "CmdOrCtrl+Shift+a",
     "action": "sendIPC('auto-indent')"
   },
   {
@@ -85,11 +85,100 @@
     "action": "sendIPC('indent-more')"
   },
   {
+    "title": "Toggle Header",
+    "category": "Editor",
+    "description": "Toggle heading on the current selection",
+    "shortcut": "CmdOrCtrl+h",
+    "action": "sendIPC('insert-bold')"
+  },
+  {
+    "title": "Toggle Bold",
+    "category": "Editor",
+    "description": "Toggle bold on the current selection",
+    "shortcut": "CmdOrCtrl+b",
+    "action": "sendIPC('insert-italic')"
+  },
+  {
+    "title": "Toggle Italic",
+    "category": "Editor",
+    "description": "Toggle italics on the current selection",
+    "shortcut": "CmdOrCtrl+i",
+    "action": "sendIPC('insert-bold')"
+  },
+  {
+    "title": "Toggle Strikethrough",
+    "category": "Editor",
+    "description": "Toggle strikethrough on the current selection",
+    "shortcut": "CmdOrCtrl+-",
+    "action": "sendIPC('insert-strikethrough')"
+  },
+  {
     "title": "Toggle Comment",
     "category": "Editor",
     "description": "Toggle comment on the current selection",
     "shortcut": "CmdOrCtrl+/",
     "action": "sendIPC('insert-comment')"
+  },
+  {
+    "title": "Insert Blockquote",
+    "category": "Editor",
+    "description": "Insert a blockquote at the current selection",
+    "shortcut": "CmdOrCtrl+l",
+    "action": "sendIPC('insert-quote')"
+  },
+  {
+    "title": "Insert Link",
+    "category": "Editor",
+    "description": "Inserts a link at the current selection",
+    "shortcut": "CmdOrCtrl+l",
+    "action": "sendIPC('insert-link')"
+  },
+  {
+    "title": "Insert Image",
+    "category": "Editor",
+    "description": "Inserts a image link at the current selection",
+    "shortcut": "CmdOrCtrl+k",
+    "action": "sendIPC('insert-image')"
+  },
+  {
+    "title": "Insert Code",
+    "category": "Editor",
+    "description": "Creates a code-block at the current selection",
+    "shortcut": "CmdOrCtrl+;",
+    "action": "sendIPC('insert-code')"
+  },
+  {
+    "title": "Insert List",
+    "category": "Editor",
+    "description": "Creates an bullet-list at the current selection",
+    "action": "toggleUnorderedList()"
+  },
+  {
+    "title": "Insert Numbered List",
+    "category": "Editor",
+    "description": "Creates an numbered-list at the current selection",
+    "action": "toggleOrderedList()"
+  },
+  {
+    "title": "Insert Horizontal Rule",
+    "category": "Editor",
+    "description": "Creates a horizontal rule at the current selection",
+    "shortcut": "CmdOrCtrl+Shift+-",
+    "action": "sendIPC('insert-code')"
+  },
+  {
+    "title": "Insert Table",
+    "category": "Editor",
+    "description": "Creates a markdown table at the current selection",
+    "shortcut": "CmdOrCtrl+t",
+    "action": "sendIPC('insert-table')"
+  },
+  {
+    "title": "Insert Emoji",
+    "category": "Editor",
+    "description": "Inserts an emoji at the current selection",
+    "shortcut": "CmdOrCtrl+e",
+    "action": "sendIPC('insert-emoji')"
   },
   {
     "title": "Insert YAML-frontmatter",
@@ -101,14 +190,14 @@
     "title": "Reload Window",
     "category": "View",
     "description": "Reload the current application window",
-    "shortcut": "CmdOrCtrl+R",
+    "shortcut": "CmdOrCtrl+r",
     "action": "reloadWin()"
   },
   {
     "title": "Toggle Menu",
     "category": "View",
     "description": "Show/Hide the app menu",
-    "shortcut": "CmdOrCtrl+M",
+    "shortcut": "CmdOrCtrl+m",
     "action": "toggleMenu()"
   },
   {
@@ -122,7 +211,7 @@
     "title": "Toggle Preview",
     "category": "View",
     "description": "Show/Hide the live-preview",
-    "shortcut": "CmdOrCtrl+P",
+    "shortcut": "CmdOrCtrl+p",
     "action": "togglePreview()"
   },
   {
@@ -140,7 +229,7 @@
   {
     "title": "Open Developer Tools",
     "description": "Open chrome developer tools",
-    "shortcut": "CmdOrCtrl+Shift+I",
+    "shortcut": "CmdOrCtrl+Shift+i",
     "action": "toggleDevTools"
   },
   {
