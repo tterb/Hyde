@@ -12,7 +12,7 @@
   box-shadow: 0 0 48px -5px rgba(0, 0, 0, 0.75);
   margin: 0 0 0 -26% !important;
   padding: 10px;
-  z-index: 999; }
+  z-index: 999 !important; }
   .palette .palette-input {
     color: rgba(255, 255, 255, 0.85);
     font-family: "Open Sans","Helvetica Neue","Segoe UI",Helvetica,Arial,sans-serif;
@@ -29,6 +29,7 @@
   .palette .palette-list .command .shortcut {
     margin: 10px 5px 10px 0; }
     .palette .palette-list .command .shortcut span {
+      background: #242526;
       font-size: 13px;
       border-radius: 5px;
       padding: 6px 8px; }
