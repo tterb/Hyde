@@ -68,6 +68,7 @@
     "color": "^2.0.0",
     "devtron": "^1.4.0",
     "electron": "1.7.8",
+    "electron-command-palette": "^0.1.1",
     "electron-config": "^0.2.1",
     "electron-json-storage": "latest",
     "electron-localshortcut": "^0.6.1",
