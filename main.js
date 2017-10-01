@@ -39,7 +39,6 @@ const localShortcut = require('electron-localshortcut');
 const windowStateManager = require('electron-window-state');
 const packageJSON = require(__dirname + '/package.json');
 const mainPage = (`file://${__dirname}/index.html`);
-// const yargs = require('yargs');
 const version = app.getVersion();
 const args = require('yargs')
     .usage('Hyde v'+version+'\n\n Usage: hyde [options] <filename>\n\n If a filename isn\'t specified, the application will open with the most recently opened file. Additionally, if the specified file doesn\'t exist, a new file with the given filename will be created at the specified path.')
@@ -132,16 +131,10 @@ ipc.on('export-to-pdf', (event, pdfPath) => {
   });
 });
 ipc.on('export-to-html', (event, data, htmlPath) => {
-  const win = BrowserWindow.fromWebContents(event.sender);
-  // dialog.showSaveDialog(function(filename) {
-	// 	if(filename === undefined)
-	// 		return notify('You didn\'t save the file', 'warning');
-		// filename is a string that contains the path and filename created in the save dialog.
-		fs.writeFile(htmlPath, data, function(err) {
-			if(err) notify('An error ocurred while creating \''+filename+'\' '+err.message, 'error');
-		});
-    event.sender.send('wrote-html', htmlPath);
-	// });
+	fs.writeFile(htmlPath, data, function(err) {
+		if(err) notify('An error ocurred while creating \''+filename+'\' '+err.message, 'error');
+	});
+  event.sender.send('wrote-html', htmlPath);
 });
 
 const getThemes = exports.getThemes = () => {
@@ -237,6 +230,7 @@ localShortcut.register('CmdOrCtrl+l', () => { sendShortcut('insert-link'); });
 localShortcut.register('CmdOrCtrl+m', () => { sendShortcut('toggle-menu'); });
 localShortcut.register('CmdOrCtrl+n', () => { sendShortcut('file-new'); });
 localShortcut.register('CmdOrCtrl+o', () => { sendShortcut('file-open'); });
+localShortcut.register('CmdOrCtrl+Shift+p', () => { sendShortcut('toggle-palette'); });
 localShortcut.register('CmdOrCtrl+r', () => { sendShortcut('win-reload'); });
 localShortcut.register('CmdOrCtrl+s', () => { sendShortcut('file-save'); });
 localShortcut.register('CmdOrCtrl+t', () => { sendShortcut('table-modal'); });
