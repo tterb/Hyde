@@ -1,0 +1,171 @@
+[
+  {
+    "title": "New",
+    "category": "File",
+    "description": "Create a new file",
+    "shortcut": "CmdOrCtrl+N",
+    "action": "sendIPC('file-new')"
+  },
+  {
+    "title": "Open",
+    "category": "File",
+    "description": "Open an existing file",
+    "shortcut": "CmdOrCtrl+O",
+    "action": "sendIPC('file-open')"
+  },
+  {
+    "title": "Save",
+    "category": "File",
+    "description": "Save the current file",
+    "shortcut": "CmdOrCtrl+S",
+    "action": "sendIPC('file-save')"
+  },
+  {
+    "title": "Save As",
+    "category": "File",
+    "description": "Save the current file",
+    "shortcut": "CmdOrCtrl+Shift+S",
+    "action": "saveAs()"
+  },
+  {
+    "title": "Export to PDF",
+    "description": "Export the file contents to PDF",
+    "action": "exporTToPDF()"
+  },
+  {
+    "title": "Export to HTML",
+    "description": "Export the file contents to HTML",
+    "action": "exportToHTML()"
+  },
+  {
+    "title": "Show in File Manager",
+    "category": "File",
+    "description": "Show the current file in the file manager",
+    "action": "shell.showItemInFolder(currentFile)"
+  },
+  {
+    "title": "Open Settings",
+    "description": "Open the application settings menu",
+    "shortcut": "CmdOrCtrl+,",
+    "action": "sendIPC('toggle-settings')"
+  },
+  {
+    "title": "Find",
+    "category": "Search",
+    "description": "Find in the current file",
+    "shortcut": "CmdOrCtrl+F",
+    "action": "sendIPC('search-find')"
+  },
+  {
+    "title": "Replace",
+    "category": "Search",
+    "description": "Replace in the current file",
+    "shortcut": "CmdOrCtrl+Shift+F",
+    "action": "sendIPC('search-replace')"
+  },
+  {
+    "title": "Auto Indent",
+    "category": "Editor",
+    "description": "Automatically indent the current selection",
+    "shortcut": "CmdOrCtrl+Shift+A",
+    "action": "sendIPC('auto-indent')"
+  },
+  {
+    "title": "Indent Less",
+    "category": "Editor",
+    "description": "Decrease the indentation of the current selection",
+    "shortcut": "CmdOrCtrl+left",
+    "action": "sendIPC('indent-less')"
+  },
+  {
+    "title": "Indent More",
+    "category": "Editor",
+    "description": "Increase the indentation of the current selection",
+    "shortcut": "CmdOrCtrl+right",
+    "action": "sendIPC('indent-more')"
+  },
+  {
+    "title": "Toggle Comment",
+    "category": "Editor",
+    "description": "Toggle comment on the current selection",
+    "shortcut": "CmdOrCtrl+/",
+    "action": "sendIPC('insert-comment')"
+  },
+  {
+    "title": "Insert YAML-frontmatter",
+    "category": "Editor",
+    "description": "Insert frontmatter template into the editor",
+    "action": "insertFrontMatter()"
+  },
+  {
+    "title": "Reload Window",
+    "category": "View",
+    "description": "Reload the current application window",
+    "shortcut": "CmdOrCtrl+R",
+    "action": "reloadWin()"
+  },
+  {
+    "title": "Toggle Menu",
+    "category": "View",
+    "description": "Show/Hide the app menu",
+    "shortcut": "CmdOrCtrl+M",
+    "action": "toggleMenu()"
+  },
+  {
+    "title": "Toggle Toolbar",
+    "category": "View",
+    "description": "Show/Hide the formatting toolbar",
+    "shortcut": "CmdOrCtrl+.",
+    "action": "toggleToolbar()"
+  },
+  {
+    "title": "Toggle Preview",
+    "category": "View",
+    "description": "Show/Hide the live-preview",
+    "shortcut": "CmdOrCtrl+P",
+    "action": "togglePreview()"
+  },
+  {
+    "title": "Markdown Mode",
+    "category": "Preview",
+    "description": "Set markdown as the live-preview mode",
+    "action": "setPreviewMode('markdown')"
+  },
+  {
+    "title": "HTML Mode",
+    "category": "Preview",
+    "description": "Set HTML as the live-preview mode",
+    "action": "setPreviewMode('html');"
+  },
+  {
+    "title": "Open Developer Tools",
+    "description": "Open chrome developer tools",
+    "shortcut": "CmdOrCtrl+Shift+I",
+    "action": "toggleDevTools"
+  },
+  {
+    "title": "Markdown Help",
+    "category": "Help",
+    "description": "Show markdown syntax help",
+    "shortcut": "CmdOrCtrl+Shift+?",
+    "action": "sendIPC('markdown-modal')"
+  },
+  {
+    "title": "View Docs",
+    "category": "Help",
+    "description": "Check out the Hyde documentation",
+    "action": "shell.openExternal(packageJSON.docs)"
+  },
+  {
+    "title": "Report an Issue",
+    "category": "Help",
+    "description": "Report a bug or issue",
+    "action": "shell.openExternal(packageJSON.repository.bugs)"
+  },
+  {
+    "title": "About Hyde",
+    "category": "Help",
+    "description": "Show information about Hyde",
+    "action": "sendIPC('about-modal')"
+  }
+]

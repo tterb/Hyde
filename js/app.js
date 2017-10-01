@@ -12,6 +12,7 @@ const argHandling = require('./js/argHandling');
 const katex = require('parse-katex');
 const settings = require('electron-settings');
 const storage = require('electron-json-storage');
+const palette = require('./js/commandPalette');
 const spellChecker = require('codemirror-spell-checker');
 const packageJSON = require(path.join(__dirname, '/package.json'));
 const Color = require('color');
@@ -140,7 +141,7 @@ window.onload = () => {
 		// Markdown -> HTML
 		converter.setOption('noHeaderId', true);
 		html = converter.makeHtml(markdownText);
-		// htmlPreview.val(html);
+		$('#htmlPreview').val(html);
 		// Open preview links in default browser
 		$('#mdPreview a').on('click', function() {
 			event.preventDefault();
@@ -206,6 +207,7 @@ $('#settings-menu').focus(function() {
 	notify('Handler for .focus() called.', 'success');
 });
 
+function getHTML() { return converter.makeHtml(cm.getValue()); }
 
 /**************************
  * Synchronized scrolling *
@@ -328,6 +330,10 @@ function countWords() {
 	var wordcount = cm.getValue().split(/\b[\s,.-:;]*/).length;
 	document.getElementById('wordcount').innerHTML = 'words: ' + wordcount.toString();
 	return cm.getValue().split(/\b[\s,.-:;]*/).length;
+}
+
+function sendIPC(cmd) {
+  return remote.BrowserWindow.getFocusedWindow().webContents.send(cmd);
 }
 
 // Allows render process to create new windows

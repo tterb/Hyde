@@ -3,7 +3,12 @@ const ipc = electron.ipcRenderer;
 // Handling file saving through IPCRenderer
 function saveAs() {
 	storage.get('markdown-savefile', function(err, data) {
-		options = {};
+		options = {
+      'filters': [{
+				name: 'Markdown',
+				'extensions': ['md']
+			}]
+    };
 		if(err) notify(err, 'error');
 		if('filename' in data) {
 			options.defaultPath = data.filename;
@@ -124,6 +129,7 @@ ipc.on('page-up', () => { cm.execCommand('goDocStart'); });
 ipc.on('page-down', () => { cm.execCommand('goDocEnd'); });
 ipc.on('indent-less', () => { cm.execCommand('indentLess'); });
 ipc.on('indent-more', () => { cm.execCommand('indentMore'); });
+ipc.on('toggle-palette', () => { palette(); });
 ipc.on('maximize', () => { toggleMaximize(); });
 ipc.on('file-pdf', () => {
 	// Save as PDF file
