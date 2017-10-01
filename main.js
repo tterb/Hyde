@@ -238,13 +238,14 @@ localShortcut.register('CmdOrCtrl+-', () => { sendShortcut('insert-strikethrough
 localShortcut.register('CmdOrCtrl+Shift+-', () => { sendShortcut('insert-hr'); });
 localShortcut.register('CmdOrCtrl+/', () => { sendShortcut('insert-comment'); });
 localShortcut.register('CmdOrCtrl+;', () => { sendShortcut('insert-code'); });
-localShortcut.register("CmdOrCtrl+'", () => { sendShortcut("insert-blockquote"); });
+localShortcut.register("CmdOrCtrl+'", () => { sendShortcut("insert-quote"); });
 localShortcut.register('CmdOrCtrl+.', () => { sendShortcut('toggle-toolbar'); });
 localShortcut.register('CmdOrCtrl+p', () => { sendShortcut('toggle-preview'); });
 localShortcut.register('CmdOrCtrl+s', () => { sendShortcut('file-save'); });
 localShortcut.register('CmdOrCtrl+,', () => { sendShortcut('toggle-settings'); });
 localShortcut.register('CmdOrCtrl+Shift+/', () => { sendShortcut('markdown-modal'); });
 localShortcut.register('CmdOrCtrl+up', () => { sendShortcut('page-up'); });
+localShortcut.register('CmdOrCtrl+down', () => { sendShortcut('page-down'); });
 localShortcut.register('CmdOrCtrl+left', () => { sendShortcut('indent-less'); });
 localShortcut.register('CmdOrCtrl+right', () => { sendShortcut('indent-more'); });
 

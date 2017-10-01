@@ -12,7 +12,7 @@ const argHandling = require('./js/argHandling');
 const katex = require('parse-katex');
 const settings = require('electron-settings');
 const storage = require('electron-json-storage');
-const palette = require('./js/commandPalette');
+const commandPalette = require('./js/commandPalette');
 const spellChecker = require('codemirror-spell-checker');
 const packageJSON = require(path.join(__dirname, '/package.json'));
 const Color = require('color');
@@ -56,6 +56,7 @@ if(settings.get('enableSpellCheck')) {
 }
 
 var cm = CodeMirror.fromTextArea(document.getElementById('markdownText'), conf);
+var htmlEditor;
 
 if(os.type() === 'Darwin') {
 	$('#settings-title').css('paddingTop', '0.9em');
@@ -141,7 +142,15 @@ window.onload = () => {
 		// Markdown -> HTML
 		converter.setOption('noHeaderId', true);
 		html = converter.makeHtml(markdownText);
-		$('#htmlPreview').val(html);
+		if(settings.get('previewMode','html') === 'html') {
+      htmlEditor = CodeMirror.fromTextArea(document.getElementById('htmlPreview'), conf);
+      htmlEditor.setValue(html);
+      htmlEditor.setOption('base', 'html');
+      htmlEditor.setOption('theme', 'neo');
+      htmlEditor.setOption('readOnly', true);
+      $('#previewPanel').css('paddingTop', 0, '!important');
+    }
+		// $('#htmlPreview').val(html);
 		// Open preview links in default browser
 		$('#mdPreview a').on('click', function() {
 			event.preventDefault();
@@ -323,6 +332,12 @@ $('#leftAlign, #centerAlign, #rightAlign').on('click', function() {
 	$('.on').removeClass('on');
 	btn.addClass('on');
 	i++;
+});
+
+$('html').click(function() {
+  commandPalette().hide();
+  if($('#settings-menu').css('left') === '0px')
+    sendIPC('toggle-settings');
 });
 
 // Word count

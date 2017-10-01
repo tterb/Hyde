@@ -119,7 +119,7 @@ ipc.on('toggle-preview', () => { togglePreview(); });
 ipc.on('win-close', () => { closeWindow(remote.BrowserWindow.getFocusedWindow()); });
 ipc.on('win-reload', () => { reloadWin(); });
 ipc.on('insert-code', () => { toggleFormat('code'); });
-ipc.on('insert-blockquote', () => { toggleBlockquote(); });
+ipc.on('insert-quote', () => { toggleBlockquote(); });
 ipc.on('toggle-toolbar', () => { toggleToolbar(); });
 ipc.on('toggle-settings', () => { toggleSettingsMenu(); });
 ipc.on('insert-strikethrough', () => { toggleFormat('strikethrough'); });
@@ -129,7 +129,7 @@ ipc.on('page-up', () => { cm.execCommand('goDocStart'); });
 ipc.on('page-down', () => { cm.execCommand('goDocEnd'); });
 ipc.on('indent-less', () => { cm.execCommand('indentLess'); });
 ipc.on('indent-more', () => { cm.execCommand('indentMore'); });
-ipc.on('toggle-palette', () => { palette(); });
+ipc.on('toggle-palette', () => { commandPalette().show(); });
 ipc.on('maximize', () => { toggleMaximize(); });
 ipc.on('file-pdf', () => {
 	// Save as PDF file
