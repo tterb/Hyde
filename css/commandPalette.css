@@ -1,0 +1,40 @@
+.palette {
+  display: none;
+  position: fixed;
+  background-color: #202123;
+  width: 48% !important;
+  top: 0;
+  left: 52% !important;
+  border: 1px solid #2e2f31;
+  border-radius: 2px;
+  border-bottom-left-radius: 10px !important;
+  border-bottom-right-radius: 10px !important;
+  box-shadow: 0 0 48px -5px rgba(0, 0, 0, 0.75);
+  margin: 0 0 0 -26% !important;
+  padding: 10px;
+  z-index: 999; }
+  .palette .palette-input {
+    color: rgba(255, 255, 255, 0.85);
+    font-family: "Open Sans","Helvetica Neue","Segoe UI",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    padding: 6px 10px; }
+  .palette .palette-list .command .title {
+    font-size: 15.5px;
+    margin: 7px 3px 0px; }
+  .palette .palette-list .command .description {
+    font-size: 13.5px;
+    margin: 1px 3px 6px; }
+  .palette .palette-list .command .shortcut {
+    margin: 10px 5px 10px 0; }
+    .palette .palette-list .command .shortcut span {
+      font-size: 13px;
+      border-radius: 5px;
+      padding: 6px 8px; }
+
+mark {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: bold;
+  text-decoration: underline; }
