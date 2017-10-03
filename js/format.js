@@ -1,11 +1,4 @@
 
-var insertTexts = {
-  link: ['[', '](#url#)'],
-  image: ['![', '](#url#)'],
-  horizontalRule: ['', '\n-------------------\n']
-};
-
-
 function toggleFormat(type) {
   'use strict';
   let modifiers;
@@ -93,11 +86,10 @@ function getState(cm, pos) {
       ret.bold = true;
     } else if(data === 'variable-2') {
       text = cm.getLine(pos.line);
-      if(/^\s*\d+\.\s/.test(text)) {
+      if(/^\s*\d+\.\s/.test(text))
         ret['ordered-list'] = true;
-      } else {
+      else
         ret['unordered-list'] = true;
-      }
     } else if(data === 'atom') {
       ret.quote = true;
     } else if(data === 'em') {
@@ -108,11 +100,10 @@ function getState(cm, pos) {
       ret.strikethrough = true;
     } else if(data === 'comment') {
       text = cm.getLine(pos.line);
-      if(text.indexOf('`') > -1) {
-          ret.code = true;
-      } else {
-          ret.comment = true;
-      }
+      if(text.indexOf('`') > -1)
+        ret.code = true;
+      else
+        ret.comment = true;
     } else if(data === 'link') {
       ret.link = true;
     } else if(data === 'tag') {
@@ -128,15 +119,15 @@ function toggleBlockquote() {
   _toggleLine(cm, 'quote');
 }
 
-function toggleComment(editor) {
+function toggleComment() {
   _toggleLine(cm, 'comment');
 }
 
-function toggleUnorderedList(editor) {
+function toggleUnorderedList() {
   _toggleLine(cm, 'unordered-list');
 }
 
-function toggleOrderedList(editor) {
+function toggleOrderedList() {
   _toggleLine(cm, 'ordered-list');
 }
 
@@ -195,11 +186,10 @@ function createTable(cols, rows, align) {
   } else if(align === 'right') {
     alignment = ':| ';
   }
-
   for(let i = 1; i <= cols; i++) {
     table += 'Column '+i+' | ';
     separator += '--------'+alignment;
-    body += ' Text     | ';
+    body += '  Text   | ';
   }
   table += '  \n'+separator.slice(0,-1)+'  \n';
   for(let i = 0; i < rows; i++) {
