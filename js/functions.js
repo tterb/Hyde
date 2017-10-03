@@ -1,12 +1,11 @@
-const {clipboard} = require('electron');
-const {webContents} = require('electron');
+const clipboard = require('electron');
 const parsePath = require('parse-filepath');
 
 function reloadWin() {
     remote.getCurrentWindow().reload();
 }
 
-function toggleDeveloper() {
+function toggleDevTools() {
   var window = electron.remote.getCurrentWindow();
   window.toggleDevTools();
 }
@@ -19,7 +18,7 @@ function showUnsavedDialog() {
   } else {
     if(filename === 'New document')
       filename = 'This document';
-    $('#unsaved-body').text('\''+filename.toString()+'\' has unsaved changes, do you want to save them?');
+    $('#unsaved-body').text(filename.toString()+' has unsaved changes, would you like to save them?');
     modal.modal();
   }
 }
@@ -28,7 +27,7 @@ function showUnsavedDialog() {
 function openNewFile(file) {
   let wins;
   file = path.join(__dirname, file);
-  fs.readFile(file, 'utf-8', (err, data) => {
+  fs.readFile(file, 'utf-8', (err) => {
     if(err)
       notify('An error ocurred while opening the file '+ err.message, 'error');
     // cm.getDoc().setValue(data);
@@ -99,33 +98,26 @@ function pasteSelected() {
   cm.replaceSelection(clipboard.readText());
 }
 
-function openFile() {
-  electron.remote.getCurrentWindow().webContents.send('file-open');
-}
+function openFile() { sendIPC('file-open'); }
 
-function saveFile() {
-  electron.remote.getCurrentWindow().webContents.send('file-save');
-}
+function saveFile() { sendIPC('file-save'); }
 
-function saveFileAs() {
-  electron.remote.getCurrentWindow().webContents.send('file-save-as');
-}
+function saveFileAs() { sendIPC('file-save-as'); }
 
-function exportToPDF() {
-  electron.remote.getCurrentWindow().webContents.send('file-pdf');
-}
+function exportToPDF() { sendIPC('file-pdf'); }
+
+function exportToHTML() { sendIPC('file-html'); }
 
 // Generations and clean state of CodeMirror
 var getGeneration = () => { return this.cm.doc.changeGeneration(); };
 var setClean = () => { this.latestGeneration = this.getGeneration(); };
 var isClean = () => { return this.cm.doc.isClean(this.latestGeneration); };
 
-// Update window title on various events
+// Update window title and status bar filename
 var updateWindowTitle = (path) => {
   var appName = 'Hyde',
       activeFile = $('#bottom-file'),
       status = $('#file-status'),
-      isClean = this.isClean(),
       saveSymbol = '*',
       filename,
       title;
@@ -137,7 +129,7 @@ var updateWindowTitle = (path) => {
     filename = 'New document';
   }
   if(!this.isClean()) {
-    title = saveSymbol + title;
+    title = title + saveSymbol;
     status.css('visibility', 'visible');
   } else {
     status.css('visibility', 'hidden');
@@ -145,7 +137,7 @@ var updateWindowTitle = (path) => {
   document.title = title;
   activeFile.html(filename);
   if(path !== undefined)
-    activeFile.attr('data-tooltip', path.toString());
+    activeFile.attr('data-tooltip', path.toString().replace(os.homedir(),'~'));
   else
     activeFile.attr('data-tooltip', 'None');
 };
