@@ -21,37 +21,37 @@
     overflow: visible;
   }
 
-  #markdown > h3 {
+  #mdPreview > h3 {
     line-height: 0.5 !important;
     margin: 0 !important;
     padding: 0 !important;
   }
 
-  #markdown > p, #markdown > ul li {
+  #mdPreview > p, #mdPreview > ul li {
     font-size: 11.5pt !important;
   }
 
-  #markdown > p {
+  #mdPreview > p {
     line-height: 1.5;
     margin: 0 0 6px !important;
   }
 
-  #markdown > ul {
+  #mdPreview > ul {
     margin-bottom: 0 !important;
     padding-bottom: 0 !important;
   }
 
-  #markdown > li {
+  #mdPreview > li {
     line-height: 1.75;
   }
 
-  #markdown > img {
+  #mdPreview > img {
     max-width: 95%;
     margin: 0 auto 0.5em !important;
     padding: 0 !important;
   }
 
-  #markdown > pre code {
+  #mdPreview > pre code {
     font-family: "Source Code Pro","Monaco","Ubuntu Mono","Dejavu Sans Mono","Consolas",monospace !important;
     background: #424242 !important;
     color: $text-color;
