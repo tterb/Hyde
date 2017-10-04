@@ -1,0 +1,125 @@
+rules:
+  indentation:
+    - 1
+    - size: 2
+  class-name-format:
+    - 1
+    - convention: 'hyphenatedlowercase'
+      ignore:
+        -CodeMirror
+        -switch__input
+        -switch__toggle
+        -switch__handle
+        -switch__touch
+  id-name-format:
+    - 1
+    - convention: 'camelcase'
+    - allow-leading-underscore: false
+  variable-name-format:
+    - 1
+    - convention: 'hyphenatedlowercase'
+    - allow-leading-underscore: false
+  mixin-name-format:
+    - 1
+    - convention: 'camelcase'
+    - allow-leading-underscore: false
+  hex-notation:
+    - 1
+    - style: lowercase
+  no-empty-rulesets:
+    - 1
+  leading-zero:
+    - 1
+    - include: true
+  nesting-depth:
+    - 1
+    - max-depth: 4
+  space-after-comma:
+    - 0
+  space-after-colon:
+    - 1
+    - include: true
+  no-color-literals:
+    - 0
+    - allow-rgba: true
+  no-ids:
+    - 0
+  no-important:
+    - 0
+  no-combinators:
+    - 0
+  single-line-per-selector:
+    - 0
+  no-transition-all:
+    - 0
+  no-duplicate-properties:
+    - 0
+  no-vendor-prefixes:
+    - 0
+  no-qualifying-elements:
+    - 0
+  empty-line-between-blocks:
+    - 0
+  force-element-nesting:
+    - 0
+  force-pseudo-nesting:
+    - 0
+  force-attribute-nesting:
+    - 0
+  property-sort-order:
+    - 0
+    -
+      order:
+        - 'display'
+        - 'position'
+        - 'content'
+        - 'background'
+        - 'background-image'
+        - 'background-color'
+        - 'background-blend-mode'
+        - 'color'
+        - 'font-family'
+        - 'font-size'
+        - 'font-weight'
+        - 'text-decoration'
+        - 'letter-spacing'
+        - 'line-height'
+        - 'text-align'
+        - 'width'
+        - 'height'
+        - 'max-width'
+        - 'max-height'
+        - 'top'
+        - 'left'
+        - 'right'
+        - 'bottom'
+        - 'border'
+        - 'border-width'
+        - 'border-style'
+        - 'border-color'
+        - 'border-radius'
+        - 'outline'
+        - 'box-shadow'
+        - 'text-shadow'
+        - 'margin'
+        - 'margin-top'
+        - 'margin-left'
+        - 'margin-right'
+        - 'margin-bottom'
+        - 'padding'
+        - 'padding-top'
+        - 'padding-left'
+        - 'padding-right'
+        - 'padding-bottom'
+        - 'overflow'
+        - 'overflow-x'
+        - 'overflow-y'
+        - 'resize'
+        - 'visibility'
+        - 'opacity'
+        - 'transition'
+        - 'transition-delay'
+        - 'transition-duration'
+        - 'transition-property'
+        - 'transition-timing-function'
+        - 'z-index'
