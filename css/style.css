@@ -13,7 +13,7 @@ body {
 
 #editArea {
   height: -webkit-calc(100% - 28px);
-  padding: 0 15px 0; }
+  padding: 0 15px; }
 
 label {
   font-size: 13px;
@@ -25,12 +25,11 @@ label {
 
 #pad {
   font-family: "Source Code Pro", "Monaco", "Ubuntu Mono", "Dejavu Sans Mono", "Consolas", monospace;
-  border: none;
+  border: 0;
   overflow: auto;
   outline: none;
   resize: none;
   -webkit-box-shadow: none;
-  -moz-box-shadow: none;
   box-shadow: none; }
 
 #draggable {
@@ -53,15 +52,15 @@ label {
     font-size: 1.95em;
     background: transparent;
     color: rgba(255, 255, 255, 0.07);
-    border: none;
+    border: 0;
     outline: none !important;
     transform: scale(1);
     transition: color 1000ms cubic-bezier(0.17, 0.04, 0.03, 0.75);
     transition: all 200ms cubic-bezier(0.17, 0.04, 0.03, 0.75);
-    padding-left: 4px;
+    padding: 3px 4px 0;
     z-index: 99; }
     #menuToggle button:hover {
-      color: rgba(255, 255, 255, 0.45); }
+      color: rgba(255, 255, 255, 0.4); }
     #menuToggle button:active, #menuToggle button:visited {
       transform: scale(0.85); }
   #menuToggle:hover {
@@ -72,25 +71,25 @@ label {
   top: -2px;
   right: 0.25%;
   z-index: 1000; }
-  #metacity .winButton {
+  #metacity .window-button {
     display: inline-block;
     background: transparent;
     outline: none;
-    border: none;
+    border: 0;
     margin: 3px 0;
     padding: 2px 0.75px;
     float: right; }
-    #metacity .winButton img {
+    #metacity .window-button img {
       display: inline-block;
       height: 21px;
       width: auto;
       padding: 4px;
       opacity: 1;
       transition: opacity 300ms ease-in-out; }
-    #metacity .winButton .active {
+    #metacity .window-button .active {
       position: fixed;
       z-index: -1; }
-    #metacity .winButton .inactive:hover {
+    #metacity .window-button .inactive:hover {
       opacity: 0; }
   #metacity #close {
     margin-right: 9px;
@@ -138,26 +137,26 @@ label {
       white-space: nowrap;
       border: 1px outset #6a6a6a;
       border-left: 1px outset #37393d;
-      border-top: none;
-      border-bottom: none;
+      border-top: 0;
+      border-bottom: 0;
       padding: 2px 0;
-      transition: all .0145s .02s ease-out; }
+      transition: all 0.0145s 0.02s ease-out; }
       #appMenu .btn-group .dropdown-toggle:hover {
         background: transparent;
         color: rgba(255, 255, 255, 0.75); }
     #appMenu .btn-group.open .dropdown-toggle {
-      background: #373537;
+      background: #343234;
       color: rgba(255, 255, 255, 0.75);
       border: 1px inset #434443;
-      border-right: none;
+      border-right: 0;
       box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.25); }
     #appMenu .btn-group .dropdown-menu {
-      background-color: #373537;
+      background-color: #343234;
       color: rgba(255, 255, 255, 0.65);
       font-size: 11px;
-      min-width: 178px;
+      min-width: 170px;
       top: 90%;
-      box-shadow: 1px 3px 10px rgba(0, 0, 0, 0.5);
+      box-shadow: 1px 4px 10px rgba(0, 0, 0, 0.35);
       border-top-left-radius: 0;
       border-top-right-radius: 6px;
       border-bottom-left-radius: 6px;
@@ -196,18 +195,17 @@ label {
           margin-top: 2px;
           padding-top: 1.5px; }
         #appMenu .btn-group .dropdown-menu li:hover, #appMenu .btn-group .dropdown-menu li:active {
-          background: #343031;
-          box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.4); }
+          background: #2f2b2c;
+          box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2); }
           #appMenu .btn-group .dropdown-menu li:hover a, #appMenu .btn-group .dropdown-menu li:active a {
             color: #f0f0f0; }
           #appMenu .btn-group .dropdown-menu li:hover span, #appMenu .btn-group .dropdown-menu li:active span {
             font-weight: 400;
             color: #ef4d5a; }
       #appMenu .btn-group .dropdown-menu .dropdown-divider {
-        color: rgba(255, 255, 255, 0.65);
-        height: 0px;
+        height: 0;
         width: 98%;
-        border-top: 1px solid rgba(0, 0, 0, 0.125);
+        border-top: 1px solid rgba(0, 0, 0, 0.2);
         margin: 1.5px auto;
         padding: 0; }
         #appMenu .btn-group .dropdown-menu .dropdown-divider:hover {
@@ -312,7 +310,7 @@ label {
     box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.4);
     transform: translateY(0.5px); }
 
-.toolbar-buttons [data-tooltip]:hover:after {
+.toolbar-buttons [data-tooltip]:hover::after {
   top: 150% !important;
   left: 20% !important;
   font-weight: 300;
@@ -331,7 +329,7 @@ label {
   border: 1px outset #2d2c2c;
   box-shadow: 0 -1px 20px rgba(0, 0, 0, 0.25);
   padding: 2px;
-  z-index: 99999;
+  z-index: 999;
   resize: both; }
   .bottom-bar div {
     letter-spacing: 0.025em;
@@ -348,16 +346,16 @@ label {
     position: absolute;
     display: inline-block;
     background: transparent;
-    border: none;
+    border: 0;
     outline: none !important; }
-  .bottom-bar #bottom-file {
+  .bottom-bar #bottomFile {
     display: inline-block;
     position: relative;
     font-size: 11px;
     top: 3px;
     bottom: 2px;
     margin: 0 4px 0 12px; }
-  .bottom-bar #file-status {
+  .bottom-bar #fileStatus {
     display: inline-block;
     position: relative;
     color: #de545f;
@@ -366,7 +364,7 @@ label {
     left: -1px;
     line-height: 0.5;
     visibility: hidden; }
-  .bottom-bar #wordcount {
+  .bottom-bar #wordCount {
     display: inline-block;
     position: relative;
     font-size: 11px;
@@ -380,97 +378,59 @@ label {
     width: -webkit-calc(100% - 240px);
     top: 0;
     left: 17%; }
+  .bottom-bar .bottom-icons button {
+    top: 2px; }
   .bottom-bar #syncScrollToggle {
-    font-size: 14.5px;
-    right: 2.5em;
-    margin-top: 4px; }
-    .bottom-bar #syncScrollToggle:after {
-      top: -190%;
-      right: 0px;
-      left: auto;
-      opacity: 0;
-      transition: opacity 200ms linear 1s; }
-    .bottom-bar #syncScrollToggle:hover:after {
-      opacity: 0.9;
-      transition: opacity 200ms linear 1s; }
+    font-size: 14.5px !important;
+    right: 2.5em !important;
+    margin-top: 4px !important; }
+    .bottom-bar #syncScrollToggle::after {
+      top: -190% !important;
+      right: 0 !important;
+      left: auto !important;
+      opacity: 0 !important;
+      transition: opacity 200ms linear 1s !important; }
   .bottom-bar #previewToggle {
     font-size: 17.5px;
-    right: 0.4em;
-    margin-top: 1px; }
-    .bottom-bar #previewToggle:after {
+    right: 0.35em;
+    margin-top: 1.5px; }
+    .bottom-bar #previewToggle::after {
       top: -150%;
-      right: 0px;
+      right: 0;
       left: auto;
       opacity: 0;
       transition: opacity 200ms linear 1s; }
-    .bottom-bar #previewToggle:hover:after {
+    .bottom-bar #previewToggle:hover::after {
       opacity: 0.9;
       transition: opacity 200ms linear 1s; }
 
-.prevToggle {
-  position: absolute;
-  display: inline-block;
-  top: 17%;
-  right: 1%;
-  font-size: 10px; }
-  .prevToggle input {
-    width: 12px;
-    margin: 2px 2px 0; }
-  .prevToggle input[type="radio"] {
-    display: inline-block;
-    position: relative;
-    left: 23px;
-    opacity: 0;
-    cursor: pointer; }
-    .prevToggle input[type="radio"] + label {
-      color: rgba(255, 255, 255, 0.75); }
-      .prevToggle input[type="radio"] + label span {
-        display: inline-block;
-        width: 20px;
-        height: 20px;
-        margin: 0 6px 3px 5px;
-        vertical-align: middle;
-        background: url(../img/buttons/radio.png) -2px top no-repeat;
-        cursor: pointer; }
-    .prevToggle input[type="radio"]:checked + label span {
-      background: url(../img/buttons/radio.png) -33px top no-repeat; }
-
-input[type="checkbox"] {
+input[type='checkbox'] {
   display: inline-block;
   position: relative;
   left: 23px;
   opacity: 0; }
-  input[type="checkbox"] + label {
+  input[type='checkbox'] + label {
     color: rgba(255, 255, 255, 0.75); }
-    input[type="checkbox"] + label span {
+    input[type='checkbox'] + label span {
       display: inline-block;
       width: 20px;
       height: 20px;
       margin: 0 6px 3px 5px;
       vertical-align: middle;
-      background: url(../img/buttons/checkbox.png) -2px top no-repeat;
+      background: url("../img/buttons/checkbox.png") -2px top no-repeat;
       cursor: pointer; }
-  input[type="checkbox"] + span {
+  input[type='checkbox'] + span {
     display: inline-block;
     width: 20px;
     height: 20px;
     margin: 0 6px 3px 5px;
     vertical-align: middle;
-    background: url(../img/buttons/checkbox.png) -2px top no-repeat;
+    background: url("../img/buttons/checkbox.png") -2px top no-repeat;
     cursor: pointer; }
-  input[type="checkbox"]:checked + label span {
-    background: url(../img/buttons/checkbox.png) -33px top no-repeat; }
-  input[type="checkbox"]:checked + span {
-    background: url(../img/buttons/checkbox.png) -33px top no-repeat; }
-
-.mode {
-  background-color: #282726;
-  float: left;
-  width: 100%;
-  text-align: left;
-  box-shadow: 0 1px 3px 3px rgba(0, 0, 0, 0.125);
-  padding: 2px 10px 2px;
-  border-bottom: 1px solid #323130; }
+  input[type='checkbox']:checked + label span {
+    background: url("../img/buttons/checkbox.png") -33px top no-repeat; }
+  input[type='checkbox']:checked + span {
+    background: url("../img/buttons/checkbox.png") -33px top no-repeat; }
 
 .trigger {
   position: absolute;
@@ -513,18 +473,10 @@ input[type="checkbox"] {
     font-size: 1em;
     top: -webkit-calc(50% - 0.4em);
     left: 65%; }
-    .trigger-button i:before {
+    .trigger-button i::before {
       color: rgba(255, 255, 255, 0.8); }
 
-#top-button {
-  left: -webkit-calc(50% - 25px);
-  top: -220%;
-  z-index: -9; }
-  #top-button i {
-    top: -webkit-calc(70% - 0.4em);
-    left: 39%; }
-
-#side-button {
+#sideButton {
   top: -webkit-calc(50% - 50px);
   left: -210%; }
 
@@ -541,7 +493,7 @@ input[type="checkbox"] {
   transition: left 500ms cubic-bezier(0.17, 0.04, 0.03, 0.75);
   z-index: 99999; }
 
-#side-logo {
+#sideLogo {
   position: relative;
   width: 68%;
   height: auto;
@@ -549,7 +501,7 @@ input[type="checkbox"] {
   margin: 25px 16% 17px;
   opacity: 0.9; }
 
-#side-menu {
+#sideMenu {
   position: relative;
   font-size: 25px;
   font-weight: 200;
@@ -557,60 +509,60 @@ input[type="checkbox"] {
   list-style: none;
   top: 1.5%;
   padding: 0; }
-  #side-menu li {
+  #sideMenu li {
     text-align: center;
     padding: 2px 0; }
-    #side-menu li a {
+    #sideMenu li a {
       color: rgba(255, 255, 255, 0.65);
       transition: all 300ms linear;
       cursor: pointer; }
-      #side-menu li a:hover, #side-menu li a:active {
+      #sideMenu li a:hover, #sideMenu li a:active {
         color: rgba(255, 255, 255, 0.7);
         font-weight: 300;
         text-decoration: none; }
-    #side-menu li:after {
+    #sideMenu li::after {
       display: block;
       position: relative;
       content: '';
       background: rgba(255, 255, 255, 0.085);
       height: 1px;
       width: 200px;
-      border: none;
+      border: 0;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
       margin: 3px auto;
       padding: 0; }
 
-#sidebar-icons {
+#sidebarIcons {
   width: 40%;
   text-shadow: 0 2px rgba(0, 0, 0, 0.2);
   margin: 55px 72px 8px;
   padding: 0; }
-  #sidebar-icons li {
+  #sidebarIcons li {
     position: relative;
     font-size: 25px;
     color: rgba(255, 255, 255, 0.3);
     padding-right: 13px;
     cursor: pointer; }
-    #sidebar-icons li:first-child {
+    #sidebarIcons li:first-child {
       font-size: 27.5px;
       top: 0;
       padding-right: 10px; }
-    #sidebar-icons li:last-child {
+    #sidebarIcons li:last-child {
       font-size: 22px;
       top: -1px;
       padding-right: 0; }
-    #sidebar-icons li:hover, #sidebar-icons li:active {
+    #sidebarIcons li:hover, #sidebarIcons li:active {
       color: #888; }
-    #sidebar-icons li:hover:after {
+    #sidebarIcons li:hover::after {
       visibility: visible; }
-    #sidebar-icons li:after {
+    #sidebarIcons li::after {
       position: absolute;
       top: 125%;
       left: 25%;
       visibility: hidden;
       transition: visibility 1s ease; }
 
-#settings-menu {
+#settingsMenu {
   display: block;
   position: absolute;
   background-image: -webkit-radial-gradient(top, circle cover, #323032 22%, #2a292d 80%);
@@ -627,10 +579,11 @@ input[type="checkbox"] {
   margin-bottom: 30px;
   padding: 12px 12px 30px 16px;
   outline: none !important;
+  cursor: default;
   z-index: 1000; }
-  #settings-menu:focus, #settings-menu.active {
-    background: white !important; }
-  #settings-menu .title {
+  #settingsMenu:focus, #settingsMenu.active {
+    background: #fff !important; }
+  #settingsMenu .title {
     display: none;
     position: fixed;
     background: -webkit-linear-gradient(top, #333034 73%, transparent);
@@ -639,50 +592,51 @@ input[type="checkbox"] {
     padding: 5px 0 10px;
     vertical-align: middle;
     z-index: 99999999999; }
-    #settings-menu .title img {
+    #settingsMenu .title img {
       display: inline-block;
       height: 36px;
       width: auto;
       margin: -15px 12px 13px 2px; }
-    #settings-menu .title h2 {
+    #settingsMenu .title h2 {
       display: inline-block;
       font-size: 48px;
       font-weight: 200;
       margin-top: 12px;
       margin-bottom: 12px; }
-  #settings-menu .settings-section {
+  #settingsMenu .settings-section {
     position: relative;
     top: 74px;
     padding: 2px 0 6px 20px; }
-    #settings-menu .settings-section h3 {
+    #settingsMenu .settings-section h3 {
       color: rgba(255, 255, 255, 0.85);
       font-size: 32px;
       font-weight: 200;
       margin-top: 4px;
       margin-left: -4px;
       margin-bottom: 8px; }
-    #settings-menu .settings-section ul {
+    #settingsMenu .settings-section ul {
       color: rgba(255, 255, 255, 0.65);
       list-style: none;
       padding-left: 10px; }
-      #settings-menu .settings-section ul li {
+      #settingsMenu .settings-section ul li {
         font-size: 15.5px;
         font-weight: 300;
         letter-spacing: 0.045em;
         line-height: 2.1;
-        margin-bottom: 4px; }
-        #settings-menu .settings-section ul li .btn-group {
+        margin-bottom: 4px;
+        cursor: default; }
+        #settingsMenu .settings-section ul li .btn-group {
           position: absolute;
           font-size: 16px;
           left: 45.5%;
           max-width: 50%; }
-          #settings-menu .settings-section ul li .btn-group .filter-option {
+          #settingsMenu .settings-section ul li .btn-group .filter-option {
             position: relative;
             font-size: 13.5px;
             font-weight: 300;
             letter-spacing: 0.055em;
             top: 2px; }
-          #settings-menu .settings-section ul li .btn-group .btn.btn-default {
+          #settingsMenu .settings-section ul li .btn-group .btn.btn-default {
             background: -webkit-linear-gradient(bottom, #2d2c2d, #3d3c3d);
             color: rgba(255, 255, 255, 0.75);
             top: 3px;
@@ -693,24 +647,24 @@ input[type="checkbox"] {
             box-shadow: 0.5px 0.75px 4px rgba(0, 0, 0, 0.2);
             padding: 1px 8px 0 10px;
             outline: none !important; }
-          #settings-menu .settings-section ul li .btn-group .caret {
+          #settingsMenu .settings-section ul li .btn-group .caret {
             position: relative;
             top: -13px;
             left: 8px; }
-        #settings-menu .settings-section ul li .btn-group.open {
+        #settingsMenu .settings-section ul li .btn-group.open {
           z-index: 999; }
-      #settings-menu .settings-section ul .select {
+      #settingsMenu .settings-section ul .select {
         margin-bottom: 7px; }
-    #settings-menu .settings-section hr {
+    #settingsMenu .settings-section hr {
       position: relative;
       background: rgba(255, 255, 255, 0.06);
       height: 1px;
       left: -4px;
-      border-top: none;
+      border-top: 0;
       box-shadow: 0 2px 3px rgba(0, 0, 0, 0.45);
       margin-top: 20px;
       margin-bottom: 5px; }
-  #settings-menu .dropdown-menu {
+  #settingsMenu .dropdown-menu {
     background: #353335;
     color: rgba(255, 255, 255, 0.6);
     top: 34px;
@@ -719,29 +673,29 @@ input[type="checkbox"] {
     padding: 0;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
     z-index: -9; }
-    #settings-menu .dropdown-menu ul {
+    #settingsMenu .dropdown-menu ul {
       padding-left: 0; }
-      #settings-menu .dropdown-menu ul li:hover, #settings-menu .dropdown-menu ul li:active, #settings-menu .dropdown-menu ul li:focus {
+      #settingsMenu .dropdown-menu ul li:hover, #settingsMenu .dropdown-menu ul li:active, #settingsMenu .dropdown-menu ul li:focus {
         background: #3b393a; }
-      #settings-menu .dropdown-menu ul li a {
+      #settingsMenu .dropdown-menu ul li a {
         color: rgba(255, 255, 255, 0.6);
         font-size: 14px;
         font-weight: 300;
         padding: 3px 12px; }
-        #settings-menu .dropdown-menu ul li a:hover, #settings-menu .dropdown-menu ul li a:active, #settings-menu .dropdown-menu ul li a:focus {
+        #settingsMenu .dropdown-menu ul li a:hover, #settingsMenu .dropdown-menu ul li a:active, #settingsMenu .dropdown-menu ul li a:focus {
           background: #323032;
           color: #de545f;
           font-weight: 400;
           outline: none !important; }
-        #settings-menu .dropdown-menu ul li a:hover {
+        #settingsMenu .dropdown-menu ul li a:hover {
           background: #2f2d2f; }
-  #settings-menu .input-group.spinner {
+  #settingsMenu .input-group.spinner {
     position: relative;
     display: inline-block;
     left: 16px;
     width: 25% !important;
     vertical-align: middle; }
-    #settings-menu .input-group.spinner .form-control {
+    #settingsMenu .input-group.spinner .form-control {
       background: #3c393a;
       color: rgba(255, 255, 255, 0.7);
       font-weight: 300;
@@ -749,17 +703,17 @@ input[type="checkbox"] {
       height: 26px;
       border: 1px inset #403e3f;
       border-radius: 6px;
-      box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.35), 0px 0.25px 4px rgba(255, 255, 255, 0.15);
+      box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.35), 0 0.25px 4px rgba(255, 255, 255, 0.15);
       padding: 0 0 0 7px;
       z-index: -99; }
-  #settings-menu .input-group-btn-vertical {
+  #settingsMenu .input-group-btn-vertical {
     position: relative;
     white-space: nowrap;
     top: 1px;
     left: -16.5px;
     width: 0;
     vertical-align: middle; }
-    #settings-menu .input-group-btn-vertical .btn {
+    #settingsMenu .input-group-btn-vertical .btn {
       display: block;
       position: relative;
       float: none;
@@ -769,55 +723,58 @@ input[type="checkbox"] {
       margin-left: -1px;
       border: 1px outset #4b4a4c;
       border-radius: 0;
-      box-shadow: -1px 0px 6px rgba(0, 0, 0, 0.3);
+      box-shadow: -1px 0 6px rgba(0, 0, 0, 0.3);
       outline: none !important; }
-      #settings-menu .input-group-btn-vertical .btn:first-child {
+      #settingsMenu .input-group-btn-vertical .btn:first-child {
         background: -webkit-linear-gradient(bottom, #222 5%, #2e2c2d, #2e2c2d 90%);
         border-top-right-radius: 6px; }
-      #settings-menu .input-group-btn-vertical .btn:last-child {
+      #settingsMenu .input-group-btn-vertical .btn:last-child {
         background: -webkit-linear-gradient(top, #222 5%, #2e2c2d, #2e2c2d 90%);
         border-bottom-right-radius: 6px;
         margin-top: -2px; }
-      #settings-menu .input-group-btn-vertical .btn:active i {
+      #settingsMenu .input-group-btn-vertical .btn:active i {
         color: #de545f; }
-    #settings-menu .input-group-btn-vertical i {
+    #settingsMenu .input-group-btn-vertical i {
       position: absolute;
       color: rgba(255, 255, 255, 0.5);
       font-size: 11px;
       top: -0.7px;
       left: 4.5px; }
-  #settings-menu .menu, #settings-menu .input {
+  #settingsMenu .menu, #settingsMenu .input {
     line-height: 38px;
     vertical-align: middle; }
-  #settings-menu .toggle {
+  #settingsMenu .toggle {
     position: relative;
     left: -5px;
-    margin-bottom: 2px; }
-    #settings-menu .toggle input[type="checkbox"] {
+    margin-bottom: 2px;
+    cursor: default; }
+    #settingsMenu .toggle label {
+      cursor: pointer; }
+    #settingsMenu .toggle input[type='checkbox'] {
       height: 20px;
       width: auto;
       margin: 4px 5px -9px -10px;
       cursor: pointer; }
-    #settings-menu .toggle input[type="checkbox"] + span {
+    #settingsMenu .toggle input[type='checkbox'] + span {
       margin: 1.5px 10px 5px 0; }
-    #settings-menu .toggle:hover:after {
+    #settingsMenu .toggle:hover::after {
       transition: all 600ms ease; }
-  #settings-menu hr {
+  #settingsMenu hr {
     position: relative;
     border-top: 1px outset rgba(255, 255, 255, 0.125);
     left: -4px;
     margin-top: 20px;
     margin-bottom: 5px; }
-  #settings-menu::-webkit-scrollbar {
+  #settingsMenu::-webkit-scrollbar {
     background: transparent; }
-  #settings-menu::-webkit-scrollbar-track {
+  #settingsMenu::-webkit-scrollbar-track {
     background: transparent;
     cursor: pointer; }
-  #settings-menu::-webkit-scrollbar-thumb {
+  #settingsMenu::-webkit-scrollbar-thumb {
     background: transparent;
     border-radius: 15px;
     cursor: grab; }
-  #settings-menu [data-tooltip]:hover:after {
+  #settingsMenu [data-tooltip]:hover::after {
     content: attr(data-tooltip);
     display: block;
     position: absolute;
@@ -832,41 +789,16 @@ input[type="checkbox"] {
     left: 22%;
     max-width: 100%;
     border-radius: 8px;
+    padding: 4px 8px;
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
     white-space: normal;
-    padding: 4px 8px;
-    transition: opacity 225ms linear 1.25s; }
+    transition: opacity 225ms linear 1.25s;
+    z-index: 99; }
 
-#settings-trigger {
+#settingsTrigger {
   left: -310px; }
-  #settings-trigger div {
+  #settingsTrigger div {
     left: -210%; }
-
-#settings-button {
-  position: absolute;
-  background: transparent;
-  border: none;
-  top: 40%;
-  left: 0;
-  cursor: pointer;
-  z-index: -99; }
-  #settings-button img {
-    position: absolute;
-    height: 56px;
-    width: 28px;
-    top: 0;
-    left: -3px;
-    cursor: pointer; }
-
-.optContainer {
-  position: fixed;
-  background-color: #282726;
-  top: 32px;
-  left: 0;
-  z-index: 999;
-  width: 100%;
-  height: 23px;
-  box-shadow: 0 1px 9px rgba(0, 0, 0, 0.5); }
 
 #toolbar {
   display: none;
@@ -881,7 +813,7 @@ input[type="checkbox"] {
   transition: width 600ms cubic-bezier(0.17, 0.04, 0.03, 0.75);
   z-index: 950; }
 
-.topFade {
+.top-fade {
   position: absolute;
   top: 0;
   height: 40px;
@@ -904,7 +836,7 @@ input[type="checkbox"] {
   #textPanel #markdownText {
     background: transparent;
     outline: none;
-    border: none;
+    border: 0;
     resize: none; }
 
 #leftPanel {
@@ -913,7 +845,7 @@ input[type="checkbox"] {
   width: 50%;
   height: -webkit-calc(100% - 28px);
   transition: width 700ms cubic-bezier(0.17, 0.04, 0.03, 0.75); }
-  #leftPanel .topFade {
+  #leftPanel .top-fade {
     left: 0;
     transition-duration: 0ms; }
 
@@ -928,7 +860,7 @@ input[type="checkbox"] {
   width: 50%;
   height: -webkit-calc(100% - 28px);
   transition: 700ms cubic-bezier(0.17, 0.04, 0.03, 0.55); }
-  #rightPanel .topFade {
+  #rightPanel .top-fade {
     background-image: -webkit-linear-gradient(top, #f6f5f5 25%, transparent);
     right: 10px; }
 
@@ -941,11 +873,11 @@ input[type="checkbox"] {
   margin-top: 0.5px;
   overflow-y: auto;
   text-rendering: geometricPrecision; }
-  #previewPanel input[type="checkbox"] {
+  #previewPanel input[type='checkbox'] {
     color: #000;
     left: 0;
     opacity: 1; }
-    #previewPanel input[type="checkbox"][disabled] {
+    #previewPanel input[type='checkbox'][disabled] {
       cursor: default; }
 
 .editor-toolbar {
@@ -978,11 +910,6 @@ input[type="checkbox"] {
   text-indent: -10px;
   margin: 0 6px; }
 
-.toolContainer {
-  width: 16px;
-  float: left;
-  margin: 3.5px 5px 0 0; }
-
 .form-group {
   margin-left: -5px;
   margin-bottom: 5px; }
@@ -992,7 +919,7 @@ input[type="checkbox"] {
     letter-spacing: 0.035em;
     line-height: 2.1;
     margin-bottom: 0; }
-  .form-group input[type="text"] {
+  .form-group input[type='text'] {
     background: #3c393a;
     color: rgba(255, 255, 255, 0.6);
     letter-spacing: 0.03em;
@@ -1003,10 +930,15 @@ input[type="checkbox"] {
     margin-top: 3px;
     margin-bottom: 10px; }
 
+#editMenu {
+  min-width: 175px !important; }
+
+#viewMenu {
+  min-width: 195px !important; }
+
 .bg-gradient1 span,
-.bg-gradient1:before {
+.bg-gradient1::before {
   background: #3e3d3c;
-  background: -moz-linear-gradient(180deg, #3e3d3c 0, #2f2e2d 80%, #2f2e2d 100%);
   background: -webkit-linear-gradient(180deg, #3e3d3c 0, #2f2e2d 80%, #2f2e2d 100%);
   background: linear-gradient(180deg, #3e3d3c 0, #2f2e2d 80%, #2f2e2d 100%); }
 
@@ -1027,7 +959,7 @@ input[type="checkbox"] {
   border-radius: 5px;
   z-index: 99999;
   visibility: hidden; }
-  .search-dialog #search-icon {
+  .search-dialog #searchIcon {
     position: relative;
     background: transparent;
     color: rgba(255, 255, 255, 0.6);
@@ -1056,15 +988,15 @@ input[type="checkbox"] {
   line-height: 1.5;
   width: 100%;
   height: 100%;
-  border: none;
+  border: 0;
   word-wrap: break-word;
   text-rendering: geometricPrecision;
   overflow-y: auto;
   outline: none !important;
   resize: none; }
 
-[data-tooltip]:after {
-  content: "";
+[data-tooltip]::after {
+  content: '';
   display: block;
   position: absolute;
   background: transparent;
@@ -1077,14 +1009,14 @@ input[type="checkbox"] {
   margin-left: -5px;
   padding: 4px 6px;
   opacity: 0;
-  transition: opacity 200ms linear 1s;
+  transition: opacity 200ms linear 1.25s;
   z-index: 20; }
 
-[data-tooltip]:hover:after {
+[data-tooltip]:hover::after {
   content: attr(data-tooltip);
   display: block;
   position: absolute;
-  background-image: -webkit-linear-gradient(top, #383637, #373635);
+  background-image: -webkit-linear-gradient(top, #333132, #323130);
   color: rgba(255, 255, 255, 0.75);
   font-family: "Roboto", "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 12px;
@@ -1092,13 +1024,12 @@ input[type="checkbox"] {
   left: 5%;
   top: -250%;
   border-radius: 4px;
-  box-shadow: 0 0 4px #222;
+  box-shadow: 0 -1.5px 8px 0 #222;
   white-space: nowrap;
   margin-left: -5px;
   padding: 4px 6px;
-  border: 1px outset #444;
   opacity: 0.9;
-  transition: opacity 200ms linear 1s;
+  transition: opacity 200ms linear 1.25s;
   z-index: 20; }
 
 .fa-link {
@@ -1145,7 +1076,7 @@ input[type="checkbox"] {
   min-width: 51px;
   font-size: 17px;
   padding: 0 20px;
-  border: none;
+  border: 0;
   overflow: visible;
   width: 51px;
   height: 32px;
@@ -1155,10 +1086,10 @@ input[type="checkbox"] {
 .switch__input {
   position: absolute;
   overflow: hidden;
-  right: 0px;
-  top: 0px;
-  left: 0px;
-  bottom: 0px;
+  right: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
   padding: 0;
   border: 0;
   opacity: 0.001;
@@ -1174,10 +1105,10 @@ input[type="checkbox"] {
 .switch__toggle {
   background-color: #333;
   position: absolute;
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   border-radius: 30px;
   transition-property: all;
   transition-duration: 0.35s;
@@ -1240,10 +1171,10 @@ input:disabled + .switch__toggle {
 .switch.switch--material .switch__input {
   position: absolute;
   overflow: hidden;
-  right: 0px;
-  top: 0px;
-  left: 0px;
-  bottom: 0px;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
   padding: 0;
   border: 0;
   opacity: 0.001;
@@ -1258,7 +1189,7 @@ input:disabled + .switch__toggle {
 
 .switch.switch--material .switch__handle {
   background-image: -webkit-radial-gradient(#333, #2e2e2e);
-  left: 0px;
+  left: 0;
   margin-top: -5px;
   width: 20px;
   height: 20px;
@@ -1279,7 +1210,7 @@ input:disabled + .switch__toggle {
   cursor: default;
   pointer-events: none; }
 
-.switch.switch--material .switch__handle:before {
+.switch.switch--material .switch__handle::before {
   background: transparent;
   content: '';
   display: block;
@@ -1287,14 +1218,14 @@ input:disabled + .switch__toggle {
   height: 100%;
   border-radius: 50%;
   z-index: -1;
-  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.12);
   transition: box-shadow 0.1s linear; }
 
-.switch.switch--material.switch--active .switch__handle:before {
-  box-shadow: 0px 0px 0px 14px rgba(0, 0, 0, 0.12); }
+.switch.switch--material.switch--active .switch__handle::before {
+  box-shadow: 0 0 0 14px rgba(0, 0, 0, 0.12); }
 
-.switch.switch--material.switch--active input:checked + .switch__toggle .switch__handle:before {
-  box-shadow: 0px 0px 0px 14px #d62937; }
+.switch.switch--material.switch--active input:checked + .switch__toggle .switch__handle::before {
+  box-shadow: 0 0 0 14px #d62937; }
 
 .switch.switch--material .switch__touch {
   position: absolute;
