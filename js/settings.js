@@ -106,10 +106,9 @@ var formatHead = () => {
 			preview.css('paddingTop', '30px');
 		} else {
 			menuToggle.show();
-			textPanel.css('paddingTop', '0px');
 			dragArea.css({ 'width': 'calc(100% - 117px)' });
 			editor.css('paddingTop', '0px');
-			preview.css('paddingTop', '30px');
+			preview.css('paddingTop', '25px');
 		}
 	}
 };
@@ -129,7 +128,7 @@ function adaptTheme(color, luminosity) {
 	} else {
 		menuButton.css('color', 'rgba(255, 255, 255, 0.07)');
 		menuButton.mouseover(function() {
-			$(this).css('color', 'rgba(255, 255, 255, 0.45)');
+			$(this).css('color', 'rgba(255, 255, 255, 0.35)');
 		}).mouseout(function() {
 			$(this).css('color', 'rgba(255, 255, 255, 0.07)');
 		});
@@ -253,7 +252,7 @@ function toggleCustomCSS() {
 				return notify('An error ocurred while accessing the custom CSS file', 'error');
 			if(data.toString().length < 6) {
 				$('#custom-css-modal').modal();
-				if($('#settings-menu').css('left') < 0)
+				if($('#settingsMenu').css('left') < 0)
 					toggleSettingsMenu();
 			} else {
 				$('#custom-css').attr('value', data);
@@ -347,7 +346,7 @@ function manageWindowSize() {
 	settings.set('windowHeight', parseInt($(window).height(),10));
 }
 
-// Handle settings-menu changes
+// Handle settingsMenu changes
 $('#editorFontSize-input, #editorFontSize-up, #editorFontSize-down').bind('keyup mouseup', function() {
 	var value = parseFloat($('#editorFontSize-input').val());
 	$('#textPanel > div').css('fontSize', value.toString()+'px');

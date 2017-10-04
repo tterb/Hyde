@@ -60,9 +60,9 @@
     <button id="menuButton" onclick="toggleMenu()"><span class="mif-menu"></span></button>
   </div>
   <div id="metacity">
-    <button id="close" class="winButton" style="cursor: pointer;"><img class="active" src="img/buttons/close_active.png" alt="Close"/><img class="inactive" src="img/buttons/close.png" alt="Close"/></button>
-    <button id="maximize" class="winButton" style="cursor: pointer;"><img class="active" src="img/buttons/max_active.png" alt="Maximize" onclick="toggleMaximize();"/><img class="inactive" src="img/buttons/max.png" alt="Maximize" onclick="toggleMaximize();"/></button>
-    <button id="minimize" class="winButton" style="cursor: pointer;"><img class="active" src="img/buttons/min_active.png" alt="Minimize"/><img class="inactive" src="img/buttons/min.png" alt="Minimize"/></button>
+    <button id="close" class="window-button" style="cursor: pointer;"><img class="active" src="img/buttons/close_active.png" alt="Close"/><img class="inactive" src="img/buttons/close.png" alt="Close"/></button>
+    <button id="maximize" class="window-button" style="cursor: pointer;"><img class="active" src="img/buttons/max_active.png" alt="Maximize" onclick="toggleMaximize();"/><img class="inactive" src="img/buttons/max.png" alt="Maximize" onclick="toggleMaximize();"/></button>
+    <button id="minimize" class="window-button" style="cursor: pointer;"><img class="active" src="img/buttons/min_active.png" alt="Minimize"/><img class="inactive" src="img/buttons/min.png" alt="Minimize"/></button>
   </div>
   <div id="appMenu" class="hidden">
     <!-- File -->
@@ -86,8 +86,8 @@
     </div>
     <!-- Edit -->
     <div class="btn-group">
-      <button class="btn dropdown-toggle" type="button" id="edit-menu-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Edit</button>
-      <ul id="edit-menu" class="dropdown-menu">
+      <button class="btn dropdown-toggle" type="button" id="editMenu-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Edit</button>
+      <ul id="editMenu" class="dropdown-menu">
         <li tabindex="-1" href="#" onclick="cm.execCommand('undo');"><a class="dropdown-item">Undo</a><span>Ctrl + Z</span></li>
         <li tabindex="-1" href="#" onclick="cm.execCommand('redo');"><a class="dropdown-item">Redo</a><span>Ctrl + Shift + Z</span></li>
         <li class="dropdown-divider"></li>
@@ -110,8 +110,8 @@
     </div>
     <!-- View -->
     <div class="btn-group">
-      <button class="btn dropdown-toggle" type="button" id="view-menu-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">View</button>
-      <ul id="view-menu" class="dropdown-menu">
+      <button class="btn dropdown-toggle" type="button" id="viewMenu-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">View</button>
+      <ul id="viewMenu" class="dropdown-menu">
         <li tabindex="-1" href="#" onclick="reloadWin()"><a class="dropdown-item">Reload</a><span>Ctrl + R</span></li>
         <li class="dropdown-divider"></li>
         <li tabindex="-1" href="#" onclick="toggleMenu();"><a class="dropdown-item">Toggle Menu</a><span>Ctrl + M</span></li>
@@ -196,27 +196,27 @@
   <!-- Editor Area -->
   <section id="editArea" class="row">
     <div class="trigger left" id="left-trigger">
-      <div id="side-button" class="trigger-button" onclick="toggleSidebar()" style="visibility:hidden;">
+      <div id="sideButton" class="trigger-button" onclick="toggleSidebar()" style="visibility:hidden;">
         <i id="side-icon" class="fa fa-chevron-right"></i>
       </div>
     </div>
     <section id="sidebar">
-      <img id="side-logo" src="img/logo.png" alt="logo"/>
-      <ul id="side-menu">
+      <img id="sideLogo" src="img/logo.png" alt="logo"/>
+      <ul id="sideMenu">
         <li id="sidebar-new"><a onclick="openNewWindow();">New</a></li>
         <li id="sidebar-open"><a>Open</a></li>
         <li id="sidebar-save"><a onclick="saveFile();">Save</a></li>
         <li id="sidebar-settings"><a onclick="toggleSettingsMenu();">Settings</a></li>
         <li id="sidebar-about"><a href="#" data-toggle="modal" data-target="#about-modal" onclick="toggleSidebar()">About</a></li>
       </ul>
-      <ul id="sidebar-icons">
+      <ul id="sidebarIcons">
         <li class="fa fa-github" data-tooltip="View on GitHub"><a onclick="openInBrowser('https://github.com/JonSn0w/Hyde')"></a></li>
         <li class="fa fa-bug" data-tooltip="Report an Issue" onclick="openInBrowser('https://github.com/JonSn0w/Hyde/issues/new')"></li>
         <li class="fa fa-file-text" data-tooltip="Read the Docs"><a onclick="openInBrowser('https://JonSn0w.github.io/Hyde/docs')"></a></li>
       </ul>
     </section>
     <!-- Settings Menu -->
-    <section id="settings-menu">
+    <section id="settingsMenu">
       <div id="settings-title" class="title">
         <img id="cog" src="img/cog.png"/><h2>Settings</h2>
       </div>
@@ -385,29 +385,29 @@
         </ul>
       </div>
     </section>
-    <div class="trigger left" id="settings-trigger">
-      <div id="side-button" class="trigger-button" onclick="toggleSettingsMenu()" style="visibility:hidden;">
+    <div class="trigger left" id="settingsTrigger">
+      <div id="sideButton" class="trigger-button" onclick="toggleSettingsMenu()" style="visibility:hidden;">
         <i id="side-icon" class="fa fa-chevron-left"></i>
       </div>
     </div>
     <div id="leftPanel">
-        <div id="leftFade" class="topFade"></div>
+        <div id="leftFade" class="top-fade"></div>
         <div id="textPanel" class="col-md-6 full-height" style="background:hsl(220, 11%, 18%);">
           <textarea id="markdownText" placeholder="" autofocus></textarea>
         </div>
     </div>
     <div id="rightPanel">
-        <div id="rightFade" class="topFade"></div>
+        <div id="rightFade" class="top-fade"></div>
         <div id="previewPanel" class="col-md-6 full-height">
           <div id="mdPreview"></div>
           <textarea id="htmlPreview" placeholder="" readOnly></textarea>
         </div>
     </div>
   </section>
-  <div class="search-dialog" id="search-container"><span id="search-icon" class="fa fa-search"></span></div>
+  <div class="search-dialog" id="search-container"><span id="searchIcon" class="fa fa-search"></span></div>
   <div class="bottom-bar">
-    <div id="bottom-file" data-tooltip=""></div><span id="file-status" data-tooltip="unsaved changes">*</span>
-    <div id="wordcount"></div>
+    <div id="bottomFile" data-tooltip=""></div><span id="fileStatus" data-tooltip="unsaved changes">*</span>
+    <div id="wordCount"></div>
     <div id="draggable" style="-webkit-app-region:drag"></div>
     <div class="bottom-icons" data-tooltip="Sync Scrolling">
     <button id="syncScrollToggle" onclick="toggleSyncScroll();"></button></div>
@@ -466,7 +466,7 @@
           <section class="modal--default__content" id="modal-body-region">
             <div>
               <span class="unsaved-icon fa fa-exclamation-circle"></span>
-              <span id="unsaved-body"></span>
+              <span id="unsavedContent"></span>
             </div>
           </section>
         </div>

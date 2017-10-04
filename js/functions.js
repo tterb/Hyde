@@ -12,13 +12,13 @@ function toggleDevTools() {
 
 function showUnsavedDialog() {
   var modal = $('#unsaved-modal'),
-      filename = $('#bottom-file').text();
+      filename = $('#bottomFile').text();
   if(modal.is(':visible')) {
     modal.modal('hide');
   } else {
     if(filename === 'New document')
       filename = 'This document';
-    $('#unsaved-body').text(filename.toString()+' has unsaved changes, would you like to save them?');
+    $('#unsavedContent').text(filename.toString()+' has unsaved changes, would you like to save them?');
     modal.modal();
   }
 }
@@ -49,7 +49,7 @@ function closeWindow(win) {
 
 function toggleSidebar() {
   var sidebar = $('#sidebar'),
-      button = $('#side-button'),
+      button = $('#sideButton'),
       buttonIcon = $('#side-icon'),
       trigger = $('#left-trigger');
   if(parseInt(sidebar.css('left'), 10) < 0) {
@@ -70,19 +70,16 @@ function toggleSidebar() {
 }
 
 function toggleSettingsMenu() {
-  var settingsMenu = $('#settings-menu'),
-      trigger = $('#settings-trigger'),
-      button = $('#settings-button'),
+  var settingsMenu = $('#settingsMenu'),
+      trigger = $('#settingsTrigger'),
       title = $('#settings-title');
   if(parseInt(settingsMenu.css('left'),10) < 0) {
-    button.css('visibility','hidden');
     settingsMenu.css('left', '0px');
     trigger.css('left','310px');
     title.css('display', 'block');
     trigger.show();
     settingsMenu.focus();
   } else {
-    button.css('visibility','hidden');
     settingsMenu.css('left', '-310px');
     title.css('display', 'none');
     trigger.hide();
@@ -116,8 +113,8 @@ var isClean = () => { return this.cm.doc.isClean(this.latestGeneration); };
 // Update window title and status bar filename
 var updateWindowTitle = (path) => {
   var appName = 'Hyde',
-      activeFile = $('#bottom-file'),
-      status = $('#file-status'),
+      activeFile = $('#bottomFile'),
+      status = $('#fileStatus'),
       saveSymbol = '*',
       filename,
       title;

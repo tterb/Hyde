@@ -34,6 +34,7 @@ let conf = {
 	autoCloseTags: settings.get('matchBrackets'),
   matchBrackets: settings.get('matchBrackets'),
   matchTags: settings.get('matchBrackets'),
+	highlightSelectionMatches: true,
   cursorScrollMargin: 50,
 	cursorBlinkRate: 425,
 	autofocus: true,
@@ -56,7 +57,6 @@ if(settings.get('enableSpellCheck')) {
 }
 
 var cm = CodeMirror.fromTextArea(document.getElementById('markdownText'), conf);
-var htmlEditor;
 
 if(os.type() === 'Darwin') {
 	$('#settings-title').css('paddingTop', '0.9em');
@@ -136,21 +136,13 @@ window.onload = () => {
 		markdownPreview.innerHTML = renderedMD;
 		$('#mdPreview p').each(function() {
 			if($(this).html() === '<br>') {
-				$(this).css('margin-bottom', '0px');
+				$(this).css('margin-bottom', '5px');
 			}
 		});
 		// Markdown -> HTML
 		converter.setOption('noHeaderId', true);
 		html = converter.makeHtml(markdownText);
-		if(settings.get('previewMode','html') === 'html') {
-      htmlEditor = CodeMirror.fromTextArea(document.getElementById('htmlPreview'), conf);
-      htmlEditor.setValue(html);
-      htmlEditor.setOption('base', 'html');
-      htmlEditor.setOption('theme', 'neo');
-      htmlEditor.setOption('readOnly', true);
-      $('#previewPanel').css('paddingTop', 0, '!important');
-    }
-		// $('#htmlPreview').val(html);
+		$('#htmlPreview').val(html);
 		// Open preview links in default browser
 		$('#mdPreview a').on('click', function() {
 			event.preventDefault();
@@ -171,15 +163,15 @@ window.onload = () => {
 
 	// Read and handle file if given from commandline
 	var filePath = __args__.file;
-	var extensions = ['.md','.markdown','.mdown','.mkdn','.mkd','.mdwn','.mdtxt','.mdtext'];
-	if(filePath && extensions.indexOf(path.extname(filePath)) > -1) {
+	var ext = ['.md','.markdown','.mdown','.mkdn','.mkd','.mdwn','.mdtxt','.mdtext'];
+	if(filePath && ext.indexOf(path.extname(filePath)) > -1) {
 		argHandling(filePath);
 	} else if(main.getWindows().size <= 1) {
 		storage.get('markdown-savefile', function(err, data) {
-			if(err) throw err;
+			if(err) notify(err, 'error');
 			if('filename' in data) {
 				fs.readFile(data.filename, 'utf-8', function(err, data) {
-					if(err) notify('An error ocurred while opening the file' + err.message, 'error');
+					if(err) notify('The last saved file no longer exists or has moved', 'info');
 					cm.getDoc().setValue(data);
 					cm.getDoc().clearHistory();
 				});
@@ -212,7 +204,7 @@ window.onload = () => {
 		createTable($('#columns').val(),$('#rows').val(),$('.on').attr('id').slice(0,-5));
 	});
 };
-$('#settings-menu').focus(function() {
+$('#settingsMenu').focus(function() {
 	notify('Handler for .focus() called.', 'success');
 });
 
@@ -336,14 +328,26 @@ $('#leftAlign, #centerAlign, #rightAlign').on('click', function() {
 
 $('html').click(function() {
   commandPalette().hide();
-  if($('#settings-menu').css('left') === '0px')
-    sendIPC('toggle-settings');
+  // if($('#settingsMenu').css('left') === '0px')
+  //   sendIPC('toggle-settings');
+});
+// Close on escape key
+$(document).keydown((e) => {
+  if(e.keyCode === 27) {
+    commandPalette().hide();
+		if($('#settingsMenu').css('left') === '0px')
+			sendIPC('toggle-settings');
+  }
+});
+
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
 });
 
 // Word count
 function countWords() {
-	var wordcount = cm.getValue().split(/\b[\s,.-:;]*/).length;
-	document.getElementById('wordcount').innerHTML = 'words: ' + wordcount.toString();
+	var wordCount = cm.getValue().split(/\b[\s,.-:;]*/).length;
+	$('#wordCount').html('words: ' + wordCount.toString());
 	return cm.getValue().split(/\b[\s,.-:;]*/).length;
 }
 
