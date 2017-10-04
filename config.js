@@ -1,6 +1,6 @@
 'use strict';
 const Config = require('electron-config');
-module.exports = new Config ({
+module.exports = new Config({
   defaults: {
     // UI Elements
     windowWidth: 1000,
@@ -14,7 +14,6 @@ module.exports = new Config ({
     editorTheme: 'one-dark',
     editorFontSize: 11.5,
     dynamicEditor: false,
-    tabSize: 2,
     lineNumbers: false,
     showTrailingSpace: false,
     matchBrackets: true,
@@ -22,7 +21,7 @@ module.exports = new Config ({
     // Preview
     previewMode: 'markdown',
     previewProfile: 'Default',
-    previewFontSize: 13.5,
+    previewFontSize: 14,
     previewLineHeight: 1.45,
     customCSS: false,
     mathRendering: true,
@@ -30,6 +29,6 @@ module.exports = new Config ({
     // Other
     showTooltips: true,
     keepInTray: false,
-    frontMatterTemplate: ""
+    frontMatterTemplate: ''
   }
 });
