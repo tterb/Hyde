@@ -185,9 +185,6 @@ window.onload = () => {
 	$('#minimize').on('click', () => { remote.BrowserWindow.getFocusedWindow().minimize(); });
 	$('#close').on('click', () => { closeWindow(remote.BrowserWindow.getFocusedWindow()); });
 	$('#sidebar-new').on('click', () => { main.createWindow(); });
-	$('#unsavedConfirm').on('click', () => { saveFile(); });
-	$('#unsavedDeny').on('click', () => { remote.BrowserWindow.getFocusedWindow().close(); });
-	// Handle link clicks in application
 	$('.link').on('click', function() {
 		event.preventDefault();
 		openInBrowser($(this).attr('href'));
