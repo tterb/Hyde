@@ -5,7 +5,7 @@ function createModals() {
 }
 
 function createAboutModal() {
-	var content = '<img id="hyde-img" src="./img/Hyde.png"/>' +
+	var content = '<img id="hydeImg" src="./img/Hyde.png"/>' +
 		'<div class="about-content">' +
 			'<ul class="about-info">' +
 				'<li>Created by <a href="openInBrowser('+'"https://JonSn0w.github.io/"' + ')" id="name">Brett Stevenson</a></li>' +
@@ -29,11 +29,11 @@ function createMarkdownModal() {
 			'<tr><td><a href='+packageJSON.repository.url+' target="_rick">Link</a></td><td>[title](http://)</td></tr>' +
 			'<tr><td>Image</td><td>![alt](http://)</td></tr>' +
 			'<tr><td id="code"><code>code</code></td><td>`code`</td></tr>' +
-			'<tr><td id="code-block"><pre style="display: inline-block; margin: 12px 0 2px"><code><span class="keyword">var </span>code = <span class="string">"formatted"</span>;</code></pre></td>' +
+			'<tr><td id="codeBlock"><pre style="display: inline-block; margin: 12px 0 2px"><code><span class="keyword">var </span>code = <span class="string">"formatted"</span>;</code></pre></td>' +
 				'<td style="line-height: 150%">``` <i style="color: rgba(0,0,0,0.5)">(shift+enter for line break)</i><br>var code = "formatted";<br>```</td>' +
 			'</tr>' +
 			'<tr><td style="font-size:125%;padding:0 17px">L<sup>a</sup>T<sub>e</sub>X</td><td>$LaTeX$</td></tr>' +
-			'<tr><td style="padding:6px 15px 8px"><img src="img/emoji/smile.png" height="27"/></td><td>:smile:' +
+			'<tr><td id="emoji"><img src="img/emoji/smile.png" height="27"/></td><td>:smile:' +
       '<tr><td id="icon"><span class="fa fa-github"></span></td><td>@github</td></tr>'
 		'</table>' +
 	'</section>';

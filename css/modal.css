@@ -1,10 +1,19 @@
 .modal-content {
   position: relative;
-  background: -webkit-linear-gradient(top, #272625, #232221) !important;
-  color: #e5e5e5;
   top: 20px;
+  background: -webkit-linear-gradient(top, #333231, #292827);
+  color: rgba(255, 255, 255, 0.75);
   border-radius: 15px;
+  border: 1px outset #303030;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.6);
   overflow-y: auto; }
+  .modal-content .modal-body {
+    background-image: -webkit-linear-gradient(top, #292728, #222);
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 15.5px;
+    font-weight: 300;
+    line-height: 1.45;
+    padding: 8px 15px; }
 
 .modal--default__content {
   position: relative;
@@ -76,7 +85,7 @@
       margin-left: 1px;
       margin-right: 8px;
       text-shadow: 0 0 8px rgba(0, 0, 0, 0.6); }
-    #unsaved-modal .modal-dialog .modal-body #unsaved-body {
+    #unsaved-modal .modal-dialog .modal-body #unsavedContent {
       position: relative;
       top: 4px;
       left: 8px; }
@@ -91,20 +100,8 @@
       #unsaved-modal .modal-dialog .unsaved-buttons button:last-child {
         margin-right: 18px; }
 
-.modal-content {
-  background: -webkit-linear-gradient(top, #333231, #292827);
-  color: rgba(255, 255, 255, 0.75);
-  border-radius: 15px;
-  border: 1px outset #303030; }
-  .modal-content .modal-body {
-    background-image: -webkit-linear-gradient(top, #292728, #222);
-    color: rgba(255, 255, 255, 0.75);
-    font-size: 15.5px;
-    font-weight: 300;
-    line-height: 1.45;
-    padding: 8px 15px; }
-
 .align-buttons {
+  border: 1px transparent;
   margin-bottom: 9px; }
   .align-buttons #leftAlign {
     position: relative;
@@ -128,7 +125,7 @@
   background: -webkit-linear-gradient(top, #454344, #2a2829);
   height: 28px;
   border-radius: 0px !important;
-  margin-top: 10px !important;
+  margin-top: 9px !important;
   margin-left: 0 !important;
   margin-right: 0 !important;
   padding: 0 10px !important;
@@ -137,19 +134,19 @@
   .button-group i {
     position: relative;
     color: rgba(255, 255, 255, 0.5);
-    font-size: 0.55em;
-    top: -5px; }
+    font-size: 0.9em;
+    top: 0; }
   .button-group.on {
     background: #393738;
+    border: 1px inset #444;
     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.6); }
     .button-group.on i {
       position: relative;
       color: #de545f;
-      top: -3px;
-      font-size: 0.7em; }
+      top: 1px;
+      font-size: 1em; }
     .button-group.on:hover {
       background: #393738;
-      color: #de545f;
       box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.6); }
   .button-group:last-child {
     border-top-right-radius: 15px !important;
@@ -231,6 +228,7 @@
   letter-spacing: 0.035em;
   width: 90%;
   text-align: left;
+  vertical-align: sub;
   margin: 22px auto 3px 30px; }
   #table-modal .table-content span {
     display: inline-block;
@@ -246,9 +244,9 @@
   float: right; }
   #table-modal .modal-close img {
     position: absolute;
-    width: 15px;
-    top: 12px;
-    right: 14px; }
+    width: 14px;
+    top: 10px;
+    right: 11px; }
   #table-modal .modal-close:active > img, #table-modal .modal-close > img:hover {
     content: url("../img/buttons/close_active.png"); }
 
@@ -342,16 +340,18 @@
       padding-left: 12px; }
     #markdown-modal .markdown-help-content td pre {
       font-size: 12px;
-      padding: 9px; }
+      padding: 9px 5px; }
   #markdown-modal .markdown-help-content #header {
     font-size: 24px;
     font-weight: 600;
     padding-left: 12px;
     padding-bottom: 5px; }
   #markdown-modal .markdown-help-content #code {
-    padding-left: 13px; }
-  #markdown-modal .markdown-help-content #code-block {
+    padding: 4px 20px 4px 13px; }
+  #markdown-modal .markdown-help-content #codeBlock {
     padding-left: 8px; }
+  #markdown-modal .markdown-help-content #emoji {
+    padding: 4px 15px 6px; }
   #markdown-modal .markdown-help-content #icon {
     font-size: 2.5em;
     padding: 7px 15px; }
@@ -392,7 +392,7 @@
       right: -4px; }
     #about-modal .modal-close:active > img, #about-modal .modal-close > img:hover {
       content: url("../img/buttons/close_active.png"); }
-  #about-modal #hyde-img {
+  #about-modal #hydeImg {
     width: 80%;
     height: auto;
     margin: auto;
@@ -482,5 +482,5 @@
   font-size: 90%;
   letter-spacing: 0.045em;
   line-height: 1.9;
-  border-radius: 9px;
-  padding: 3px 9px 4px; }
+  border-radius: 8px;
+  padding: 4px 9px 5px; }
