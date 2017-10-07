@@ -1,4 +1,5 @@
 const ipc = electron.ipcRenderer;
+let target = '';
 
 // Handling file saving through IPCRenderer
 function saveAs() {
@@ -117,7 +118,7 @@ ipc.on('insert-link', () => { insert('link'); });
 ipc.on('toggle-menu', () => { if(process.platform !== 'darwin') toggleMenu(); });
 ipc.on('toggle-preview', () => { togglePreview(); });
 ipc.on('win-close', () => { closeWindow(remote.BrowserWindow.getFocusedWindow()); });
-ipc.on('win-reload', () => { reloadWin(); });
+ipc.on('win-reload', () => { showUnsavedDialog('reload'); });
 ipc.on('insert-code', () => { toggleFormat('code'); });
 ipc.on('insert-quote', () => { toggleBlockquote(); });
 ipc.on('toggle-toolbar', () => { toggleToolbar(); });
@@ -161,6 +162,7 @@ ipc.on('about-modal', () => { $('#about-modal').modal(); });
 ipc.on('markdown-modal', () => { $('#markdown-modal').modal(); });
 ipc.on('table-modal', () => { $('#table-modal').modal(); });
 ipc.on('insert-emoji', () => { $('#emoji-modal').modal(); });
-ipc.on('keybinding-modal', () => { $('#keybinding-modal').modal(); });
+ipc.on('keybinding-modal', () => { settings.set('targetFile', '/docs/keybindings.md'); main.createWindow(); });
 ipc.on('open-file-manager', () => { shell.showItemInFolder(currentFile); });
+ipc.on('target-file', () => { return target; });
 ipc.on('set-theme', function(data) { setEditorTheme(data); });

@@ -2,7 +2,10 @@ const clipboard = require('electron');
 const parsePath = require('parse-filepath');
 
 function reloadWin() {
-    remote.getCurrentWindow().reload();
+  if(!this.isClean()) {
+    showUnsavedDialog('reload');
+  }
+  remote.getCurrentWindow().reload();
 }
 
 function toggleDevTools() {
@@ -10,18 +13,38 @@ function toggleDevTools() {
   window.toggleDevTools();
 }
 
-function showUnsavedDialog() {
+function showUnsavedDialog(opt) {
   var modal = $('#unsaved-modal'),
       filename = $('#bottomFile').text();
-  if(modal.is(':visible')) {
+      action = () => { closeWindow(remote.BrowserWindow.getFocusedWindow()); };
+  if(opt === 'reload')
+    action = () => { remote.getCurrentWindow().reload(); };
+  if(filename === 'New document')
+    filename = 'This document';
+  $('#unsavedContent').text(filename.toString()+' has unsaved changes, would you like to save them?');
+  modal.modal();
+  modal.on('shown.bs.modal', () => {
+    document.activeElement.blur();
+    $('#unsavedConfirm').focus();
+  });
+  $('#unsavedConfirm').on('keypress click', (e) => {
+    if(e.which === 13 || e.type === 'click') {
+      saveFile();
+      modal.modal('hide');
+      setTimeout(() => action(), 200);
+    }
+  });
+  $('#unsavedDeny').on('click', () => {
+    this.setClean();
     modal.modal('hide');
-  } else {
-    if(filename === 'New document')
-      filename = 'This document';
-    $('#unsavedContent').text(filename.toString()+' has unsaved changes, would you like to save them?');
-    modal.modal();
-  }
+    setTimeout(() => action(), 200);
+  });
 }
+
+// $('#unsaved-modal').on('shown.bs.modal', () => {
+//   document.activeElement.blur();
+//   $('#unsavedConfirm').focus();
+// });
 
 // FIXME: Fix open file in new window
 function openNewFile(file) {

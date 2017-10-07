@@ -165,7 +165,7 @@
         <li tabindex="-1" href="#" data-toggle="modal" data-target="#markdown-modal"><a class="dropdown-item">Markdown Help</a></li>
         <li class="dropdown-divider"></li>
         <li tabindex="-1" href="#"><a class="dropdown-item" class="link" onclick="openInBrowser('https://JonSn0w.github.io/Hyde/docs')">Documentation</a></li>
-        <li tabindex="-1" href="#" onclick="openInBrowser('https://JonSn0w.github.io/Hyde/docs#keybindings')"><a class="dropdown-item">Keybindings</a></li>
+        <li tabindex="-1" href="#" onclick="sendIPC('keybinding-modal')"><a class="dropdown-item">Keybindings</a></li>
         <li tabindex="-1"><a class="dropdown-item" class="link" onclick="openInBrowser('https://github.com/JonSn0w/Hyde/issues/new')">Report an Issue</a></li>
         <li class="dropdown-divider"></li>
         <li tabindex="-1" href="#" data-toggle="modal" data-target="#about-modal"><a class="dropdown-item">About Hyde</a></li>
@@ -245,16 +245,6 @@
               <option>Solarized Light</option><option>Tomorrow Night</option><option>Yeti</option><option>Zenburn</option>
             </select>
           </li>
-          <!-- <li id="lineNumbers" class="toggle">
-            <label class="switch switch--material">
-            <input type="checkbox" class="switch__input switch--material__input" value="" setting="lineNumbers">
-            <div class="switch__toggle switch--material__toggle">
-              <div class="switch__handle switch--material__handle">
-              </div>
-            </div>
-            </label>
-            <span>Line numbers</span>
-          </li> -->
           <li id="dynamicEditor" class="toggle" data-tooltip="Add syntax-driven text formatting to editor">
             <label class="switch switch--material">
             <input type="checkbox" class="switch__input switch--material__input" value="" setting="dynamicEditor">
@@ -415,7 +405,7 @@
     <button id="previewToggle" class="fa fa-eye" onclick="togglePreview();"></button></div>
   </div>
   <!-- Table Modal -->
-  <div class="modal fade" id="table-modal" tabindex="-1" role="dialog">
+  <div class="modal fade animated bounceIn" id="table-modal" tabindex="-1" role="dialog">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -471,7 +461,7 @@
           </section>
         </div>
         <div class="unsaved-buttons">
-          <button href="#" id="unsavedConfirm" class=" modal-button"><span>Save</span></button>
+          <button href="#" id="unsavedConfirm" class="modal-button"><span>Save</span></button>
           <button href="#" id="unsavedDeny" class="modal-button"><span>Don't Save</span></button>
         </div>
       </div>

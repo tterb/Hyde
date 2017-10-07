@@ -32,6 +32,7 @@ const settings = require('./config');
 const tray = require('./tray');
 const menuTemplate = require('./js/menu');
 const keepInTray = settings.get('keepInTray');
+const setting = require('electron-settings');
 const fs = require('fs');
 const path = require('path');
 const window = require('electron-window');
@@ -97,7 +98,12 @@ process.argv.forEach(function(val, index, array) {
 
 const createWindow = exports.createWindow = (file) => {
   let newWindow = window.createWindow(getConfig());
-  let argFile = { file: readFile };
+  let argFile;
+  if(setting.has('targetFile')) {
+    argFile = { file: path.join(__dirname, setting.get('targetFile')) };
+    setting.delete('targetFile');
+  }
+  // let argFile = { file: path.join(__dirname, '/docs/keybindings.md') };
   windows.add(newWindow);
   newWindow.showUrl(path.join(__dirname, 'index.html'), argFile);
   // newWindow.showUrl(mainPage);
