@@ -1,5 +1,4 @@
 'use strict';
-
 const gulp = require('gulp');
 const fs = require('fs');
 const sass = require('gulp-sass');
@@ -12,12 +11,6 @@ const exec = require('child_process').exec;
 const appVersion = config.version;
 var electronPackage = require('electron/package.json');
 var electronVersion = electronPackage.version;
-var minimist = require('minimist');
-var args = minimist(process.argv.slice(2), knownOptions);
-var knownOptions = {
-  string: 'env',
-  default: { env: process.env.NODE_ENV || 'production' }
-};
 
 const options = {
 	dir: '.',
@@ -29,25 +22,22 @@ const options = {
 	version: electronVersion,
 	appVersion: appVersion,
   ignore: [
-    ".github/*",
-    ".gulp-scss-cache/*",
-    ".sass-cache/*",
-    "modal/*",
-    ".codeclimate.yml",
-    ".travis.yml",
-    "frontMatter.yml",
-    "Hyde.lnk",
-    "TODO.md",
-    "test.md"
+    '.github/*',
+    '.gulp-scss-cache/*',
+    '.sass-cache/*',
+    'modal/*',
+    '.codeclimate.yml',
+    '.travis.yml',
+    'frontMatter.yml',
+    'Hyde.lnk',
+    'TODO.md',
+    'test.md'
   ]
 };
 
 
 gulp.task('launch', () => {
-	// if(args.env === 'dev')
-  //   gulp.start('liveReload');
-  // else
-  	electron.start();
+    electron.start('-d');
 });
 
 gulp.task('rebuild', () => {
@@ -81,22 +71,28 @@ gulp.task('scss', () => {
 });
 
 gulp.task('clean', () => {
-  exec('rm -rf ./release', function (err, stdout, stderr) {
+  exec('rm -rf ./release', function (stdout, stderr) {
     console.log(stdout);
     console.log(stderr);
   });
-})
+});
 
 gulp.task('build:linux', () => {
-	// TODO: Linux package build process
+  options.arch = 'amd64';
+  options.platform = 'linux';
+  options.icon = '/img/icon/png/256x256.png';
+  packager(options, (err) => {
+    if(err) console.error(err);
+    done();
+  });
 });
 
 gulp.task('build:win', (done) => {
 	options.arch = 'ia32';
 	options.platform = 'win32';
 	options.icon = '/img/icon/ico/icon.ico';
-	packager(options, (err, paths) => {
-		if (err) { console.error(err); }
+	packager(options, (err) => {
+		if(err) console.error(err);
 		done();
 	});
 });
@@ -105,8 +101,8 @@ gulp.task('build:osx', (done) => {
 	options.arch = 'x64';
 	options.platform = 'darwin';
 	options.icon = '/img/icon/icns/icon.icns';
-	packager(options, (err, paths) => {
-		if (err) { console.error(err); }
+	packager(options, (err) => {
+		if(err) console.error(err);
 		done();
 	});
 });
