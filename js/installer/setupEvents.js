@@ -1,9 +1,9 @@
-const electron = require('electron')
-const app = electron.app
+const electron = require('electron');
+const app = electron.app;
 
 module.exports = {
   handleSquirrelEvent: function() {
-    if (process.argv.length === 1) {
+    if(process.argv.length === 1) {
       return false;
     }
 
@@ -15,10 +15,10 @@ module.exports = {
     const updateDotExe = path.resolve(path.join(rootAtomFolder, 'Update.exe'));
     const exeName = path.basename(process.execPath);
     const spawn = function(command, args) {
-      let spawnedProcess, err;
+      let spawnedProcess;
       try {
         spawnedProcess = ChildProcess.spawn(command, args, {detached: true});
-      } catch (err) { console.error(err) }
+      } catch (err) { console.error(err); }
       return spawnedProcess;
     };
 
@@ -60,4 +60,4 @@ module.exports = {
       return true;
     }
   }
-}
+};
