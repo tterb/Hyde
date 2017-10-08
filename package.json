@@ -14,6 +14,15 @@
     "create-installer-win": "node js/installers/windows/createinstaller.js",
     "create-installer-linux": "electron-installer-debian ./dist/hyde-linux-x64/ --out=dist/installers/ --arch=amd64 --overwrite  --icon=img/icon/icns/icon.icns"
   },
+  "build": {
+    "squirrelWindows": {
+      "remoteReleases": "http://localhost:9000/dist/win1/"
+    },
+    "win": {
+      "certificateFile": "./certs/my_signing_key.pfx",
+      "certificatePassword": ""
+    }
+  },
   "bin": {
     "hyde": "./bin/hyde"
   },
@@ -39,7 +48,9 @@
   ],
   "author": "Brett Stevenson",
   "license": "GPL-3.0",
-  "contributors": [{}],
+  "contributors": [
+    {}
+  ],
   "_npmUser": {
     "name": "bstevenson",
     "email": "bstevensondev@gmail.com"
@@ -60,7 +71,6 @@
     "electron-packager": "^9.1.0",
     "electron-rebuild": "^1.5.11",
     "electron-winstaller": "^2.6.3",
-    "eslint": "^4.7.2",
     "gulp": "^3.9.1",
     "gulp-sass": "^3.1.0"
   },
@@ -71,7 +81,7 @@
     "devtron": "^1.4.0",
     "electron": "1.7.8",
     "electron-command-palette": "^0.1.1",
-    "electron-config": "^0.2.1",
+    "electron-config": "^1.0.0",
     "electron-json-storage": "latest",
     "electron-localshortcut": "^0.6.1",
     "electron-settings": "^3.1.1",
