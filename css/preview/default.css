@@ -1,16 +1,21 @@
 #mdPreview {
-  color: #333;
+  color: #222;
   font-family: "Open Sans", "Roboto", "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
   font-size: 13.5px;
   letter-spacing: 0.04em;
-  line-height: 1.5;
+  line-height: 1.425;
   text-rendering: geometricPrecision;
   overflow: none;
   margin-top: 0;
 }
+
+#mdPreview h1, #mdPreview h2, #mdPreview h3, #mdPreview h4 {
+  color: #333;
+  font-weight: 700;
+}
+
 #mdPreview h1 {
   font-size: 2.5em;
-  font-weight: 700;
   letter-spacing: 0.0175em;
   line-height: 1.45;
   border-bottom: 1px solid #e1e3ea;
@@ -19,7 +24,6 @@
 }
 #mdPreview h2 {
   font-size: 2em;
-  font-weight: 700;
   letter-spacing: 0.0125em;
   line-height: 1.4;
   border-bottom: 1px solid #e1e3ea;
@@ -27,7 +31,6 @@
 }
 #mdPreview h3 {
   font-size: 1.65em;
-  font-weight: 700;
   letter-spacing: 0.01em;
   line-height: 1.3;
   margin-top: 10px;
@@ -35,7 +38,6 @@
 }
 #mdPreview h4 {
   font-size: 1.35em;
-  font-weight: 700;
   letter-spacing: 0.01em;
   line-height: 1.25;
   margin-bottom: 16px;
@@ -52,14 +54,31 @@
   vertical-align: middle;
   box-sizing: content-box;
 }
+
+#mdPreview ol {
+  counter-reset: item;
+}
+
+#mdPreview ol li {
+  font-family: "Open Sans", "Roboto", "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
+  list-style-type: none;
+  counter-increment: item;
+}
+
+#mdPreview ol li:before {
+  font-family: "Lora", Garamond, Times, Georgia, serif;
+  padding-right: 6px;
+  content: counter(item) ".";
+}
+
 #mdPreview ol, #mdPreview ul {
   line-height: 1.6;
   margin-top: 0;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   padding-left: 35px;
 }
 #mdPreview ol ol, #mdPreview ol ul, #mdPreview ul ol, #mdPreview ul ul {
-  padding-left: 27px;
+  padding-left: 25px;
 }
 #mdPreview ol ol ol, #mdPreview ol ol ul, #mdPreview ol ul ol, #mdPreview ol ul ul, #mdPreview ul ol ol, #mdPreview ul ol ul, #mdPreview ul ul ol, #mdPreview ul ul ul {
   padding-left: 35px;
@@ -84,8 +103,8 @@
   border-top: 2px solid #ddd;
 }
 #mdPreview p {
+  color: #212121;
   letter-spacing: 0.0375em;
-  line-height: 1.5;
   margin: 0 0 16px;
 }
 #mdPreview strong {
@@ -137,6 +156,16 @@
   border-collapse: collapse;
   margin: 20px 10px;
 }
+#mdPreview table th {
+  background-color: #f4f5f6;
+  font-size: 1em;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+#mdPreview table th strong {
+  color: #2a2a2a;
+  font-weight: 800;
+}
 #mdPreview table tr {
   background-color: #f4f5f6;
   border: 1px solid #b6bbc1;
@@ -144,14 +173,12 @@
 #mdPreview table tr:nth-child(2n - 1) {
   background-color: #eeeff0;
 }
-#mdPreview table th {
-  background-color: #f4f5f6;
-  font-size: 75%;
-  font-weight: 600;
-}
 #mdPreview table th, #mdPreview table td {
   border: 1px solid #dfe2e5;
   padding: 6px 13px;
+}
+#mdPreview table td {
+  padding-bottom: 7px;
 }
 #mdPreview table thead tr {
   line-height: 1.5;
