@@ -4,25 +4,15 @@
   "description": "An modular markdown editor for new and experienced users, with features that cater to Jekyll and documentation writing",
   "main": "main.js",
   "productName": "Hyde",
-  "author": "Brett Stevenson",
-  "license": "GPL-3.0",
-  "homepage": "https://JonSn0w.github.io/Hyde",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/JonSn0w/Hyde.git",
-    "docs": "https://github.com/JonSn0w/Hyde/tree/master/docs",
-    "bugs": "https://github.com/JonSn0w/Hyde/issues/new"
-  },
-  "docs": "https://JonSn0w.github.io/Hyde/docs",
-  "keybindings": "https://JonSn0w.github.io/Hyde/docs#keybindings",
   "scripts": {
     "start": "electron main.js",
     "build": "rm -rf release && gulp build",
-    "package-mac": "electron-packager . --overwrite --asar --platform=darwin --arch=x64 --icon=img/icon/icns/icon.icns --prune=true --out=release",
-    "package-win": "electron-packager . --overwrite --asar --platform=win32 --arch=ia32 --icon=img/icon/ico/icon.ico --prune=true --out=release --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Hyde\"",
-    "package-linux": "electron-packager . --overwrite --asar --platform=linux --arch=x64 --icon=img/icon/png/1024x1024.png --prune=true --out=release",
-    "create-installer-mac": "electron-installer-dmg ./release/Hyde-darwin-x64/Hyde.app hyde --out=release --overwrite --icon=img/icon/icns/icon.icns",
-    "create-installer-win": "node installers/windows/createinstaller.js"
+    "package-mac": "electron-packager . --overwrite --asar --platform=darwin --arch=x64 --icon=img/icon/icns/icon.icns --prune=true --out=dist/ --version-string.CompanyName=BStevensonDev --version-string.FileDescription=Hyde-Installer --version-string.ProductName=\"Hyde\"",
+    "package-win": "electron-packager . --overwrite --asar --platform=win32 --arch=ia32 --icon=img/icon/ico/icon.ico --prune=true --out=dist/ --version-string.CompanyName=BStevensonDev --version-string.FileDescription=Hyde-Installer --version-string.ProductName=\"Hyde\"",
+    "package-linux": "electron-packager . --overwrite --asar --platform=linux --arch=amd64 --icon=img/icon/png/256x256.png --prune=true --out=dist/ --version-string.CompanyName=BStevensonDev --version-string.FileDescription=Hyde-Installer --version-string.ProductName=\"Hyde\"",
+    "create-installer-mac": "electron-installer-dmg ./dist/hyde-darwin-x64/Hyde.app hyde --out=dist/installers/ --overwrite --icon=img/icon/icns/icon.icns",
+    "create-installer-win": "node js/installers/windows/createinstaller.js",
+    "create-installer-linux": "electron-installer-debian ./dist/hyde-linux-x64/ --out=dist/installers/ --arch=amd64 --overwrite  --icon=img/icon/icns/icon.icns"
   },
   "bin": {
     "hyde": "./bin/hyde"
@@ -47,10 +37,23 @@
     "writing",
     "post"
   ],
+  "author": "Brett Stevenson",
+  "license": "GPL-3.0",
+  "contributors": [{}],
   "_npmUser": {
     "name": "bstevenson",
     "email": "bstevensondev@gmail.com"
   },
+  "homepage": "https://JonSn0w.github.io/Hyde",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JonSn0w/Hyde.git"
+  },
+  "bugs": {
+    "url": "https://github.com/JonSn0w/Hyde/issues/new"
+  },
+  "docs": "https://JonSn0w.github.io/Hyde/docs",
+  "keybindings": "https://JonSn0w.github.io/Hyde/docs#keybindings",
   "devDependencies": {
     "electron-connect": "^0.6.1",
     "electron-installer-dmg": "^0.2.1",
@@ -59,8 +62,7 @@
     "electron-winstaller": "^2.6.3",
     "eslint": "^4.7.2",
     "gulp": "^3.9.1",
-    "gulp-sass": "^3.1.0",
-    "minimist": "^1.2.0"
+    "gulp-sass": "^3.1.0"
   },
   "dependencies": {
     "codemirror": "^5.18.2",
