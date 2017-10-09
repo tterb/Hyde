@@ -11,10 +11,10 @@ function createAboutModal() {
 				'<li>Created by <a href="openInBrowser('+'"https://JonSn0w.github.io/"' + ')" id="name">Brett Stevenson</a></li>' +
 				'<li>License: <a id="license-modal" href="openInBrowser('+'"http://www.gnu.org/licenses/gpl.txt"'+')">GPL v3.0</a></li>' +
 				'<li>Version: <a id="version-modal" href="openInBrowser('+'"https://github.com/JonSn0w/Hyde/releases/latest"'+')">v0.0.1</a></li>' +
-				'<li id="check-updates-modal"><a href="openInBrowser("'+'https://github.com/JonSn0w/Hyde/releases/latest"'+')">Check for Updates</a></li>' +
+				'<li><button class="modal-button check-update-button"><a href="openInBrowser("'+'https://github.com/JonSn0w/Hyde/releases/latest"'+')">Check for Updates</a></button></li>' +
 			'</ul>' +
 		'</div>';
-	$('#about-modal').append(createInsetModal('', content));
+	$('#about-modal').append(createModal('', content));
 }
 
 function createMarkdownModal() {
