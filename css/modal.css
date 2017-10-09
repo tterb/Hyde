@@ -1,8 +1,8 @@
 .modal-content {
   position: relative;
-  top: 20px;
   background: -webkit-linear-gradient(top, #333231, #292827);
   color: rgba(255, 255, 255, 0.75);
+  top: 20px;
   border-radius: 15px;
   border: 1px outset #303030;
   box-shadow: 0 3px 15px rgba(0, 0, 0, 0.6);
@@ -76,7 +76,7 @@
     background: transparent;
     color: rgba(255, 255, 255, 0.5);
     font-size: 14.5px;
-    padding: 2px 13px; }
+    padding: 2px 13px 2px 11px; }
     #unsaved-modal .modal-dialog .modal-body .unsaved-icon {
       display: inline-block;
       color: rgba(255, 255, 255, 0.6);
@@ -91,14 +91,14 @@
       left: 8px; }
   #unsaved-modal .modal-dialog .unsaved-buttons {
     float: right;
-    margin: 4px 0px 10px 52%; }
+    margin: 4px 4px 10px 52%; }
     #unsaved-modal .modal-dialog .unsaved-buttons button {
       font-size: 13.5px;
       font-weight: 300;
       border-radius: 6px;
-      margin: 6px 10px 8px 0; }
+      margin: 4px 12px 8px 0; }
       #unsaved-modal .modal-dialog .unsaved-buttons button:last-child {
-        margin-right: 18px; }
+        margin-right: 16px; }
 
 .align-buttons {
   border: 1px transparent;
@@ -195,7 +195,7 @@
   box-shadow: none !important; }
   .modal-close img {
     position: absolute;
-    width: 14.5px;
+    width: 14px;
     opacity: 1;
     filter: none;
     cursor: pointer;
@@ -277,12 +277,9 @@
         color: rgba(255, 255, 255, 0.7); }
     #table-modal ul li #table-button {
       display: inline-block;
-      text-shadow: -2px 2px #323031;
       background-image: -webkit-linear-gradient(top, #555354, #2d2b2c);
-      box-shadow: inset 0 0 0 1px #2c2a2b;
-      border: none;
-      border-radius: 100px;
       color: rgba(255, 255, 255, 0.6) !important;
+      text-shadow: -2px 2px #323031;
       text-align: center;
       letter-spacing: 5px;
       width: 32px;
@@ -290,6 +287,9 @@
       padding-left: 5px;
       overflow: hidden;
       outline: none !important;
+      box-shadow: inset 0 0 0 1px #2c2a2b;
+      border: none;
+      border-radius: 100px;
       box-shadow: inset 0 3px 0 transparent, 0 3px 3px rgba(0, 0, 0, 0.2);
       transition: all 300ms cubic-bezier(0.67, 0.13, 0.1, 0.81); }
       #table-modal ul li #table-button:hover i {
@@ -435,20 +435,27 @@
   background-image: -webkit-linear-gradient(top, #555354, #2d2b2c);
   color: rgba(255, 255, 255, 0.75);
   font-size: 13.5px;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.07em;
   text-shadow: -2px 2px #323031;
   border: none;
   border-radius: 8px;
-  box-shadow: inset 0 0 0 1px #2c2a2b;
-  padding: 5px 11px 6px;
+  box-shadow: 0 1px 20px rgba(0, 0, 0, 0.2);
+  padding: 5px 11px;
   margin: 12px 6px 8px 0;
-  transition: all 300ms ease-in-out; }
+  transition: all 300ms ease-in-out;
+  transition-delay: 50ms; }
   .modal-button:hover {
-    color: rgba(255, 255, 255, 0.85);
-    box-shadow: inset 0 0 0 1px #2e2c2d, 0 5px 15px #222021; }
+    background-image: -webkit-linear-gradient(top, #4f4d4e, #2b292a);
+    color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 1px 15px rgba(0, 0, 0, 0.5); }
   .modal-button:active {
+    background-image: -webkit-linear-gradient(top, #4a4849, #2b292a);
     color: rgba(255, 255, 255, 0.85);
-    box-shadow: inset 0 0 0 1px #2e2c2d, inset 0 5px 30px #222021; }
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.45), 0 1px 15px rgba(0, 0, 0, 0.35);
+    transform: translateY(1px);
+    transition-duration: 70ms; }
+  .modal-button span {
+    vertical-align: text-bottom; }
 
 #emoji-modal .modal-dialog {
   width: 480px; }
