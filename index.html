@@ -162,11 +162,11 @@
     <div class="btn-group">
       <button class="btn dropdown-toggle" type="button" id="help-menu-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Help</button>
       <ul id="help-menu" class="dropdown-menu">
-        <li tabindex="-1" href="#" data-toggle="modal" data-target="#markdown-modal"><a class="dropdown-item">Markdown Help</a></li>
-        <li class="dropdown-divider"></li>
         <li tabindex="-1" href="#"><a class="dropdown-item" class="link" onclick="openInBrowser('https://JonSn0w.github.io/Hyde/docs')">Documentation</a></li>
         <li tabindex="-1" href="#" onclick="sendIPC('keybinding-modal')"><a class="dropdown-item">Keybindings</a></li>
         <li tabindex="-1"><a class="dropdown-item" class="link" onclick="openInBrowser('https://github.com/JonSn0w/Hyde/issues/new')">Report an Issue</a></li>
+        <li class="dropdown-divider"></li>
+        <li tabindex="-1" href="#" data-toggle="modal" data-target="#markdown-modal"><a class="dropdown-item">Markdown Help</a></li>
         <li class="dropdown-divider"></li>
         <li tabindex="-1" href="#" data-toggle="modal" data-target="#about-modal"><a class="dropdown-item">About Hyde</a></li>
       </ul>
@@ -399,13 +399,15 @@
     <div id="bottomFile" data-tooltip=""></div><span id="fileStatus" data-tooltip="unsaved changes">*</span>
     <div id="wordCount"></div>
     <div id="draggable" style="-webkit-app-region:drag"></div>
-    <div class="bottom-icons" data-tooltip="Sync Scrolling">
-    <button id="syncScrollToggle" onclick="toggleSyncScroll();"></button></div>
-    <div class="bottom-icons" data-tooltip="Toggle Preview">
-    <button id="previewToggle" class="fa fa-eye" onclick="togglePreview();"></button></div>
+    <!-- <div class="bottom-icons" data-tooltip="Sync Scrolling"> -->
+    <button id="syncScrollToggle" data-tooltip="Sync Scrolling" onclick="toggleSyncScroll();"></button>
+  <!-- </div> -->
+    <!-- <div class="bottom-icons" data-tooltip="Toggle Preview"> -->
+    <button id="previewToggle" class="fa fa-eye" data-tooltip="Toggle Preview" onclick="togglePreview();"></button>
+  <!-- </div> -->
   </div>
   <!-- Table Modal -->
-  <div class="modal fade animated bounceIn" id="table-modal" tabindex="-1" role="dialog">
+  <div class="modal fade animated" id="table-modal" tabindex="-1" role="dialog">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
