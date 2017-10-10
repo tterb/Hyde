@@ -2,10 +2,10 @@ const clipboard = require('electron');
 const parsePath = require('parse-filepath');
 
 function reloadWin() {
-  if(!this.isClean()) {
+  if(!this.isClean())
     showUnsavedDialog('reload');
-  }
-  remote.getCurrentWindow().reload();
+  else
+    remote.getCurrentWindow().reload();
 }
 
 function toggleDevTools() {
@@ -41,26 +41,9 @@ function showUnsavedDialog(opt) {
   });
 }
 
-// $('#unsaved-modal').on('shown.bs.modal', () => {
-//   document.activeElement.blur();
-//   $('#unsavedConfirm').focus();
-// });
-
-// FIXME: Fix open file in new window
 function openNewFile(file) {
-  let wins;
-  file = path.join(__dirname, file);
-  fs.readFile(file, 'utf-8', (err) => {
-    if(err)
-      notify('An error ocurred while opening the file '+ err.message, 'error');
-    // cm.getDoc().setValue(data);
-    openNewWindow();
-    this.isFileLoadedInitially = true;
-    this.currentFile = file;
-    // app.addRecentDocument(file);
-  });
-  wins = Array.from(main.getWindows());
-  return wins;
+  settings.set('targetFile', file);
+  main.createWindow();
 }
 
 function closeWindow(win) {

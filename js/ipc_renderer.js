@@ -4,12 +4,7 @@ let target = '';
 // Handling file saving through IPCRenderer
 function saveAs() {
 	storage.get('markdown-savefile', function(err, data) {
-		options = {
-      'filters': [{
-				name: 'Markdown',
-				'extensions': ['md']
-			}]
-    };
+		options = {'filters': [{ name:'Markdown', 'extensions':['md']}]};
 		if(err) notify(err, 'error');
 		if('filename' in data) {
 			options.defaultPath = data.filename;
@@ -17,12 +12,12 @@ function saveAs() {
 		dialog.showSaveDialog(options, function(filename) {
 			if(filename === undefined)
 				return notify('You didn\'t save the file', 'warning');
-			storage.set('markdown-savefile', {'filename' : filename}, function(err) {
+			storage.set('markdown-savefile', {'filename' : filename}, (err) => {
 				if(err) notify(err, 'error');
 			});
-			var mdValue = cm.getValue();
 			// filename is a string that contains the path and filename created in the save dialog.
-			fs.writeFile(filename, mdValue, function(err) {
+			var mdValue = cm.getValue();
+			fs.writeFile(filename, mdValue, (err) => {
 				if(err) notify('An error ocurred while creating the file '+ err.message, 'error');
 			});
 			this.setClean();
@@ -33,7 +28,7 @@ function saveAs() {
 }
 
 ipc.on('file-new', function() {
-	storage.set('markdown-savefile', {}, function(err) {
+	storage.set('markdown-savefile', {}, (err) => {
 		if(err) notify(err, 'error');
 	});
 	currentFile = '';
@@ -41,8 +36,8 @@ ipc.on('file-new', function() {
 });
 
 // Handling file saving through IPCRenderer
-ipc.on('file-save', function() {
-	storage.get('markdown-savefile', function(err, data) {
+ipc.on('file-save', () => {
+	storage.get('markdown-savefile', (err, data) => {
 		if(err) {
 			saveAs();
 			return;
@@ -51,18 +46,17 @@ ipc.on('file-save', function() {
 			var filename = data.filename;
 			if(filename === undefined)
 				return notify('You didn\'t save the file', 'warning');
-			storage.set('markdown-savefile', {'filename' : filename}, function(err) {
+			storage.set('markdown-savefile', {'filename' : filename}, (err) => {
 				if(err) notify(err, 'error');
 			});
-
+			// filename is a string that contains the path and filename created in the save file dialog.
 			var mdValue = cm.getValue();
-			// fileName is a string that contains the path and filename created in the save file dialog.
-			fs.writeFile(filename, mdValue, function(err) {
+			fs.writeFile(filename, mdValue, (err) => {
 				if(err) { notify('An error ocurred creating the file '+ err.message, 'error'); }
 			});
 			this.setClean();
 			this.currentFile = filename;
-			updateWindowTitle(filename);
+			remote.BrowserWindow.getFocusedWindow().updateWindowTitle(filename);
 		} else {
 			saveAs();
 		}
@@ -71,6 +65,7 @@ ipc.on('file-save', function() {
 
 ipc.on('file-save-as', saveAs);
 
+// FIXME: Issues with savefile w/ multiple files open
 // Handling file opening through IPCRenderer
 ipc.on('file-open', () => {
 	storage.get('markdown-savefile', (err, data) => {
@@ -93,14 +88,19 @@ ipc.on('file-open', () => {
 					if(err) notify(err, 'error');
 				});
 
-			// file is a string that contains the path and filename created in the save file dialog.
-			fs.readFile(file[0], 'utf-8', (err, data) => {
-				if(err) { notify('An error ocurred while opening the file '+ err.message, 'error'); }
-				cm.getDoc().setValue(data);
-			});
-			// app.addRecentDocument(file);
 			this.isFileLoadedInitially = true;
-			this.currentFile = file[0];
+			// this.currentFile = file[0]; <-- This fixes bottom file but not save
+			// file is a string that contains the path and filename created in the save file dialog.
+      if(!this.isClean()) {
+        settings.set('targetFile', file[0]);
+        main.createWindow();
+      } else {
+  			fs.readFile(file[0], 'utf-8', (err, data) => {
+  				if(err) { notify('An error ocurred while opening the file '+ err.message, 'error'); }
+  				cm.getDoc().setValue(data);
+  			});
+      }
+			// app.addRecentDocument(file);
 		});
 	});
 });
@@ -118,7 +118,7 @@ ipc.on('insert-link', () => { insert('link'); });
 ipc.on('toggle-menu', () => { if(process.platform !== 'darwin') toggleMenu(); });
 ipc.on('toggle-preview', () => { togglePreview(); });
 ipc.on('win-close', () => { closeWindow(remote.BrowserWindow.getFocusedWindow()); });
-ipc.on('win-reload', () => { showUnsavedDialog('reload'); });
+ipc.on('win-reload', () => { reloadWin(); });
 ipc.on('insert-code', () => { toggleFormat('code'); });
 ipc.on('insert-quote', () => { toggleBlockquote(); });
 ipc.on('toggle-toolbar', () => { toggleToolbar(); });
@@ -132,25 +132,16 @@ ipc.on('indent-less', () => { cm.execCommand('indentLess'); });
 ipc.on('indent-more', () => { cm.execCommand('indentMore'); });
 ipc.on('toggle-palette', () => { commandPalette().show(); });
 ipc.on('maximize', () => { toggleMaximize(); });
+// Save as PDF file
 ipc.on('file-pdf', () => {
-	// Save as PDF file
-	options = {
-		filters: [
-			{ name: 'PDF', extensions: ['pdf'] }
-		]
-	};
+	options = { filters: [{ name:'PDF', extensions:['pdf']}]};
 	dialog.showSaveDialog(options, (filePath) => {
 		ipc.send('export-to-pdf', filePath);
 	});
 });
+// Save as HTML file
 ipc.on('file-html', () => {
-	// Save as HTML file
-	options = {
-		filters: [
-			{ name: 'html', extensions: ['html'] }
-		]
-	};
-  // var html = getHTML();
+	options = { filters: [{ name:'html', extensions: ['html']}]};
 	dialog.showSaveDialog(options, (filePath) => {
 		ipc.send('export-to-html', getHTML(), filePath);
 	});
@@ -162,7 +153,7 @@ ipc.on('about-modal', () => { $('#about-modal').modal(); });
 ipc.on('markdown-modal', () => { $('#markdown-modal').modal(); });
 ipc.on('table-modal', () => { $('#table-modal').modal(); });
 ipc.on('insert-emoji', () => { $('#emoji-modal').modal(); });
-ipc.on('keybinding-modal', () => { settings.set('targetFile', '/docs/keybindings.md'); main.createWindow(); });
+ipc.on('keybinding-modal', () => { settings.set('targetFile', path.join(__dirname, '/docs/keybindings.md')); main.createWindow(); });
 ipc.on('open-file-manager', () => { shell.showItemInFolder(currentFile); });
 ipc.on('target-file', () => { return target; });
 ipc.on('set-theme', function(data) { setEditorTheme(data); });
