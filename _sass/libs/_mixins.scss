@@ -2,45 +2,43 @@
 /// Makes an element's :before pseudoelement a FontAwesome icon.
 /// @param {string} $content Optional content value to use.
 @mixin icon($content: false) {
-	text-decoration: none;
-	&:before {
-		@if $content {
-			content: $content;
+  text-decoration: none;
+  &::before {
+    @if $content {
+      content: $content;
 		}
-		-moz-osx-font-smoothing: grayscale;
-		-webkit-font-smoothing: antialiased;
-		font-family: FontAwesome;
-		font-style: normal;
-		font-weight: normal;
-		text-transform: none !important;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-transform: none !important;
 	}
 }
 
-@mixin transition-all() {
-    -webkit-transition: all 0.35s;
-    -moz-transition: all 0.35s;
-    transition: all 0.35s;
+@mixin transitionAll {
+  -webkit-transition: all 0.35s;
+  -moz-transition: all 0.35s;
+  transition: all 0.35s;
 }
 
-@mixin respond-to($breakpoint) {
-    @media only screen and (max-width: $breakpoint + px) {
-        @content;
-    }
+@mixin respondTo($breakpoint) {
+  @media only screen and (max-width: $breakpoint + px) {
+    @content;
+  }
 }
 
-@mixin scrollbars($size, $foreground-color, $background-color: mix($foreground-color, white, 50%)) {
+@mixin scrollbars($size, $foreground-color, $background-color: mix($foreground-color, #fff, 50%)) {
   ::-webkit-scrollbar {
-      width:  $size;
-      height: $size;
+    width:  $size;
+    height: $size;
   }
-
   ::-webkit-scrollbar-thumb {
-      background: $foreground-color;
-      border-radius: 25px;
+    background: $foreground-color;
+    border-radius: 25px;
   }
-
   ::-webkit-scrollbar-track {
-      background: $background-color;
+    background: $background-color;
   }
 
   // For Internet Explorer
