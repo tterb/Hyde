@@ -12,7 +12,7 @@
   margin: auto;
   padding: .1em .8em;
   overflow: hidden;
-  z-index: 9999999;
+  z-index: 1010;
 }
 
 .CodeMirror-dialog-top {
