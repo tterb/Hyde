@@ -56,6 +56,8 @@ rules:
     - 0
   no-vendor-prefixes:
     - 0
+  no-css-comments:
+    - 0
   no-qualifying-elements:
     - 0
   empty-line-between-blocks:
