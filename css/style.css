@@ -297,9 +297,12 @@ label {
   border: 1px outset #4a4f4d;
   box-shadow: 0.5px 1px 3px rgba(0, 0, 0, 0.3);
   margin-right: 1.5px;
-  padding: 4.5px 5px 5px;
+  padding: 3px 5px 5px 4.25px;
   transition: top 100ms ease-in-out;
   transition: color 200ms ease-in-out; }
+  .toolbar-buttons a::before {
+    text-align: center;
+    vertical-align: middle; }
   .toolbar-buttons a:hover {
     color: #f0f0f0 !important;
     border-color: #4a4f4d; }
@@ -328,7 +331,7 @@ label {
   border: 1px outset #2d2c2c;
   box-shadow: 0 -1px 20px rgba(0, 0, 0, 0.25);
   padding: 2px;
-  z-index: 999;
+  z-index: 1010;
   resize: both; }
   .bottom-bar div {
     letter-spacing: 0.025em;
@@ -387,7 +390,6 @@ label {
       top: -190% !important;
       right: 0 !important;
       left: auto !important;
-      opacity: 0 !important;
       transition: opacity 200ms linear 1s !important; }
   .bottom-bar #previewToggle {
     font-size: 17.5px;
@@ -490,7 +492,7 @@ input[type='checkbox'] {
   left: -250px;
   box-shadow: 0 0 16px rgba(0, 0, 0, 0.4);
   transition: left 500ms cubic-bezier(0.17, 0.04, 0.03, 0.75);
-  z-index: 99999; }
+  z-index: 999; }
 
 #sideLogo {
   position: relative;
@@ -579,7 +581,7 @@ input[type='checkbox'] {
   padding: 12px 12px 30px 16px;
   outline: none !important;
   cursor: default;
-  z-index: 1000; }
+  z-index: 1005; }
   #settingsMenu:focus, #settingsMenu.active {
     background: #fff !important; }
   #settingsMenu .title {
@@ -791,8 +793,7 @@ input[type='checkbox'] {
     padding: 4px 8px;
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
     white-space: normal;
-    transition: opacity 225ms linear 1.25s;
-    z-index: 99; }
+    transition: opacity 225ms linear 1.25s; }
 
 #settingsTrigger {
   left: -310px; }
@@ -1023,11 +1024,12 @@ input[type='checkbox'] {
   left: 5%;
   top: -250%;
   border-radius: 4px;
-  box-shadow: 0 -1.5px 8px 0 #222;
+  box-shadow: 0 0.5px 6px 0 rgba(0, 0, 0, 0.7);
   white-space: nowrap;
   margin-left: -5px;
-  padding: 4px 6px;
-  opacity: 0.9;
+  padding: 4px 8px;
+  border: 1px outset #444;
+  opacity: 0.9 !important;
   transition: opacity 200ms linear 1.25s;
   z-index: 20; }
 
