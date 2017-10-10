@@ -100,16 +100,16 @@ const createWindow = exports.createWindow = (file) => {
   let newWindow = window.createWindow(getConfig());
   let argFile;
   if(setting.has('targetFile')) {
-    argFile = { file: path.join(__dirname, setting.get('targetFile')) };
+    argFile = { file: setting.get('targetFile') };
     setting.delete('targetFile');
   }
   // let argFile = { file: path.join(__dirname, '/docs/keybindings.md') };
-  windows.add(newWindow);
   newWindow.showUrl(path.join(__dirname, 'index.html'), argFile);
   // newWindow.showUrl(mainPage);
   newWindow.once('ready-to-show', () => { newWindow.show(); });
   // Open the DevTools.
   if (args.dev) { newWindow.webContents.openDevTools(); }
+  windows.add(newWindow);
   // Emitted when the window is closed.
   newWindow.on('closed', () => {
     windows.delete(newWindow);
