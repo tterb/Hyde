@@ -134,9 +134,10 @@ window.onload = () => {
 			renderedMD = katex.renderLaTeX(renderedMD);
 		// Markdown -> Preview
 		markdownPreview.innerHTML = renderedMD;
+    // Allows for making '<br>' tags more GitHub-esque
 		$('#mdPreview p').each(function() {
 			if($(this).html() === '<br>') {
-				$(this).css('margin-bottom', '5px');
+				$(this).attr('class', 'break');
 			}
 		});
 		// Markdown -> HTML
@@ -320,7 +321,6 @@ $('#leftAlign, #centerAlign, #rightAlign').on('click', function() {
 	var btn = $(this);
 	$('.on').removeClass('on');
 	btn.addClass('on');
-	i++;
 });
 
 $('html').click(function() {
