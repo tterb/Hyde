@@ -107,6 +107,10 @@
   letter-spacing: 0.0375em;
   margin: 0 0 16px;
 }
+#mdPreview .break {
+  height: 0;
+  margin-bottom: 20px;
+}
 #mdPreview strong {
   font-size: 105%;
   font-weight: 700;
