@@ -134,7 +134,6 @@
 .CodeMirror-composing {border-bottom: 2px solid;}
 
 /* Default styles for common addons */
-
 div.CodeMirror span.CodeMirror-matchingbracket {
   background: rgba(255,255,255,0.2);
 }
@@ -143,9 +142,14 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {
   color: rgba(255,255,255,0.85);
   text-decoration: none;
 }
-.CodeMirror-matchingtag {background: rgba(255,255,255,0.1);}
-.CodeMirror-activeline-background {background: #e8f2ff;}
-
+.CodeMirror-matchingtag { background: rgba(255,255,255,0.1); }
+.CodeMirror-activeline-background { background: #e8f2ff; }
+.cm-matchhighlight {
+  background: rgba(255,255,255,0.05);
+  font-size: -webkit-calc(100% - 0.5px);
+  border: 0.5px solid;
+  border-radius: 3px;
+}
 /** STOP **/
 /* The rest of this file contains styles related to the mechanics of
    the editor. You probably shouldn't touch them. */
@@ -330,7 +334,7 @@ div.CodeMirror-dragcursors {
 .CodeMirror-selected { background: rgba(255,255,255,0.075); }
 .CodeMirror-focused .CodeMirror-selected { background: rgba(255,255,255,0.1); }
 .CodeMirror-crosshair { cursor: crosshair; }
-.CodeMirror-line::selection, .CodeMirror-line > span::selection, .CodeMirror-line > span > span::selection { background: rgba(255,255,255,0.1); }
+.CodeMirror-line::selection, .CodeMirror-line > span::selection, .CodeMirror-line > span > span::selection { background: rgba(255,255,255,0.1); border: none !important; }
 
 .cm-searching {
   background: rgba(255, 255, 75, 0.4);
