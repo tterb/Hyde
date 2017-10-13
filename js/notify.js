@@ -6,10 +6,10 @@ function notify(text, type) {
 		icon = 'fa fa-check-circle';
 	} else if(type === 'warning') {
 		head = '<strong>Warning </strong>';
-    icon = 'fa fa-exclamation-circle ';
+    icon = 'fa fa-exclamation-triangle';
 	} else if(type === 'error') {
 		head = '<strong>Error </strong>';
-    icon = 'fa fa-exclamation-triangle';
+    icon = 'fa fa-exclamation-circle';
 		type = 'danger';
 	} else {
 		head = '<strong>Info </strong>';
@@ -26,11 +26,11 @@ function notify(text, type) {
 			align: 'right'
 		},
 		offset: 4,
-		spacing: 5,
+		spacing: 6,
 		delay: 10000,
 		animate: {
 			enter: 'animated fadeInRight',
-			exit: 'animated fadeOutUp'
+			exit: 'animated fadeOutRight'
 		},
 		z_index: 99999,
 	});
