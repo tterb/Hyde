@@ -1,5 +1,7 @@
+// A Set to keep track of active notifications 
+let notifications = new Set();
 
-function notify(text, type) {
+function createNotification(text, type) {
 	var head, icon;
 	if(type === 'success') {
 		head = '<strong>Success </strong>';
@@ -27,13 +29,21 @@ function notify(text, type) {
 		},
 		offset: 4,
 		spacing: 6,
-		delay: 10000,
+		delay: 15000,
 		animate: {
 			enter: 'animated fadeInRight',
 			exit: 'animated fadeOutRight'
 		},
 		z_index: 99999,
 	});
+	notifications.add(text);
+}
+
+function notify(text, type) {
+  if(!notifications.has(text)) {
+		createNotification(text, type);
+		setTimeout(() => notifications.delete(text), 15000);
+	}
 }
 
 module.exports = notify;
