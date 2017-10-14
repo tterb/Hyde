@@ -1,153 +1,155 @@
 .alert {
-  border-radius: 4px;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px; }
-
-.alert-success, .alert-info, .alert-warning, .alert-danger {
   display: table;
   min-width: 250px !important;
   max-width: 375px !important;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-  margin-top: 20px !important;
-  padding: 0 0 7px 10px !important;
+  border-radius: 4px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
   border: none !important;
+  margin-top: 20px !important;
+  margin-right: 4px !important;
+  padding: 0 0 7px 10px !important;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
   outline: none !important;
-  vertical-align: middle; }
-  .alert-success .alert-sidebar, .alert-info .alert-sidebar, .alert-warning .alert-sidebar, .alert-danger .alert-sidebar {
+  vertical-align: middle;
+  cursor: pointer; }
+  .alert:hover {
+    box-shadow: -1px 3px 12px rgba(0, 0, 0, 0.35); }
+  .alert .alert-sidebar {
     position: absolute;
     display: inline-block;
     width: 36px;
     height: 101%;
     top: 0;
     left: -1px;
-    border-radius: 5px;
+    border-radius: 7px;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     opacity: 0.85; }
-    .alert-success .alert-sidebar span, .alert-info .alert-sidebar span, .alert-warning .alert-sidebar span, .alert-danger .alert-sidebar span {
+    .alert .alert-sidebar .alert-icon {
       position: relative;
-      color: rgba(255, 255, 255, 0.8);
+      color: rgba(255, 255, 255, 0.85);
       font-size: 1.05em;
       top: 4px;
-      left: 11px; }
-  .alert-success span, .alert-info span, .alert-warning span, .alert-danger span {
+      left: 11px;
+      text-shadow: 1px 0 5px rgba(0, 0, 0, 0.4); }
+  .alert .alert-title {
+    font-size: 1.0125em;
+    width: 92%;
+    border-top-right-radius: 5px;
+    margin-left: 25px;
+    padding: 3.5px 0 1.5px 8px; }
+    .alert .alert-title strong {
+      font-size: 1.15em !important;
+      letter-spacing: 0.055em; }
+  .alert .alert-message {
+    position: relative;
+    max-width: 100% !important;
+    line-height: 1.2em;
+    text-align: left;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    padding: 7px 10px 1px 33px;
+    margin-right: -1em;
+    padding-right: 1em; }
+    .alert .alert-message.expand {
+      display: block; }
+  .alert span {
     display: table-cell;
     letter-spacing: 0.04em !important;
     float: left !important; }
-    .alert-success span strong, .alert-info span strong, .alert-warning span strong, .alert-danger span strong {
-      font-size: 1.15em !important; }
-    .alert-success span:nth-child(2), .alert-info span:nth-child(2), .alert-warning span:nth-child(2), .alert-danger span:nth-child(2) {
+    .alert span:nth-child(2) {
       position: relative;
       top: 1px;
       font-size: 1.05em;
       height: auto !important;
       margin: auto; }
-    .alert-success span:nth-child(3), .alert-info span:nth-child(3), .alert-warning span:nth-child(3), .alert-danger span:nth-child(3) {
-      font-size: 1.0125em;
-      width: 92%;
-      border-top-right-radius: 5px;
-      margin-left: 25px;
-      padding: 4px 0 2px 8px; }
-    .alert-success span:nth-child(4), .alert-info span:nth-child(4), .alert-warning span:nth-child(4), .alert-danger span:nth-child(4) {
-      max-width: 100% !important;
-      max-height: 85% !important;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      padding: 7px 10px 1px 33px; }
-    .alert-success span:before, .alert-info span:before, .alert-warning span:before, .alert-danger span:before {
+    .alert span:before {
       position: relative !important;
       font-size: 1.5em !important;
       top: 1.65px;
       left: -2px;
       margin-right: 1px !important; }
-  .alert-success .close, .alert-info .close, .alert-warning .close, .alert-danger .close {
-    top: 4.5px !important;
+  .alert .close {
+    top: 4px !important;
     right: 5px !important;
     height: auto !important;
-    width: 19px !important;
+    width: 18px !important;
     border-radius: 100px;
     outline: none !important;
     font-size: 18px !important;
     text-shadow: none;
     padding: 1px;
     opacity: 0.8; }
-    .alert-success .close:hover, .alert-info .close:hover, .alert-warning .close:hover, .alert-danger .close:hover {
+    .alert .close:hover {
       font-size: 16px !important;
-      color: rgba(255, 255, 255, 0.95) !important;
-      opacity: 0.6;
+      color: rgba(255, 255, 255, 0.975) !important;
       transition: background-color 200ms linear;
-      transition: color 250ms linear; }
+      transition: color 250ms linear;
+      opacity: 0.5; }
 
 .alert-success {
-  background: rgba(176, 227, 181, 0.95); }
+  background: rgba(176, 227, 181, 0.95);
+  color: #3c763d; }
   .alert-success:hover {
     background: #b0e3b5; }
   .alert-success .alert-sidebar {
     background: #33a033; }
   .alert-success .alert-title {
-    background: rgba(112, 183, 119, 0.3);
+    background: rgba(112, 183, 119, 0.25);
     border-bottom: 1px solid rgba(60, 118, 61, 0.25); }
   .alert-success .close {
     color: #298129; }
     .alert-success .close:hover {
-      background: rgba(51, 160, 51, 0.75) !important; }
+      background: rgba(51, 160, 51, 0.65) !important; }
 
 .alert-info {
   background: rgba(182, 218, 252, 0.95); }
   .alert-info:hover {
     background: #b6dafc; }
   .alert-info .alert-sidebar {
-    background: #3088ef;
-    color: rgba(208, 228, 237, 0.95); }
+    background: #3088ef; }
   .alert-info .alert-title {
     background: rgba(114, 183, 223, 0.2);
     border-bottom: 1px solid rgba(158, 178, 187, 0.8); }
   .alert-info .close {
     color: #3088ef !important; }
     .alert-info .close:hover {
-      background: rgba(48, 136, 239, 0.75) !important; }
+      background: rgba(48, 136, 239, 0.55) !important; }
 
 .alert-warning {
-  background: rgba(230, 220, 179, 0.95);
-  color: #b07817 !important; }
+  background: rgba(240, 224, 164, 0.95);
+  color: #b57317 !important; }
   .alert-warning:hover {
-    background: #e6dcb3; }
+    background: #f0e0a4; }
   .alert-warning .alert-sidebar {
-    background: #d8891c;
-    color: rgba(230, 220, 179, 0.95); }
+    background: #dd9d30; }
+    .alert-warning .alert-sidebar .alert-icon {
+      font-size: 0.95em; }
   .alert-warning .alert-title {
-    background: rgba(195, 174, 115, 0.2);
-    border-bottom: 1px solid rgba(188, 124, 51, 0.35); }
+    background: rgba(208, 181, 106, 0.2);
+    border-bottom: 1px solid rgba(181, 115, 23, 0.25); }
   .alert-warning .close {
-    color: #9a613b !important; }
+    color: #b57317 !important; }
     .alert-warning .close:hover {
-      background: rgba(216, 137, 28, 0.75) !important; }
+      background: rgba(221, 157, 48, 0.75) !important; }
 
 .alert-danger {
-  background: rgba(224, 154, 154, 0.95);
-  color: #be2a2a !important; }
+  background: rgba(229, 155, 155, 0.95);
+  color: #be2424 !important; }
   .alert-danger:hover {
-    background: #e09a9a; }
+    background: #e59b9b; }
   .alert-danger .alert-sidebar {
-    background: #d03132;
-    color: rgba(238, 206, 206, 0.95); }
-    .alert-danger .alert-sidebar span {
-      position: relative;
-      font-size: 0.9em;
-      top: 5px; }
+    background: #d03132; }
+    .alert-danger .alert-sidebar .alert-icon {
+      text-shadow: 1px 0 5px rgba(0, 0, 0, 0.35); }
   .alert-danger .alert-title {
-    background: rgba(222, 141, 141, 0.95);
-    border-bottom: 1px solid rgba(190, 42, 42, 0.25); }
+    background: rgba(224, 144, 144, 0.75);
+    border-bottom: 1px solid rgba(190, 36, 36, 0.25); }
   .alert-danger .close {
-    color: #be2a2a !important; }
+    color: #be2424 !important; }
     .alert-danger .close:hover {
       background: rgba(208, 49, 50, 0.75) !important; }
-
-.fa-exclamation-triangle {
-  position: relative;
-  top: 4px;
-  font-size: 0.95em; }
-
-.fa-warning {
-  position: relative;
-  top: 4px; }
