@@ -87,12 +87,12 @@ var formatHead = () => {
 			menu.css('box-shadow', 'none');
 			leftFade.css('top', '8px');
 			textPanel.css('paddingTop', '35px');
-			preview.css('paddingTop', '40px');
+			preview.css('paddingTop', '35px');
 		} else {
 			textPanel.css('paddingTop', '0px');
 			menu.css('box-shadow', '0 1px 10px rgba(0,0,0,0.3)');
 			leftFade.css('top', '0');
-			textPanel.css('paddingTop', '0px');
+			textPanel.css('paddingTop', '5px');
 			preview.css('paddingTop', '30px');
 		}
 	} else {
@@ -102,8 +102,8 @@ var formatHead = () => {
 		if(toolbar.is(':visible')) {
 			textPanel.css('paddingTop', '7px');
 			dragArea.css('width', '-webkit-calc(50% - 50px)');
-			editor.css('paddingTop', '7px');
-			preview.css('paddingTop', '30px');
+			editor.css('paddingTop', '9px');
+			preview.css('paddingTop', '25px');
 		} else {
 			menuToggle.show();
 			dragArea.css({ 'width': 'calc(100% - 117px)' });
@@ -184,6 +184,7 @@ function togglePreview() {
 		leftFade.width('100%');
 		rightFade.hide();
 		syncScroll.hide();
+    // syncScroll.css('color', '#444444');
 		previewToggle.attr('class', 'fa fa-eye-slash');
 		settings.set('showPreview', true);
 	} else {
