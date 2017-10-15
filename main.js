@@ -239,6 +239,7 @@ localShortcut.register('CmdOrCtrl+o', () => { sendShortcut('file-open'); });
 localShortcut.register('CmdOrCtrl+Shift+p', () => { sendShortcut('toggle-palette'); });
 localShortcut.register('CmdOrCtrl+r', () => { sendShortcut('win-reload'); });
 localShortcut.register('CmdOrCtrl+s', () => { sendShortcut('file-save'); });
+localShortcut.register('CmdOrCtrl+Shift+s', () => { sendShortcut('file-save-as'); });
 localShortcut.register('CmdOrCtrl+t', () => { sendShortcut('table-modal'); });
 localShortcut.register('CmdOrCtrl+-', () => { sendShortcut('insert-strikethrough'); });
 localShortcut.register('CmdOrCtrl+Shift+-', () => { sendShortcut('insert-hr'); });
