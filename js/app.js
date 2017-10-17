@@ -113,6 +113,7 @@ var converter = new showdown.Converter({
 		extensions: ['youtube', highlight]
 });
 
+
 window.onload = () => {
 	var markdownPreview = document.getElementById('mdPreview');
 
@@ -120,6 +121,10 @@ window.onload = () => {
 	adaptTheme(themeColor, Color(themeColor).luminosity());
 	createModals();
 	fillEmojiModal();
+
+  $(document).on("click", ".alert", function (e) {
+    $(e.target).addClass('expand');
+  });
 
 	cm.on('change', (cm) => {
 		var markdownText = cm.getValue();
@@ -140,10 +145,8 @@ window.onload = () => {
 				$(this).attr('class', 'break');
 			}
 		});
-		// Markdown -> HTML
 		converter.setOption('noHeaderId', true);
-		html = converter.makeHtml(markdownText);
-		$('#htmlPreview').val(html);
+    $('#htmlPreview').val(converter.makeHtml(markdownText));
 		// Open preview links in default browser
 		$('#mdPreview a').on('click', function() {
 			event.preventDefault();
@@ -167,7 +170,7 @@ window.onload = () => {
 	var ext = ['.md','.markdown','.mdown','.mkdn','.mkd','.mdwn','.mdtxt','.mdtext'];
 	if(filePath && ext.indexOf(path.extname(filePath)) > -1) {
 		argHandling(filePath);
-	} else if(main.getWindows().size <= 1) {
+	} else if(Object.keys(main.getWindows()).length <= 1) {
 		storage.get('markdown-savefile', function(err, data) {
 			if(err) notify(err, 'error');
 			if('filename' in data) {
@@ -202,9 +205,6 @@ window.onload = () => {
 		createTable($('#columns').val(),$('#rows').val(),$('.on').attr('id').slice(0,-5));
 	});
 };
-$('#settingsMenu').focus(function() {
-	notify('Handler for .focus() called.', 'success');
-});
 
 function getHTML() { return converter.makeHtml(cm.getValue()); }
 
@@ -323,10 +323,9 @@ $('#leftAlign, #centerAlign, #rightAlign').on('click', function() {
 	btn.addClass('on');
 });
 
-$('html').click(function() {
-  commandPalette().hide();
-  // if($('#settingsMenu').css('left') === '0px')
-  //   sendIPC('toggle-settings');
+$(document).click(function(e) {
+	if($(e.target).attr("class") !== 'palette-input')
+	  commandPalette().hide();
 });
 // Close on escape key
 $(document).keydown((e) => {
@@ -337,7 +336,7 @@ $(document).keydown((e) => {
   }
 });
 
-$(document).ready(function(){
+$(document).ready(function() {
     $('[data-toggle="tooltip"]').tooltip();
 });
 
