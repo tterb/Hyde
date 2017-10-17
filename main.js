@@ -28,18 +28,17 @@ const shell = electron.shell;
 const BrowserWindow = electron.BrowserWindow;
 const {Menu, MenuItem} = require('electron');
 const mod = require('./package.json');
-const settings = require('./config');
+const config = require('./config');
 const tray = require('./tray');
 const menuTemplate = require('./js/menu');
-const keepInTray = settings.get('keepInTray');
-const setting = require('electron-settings');
+const settings = require('electron-settings');
 const fs = require('fs');
 const path = require('path');
 const window = require('electron-window');
 const localShortcut = require('electron-localshortcut');
 const windowStateManager = require('electron-window-state');
 const packageJSON = require(__dirname + '/package.json');
-const mainPage = (`file://${__dirname}/index.html`);
+const mainPage = path.join(__dirname, 'index.html');
 const version = app.getVersion();
 const args = require('yargs')
     .usage('Hyde v'+version+'\n\n Usage: hyde [options] <filename>\n\n If a filename isn\'t specified, the application will open with the most recently opened file. Additionally, if the specified file doesn\'t exist, a new file with the given filename will be created at the specified path.')
@@ -55,17 +54,16 @@ const args = require('yargs')
     .wrap(60)
     .argv;
 
-// console.log('args.d: '+args.d+'\nargs.dev: '+args.dev);
 // Keep a global reference of the window objects
 var windows = new Set();
 let isQuitting = false;
-let windowState, mainWindow;
+let windowState, mainWindow, pathToOpen;
 
 // Allows render process to access active windows
-const getWindows = exports.getWindows = () => windows;
+const getWindows = exports.getWindows = () => window.windows;
 const lshortcuts = exports.lshortcuts = () => localShortcut;
 
-function getConfig() {
+function getWindowConfig() {
   var conf = {
       width: windowState.width,
       height: windowState.height,
@@ -96,33 +94,31 @@ process.argv.forEach(function(val, index, array) {
   }
 });
 
-const createWindow = exports.createWindow = (file) => {
-  let newWindow = window.createWindow(getConfig());
-  let argFile;
-  if(setting.has('targetFile')) {
-    argFile = { file: setting.get('targetFile') };
-    setting.delete('targetFile');
-  }
-  // let argFile = { file: path.join(__dirname, '/docs/keybindings.md') };
-  newWindow.showUrl(path.join(__dirname, 'index.html'), argFile);
-  // newWindow.showUrl(mainPage);
-  newWindow.once('ready-to-show', () => { newWindow.show(); });
-  // Open the DevTools.
-  if (args.dev) { newWindow.webContents.openDevTools(); }
-  windows.add(newWindow);
-  // Emitted when the window is closed.
-  newWindow.on('closed', () => {
-    windows.delete(newWindow);
-    newWindow = null;
-  });
 
+const createWindow = exports.createWindow = (filePath) => {
+  let argFile;
+  let newWindow = window.createWindow(getWindowConfig());
+  if(settings.has('targetFile')) {
+    argFile = { file: settings.get('targetFile') };
+    window.windows[newWindow.id].filePath = { 'filename': settings.get('targetFile') };
+    settings.delete('targetFile');
+  }
+  newWindow.showUrl(mainPage, argFile);
+  windowState.manage(newWindow)
+  newWindow.on('did-finish-load', () => { mainWindow.show(); });
+  newWindow.on('closed', () => { newWindow = null; });
+
+  // Listen for issues
+  newWindow.on('unresponsive', (err) => { console.error(err); });
+  newWindow.webContents.on('crashed', (err) => { console.error(err); });
   // Open anchor links in browser
-  newWindow.webContents.on('will-navigate', (e, url) => {
+  function openExternal (e, url) {
     e.preventDefault();
     shell.openExternal(url);
-  });
-  tray.create(newWindow);
-  return newWindow;
+  }
+  newWindow.webContents.on('new-window', openExternal)
+  newWindow.webContents.on('will-navigate', openExternal)
+  return newWindow
 }
 
 ipc.on('export-to-pdf', (event, pdfPath) => {
@@ -188,7 +184,7 @@ if (process.platform === 'darwin') {
     label: name,
     submenu: [
       {role: 'about', click: () => {
-        sendShortcut('about-modal');
+        ipcSend('about-modal');
       }},
       {type: 'separator'},
       {role: 'services', submenu: []},
@@ -200,7 +196,7 @@ if (process.platform === 'darwin') {
       {role: 'quit'}
     ]
   })
-  template[1].submenu[7] = {label: "Show in Finder", click: () => { sendShortcut('open-file-manager'); }};
+  template[1].submenu[7] = {label: "Show in Finder", click: () => { ipcSend('open-file-manager'); }};
   template[3].submenu.splice(2,1);
   // Add syntax-themes to menu
   template[3].submenu[6].submenu = menuThemes();
@@ -212,130 +208,119 @@ if (process.platform === 'darwin') {
     {role: 'front'}
   ]
 } else {
-  template[0].submenu[7] = {label: "Show in Explorer", click: () => { sendShortcut('open-file-manager'); }};
+  template[0].submenu[7] = {label: "Show in Explorer", click: () => { ipcSend('open-file-manager'); }};
   template[2].submenu[7].submenu = menuThemes();
 }
 
-function sendShortcut(cmd) {
+function ipcSend(cmd) {
   var focusedWindow = BrowserWindow.getFocusedWindow();
   focusedWindow.webContents.send(cmd);
 }
 
 // Register local keyboard shortcuts
-// var shortcuts = registerShortcuts();
-localShortcut.register('CmdOrCtrl+Shift+a', () => { sendShortcut('auto-indent'); });
-localShortcut.register('CmdOrCtrl+b', () => { sendShortcut('insert-bold'); });
-localShortcut.register('CmdOrCtrl+d', () => { sendShortcut('select-word'); });
-localShortcut.register('CmdOrCtrl+e', () => { sendShortcut('insert-emoji'); });
-localShortcut.register('CmdOrCtrl+f', () => { sendShortcut('search-find'); });
-localShortcut.register('CmdOrCtrl+Shift+f', () => { sendShortcut('search-replace'); });
-localShortcut.register('CmdOrCtrl+h', () => { sendShortcut('insert-heading'); });
-localShortcut.register('CmdOrCtrl+i', () => { sendShortcut('insert-italic'); });
-localShortcut.register('CmdOrCtrl+k', () => { sendShortcut('insert-image'); });
-localShortcut.register('CmdOrCtrl+l', () => { sendShortcut('insert-link'); });
-localShortcut.register('CmdOrCtrl+m', () => { sendShortcut('toggle-menu'); });
-localShortcut.register('CmdOrCtrl+n', () => { sendShortcut('file-new'); });
-localShortcut.register('CmdOrCtrl+o', () => { sendShortcut('file-open'); });
-localShortcut.register('CmdOrCtrl+Shift+p', () => { sendShortcut('toggle-palette'); });
-localShortcut.register('CmdOrCtrl+r', () => { sendShortcut('win-reload'); });
-localShortcut.register('CmdOrCtrl+s', () => { sendShortcut('file-save'); });
-localShortcut.register('CmdOrCtrl+Shift+s', () => { sendShortcut('file-save-as'); });
-localShortcut.register('CmdOrCtrl+t', () => { sendShortcut('table-modal'); });
-localShortcut.register('CmdOrCtrl+-', () => { sendShortcut('insert-strikethrough'); });
-localShortcut.register('CmdOrCtrl+Shift+-', () => { sendShortcut('insert-hr'); });
-localShortcut.register('CmdOrCtrl+/', () => { sendShortcut('insert-comment'); });
-localShortcut.register('CmdOrCtrl+;', () => { sendShortcut('insert-code'); });
-localShortcut.register("CmdOrCtrl+'", () => { sendShortcut("insert-quote"); });
-localShortcut.register('CmdOrCtrl+.', () => { sendShortcut('toggle-toolbar'); });
-localShortcut.register('CmdOrCtrl+p', () => { sendShortcut('toggle-preview'); });
-localShortcut.register('CmdOrCtrl+s', () => { sendShortcut('file-save'); });
-localShortcut.register('CmdOrCtrl+,', () => { sendShortcut('toggle-settings'); });
-localShortcut.register('CmdOrCtrl+Shift+/', () => { sendShortcut('markdown-modal'); });
-localShortcut.register('CmdOrCtrl+up', () => { sendShortcut('page-up'); });
-localShortcut.register('CmdOrCtrl+down', () => { sendShortcut('page-down'); });
-localShortcut.register('CmdOrCtrl+left', () => { sendShortcut('indent-less'); });
-localShortcut.register('CmdOrCtrl+right', () => { sendShortcut('indent-more'); });
+localShortcut.register('CmdOrCtrl+Shift+a', () => { ipcSend('auto-indent'); });
+localShortcut.register('CmdOrCtrl+b', () => { ipcSend('insert-bold'); });
+localShortcut.register('CmdOrCtrl+d', () => { ipcSend('select-word'); });
+localShortcut.register('CmdOrCtrl+e', () => { ipcSend('insert-emoji'); });
+localShortcut.register('CmdOrCtrl+f', () => { ipcSend('search-find'); });
+localShortcut.register('CmdOrCtrl+Shift+f', () => { ipcSend('search-replace'); });
+localShortcut.register('CmdOrCtrl+h', () => { ipcSend('insert-heading'); });
+localShortcut.register('CmdOrCtrl+i', () => { ipcSend('insert-italic'); });
+localShortcut.register('CmdOrCtrl+k', () => { ipcSend('insert-image'); });
+localShortcut.register('CmdOrCtrl+l', () => { ipcSend('insert-link'); });
+localShortcut.register('CmdOrCtrl+m', () => { ipcSend('toggle-menu'); });
+localShortcut.register('CmdOrCtrl+n', () => { ipcSend('file-new'); });
+localShortcut.register('CmdOrCtrl+o', () => { ipcSend('file-open'); });
+localShortcut.register('CmdOrCtrl+Shift+o', () => { ipcSend('file-open-win'); });
+localShortcut.register('CmdOrCtrl+p', () => { ipcSend('toggle-preview'); });
+localShortcut.register('CmdOrCtrl+Shift+p', () => { ipcSend('toggle-palette'); });
+localShortcut.register('CmdOrCtrl+r', () => { ipcSend('win-reload'); });
+localShortcut.register('CmdOrCtrl+s', () => { ipcSend('file-save'); });
+localShortcut.register('CmdOrCtrl+Shift+s', () => { ipcSend('file-save-as'); });
+localShortcut.register('CmdOrCtrl+t', () => { ipcSend('table-modal'); });
+localShortcut.register('CmdOrCtrl+up', () => { ipcSend('page-up'); });
+localShortcut.register('CmdOrCtrl+down', () => { ipcSend('page-down'); });
+localShortcut.register('CmdOrCtrl+left', () => { ipcSend('indent-less'); });
+localShortcut.register('CmdOrCtrl+right', () => { ipcSend('indent-more'); });
+localShortcut.register('CmdOrCtrl+-', () => { ipcSend('insert-strikethrough'); });
+localShortcut.register('CmdOrCtrl+Shift+-', () => { ipcSend('insert-hr'); });
+localShortcut.register('CmdOrCtrl+/', () => { ipcSend('insert-comment'); });
+localShortcut.register('CmdOrCtrl+;', () => { ipcSend('insert-code'); });
+localShortcut.register("CmdOrCtrl+'", () => { ipcSend("insert-quote"); });
+localShortcut.register('CmdOrCtrl+.', () => { ipcSend('toggle-toolbar'); });
+localShortcut.register('CmdOrCtrl+,', () => { ipcSend('toggle-settings'); });
+localShortcut.register('CmdOrCtrl+Shift+/', () => { ipcSend('markdown-modal'); });
 
 // Called after initialization
 app.on('ready', function() {
-  // Create native application menu
-  const menu = Menu.buildFromTemplate(template);
-  Menu.setApplicationMenu(menu);
+  // Create native application menu for OSX
+  Menu.setApplicationMenu(Menu.buildFromTemplate(template));
   // Initialize windowStateManager
   windowState = windowStateManager({
-    defaultWidth: settings.get('windowWidth'),
-    defaultHeight: settings.get('windowHeight')
+    defaultWidth: config.get('windowWidth'),
+    defaultHeight: config.get('windowHeight')
   });
-  // Create main BrowserWindow
-  mainWindow = window.createWindow(getConfig());
-  let argFile = { file: readFile };
-  mainWindow.showUrl(path.join(__dirname, 'index.html'), argFile);
-  // mainWindow.showUrl(path.join(__dirname, 'index.html'));
-  windowState.manage(mainWindow);
-  windows.add(mainWindow);
+  settings.set('targetFile', readFile);
+  // Create main window
+  mainWindow = createWindow();
   tray.create(mainWindow);
-  // Show Dev Tools
+  // Show DevTools
   if(args.dev) {
     require('devtron').install();
     mainWindow.webContents.openDevTools();
   }
-  mainWindow.on('did-finish-load', () => {
-    mainWindow.show();
-  });
-  if(keepInTray) {
-    mainWindow.on('close', e => {
-      if (!isQuitting) {
-        e.preventDefault();
-        if(process.platform === 'darwin') {
-          app.hide();
-        } else {
-          mainWindow.hide();
-        }
-      }
-    });
-  }
-
-  mainWindow.on('closed', () => {
-    mainWindow = null;
-  });
-
-  // Quit when all windows are closed.
-  app.on('window-all-closed', () => {
-    // On OSX it is common for applications and their menu bar
-    // to stay active until the user quits explicitly with Cmd+Q
-    if(process.platform !== 'darwin') {
-      app.quit();
-    }
-  });
-
-  app.on('activate', () => {
-    // On OS X it's common to re-create a window in the app when the
-    // dock icon is clicked and there are no other windows open.
-    if (mainWindow === null) {
-      createWindow();
-    }
-  });
-
-  app.on('before-quit', () => {
-    // Store current window state
-    windowState.saveState(mainWindow)
-    isQuitting = true;
-  });
-
-  mainWindow.on('unresponsive', (err) => {
-    console.error(err);
-  });
-
-  // Listen for crashes
-  mainWindow.webContents.on('crashed', (err) => {
-    console.error(err);
-  });
 });
 
 // Listen for uncaughtExceptions
 process.on('uncaughtException', (err) => {
   console.error(err)
 });
+
+app.on('open-file', (e, path) => {
+  e.preventDefault()
+  if (isReady) {
+    createWindow(path)
+  } else {
+    pathToOpen = path
+  }
+});
+
+// Quit when all windows are closed.
+app.on('window-all-closed', () => {
+  // On OSX it is common for applications and their menu bar
+  // to stay active until the user quits explicitly with Cmd+Q
+  if(process.platform !== 'darwin') {
+    app.quit();
+  }
+});
+
+app.on('quit', e => {
+  if(settings.get('keepInTray') && !isQuitting) {
+    e.preventDefault();
+    if(process.platform === 'darwin')
+      app.hide();
+    else
+      Object.values(window.windows).hide();
+  }
+});
+
+app.on('activate', () => {
+  // On OS X it's common to re-create a window in the app when the
+  // dock icon is clicked and there are no other windows open.
+  if (mainWindow === null) {
+    createWindow();
+  }
+});
+
+app.on('before-quit', () => {
+  // Store current window state
+  windowState.saveState(mainWindow)
+  isQuitting = true;
+});
+
+const appVersion = exports.appVersion = () => {
+  return app.getVersion();
+}
 
 app.on('browser-window-created', function(event, win) {
   win.webContents.on('context-menu', function(e, params) {
@@ -349,10 +334,6 @@ ipc.on('show-context-menu', function(event) {
   contextMenu.popup(win);
 });
 
-const appVersion = exports.appVersion = () => {
-  return app.getVersion();
-}
-
 let rightClickPos = null;
 const contextMenu = new Menu();
 contextMenu.append(new MenuItem({ role: 'undo' }))
@@ -361,8 +342,8 @@ contextMenu.append(new MenuItem({ type: 'separator' }))
 contextMenu.append(new MenuItem({ label: "Cut", role: "cut" }))
 contextMenu.append(new MenuItem({ label: "Copy", role: "copy" }))
 contextMenu.append(new MenuItem({ label: "Paste", role: "paste" }))
-contextMenu.append(new MenuItem({ label: "Select All", click: () => { sendShortcut('ctrl+a'); } }))
+contextMenu.append(new MenuItem({ label: "Select All", click: () => { ipcSend('ctrl+a'); } }))
 contextMenu.append(new MenuItem({ type: 'separator' }))
-contextMenu.append(new MenuItem({ label: 'Show in File Manager', click: () => { sendShortcut('open-file-manager'); } }))
+contextMenu.append(new MenuItem({ label: 'Show in File Manager', click: () => { ipcSend('open-file-manager'); } }))
 contextMenu.append(new MenuItem({ type: 'separator' }))
 contextMenu.append(new MenuItem({ label: 'Inspect Element', click: () => { mainWindow.inspectElement(rightClickPos.x, rightClickPos.y); }}))
