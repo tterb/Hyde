@@ -1,29 +1,26 @@
 const ipc = electron.ipcRenderer;
-let target = '';
 
 // Handling file saving through IPCRenderer
 function saveAs() {
-	storage.get('markdown-savefile', function(err, data) {
-		options = {'filters': [{ name:'Markdown', 'extensions':['md']}]};
-		if(err) notify(err, 'error');
-		if('filename' in data) {
-			options.defaultPath = data.filename;
-		}
-		dialog.showSaveDialog(options, function(filename) {
-			if(filename === undefined)
-				return notify('You didn\'t save the file', 'warning');
-			storage.set('markdown-savefile', {'filename' : filename}, (err) => {
-				if(err) notify(err, 'error');
-			});
-			// filename is a string that contains the path and filename created in the save dialog.
-			var mdValue = cm.getValue();
-			fs.writeFile(filename, mdValue, (err) => {
-				if(err) notify('An error ocurred while creating the file '+ err.message, 'error');
-			});
-			this.setClean();
-			this.currentFile = filename;
-			this.updateWindowTitle(filename);
+  let data = main.getWindows()[remote.getCurrentWindow().id].filePath;
+	var options = {'filters': [{ name:'Markdown', 'extensions':['md']} ]};
+	if('filename' in data) {
+		options.defaultPath = data.filename;
+	}
+	dialog.showSaveDialog(options, function(filename) {
+		if(filename === undefined)
+			return notify('You didn\'t save the file', 'warning');
+		storage.set('markdown-savefile', {'filename' : filename}, (err) => {
+			if(err) notify(err, 'error');
 		});
+		// filename is a string that contains the path and filename created in the save dialog.
+		var mdValue = cm.getValue();
+		fs.writeFile(filename, mdValue, (err) => {
+			if(err) notify('An error ocurred while creating the file '+ err.message, 'error');
+		});
+		this.setClean();
+		this.currentFile = filename;
+		this.updateWindowTitle(filename);
 	});
 }
 
@@ -31,77 +28,97 @@ ipc.on('file-new', function() {
 	storage.set('markdown-savefile', {}, (err) => {
 		if(err) notify(err, 'error');
 	});
-	currentFile = '';
+	this.currentFile = '';
+	this.updateWindowTitle('New Document');
 	cm.getDoc().setValue('');
 });
 
+
 // Handling file saving through IPCRenderer
 ipc.on('file-save', () => {
-	storage.get('markdown-savefile', (err, data) => {
-		if(err) {
-			saveAs();
-			return;
-		}
-		if('filename' in data) {
-			var filename = data.filename;
-			if(filename === undefined)
-				return notify('You didn\'t save the file', 'warning');
-			storage.set('markdown-savefile', {'filename' : filename}, (err) => {
-				if(err) notify(err, 'error');
-			});
-			// filename is a string that contains the path and filename created in the save file dialog.
-			var mdValue = cm.getValue();
-			fs.writeFile(filename, mdValue, (err) => {
-				if(err) { notify('An error ocurred creating the file '+ err.message, 'error'); }
-			});
-			this.setClean();
-			this.currentFile = filename;
-			remote.BrowserWindow.getFocusedWindow().updateWindowTitle(filename);
-		} else {
-			saveAs();
-		}
-	});
+  let data = main.getWindows()[remote.getCurrentWindow().id].filePath;
+  if(data === null) {
+    saveAs();
+		return;
+  }
+	if('filename' in data) {
+		var filename = data.filename;
+		if(filename === undefined)
+			return notify('You didn\'t save the file', 'warning');
+		storage.set('markdown-savefile', {'filename' : filename}, (err) => {
+			if(err) notify(err, 'error');
+		});
+		// filename is a string that contains the path and filename created in the save file dialog.
+		var mdValue = cm.getValue();
+		fs.writeFile(filename, mdValue, (err) => {
+			if(err) { notify('An error ocurred saving the file '+ err.message, 'error'); }
+		});
+		this.setClean();
+		this.currentFile = filename;
+		this.updateWindowTitle(filename);
+	} else {
+		saveAs();
+	}
 });
 
 ipc.on('file-save-as', saveAs);
 
-// FIXME: Issues with savefile w/ multiple files open
 // Handling file opening through IPCRenderer
 ipc.on('file-open', () => {
-	storage.get('markdown-savefile', (err, data) => {
-		if(err) notify(err, 'error');
-		var options = {
-			'properties': ['openFile'],
-			'filters': [{
-				name: 'Markdown',
-				'extensions': ['md','markdown','mdown','mkdn','mkd','mdwn','mdtxt','mdtext']
-			}]
-		};
-		if('filename' in data)
-			options.defaultPath = data.filename;
-		dialog.showOpenDialog(options, (file) => {
-			if(file === undefined) {
-				return notify('You didn\'t select a file to open', 'info');
-			}
-			storage.set('markdown-savefile', {
-				'filename' : file[0] }, (err) => {
-					if(err) notify(err, 'error');
-				});
+  let data = main.getWindows()[remote.getCurrentWindow().id].filePath;
+  var options = {
+		'properties': ['openFile'],
+		'filters': [{
+			name: 'Markdown',
+			'extensions': ['md','markdown','mdown','mkdn','mkd','mdwn','mdtxt','mdtext']
+		}]
+	};
+  if('filename' in data)
+    options.defaultPath = data.filename;
+  dialog.showOpenDialog(options, (file) => {
+		if(file === undefined) {
+			return notify('You didn\'t select a file to open', 'info');
+		}
+    main.getWindows()[remote.getCurrentWindow().id].filePath = { 'filename' : file[0] };
+		storage.set('markdown-savefile', { 'filename' : file[0] },
+    (err) => { if(err) notify(err, 'error'); });
 
-			this.isFileLoadedInitially = true;
-			// this.currentFile = file[0]; <-- This fixes bottom file but not save
-			// file is a string that contains the path and filename created in the save file dialog.
-      if(!this.isClean()) {
-        settings.set('targetFile', file[0]);
-        main.createWindow();
-      } else {
-  			fs.readFile(file[0], 'utf-8', (err, data) => {
-  				if(err) { notify('An error ocurred while opening the file '+ err.message, 'error'); }
-  				cm.getDoc().setValue(data);
-  			});
-      }
-			// app.addRecentDocument(file);
-		});
+		this.isFileLoadedInitially = true;
+		this.currentFile = file[0]; // <-- This fixes bottom file but not save
+    if(!this.isClean()) {
+      settings.set('targetFile', file[0]);
+      main.createWindow();
+    } else {
+      readFileIntoEditor(file[0]);
+      // fs.readFile(file[0], 'utf-8', (err, data) => {
+      //   if(err) { notify('An error ocurred while opening the file '+ err.message, 'error'); }
+      //   cm.getDoc().setValue(data);
+      // });
+    }
+  });
+});
+
+ipc.on('file-open-new', () => {
+  let data = main.getWindows()[remote.getCurrentWindow().id].filePath;
+	var options = {
+		'properties': ['openFile'],
+		'filters': [{
+			name: 'Markdown',
+			'extensions': ['md','markdown','mdown','mkdn','mkd','mdwn','mdtxt','mdtext']
+		}]
+	};
+	if('filename' in data)
+		options.defaultPath = data.filename;
+	dialog.showOpenDialog(options, (file) => {
+		if(file === undefined) {
+			return notify('You didn\'t select a file to open', 'info');
+		}
+    main.getWindows()[remote.getCurrentWindow().id].filePath = { 'filename' : this.currentFile };
+		// this.isFileLoadedInitially = true;
+		// this.currentFile = file[0]; // <-- This fixes bottom file but not save
+		// file is a string that contains the path and filename created in the save file dialog.
+    settings.set('targetFile', file[0]);
+    main.createWindow();
 	});
 });
 

@@ -1,6 +1,29 @@
 const clipboard = require('electron');
 const parsePath = require('parse-filepath');
 
+function openFile() { sendIPC('file-open'); }
+function openNewFile(file = null) {
+  if(file === null) {
+    sendIPC('file-open-new')
+  } else {
+    settings.set('targetFile', file);
+    createWindow();
+  }
+}
+
+function saveFile() { sendIPC('file-save'); }
+function saveFileAs() { sendIPC('file-save-as'); }
+
+function exportToPDF() { sendIPC('file-pdf'); }
+function exportToHTML() { sendIPC('file-html'); }
+
+function copySelected() {
+  clipboard.writeText(cm.getSelection().toString());
+}
+function pasteSelected() {
+  cm.replaceSelection(clipboard.readText());
+}
+
 function reloadWin() {
   if(!this.isClean())
     showUnsavedDialog('reload');
@@ -12,6 +35,19 @@ function toggleDevTools() {
   var window = electron.remote.getCurrentWindow();
   window.toggleDevTools();
 }
+
+function closeWindow(win) {
+  if(!this.isClean())
+    showUnsavedDialog();
+  else
+    win.close();
+}
+
+// Generations and clean state of CodeMirror
+var getGeneration = () => { return this.cm.doc.changeGeneration(); };
+var setClean = () => { this.latestGeneration = this.getGeneration(); };
+var isClean = () => { return this.cm.doc.isClean(this.latestGeneration); };
+
 
 function showUnsavedDialog(opt) {
   var modal = $('#unsaved-modal'),
@@ -39,18 +75,6 @@ function showUnsavedDialog(opt) {
     modal.modal('hide');
     setTimeout(() => action(), 200);
   });
-}
-
-function openNewFile(file) {
-  settings.set('targetFile', file);
-  main.createWindow();
-}
-
-function closeWindow(win) {
-  if(!this.isClean())
-    showUnsavedDialog();
-  else
-    win.close();
 }
 
 function toggleSidebar() {
@@ -93,29 +117,6 @@ function toggleSettingsMenu() {
   }
 }
 
-function copySelected() {
-  clipboard.writeText(cm.getSelection().toString());
-}
-
-function pasteSelected() {
-  cm.replaceSelection(clipboard.readText());
-}
-
-function openFile() { sendIPC('file-open'); }
-
-function saveFile() { sendIPC('file-save'); }
-
-function saveFileAs() { sendIPC('file-save-as'); }
-
-function exportToPDF() { sendIPC('file-pdf'); }
-
-function exportToHTML() { sendIPC('file-html'); }
-
-// Generations and clean state of CodeMirror
-var getGeneration = () => { return this.cm.doc.changeGeneration(); };
-var setClean = () => { this.latestGeneration = this.getGeneration(); };
-var isClean = () => { return this.cm.doc.isClean(this.latestGeneration); };
-
 // Update window title and status bar filename
 var updateWindowTitle = (path) => {
   var appName = 'Hyde',
@@ -142,12 +143,12 @@ var updateWindowTitle = (path) => {
   if(path !== undefined)
     activeFile.attr('data-tooltip', path.toString().replace(os.homedir(),'~'));
   else
-    activeFile.attr('data-tooltip', 'None');
+    activeFile.attr('data-tooltip', '...');
 };
 
 function toggleMaximize() {
   var window = electron.remote.getCurrentWindow();
-  if(window.isMaximized) {
+  if(window.isMaximized()) {
     window.unmaximize();
     settings.set('isMaximized', false);
   } else {
@@ -175,4 +176,11 @@ function appendCustomCSS() {
   fs.writeFileSync(path.join(__dirname, 'css/preview/', 'custom.css'), input);
   toggleCustomCSS();
   $('#custom-css-modal').modal();
+}
+
+// Word count
+function countWords() {
+	var wordCount = cm.getValue().split(/\b[\s,.-:;]*/).length;
+	$('#wordCount').html('words: ' + wordCount.toString());
+	return cm.getValue().split(/\b[\s,.-:;]*/).length;
 }
