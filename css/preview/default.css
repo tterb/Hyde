@@ -72,12 +72,13 @@
 }
 
 #mdPreview ol, #mdPreview ul {
-  line-height: 1.6;
+  line-height: 1.55;
   margin-top: 0;
-  margin-bottom: 24px;
+  margin-bottom: 15px;
   padding-left: 35px;
 }
 #mdPreview ol ol, #mdPreview ol ul, #mdPreview ul ol, #mdPreview ul ul {
+  padding-top: 4px;
   padding-left: 25px;
 }
 #mdPreview ol ol ol, #mdPreview ol ol ul, #mdPreview ol ul ol, #mdPreview ol ul ul, #mdPreview ul ol ol, #mdPreview ul ol ul, #mdPreview ul ul ol, #mdPreview ul ul ul {
@@ -109,7 +110,7 @@
 }
 #mdPreview .break {
   height: 0;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 #mdPreview strong {
   font-size: 105%;
