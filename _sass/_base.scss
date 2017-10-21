@@ -212,12 +212,16 @@ pre {
   // padding-bottom: 3em;
   @extend %clearfix;
 
-  @include media-query($on-laptop) {
-    max-width: -webkit-calc(800px - (#{$horizontal-spacing-unit}));
-    max-width:         calc(800px - (#{$horizontal-spacing-unit}));
-    padding-right: $spacing-unit / 2;
-    padding-left: $spacing-unit / 2;
-  }
+  // @include media-query($on-laptop) {
+  //   max-width: -webkit-calc(800px - (#{$horizontal-spacing-unit}));
+  //   max-width:         calc(800px - (#{$horizontal-spacing-unit}));
+  //   padding-right: $spacing-unit / 0;
+  //   padding-left: $spacing-unit / 0;
+  //   .gradient {
+  //     top: 2em;
+  //     height: 110%;
+  //   }
+  // }
 }
 
 
