@@ -16,20 +16,20 @@ sitemap:
   <h3>Table of Contents</h3>
   <ul class="toc-list">
     <li><a href="{{ '/docs#about' | prepend: site.baseurl }}">About</a></li>
-    <li><a href="{{ '/docs#install' | prepend: site.baseurl }}l">Install</a></li>
+    <li><a href="{{ '/docs#install' | prepend: site.baseurl }}">Install</a></li>
     <li><a href="{{ '/docs#keybindings' | prepend: site.baseurl }}">Keybindings</a></li>
     <li><a href="{{ '/docs#changelog' | prepend: site.baseurl }}">Changelog</a></li>
-    <li><a href="{{ '/docs#coontruting' | prepend: site.baseurl }}">Contributing</a></li>
+    <li><a href="{{ '/docs#contributing' | prepend: site.baseurl }}">Contributing</a></li>
   </ul>
 </section>
 <section id="about" class="document-section">
   <h2>About</h2>
   <p>Hyde is an open-source markdown editor, which utilizes the Electron framework to create a comfortable, cross-platform experience for every type of user. <br>Modularity is at the core of Hyde's interface design, allowing you to cater the UI to what you need. Whether you are a power-user that prefers keyboard shortcuts and a minimalistic interface, a visually-oriented user that prefers the accesibilty of toolbars and menus, or maybe somewhere in between, Hyde is capable of providing you with exactly what you need.</p>
-  <hr>
 </section>
+<hr>
 <section id="install" class="document-section">
   <h2>Install</h2>
-  <p>Though there isn't an installer yet, using Hyde is simple. To use Hyde on any platform, you must first <a href="https://www.npmjs.com/">install npm</a> and download Hyde from the project <a href="https://github.com/JonSn0w/Hyde">repo</a>. Then simply run the following command from within the project directory:
+  <p>Though there isn't an installer yet, using Hyde is simple. To use Hyde on any platform, you must first <a href="https://www.npmjs.com/">install npm</a> and download Hyde from the <a href="https://github.com/JonSn0w/Hyde">project repo</a>. Then simply run the following command from within the project directory:
     <div class="language-shell highlighter-rouge">
       <pre class="highlight"><code><span class="c"># Clone the repository</span><br><span class="nv">$</span> git clone https://github.com/jonsn0w/hyde<br><br><span class="c"># Navigate to the directory</span><br><span class="nv">$</span> cd hyde<br><br><span class="c"># Install Hyde</span><br><span class="nv">$</span> npm install -g ./</code></pre>
     </div>
@@ -38,11 +38,11 @@ sitemap:
       <pre class="highlight"><code><span class="nv">$</span> hyde &#60;filename&#62;</code></pre>
     </div>
   </p>
-  <hr>
 </section>
+<hr>
 <section id="keybindings" class="document-section">
   <h2 class="section-title">Keyboard Shortcuts</h2>
-  <div class="keybinding-section">
+  <div class="keybinding-table">
   <h3>Operations</h3>
   <table id="table-ops" class="document-table">
     <thead>
@@ -99,7 +99,7 @@ sitemap:
     </tbody>
   </table>
   </div>
-  <div class="keybinding-section right">
+  <div class="keybinding-table right">
   <table id="table-edit" class="document-table">
     <h3>Editing</h3>
     <thead>
@@ -152,7 +152,7 @@ sitemap:
     </tbody>
   </table>
   </div>
-  <div class="keybinding-section" style="right: 50%;">
+  <div class="keybinding-table" style="right: 50%;">
   <table id="table-format" class="document-table">
     <h3>Formatting</h3>
     <thead>
@@ -209,21 +209,25 @@ sitemap:
     </tbody>
   </table>
   </div>
-  <hr>
 </section>
+<hr>
 <section id="changelog" class="document-section">
   <h2>Changelog</h2>
-  <div class="version">
-    <div id="v0.0.1" class="version-title"><span>v</span>0.0.1</div>
-    <hr class="version-rule">
-    <ul class="version-changes">
-      <li>All features added</li>
-      <li>All bugs created</li>
-    </ul>
-  </div>
-  <hr>
+  {% assign sorted_versions = site.data.changelog | reverse %}
+  {% for version in sorted_versions %}
+    <div class="version">
+      <div id="v{{ version.version }}" class="version-title" href="{{ site.repo }}/releases/tag/v{{ version.version }}"><span>v</span>{{ version.version | escape }}</div>
+      <hr class="version-rule">
+      <ul class="version-changes">
+        {% for change in version.changes %}
+          <li>{{ change | escape }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endfor %}
 </section>
-<section id="contributing" class="document-section" style="padding-bottom: 1.75em;">
+<hr>
+<section id="contributing" class="document-section">
   <h2>Contributing</h2>
-  <p>If you're looking for an easy way to contribute to this project but aren't sure where to start, I've created a list of minor bugs and/or issues to be fixed before the projects initial release, which you can find <a href="https://github.com/JonSn0w/Hyde/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20is%3Ahelpwanted">here</a> or you can just try the app out and provide some <a href="https://github.com/JonSn0w/Hyde/issues/new">feedback</a>. <br>Also, before submitting a pull-request, I would ask that you first take a look at the projects Contributing guidelines.</p>
+  <p>If you're looking for an easy way to contribute to this project but aren't sure where to start, I've created a list of minor bugs and/or issues to be fixed before the projects initial release, which you can find <a href="https://github.com/JonSn0w/Hyde/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20is%3Ahelpwanted">here</a> or you can just try out the app and provide some <a href="https://github.com/JonSn0w/Hyde/issues/new">feedback</a>. <br>Also, before submitting a pull-request, I would ask that you first take a look at the projects <a href="https://github.com/JonSn0w/Hyde/blob/master/docs/CONTRIBUTING.md" target="_blank">Contributing guidelines</a>.</p>
 </section>
