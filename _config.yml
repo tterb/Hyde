@@ -1,46 +1,23 @@
 # Site settings
 title: Hyde
 email: bstevensondev@gmail.com
-description: A wwebsite for Hyde editor
+description: A website for Hyde editor
 owner:
   name: Brett Stevenson # or company name
-  url: https://brettstevenson.github.io
+  url: http://brettstevenson.io
+repo: https://github.com/JonSn0w/Hyde
+bugs: https://github.com/JonSn0w/Hyde/issues/new
 first_published: 2017
-baseurl: "/Hyde" # the subpath of your site, e.g. /blog/
+baseurl: "/Hyde/" # the subpath of your site, e.g. /blog/
+
 url: "" # the base hostname & protocol for your site
 twitter_username: bstevensondev
 github_username:  JonSn0w
 
 name: 'Brett Stevenson'
 author: 'Brett Stevenson'
-# author_image: "/images/avatar.jpg"
-# cover: "/images/cover.jpg"
 # logo: "/images/logo.jpg"
-# favicon: "/images/favicon.png"
-
-social:
-  github: https://github.com/JonSn0w/Hyde
-  # deviantart:
-  # dribbble:
-  # twitter:
-  # etsy: https://etsy.com/
-  # pinterest: https://pintrest.com/
-  # linkedin-square: https://linkedin.com/
-  # email: /contact/
-  #flickr:
-  #spotify:
-  #stack-overflow:
-  #vimeo:
-  #reddit:
-  #pied-piper:
-  #digg:
-  #weibo:
-  #trello:
-  #foursquare:
-  #linux:
-  #bitbucket-square:
-  #vk:
-  #slack:
+favicon: "images/favicon.png"
 
 # Build settings
 markdown: kramdown
