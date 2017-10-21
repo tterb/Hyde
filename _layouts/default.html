@@ -4,10 +4,17 @@
   {% include head.html %}
   <body>
     <div class="page-content">
-      <div id="page-wrapper" class="wrapper">
-        {% include header.html %}
-        {{ content }}
-      </div>
+      {% if page.layout == "page" %}
+        <div id="page-wrapper" class="wrapper">
+          {% include header.html %}
+          {{ content }}
+        </div>
+      {% elsif page.layout == "default" %}
+        <div id="page-wrapper" class="wrapper landing">
+          {% include header.html %}
+          {{ content }}
+        </div>
+      {% endif %}
     </div>
     {% unless page.options contains "nofooter" %}{% include footer.html %}{% endunless %}
     {% include scripts.html %}
