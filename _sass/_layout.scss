@@ -169,7 +169,7 @@ html, body {
       font-size: 200px;
     }
     h3 {
-      font-size: 30px !important;
+      font-size: 33px !important;
 		}
 	}
 }
@@ -207,9 +207,9 @@ html, body {
 .gradient {
   @include background-image(linear-gradient(to top, #292c33 57%, rgba(#292c33, 0.915) 63%, rgba(#292c33, 0.8) 67%, rgba(#292c33, 0.2) 80%, rgba(#292c33, 0) 86%));
   position: absolute;
-  height: 152%;
+  height: 162%;
   width: 100%;
-  top: 8.5%;
+  top: 10%;
   left: 0;
   z-index: 0;
 }
@@ -221,7 +221,7 @@ html, body {
     display: inline-block;
     width: 47%;
     height: auto;
-    top: 184%;
+    top: 195%;
     left: 47%;
   }
 }
@@ -247,7 +247,7 @@ html, body {
   display: inline-block;
   width: 50%;
   height: auto;
-  top: 2em;
+  top: 4em;
   left: 0;
   right: 50%;
   #preview-img {
@@ -345,7 +345,7 @@ html, body {
   @include background-image(linear-gradient(to top, #1c1e22, #2c2f35));
   text-align: center;
   box-shadow: 0 -3px 20px rgba(0,0,0,0.5);
-  padding: 1.75em 3em 0.5em !important;
+  padding: 1.75em 3em 0.35em !important;
   .icons {
     list-style: none;
     font-size: 2.5em;
@@ -367,7 +367,7 @@ html, body {
     display: block;
     position: relative;
     font-size: 30px;
-    margin: 10px auto 15px;
+    margin: 12px auto 15px;
     a {
       position: relative;
       color: _palette(accent1, fg-light);
