@@ -1,15 +1,8 @@
 {
-  "name": "stephstevenson.github.io",
+  "name": "brettstevenson.io/Hyde",
   "version": "1.0.0",
-  "description": "A personal website for my blog",
-  "main": "Gulpfile.js",
-  "dependencies": {
-    "critical": "^0.8.4",
-    "gulp": "^3.9.1",
-    "imagemin-pngquant": "^5.0.0",
-    "jspm": "^0.16.53",
-    "octicons": "^5.0.1"
-  },
+  "description": "A personal website for Hyde",
+  "main": "gulpfile.js",
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^4.0.0",
@@ -26,19 +19,24 @@
     "gulp-shell": "^0.6.3",
     "gulp-uncss": "^1.0.6"
   },
+  "dependencies": {
+    "critical": "^0.8.4",
+    "gulp": "^3.9.1",
+    "jspm": "^0.16.53"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stephstevenson/stephstevenson.github.io.git"
+    "url": "git+https://github.com/JonSn0w/Hyde.git"
   },
   "author": "Steph Stevenson",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/stephstevenson/stephstevenson.github.io/issues"
+    "url": "https://github.com/JonSn0w/Hyde/issues"
   },
-  "homepage": "https://github.com/stephstevenson/stephstevenson.github.io#readme",
+  "homepage": "https://github.com/JonSn0w/Hyde#readme",
   "jspm": {
     "dependencies": {
       "jquery": "npm:jquery@^3.2.1"
