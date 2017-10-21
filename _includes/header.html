@@ -1,10 +1,10 @@
 {% if page.layout == 'page' %}
-    <header id="header-alt" class="header">
+    <header id="header" class="header alt">
 {% else %}
     <header id="header" class="header">
 {% endif %}
   <div class="wrapper-head">
-    <div class="logo" style="background-image: url({{ site.favicon | prepend: site.baseurl}})"></div>
+    <div class="logo"><img src="{{ site.favicon | prepend: site.baseurl }})"></div>
     <nav class="site-nav">
       <div class="trigger">
         <a class="page-link" href="{{ site.baseurl }}/">home</a>
