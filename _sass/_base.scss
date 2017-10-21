@@ -1,6 +1,4 @@
-/**
- * Reset some basic elements
- */
+// Reset some basic elements
 body, h1, h2, h3, h4, h5, h6,
 p, blockquote, pre, hr,
 dl, dd, ol, ul, figure {
@@ -8,22 +6,18 @@ dl, dd, ol, ul, figure {
   padding: 0;
 }
 
+// Variables
+$base-line-height:                    1.5em;
+$horizontal-spacing-unit:              50px;
+$vertical-spacing-unit:                40px;
+$nav-height:                         3.25em;
 
+// portfolio tinkering
+$img-spacing:                           5px;
+$img-height:                          275px;
+$caption-font-size:                    12px;
 
-/** Variables **********************************************/
-$base-font-family:              Helvetica, sans-serif;
-$base-line-height:              1.5em;
-$horizontal-spacing-unit:       50px;
-$vertical-spacing-unit:         40px;
-$nav-height:                  3.25em;
-
-/* portfolio tinkering */
-$img-spacing: 5px;
-$img-height: 275px;
-$caption-font-size: 12px;
-$caption-color: #aaa;
-
-/* COLORS  */
+// Colors
 $red:  #ff3636;
 $orange: #f29105;
 $blue: #2698ba;
@@ -31,20 +25,17 @@ $green: #11d68b;
 $lime-green: #b7d12a;
 $purple: #b509ac;
 
-
 $grey-color-dark: #333;   /* footer */
 $grey-color-light: #ddd;  /* navigation bar border */
 $text-color: #666;
 
-/* Set theme color *************************/
-$theme-color: $red;
+// Set theme color
+// $theme-color: $red;
 
 
-/************************************************************/
+/****************************************************************/
 
-/**
- * Basic styling
- */
+// Basic styling
 body {
   width: 100%;
   height: 100%;
@@ -60,11 +51,7 @@ body {
   -webkit-text-size-adjust: 100%;
 }
 
-
-
-/**
- * Set `margin-bottom` to maintain vertical rhythm
- */
+// Set `margin-bottom` to maintain vertical rhythm
 p, blockquote, pre,
 ul, ol, dl, figure,
 %vertical-rhythm {
@@ -89,9 +76,7 @@ hr {
 }
 
 
-/**
- * Figures
- */
+// Figures
 figure > img {
   display: block;
 }
@@ -102,64 +87,51 @@ figcaption {
 
 
 
-/**
- * Lists
- */
+// Lists
 ul, ol {
   margin-left: $horizontal-spacing-unit;
 }
 
 li {
-  > ul,
-  > ol {
+  ul, ol {
     margin-bottom: 0;
   }
 }
 
 
-
-/**
- * Headings
- */
+// Headings
 h1, h2, h3, h4, h5, h6 {
   font-weight: 100;
 }
 
 
-/**
- * Links
- */
+// Links
 // a {
 //     color: $text-color;
 //     text-decoration: none;
-    /*
-    &:visited {
-        color: darken($brand-color, 15%);
-    }
-    */
+//    &:visited {
+//        color: darken($brand-color, 15%);
+//    }
 //     &:hover {
 //         color: $theme-color;
 //         text-decoration: none;
 //     }
 // }
-
-article a {
-  color: $theme-color;
-  font-weight: 100;
-  &:hover {
-    text-decoration: none;
-  }
-}
-
+// article a {
+//   color: $theme-color;
+//   font-weight: 100;
+//   &:hover {
+//     text-decoration: none;
+//   }
+// }
 
 
-/**
- * Blockquotes
- */
+
+// Blockquotes
 blockquote {
   color: $text-color;
-	border-left: 10px solid $grey-color-light;
-	padding-left: $horizontal-spacing-unit / 2;
+  border-left: 10px solid $grey-color-light;
+  padding-left: $horizontal-spacing-unit / 2;
   font-size: 18px;
   font-style: italic;
 
@@ -170,11 +142,8 @@ blockquote {
 
 
 
-/**
- * Code formatting
- */
-pre,
-code {
+// Code formatting
+pre, code {
   font-size: 15px;
   border-radius: 3px;
 }
@@ -186,8 +155,7 @@ code {
 pre {
   padding: 10px 12px;
   overflow-x: scroll;
-
-  > code {
+  code {
     border: 0;
     padding-right: 0;
     padding-left: 0;
@@ -198,10 +166,7 @@ pre {
 }
 
 
-/**
- * Wrapper
- */
-
+// Wrapper
 .wrapper {
   // background: #292c33;
   max-width: 100%;
@@ -225,9 +190,7 @@ pre {
 }
 
 
-/**
- * Clearfix
- */
+// Clearfix
 %clearfix {
   &::before,
   &::after {
