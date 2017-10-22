@@ -168,13 +168,11 @@ pre {
 
 // Wrapper
 .wrapper {
-  // background: #292c33;
   max-width: 100%;
   margin-right: auto;
   margin-left: auto;
   padding-right: calc($horizontal-spacing-unit/3);
   padding-left: calc($horizontal-spacing-unit/3);
-  // padding-bottom: 3em;
   @extend %clearfix;
 
   // @include media-query($on-laptop) {
