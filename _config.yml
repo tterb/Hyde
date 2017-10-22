@@ -17,7 +17,7 @@ github_username:  JonSn0w
 name: 'Brett Stevenson'
 author: 'Brett Stevenson'
 # logo: "/images/logo.jpg"
-favicon: "images/favicon.png"
+favicon: images/favicon.png
 
 # Build settings
 markdown: kramdown
