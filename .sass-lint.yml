@@ -5,12 +5,6 @@ rules:
   class-name-format:
     - 1
     - convention: 'hyphenatedlowercase'
-      ignore:
-        -CodeMirror
-        -switch__input
-        -switch__toggle
-        -switch__handle
-        -switch__touch
   id-name-format:
     - 1
     - convention: 'camelcase'
@@ -20,7 +14,7 @@ rules:
     - convention: 'hyphenatedlowercase'
     - allow-leading-underscore: false
   mixin-name-format:
-    - 1
+    - 0
     - convention: 'camelcase'
     - allow-leading-underscore: false
   hex-notation:
