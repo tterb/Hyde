@@ -5,6 +5,9 @@
 @import 'bourbon/bourbon';
 @import 'syntax-highlighting';
 
+$bg-light: #fff;
+$bg-dark: #292C33;
+
 .cf {
   @include clearfix;
 }
@@ -109,18 +112,30 @@ html, body {
   position: absolute;
   float: right;
   line-height: $nav-height;
-  right: 1.75em;
+  right: 3.5%;
+  margin-top: 4px;
   z-index: 999;
   .page-link {
+    display: inline-block;
     color: rgba(55,58,65,0.4);
     line-height: $base-line-height;
+    text-align: center;
     text-transform: lowercase;
-    transition: 250ms ease-in-out;
+    transition: color 250ms cubic-bezier(0.84, 0.17, 0.23, 0.57), font-weight 250ms cubic-bezier(0.84, 0.17, 0.23, 0.57);
     &:not(:first-child) {
       margin-left: 10px;
 		}
+    &::after {
+      display: inline-block;
+      content: attr(title);
+      font-weight: 400;
+      height: 0;
+      overflow: hidden;
+      visibility: hidden;
+    }
     &:hover, &:active {
-      color: rgba(1,4,10,0.8);
+      color: rgba(55,58,65,0.8);
+      font-weight: 400;
 		}
 	}
   @include media-query($on-palm) {
@@ -169,7 +184,9 @@ html, body {
       font-size: 200px;
     }
     h3 {
+      position: relative;
       font-size: 33px !important;
+      left: 5px;
 		}
 	}
 }
@@ -194,7 +211,7 @@ html, body {
     opacity: 0.6;
     width: 47%;
     height: auto;
-    top: 28.5em;
+    top: 27.5em;
     left: 4%;
     padding-left: 0;
     z-index: 9;
@@ -205,23 +222,24 @@ html, body {
 }
 
 .gradient {
-  @include background-image(linear-gradient(to top, #292c33 57%, rgba(#292c33, 0.915) 63%, rgba(#292c33, 0.8) 67%, rgba(#292c33, 0.2) 80%, rgba(#292c33, 0) 86%));
+  @include background-image(linear-gradient(to top, #24282d 58%, rgba(41,44,51,0.915) 64%, rgba(41,44,51,0.8) 67%, rgba(41,44,51,0.2) 80%, rgba(41,44,51,0) 86%));
   position: absolute;
-  height: 162%;
+  height: 155%;
   width: 100%;
-  top: 10%;
+  top: 4%;
   left: 0;
+  overflow: auto;
   z-index: 0;
 }
 
 .preview-section {
-  margin: 3.25em 0 1.5em;
+  margin: 1.25em 0 1.5em;
   .preview-features {
     position: absolute;
     display: inline-block;
     width: 47%;
     height: auto;
-    top: 195%;
+    top: 182.5%;
     left: 47%;
   }
 }
@@ -275,6 +293,61 @@ html, body {
     width: 125%;
     right: 0;
 	}
+}
+
+.repo-icons {
+  position: absolute;
+  font-size: 54px;
+  top: 250%;
+  right: 17.5%;
+  a {
+    span {
+      color: #373a3f !important;
+      padding: 0 6px;
+      opacity: 0.9;
+    }
+  }
+  #github {
+    position: relative;
+    font-size: 58px;
+    top: 1px;
+    &:hover, &:active {
+      span::before {
+        color: #4489ce;
+      }
+    }
+  }
+  #heart {
+    span {
+      position: relative;
+      top: 0;
+    }
+    &:hover, &:active {
+      span::before {
+        color: #ebc;
+      }
+    }
+  }
+  #bug {
+    font-size: 53px;
+    &:hover, &:active {
+      span::before {
+        color: #d66;
+      }
+    }
+  }
+}
+
+.tag-line {
+  color: #555;
+  font-size: 29px;
+  font-weight: 400;
+  text-align: center;
+  line-height: 1.2;
+  width: 75%;
+  margin: 1em auto 3em;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.2) !important;
+  opacity: 0.7;
 }
 
 .install-content {
@@ -342,8 +415,9 @@ html, body {
 */
 #footer {
   background-color: rgb(33,36,43);
+  height: 100px;
   @include background-image(linear-gradient(to top, #1c1e22, #2c2f35));
-  text-align: center;
+  // text-align: center;
   box-shadow: 0 -3px 20px rgba(0,0,0,0.5);
   padding: 1.75em 3em 0.35em !important;
   .icons {
@@ -425,6 +499,42 @@ html, body {
       }
 		}
 	}
+  .os-section {
+    display: inline-block;
+    position: relative;
+    width: 20%;
+    left: 84%;
+    span {
+      display: block;
+      color: #c9c9cc;
+      font-size: 0.75em;
+      letter-spacing: 0.045em;
+      text-align: left;
+    }
+    .os-icons {
+      margin-top: 4px;
+      img {
+        display: inline-block;
+        position: relative;
+        color: #a9a9ac;
+        height: 2.25em;
+        width: auto;
+        padding: 0 7px;
+        opacity: 0.4;
+        &:first-child {
+          margin-left: 1.25em;
+        }
+        &:nth-child(2) {
+          height: 2.05em;
+          top: 1px;
+        }
+        &:nth-child(3) {
+          height: 2.15em;
+          top: 1px;
+        }
+      }
+    }
+  }
 }
 @include breakpoint(xsmall) {
   display: block;
