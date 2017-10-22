@@ -52,6 +52,17 @@ html, body {
   height: 3.25em;
   width: 101%;
   z-index: 9999;
+  .title {
+    position: absolute;
+    display: inline-block;
+    font-family: _font(hdr-family);
+    font-size: 40px;
+    font-weight: 500;
+    line-height: 2.25em;
+    color: rgba(255,255,255,0.75);
+    top: -2px;
+    left: 40px;
+  }
   .page-link {
     color: rgba(255,255,255,0.55);
     &:hover, &:active {
@@ -365,16 +376,17 @@ html, body {
   h3 {
     font-size: 2.85em;
     font-weight: 300;
+    line-height: 1.2;
     color: rgba(255,255,255,0.7);
-    margin: 1.25em 0 1.5em;
+    margin: 0.75em 0 1em;
 	}
-  .gradient {
-    @include background-image(linear-gradient(to top, #292c33 5%, rgba(#292c33, 0.8) 20%, rgba(#292c33, 0.6) 40%, rgba(#292c33, 0) 80%));
-    top: 12%;
-    height: 405px;
-	}
+  // .gradient {
+  //   @include background-image(linear-gradient(to top, #292c33 5%, rgba(#292c33, 0.8) 20%, rgba(#292c33, 0.6) 40%, rgba(#292c33, 0) 80%));
+  //   top: 12%;
+  //   height: 405px;
+	// }
   .install-buttons {
-    margin: 3em auto 0;
+    margin: 2em auto;
     padding-top: 0.75em;
     padding-bottom: 6.25em;
     .os-image {
@@ -393,7 +405,7 @@ html, body {
       margin-top: 8px;
 		}
 	}
-  .os-button {
+  .platform-button {
     @include background-image(radial-gradient(rgb(43, 46, 53), rgb(39, 42, 49)));
     color: rgba(255,255,255,0.45);
     width: 22%;
@@ -403,6 +415,7 @@ html, body {
     box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
     margin: 10px 2% 2em;
     padding: 0.5em 1em;
+    outline: none !important;
     transition: all 300ms ease-in-out;
     &:hover, &:active {
       @include background-image(radial-gradient(rgb(51, 54, 62), rgb(40, 43, 50)));
@@ -417,6 +430,35 @@ html, body {
       text-shadow: 1px 2px 6px rgba(0,0,0,0.45) !important;
     }
 	}
+  .alert {
+    display: none;
+    position: relative;
+    top: -5.5em;
+    span {
+      position: relative;
+      display: inline-block;
+      color: rgba(255,255,255,0.55);
+      font-size: 1.5em;
+      line-height: 1.3;
+      margin-left: 0.45em;
+      a {
+        color: rgba(255,255,255,0.65);
+        font-weight: 500;
+        text-decoration: none;
+        border-bottom: 1px dotted transparent;
+        &:hover, &:active {
+          border-bottom: 1px dotted rgba(255,255,255,0.6);
+        }
+      }
+    }
+    img {
+      position: relative;
+      display: inline-block;
+      height: 50px;
+      width: auto;
+      top: 3px;
+    }
+  }
 }
 
 /*
