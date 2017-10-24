@@ -1,7 +1,7 @@
 #mdPreview {
   color: #232224;
   font-family: "Roboto", "Noto Sans", "Ubuntu", "Helvetica Neue", Helvetica, "Segoe UI", Arial, sans-serif;
-  font-size: 17px;
+  font-size: 16px;
   line-height: 1.5;
   text-rendering: geometricPrecision;
   margin-top: 0;
@@ -15,24 +15,24 @@
   margin-bottom: 16px;
 }
 #mdPreview h1 {
-  font-size: 2.1em;
+  font-size: 2.3em;
   letter-spacing: 0.02em;
   border-bottom: 1px solid #e2e2e2;
   padding-bottom: 0.15em;
 }
 #mdPreview h2 {
-  font-size: 1.6em;
+  font-size: 1.8em;
   border-bottom: 1px solid #e2e2e2;
   padding-bottom: 0.15em;
 }
 #mdPreview h3 {
-  font-size: 1.25em;
+  font-size: 1.45em;
 }
 #mdPreview h4 {
-  font-size: 1em;
+  font-size: 1.2em;
 }
 #mdPreview h5 {
-  font-size: 1em;
+  font-size: 1.15em;
 }
 #mdPreview h6 {
   font-size: 0.85em;
@@ -57,7 +57,7 @@
   padding-left: 35px;
 }
 #mdPreview li {
-  font-size: 2.4vh;
+  /*font-size: 2.4vh;*/
   letter-spacing: 0.0275em;
   margin-bottom: 5px;
 }
@@ -81,17 +81,17 @@
   padding: 0;
 }
 #mdPreview p {
-  font-size: 2.4vh;
+  /*font-size: 1.1em;*/
   letter-spacing: 0.0275em;
   line-height: 1.5;
   margin: 0 0 16px !important;
 }
 #mdPreview .break {
   height: 0;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 #mdPreview pre {
-  background: #ececec;
+  background: #ece9ec;
   color: #24292e;
   font-family: "SFMono-Regular", Consolas, "Inconsolata", "Liberation Mono", Menlo, monospace;
   font-size: 85%;
@@ -103,7 +103,7 @@
   margin-bottom: 16px;
   word-wrap: normal;
   word-break: normal;
-  overflow: auto;
+  overflow: hidden;
 }
 #mdPreview pre code {
   font-family: "SFMono-Regular", Consolas, "Inconsolata", "Liberation Mono", Menlo, monospace;
@@ -118,7 +118,7 @@
   background-color: rgba(20, 20, 20, 0.05);
   color: #24292e;
   font-family: "SFMono-Regular", Consolas, "Inconsolata", "Liberation Mono", Menlo, monospace;
-  font-size: 85%;
+  /*font-size: 85%;*/
   border-radius: 5px;
   margin: 0;
   padding: 0.2em 0;
@@ -178,3 +178,6 @@
 #mdPreview *:last-child {
   margin-bottom: 0 !important;
 }
+
+.hljs-built_in { color: #005cc5; }
+.hljs-comment { color: #6a737d !important; }
