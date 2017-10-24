@@ -43,7 +43,7 @@ let conf = {
 	}
 };
 
-var theme = settings.get('editorTheme');
+let theme = settings.get('editorTheme');
 setEditorTheme(theme);
 if(main.getThemes().filter((temp) => { return temp.value === theme; }))
 	conf.theme = theme;
@@ -72,19 +72,19 @@ main.getThemes().filter((temp) => {
 	themes.push(temp.value);
 });
 themes.forEach(function(index) {
-	var tag = document.createElement('link');
+	let tag = document.createElement('link');
 	tag.setAttribute('rel', 'stylesheet');
 	tag.setAttribute('href', 'css/theme/'+index+'.css');
 	head.append(tag);
 });
 
 function setEditorTheme(theme) {
-	var themeTag;
+	let themeTag;
 	if(theme === undefined)
 		theme = 'one-dark';
 	themeTag = $('link[href="css/theme/'+theme.toString()+'.css"]');
 	themeTag.attr('id', 'themeLink');
-	var title = theme.replace(/-/g , ' ').replace(/\w\S*/g, function(str) {
+	let title = theme.replace(/-/g , ' ').replace(/\w\S*/g, function(str) {
 		return str.charAt(0).toUpperCase() + str.substr(1).toLowerCase();
 	});
 	$('#editorTheme').attr('title', title);
@@ -93,11 +93,11 @@ function setEditorTheme(theme) {
 		currentTheme = theme;
 		cm.setOption('theme', theme);
 	}
-	var themeColor = $('.cm-s-'+theme).css('background-color');
+	let themeColor = $('.cm-s-'+theme).css('background-color');
 	adaptTheme(themeColor, Color(themeColor).luminosity());
 }
 
-var converter = new showdown.Converter({
+let converter = new showdown.Converter({
 		ghCodeBlocks: true,
 		ghCompatibleHeaderId: true,
 		tables: true,
@@ -113,30 +113,33 @@ var converter = new showdown.Converter({
 		extensions: ['youtube', highlight]
 });
 
-
 window.onload = () => {
-	var markdownPreview = document.getElementById('mdPreview');
-
-	var themeColor = $('.cm-s-'+theme).css('background-color');
+	let markdownPreview = document.getElementById('mdPreview');
+	let themeColor = $('.cm-s-'+theme).css('background-color');
 	adaptTheme(themeColor, Color(themeColor).luminosity());
 	createModals();
 	fillEmojiModal();
 
-  $(document).on("click", ".alert", function (e) {
-    $(e.target).addClass('expand');
+  // Expand truncated alerts on click
+  $(document).on('click', '.alert', function(e) {
+    if($(e.target).hasClass('expand'))
+      $(e.target).removeClass('expand');
+    else
+      $(e.target).addClass('expand');
   });
 
 	cm.on('change', (cm) => {
-		var markdownText = cm.getValue();
+		let markdownText = cm.getValue();
 		// Remove the YAML frontmatter
 		if(settings.get('hideYAMLFrontMatter'))
 			markdownText = removeYAMLPreview(markdownText);
 		// Convert emoji's
 		markdownText = replaceWithEmojis(markdownText);
-		var renderedMD = converter.makeHtml(markdownText);
+		let renderedMD = converter.makeHtml(markdownText);
     // Render LaTex
+		let texConfig = [['$$', '\$\$', false], ['$$ ', ' \$\$', true]];
 		if(settings.get('mathRendering'))
-			renderedMD = katex.renderLaTeX(renderedMD);
+			renderedMD = katex.renderLaTeX(renderedMD, texConfig);
 		// Markdown -> Preview
 		markdownPreview.innerHTML = renderedMD;
     // Allows for making '<br>' tags more GitHub-esque
@@ -145,6 +148,7 @@ window.onload = () => {
 				$(this).attr('class', 'break');
 			}
 		});
+		// Markdown -> HTML
 		converter.setOption('noHeaderId', true);
     $('#htmlPreview').val(converter.makeHtml(markdownText));
 		// Open preview links in default browser
@@ -166,10 +170,13 @@ window.onload = () => {
 	});
 
 	// Read and handle file if given from commandline
-	var filePath = __args__.file;
-	var ext = ['.md','.markdown','.mdown','.mkdn','.mkd','.mdwn','.mdtxt','.mdtext'];
-	if(filePath && ext.indexOf(path.extname(filePath)) > -1) {
-		argHandling(filePath);
+	let filePath = __args__.file;
+	let ext = ['.md','.markdown','.mdown','.mkdn','.mkd','.mdwn','.mdtxt','.mdtext'];
+	if(filePath) {
+    if(ext.indexOf(path.extname(filePath)) > -1)
+      argHandling(filePath);
+    else
+      notify('The specified file is invalid', 'error');
 	} else if(Object.keys(main.getWindows()).length <= 1) {
 		storage.get('markdown-savefile', function(err, data) {
 			if(err) notify(err, 'error');
@@ -179,11 +186,11 @@ window.onload = () => {
 					cm.getDoc().setValue(data);
 					cm.getDoc().clearHistory();
 				});
+        main.getWindows()[remote.getCurrentWindow().id].filePath = { 'filename' : data.filename };
 				this.isFileLoadedInitially = true;
 				this.currentFile = data.filename;
 			}
 		});
-		if(filePath) notify('The specified file is invalid', 'error');
 	}
 
 	$('#minimize').on('click', () => { remote.BrowserWindow.getFocusedWindow().minimize(); });
@@ -199,7 +206,7 @@ window.onload = () => {
 	}).mouseout(function() {
 		$(this).children('ul').hide();
 	});
-	$('#yamlPath').on('click', () => { setFrontMatterTemplate(); });
+
 	$('#table-button').on('click', () => {
 		$('#table-modal').modal();
 		createTable($('#columns').val(),$('#rows').val(),$('.on').attr('id').slice(0,-5));
@@ -235,24 +242,24 @@ var toggleSyncScroll = () => {
 syncScroll.on('change', () => { toggleSyncScroll(); });
 
 // Scrollable height.
-var codeScrollable = () => {
-	var info = cm.getScrollInfo();
+let codeScrollable = () => {
+	let info = cm.getScrollInfo();
 	return info.height - info.clientHeight;
 };
-var prevScrollable = () => {
+let prevScrollable = () => {
 	return markdown.height() - preview.height();
 };
 // Temporarily swaps out a scroll handler.
-var muteScroll = (obj, listener) => {
+let muteScroll = (obj, listener) => {
 	obj.off('scroll', listener);
 	obj.on('scroll', tempHandler);
-	var tempHandler = () => {
+	let tempHandler = () => {
 		obj.off('scroll', tempHandler);
 		obj.on('scroll', listener);
 	};
 };
 // Scroll Event Listeners
-var codeScroll = () => {
+let codeScroll = () => {
 	var scrollable = codeScrollable();
 	if(scrollable > 0 && isSynced) {
 		var percent = cm.getScrollInfo().top / scrollable;
@@ -263,7 +270,7 @@ var codeScroll = () => {
 cm.on('scroll', codeScroll);
 $(window).on('resize', codeScroll);
 $(window).on('resize', manageWindowSize());
-var prevScroll = () => {
+let prevScroll = () => {
 	var scrollable = prevScrollable();
 	if(scrollable > 0 && isSynced) {
 		var percent = $(this).scrollTop() / scrollable;
@@ -276,9 +283,9 @@ preview.on('scroll', prevScroll);
 
 function readFileIntoEditor(file) {
 	if(file === '') return;
-	fs.readFile(file, function (err, data) {
+	fs.readFile(file, 'utf-8', function(err, data) {
 		if(err) notify('Read failed: ' + err, 'error');
-		cm.getDoc().setValue(String(data));
+		cm.getDoc().setValue(data);
 		cm.getDoc().clearHistory();
 	});
 	this.isFileLoadedInitially = true;
@@ -297,7 +304,7 @@ $(window).on('resize', () => {
 $('#version-modal').text('v'+main.appVersion());
 
 $('.spinner .btn').on('click', function() {
-	var btn = $(this),
+	let btn = $(this),
 			input = btn.closest('.spinner').find('input'),
 			value = parseFloat(input.val());
   if(btn.is(':first-of-type')) {
@@ -324,8 +331,8 @@ $('#leftAlign, #centerAlign, #rightAlign').on('click', function() {
 });
 
 $(document).click(function(e) {
-	if($(e.target).attr("class") !== 'palette-input')
-	  commandPalette().hide();
+	if($(e.target).attr('class') !== 'palette-input')
+    commandPalette().hide();
 });
 // Close on escape key
 $(document).keydown((e) => {
@@ -340,19 +347,37 @@ $(document).ready(function() {
     $('[data-toggle="tooltip"]').tooltip();
 });
 
-// Word count
-function countWords() {
-	var wordCount = cm.getValue().split(/\b[\s,.-:;]*/).length;
-	$('#wordCount').html('words: ' + wordCount.toString());
-	return cm.getValue().split(/\b[\s,.-:;]*/).length;
-}
+// FIXME: fucks up when there is already a file in the editor
+// Improve drag-and-drop file functionality
+$(document).on('drop', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    for(let f of e.dataTransfer.files) {
+      fs.readFile(f.path, 'utf-8', (err, data) => {
+				if(err) notify('An error ocurred while opening the file '+ err.message, 'error');
+				cm.getDoc().setValue(data);
+			});
+      openNewFile(f.path);
+    }
+  });
+  $(document).on('dragover', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+		console.log('dragging');
+  });
+
+$(document).keydown((e) => {
+  if(e.altKey) {
+    toggleMenu();
+  }
+});
 
 function sendIPC(cmd) {
   return remote.BrowserWindow.getFocusedWindow().webContents.send(cmd);
 }
 
 // Allows render process to create new windows
-function openNewWindow() {
+function newWindow() {
 	main.createWindow();
 }
 
