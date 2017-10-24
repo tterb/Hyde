@@ -15,7 +15,7 @@ function saveAs() {
 		});
 		// filename is a string that contains the path and filename created in the save dialog.
 		var mdValue = cm.getValue();
-		fs.writeFile(filename, mdValue, (err) => {
+		fs.writeFileSync(filename, mdValue, (err) => {
 			if(err) notify('An error ocurred while creating the file '+ err.message, 'error');
 		});
 		this.setClean();
@@ -49,9 +49,8 @@ ipc.on('file-save', () => {
 			if(err) notify(err, 'error');
 		});
 		// filename is a string that contains the path and filename created in the save file dialog.
-		var mdValue = cm.getValue();
-		fs.writeFile(filename, mdValue, (err) => {
-			if(err) { notify('An error ocurred saving the file '+ err.message, 'error'); }
+		fs.writeFile(filename, cm.getValue(), function(err) {
+			if(err) notify('An error ocurred while saving the file '+ err.message, 'error');
 		});
 		this.setClean();
 		this.currentFile = filename;
@@ -79,21 +78,17 @@ ipc.on('file-open', () => {
 		if(file === undefined) {
 			return notify('You didn\'t select a file to open', 'info');
 		}
-    main.getWindows()[remote.getCurrentWindow().id].filePath = { 'filename' : file[0] };
+    data = { 'filename' : file[0] };
 		storage.set('markdown-savefile', { 'filename' : file[0] },
     (err) => { if(err) notify(err, 'error'); });
 
 		this.isFileLoadedInitially = true;
-		this.currentFile = file[0]; // <-- This fixes bottom file but not save
+		this.currentFile = file[0];
     if(!this.isClean()) {
       settings.set('targetFile', file[0]);
       main.createWindow();
     } else {
       readFileIntoEditor(file[0]);
-      // fs.readFile(file[0], 'utf-8', (err, data) => {
-      //   if(err) { notify('An error ocurred while opening the file '+ err.message, 'error'); }
-      //   cm.getDoc().setValue(data);
-      // });
     }
   });
 });
@@ -113,9 +108,7 @@ ipc.on('file-open-new', () => {
 		if(file === undefined) {
 			return notify('You didn\'t select a file to open', 'info');
 		}
-    main.getWindows()[remote.getCurrentWindow().id].filePath = { 'filename' : this.currentFile };
-		// this.isFileLoadedInitially = true;
-		// this.currentFile = file[0]; // <-- This fixes bottom file but not save
+    data = { 'filename' : this.currentFile };
 		// file is a string that contains the path and filename created in the save file dialog.
     settings.set('targetFile', file[0]);
     main.createWindow();
