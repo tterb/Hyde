@@ -8,7 +8,7 @@ var menu = $('#appMenu'),
 		editor = $('.CodeMirror-wrap'),
 		syncScroll = $('#syncScrollToggle');
 
-var opts = [
+let opts = [
 	{ name: 'showMenu', action: () => { toggleMenu(); }},
 	{ name: 'showToolbar', action: () => { toggleToolbar(); }},
 	{ name: 'showPreview', action: () => { togglePreview(); }},
@@ -19,6 +19,7 @@ var opts = [
 	{ name: 'showTrailingSpace', action: () => { toggleWhitespace(); }},
 	{ name: 'previewProfile', action: () => { setPreviewProfile(); }},
 	{ name: 'customCSS', action: () => { toggleCustomCSS(); }},
+	{ name: 'showTooltips', action: () => { toggleTooltips(); }},
 	{ name: 'mathRendering' }, { name: 'editorFontSize' },
 	{ name: 'enableSpellCheck' }, { name: 'previewMode' },
 	{ name: 'previewFontSize' }, { name: 'hideYAMLFrontMatter' },
@@ -26,17 +27,17 @@ var opts = [
 ];
 
 function getUserSettings() {
-		opts.forEach(checkSetting);
-		setPreviewMode(settings.get('previewMode'));
-		setPreviewProfile(settings.get('previewProfile'));
-		opts.forEach(applySettings);
-		formatHead();
-		syncScrollCheck();
-		if(process.platform === 'darwin') {
-			$('.btn-group').remove();
-			$('#menuToggle').remove();
-			$('#metacity').hide();
-		}
+	opts.forEach(checkSetting);
+	setPreviewMode(settings.get('previewMode'));
+	setPreviewProfile(settings.get('previewProfile'));
+	opts.forEach(applySettings);
+	formatHead();
+	syncScrollCheck();
+	if(process.platform === 'darwin') {
+		$('.btn-group').remove();
+		$('#menuToggle').remove();
+		$('#metacity').hide();
+	}
 }
 
 // If there are no settings for option, sets default
@@ -80,35 +81,30 @@ var formatHead = () => {
 		if(menu.is(':visible') !== toolbar.is(':visible'))
 			toggleMenu();
 	if(menu.is(':visible')) {
-		toolbar.css({ top: '26px' });
+		toolbar.css('top', '26px');
 		dragArea.css('width', '-webkit-calc(100% - 255px)');
 		menuToggle.hide();
 		if(toolbar.is(':visible')) {
 			menu.css('box-shadow', 'none');
-			leftFade.css('top', '8px');
-			textPanel.css('paddingTop', '35px');
-			preview.css('paddingTop', '35px');
+			textPanel.css('paddingTop', '40px');
+			preview.css('paddingTop', '40px');
 		} else {
-			textPanel.css('paddingTop', '0px');
-			menu.css('box-shadow', '0 1px 10px rgba(0,0,0,0.3)');
-			leftFade.css('top', '0');
-			textPanel.css('paddingTop', '5px');
-			preview.css('paddingTop', '30px');
+      menu.css('box-shadow', 'none');
+			textPanel.css('paddingTop', '3px');
+			preview.css('paddingTop', '35px');
 		}
 	} else {
-		toolbar.css({ top: '0' });
-		textPanel.css('paddingTop', '0');
-		leftFade.css('top', '0');
+		toolbar.css('top', '0');
 		if(toolbar.is(':visible')) {
-			textPanel.css('paddingTop', '7px');
 			dragArea.css('width', '-webkit-calc(50% - 50px)');
 			editor.css('paddingTop', '9px');
-			preview.css('paddingTop', '25px');
+			textPanel.css('paddingTop', '15px');
 		} else {
 			menuToggle.show();
 			dragArea.css({ 'width': 'calc(100% - 117px)' });
-			editor.css('paddingTop', '0px');
-			preview.css('paddingTop', '25px');
+			editor.css('paddingTop', '5px');
+			textPanel.css('paddingTop', '0px');
+			preview.css('paddingTop', '30px');
 		}
 	}
 };
@@ -174,7 +170,7 @@ var toggleToolbar = () => {
 };
 
 function togglePreview() {
-	var leftPanel = $('#leftPanel'),
+	let leftPanel = $('#leftPanel'),
 			rightPanel = $('#rightPanel'),
 			previewToggle = $('#previewToggle');
 	if(preview.is(':visible')) {
@@ -205,19 +201,19 @@ function setPreviewMode(opt) {
 	var markdown = $('#mdPreview'),
 			html = $('#htmlPreview'),
 			htmlText = '';
-	if(markdown.is(':visible') && opt !== 'markdown') {
+  if(markdown.is(':visible') && opt === 'html') {
 		markdown.hide();
 		html.show();
 		htmlText = html[0].innerHTML.replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
 		html.text(htmlText);
 		preview.css('padding', '0');
+    preview.css('paddingTop', '0', '!important');
 		preview.css('overflow', 'hidden');
 	} else if(html.is(':visible') && opt !== 'html') {
 		html.hide();
 		markdown.show();
-		preview.css('padding', '32px 15px 27px');
+		preview.css('padding', '30px 15px 27px');
 		preview.css('overflow-y', 'auto');
-		settings.set('previewMode', 'markdown');
 	}
 	settings.set('previewMode', opt);
 }
@@ -332,6 +328,13 @@ function setFrontMatterTemplate() {
 	});
 }
 
+
+function toggleTooltips() {
+	if(!settings.get('showTooltips')) {
+    $('[data-tooltip]').removeAttr('data-tooltip');
+	}
+}
+
 function manageWindowSize() {
 	var codeMirror = $('.CodeMirror-sizer');
 	if(preview.is(':visible') && parseInt($('#body').width(),10) > 987) {
@@ -375,6 +378,8 @@ $('#previewFontSize-input, #previewFontSize-up, #previewFontSize-down').bind('ke
 	$('#mdPreview').css('fontSize', value.toString()+'px');
 	settings.set('previewFontSize', value);
 });
+
+$('#yamlPath').on('click', () => { setFrontMatterTemplate(); });
 
 // Settings menu toggle listeners
 var changes = [];
