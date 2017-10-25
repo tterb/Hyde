@@ -54,7 +54,7 @@
   font-weight: 200; }
 
 #unsaved-modal .modal-dialog {
-  width: 400px;
+  width: 390px;
   margin: 100px auto !important; }
   #unsaved-modal .modal-dialog .modal-content {
     background: -webkit-linear-gradient(top, #292728, #222) !important; }
@@ -62,7 +62,7 @@
     padding: 8px 8px 7px; }
     #unsaved-modal .modal-dialog .modal-header .modal-title {
       position: relative;
-      top: -2px;
+      top: -1.5px;
       margin: 0 0 0 6px; }
     #unsaved-modal .modal-dialog .modal-header .modal-close {
       position: absolute;
@@ -76,7 +76,7 @@
     background: transparent;
     color: rgba(255, 255, 255, 0.5);
     font-size: 14.5px;
-    padding: 3px 13px 2px 11px; }
+    padding: 3px 13px 2px 13px; }
     #unsaved-modal .modal-dialog .modal-body .unsaved-icon {
       display: inline-block;
       color: rgba(255, 255, 255, 0.6);
@@ -87,18 +87,18 @@
       text-shadow: 0 0 8px rgba(0, 0, 0, 0.6); }
     #unsaved-modal .modal-dialog .modal-body #unsavedContent {
       position: relative;
-      top: 4px;
+      top: 4.5px;
       left: 8px; }
   #unsaved-modal .modal-dialog .unsaved-buttons {
     float: right;
-    margin: 4px 4px 10px 52%; }
+    margin: 4px 4px 9px 52%; }
     #unsaved-modal .modal-dialog .unsaved-buttons button {
       font-size: 13.5px;
       font-weight: 300;
       border-radius: 6px;
-      margin: 4px 12px 8px 0; }
+      margin: 8px 12px 6px 0; }
       #unsaved-modal .modal-dialog .unsaved-buttons button:last-child {
-        margin-right: 16px; }
+        margin-right: 15px; }
 
 .align-buttons {
   border: 1px transparent;
@@ -371,8 +371,8 @@
   #about-modal .modal-content {
     overflow: hidden; }
   #about-modal .modal-dialog {
-    width: 35%;
-    height: 50%;
+    width: 33%;
+    height: 52%;
     border-radius: 20px;
     margin: 70px auto; }
   #about-modal .modal-header {
@@ -407,7 +407,7 @@
     width: 80%;
     height: auto;
     margin: auto;
-    margin: 28px 10%; }
+    margin: 30px 11% 24px; }
   #about-modal a {
     color: #de545f;
     font-size: 14px;
@@ -435,20 +435,28 @@
       color: #de545f;
       text-decoration: none !important; }
   #about-modal .check-update-button {
+    background: -webkit-linear-gradient(top, #454344, #272526);
     text-decoration: none !important;
-    margin: 20px auto 0; }
+    padding-top: 4px;
+    margin: 20px auto 0 10px; }
     #about-modal .check-update-button a {
-      color: #aaa;
-      font-size: 13px; }
-    #about-modal .check-update-button:hover, #about-modal .check-update-button:active a {
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 13px;
+      text-decoration: none !important; }
+      #about-modal .check-update-button a:hover, #about-modal .check-update-button a:active {
+        color: rgba(255, 255, 255, 0.75);
+        text-decoration: none !important;
+        border-bottom: none !important;
+        outline: none; }
+    #about-modal .check-update-button:hover a, #about-modal .check-update-button:active a {
       color: rgba(255, 255, 255, 0.75);
       text-decoration: none !important;
-      border-bottom: none;
+      border-bottom: none !important;
       outline: none; }
 
 .modal-button {
   background-image: -webkit-linear-gradient(top, #555354, #2d2b2c);
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(255, 255, 255, 0.55);
   font-size: 13.5px;
   letter-spacing: 0.07em;
   text-shadow: -2px 2px #323031;
@@ -459,6 +467,8 @@
   margin: 12px 6px 8px 0;
   transition: all 300ms ease-in-out;
   transition-delay: 50ms; }
+  .modal-button.default {
+    color: rgba(255, 255, 255, 0.85); }
   .modal-button:hover {
     background-image: -webkit-linear-gradient(top, #4f4d4e, #2b292a);
     color: rgba(255, 255, 255, 0.95);
