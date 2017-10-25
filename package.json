@@ -9,10 +9,10 @@
     "build": "rm -rf release && gulp build",
     "package-mac": "electron-packager . --overwrite --asar --platform=darwin --arch=x64 --icon=img/icon/icns/icon.icns --prune=true --out=dist/ --version-string.CompanyName=BStevensonDev --version-string.FileDescription=Hyde-Installer --version-string.ProductName=\"Hyde\"",
     "package-win": "electron-packager . --overwrite --asar --platform=win32 --arch=ia32 --icon=img/icon/ico/icon.ico --prune=true --out=dist/ --version-string.CompanyName=BStevensonDev --version-string.FileDescription=Hyde-Installer --version-string.ProductName=\"Hyde\"",
-    "package-linux": "electron-packager . --overwrite --asar --platform=linux --arch=amd64 --icon=img/icon/png/256x256.png --prune=true --out=dist/ --version-string.CompanyName=BStevensonDev --version-string.FileDescription=Hyde-Installer --version-string.ProductName=\"Hyde\"",
+    "package-linux": "electron-packager . --overwrite --asar --platform=linux --arch=arm64 --icon=img/icon/png/256x256.png --prune=true --out=dist/ --version-string.CompanyName=BStevensonDev --version-string.FileDescription=Hyde-Installer --version-string.ProductName=\"Hyde\"",
     "create-installer-mac": "electron-installer-dmg ./dist/hyde-darwin-x64/Hyde.app hyde --out=dist/installers/ --overwrite --icon=img/icon/icns/icon.icns",
     "create-installer-win": "node js/installers/windows/createinstaller.js",
-    "create-installer-linux": "electron-installer-debian ./dist/hyde-linux-x64/ --out=dist/installers/ --arch=amd64 --overwrite  --icon=img/icon/icns/icon.icns"
+    "create-installer-linux": "electron-installer-debian ./dist/hyde-linux-x64/ --out=dist/installers/ --arch=arm64 --overwrite  --icon=img/icon/icns/icon.icns"
   },
   "build": {
     "squirrelWindows": {
@@ -88,8 +88,9 @@
     "electron-window": "^0.8.1",
     "electron-window-state": "^4.1.1",
     "jquery": "^3.1.0",
+    "katex": "^0.9.0",
+    "lodash": "^4.17.4",
     "parse-filepath": "1.0.1",
-    "parse-katex": "^0.3.0",
     "showdown": "^1.7.2",
     "showdown-highlight": "^1.0.2",
     "showdown-youtube": "^1.2.1",
