@@ -9,7 +9,7 @@ const path = require('path');
 const showdown  = require('showdown');
 const notify = require('./js/notify');
 const argHandling = require('./js/argHandling');
-const katex = require('parse-katex');
+const katex = require('./js/parseTex');
 const settings = require('electron-settings');
 const storage = require('electron-json-storage');
 const commandPalette = require('./js/commandPalette');
@@ -114,7 +114,7 @@ let converter = new showdown.Converter({
 });
 
 window.onload = () => {
-	let markdownPreview = document.getElementById('mdPreview');
+	// let markdownPreview = document.getElementById('mdPreview');
 	let themeColor = $('.cm-s-'+theme).css('background-color');
 	adaptTheme(themeColor, Color(themeColor).luminosity());
 	createModals();
@@ -128,45 +128,13 @@ window.onload = () => {
       $(e.target).addClass('expand');
   });
 
-	cm.on('change', (cm) => {
-		let markdownText = cm.getValue();
-		// Remove the YAML frontmatter
-		if(settings.get('hideYAMLFrontMatter'))
-			markdownText = removeYAMLPreview(markdownText);
-		// Convert emoji's
-		markdownText = replaceWithEmojis(markdownText);
-		let renderedMD = converter.makeHtml(markdownText);
-    // Render LaTex
-		let texConfig = [['$$', '\$\$', false], ['$$ ', ' \$\$', true]];
-		if(settings.get('mathRendering'))
-			renderedMD = katex.renderLaTeX(renderedMD, texConfig);
-		// Markdown -> Preview
-		markdownPreview.innerHTML = renderedMD;
-    // Allows for making '<br>' tags more GitHub-esque
-		$('#mdPreview p').each(function() {
-			if($(this).html() === '<br>') {
-				$(this).attr('class', 'break');
-			}
-		});
-		// Markdown -> HTML
-		converter.setOption('noHeaderId', true);
-    $('#htmlPreview').val(converter.makeHtml(markdownText));
-		// Open preview links in default browser
-		$('#mdPreview a').on('click', function() {
-			event.preventDefault();
-			openInBrowser($(this).attr('href'));
-		});
-		// Handle preview checkboxes
-		$('#mdPreview :checkbox').removeAttr('disabled');
-		$('#mdPreview :checkbox').on('click', function() {
-			event.preventDefault();
-		});
-		if(this.isFileLoadedInitially) {
-			this.setClean();
-			this.isFileLoadedInitially = false;
-		}
-		this.updateWindowTitle(this.currentFile);
-		countWords();
+  // Render editor changes to live-preview
+	cm.on('change', (cm) => { renderMarkdown(cm); });
+
+	// Open preview links in default browser
+	$('#mdPreview a').on('click', function() {
+		event.preventDefault();
+		openInBrowser($(this).attr('href'));
 	});
 
 	// Read and handle file if given from commandline
@@ -242,24 +210,24 @@ var toggleSyncScroll = () => {
 syncScroll.on('change', () => { toggleSyncScroll(); });
 
 // Scrollable height.
-let codeScrollable = () => {
-	let info = cm.getScrollInfo();
+var codeScrollable = () => {
+	var info = cm.getScrollInfo();
 	return info.height - info.clientHeight;
 };
-let prevScrollable = () => {
+var prevScrollable = () => {
 	return markdown.height() - preview.height();
 };
 // Temporarily swaps out a scroll handler.
-let muteScroll = (obj, listener) => {
+var muteScroll = (obj, listener) => {
 	obj.off('scroll', listener);
 	obj.on('scroll', tempHandler);
-	let tempHandler = () => {
+	var tempHandler = () => {
 		obj.off('scroll', tempHandler);
 		obj.on('scroll', listener);
 	};
 };
 // Scroll Event Listeners
-let codeScroll = () => {
+var codeScroll = () => {
 	var scrollable = codeScrollable();
 	if(scrollable > 0 && isSynced) {
 		var percent = cm.getScrollInfo().top / scrollable;
@@ -270,7 +238,7 @@ let codeScroll = () => {
 cm.on('scroll', codeScroll);
 $(window).on('resize', codeScroll);
 $(window).on('resize', manageWindowSize());
-let prevScroll = () => {
+var prevScroll = () => {
 	var scrollable = prevScrollable();
 	if(scrollable > 0 && isSynced) {
 		var percent = $(this).scrollTop() / scrollable;
@@ -280,16 +248,17 @@ let prevScroll = () => {
 };
 preview.on('scroll', prevScroll);
 
-
+// Reads specified file and returns 'false' if there is an error
 function readFileIntoEditor(file) {
 	if(file === '') return;
 	fs.readFile(file, 'utf-8', function(err, data) {
-		if(err) notify('Read failed: ' + err, 'error');
+		if(err) notify('Read Error: ' + err, 'error');
 		cm.getDoc().setValue(data);
 		cm.getDoc().clearHistory();
 	});
 	this.isFileLoadedInitially = true;
 	this.currentFile = file;
+  return true;
 }
 
 // Resize toolbar when window is below necessary width
@@ -352,12 +321,12 @@ $(document).ready(function() {
 $(document).on('drop', function(e) {
     e.preventDefault();
     e.stopPropagation();
-    for(let f of e.dataTransfer.files) {
-      fs.readFile(f.path, 'utf-8', (err, data) => {
+    for(var file of e.dataTransfer.files) {
+      fs.readFile(file.path, 'utf-8', (err, data) => {
 				if(err) notify('An error ocurred while opening the file '+ err.message, 'error');
 				cm.getDoc().setValue(data);
 			});
-      openNewFile(f.path);
+      openNewFile(file.path);
     }
   });
   $(document).on('dragover', function(e) {
@@ -383,4 +352,40 @@ function newWindow() {
 
 function openInBrowser(url) {
 	shell.openExternal(url);
+}
+
+function renderMarkdown(cm) {
+	let markdownText = cm.getValue();
+		// Remove the YAML frontmatter
+		if(settings.get('hideYAMLFrontMatter'))
+			markdownText = removeYAMLPreview(markdownText);
+		// Convert emoji's
+		markdownText = replaceWithEmojis(markdownText);
+		var renderedMD = converter.makeHtml(markdownText);
+    // Render LaTex
+		let texConfig = [['$$', '\$\$', false], ['$$ ', ' \$\$', true]];
+		if(settings.get('mathRendering'))
+			renderedMD = katex.renderLaTeX(renderedMD, texConfig);
+		// Markdown -> Preview
+		$('#mdPreview').html(renderedMD);
+    // Allows for making '<br>' tags more GitHub-esque
+		$('#mdPreview p').each(function() {
+			if($(this).html() === '<br>') {
+				$(this).attr('class', 'break');
+			}
+		});
+		// Markdown -> HTML
+		converter.setOption('noHeaderId', true);
+    $('#htmlPreview').val(converter.makeHtml(markdownText));
+		// Handle preview checkboxes
+		$('#mdPreview :checkbox').removeAttr('disabled');
+		$('#mdPreview :checkbox').on('click', function() {
+			event.preventDefault();
+		});
+		if(this.isFileLoadedInitially) {
+			this.setClean();
+			this.isFileLoadedInitially = false;
+		}
+		this.updateWindowTitle(this.currentFile);
+		countWords();
 }
