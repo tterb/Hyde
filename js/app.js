@@ -326,7 +326,7 @@ $(document).on('drop', function(e) {
 				if(err) notify('An error ocurred while opening the file '+ err.message, 'error');
 				cm.getDoc().setValue(data);
 			});
-      openNewFile(file.path);
+      openNewWindow(file.path);
     }
   });
   $(document).on('dragover', function(e) {
@@ -343,11 +343,6 @@ $(document).keydown((e) => {
 
 function sendIPC(cmd) {
   return remote.BrowserWindow.getFocusedWindow().webContents.send(cmd);
-}
-
-// Allows render process to create new windows
-function newWindow() {
-	main.createWindow();
 }
 
 function openInBrowser(url) {

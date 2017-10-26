@@ -2,9 +2,9 @@ const clipboard = require('electron');
 const parsePath = require('parse-filepath');
 
 function openFile() { sendIPC('file-open'); }
-function openNewFile(file = null) {
+function openNewWindow(file = null) {
   if(file === null) {
-    sendIPC('file-open-new')
+    sendIPC('file-open-new');
   } else {
     settings.set('targetFile', file);
     createWindow();
@@ -105,12 +105,12 @@ function toggleSettingsMenu() {
       title = $('#settings-title');
   if(parseInt(settingsMenu.css('left'),10) < 0) {
     settingsMenu.css('left', '0px');
-    trigger.css('left','310px');
+    trigger.css('left','300px');
     title.css('display', 'block');
     trigger.show();
     settingsMenu.focus();
   } else {
-    settingsMenu.css('left', '-310px');
+    settingsMenu.css('left', '-300px');
     title.css('display', 'none');
     trigger.hide();
     settingsMenu.off('focus');
