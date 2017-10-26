@@ -98,6 +98,9 @@
 #mdPreview ul li p {
   margin-bottom: 0 !important;
 }
+#mdPreview .task-list-item {
+  margin-bottom: 12px;
+}
 #mdPreview a {
   color: #1a6b9a;
   text-decoration: none;
@@ -113,7 +116,7 @@
 #mdPreview p {
   color: #212121;
   letter-spacing: 0.0375em;
-  margin: 0 0 16px;
+  margin: 0 0 16px 2px;
 }
 #mdPreview .break {
   height: 0;
