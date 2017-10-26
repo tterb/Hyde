@@ -57,19 +57,19 @@
 <body class="container-fluid" id="body" style="resize: both">
   <div id="draggable" style="-webkit-app-region:drag"></div>
   <div id="menuToggle">
-    <button id="menuButton" onclick="toggleMenu()"><span class="mif-menu"></span></button>
+    <button id="menuButton" onclick="toggleToolbar()"><span class="mif-menu"></span></button>
   </div>
   <div id="metacity">
     <button id="close" class="window-button" style="cursor: pointer;"><img class="active" src="img/buttons/close_active.png" alt="Close"/><img class="inactive" src="img/buttons/close.png" alt="Close"/></button>
     <button id="maximize" class="window-button" style="cursor: pointer;"><img class="active" src="img/buttons/max_active.png" alt="Maximize" onclick="toggleMaximize();"/><img class="inactive" src="img/buttons/max.png" alt="Maximize" onclick="toggleMaximize();"/></button>
     <button id="minimize" class="window-button" style="cursor: pointer;"><img class="active" src="img/buttons/min_active.png" alt="Minimize"/><img class="inactive" src="img/buttons/min.png" alt="Minimize"/></button>
   </div>
-  <div id="appMenu" class="hidden">
+  <div id="appMenu" class="hidden slideDownIn animated">
     <!-- File -->
     <div class="btn-group">
       <button class="btn dropdown-toggle" type="button" id="file-menu-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">File</button>
       <ul id="file-menu" class="dropdown-menu">
-        <li tabindex="-1" href="#" onclick="openNewWindow();"><a class="dropdown-item">New</a><span>Ctrl + N</span></li>
+        <li tabindex="-1" href="#" onclick="main.createWindow();"><a class="dropdown-item">New</a><span>Ctrl + N</span></li>
         <li tabindex="-1" href="#" onclick="openFile();"><a class="dropdown-item">Open</a><span>Ctrl + O</span></li>
         <li class="dropdown-divider"></li>
         <li tabindex="-1" href="#" onclick="saveFile();"><a class="dropdown-item">Save</a><span>Ctrl + S</span></li>
@@ -99,9 +99,9 @@
         <li tabindex="-1" href="#" onclick="toggleSearch('find');"><a class="dropdown-item">Find</a><span>Ctrl + F</span></li>
         <li tabindex="-1" href="#" onclick="toggleSearch('replace');"><a class="dropdown-item">Replace</a><span>Ctrl + Shift + F</span></li>
         <li class="dropdown-divider"></li>
+        <li tabindex="-1" href="#" onclick="cm.execCommand('indentAuto');"><a class="dropdown-item">Auto-Indent</a><span>Ctrl + Shift + A</span></li>
         <li tabindex="-1" href="#" onclick="cm.execCommand('indentLess');"><a class="dropdown-item">Indent Left</a><span>Ctrl + Left</span></li>
         <li tabindex="-1" href="#" onclick="cm.execCommand('indentMore');"><a class="dropdown-item">Indent Right</a><span>Ctrl + Right</span></li>
-        <li tabindex="-1" href="#" onclick="cm.execCommand('indentAuto');"><a class="dropdown-item">Auto-Indent</a><span>Ctrl + Shift + A</span></li>
         <li class="dropdown-divider"></li>
         <li tabindex="-1" href="#" onclick="toggleComment();"><a class="dropdown-item">Toggle Comment</a><span>Ctrl + /</span></li>
         <li class="dropdown-divider"></li>
@@ -196,14 +196,14 @@
   <!-- Editor Area -->
   <section id="editArea" class="row">
     <div class="trigger left" id="left-trigger">
-      <div id="sideButton" class="trigger-button" onclick="toggleSidebar()" style="visibility:hidden;">
+      <div id="sideButton" class="trigger-button" onclick="toggleSettingsMenu()" style="visibility:hidden;">
         <i id="side-icon" class="fa fa-chevron-right"></i>
       </div>
     </div>
-    <section id="sidebar">
+    <!-- <section id="sidebar">
       <img id="sideLogo" src="img/logo.png" alt="logo"/>
       <ul id="sideMenu">
-        <li id="sidebar-new"><a onclick="openNewWindow();">New</a></li>
+        <li id="sidebar-new"><a onclick="main.createWindow();">New</a></li>
         <li id="sidebar-open"><a>Open</a></li>
         <li id="sidebar-save"><a onclick="saveFile();">Save</a></li>
         <li id="sidebar-settings"><a onclick="toggleSettingsMenu();">Settings</a></li>
@@ -214,7 +214,7 @@
         <li class="fa fa-bug" data-tooltip="Report an Issue" onclick="openInBrowser('https://github.com/JonSn0w/Hyde/issues/new')"></li>
         <li class="fa fa-file-text" data-tooltip="Read the Docs"><a onclick="openInBrowser('https://JonSn0w.github.io/Hyde/docs')"></a></li>
       </ul>
-    </section>
+    </section> -->
     <!-- Settings Menu -->
     <section id="settingsMenu">
       <div id="settings-title" class="title">
@@ -303,7 +303,7 @@
               <option>GitHub</option>
             </select>
           </li>
-          <li id="previewFontSize" class="input" style="margin-top: 7px;"><span>Font size: </span>
+          <li id="previewFontSize" class="input" style="margin: 7px 0 8px;"><span>Font size: </span>
             <div class="input-group spinner">
               <input id="previewFontSize-input" type="text" class="form-control" value="">
               <div class="input-group-btn-vertical" style="top:1px;">
@@ -354,7 +354,7 @@
           </li>
           <li id="showTooltips" class="toggle" data-tooltip="Show awesome tooltips like these!">
             <label class="switch switch--material">
-              <input type="checkbox" class="switch__input switch--material__input" value="" setting="showTooltips" checked>
+              <input type="checkbox" class="switch__input switch--material__input require-reload" value="" setting="showTooltips" checked>
               <div class="switch__toggle switch--material__toggle">
                 <div class="switch__handle switch--material__handle">
                 </div>
@@ -362,7 +362,7 @@
             </label>
             <span>Show UI-tooltips</span>
           </li>
-           <li id="keepInTray" class="toggle">
+           <li id="keepInTray" class="toggle" style="margin-bottom: 20px">
             <label class="switch switch--material">
             <input type="checkbox" class="switch__input switch--material__input require-reload" value="" setting="keepInTray">
             <div class="switch__toggle switch--material__toggle">
@@ -413,9 +413,14 @@
         <div class="table-content">
           <ul id="table-input">
             <li id="table-columns" class="form-group">
-            <input type="number" id="columns" placeholder="Columns" class="form-control" value=""></li>
+              <input type="number" id="columns" placeholder="Columns" class="form-control" value="">
+            </li>
             <li id="table-rows" class="form-group">
-              <input type="number" id="rows" placeholder="Rows" class="form-control" value=""></li><li><button id="table-button" data-dismiss="modal"><i class="fa fa-arrow-right"></i></button></li>
+              <input type="number" id="rows" placeholder="Rows" class="form-control" value="">
+            </li>
+            <li>
+              <button id="table-button" data-dismiss="modal"><i class="fa fa-arrow-right"></i></button>
+            </li>
           </ul>
       		<div id="alignButtons" class="align-buttons"><span>Align: </span><button id="leftAlign" class="modal-button button-group on"><i class="fa fa-align-left"></i></button><button id="centerAlign" class="modal-button button-group"><i class="fa fa-align-center"></i></button><button id="rightAlign" class="modal-button button-group"><i class="fa fa-align-right"></i></button>
         </div></div></div></div>
@@ -442,7 +447,7 @@
       </div>
     </div>
   </div>
-  <!-- Close-Unsaved Modal -->
+  <!-- Unsaved-Close Modal -->
   <div class="modal fade" id="unsaved-modal" tabindex="-1" role="dialog">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -451,7 +456,7 @@
           <h4 class="modal-title">Unsaved Changes</h4>
         </div>
         <div class="modal-body">
-          <section class="modal--default__content" id="modal-body-region">
+          <section class="modal--default__content">
             <div>
               <span class="unsaved-icon fa fa-exclamation-circle"></span>
               <span id="unsavedContent"></span>
@@ -459,7 +464,7 @@
           </section>
         </div>
         <div class="unsaved-buttons">
-          <button href="#" id="unsavedConfirm" class="modal-button"><span>Save</span></button>
+          <button href="#" id="unsavedConfirm" class="modal-button default"><span>Save</span></button>
           <button href="#" id="unsavedDeny" class="modal-button"><span>Don't Save</span></button>
         </div>
       </div>
