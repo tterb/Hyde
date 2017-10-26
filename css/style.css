@@ -93,7 +93,7 @@ label {
       top: 5px;
       width: 13.25px;
       height: 13.25px;
-      margin: 2px 3px 2px 4px;
+      margin: 1px 3px 2px 4px;
       overflow: visible;
       z-index: -1; }
     #metacity .window-button .inactive:hover {
@@ -104,7 +104,7 @@ label {
 
 #appMenu {
   position: fixed;
-  background: -webkit-linear-gradient(top, #2b2b2b 5%, #242322 40%, #222120 60%, #161514 90%);
+  background: -webkit-linear-gradient(top, #2f2f2f 5%, #282726 40%, #262524 60%, #191817 90%);
   background-blend-mode: multiply;
   color: rgba(255, 255, 255, 0.75) !important;
   font-size: 11px;
@@ -393,7 +393,7 @@ label {
   .bottom-bar #syncScrollToggle {
     font-size: 14.5px !important;
     right: 2.5em !important;
-    margin-top: 5px !important; }
+    margin-top: 4px !important; }
     .bottom-bar #syncScrollToggle::after {
       top: -190% !important;
       right: 0 !important;
@@ -402,7 +402,7 @@ label {
   .bottom-bar #previewToggle {
     font-size: 17.5px;
     right: 0.35em;
-    margin-top: 1.5px; }
+    margin-top: 1px; }
     .bottom-bar #previewToggle::after {
       top: -150%;
       right: 0;
