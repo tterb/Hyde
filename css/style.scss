@@ -105,25 +105,48 @@ label {
     float: right;
     img {
       display: inline-block;
-      width: 13px;
-      height: 13px;
-      margin: 2px 3px 2px 4px;
+      width: 20px;
+      height: auto;
+      padding: 2px 3px 2px 4px;
       opacity: 1;
       overflow: visible;
       background-size: cover;
-      transition: opacity 100ms ease-in-out;
+      transition: opacity 200ms ease-in-out;
+    }
+    .hover {
+      position: fixed;
+      top: 5px;
+      width: 20px;
+      height: auto;
+      padding: 2px 3px 2px 4px;
+      overflow: visible;
+      background-size: cover;
+      transition: opacity 200ms ease-in-out;
+      z-index: -1;
     }
     .active {
       position: fixed;
       top: 5px;
-      width: 13.25px;
-      height: 13.25px;
-      margin: 1px 3px 2px 4px;
+      width: 20px;
+      height: auto;
+      padding: 2px 3px 2px 4px;
       overflow: visible;
+      background-size: cover;
+      transition: opacity 200ms ease-in-out;
       z-index: -1;
     }
-    .inactive:hover {
-      opacity: 0;
+    &:hover {
+      .inactive {
+        opacity: 0;
+      }
+    }
+    &:active {
+      .inactive {
+        opacity: 0;
+      }
+      .hover {
+        opacity: 0;
+      }
     }
   }
   #close {
