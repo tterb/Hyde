@@ -48,18 +48,12 @@ function createCustomCSSModal() {
 	$('#custom-css-modal').append(modal);
 }
 
-function fillEmojiModal() {
-	var content = '<section class="modal--default__content text-input" id="emoji-table"></section>';
-	var modal = createInsetModal('Emoji', content);
-	$('#emoji-modal').append(modal);
-}
-
 function createModal(title, content) {
 	var modal = '<div class="modal-dialog bounceInDown animated">' +
 		'<div class="modal-content">' +
 			'<div class="modal-body">' +
 				'<div class="modal-header">' +
-					'<button type="button" class="modal-close" data-dismiss="modal"><img class="inactive" src="img/buttons/close.png" alt="Close"/><img class="active" src="img/buttons/close_active.png" alt="Close"/></button>';
+					'<button type="button" class="window-button modal-close" data-dismiss="modal"><img class="active" src="img/buttons/close_active.png" alt="Close"/><img class="hover" src="img/buttons/close_hover.png" alt="Close"/><img class="inactive" src="img/buttons/close.png" alt="Close"/></button>';
 	if(title.length > 0)
 		modal += '<h4 class="modal-title">'+ title + '</h4>';
 	modal += '</div>' + content + '</div></div></div></div>';
@@ -70,7 +64,7 @@ function createInsetModal(title, content) {
 	var modal = '<div class="modal-dialog bounceInDown animated">' +
 		'<div class="modal-content modal-inset">' +
 			'<div class="modal-header">' +
-				'<button type="button" class="modal-close" data-dismiss="modal"><img class="inactive" src="img/buttons/close.png" alt="Close"/><img class="active" src="img/buttons/close_active.png" alt="Close"/></button>' +
+				'<button type="button" class="window-button modal-close" data-dismiss="modal"><img class="active" src="img/buttons/close_active.png" alt="Close"/><img class="hover" src="img/buttons/close_hover.png" alt="Close"/><img class="inactive" src="img/buttons/close.png" alt="Close"/></button>' +
 				'<h4 class="modal-title">' + title + '</h4>' +
 			'</div>' +
 			'<div class="modal-body-inset">' + content +
