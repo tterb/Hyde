@@ -15,6 +15,7 @@ const storage = require('electron-json-storage');
 const commandPalette = require('./js/commandPalette');
 const spellChecker = require('codemirror-spell-checker');
 const packageJSON = require(path.join(__dirname, '/package.json'));
+const emoji = require('node-emoji');
 const Color = require('color');
 const os = require('os');
 const highlight = require('showdown-highlight');
@@ -114,7 +115,6 @@ let converter = new showdown.Converter({
 });
 
 window.onload = () => {
-	// let markdownPreview = document.getElementById('mdPreview');
 	let themeColor = $('.cm-s-'+theme).css('background-color');
 	adaptTheme(themeColor, Color(themeColor).luminosity());
 	createModals();
@@ -355,7 +355,7 @@ function renderMarkdown(cm) {
 		if(settings.get('hideYAMLFrontMatter'))
 			markdownText = removeYAMLPreview(markdownText);
 		// Convert emoji's
-		markdownText = replaceWithEmojis(markdownText);
+    markdownText = emoji.emojify(markdownText, (name) => { return name; }, formatEmoji);
 		var renderedMD = converter.makeHtml(markdownText);
     // Render LaTex
 		let texConfig = [['$$', '\$\$', false], ['$$ ', ' \$\$', true]];
@@ -384,3 +384,7 @@ function renderMarkdown(cm) {
 		this.updateWindowTitle(this.currentFile);
 		countWords();
 }
+
+var formatEmoji = (code, name) => {
+  return '<span class="emoji emoji-'+ name +'" alt="' + code + '">'+ code +'</span>';
+};
