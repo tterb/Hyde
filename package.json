@@ -55,7 +55,7 @@
     "name": "bstevenson",
     "email": "bstevensondev@gmail.com"
   },
-  "homepage": "https://JonSn0w.github.io/Hyde",
+  "homepage": "https://brettstevenson.io/Hyde",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/JonSn0w/Hyde.git"
@@ -63,8 +63,8 @@
   "bugs": {
     "url": "https://github.com/JonSn0w/Hyde/issues/new"
   },
-  "docs": "https://JonSn0w.github.io/Hyde/docs",
-  "keybindings": "https://JonSn0w.github.io/Hyde/docs#keybindings",
+  "docs": "https://brettstevenson.io/Hyde/docs",
+  "keybindings": "https://brettstevenson.io/Hyde/docs#keybindings",
   "devDependencies": {
     "electron-connect": "^0.6.1",
     "electron-installer-dmg": "^0.2.1",
@@ -87,9 +87,11 @@
     "electron-settings": "^3.1.1",
     "electron-window": "^0.8.1",
     "electron-window-state": "^4.1.1",
+    "emojify.js": "^1.1.0",
     "jquery": "^3.1.0",
     "katex": "^0.9.0-alpha1",
     "lodash": "^4.17.4",
+    "node-emoji": "^1.8.1",
     "parse-filepath": "1.0.1",
     "showdown": "^1.7.2",
     "showdown-highlight": "^1.0.2",
