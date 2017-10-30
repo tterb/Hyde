@@ -33,7 +33,7 @@ function createMarkdownModal() {
 				'<td style="line-height: 150%">``` <i style="color: rgba(0,0,0,0.5)">(shift+enter for line break)</i><br>var code = "formatted";<br>```</td>' +
 			'</tr>' +
 			'<tr><td style="font-size:125%;padding:0 17px">L<sup>a</sup>T<sub>e</sub>X</td><td>$LaTeX$</td></tr>' +
-			'<tr><td id="emoji"><img src="img/emoji/smile.png" height="27"/></td><td>:smile:' +
+			'<tr><td id="emoji"><span id="emoji" class="emoji emoji-smile">&#128515;	</span></td><td>:smile:' +
       '<tr><td id="icon"><span class="fa fa-github"></span></td><td>@github</td></tr>'
 		'</table>' +
 	'</section>';
