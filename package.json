@@ -93,7 +93,7 @@
     "lodash": "^4.17.4",
     "node-emoji": "^1.8.1",
     "parse-filepath": "1.0.1",
-    "showdown": "^1.7.2",
+    "showdown": "^1.8.0",
     "showdown-highlight": "^1.0.2",
     "showdown-youtube": "^1.2.1",
     "yargs": "^9.0.1"
