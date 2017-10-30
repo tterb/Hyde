@@ -13,7 +13,7 @@
 .cm-s-neo .cm-node,.cm-s-neo .cm-tag { color:#9c3328; }
 .cm-s-neo .cm-string { color:#b35e14; }
 .cm-s-neo .cm-variable,.cm-s-neo .cm-qualifier { color:#047d65; }
-
+.cm-s-neo .CodeMirror-selected { background:#d2d2d3; }
 /* Editor styling */
 .cm-s-neo pre { padding:0; }
 .cm-s-neo .CodeMirror-gutters {
