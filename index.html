@@ -4,8 +4,9 @@ layout: default
 
 {% include title_landing.html %}
 
+<div class="gradient"></div>
 <section class="editor-section">
-  <div class="editor-features">
+  <div id="editor" class="editor-features">
     <ul class="feature-list">
       <li>Easily format and enhance your writing with the dropdown toolbar</li>
       <li>Syntax highlighting for Markdown, YAML frontmatter, and compatible HTML</li>
@@ -14,13 +15,12 @@ layout: default
       <li>Keyboard shortcut support for all app functionalities to streamline your workflow</li>
     </ul>
   </div>
-  <div class="gradient"></div>
   <div class="right-img">
     <img id="editor-img" src="{{ site.baseurl }}/images/editorImage.png" alt=""></img>
   </div>
 </section>
 <section class="preview-section">
-  <div class="preview-features">
+  <div id="preview" class="preview-features">
     <ul class="feature-list">
       <li> Live-preview allows you to see rendered changes in real-time </li>
       <li>Synced scrolling allows the preview to keep up with you as you type</li>
@@ -28,8 +28,15 @@ layout: default
       <li>FontAwesome, Glyphicon, and Emoji support</li>
       <li>Export your documents to a PDF for easy sharing across any platform</li>
     </ul>
+    <div class="repo-icons">
+      <a id="github" href="{{ site.repo }}"><span class="fa fa-github"></span></a>
+      <a id="heart" href="{{ site.repo }}"><span class="fa fa-heart"></span></a>
+      <a id="bug" href="{{ site.bugs
+       }}"><span class="fa fa-bug"></span></a>
+    </div>
   </div>
   <div class="left-img">
     <img id="preview-img" src="{{ site.baseurl }}/images/previewImage.png" alt=""></img>
   </div>
 </section>
+  <div class="tag-line">All contained within a modular UI, cabable of providing a minimal editor or accessible word processor</div>
