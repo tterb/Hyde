@@ -22,7 +22,7 @@ engines:
     config:
       languages:
         javascript:
-          mass_threshold: 85
+          mass_threshold: 75
   eslint:
     enabled: true
     checks:
@@ -45,13 +45,13 @@ ratings:
   - "**.js"
   - "**.jsx"
 exclude_paths:
-  - "css/bootstrap.min.css"
-  - "css/metro-icons.min.css"
-  - "css/font-awesome.min.css"
-  - "css/fonts/*"
-  - "js/codemirror/*"
-  - "js/showdown-icon.js"
-  - "img/*"
+  - "assets/css/bootstrap.min.css"
+  - "assets/css/metro-icons.min.css"
+  - "assets/css/font-awesome.min.css"
+  - "assets/css/fonts/*"
+  - "assets/js/codemirror/*"
+  - "assets/js/showdown-icon.js"
+  - "assets/img/*"
 
 parserOptions:
   sourceType: module
@@ -329,4 +329,4 @@ rules:
   symbol-description: off
   template-curly-spacing: off
   yield-star-spacing: off
-  "complexity": ["error", 15]
+  "complexity": ["error", 12]
