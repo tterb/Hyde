@@ -1,18 +1,18 @@
 {
   "name": "hyde",
   "version": "0.0.1",
-  "description": "An modular markdown editor for new and experienced users, with features that cater to Jekyll and documentation writing",
+  "description": "A modular markdown editor for new and experienced users, with features that cater to a wide variety of platforms",
   "main": "main.js",
   "productName": "Hyde",
   "scripts": {
     "start": "electron main.js",
     "build": "rm -rf release && gulp build",
-    "package-mac": "electron-packager . --overwrite --asar --platform=darwin --arch=x64 --icon=img/icon/icns/icon.icns --prune=true --out=dist/ --version-string.CompanyName=BStevensonDev --version-string.FileDescription=Hyde-Installer --version-string.ProductName=\"Hyde\"",
-    "package-win": "electron-packager . --overwrite --asar --platform=win32 --arch=ia32 --icon=img/icon/ico/icon.ico --prune=true --out=dist/ --version-string.CompanyName=BStevensonDev --version-string.FileDescription=Hyde-Installer --version-string.ProductName=\"Hyde\"",
-    "package-linux": "electron-packager . --overwrite --asar --platform=linux --arch=arm64 --icon=img/icon/png/256x256.png --prune=true --out=dist/ --version-string.CompanyName=BStevensonDev --version-string.FileDescription=Hyde-Installer --version-string.ProductName=\"Hyde\"",
-    "create-installer-mac": "electron-installer-dmg ./dist/hyde-darwin-x64/Hyde.app hyde --out=dist/installers/ --overwrite --icon=img/icon/icns/icon.icns",
-    "create-installer-win": "node js/installers/windows/createinstaller.js",
-    "create-installer-linux": "electron-installer-debian ./dist/hyde-linux-x64/ --out=dist/installers/ --arch=arm64 --overwrite  --icon=img/icon/icns/icon.icns"
+    "package-mac": "electron-packager . --overwrite --asar --platform=darwin --arch=x64 --icon=assets/img/icon/icns/icon.icns --prune=true --out=dist/ --version-string.CompanyName=BStevensonDev --version-string.FileDescription=Hyde-Installer --version-string.ProductName=\"Hyde\"",
+    "package-win": "electron-packager . --overwrite --asar --platform=win32 --arch=ia32 --icon=assets/img/icon/ico/icon.ico --prune=true --out=dist/ --version-string.CompanyName=BStevensonDev --version-string.FileDescription=Hyde-Installer --version-string.ProductName=\"Hyde\"",
+    "package-linux": "electron-packager . --overwrite --asar --platform=linux --arch=arm64 --icon=assets/img/icon/png/256x256.png --prune=true --out=dist/ --version-string.CompanyName=BStevensonDev --version-string.FileDescription=Hyde-Installer --version-string.ProductName=\"Hyde\"",
+    "create-installer-mac": "electron-installer-dmg ./dist/hyde-darwin-x64/Hyde.app hyde --out=dist/installers/ --overwrite --icon=assets/img/icon/icns/icon.icns",
+    "create-installer-win": "node assets/js/installers/windows/createinstaller.js",
+    "create-installer-linux": "electron-installer-debian ./dist/hyde-linux-x64/ --out=dist/installers/ --arch=arm64 --overwrite  --icon=assets/img/icon/icns/icon.icns"
   },
   "build": {
     "squirrelWindows": {
