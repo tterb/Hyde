@@ -3,25 +3,24 @@
 <head>
   <meta name="viewport" charset="UTF-8" content="width=device-width"/>
   <title>Hyde - New document</title>
-  <link rel="stylesheet" href="css/animate.css">
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/bootstrap-select.min.css">
-  <link rel="stylesheet" href="css/codemirror.css">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/modal.css">
-  <link rel="stylesheet" href="css/notification.css">
-  <link rel="stylesheet" href="css/commandPalette.css">
-  <link rel="stylesheet" href="css/katex.min.css">
-  <link rel="stylesheet" id="profileTag" href="css/preview/default.css">
-  <link rel="stylesheet" href="css/fonts/font-awesome.min.css">
-  <link rel="stylesheet" href="css/fonts/metro-icons.min.css">
-  <link rel="stylesheet" href="css/fonts/octicons.css">
-  <link rel="stylesheet" href="css/fonts/lora.css">
-  <link rel="stylesheet" href="css/fonts/open-sans.css">
-  <link rel="stylesheet" href="css/fonts/source-code-pro.css">
-  <link rel="stylesheet" href="css/dialog.css">
-  <link rel="stylesheet" href="css/scrollbar.css">
-  <link rel="stylesheet" href="css/export-pdf.css">
+  <link rel="stylesheet" href="assets/css/animate.css">
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/bootstrap-select.min.css">
+  <link rel="stylesheet" href="assets/css/codemirror.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/modal.css">
+  <link rel="stylesheet" href="assets/css/notification.css">
+  <link rel="stylesheet" href="assets/css/commandPalette.css">
+  <link rel="stylesheet" id="profileTag" href="assets/css/preview/default.css">
+  <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+  <link rel="stylesheet" href="assets/fonts/metro-icons.min.css">
+  <link rel="stylesheet" href="assets/fonts/lora.css">
+  <link rel="stylesheet" href="assets/fonts/open-sans.css">
+  <link rel="stylesheet" href="assets/fonts/source-code-pro.css">
+  <link rel="stylesheet" href="assets/fonts/katex.min.css">
+  <link rel="stylesheet" href="assets/css/dialog.css">
+  <link rel="stylesheet" href="assets/css/scrollbar.css">
+  <link rel="stylesheet" href="assets/css/export-pdf.css">
   <script src="node_modules/codemirror/lib/codemirror.js"></script>
   <script src="node_modules/codemirror/mode/markdown/markdown.js"></script>
   <script src="node_modules/codemirror/mode/gfm/gfm.js"></script>
@@ -61,9 +60,9 @@
     <button id="menuButton" onclick="toggleToolbar()"><span class="mif-menu"></span></button>
   </div>
   <div id="metacity">
-    <button id="close" class="window-button" style="cursor: pointer;"><img class="active" src="img/buttons/close_active.png" alt="Close"/><img class="hover" src="img/buttons/close_hover.png" alt="Close"/><img class="inactive" src="img/buttons/close.png" alt="Close"/></button>
-    <button id="maximize" class="window-button" style="cursor: pointer;"><img class="active" src="img/buttons/max_active.png" alt="Maximize" onclick="toggleMaximize();"/><img class="hover" src="img/buttons/max_hover.png" alt="Maximize"/><img class="inactive" src="img/buttons/max.png" alt="Maximize" onclick="toggleMaximize();"/></button>
-    <button id="minimize" class="window-button" style="cursor: pointer;"><img class="active" src="img/buttons/min_active.png" alt="Minimize"/><img class="hover" src="img/buttons/min_hover.png" alt="Minimize"/><img class="inactive" src="img/buttons/min.png" alt="Minimize"/></button>
+    <button id="close" class="window-button" style="cursor: pointer;"><img class="active" src="assets/img/buttons/close_active.png" alt="Close"/><img class="hover" src="assets/img/buttons/close_hover.png" alt="Close"/><img class="inactive" src="assets/img/buttons/close.png" alt="Close"/></button>
+    <button id="maximize" class="window-button" style="cursor: pointer;"><img class="active" src="assets/img/buttons/max_active.png" alt="Maximize" onclick="toggleMaximize();"/><img class="hover" src="assets/img/buttons/max_hover.png" alt="Maximize"/><img class="inactive" src="assets/img/buttons/max.png" alt="Maximize" onclick="toggleMaximize();"/></button>
+    <button id="minimize" class="window-button" style="cursor: pointer;"><img class="active" src="assets/img/buttons/min_active.png" alt="Minimize"/><img class="hover" src="assets/img/buttons/min_hover.png" alt="Minimize"/><img class="inactive" src="assets/img/buttons/min.png" alt="Minimize"/></button>
   </div>
   <div id="appMenu" class="hidden slideDownIn animated">
     <!-- File -->
@@ -202,7 +201,7 @@
       </div>
     </div>
     <!-- <section id="sidebar">
-      <img id="sideLogo" src="img/logo.png" alt="logo"/>
+      <img id="sideLogo" src="assets/img/logo.png" alt="logo"/>
       <ul id="sideMenu">
         <li id="sidebar-new"><a onclick="main.createWindow();">New</a></li>
         <li id="sidebar-open"><a>Open</a></li>
@@ -219,7 +218,7 @@
     <!-- Settings Menu -->
     <section id="settingsMenu">
       <div id="settings-title" class="title">
-        <img id="cog" src="img/cog.png"/><h2>Settings</h2>
+        <img id="cog" src="assets/img/cog.png"/><h2>Settings</h2>
       </div>
       <div id="editor-section" class="settings-section">
         <h3>Editor</h3>
@@ -408,7 +407,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="modal-close" data-dismiss="modal"><img class="inactive" src="img/buttons/close.png" alt="Close"/><img class="hover" src="img/buttons/close_hover.png" alt="Close"/><img class="active" src="img/buttons/close_active.png" alt="Close"/></button>
+          <button type="button" class="modal-close" data-dismiss="modal"><img class="inactive" src="assets/img/buttons/close.png" alt="Close"/><img class="hover" src="assets/img/buttons/close_hover.png" alt="Close"/><img class="active" src="assets/img/buttons/close_active.png" alt="Close"/></button>
           <h4 class="modal-title">Table</h4>
         </div>
         <div class="table-content">
@@ -437,7 +436,7 @@
     <div class="modal-dialog">
       <div class="modal-content modal-inset">
         <div class="modal-header">
-          <button type="button" class="modal-close" data-dismiss="modal"><img class="inactive" src="img/buttons/close.png" alt="Close"/><img class="hover" src="img/buttons/close_hover.png" alt="Close"/><img class="active" src="img/buttons/close_active.png" alt="Close"/>
+          <button type="button" class="modal-close" data-dismiss="modal"><img class="inactive" src="assets/img/buttons/close.png" alt="Close"/><img class="hover" src="assets/img/buttons/close_hover.png" alt="Close"/><img class="active" src="assets/img/buttons/close_active.png" alt="Close"/>
           </button>
           <h4 class="modal-title">Emoji</h4>
         </div>
@@ -460,7 +459,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="modal-close" data-dismiss="modal"><img class="inactive" src="img/buttons/close.png" alt="Close"/><img class="hover" src="img/buttons/close_hover.png" alt="Close"/><img class="active" src="img/buttons/close_active.png" alt="Close"/></button>
+          <button type="button" class="modal-close" data-dismiss="modal"><img class="inactive" src="assets/img/buttons/close.png" alt="Close"/><img class="hover" src="assets/img/buttons/close_hover.png" alt="Close"/><img class="active" src="assets/img/buttons/close_active.png" alt="Close"/></button>
           <h4 class="modal-title">Unsaved Changes</h4>
         </div>
         <div class="modal-body">
@@ -478,21 +477,21 @@
       </div>
     </div>
   </div>
-  <script>if(typeof module === 'object') {window.module = module; module = undefined;}</script>
+  <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
   <script>if(window.module) module = window.module;</script>
-  <script src="js/jquery.min.js"></script>
-  <script src="js/bootstrap/bootstrap.min.js"></script>
-  <script src="js/bootstrap/bootstrap-select.min.js"></script>
-  <script src="js/bootstrap/bootstrap-notify.js"></script>
-  <script src="js/codemirror/search.js"></script>
-  <script src="js/codemirror/searchcursor.js"></script>
-  <script src="js/showdown-icon.js"></script>
-  <script src="js/settings.js"></script>
-  <script src="js/app.js"></script>
-  <script src="js/modal.js"></script>
-  <script src="js/emoji.js"></script>
-  <script src="js/format.js"></script>
-  <script src="js/functions.js"></script>
-  <script src="js/ipc_renderer.js"></script>
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/bootstrap/bootstrap.min.js"></script>
+  <script src="assets/js/bootstrap/bootstrap-select.min.js"></script>
+  <script src="assets/js/bootstrap/bootstrap-notify.js"></script>
+  <script src="assets/js/codemirror/search.js"></script>
+  <script src="assets/js/codemirror/searchcursor.js"></script>
+  <script src="assets/js/showdown-icon.js"></script>
+  <script src="assets/js/settings.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/modal.js"></script>
+  <script src="assets/js/emoji.js"></script>
+  <script src="assets/js/format.js"></script>
+  <script src="assets/js/functions.js"></script>
+  <script src="assets/js/ipc_renderer.js"></script>
 </body>
 </html>

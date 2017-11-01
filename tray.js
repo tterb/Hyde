@@ -2,7 +2,7 @@
 const path = require('path');
 const electron = require('electron');
 const app = electron.app;
-var iconPath = path.join(__dirname, 'img/icon/ico/icon.ico');
+var iconPath = path.join(__dirname,'assets','img','icon');
 let tray = null;
 
 exports.create = function(mainWindow) {
@@ -24,14 +24,15 @@ exports.create = function(mainWindow) {
 		{ label: 'Quit', click() { app.quit(); }}
 	]);
 
+	let icon;
 	if(process.platform === 'darwin')
-		iconPath = path.join(__dirname, 'img/icon/icns/icon.icns');
+		icon = path.join(__dirname,iconPath,'icns','icon.icns');
 	else if(process.platform === 'win32')
-		iconPath = path.join(__dirname, 'img/icon/ico/icon.ico');
+		icon = path.join(__dirname,iconPath,'ico','icon.ico');
 	else
-		iconPath = path.join(__dirname, 'img/icon/png/48x48.png');
+		icon = path.join(__dirname,iconPath,'png','48x48.png');
 
-	tray = new electron.Tray(iconPath);
+	tray = new electron.Tray(icon);
 	tray.setToolTip('Hyde');
 	tray.setContextMenu(contextMenu);
 	tray.on('click', toggleHide);
