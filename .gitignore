@@ -3,10 +3,9 @@
 # Local .npmrc preferences
 .npmrc
 
-dist
 .gulp-scss-cache/*
 .sass-cache/*
 node_modules
 npm-debug.txt
-img/README/*
-TODO.md
+dist/*
+*_.*
