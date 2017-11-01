@@ -55,23 +55,28 @@ gulp.task('liveReload', () => {
 	electron.start();
 	//Watch js files and restart Electron if they change
 	gulp.watch(['./*.js'], electron.restart);
-	gulp.watch(['./js/**/*.js'], electron.restart);
+	gulp.watch(['./assets/js/*.js'], electron.restart);
+  // gulp.watch(['./assets/js/**/*.js'], electron.restart);
 	//watch css files, but only reload (no restart necessary)
-	gulp.watch(['./**/**/*.css'], electron.reload);
-	gulp.watch(['./**/*.css'], electron.reload);
-  gulp.watch(['./css/*.scss'], ['scss']);
+	gulp.watch(['./assets/css/*.css'], electron.reload);
+	gulp.watch(['./assets/css/**/*.css'], electron.reload);
+  gulp.watch(['./assets/sass/*.scss'], ['scss']);
+  gulp.watch(['./assets/sass/**/*.scss'], ['scss']);
 	//watch html
 	gulp.watch(['./index.html'], electron.restart);
 });
 
 gulp.task('scss', () => {
-  gulp.src('./css/*.scss')
+  gulp.src('./assets/sass/*.scss')
     .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest('./css/'));
+    .pipe(gulp.dest('./assets/css/'));
+  gulp.src('./assets/sass/preview/*.scss')
+    .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
+    .pipe(gulp.dest('./assets/css/preview/'));
 });
 
 gulp.task('clean', () => {
-  exec('rm -rf ./release', function (stdout, stderr) {
+  exec('rm -rf ./dist', function (stdout, stderr) {
     console.log(stdout);
     console.log(stderr);
   });
@@ -80,7 +85,7 @@ gulp.task('clean', () => {
 gulp.task('build:linux', () => {
   options.arch = 'amd64';
   options.platform = 'linux';
-  options.icon = '/img/icon/png/256x256.png';
+  options.icon = '/assets/img/icon/png/256x256.png';
   packager(options, (err) => {
     if(err) console.error(err);
     done();
@@ -90,7 +95,7 @@ gulp.task('build:linux', () => {
 gulp.task('build:win', (done) => {
 	options.arch = 'ia32';
 	options.platform = 'win32';
-	options.icon = '/img/icon/ico/icon.ico';
+	options.icon = '/assets/img/icon/ico/icon.ico';
 	packager(options, (err) => {
 		if(err) console.error(err);
 		done();
@@ -100,7 +105,7 @@ gulp.task('build:win', (done) => {
 gulp.task('build:osx', (done) => {
 	options.arch = 'x64';
 	options.platform = 'darwin';
-	options.icon = '/img/icon/icns/icon.icns';
+	options.icon = '/assets/img/icon/icns/icon.icns';
 	packager(options, (err) => {
 		if(err) console.error(err);
 		done();
