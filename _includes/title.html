@@ -1,6 +1,8 @@
-
-<div class="title-container">
+{% if page.layout == 'page' %}
+  <div class="title-container">
+{% else %}
+  <div class="title-container landing">
+{% endif %}
   <h1>Hyde</h1>
   <h3>A Jekyll-inspired Markdown editor</h3>
-  <!-- <hr style="width:90%;margin:0 auto 1em;"> -->
 </div>
