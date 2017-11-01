@@ -1,11 +1,11 @@
 #mdPreview {
   color: #222;
-  font-family: "Open Sans", "Roboto", "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
-  font-size: 13.5px;
-  letter-spacing: 0.04em;
-  line-height: 1.425;
+  font-family: "Open Sans", "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 17px;
+  letter-spacing: 0.0375em;
+  line-height: 1.5;
   text-rendering: geometricPrecision;
-  overflow: none;
+  overflow: auto;
   margin-top: 0;
 }
 
@@ -14,21 +14,25 @@
   font-weight: 700;
 }
 
+#mdPreview h1, #mdPreview h2 {
+  border-bottom: 1px solid #e1e3ea;
+}
+
 #mdPreview h1 {
   font-size: 2.5em;
   letter-spacing: 0.0175em;
   line-height: 1.45;
-  border-bottom: 1px solid #e1e3ea;
   margin-top: 0;
   margin-bottom: 25px;
 }
+
 #mdPreview h2 {
   font-size: 2em;
   letter-spacing: 0.0125em;
   line-height: 1.4;
-  border-bottom: 1px solid #e1e3ea;
   margin-bottom: 22px;
 }
+
 #mdPreview h3 {
   font-size: 1.6em;
   letter-spacing: 0.01em;
@@ -36,12 +40,14 @@
   margin-top: 10px;
   margin-bottom: 15px;
 }
+
 #mdPreview h4 {
   font-size: 1.45em;
   letter-spacing: 0.01em;
   line-height: 1.25;
   margin-bottom: 16px;
 }
+
 #mdPreview h5 {
   color: #666;
   font-size: 1.3em;
@@ -49,6 +55,7 @@
   line-height: 1.25;
   margin-bottom: 14px;
 }
+
 #mdPreview h6 {
   color: #666;
   font-size: 1.08em;
@@ -56,26 +63,11 @@
   line-height: 1.2;
   margin-bottom: 14px;
 }
+
 #mdPreview img {
   max-width: 95%;
   vertical-align: middle;
   box-sizing: content-box;
-}
-
-#mdPreview ol {
-  counter-reset: item;
-}
-
-#mdPreview ol li {
-  font-family: "Open Sans", "Roboto", "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
-  list-style-type: none;
-  counter-increment: item;
-}
-
-#mdPreview ol li:before {
-  font-family: "Lora", Garamond, Times, Georgia, serif;
-  padding-right: 6px;
-  content: counter(item) ".";
 }
 
 #mdPreview ol, #mdPreview ul {
@@ -84,48 +76,76 @@
   margin-bottom: 15px;
   padding-left: 35px;
 }
+
 #mdPreview ol ol, #mdPreview ol ul, #mdPreview ul ol, #mdPreview ul ul {
   padding-top: 4px;
   padding-left: 25px;
 }
+
 #mdPreview ol ol ol, #mdPreview ol ol ul, #mdPreview ol ul ol, #mdPreview ol ul ul, #mdPreview ul ol ol, #mdPreview ul ol ul, #mdPreview ul ul ol, #mdPreview ul ul ul {
   padding-left: 35px;
 }
+
+#mdPreview ol p, #mdPreview ul p {
+  margin-bottom: 0 !important;
+}
+
+#mdPreview ol {
+  counter-reset: item;
+}
+
+#mdPreview ol li {
+  font-family: "Open Sans", "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
+  list-style-type: none;
+  counter-increment: item;
+}
+
+#mdPreview ol li::before {
+  font-family: "Lora", Garamond, Times, Georgia, serif;
+  padding-right: 6px;
+  content: counter(item) ".";
+}
+
 #mdPreview li {
   letter-spacing: 0.04em;
   margin-bottom: 5px;
 }
-#mdPreview ul li p {
-  margin-bottom: 0 !important;
-}
+
 #mdPreview .task-list-item {
   margin-bottom: 12px;
 }
+
 #mdPreview a {
   color: #1a6b9a;
   text-decoration: none;
   transition: 300ms ease;
 }
+
 #mdPreview a:hover, #mdPreview a:focus, #mdPreview a:active {
   color: #28abda;
   text-decoration: none;
 }
+
 #mdPreview hr {
   border-top: 2px solid #ddd;
 }
+
 #mdPreview p {
-  color: #212121;
+  color: #222;
   letter-spacing: 0.0375em;
   margin: 0 0 16px 2px;
 }
-#mdPreview .break {
-  height: 0;
-  margin-bottom: 16px;
-}
+
 #mdPreview strong {
   font-size: 105%;
   font-weight: 700;
 }
+
+#mdPreview .break {
+  height: 0;
+  margin-bottom: 16px;
+}
+
 #mdPreview pre {
   background: #3a393b;
   color: rgba(255, 255, 255, 0.7);
@@ -136,8 +156,9 @@
   box-shadow: inset 0 0 14px rgba(0, 0, 0, 0.5);
   overflow: hidden;
 }
+
 #mdPreview pre code {
-  font-family: "Source Code Pro","Monaco", "Ubuntu Mono", "Dejavu Sans Mono", "Consolas", monospace !important;
+  font-family: "Source Code Pro", "Monaco", "Ubuntu Mono", "Dejavu Sans Mono", "Consolas", monospace !important;
   background: transparent;
   color: rgba(255, 255, 255, 0.7);
   font-size: 90%;
@@ -146,15 +167,17 @@
   border-radius: 10px;
   padding: 2px 0 3px;
 }
+
 #mdPreview code {
   background: #414345;
-  color: rgba(255,255,255,0.85);
-  font-family: "Source Code Pro","Monaco", "Ubuntu Mono", "Dejavu Sans Mono", "Consolas", monospace !important;
+  color: rgba(255, 255, 255, 0.85);
+  font-family: "Source Code Pro", "Monaco", "Ubuntu Mono", "Dejavu Sans Mono", "Consolas", monospace !important;
   font-size: 90%;
   letter-spacing: 0.05em;
   margin: 0 2px;
   padding: 3px 5px 3px 6px;
 }
+
 #mdPreview blockquote {
   display: flex;
   background: rgba(0, 0, 0, 0.04);
@@ -165,40 +188,41 @@
   margin: 15px 10px;
   padding: 10px 20px 11px;
 }
+
 #mdPreview blockquote > p {
   margin-bottom: 0;
 }
+
 #mdPreview table {
   border-collapse: collapse;
   margin: 20px 10px;
 }
+
+#mdPreview table tr {
+  background-color: #f8f7f5;
+  border: 1px solid #c6cbd1;
+}
+
+#mdPreview table tr:nth-child(2n) {
+  background-color: #eeeff0;
+}
+
 #mdPreview table th {
   background-color: #f4f5f6;
   font-size: 1em;
   font-weight: 700;
   letter-spacing: 0.03em;
 }
-#mdPreview table th strong {
-  color: #2a2a2a;
-  font-weight: 800;
-}
-#mdPreview table tr {
-  background-color: #f4f5f6;
-  border: 1px solid #b6bbc1;
-}
-#mdPreview table tr:nth-child(2n - 1) {
-  background-color: #eeeff0;
-}
+
 #mdPreview table th, #mdPreview table td {
   border: 1px solid #dfe2e5;
   padding: 6px 13px;
 }
-#mdPreview table td {
-  padding-bottom: 7px;
-}
+
 #mdPreview table thead tr {
   line-height: 1.5;
 }
+
 #mdPreview kbd {
   background-image: -webkit-linear-gradient(top, #f4f4f4, #e0e0e0);
   color: #303030;
@@ -207,27 +231,69 @@
   border-bottom-color: #ddd;
   border-radius: 4px;
   padding: 2px 4px 2.25px;
-  box-shadow: 0 0.5px 3px rgba(0,0,0,0.15);
+  box-shadow: 0 0.5px 3px rgba(0, 0, 0, 0.15);
 }
+
+#mdPreview .emoji {
+  font-size: 1.2em;
+}
+
 #mdPreview *:first-child {
   margin-top: 0 !important;
 }
+
 #mdPreview *:last-child {
   margin-bottom: 0 !important;
 }
 
-/* Code block syntax-highlighting */
-.hljs-built_in { color: hsl(180, 49%, 60%); }
-.hljs-title { color: hsl(207, 82%, 66%); }
-.hljs-keyword { color: hsl(286, 60%, 67%); }
-.hljs-class { color: hsl(25, 54%, 61%) !important; }
-.hljs-name { color: hsl(355, 65%, 65%); }
-.hljs-number { color: hsl(25, 54%, 61%); }
-.hljs-attr { color: hsl(25, 54%, 61%); }
-.hljs-meta { color: hsl(355, 65%, 65%); }
-.hljs-string { color: hsl(95, 38%, 62%); }
-.hljs-literal { color: hsl(207, 82%, 66%); }
-.hljs-subst { color: hsl(355, 65%, 65%); }
-.hljs-params { color: rgba(255, 255, 255, 0.75) !important; }
-.hljs-comment { color: rgba(255, 255, 255, 0.3) !important; }
-/*.bash .hljs-built_in { color: rgba(255, 255, 255, 0.75) !important; }*/
+.hljs-built_in {
+  color: #67cbcb;
+}
+
+.hljs-title {
+  color: #61afef;
+}
+
+.hljs-keyword {
+  color: #c678dd;
+}
+
+.hljs-class {
+  color: #d19366 !important;
+}
+
+.hljs-name {
+  color: #e06c75;
+}
+
+.hljs-number {
+  color: #d19366;
+}
+
+.hljs-attr {
+  color: #d19366;
+}
+
+.hljs-meta {
+  color: #e06c75;
+}
+
+.hljs-string {
+  color: #98c379;
+}
+
+.hljs-literal {
+  color: #61afef;
+}
+
+.hljs-subst {
+  color: #e06c75;
+}
+
+.hljs-params {
+  color: rgba(255, 255, 255, 0.75) !important;
+}
+
+.hljs-comment {
+  color: rgba(255, 255, 255, 0.3) !important;
+}

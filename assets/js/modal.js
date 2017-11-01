@@ -5,7 +5,7 @@ function createModals() {
 }
 
 function createAboutModal() {
-	var content = '<img id="hydeImg" src="./img/Hyde.png"/>' +
+	var content = '<img id="hydeImg" src="./assets/img/Hyde.png"/>' +
 		'<div class="about-content">' +
 			'<ul class="about-info">' +
 				'<li>Created by <a href="openInBrowser('+'"https://JonSn0w.github.io/"' + ')" id="name">Brett Stevenson</a></li>' +
@@ -34,7 +34,7 @@ function createMarkdownModal() {
 			'</tr>' +
 			'<tr><td style="font-size:125%;padding:0 17px">L<sup>a</sup>T<sub>e</sub>X</td><td>$LaTeX$</td></tr>' +
 			'<tr><td id="emoji"><span id="emoji" class="emoji emoji-smile">&#128515;	</span></td><td>:smile:' +
-      '<tr><td id="icon"><span class="fa fa-github"></span></td><td>@github</td></tr>'
+      '<tr><td id="icon"><span class="fa fa-github"></span></td><td>@github</td></tr>' +
 		'</table>' +
 	'</section>';
 	$('#markdown-modal').append(createInsetModal('Markdown Help', content));
@@ -53,7 +53,7 @@ function createModal(title, content) {
 		'<div class="modal-content">' +
 			'<div class="modal-body">' +
 				'<div class="modal-header">' +
-					'<button type="button" class="window-button modal-close" data-dismiss="modal"><img class="active" src="img/buttons/close_active.png" alt="Close"/><img class="hover" src="img/buttons/close_hover.png" alt="Close"/><img class="inactive" src="img/buttons/close.png" alt="Close"/></button>';
+					'<button type="button" class="window-button modal-close" data-dismiss="modal"><img class="active" src="assets/img/buttons/close_active.png" alt="Close"/><img class="hover" src="assets/img/buttons/close_hover.png" alt="Close"/><img class="inactive" src="assets/img/buttons/close.png" alt="Close"/></button>';
 	if(title.length > 0)
 		modal += '<h4 class="modal-title">'+ title + '</h4>';
 	modal += '</div>' + content + '</div></div></div></div>';
@@ -64,7 +64,7 @@ function createInsetModal(title, content) {
 	var modal = '<div class="modal-dialog bounceInDown animated">' +
 		'<div class="modal-content modal-inset">' +
 			'<div class="modal-header">' +
-				'<button type="button" class="window-button modal-close" data-dismiss="modal"><img class="active" src="img/buttons/close_active.png" alt="Close"/><img class="hover" src="img/buttons/close_hover.png" alt="Close"/><img class="inactive" src="img/buttons/close.png" alt="Close"/></button>' +
+				'<button type="button" class="window-button modal-close" data-dismiss="modal"><img class="active" src="assets/img/buttons/close_active.png" alt="Close"/><img class="hover" src="assets/img/buttons/close_hover.png" alt="Close"/><img class="inactive" src="assets/img/buttons/close.png" alt="Close"/></button>' +
 				'<h4 class="modal-title">' + title + '</h4>' +
 			'</div>' +
 			'<div class="modal-body-inset">' + content +

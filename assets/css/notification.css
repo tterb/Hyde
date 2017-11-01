@@ -138,10 +138,10 @@
       background: rgba(221, 157, 48, 0.75) !important; }
 
 .alert-danger {
-  background: rgba(229, 155, 155, 0.95);
+  background: rgba(229, 151, 151, 0.95);
   color: #be2424 !important; }
   .alert-danger:hover {
-    background: #e59b9b; }
+    background: #e59797; }
   .alert-danger .alert-sidebar {
     background: #d03132; }
     .alert-danger .alert-sidebar .alert-icon {

@@ -1,6 +1,6 @@
 
 function getEmojis() {
-	var list = JSON.parse(fs.readFileSync(path.join(__dirname, 'emoji-list.json'), 'utf8'));
+	var list = JSON.parse(fs.readFileSync(path.join(__dirname,'assets','json', 'emoji-list.json'), 'utf8'));
 	var emojis = [];
 	list.forEach((e) => {
 		emojis.push(e);
@@ -16,7 +16,7 @@ function fillEmojiModal(type) {
     if(temp.category === type) {
 			var div = $('<div>', {'class': 'emoji-list'});
 			div.click(() => { insertEmoji(temp.aliases[0]); });
-			var img = $('<span>', {'class': 'emoji-'+temp.category, 'alt': temp.emoji, 'title': temp.aliases[0], 'text': temp.emoji });
+			var img = $('<span>', {'class': 'emoji-'+temp.category+' emoji-'+temp.aliases[0], 'alt': temp.emoji, 'title': temp.aliases[0], 'text': temp.emoji });
 			div.append(img);
 			table.append(div);
     }

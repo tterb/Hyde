@@ -871,7 +871,7 @@ input[type='checkbox'] {
   text-rendering: geometricPrecision; }
   #textPanel > div {
     font-size: 11.5px;
-    letter-spacing: 0.0275em;
+    letter-spacing: 0.02em;
     line-height: 1.5;
     padding: 0 0 30px; }
   #textPanel #markdownText {
@@ -1000,6 +1000,9 @@ input[type='checkbox'] {
   background: #3e3d3c;
   background: -webkit-linear-gradient(180deg, #3e3d3c 0, #2f2e2d 80%, #2f2e2d 100%);
   background: linear-gradient(180deg, #3e3d3c 0, #2f2e2d 80%, #2f2e2d 100%); }
+
+.cm-header {
+  letter-spacing: 0.025em; }
 
 .cm-trailingspace,
 .cm-trailing-space-a,

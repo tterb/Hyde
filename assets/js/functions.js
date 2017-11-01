@@ -173,7 +173,7 @@ function toggleSearch(opt) {
 function appendCustomCSS() {
   var input = $('#custom-css').val();
   if(input.length <= 1) return;
-  fs.writeFileSync(path.join(__dirname, 'css/preview/', 'custom.css'), input);
+  fs.writeFileSync(path.join(__dirname,'css','preview','custom.css'), input);
   toggleCustomCSS();
   $('#custom-css-modal').modal();
 }

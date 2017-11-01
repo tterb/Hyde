@@ -1,4 +1,4 @@
-const config = require('./config');
+const config = require('./assets/js/config');
 var menu = $('#appMenu'),
 		toolbar = $('#toolbar'),
 		leftFade = $('#leftFade'),
@@ -224,7 +224,7 @@ function setPreviewProfile(profile) {
 	if(!profile)
 		profile = settings.get('previewProfile');
 	if(current !== profile.toLowerCase()) {
-		profileTag.attr('href', 'css/preview/'+profile.toLowerCase()+'.css');
+		profileTag.attr('href', 'assets/css/preview/'+profile.toLowerCase()+'.css');
 	}
 	settings.set('previewProfile', profile.toString());
 	$('#previewProfile').attr('title', profile);
@@ -232,7 +232,7 @@ function setPreviewProfile(profile) {
 
 function toggleCustomCSS() {
 	var state = settings.get('customCSS'),
-			file = path.join('css/preview/custom.css'),
+			file = path.join('assets','css','preview','custom.css'),
 			tag = $('#customCSSTag');
 	if(!state)
 		tag.remove();

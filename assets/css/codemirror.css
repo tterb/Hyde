@@ -10,7 +10,7 @@
 /* PADDING */
 
 .CodeMirror-lines {
-  padding: 5px 0 25px; /* Vertical padding around content */
+  padding: 5px 0 0; /* Vertical padding around content */
   min-height: 1px; /* prevents collapsing before first draw */
   cursor: text;
 }
@@ -146,9 +146,9 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {
 .CodeMirror-activeline-background { background: #e8f2ff; }
 .cm-matchhighlight {
   background: rgba(255,255,255,0.05);
-  font-size: -webkit-calc(100% - 0.5px);
-  border: 0.5px solid;
-  border-radius: 3px;
+  /*font-size: -webkit-calc(100% - 0.5px);*/
+  /*border: 0.5px solid;*/
+  /*border-radius: 3px;*/
 }
 /** STOP **/
 /* The rest of this file contains styles related to the mechanics of

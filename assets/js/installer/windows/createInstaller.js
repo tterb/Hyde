@@ -17,9 +17,9 @@ function getInstallerConfig () {
        appDirectory: path.join(outPath, 'Hyde-win32-ia32/'),
        authors: 'Brett Stevenson',
        noMsi: true,
-       outputDirectory: path.join(outPath, 'installers/hyde-win-installer'),
+       outputDirectory: path.join(outPath, 'assets','installers','hyde-win-installer'),
        exe: 'Hyde.exe',
        setupExe: 'HydeInstaller.exe',
-       setupIcon: path.join(rootPath, 'img', 'icon', 'ico', 'icon.ico')
+       setupIcon: path.join(rootPath, 'assets','img','icon','ico','icon.ico')
    });
 }

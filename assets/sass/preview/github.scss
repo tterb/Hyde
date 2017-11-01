@@ -1,0 +1,193 @@
+$text-color: #232224;
+$header-subtle-color: #737373;
+$code-text-color: #24292e;
+$code-background: #ececec;
+$code-block-background: rgba(20,20,20,0.05);
+$link-color: #0366d6;
+
+$sans-serif: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';
+$serif: 'Lora',Garamond,Times,Georgia,serif;
+$monospaced: 'SFMono-Regular', Consolas, Inconsolata, 'Liberation Mono', Menlo, monospace;
+
+#mdPreview  {
+  color: $text-color;
+  font-family: $sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  text-rendering: geometricPrecision;
+  margin-top: 0;
+  overflow: none;
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: 0.01em;
+    margin-top: 24px;
+    margin-bottom: 16px;
+  }
+  h1 {
+    font-size: 2.3em;
+    letter-spacing: 0.02em;
+    border-bottom: 1px solid #e2e2e2;
+    padding-bottom: 0.15em;
+  }
+  h2 {
+    font-size: 1.8em;
+    border-bottom: 1px solid #e2e2e2;
+    padding-bottom: 0.15em;
+  }
+  h3 {
+    font-size: 1.45em;
+  }
+  h4 {
+    font-size: 1.2em;
+  }
+  h5 {
+    font-size: 1.15em;
+  }
+  h6 {
+    font-size: 0.95em;
+    color: $header-subtle-color;
+  }
+  img {
+    background: transparent;
+    max-width: 95%;
+    vertical-align: middle;
+    box-sizing: content-box;
+    border-style: none;
+  }
+  ol, ul {
+    margin-top: 0;
+    margin-bottom: 16px;
+    padding-left: 2em;
+    ol, ul {
+      padding-left: 27px;
+      ol, ul {
+        padding-left: 35px;
+      }
+    }
+  }
+  li {
+    // font-size: 2.4vh;
+    letter-spacing: 0.0275em;
+    margin-bottom: 5px;
+  }
+  li+li {
+    margin-top: 0.25em;
+  }
+  a {
+    color: $link-color;
+    text-decoration: none;
+    transition: 300ms ease;
+    &:hover, &:focus, &:active {
+      color: $link-color;
+      text-decoration: underline;
+    }
+  }
+  hr {
+    background: #e4e4e4;
+    height: 2px;
+    border: 0;
+    margin: 24px 0;
+    padding: 0;
+  }
+  p {
+    // font-size: 2.4vh;
+    letter-spacing: 0.0275em;
+    line-height: 1.5;
+    margin: 0 0 16px !important;
+  }
+  .break {
+    height: 0;
+    margin-bottom: 15px;
+  }
+  pre {
+    background: $code-background;
+    color: $text-color;
+    font-family: $monospaced;
+    font-size: 85%;
+    line-height: 1.45;
+    border: 0;
+    border-radius: 5px;
+    padding: 10px 20px;
+    box-shadow: none;
+    margin-bottom: 16px;
+    word-wrap: normal;
+    word-break: normal;
+    overflow: hidden;
+    code {
+      font-family: $monospaced !important;
+      background: transparent;
+      letter-spacing: 0.045em;
+      &::before, &::after {
+        letter-spacing: -0.2em;
+        content: '';
+      }
+    }
+  }
+  code {
+    background-color: $code-block-background;
+    color: $code-text-color;
+    font-size: 85%;
+    border-radius: 5px;
+    margin: 0;
+    padding: 0.2em 0;
+    &::before, &::after {
+      letter-spacing: -0.2em;
+      content: '\00a0';
+    }
+  }
+  blockquote {
+    background: rgba(0,0,0,0.05);
+    color: #6a737d;
+    font-size: 13.5px;
+    border-left: 0.25em solid #dfe2e5;
+    border-radius: 5px;
+    margin-top: 0;
+    margin-bottom: 16px;
+    padding: 0 1em;
+    > p {
+      margin-bottom: 0;
+    }
+  }
+  table {
+    border-collapse: collapse;
+    margin-left: 10px;
+    tr {
+      background-color: #f8f7f5;
+      border: 1px solid #c6cbd1;
+      &:nth-child(2n) {
+        background-color: #ecedee;
+      }
+    }
+    th {
+      font-size: 17px;
+      font-weight: 600;
+      padding: 8px 13px !important;
+    }
+    th, td {
+      border: 1px solid #dfe2e5;
+      padding: 6px 13px;
+    }
+    thead tr {
+      line-height: 1.5;
+    }
+  }
+  kbd {
+    background-image: -webkit-linear-gradient(top, #f5f5f5, #e6e6e6);
+    color: rgba(0,0,0,0.7);
+    font-size: 8pt;
+    border: solid 1px #c6cbd1;
+    border-bottom-color: #959da5;
+    border-radius: 4px;
+    box-shadow: inset 0 -0.5px 0 #959da5;
+  }
+  *:first-child  {
+    margin-top: 0 !important;
+  }
+  *:last-child {
+    margin-bottom: 0 !important;
+  }
+}
+
+.hljs-built_in { color: #005cc5; }
+.hljs-comment { color: #6a737d !important; }

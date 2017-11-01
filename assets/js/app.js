@@ -7,12 +7,12 @@ const fs = remote.require('fs');
 const main = remote.require('./main');
 const path = require('path');
 const showdown  = require('showdown');
-const notify = require('./js/notify');
-const argHandling = require('./js/argHandling');
-const katex = require('./js/parseTex');
+const notify = require('./assets/js/notify');
+const argHandling = require('./assets/js/argHandling');
+const katex = require('./assets/js/parseTex');
 const settings = require('electron-settings');
 const storage = require('electron-json-storage');
-const commandPalette = require('./js/commandPalette');
+const commandPalette = require('./assets/js/commandPalette');
 const spellChecker = require('codemirror-spell-checker');
 const packageJSON = require(path.join(__dirname, '/package.json'));
 const emoji = require('node-emoji');
@@ -75,7 +75,7 @@ main.getThemes().filter((temp) => {
 themes.forEach(function(index) {
 	let tag = document.createElement('link');
 	tag.setAttribute('rel', 'stylesheet');
-	tag.setAttribute('href', 'css/theme/'+index+'.css');
+	tag.setAttribute('href', 'assets/css/themes/'+index+'.css');
 	head.append(tag);
 });
 
@@ -83,7 +83,7 @@ function setEditorTheme(theme) {
 	let themeTag;
 	if(theme === undefined)
 		theme = 'one-dark';
-	themeTag = $('link[href="css/theme/'+theme.toString()+'.css"]');
+	themeTag = $('link[href="assets/css/themes/'+theme.toString()+'.css"]');
 	themeTag.attr('id', 'themeLink');
 	let title = theme.replace(/-/g , ' ').replace(/\w\S*/g, function(str) {
 		return str.charAt(0).toUpperCase() + str.substr(1).toLowerCase();

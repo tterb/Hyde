@@ -109,6 +109,8 @@ ipc.on('file-open-new', () => {
 			return notify('You didn\'t select a file to open', 'info');
 		}
     data = { 'filename' : this.currentFile };
+		// this.isFileLoadedInitially = true;
+		// this.currentFile = file[0]; // <-- This fixes bottom file but not save
 		// file is a string that contains the path and filename created in the save file dialog.
     settings.set('targetFile', file[0]);
     main.createWindow();
@@ -125,14 +127,14 @@ ipc.on('insert-heading', () => { toggleHeading(); });
 ipc.on('insert-italic', () => { toggleFormat('em'); });
 ipc.on('insert-image', () => { insert('image'); });
 ipc.on('insert-link', () => { insert('link'); });
-ipc.on('toggle-menu', () => { if(process.platform !== 'darwin') toggleMenu(); });
+ipc.on('toggle-menu', () => { if(process.platform !== 'darwin') toggleMenu(); notify('Toggle app menu', 'error'); });
 ipc.on('toggle-preview', () => { togglePreview(); });
 ipc.on('win-close', () => { closeWindow(remote.BrowserWindow.getFocusedWindow()); });
 ipc.on('win-reload', () => { reloadWin(); });
 ipc.on('insert-code', () => { toggleFormat('code'); });
 ipc.on('insert-quote', () => { toggleBlockquote(); });
-ipc.on('toggle-toolbar', () => { toggleToolbar(); });
-ipc.on('toggle-settings', () => { toggleSettingsMenu(); });
+ipc.on('toggle-toolbar', () => { toggleToolbar(); notify('Toggle toolbar', 'warning'); });
+ipc.on('toggle-settings', () => { toggleSettingsMenu(); notify('Toggle settings menu', 'info'); });
 ipc.on('insert-strikethrough', () => { toggleFormat('strikethrough'); });
 ipc.on('insert-hr', () => { insert('hr'); });
 ipc.on('insert-comment', () => { toggleComment(); });
@@ -140,7 +142,7 @@ ipc.on('page-up', () => { cm.execCommand('goDocStart'); });
 ipc.on('page-down', () => { cm.execCommand('goDocEnd'); });
 ipc.on('indent-less', () => { cm.execCommand('indentLess'); });
 ipc.on('indent-more', () => { cm.execCommand('indentMore'); });
-ipc.on('toggle-palette', () => { commandPalette().show(); });
+ipc.on('toggle-palette', () => { commandPalette().show(); notify('Toggle command-palette If string, assumed to be CSS class name. If null, no animation at all. If function, runs the function. (v3.0.1+) You can use animate.css class names or your custom css animations as well.', 'success'); });
 ipc.on('maximize', () => { toggleMaximize(); });
 // Save as PDF file
 ipc.on('file-pdf', () => {
