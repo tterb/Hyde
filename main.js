@@ -80,9 +80,9 @@ function getWindowConfig() {
   }
   if (process.platform === 'darwin') {
     conf.titleBarStyle = 'hidden';
-    conf.icon = path.join(__dirname,'assets','img','icon','png','icon.icns');
+    conf.icon = path.join(__dirname,'assets','img','icon','icns','icon.icns');
   } else if (process.platform === 'win32') {
-    conf.icon = path.join(__dirname,'assets','img','icon','png','icon.ico');
+    conf.icon = path.join(__dirname,'assets','img','icon','ico','icon.ico');
   } else {
     conf.icon = path.join(__dirname,'assets','img','icon','png','64x64.png');
   }
