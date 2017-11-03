@@ -188,9 +188,10 @@ html, body {
     padding-left: 15px;
   }
   &.landing {
-    line-height: 2em;
+    top: 1vw;
+    line-height: 1.5em;
     h1 {
-      font-size: 17.5vw;
+      font-size: 18.5vw;
     }
     h3 {
       position: relative;
@@ -213,11 +214,11 @@ html, body {
 
 .gradient {
   // @include background-image(linear-gradient(to top, #24282d 58%, rgba(41,44,51,0.915) 64%, rgba(41,44,51,0.8) 67%, rgba(41,44,51,0.2) 80%, rgba(41,44,51,0) 86%));
-  @include background-image(linear-gradient(to top, #24282d 58%, rgba(41,44,51,0.915) 64%, rgba(41,44,51,0.8) 67%, rgba(41,44,51,0.2) 80%, rgba(41,44,51,0.1) 83%, transparent));
+  @include background-image(linear-gradient(to top, #24282d 56%, rgba(41,44,51,0.935) 63%, rgba(41,44,51,0.8) 67%, rgba(41,44,51,0.2) 80%, rgba(41,44,51,0.1) 83%, transparent));
   position: absolute;
   height: 104vw;
   width: 100%;
-  top: 4vh;
+  top: 4.5vh;
   left: 0;
   overflow: auto;
   z-index: 0;
@@ -246,12 +247,12 @@ html, body {
 
 .editor-section {
   height: 75vw;
-  padding-top: 0.5em;
+  padding-top: 1em;
   .editor-features {
     position: absolute;
     color: #fff;
-    top: 42vw;
     left: 4vw;
+    padding-top: 12.5vw;
     padding-left: 0;
     opacity: 0.6;
     .feature-list {
@@ -262,7 +263,7 @@ html, body {
 
 .preview-section {
   height: 70vw;
-  margin: 1.5vw 0 2.75vw;
+  margin: 0.5vw 0 2.75vw;
   .preview-features {
     position: relative;
     right: 0.5vw;
@@ -278,17 +279,15 @@ html, body {
   display: inline-block;
   max-width: 50%;
   height: auto;
-  top: 6.5vw;
+  top: 4.25vw;
   left: 0;
-  right: 50%;
   float: left;
   #previewImg {
     position: relative;
-    float: left;
-    height: 125%;
-    width: 125%;
+    height: 100%;
+    width: 120%;
     left: 0;
-    right: 100%;
+    float: left;
 	}
 }
 
@@ -297,24 +296,21 @@ html, body {
   display: inline-block;
   max-width: 50%;
   height: auto;
-  top: 0;
+  top: 3.5vw;
   left: 50%;
-  right: 0;
   #editorImg {
     position: relative;
-    float: right;
-    height: 125%;
-    width: 125%;
-    top: -1vw;
+    height: 100%;
+    width: 120%;
     right: 0;
+    float: right;
 	}
 }
 
 .repo-icons {
   position: absolute;
   font-size: 5.4vw;
-  // top: 240vh;
-  right: 19.5%;
+  right: 20.5%;
   a {
     span {
       color: #373a3f !important;
@@ -332,8 +328,7 @@ html, body {
     top: 1px;
     &:hover, &:active {
       span::before {
-        // color: #247090;
-        color: #3d7fc0;
+        color: #3d74c0;
       }
     }
   }
@@ -344,7 +339,7 @@ html, body {
     }
     &:hover, &:active {
       span::before {
-        color: #ddadbd;
+        color: #dd9dbd;
       }
     }
   }
@@ -471,47 +466,16 @@ html, body {
   @include background-image(linear-gradient(to top, #1c1e22, #2c2f35));
   // text-align: center;
   box-shadow: 0 -3px 20px rgba(0,0,0,0.5);
-  padding: 1.75em 3em 0.35em !important;
+  padding: 1.25em 2em 0.35em !important;
   .icons {
     list-style: none;
     font-size: 2.5em;
     margin: 0 0 0.75em;
-    a:hover {
-      // color: mix(desaturate($theme-color, 20%), #fff, 75%);
-		}
     li {
       @include position(relative, null null null -3px);
       position: relative;
       padding: 0 0.75em 0 0;
       left: -3px;
-		}
-	}
-  .contact-icon {
-    display: block;
-    position: relative;
-    font-size: 30px;
-    margin: 12px auto 15px;
-    a {
-      position: relative;
-      color: _palette(accent1, fg-light);
-      padding-right: 15px;
-      opacity: 0.7;
-      &:first-child {
-        font-size: 1.05em;
-      }
-      &:nth-child(3) {
-        font-size: 0.9em;
-      }
-      &:last-child {
-        font-size: 27.5px;
-        padding-right: 0;
-        bottom: 1.5px;
-			}
-      &:hover, &:active {
-        color: _palette(accent1, fg);
-        // color: desaturate($theme-color, 40%);
-        opacity: 0.75;
-			}
 		}
 	}
   .copyright {
@@ -543,24 +507,22 @@ html, body {
           color: _palette(white);
 				}
 			}
-      #jekyll:hover {
-        color: desaturate(_palette(accent5, bg), 20%);
-      }
 		}
 	}
   .left-footer {
     display: inline-block;
     position: relative;
     top: 0;
-    left: -1.25em;
+    left: 0;
     span {
       font-size: 1em;
       font-weight: 300;
       letter-spacing: 0.02em;
+      line-height: 1.6;
       color: rgba(255,255,255,0.65);
       i::before {
         font-size: 1.2em;
-        color: rgba(255,255,255,0.8);
+        color: rgba(255,255,255,0.75);
         padding: 0 1px;
       }
       .fa-heart {
@@ -569,11 +531,12 @@ html, body {
         font-size: 0.9em;
       }
       a {
-        // font-size: 0.9em;
         color: rgba(255,255,255,0.75);
+        border-bottom:  1px dotted rgba(255,255,255,0);
+        transition: color 200ms ease-in-out, border 250ms ease-in-out;
         &:hover, &:active {
-          color: rgba(255,255,255,0.95);
-          border-bottom:  1px dotted rgba(255,255,255,0.85);
+          color: rgba(255,255,255,0.9);
+          border-bottom:  1px dotted rgba(255,255,255,0.75);
         }
       }
     }
@@ -581,8 +544,9 @@ html, body {
   .os-section {
     display: inline-block;
     position: relative;
-    width: 25%;
-    left: 45%;
+    width: 21%;
+    top: 8%;
+    left: 52%;
     span {
       display: block;
       color: #c9c9cc;
@@ -601,15 +565,15 @@ html, body {
         padding: 0 7px;
         opacity: 0.5;
         &:first-child {
-          margin-left: 1.25em;
+          margin-left: 1.5em;
         }
         &:nth-child(2) {
           height: 5.1vh;
           top: 1px;
         }
         &:nth-child(3) {
-          height: 5.4vh;
-          top: 2px;
+          height: 5.2vh;
+          top: 3px;
         }
       }
     }
