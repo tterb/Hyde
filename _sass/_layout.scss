@@ -213,12 +213,11 @@ html, body {
 }
 
 .gradient {
-  // @include background-image(linear-gradient(to top, #24282d 58%, rgba(41,44,51,0.915) 64%, rgba(41,44,51,0.8) 67%, rgba(41,44,51,0.2) 80%, rgba(41,44,51,0) 86%));
-  @include background-image(linear-gradient(to top, #24282d 56%, rgba(41,44,51,0.935) 63%, rgba(41,44,51,0.8) 67%, rgba(41,44,51,0.2) 80%, rgba(41,44,51,0.1) 83%, transparent));
+  @include background-image(linear-gradient(to top, #24282d 56%, rgba(41,44,51,0.935) 62%, rgba(41,44,51,0.8) 67%, rgba(41,44,51,0.2) 80%, rgba(41,44,51,0.1) 83%, transparent));
   position: absolute;
   height: 104vw;
   width: 100%;
-  top: 4.5vh;
+  top: 7.5vh;
   left: 0;
   overflow: auto;
   z-index: 0;
@@ -247,11 +246,11 @@ html, body {
 
 .editor-section {
   height: 75vw;
-  padding-top: 1em;
+  padding-top: 1.5em;
   .editor-features {
     position: absolute;
     color: #fff;
-    left: 4vw;
+    left: 3.5vw;
     padding-top: 12.5vw;
     padding-left: 0;
     opacity: 0.6;
@@ -285,7 +284,7 @@ html, body {
   #previewImg {
     position: relative;
     height: 100%;
-    width: 120%;
+    width: 123%;
     left: 0;
     float: left;
 	}
@@ -301,7 +300,7 @@ html, body {
   #editorImg {
     position: relative;
     height: 100%;
-    width: 120%;
+    width: 123%;
     right: 0;
     float: right;
 	}
