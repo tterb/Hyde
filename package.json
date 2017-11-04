@@ -1,7 +1,7 @@
 {
-  "name": "brettstevenson.io/Hyde",
+  "name": "hyde-website",
   "version": "1.0.0",
-  "description": "A personal website for Hyde",
+  "description": "The website for Hyde",
   "main": "gulpfile.js",
   "devDependencies": {
     "gulp": "^3.9.1",
@@ -31,12 +31,12 @@
     "type": "git",
     "url": "git+https://github.com/JonSn0w/Hyde.git"
   },
-  "author": "Steph Stevenson",
+  "author": "Brett Stevenson",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/JonSn0w/Hyde/issues"
   },
-  "homepage": "https://github.com/JonSn0w/Hyde#readme",
+  "homepage": "https://brettstevenson.io/Hyde",
   "jspm": {
     "dependencies": {
       "jquery": "npm:jquery@^3.2.1"
