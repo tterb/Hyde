@@ -27,6 +27,7 @@ html {
 body {
   @include font-feature-settings('liga', 'dlig');
   font-family: _font(ctrl-family);
+  font-weight: 300;
   margin: 0;
   padding: 0;
   text-rendering: optimizeLegibility;
@@ -36,6 +37,14 @@ body {
 html, body {
   margin: 0;
   padding: 0;
+}
+
+pre code, code {
+  @include font-feature-settings('liga', 'dlig');
+  font-family: _font(monospace-family);
+  font-size: 1em;
+  font-weight: 500;
+  line-height: 1;
 }
 
 /**
@@ -343,7 +352,7 @@ html, body {
     }
   }
   #bug {
-    font-size: 5.1vw;
+    font-size: 5.2vw;
     &:hover, &:active {
       span::before {
         color: #d44;
@@ -651,7 +660,7 @@ kbd {
     line-height: 1;
     margin: 0 0 0.75em;
     padding-left: 0 !important;
-    text-shadow: 0 3px 10px rgba(0,0,0,0.3) !important;
+    text-shadow: 0 3px 10px rgba(0,0,0,0.2) !important;
 	}
   h3 {
     color: rgba(255,255,255,0.6);
@@ -660,15 +669,16 @@ kbd {
     margin-bottom: 0.5em;
 	}
   p {
-    letter-spacing: 0.04em;
+    letter-spacing: 0.05em;
     margin: 0.5em 1.5% 1.5em;
   }
   a {
-    color: rgba(255,255,255,0.7);
+    color: rgba(255,255,255,0.75);
     font-weight: 400;
     border-bottom: 1px none transparent;
     transition: 350ms ease-in-out;
     &:hover, &:active {
+      color: rgba(255,255,255,0.85);
       border-bottom: 1px dotted rgba(255,255,255,0.6);
 		}
 	}
