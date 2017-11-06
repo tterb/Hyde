@@ -84,7 +84,7 @@
     "electron-config": "^1.0.0",
     "electron-json-storage": "latest",
     "electron-localshortcut": "^0.6.1",
-    "electron-settings": "^3.1.1",
+    "electron-settings": "^3.1.4",
     "electron-window": "^0.8.1",
     "electron-window-state": "^4.1.1",
     "emojify.js": "^1.1.0",
@@ -93,7 +93,7 @@
     "lodash": "^4.17.4",
     "node-emoji": "^1.8.1",
     "parse-filepath": "1.0.1",
-    "showdown": "^1.8.0",
+    "showdown": "^1.8.1",
     "showdown-highlight": "^1.0.2",
     "showdown-youtube": "^1.2.1",
     "yargs": "^9.0.1"
