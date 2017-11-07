@@ -11,7 +11,7 @@
         {% assign sorted_pages = site.pages | sort: 'key' | reverse %}
         {% for page in sorted_pages %}
           {% if page.title %}{% unless page.options contains 'nomenu' %}
-            <a class="page-link" href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>
+            <a class="page-link" href="{{ page.permalink | prepend: site.baseurl }}">{{ page.title }}</a>
           {% endunless %}{% endif %}
         {% endfor %}
       </div>
