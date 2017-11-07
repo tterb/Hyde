@@ -44,50 +44,13 @@ pre code, code {
   font-family: _font(monospace-family);
   font-size: 1em;
   font-weight: 500;
+  letter-spacing: 0.01em;
   line-height: 1;
 }
 
 /**
 * Site header   **********************************************************
 */
-.header.alt {
-  @include vendor('transition', 'background-color #{_duration(.8s)} ease');
-  @include vendor('transition', 'color #{_duration(.8s)} ease');
-  display: block;
-  border: 0;
-  line-height: 3em;
-  left: 0;
-  top: 0;
-  height: 3.25em;
-  width: 101%;
-  z-index: 9999;
-  .title {
-    position: absolute;
-    display: inline-block;
-    font-family: _font(hdr-family);
-    font-size: 2em;
-    font-weight: 500;
-    color: rgba(255,255,255,0.75);
-    top: 0.105em;
-    left: 1em;
-  }
-  .page-link {
-    color: rgba(255,255,255,0.55);
-    &:hover, &:active {
-      color: rgba(255,255,255,0.9);
-  	}
-  }
-  .logo img {
-    position: relative;
-    height: 1.8em;
-    width: auto;
-    float: left;
-    top: 18px;
-    left: -58px;
-    opacity: 0.7;
-	}
-}
-
 .header {
   @include vendor('transition', 'background-color #{_duration(.2s)} ease');
   display: block;
@@ -111,17 +74,43 @@ pre code, code {
       width: auto;
 		}
 	}
-}
-
-.site-title {
-  font-size: 20px;
-  line-height: $nav-height;
-  letter-spacing: -1px;
-  margin-bottom: 0;
-  &:hover {
-    text-decoration: none;
-    // color: $theme-color;
-	}
+  &.alt {
+    @include vendor('transition', 'background-color #{_duration(.8s)} ease');
+    @include vendor('transition', 'color #{_duration(.8s)} ease');
+    display: block;
+    border: 0;
+    line-height: 3em;
+    left: 0;
+    top: 0;
+    height: 3.25em;
+    width: 101%;
+    z-index: 9999;
+    .title {
+      position: absolute;
+      display: inline-block;
+      font-family: _font(hdr-family);
+      font-size: 2em;
+      font-weight: 500;
+      color: rgba(255,255,255,0.75);
+      top: 0.105em;
+      left: 1em;
+    }
+    .page-link {
+      color: rgba(255,255,255,0.55);
+      &:hover, &:active {
+        color: rgba(255,255,255,0.9);
+    	}
+    }
+    .logo img {
+      position: relative;
+      height: 1.8em;
+      width: auto;
+      float: left;
+      top: 18px;
+      left: -58px;
+      opacity: 0.7;
+  	}
+  }
 }
 
 .section-title {
@@ -132,14 +121,15 @@ pre code, code {
   position: absolute;
   float: right;
   line-height: $nav-height;
-  right: 3.5%;
+  right: 2.5%;
   z-index: 999;
   .page-link {
     display: inline-block;
-    color: rgba(55,58,65,0.4);
+    color: rgba(95,98,105,0.6);
     line-height: $base-line-height;
     text-align: center;
     text-transform: lowercase;
+    text-shadow: transparent 0 0 0, rgba(0,0,0,0.4) 0 0 0 !important;
     transition: color 250ms cubic-bezier(0.84, 0.17, 0.23, 0.57), font-weight 250ms cubic-bezier(0.84, 0.17, 0.23, 0.57);
     &:not(:first-child) {
       margin-left: 10px;
@@ -155,6 +145,7 @@ pre code, code {
     &:hover, &:active {
       color: rgba(55,58,65,0.8);
       font-weight: 400;
+      text-shadow: 0 0 1px rgba(0,0,0,0.4);
 		}
 	}
   @include media-query($on-palm) {
@@ -226,7 +217,7 @@ pre code, code {
   position: absolute;
   height: 104vw;
   width: 100%;
-  top: 7.5vh;
+  top: 6.5vh;
   left: 0;
   overflow: auto;
   z-index: 0;
@@ -239,16 +230,14 @@ pre code, code {
   z-index: 9;
   .feature-list {
     font-family: _font(ctrl-family);
-    font-size: 2.15vw;
+    font-size: 2vw;
     font-weight: 300;
     line-height: 1.35;
     letter-spacing: 0.035em;
     li {
-      padding-left: 14px;
+      font-size: 2vw;
+      padding-left: 12px;
       padding-bottom: 20px;
-      &::before {
-        font-size: 1.65em;
-  		}
   	}
   }
 }
@@ -260,11 +249,26 @@ pre code, code {
     position: absolute;
     color: #fff;
     left: 3.5vw;
-    padding-top: 12.5vw;
+    padding-top: 12.25vw;
     padding-left: 0;
     opacity: 0.6;
     .feature-list {
-      list-style-image: url('./img/bullet.png');
+      list-style: url('./img/bullet.png');
+      li {
+      //   display: -webkit-box;
+      //   text-align: left;
+      //   -webkit-line-clamp: 4;
+      //   -webkit-box-orient: vertical;
+      //   margin-right: -1em;
+      //   padding-right: 1em;
+        &::before {
+          font-size: 0.5em;
+          // display: inline-block;
+          // vertical-align: unset;
+          // content: url('./img/bullet.png');
+          // padding-right: 12px;
+        }
+      }
   	}
   }
 }
@@ -318,7 +322,7 @@ pre code, code {
 .repo-icons {
   position: absolute;
   font-size: 5.4vw;
-  right: 20.5%;
+  right: 21.5%;
   a {
     span {
       color: #373a3f !important;
@@ -363,14 +367,14 @@ pre code, code {
 
 .tag-line {
   display: inline-block;
-  color: #222;
+  color: #303030;
   font-size: 2.5vw;
   font-weight: 400;
   text-align: center;
   line-height: 1.2;
   width: 75%;
   margin: 8vh 12.5% 14vh;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.15) !important;
+  text-shadow: 0 0.5px 2px rgba(0,0,0,0.15) !important;
   opacity: 0.7;
 }
 
@@ -645,7 +649,7 @@ kbd {
   font-weight: 500 !important;
   letter-spacing: 0.03em;
   line-height: 1;
-  margin: 0.25em 0.4em 0.175em;
+  margin: 0.1em 0.4em 0.175em;
   text-shadow: 0 3px 10px rgba(0,0,0,0.3) !important;
 }
 
@@ -723,7 +727,7 @@ kbd {
       background: rgba(0,0,0,0.02);
     }
     .table-shortcut kbd {
-      @include background-image(linear-gradient(to bottom, rgba(55,58,65,0.8), rgba(45,48,55,0.85)));
+      @include background-image(linear-gradient(to bottom, rgba(55,58,65,0.8), rgba(42,45,52,0.85)));
       margin: 0;
       padding: 3px 7px;
     }
@@ -766,9 +770,11 @@ hr {
       padding-bottom: 5px;
       a {
         color: rgba(255,255,255,0.65);
+        transform: all 350ms ease-in-out !important;
         &:hover {
-          color: rgba(255,255,255,0.75);
+          color: rgba(255,255,255,0.85);
           font-weight: 300;
+          border-bottom: 1px dotted rgba(255,255,255,0.7);
 				}
 			}
       &::before {
@@ -779,15 +785,15 @@ hr {
 }
 
 #keybindings {
+  padding-bottom: 1em;
   h3 {
     margin: 0.5em 3% 0.85em;
 	}
   .keybinding-table {
     display: inline-block;
     position: relative;
-    float: left;
-    width: 49%;
-    margin-bottom: 4em;
+    width: 48%;
+    margin-bottom: 3em;
     &.right {
       float: right;
   	}
@@ -796,7 +802,21 @@ hr {
       font-size: 13px;
       text-align: center !important;
       border-left: 0;
-      padding-left: 18px;
+      padding: 8px 9px 10px;
+    }
+  }
+  .key-note {
+    display: block;
+    position: relative;
+    font-size: 15px;
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    top: -3vh;
+    margin: 0 auto;
+    code {
+      font-family: monospace;
+      padding-right: 1px;
+      padding-left: 3px;
     }
   }
 }
