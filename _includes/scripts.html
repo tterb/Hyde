@@ -7,6 +7,7 @@
 <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="{{ "/js/jquery.fitvids.min.js" | absolute_url  }}"></script>
 <script type="text/javascript" src="{{ "/js/index.min.js" | absolute_url  }}"></script>
+<script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
 
 <script>
 (function ($) {
@@ -36,6 +37,11 @@
         }
       });
   });
+  window.sr = ScrollReveal({ duration: 1000, reset: true });
+  sr.reveal('.editor-section .feature-list li', 50);
+  sr.reveal('.preview-section .feature-list li', 25);
+  sr.reveal('.repo-icons a', 20);
+  sr.reveal('.tag-line');
 }(jQuery));
 </script>
 
