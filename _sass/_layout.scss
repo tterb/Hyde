@@ -5,8 +5,6 @@
 @import 'bourbon/bourbon';
 @import 'syntax-highlighting';
 
-$bg-light: #fff;
-$bg-dark: #292c33;
 
 .cf {
   @include clearfix;
@@ -209,11 +207,11 @@ pre code, code {
   background-color: rgb(41,44,51);
 }
 .wrapper.landing {
-  background-color: #fcfbfe !important;
+  background-color: _palette(bg-light) !important;
 }
 
 .gradient {
-  @include background-image(linear-gradient(to top, #24282d 56%, rgba(41,44,51,0.935) 62%, rgba(41,44,51,0.8) 67%, rgba(41,44,51,0.2) 80%, rgba(41,44,51,0.1) 83%, transparent));
+  @include background-image(linear-gradient(to top, _palette(bg-dark) 56%, rgba(41,44,51,0.935) 62%, rgba(41,44,51,0.8) 67%, rgba(41,44,51,0.2) 80%, rgba(41,44,51,0.1) 83%, transparent));
   position: absolute;
   height: 104vw;
   width: 100%;
@@ -255,18 +253,8 @@ pre code, code {
     .feature-list {
       list-style: url('./img/bullet.png');
       li {
-      //   display: -webkit-box;
-      //   text-align: left;
-      //   -webkit-line-clamp: 4;
-      //   -webkit-box-orient: vertical;
-      //   margin-right: -1em;
-      //   padding-right: 1em;
         &::before {
           font-size: 0.5em;
-          // display: inline-block;
-          // vertical-align: unset;
-          // content: url('./img/bullet.png');
-          // padding-right: 12px;
         }
       }
   	}
@@ -380,7 +368,7 @@ pre code, code {
 
 .install-content {
   text-align: center;
-  background: #292c33;
+  background: _palette(bg);
   h3 {
     font-size: 2.85em;
     font-weight: 300;
@@ -388,11 +376,6 @@ pre code, code {
     color: rgba(255,255,255,0.7);
     margin: 0.75em 0 1em;
 	}
-  // .gradient {
-  //   @include background-image(linear-gradient(to top, #292c33 5%, rgba(#292c33, 0.8) 20%, rgba(#292c33, 0.6) 40%, rgba(#292c33, 0) 80%));
-  //   top: 12%;
-  //   height: 405px;
-	// }
   .install-buttons {
     margin: 2em auto;
     padding-top: 0.75em;
@@ -510,13 +493,13 @@ pre code, code {
         border-left: 0 !important;
         margin-left: 0;
         padding: 0 0.55em 0 0 !important;
-			}
+      }
 
       a {
         color: inherit;
         text-decoration: none;
         &:hover {
-          color: _palette(white);
+          color: _palette(fg-white);
 				}
 			}
 		}
@@ -635,7 +618,7 @@ kbd {
 
 .document {
   &.gradient {
-    background: linear-gradient(to top, #292c33 54%, rgba(41,44,51,0.85) 60%, rgba(41,44,51,0.7) 64.5%, rgba(41,44,51,0.3) 74%, rgba(41,44,51,0) 87%);
+    background: linear-gradient(to top, _palette(bg) 54%, rgba(41,44,51,0.85) 60%, rgba(41,44,51,0.7) 64.5%, rgba(41,44,51,0.3) 74%, rgba(41,44,51,0) 87%);
     top: -6.5em;
     height: 145%;
 	}
@@ -854,9 +837,6 @@ hr {
         margin-right: 4px;
       }
 		}
-    .faq-answer {
-      margin: 0 0.5em 2.5em;
-		}
 	}
 }
 
@@ -905,10 +885,10 @@ hr {
 
 #credits {
   position: relative;
-  background: #292c33;
+  background: _palette(bg);
   padding-bottom: 2em;
   .credits-list {
-    background: #292c33;
+    background: _palette(bg);
     padding: 0 35px 12px;
     margin-left: 5em;
     margin-bottom: 1em;
