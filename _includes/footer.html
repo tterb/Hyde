@@ -1,37 +1,6 @@
 <!-- Footer -->
 <footer id="footer">
   <link rel = "stylesheet" type = "text/css" href="{{ /fonts/fontawesome.min.css | prepend: site.baseurl }}"/>
-  <!-- <span class="contact-icon center">
-    <a href="{{ site.baseurl }}"><i class="fa fa-home"></i></a>
-    <a href="{{ site.repo }}"><i class="fa fa-github"></i></a>
-    <a href="{{ site.bugs }}"><i class="fa fa-bug"></i></a>
-    <a href="{{ '/contact/' | prepend: site.owner.url }}"><i class="fa fa-envelope-o"></i></a>
-  </span>
-  <ul class="copyright">
-    <li>&copy;
-      {% assign thisyear = site.time | date: "%Y" %}
-      {% if site.first_published %}
-        {% capture diff %}
-          {{ site.first_published | minus:thisyear }}
-        {% endcapture %}
-        {% if diff contains '-' %}
-          {{ site.first_published }},
-        {% endif %}
-      {% endif %}
-      {{ thisyear }}
-      {% if site.owner.name %}
-        {% if site.owner.url %}
-          <a href="{{ site.owner.url }}">{{ site.owner.name }}</a>
-        {% else %}
-          <a href="{{ site.baseurl }}">{{ site.owner.name }}</a>
-        {% endif %}
-      {% else %}
-        <a href="{{ site.baseurl }}">{{ site.title }}</a>
-      {% endif %}
-    </li>
-    <li>Built with <a id="jekyll" href="http://jekyllrb.com" target="_blank">Jekyll</a></li>
-    <li><a href="{{ '/credits/' | prepend: site.baseurl }}">Credits</a></li>
-  </ul> -->
   <div class="left-footer">
     <span><i class="fa fa-code"></i> with <i class="fa fa-heart"></i> by <a href="http://brettstevenson.io/">Brett Stevenson</a><br> &amp; <a href="{{ '/credits.html' | prepend: site.baseurl }}">the contributors</a></span>
   </div>
