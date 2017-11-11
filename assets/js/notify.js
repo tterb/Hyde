@@ -46,4 +46,12 @@ function notify(text, type) {
 	}
 }
 
+// Expand truncated alerts on click
+$(document).on('click', '.alert', function(e) {
+	if($(e.target).hasClass('expand'))
+		$(e.target).removeClass('expand');
+	else
+		$(e.target).addClass('expand');
+});
+
 module.exports = notify;
