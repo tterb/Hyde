@@ -1,42 +1,17 @@
-<script src="{{ '/js/jquery.min.js' | absolute_url }}"></script>
-<script src="{{ '/js/jquery.scrollex.min.js' | absolute_url }}"></script>
-<script src="{{ '/js/jquery.scrolly.min.js' | absolute_url }}"></script>
-<script src="{{ '/js/skel.min.js' | absolute_url }}"></script>
-<script src="{{ '/js/util.min.js' | absolute_url }}"></script>
-<script src="{{ '/js/main.min.js' | absolute_url }}"></script>
+<script src="{{ 'js/jquery.min.js' | absolute_url }}"></script>
+<script src="{{ 'js/jquery.scrollex.min.js' | absolute_url }}"></script>
+<script src="{{ 'js/jquery.scrolly.min.js' | absolute_url }}"></script>
+<script src="{{ 'js/skel.min.js' | absolute_url }}"></script>
+<script src="{{ 'js/util.min.js' | absolute_url }}"></script>
+<script src="{{ 'js/main.min.js' | absolute_url }}"></script>
 <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-<script type="text/javascript" src="{{ "/js/jquery.fitvids.min.js" | absolute_url  }}"></script>
-<script type="text/javascript" src="{{ "/js/index.min.js" | absolute_url  }}"></script>
+<script type="text/javascript" src="{{ 'js/jquery.fitvids.min.js' | absolute_url }}"></script>
+<script type="text/javascript" src="{{ 'js/index.min.js' | absolute_url }}"></script>
 <script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
 
 <script>
 (function ($) {
   "use strict";
-  $(document).ready(function(){
-    var $window = $(window),
-    $image = $('.post-image, .teaserimage-image');
-      $window.on('scroll', function() {
-        var top = $window.scrollTop();
-        if (top < 0 || top > 1500) { return; }
-        $image
-          .css('transform', 'translate3d(0px, '+top/3+'px, 0px)')
-          .css('opacity', 1-Math.max(top/700, 0));
-      });
-      $window.trigger('scroll');
-      var height = $('.post-image').height();
-      $('.post-content').css('padding-top', height + 'px');
-      $('a[href*=#]:not([href=#])').click(function() {
-        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
-         && location.hostname == this.hostname) {
-          var target = $(this.hash);
-          target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
-          if (target.length) {
-            $('html,body').animate({ scrollTop: target.offset().top }, 500);
-            return false;
-          }
-        }
-      });
-  });
   window.sr = ScrollReveal({ duration: 1000, reset: true });
   sr.reveal('.editor-section .feature-list li', 50);
   sr.reveal('.preview-section .feature-list li', 25);

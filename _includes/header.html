@@ -5,16 +5,14 @@
 <header id="header" class="header">
   <div class="wrapper-head">
 {% endif %}
-    <nav class="site-nav">
-      <div class="trigger">
-        <a class="page-link" href="{{ site.baseurl }}">home</a>
-        {% assign sorted_pages = site.pages | sort: 'key' | reverse %}
-        {% for page in sorted_pages %}
-          {% if page.title %}{% unless page.options contains 'nomenu' %}
-            <a class="page-link" href="{{ page.permalink | prepend: site.baseurl }}">{{ page.title }}</a>
-          {% endunless %}{% endif %}
-        {% endfor %}
-      </div>
+  <nav class="site-nav">
+    <a class="page-link" href="{{ site.baseurl }}">home</a>
+    {% assign sorted_pages = site.pages | sort: 'key' | reverse %}
+    {% for page in sorted_pages %}
+      {% if page.title %}{% unless page.options contains 'nomenu' %}
+        <a class="page-link" href="{{ page.permalink | prepend: site.baseurl }}">{{ page.title }}</a>
+      {% endunless %}{% endif %}
+    {% endfor %}
     </nav>
   </div>
 </header>
