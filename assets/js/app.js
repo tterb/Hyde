@@ -60,7 +60,8 @@ if(settings.get('enableSpellCheck')) {
 var cm = CodeMirror.fromTextArea(document.getElementById('markdownText'), conf);
 
 if(os.type() === 'Darwin') {
-	$('#settings-title').css('paddingTop', '0.9em');
+	$('.CodeMirror-scroll').css('paddingTop', '35px');
+	$('#settings-title').css('paddingTop', '1.5em');
 	$('#settings-title > img').css('marginTop', '-13px');
 	$('#settings-title > h2').css('font-size', '3.175em');
 	$('#settings-section h3').css('letter-spacing', '0.045em');
@@ -119,14 +120,6 @@ window.onload = () => {
 	adaptTheme(themeColor, Color(themeColor).luminosity());
 	createModals();
 	fillEmojiModal();
-
-  // Expand truncated alerts on click
-  $(document).on('click', '.alert', function(e) {
-    if($(e.target).hasClass('expand'))
-      $(e.target).removeClass('expand');
-    else
-      $(e.target).addClass('expand');
-  });
 
   // Render editor changes to live-preview
 	cm.on('change', (cm) => { renderMarkdown(cm); });
@@ -326,7 +319,7 @@ $(document).on('drop', function(e) {
 				if(err) notify('An error ocurred while opening the file '+ err.message, 'error');
 				cm.getDoc().setValue(data);
 			});
-      openNewWindow(file.path);
+      newWindow(file.path);
     }
   });
   $(document).on('dragover', function(e) {
@@ -336,7 +329,7 @@ $(document).on('drop', function(e) {
   });
 
 $(document).keydown((e) => {
-  if(e.altKey) {
+  if(e.altKey && process.platform !== 'darwin') {
     toggleMenu();
   }
 });
