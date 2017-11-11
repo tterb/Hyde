@@ -22,7 +22,6 @@ module.exports = new Config({
     previewMode: 'markdown',
     previewProfile: 'Default',
     previewFontSize: 14,
-    previewLineHeight: 1.45,
     customCSS: false,
     mathRendering: true,
     hideYAMLFrontMatter: true,
