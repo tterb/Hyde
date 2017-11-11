@@ -2,7 +2,7 @@ const clipboard = require('electron');
 const parsePath = require('parse-filepath');
 
 function openFile() { sendIPC('file-open'); }
-function openNewWindow(file = null) {
+function newWindow(file = null) {
   if(file === null) {
     sendIPC('file-open-new');
   } else {
