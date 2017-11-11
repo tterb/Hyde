@@ -98,8 +98,7 @@ ipc.on('file-open-new', () => {
 	var options = {
 		'properties': ['openFile'],
 		'filters': [{
-			name: 'Markdown',
-			'extensions': ['md','markdown','mdown','mkdn','mkd','mdwn','mdtxt','mdtext']
+			name: 'Markdown', 'extensions': ['md','markdown','mdown','mkdn','mkd','mdwn','mdtxt','mdtext']
 		}]
 	};
 	if('filename' in data)
@@ -108,9 +107,9 @@ ipc.on('file-open-new', () => {
 		if(file === undefined) {
 			return notify('You didn\'t select a file to open', 'info');
 		}
-    data = { 'filename' : this.currentFile };
+    data = { 'filename' : file[0] };
 		// this.isFileLoadedInitially = true;
-		// this.currentFile = file[0]; // <-- This fixes bottom file but not save
+		// this.currentFile = data.filename; // <-- This fixes bottom file but not save
 		// file is a string that contains the path and filename created in the save file dialog.
     settings.set('targetFile', file[0]);
     main.createWindow();
@@ -127,7 +126,7 @@ ipc.on('insert-heading', () => { toggleHeading(); });
 ipc.on('insert-italic', () => { toggleFormat('em'); });
 ipc.on('insert-image', () => { insert('image'); });
 ipc.on('insert-link', () => { insert('link'); });
-ipc.on('toggle-menu', () => { if(process.platform !== 'darwin') toggleMenu(); notify('Toggle app menu', 'error'); });
+ipc.on('toggle-menu', () => { if(process.platform !== 'darwin') toggleMenu(); });
 ipc.on('toggle-preview', () => { togglePreview(); });
 ipc.on('win-close', () => { closeWindow(remote.BrowserWindow.getFocusedWindow()); });
 ipc.on('win-reload', () => { reloadWin(); });
