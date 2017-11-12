@@ -134,32 +134,24 @@ pre code, code {
     -webkit-user-select: none;
     -webkit-touch-callout: none;
     text-shadow: transparent 0 0 0, rgba(0,0,0,0.4) 0 0 0 !important;
-    // transition: color 250ms cubic-bezier(0.84, 0.17, 0.23, 0.57), font-weight 250ms cubic-bezier(0.84, 0.17, 0.23, 0.57);
+    // @include transition(color 250ms cubic-bezier(0.84, 0.17, 0.23, 0.57), font-weight 250ms cubic-bezier(0.84, 0.17, 0.23, 0.57);
     &:not(:first-child) {
       margin-left: 10px;
 		}
     &::after {
+      @include transition(all 500ms ease 0s);
+      position: absolute;
       content: '';
       height: 2px;
       left: 0;
       bottom: 20;
       width: 1px;
-      position: absolute;
-      -webkit-transition: all 500ms ease;
-      -moz-transition: all 500ms ease;
-      -ms-transition: all 500ms ease;
-      -o-transition: all 500ms ease;
-      transition: all 500ms ease;
       right: 0;
       margin: 0 auto 3px;
     }
     &:hover {
+      @include transition(all 500ms ease 0s);
       // color: rgba(95,98,105,0.5);
-      -webkit-transition: all 500ms ease;
-      -moz-transition: all 500ms ease;
-      -ms-transition: all 500ms ease;
-      -o-transition: all 500ms ease;
-      transition: all 500ms ease;
       cursor: pointer;
     }
     &:hover::after,
@@ -167,20 +159,6 @@ pre code, code {
       width: 100%;
       background: rgba(95,98,105,0.15);
     }
-    
-    // &::after {
-    //   display: inline-block;
-    //   content: attr(title);
-    //   font-weight: 400;
-    //   height: 0;
-    //   overflow: hidden;
-    //   visibility: hidden;
-    // }
-    // &:hover, &:active {
-    //   color: rgba(55,58,65,0.8);
-    //   font-weight: 400;
-    //   text-shadow: 0 0 1px rgba(0,0,0,0.4);
-		// }
 	}
   @include media-query($on-palm) {
     top: 0;
@@ -353,7 +331,7 @@ pre code, code {
       padding: 0 6px;
       opacity: 0.9;
       &::before {
-        transition: all 200ms ease-in-out !important;
+        @include transition(all 200ms ease-in-out 0s);
         transition-delay: 100ms;
       }
     }
@@ -435,6 +413,7 @@ pre code, code {
 	}
   .platform-button {
     @include background-image(radial-gradient(rgb(43, 46, 53), rgb(39, 42, 49)));
+    @include transition(all 300ms ease-in-out 0s);
     color: rgba(255,255,255,0.45);
     width: 22%;
     height: 235px;
@@ -444,7 +423,6 @@ pre code, code {
     margin: 10px 2% 2em;
     padding: 0.5em 1em;
     outline: none !important;
-    transition: all 300ms ease-in-out;
     &:hover, &:active {
       @include background-image(radial-gradient(rgb(51, 54, 62), rgb(40, 43, 50)));
       color: rgba(255,255,255,0.9);
@@ -496,51 +474,8 @@ pre code, code {
   @include background-image(linear-gradient(to top, #1c1e22, #2c2f35));
   background-color: rgb(33,36,43);
   height: 100px;
-  // text-align: center;
   box-shadow: 0 -3px 20px rgba(0,0,0,0.5);
   padding: 1em 2em 0.6em !important;
-  // .icons {
-  //   list-style: none;
-  //   font-size: 2.5em;
-  //   margin: 0 0 0.75em;
-  //   li {
-  //     @include position(relative, null null null -3px);
-  //     position: relative;
-  //     padding: 0 0.75em 0 0;
-  //     left: -3px;
-	// 	}
-	// }
-  // .copyright {
-  //   // color: _palette(accent1, fg-light);
-  //   font-size: 0.65em;
-  //   font-weight: 300;
-  //   letter-spacing: _size(letter-spacing-alt) !important;
-  //   list-style: none;
-  //   text-transform: uppercase;
-  //   margin: auto;
-  //   margin-bottom: 1em;
-  //   padding: 0;
-  //   li {
-  //     display: inline-block !important;
-  //     border-left: solid 1px mix(#35393d, #fff, 80%) !important;
-  //     line-height: _font(hdr-lheight-smaller) !important;
-  //     padding: 1px 0 1px 1em !important;
-  // 
-  //     &:first-child {
-  //       border-left: 0 !important;
-  //       margin-left: 0;
-  //       padding: 0 0.55em 0 0 !important;
-  //     }
-  // 
-  //     a {
-  //       color: inherit;
-  //       text-decoration: none;
-  //       &:hover {
-  //         color: _palette(fg-white);
-	// 			}
-	// 		}
-	// 	}
-	// }
   .left-footer {
     display: inline-block;
     position: relative;
@@ -563,9 +498,9 @@ pre code, code {
         font-size: 0.9em;
       }
       a {
+        @include transition(color 200ms ease-in-out 0s, border 250ms ease-in-out 0s);
         color: rgba(255,255,255,0.75);
         border-bottom:  1px dotted rgba(255,255,255,0);
-        transition: color 200ms ease-in-out, border 250ms ease-in-out;
         &:hover, &:active {
           color: rgba(255,255,255,0.9);
           border-bottom:  1px dotted rgba(255,255,255,0.75);
@@ -660,7 +595,7 @@ kbd {
 
 .document {
   &.gradient {
-    background: linear-gradient(to top, _palette(bg) 54%, rgba(41,44,51,0.85) 60%, rgba(41,44,51,0.7) 64.5%, rgba(41,44,51,0.3) 74%, rgba(41,44,51,0) 87%);
+    @include background(linear-gradient(to top, _palette(bg) 54%, rgba(41,44,51,0.85) 60%, rgba(41,44,51,0.7) 64.5%, rgba(41,44,51,0.3) 74%, rgba(41,44,51,0) 87%));
     top: -6.5em;
     height: 145%;
 	}
@@ -671,7 +606,7 @@ kbd {
   color: rgba(255,255,255,0.75);
   font-family: _font(hdr-family);
   font-size: 150px;
-  font-weight: 500 !important;
+  font-weight: 600 !important;
   letter-spacing: 0.03em;
   line-height: 1;
   margin: 0.1em 0.4em 0.175em;
@@ -702,10 +637,10 @@ kbd {
     margin: 0.5em 1.5% 1.5em;
   }
   a {
+    @include transition(all 350ms ease-in-out 0s);
     color: rgba(255,255,255,0.75);
     font-weight: 400;
     border-bottom: 1px none transparent;
-    transition: 350ms ease-in-out;
     &:hover, &:active {
       color: rgba(255,255,255,0.85);
       border-bottom: 1px dotted rgba(255,255,255,0.6);
@@ -866,8 +801,8 @@ hr {
     margin: 10px auto 5px;
 	}
   .faq-list {
-    letter-spacing: 0.05em;
     list-style: none;
+    letter-spacing: 0.05em;
     width: 85%;
     margin: 0 auto 30px;
     padding: 1.25em 3em 0.15em 2em;
@@ -909,15 +844,11 @@ hr {
       overflow: hidden;
     }
     .faq-answer {
-      // display: none;
       color: rgba(255,255,255,0.6);
       letter-spacing: 0.05em;
       height: auto;
       display: block;
       margin-bottom: 20px;
-      // height: 0;
-      // opacity: 0;
-      // overflow: hidden;
     }
     li:last-child {
       .faq-question {
@@ -942,11 +873,11 @@ hr {
       .expand {
         @include transform(rotate(-46deg));
         @include transition(all 600ms ease 0s);
-        -webkit-transform: rotate(-46deg);
-        -moz-transform: rotate(-46deg);
-        -o-transform: rotate(-46deg);
-        -ms-transform: rotate(-46deg);
-        transform: rotate(-46deg);
+        // -webkit-transform: rotate(-46deg);
+        // -moz-transform: rotate(-46deg);
+        // -o-transform: rotate(-46deg);
+        // -ms-transform: rotate(-46deg);
+        // transform: rotate(-46deg);
         opacity: 0.6;
       }
       .answer-container {
@@ -1011,25 +942,41 @@ hr {
 #credits {
   position: relative;
   background: _palette(bg);
+  width: 90%;
+  margin: 0 auto 3em;
   padding-bottom: 2em;
+  span {
+    display: block;
+    color: rgba(255,255,255,0.6);
+    font-size: 1.5em;
+    letter-spacing: 0.03em;
+    line-height: 1.5;
+    width: 95%;
+    margin: 0 auto 1.25em;
+  }
   .credits-list {
     background: _palette(bg);
-    padding: 0 35px 12px;
-    margin-left: 5em;
-    margin-bottom: 1em;
     list-style-image: url('./img/bullet_small.png');
+    font-size: 0.9em;
+    letter-spacing: 0.06em;
+    margin: 0 3em;
+    padding: 0 35px;
+    ul {
+      margin-left: 25px;
+    }
     li {
       padding-left: 9px;
       padding-bottom: 5px;
       a {
-        font-size: 1.55em;
+        @include transition(all 300ms ease 0s);
+        font-size: 1.5em;
         letter-spacing: 0.05em;
         line-height: 1.5;
         color: rgba(255,255,255,0.6);
-        transition: all 300ms ease;
-        &:hover {
-          font-weight: 500;
-				}
+        &:hover, &:active {
+          color: rgba(255,255,255,0.7);
+          border-bottom: 1px dotted rgba(255,255,255,0.6);
+        }
 			}
 		}
 	}
