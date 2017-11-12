@@ -90,30 +90,19 @@ $palette: (
   bg:                         #292c33,
   bg-light:					          #fcfbfe,
   bg-dark:                    #24282d,
-  // fg-bold:			            #101010,
-  fg-bold:            rgba(0,0,0,0.9),
-  // fg:					            #363636,
   fg:                 rgba(0,0,0,0.4),
   fg-light:			rgba(255,255,255,0.6),
   fg-white:                   #fafafa,
+  fg-header:                  #01040a,
   border:				    rgba(0,0,0,0.175),
   border-bg:	 rgba(144,144,144,0.25),
   border2:			      rgba(0,0,0,0.8),
   border2-bg:		rgba(144,144,144,0.5),
+  accent1:                    #3d74c0,
+  accent2:                    #dd9dbd,
+  accent3:                       #d44,
 
-  accent1: (
-    bg:						 #2a2e35,
-    fg-bold:			 #fff,
-    fg:						 mix(#272930, #fff, 20%),
-    fg-light:			 mix(#272930, #fff, 40%),
-    shadow:        desaturate(darken(#272930, 12%), 10%),
-    border:				 rgba(0,0,0,0.125),
-    border-bg:		 rgba(255,255,255,0.075),
-    border2:			 rgba(0,0,0,0.25),
-    border2-bg:		 rgba(255,255,255,0.2)
-	),
-
-  accent2: (
+  accent4: (
     bg:					   #4f6272,
     fg-bold:			 #fff,
     fg:						 mix(#4f6272, #fff, 20%),
@@ -125,7 +114,7 @@ $palette: (
     border2-bg:		 rgba(255,255,255,0.2)
 	),
 
-  accent3: (
+  accent5: (
     bg:						 #ff3636,
     fg-bold:			 #fff,
     fg:						 mix(#ff3636, #fff, 25%),
@@ -137,7 +126,3 @@ $palette: (
     border2-bg:		 rgba(255,255,255,0.2)
 	),
 );
-
-// #3d74c0
-// #dd9dbd
-// #d44
