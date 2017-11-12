@@ -1,0 +1,69 @@
+- name: Electron
+  link: http://electron.atom.io/
+  
+- name: Electron Localshortcut
+  link: https://github.com/parro-it/electron-localshortcut
+  
+- name: Electron JSON Storage
+  link: https://github.com/electron-userland/electron-json-storage  
+  
+- name: Electron Connect
+  link: https://www.npmjs.com/package/electron-connect
+  
+- name: Electron Settings
+  link: https://www.npmjs.com/package/electron-settings
+
+- name: Electron Window
+  link: https://www.npmjs.com/package/electron-window
+  
+- name: Electron Window State
+  link: https://www.npmjs.com/package/electron-window-state
+
+- name: Electron Packager
+  link: https://www.npmjs.com/package/electron-packager
+  
+- name: Electron Settings
+  link: https://www.npmjs.com/package/electron-settings
+
+- name: Jekyll
+  link: http://jekyllrb.com/
+
+- name: Node.js
+  link: https://nodejs.org/
+
+- name: Bootstrap
+  link: http://getbootstrap.com
+  
+- name: JQuery
+  link: https://jquery.com/
+  
+- name: Gulp
+  link: https://gulpjs.com/
+
+- name: ShowdownJS
+  link: http://showdownjs.github.io/showdown/
+  
+- name: CodeMirror
+  link: http://codemirror.net/
+
+- name: Open Sans
+  link: https://fonts.google.com/specimen/Open+Sans
+  
+- name: Source Code Pro
+  link: https://fonts.google.com/specimen/Source+Code+Pro
+  
+- name: FontAwesome
+  link: http://fontawesome.io/
+  
+- name: Glyphicons
+  link: http://glyphicons.com/
+
+- name: Parse Katex
+  link: https://github.com/joshuacaron/parse-katex
+  
+- name: Devtron
+  link: https://www.npmjs.com/package/devtron
+  
+- name: Yargs 
+  link: https://www.npmjs.com/package/yargs
+  
