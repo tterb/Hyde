@@ -79,7 +79,7 @@
     "codemirror-spell-checker": "^1.1.2",
     "color": "^2.0.0",
     "devtron": "^1.4.0",
-    "electron": "1.7.8",
+    "electron": "^1.7.8",
     "electron-command-palette": "^0.1.1",
     "electron-config": "^1.0.0",
     "electron-json-storage": "latest",
@@ -94,7 +94,6 @@
     "node-emoji": "^1.8.1",
     "parse-filepath": "1.0.1",
     "showdown": "^1.8.1",
-    "showdown-highlight": "^1.0.2",
     "showdown-youtube": "^1.2.1",
     "yargs": "^9.0.1"
   }

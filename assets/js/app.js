@@ -18,7 +18,8 @@ const packageJSON = require(path.join(__dirname, '/package.json'));
 const emoji = require('node-emoji');
 const Color = require('color');
 const os = require('os');
-const highlight = require('showdown-highlight');
+//conse marked = require('marked');
+// const highlight = require('showdown-highlight');
 require('showdown-youtube');
 
 getUserSettings();
@@ -26,7 +27,7 @@ let currentTheme = settings.get('editorTheme');
 let conf = {
 	mode: 'yaml-frontmatter',
 	base: 'gfm',
-	viewportMargin: 100000000000,
+	viewportMargin: 10,
 	tabSize: 2,
 	lineWrapping: true,
 	lineNumbers: settings.get('lineNumbers'),
@@ -112,7 +113,7 @@ let converter = new showdown.Converter({
 		simplifiedAutoLink: false,
 		excludeTrailingPunctuationFromURLs: true,
 		disableForced4SpacesIndentedSublists: true,
-		extensions: ['youtube', highlight]
+		extensions: ['youtube']
 });
 
 window.onload = () => {
@@ -168,7 +169,7 @@ window.onload = () => {
 		$(this).children('ul').hide();
 	});
 
-	$('#table-button').on('click', () => {
+	$('.table-button').on('click', () => {
 		$('#table-modal').modal();
 		createTable($('#columns').val(),$('#rows').val(),$('.on').attr('id').slice(0,-5));
 	});
@@ -344,38 +345,39 @@ function openInBrowser(url) {
 
 function renderMarkdown(cm) {
 	let markdownText = cm.getValue();
-		// Remove the YAML frontmatter
-		if(settings.get('hideYAMLFrontMatter'))
-			markdownText = removeYAMLPreview(markdownText);
-		// Convert emoji's
-    markdownText = emoji.emojify(markdownText, (name) => { return name; }, formatEmoji);
-		var renderedMD = converter.makeHtml(markdownText);
-    // Render LaTex
-		let texConfig = [['$$', '\$\$', false], ['$$ ', ' \$\$', true]];
-		if(settings.get('mathRendering'))
-			renderedMD = katex.renderLaTeX(renderedMD, texConfig);
-		// Markdown -> Preview
-		$('#mdPreview').html(renderedMD);
-    // Allows for making '<br>' tags more GitHub-esque
-		$('#mdPreview p').each(function() {
-			if($(this).html() === '<br>') {
-				$(this).attr('class', 'break');
-			}
-		});
-		// Markdown -> HTML
-		converter.setOption('noHeaderId', true);
-    $('#htmlPreview').val(converter.makeHtml(markdownText));
-		// Handle preview checkboxes
-		$('#mdPreview :checkbox').removeAttr('disabled');
-		$('#mdPreview :checkbox').on('click', function() {
-			event.preventDefault();
-		});
-		if(this.isFileLoadedInitially) {
-			this.setClean();
-			this.isFileLoadedInitially = false;
+	sendIPC('has-changes');
+	// Remove the YAML frontmatter
+	if(settings.get('hideYAMLFrontMatter'))
+		markdownText = removeYAMLPreview(markdownText);
+	// Convert emoji's
+  markdownText = emoji.emojify(markdownText, (name) => { return name; }, formatEmoji);
+	var renderedMD = converter.makeHtml(markdownText);
+  // Render LaTex
+	let texConfig = [['$$', '\$\$', false], ['$$ ', ' \$\$', true]];
+	if(settings.get('mathRendering'))
+		renderedMD = katex.renderLaTeX(renderedMD, texConfig);
+	// Markdown -> Preview
+	$('#mdPreview').html(renderedMD);
+  // Allows for making '<br>' tags more GitHub-esque
+	$('#mdPreview p').each(function() {
+		if($(this).html() === '<br>') {
+			$(this).attr('class', 'break');
 		}
-		this.updateWindowTitle(this.currentFile);
-		countWords();
+	});
+	// Markdown -> HTML
+	converter.setOption('noHeaderId', true);
+  $('#htmlPreview').val(converter.makeHtml(markdownText));
+	// Handle preview checkboxes
+	$('#mdPreview :checkbox').removeAttr('disabled');
+	$('#mdPreview :checkbox').on('click', function() {
+		event.preventDefault();
+	});
+	if(this.isFileLoadedInitially) {
+		this.setClean();
+		this.isFileLoadedInitially = false;
+	}
+	this.updateWindowTitle(this.currentFile);
+	countWords();
 }
 
 var formatEmoji = (code, name) => {
