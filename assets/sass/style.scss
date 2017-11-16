@@ -403,7 +403,7 @@ label {
     border: 1px outset #4a4f4d;
     box-shadow: 0.5px 1px 3px rgba(0,0,0,0.3);
     margin-right: 1.5px;
-    padding: 3px 5px 5px 4.25px;
+    padding: 3.5px 5px 5px 4.25px;
     transition: top 100ms ease-in-out;
     transition: color 200ms ease-in-out;
     &::before {
@@ -431,19 +431,19 @@ label {
 
 .bottom-bar {
   position: absolute;
-  background: -webkit-linear-gradient(top, #282628 0%, #2b2a2b 30%, #191919 150%), -webkit-linear-gradient(bottom, rgba(255,255,255,0.4) 0%, rgba(0,0,0,0.025) 200%);
-  // background: -webkit-linear-gradient(top, #222 0%, #292929 30%, #121212 150%), -webkit-linear-gradient(bottom, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.025) 200%);
+  // background: -webkit-linear-gradient(top, #282628 0%, #2b2a2b 30%, #191919 150%), -webkit-linear-gradient(bottom, rgba(255,255,255,0.4) 0%, rgba(0,0,0,0.025) 200%);
+  background: -webkit-linear-gradient(top, #1d1d1d 12%, #212021 45%, #141414 100%), -webkit-linear-gradient(bottom, rgba(255, 255, 255, 0.4) 0%, rgba(0, 0, 0, 0.025) 200%);
+  background: -webkit-linear-gradient(top, #232223 45%, #141414 100%), -webkit-linear-gradient(bottom, rgba(255, 255, 255, 0.4) 0%, rgba(0, 0, 0, 0.025) 200%);
   background-blend-mode: multiply;
-  // background: -webkit-linear-gradient(top, #2b2b2b 5%, #2b2b2b 35%, #222120, #1d1d1d 98%), -webkit-radial-gradient(top, circle cover, #242223 20%, #323031 50%, #242223 80%);
   color: #b6b5b4;
   font-size: 11px;
   height: 28px;
   width: 100%;
   bottom: 0;
   left: 0;
-  border: 1px outset #2d2c2c;
-  box-shadow: 0 -1px 20px rgba(0,0,0,0.25);
-  padding: 2px;
+  // border: 1px outset #2d2c2c;
+  box-shadow: 0 -0.25px 10px rgba(0, 0, 0, 0.65);
+  padding: 3px 0 2px;
   z-index: 1010;
   resize: both;
   div {
@@ -506,7 +506,7 @@ label {
   #syncScrollToggle {
     font-size: 14.5px !important;
     right: 2.5em !important;
-    margin-top: 4px !important;
+    margin-top: 2.5px !important;
     &::after {
       top: -190% !important;
       right: 0 !important;
@@ -517,7 +517,7 @@ label {
   #previewToggle {
     font-size: 17.5px;
     right: 0.35em;
-    margin-top: 1px;
+    margin-top: -0.5px;
     &::after {
       top: -150%;
       right: 0;
@@ -773,7 +773,7 @@ input[type='checkbox'] {
     top: 80px;
     padding: 2px 0 6px 17px;
     h3 {
-      color: rgba(255,255,255,0.85);
+      color: rgba(255,255,255,0.775);
       font-size: 30px;
       font-weight: 200;
       margin-top: 4px;
@@ -785,9 +785,9 @@ input[type='checkbox'] {
       list-style: none;
       padding-left: 10px;
       li {
-        font-size: 15.5px;
+        font-size: 15px;
         font-weight: 300;
-        letter-spacing: 0.045em;
+        letter-spacing: 0.05em;
         line-height: 2.1;
         margin-bottom: 4px;
         cursor: default;
@@ -804,16 +804,20 @@ input[type='checkbox'] {
             top: 2px;
           }
           .btn.btn-default {
-            background: -webkit-linear-gradient(bottom, #2d2c2d, #3d3c3d);
+            background: -webkit-linear-gradient(top, #3d3c3d, #2a292a);
             color: $text-color;
             top: 3px;
             left: -4px;
             height: 29px;
             letter-spacing: 0.04em;
             border: 1px outset #3c3c3c;
-            box-shadow: 0.5px 0.75px 4px rgba(0,0,0,0.2);
-            padding: 1px 8px 0 10px;
+            box-shadow: 1.5px 0.75px 4px rgba(0, 0, 0, 0.2), inset 0 0 2px 1px rgba(0, 0, 0, 0.35), inset 0 1px 1px 1px rgba(255, 255, 255, 0.1);
+            padding: 1px 8px 0 11px;
+            transition: all 250ms ease-in-out;
             outline: none !important;
+            &:hover, &:focus, &:active {
+              color: rgba(255,255,255,0.85);
+            }
           }
           .caret {
             position: relative;
@@ -881,7 +885,6 @@ input[type='checkbox'] {
     width: 25% !important;
     vertical-align: middle;
     .form-control {
-      // background: #3a3839;
       background: #3c393a;
       color: rgba(255,255,255,0.7);
       font-weight: 300;
@@ -987,7 +990,6 @@ input[type='checkbox'] {
     width: 25% !important;
     vertical-align: middle;
     .form-control {
-      // background: #3a3839;
       background: #3c393a;
       color: rgba(255,255,255,0.7);
       font-weight: 300;
@@ -1058,7 +1060,7 @@ input[type='checkbox'] {
   width: 50%;
   height: 34px;
   border-bottom: 1px #2a2a2a solid;
-  box-shadow: -2px 0 6px rgba(0,0,0,0.75);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.5);
   transition: width 600ms cubic-bezier(0.17, 0.04, 0.03, 0.75);
   z-index: 950;
 }
@@ -1223,6 +1225,7 @@ input[type='checkbox'] {
     padding: 5px 10px;
     margin-top: 3px;
     margin-bottom: 10px;
+    text-overflow: ellipsis;
   }
 }
 
