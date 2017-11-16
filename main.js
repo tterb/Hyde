@@ -60,6 +60,7 @@ const args = require('yargs')
 // Keep a global reference of the window objects
 var windows = new Set();
 let isQuitting = false;
+var hasChanges = false;
 let windowState, mainWindow, pathToOpen;
 
 // Allows render process to access active windows
@@ -183,18 +184,18 @@ function menuThemes() {
 var template = [
   {label: '&File', submenu: [
 		{label: 'New', accelerator: 'CmdOrCtrl+N', click: () => { createWindow(); }},
-		{label: 'Open', accelerator: 'CmdOrCtrl+O', click: () => { main.ipcSend('file-open'); }},
+		{label: 'Open', accelerator: 'CmdOrCtrl+O', click: () => { ipcSend('file-open'); }},
 		{type: 'separator'},
-		{label: 'Save', accelerator: 'CmdOrCtrl+S', click: () => { main.ipcSend('file-save'); }},
-		{label: 'Save As', accelerator: 'CmdOrCtrl+Shift+S', click: () => { main.ipcSend('file-save-as'); }},
-		{label: 'Export to PDF', click: () => { main.ipcSend('file-pdf'); }},
-    {label: 'Export to HTML', click: () => { main.ipcSend('file-html'); }},
+		{label: 'Save', accelerator: 'CmdOrCtrl+S', click: () => { ipcSend('file-save'); }},
+		{label: 'Save As', accelerator: 'CmdOrCtrl+Shift+S', click: () => { ipcSend('file-save-as'); }},
+		{label: 'Export to PDF', click: () => { ipcSend('file-pdf'); }},
+    {label: 'Export to HTML', click: () => { ipcSend('file-html'); }},
 		{type: 'separator'},
 		{label: 'Show in File Manager', click: () => { ipc.send('open-file-manager'); }},
 		{type: 'separator'},
-		{label: 'Settings', accelerator: 'CmdOrCtrl+,', click: () => { main.ipcSend('toggle-settings'); }},
+		{label: 'Settings', accelerator: 'CmdOrCtrl+,', click: () => { ipcSend('toggle-settings'); }},
 		{type: 'separator'},
-		{label: 'Quit', accelerator: 'CmdOrCtrl+Q', click: () => { main.ipcSend('win-close'); }}
+		{label: 'Quit', accelerator: 'CmdOrCtrl+Q', click: () => { ipcSend('win-close'); }}
 	]},
 	{label: '&Edit', submenu: [
 		{label: 'Undo', accelerator: 'CmdOrCtrl+Z', role: 'undo'},
@@ -203,32 +204,32 @@ var template = [
 		{label: 'Cut', accelerator: 'CmdOrCtrl+X', role: 'cut'},
 		{label: 'Copy', accelerator: 'CmdOrCtrl+C', role: 'copy'},
 		{label: 'Paste', accelerator: 'CmdOrCtrl+V', role: 'paste'},
-		{label: 'Select All', accelerator: 'CmdOrCtrl+A', click: () => { main.ipcSend('select-all'); }},
+		{label: 'Select All', accelerator: 'CmdOrCtrl+A', click: () => { ipcSend('select-all'); }},
 		{type: 'separator'},
-		{label: 'Find', accelerator: 'CmdOrCtrl+F', click: () => { main.ipcSend('search-find'); }},
-		{label: 'Replace', accelerator: 'CmdOrCtrl+Shift+F', click: () => { main.ipcSend('search-replace'); }},
+		{label: 'Find', accelerator: 'CmdOrCtrl+F', click: () => { ipcSend('search-find'); }},
+		{label: 'Replace', accelerator: 'CmdOrCtrl+Shift+F', click: () => { ipcSend('search-replace'); }},
 		{type: 'separator'},
-		{label: 'Auto-Indent', accelerator: 'CmdOrCtrl+Shift+A', click: () => { main.ipcSend('auto-indent'); }},
-		{label: 'Indent Less', accelerator: 'CmdOrCtrl+Left', click: () => { main.ipcSend('indent-less'); }},
-		{label: 'Indent More', accelerator: 'CmdOrCtrl+Right', click: () => { main.ipcSend('indent-more'); }},
+		{label: 'Auto-Indent', accelerator: 'CmdOrCtrl+Shift+A', click: () => { ipcSend('auto-indent'); }},
+		{label: 'Indent Less', accelerator: 'CmdOrCtrl+Left', click: () => { ipcSend('indent-less'); }},
+		{label: 'Indent More', accelerator: 'CmdOrCtrl+Right', click: () => { ipcSend('indent-more'); }},
 		{type: 'separator'},
-		{label: 'Toggle Comment', accelerator: 'CmdOrCtrl+/', click: () => { main.ipcSend('insert-comment'); }},
+		{label: 'Toggle Comment', accelerator: 'CmdOrCtrl+/', click: () => { ipcSend('insert-comment'); }},
 		{type: 'separator'},
-		{label: 'Insert YAML-frontmatter', accelerator: 'CmdOrCtrl+Shift+Y', click: () => { main.ipcSend('insert-yaml'); }}
+		{label: 'Insert YAML-frontmatter', accelerator: 'CmdOrCtrl+Shift+Y', click: () => { ipcSend('insert-yaml'); }}
 	]},
 	{label: '&View', submenu: [
-		{label: 'Reload', accelerator:'CmdOrCtrl+R', click: () => { main.ipcSend('win-reload'); }},
+		{label: 'Reload', accelerator:'CmdOrCtrl+R', click: () => { ipcSend('win-reload'); }},
 		{type: 'separator'},
-		{label: 'Toggle Menu', accelerator:'CmdOrCtrl+M', click: () => { main.ipcSend('toggle-menu'); }},
-		{label: 'Toggle Toolbar', accelerator:'CmdOrCtrl+.', click: () => { main.ipcSend('toggle-toolbar'); }},
-		{label: 'Toggle Preview', accelerator:'CmdOrCtrl+P', click: () => { main.ipcSend('toggle-preview'); }},
-		{label: 'Toggle Full Screen', accelerator:'F11', click: () => { main.ipcSend('mazimize'); }},
+		{label: 'Toggle Menu', accelerator:'CmdOrCtrl+M', click: () => { ipcSend('toggle-menu'); }},
+		{label: 'Toggle Toolbar', accelerator:'CmdOrCtrl+.', click: () => { ipcSend('toggle-toolbar'); }},
+		{label: 'Toggle Preview', accelerator:'CmdOrCtrl+P', click: () => { ipcSend('toggle-preview'); }},
+		{label: 'Toggle Full Screen', accelerator:'F11', click: () => { ipcSend('mazimize'); }},
 		{type: 'separator'},
 		{label: 'Themes' },
 		{type: 'separator'},
 		{label: 'Preview Mode', submenu: [
-			{label: 'Markdown', click: () => { main.ipcSend('markdown-preview'); }},
-			{label: 'HTML', click: () => { main.ipcSend('html-preview'); }}
+			{label: 'Markdown', click: () => { ipcSend('markdown-preview'); }},
+			{label: 'HTML', click: () => { ipcSend('html-preview'); }}
 		]},
 		{type: 'separator'},
 		{role: 'toggledevtools'}
@@ -247,7 +248,7 @@ var template = [
 	]},
 	{label: '&Help', role: 'help', submenu: [
 		{label: 'Markdown Help', click: () => {
-			main.ipcSend('markdown-modal');
+			ipcSend('markdown-modal');
 		}},
 		{type: 'separator'},
 		{label: 'Documentation', click: () => {
@@ -262,7 +263,7 @@ var template = [
 		}},
 		{type: 'separator'},
 		{label: 'About Hyde', click: () => {
-			main.ipcSend('about-modal');
+			ipcSend('about-modal');
 		}}
 	]}
 ];
@@ -357,6 +358,37 @@ app.on('ready', function() {
     require('devtron').install();
     mainWindow.webContents.openDevTools();
   }
+  
+  
+  // FIXME: Window is still being removed from window.windows array
+  mainWindow.on('close', (e) => {
+    if(process.platform === 'darwin') {
+      if(hasChanges) {
+        var prompt = require('electron').dialog.showMessageBox({
+            type: 'question',
+            buttons: ['Yes', 'No', 'Cancel'],
+            title: 'Confirm',
+            message: 'Unsaved Changes',
+            detail: 'The current file contains unsaved changes, would you like to save them?'
+         });
+        if(prompt == 1) {  // NO
+          e.preventDefault();
+          hasChanges = false;
+          mainWindow.close();
+        } else if(prompt == 2) {  // CANCEL
+          e.preventDefault();
+        } else {  // YES
+          e.preventDefault();
+          windows
+          ipcSend('file-save');
+        }
+      }
+    }
+  });
+});
+
+ipc.on('changed-state', (state) => {
+  hasChanges = state;
 });
 
 // Listen for uncaughtExceptions
@@ -382,7 +414,7 @@ app.on('window-all-closed', () => {
   }
 });
 
-app.on('quit', e => {
+app.on('quit', (e) => {
   if(settings.get('keepInTray') && !isQuitting) {
     e.preventDefault();
     if(process.platform === 'darwin')
@@ -401,7 +433,6 @@ app.on('activate', () => {
 });
 
 app.on('before-quit', () => {
-  // Store current window state
   windowState.saveState(mainWindow)
   isQuitting = true;
 });

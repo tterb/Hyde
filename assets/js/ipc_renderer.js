@@ -165,6 +165,7 @@ ipc.on('markdown-modal', () => { $('#markdown-modal').modal(); });
 ipc.on('table-modal', () => { $('#table-modal').modal(); });
 ipc.on('insert-emoji', () => { $('#emoji-modal').modal(); });
 ipc.on('keybinding-modal', () => { settings.set('targetFile', path.join(__dirname, '/docs/keybindings.md')); main.createWindow(); });
+ipc.on('has-changes', () => { ipc.send('changed-state', !isClean()); });
 ipc.on('open-file-manager', () => { shell.showItemInFolder(currentFile); });
 ipc.on('target-file', () => { return target; });
 ipc.on('set-theme', function(data) { setEditorTheme(data); });
