@@ -51,7 +51,8 @@
 
 .modal-title {
   font-size: 22px;
-  font-weight: 200; }
+  font-weight: 200;
+  cursor: default; }
 
 #unsaved-modal .modal-dialog {
   width: 390px;
@@ -95,7 +96,7 @@
     #unsaved-modal .modal-dialog .unsaved-buttons button {
       font-size: 13.5px;
       font-weight: 300;
-      border-radius: 6px;
+      border-radius: 4px;
       margin: 8px 12px 6px 0; }
       #unsaved-modal .modal-dialog .unsaved-buttons button:last-child {
         margin-right: 15px; }
@@ -286,7 +287,7 @@
       #table-modal ul li input[type='number']::-webkit-inner-spin-button {
         background-image: -webkit-linear-gradient(top, #333, #222);
         color: rgba(255, 255, 255, 0.7); }
-    #table-modal ul li #table-button {
+    #table-modal ul li .table-button {
       display: inline-block;
       background-image: -webkit-linear-gradient(top, #555354, #2d2b2c);
       color: rgba(255, 255, 255, 0.6) !important;
@@ -303,12 +304,12 @@
       border-radius: 100px;
       box-shadow: inset 0 3px 0 transparent, 0 3px 3px rgba(0, 0, 0, 0.2);
       transition: all 300ms cubic-bezier(0.67, 0.13, 0.1, 0.81); }
-      #table-modal ul li #table-button:hover i {
+      #table-modal ul li .table-button:hover i {
         color: rgba(255, 255, 255, 0.9); }
-      #table-modal ul li #table-button:active {
+      #table-modal ul li .table-button:active {
         box-shadow: inset 0 3px 0 rgba(0, 0, 0, 0.2);
         transform: translateY(2px); }
-      #table-modal ul li #table-button i::before {
+      #table-modal ul li .table-button i::before {
         position: relative;
         left: 3.5px; }
     #table-modal ul li:last-child {
@@ -466,7 +467,7 @@
   text-shadow: -2px 2px #323031;
   border: 0;
   border-radius: 8px;
-  box-shadow: 0 1px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.35), inset 0 2px 1px 0 rgba(255, 255, 255, 0.15);
   padding: 5px 11px;
   margin: 12px 6px 8px 0;
   transition: all 300ms ease-in-out;
@@ -496,14 +497,17 @@
   padding: 2.5% 2.5% 0; }
 
 #emoji-modal .category-buttons {
-  width: 39%;
-  margin: 18px auto 15px; }
+  width: 45%;
+  text-align: center;
+  margin: 18px auto 15px;
+  cursor: pointer; }
   #emoji-modal .category-buttons .button {
-    font-size: 1.3em;
+    font-size: 1.6em;
     background: transparent;
-    color: rgba(255, 255, 255, 0.25);
+    color: rgba(255, 255, 255, 0.35);
     border: 0;
-    padding: 0 6px 2px; }
+    padding: 0 6px 2px;
+    transition: color 200ms ease; }
     #emoji-modal .category-buttons .button.active {
       color: #de545f; }
       #emoji-modal .category-buttons .button.active:hover, #emoji-modal .category-buttons .button.active:active {
@@ -511,9 +515,9 @@
     #emoji-modal .category-buttons .button:hover, #emoji-modal .category-buttons .button:active {
       color: rgba(255, 255, 255, 0.5);
       text-decoration: none;
-      border: none; }
+      border: 0; }
 
-#emoji-modal #emoji-table {
+#emoji-modal .emoji-table {
   min-height: 350px;
   max-height: 350px;
   padding-left: 6px !important;
@@ -521,10 +525,12 @@
 
 .emoji-list {
   display: inline-block;
+  text-align: center;
   min-width: 43px;
-  padding: 8px; }
+  padding: 8px 8px 0;
+  cursor: pointer; }
   .emoji-list span {
-    font-size: 1.4em;
+    font-size: 1.8em;
     height: 32px;
     width: auto;
     min-width: 30px;
