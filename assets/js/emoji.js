@@ -9,7 +9,7 @@ function getEmojis() {
 }
 
 function fillEmojiModal(type) {
-	var table = $('#emoji-table');
+	var table = $('.emoji-table');
 	table.empty();
   if(type === undefined) type = 'People';
 	getEmojis().forEach((temp) => {
