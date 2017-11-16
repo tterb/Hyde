@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="assets/css/modal.css">
   <link rel="stylesheet" href="assets/css/notification.css">
   <link rel="stylesheet" href="assets/css/commandPalette.css">
-  <link rel="stylesheet" id="profileTag" href="assets/css/preview/default.css">
+  <link id="profileTag" rel="stylesheet" href="assets/css/preview/default.css">
   <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
   <link rel="stylesheet" href="assets/fonts/metro-icons.min.css">
   <link rel="stylesheet" href="assets/fonts/lora.css">
@@ -54,7 +54,7 @@
   <script src="node_modules/codemirror/addon/scroll/annotatescrollbar.js"></script>
 </head>
 
-<body class="container-fluid" id="body" style="resize: both">
+<body id="body" class="container-fluid" style="resize: both">
   <div id="draggable" style="-webkit-app-region:drag"></div>
   <div id="menuToggle">
     <button id="menuButton" onclick="toggleToolbar()"><span class="mif-menu"></span></button>
@@ -65,10 +65,11 @@
     <button id="minimize" class="window-button" style="cursor: pointer;"><img class="active" src="assets/img/buttons/min_active.png" alt="Minimize"/><img class="hover" src="assets/img/buttons/min_hover.png" alt="Minimize"/><img class="inactive" src="assets/img/buttons/min.png" alt="Minimize"/></button>
   </div>
   <div id="appMenu" class="hidden slideDownIn animated">
+    <span id="menuTitle"></span>
     <!-- File -->
     <div class="btn-group">
-      <button class="btn dropdown-toggle" type="button" id="file-menu-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">File</button>
-      <ul id="file-menu" class="dropdown-menu">
+      <button id="fileMenu-button" class="btn dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">File</button>
+      <ul id="fileMenu" class="dropdown-menu">
         <li tabindex="-1" href="#" onclick="main.createWindow();"><a class="dropdown-item">New</a><span>Ctrl + N</span></li>
         <li tabindex="-1" href="#" onclick="openFile();"><a class="dropdown-item">Open</a><span>Ctrl + O</span></li>
         <li class="dropdown-divider"></li>
@@ -86,7 +87,7 @@
     </div>
     <!-- Edit -->
     <div class="btn-group">
-      <button class="btn dropdown-toggle" type="button" id="editMenu-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Edit</button>
+      <button id="editMenu-button" class="btn dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Edit</button>
       <ul id="editMenu" class="dropdown-menu">
         <li tabindex="-1" href="#" onclick="cm.execCommand('undo');"><a class="dropdown-item">Undo</a><span>Ctrl + Z</span></li>
         <li tabindex="-1" href="#" onclick="cm.execCommand('redo');"><a class="dropdown-item">Redo</a><span>Ctrl + Shift + Z</span></li>
@@ -110,7 +111,7 @@
     </div>
     <!-- View -->
     <div class="btn-group">
-      <button class="btn dropdown-toggle" type="button" id="viewMenu-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">View</button>
+      <button id="viewMenu-button" class="btn dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">View</button>
       <ul id="viewMenu" class="dropdown-menu">
         <li tabindex="-1" href="#" onclick="reloadWin()"><a class="dropdown-item">Reload</a><span>Ctrl + R</span></li>
         <li class="dropdown-divider"></li>
@@ -121,7 +122,7 @@
         <li class="dropdown-divider"></li>
         <li class="dropdown-submenu">
           <a class="test" tabindex="-1" href="#" data-toggle="dropdown" class="dropdown-item">Themes <span class="caret"></span></a>
-          <ul class="dropdown-menu sub" id="themes-menu">
+          <ul id="themes-menu" class="dropdown-menu sub">
             <li href="#" onclick="setEditorTheme('base16-dark');"><a class="dropdown-item">Base16 Dark</a></li>
             <li href="#" onclick="setEditorTheme('base16-light');"><a class="dropdown-item">Base16 Light</a></li>
             <li href="#" onclick="setEditorTheme('dracula');"><a class="dropdown-item">Dracula</a></li>
@@ -200,27 +201,12 @@
         <i id="side-icon" class="fa fa-chevron-right"></i>
       </div>
     </div>
-    <!-- <section id="sidebar">
-      <img id="sideLogo" src="assets/img/logo.png" alt="logo"/>
-      <ul id="sideMenu">
-        <li id="sidebar-new"><a onclick="main.createWindow();">New</a></li>
-        <li id="sidebar-open"><a>Open</a></li>
-        <li id="sidebar-save"><a onclick="saveFile();">Save</a></li>
-        <li id="sidebar-settings"><a onclick="toggleSettingsMenu();">Settings</a></li>
-        <li id="sidebar-about"><a href="#" data-toggle="modal" data-target="#about-modal" onclick="toggleSidebar()">About</a></li>
-      </ul>
-      <ul id="sidebarIcons">
-        <li class="fa fa-github" data-tooltip="View on GitHub"><a onclick="openInBrowser('https://github.com/JonSn0w/Hyde')"></a></li>
-        <li class="fa fa-bug" data-tooltip="Report an Issue" onclick="openInBrowser('https://github.com/JonSn0w/Hyde/issues/new')"></li>
-        <li class="fa fa-file-text" data-tooltip="Read the Docs"><a onclick="openInBrowser('https://JonSn0w.github.io/Hyde/docs')"></a></li>
-      </ul>
-    </section> -->
     <!-- Settings Menu -->
     <section id="settingsMenu">
       <div id="settings-title" class="title">
         <img id="cog" src="assets/img/cog.png"/><h2>Settings</h2>
       </div>
-      <div id="editor-section" class="settings-section">
+      <div id="editorSettings" class="settings-section">
         <h3>Editor</h3>
         <ul id="options">
           <li id="editorFontSze" class="input"><span>Font size: </span>
@@ -232,7 +218,7 @@
               </div>
             </div>
           </li>
-          <li id="editor-theme" class="menu select" style="margin-bottom: 6px;"><span>Theme: </span>
+          <li id="themeSelect" class="menu select" style="margin-bottom: 8px;"><span>Theme: </span>
             <select id="editorTheme" class="selectpicker" title="One Dark" data-width="fit">
               <option>Base16 Dark</option><option>Base16 light</option>
               <option>Dracula</option><option>Duotone Dark</option>
@@ -247,7 +233,7 @@
           </li>
           <li id="dynamicEditor" class="toggle" data-tooltip="Add syntax-driven text formatting to editor">
             <label class="switch switch--material">
-            <input type="checkbox" class="switch__input switch--material__input" value="" setting="dynamicEditor">
+            <input type="checkbox" class="switch__input switch--material__input require-reload" value="" setting="dynamicEditor">
             <div class="switch__toggle switch--material__toggle">
               <div class="switch__handle switch--material__handle">
               </div>
@@ -288,7 +274,7 @@
         </ul>
         <hr>
       </div>
-      <div id="preview-section" class="settings-section">
+      <div id="previewSettings" class="settings-section">
         <h3>Preview</h3>
         <ul id="options">
           <li class="menu select"><span>Mode: </span>
@@ -303,7 +289,7 @@
               <option>GitHub</option>
             </select>
           </li>
-          <li id="previewFontSize" class="input" style="margin: 7px 0 8px;"><span>Font size: </span>
+          <li id="previewFontSize" class="input" style="margin: 7px 0 10px;"><span>Font size: </span>
             <div class="input-group spinner">
               <input id="previewFontSize-input" type="text" class="form-control" value="">
               <div class="input-group-btn-vertical" style="top:1px;">
@@ -345,7 +331,7 @@
         </ul>
         <hr>
       </div>
-      <div id="app-section" class="settings-section">
+      <div id="appSettings" class="settings-section">
         <h3 style="margin-bottom:10px;">App</h3>
         <ul id="options">
           <li id="frontMatterTemplate" class="form-group">
@@ -375,7 +361,7 @@
         </ul>
       </div>
     </section>
-    <div class="trigger left" id="settingsTrigger">
+    <div id="settingsTrigger" class="trigger left">
       <div id="sideButton" class="trigger-button" onclick="toggleSettingsMenu()" style="visibility:hidden;">
         <i id="side-icon" class="fa fa-chevron-left"></i>
       </div>
@@ -394,7 +380,7 @@
         </div>
     </div>
   </section>
-  <div class="search-dialog" id="search-container"><span id="searchIcon" class="fa fa-search"></span></div>
+  <div id="search-container" class="search-dialog"><span id="searchIcon" class="fa fa-search"></span></div>
   <div class="bottom-bar">
     <div id="bottomFile" data-tooltip=""></div><span id="fileStatus" data-tooltip="unsaved changes">*</span>
     <div id="wordCount"></div>
@@ -403,7 +389,7 @@
     <button id="previewToggle" class="fa fa-eye" data-tooltip="Toggle Preview" onclick="togglePreview();"></button>
   </div>
   <!-- Table Modal -->
-  <div class="modal fade animated" id="table-modal" tabindex="-1" role="dialog">
+  <div id="table-modal" class="modal fade animated" tabindex="-1" role="dialog">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -411,28 +397,28 @@
           <h4 class="modal-title">Table</h4>
         </div>
         <div class="table-content">
-          <ul id="table-input">
-            <li id="table-columns" class="form-group">
+          <ul class="table-input">
+            <li class="table-columns" class="form-group">
               <input type="number" id="columns" placeholder="Columns" class="form-control" value="">
             </li>
-            <li id="table-rows" class="form-group">
+            <li class="table-rows" class="form-group">
               <input type="number" id="rows" placeholder="Rows" class="form-control" value="">
             </li>
             <li>
-              <button id="table-button" data-dismiss="modal"><i class="fa fa-arrow-right"></i></button>
+              <button class="table-button" data-dismiss="modal"><i class="fa fa-arrow-right"></i></button>
             </li>
           </ul>
       		<div id="alignButtons" class="align-buttons"><span>Align: </span><button id="leftAlign" class="modal-button button-group on"><i class="fa fa-align-left"></i></button><button id="centerAlign" class="modal-button button-group"><i class="fa fa-align-center"></i></button><button id="rightAlign" class="modal-button button-group"><i class="fa fa-align-right"></i></button>
         </div></div></div></div>
   </div>
   <!-- Markdown Help Modal -->
-  <div class="modal fade" id="markdown-modal" tabindex="-1" role="dialog"></div>
+  <div id="markdown-modal" class="modal fade" tabindex="-1" role="dialog"></div>
   <!-- About Modal -->
-  <div class="modal fade" id="about-modal" tabindex="-1" role="dialog"></div>
+  <div id="about-modal" class="modal fade" tabindex="-1" role="dialog"></div>
   <!-- Custom CSS Modal -->
-  <div class="modal fade" id="custom-css-modal" tabindex="-1" role="dialog"></div>
+  <div id="custom-css-modal" class="modal fade" tabindex="-1" role="dialog"></div>
   <!-- Emoji Modal -->
-  <div class="modal fade" id="emoji-modal" tabindex="-1" role="dialog">
+  <div id="emoji-modal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog">
       <div class="modal-content modal-inset">
         <div class="modal-header">
@@ -441,7 +427,7 @@
           <h4 class="modal-title">Emoji</h4>
         </div>
         <div class="modal-body-inset">
-          <section class="modal--default__content text-input" id="emoji-table"></section>
+          <section class="emoji-table modal--default__content text-input"></section>
         </div>
         <div class="category-buttons">
           <button href="#" alt="people" class="button active fa fa-smile-o" value="People"></button>
@@ -455,7 +441,7 @@
     </div>
   </div>
   <!-- Unsaved-Close Modal -->
-  <div class="modal fade" id="unsaved-modal" tabindex="-1" role="dialog">
+  <div id="unsaved-modal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
