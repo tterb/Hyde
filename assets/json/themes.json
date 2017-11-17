@@ -1,0 +1,22 @@
+[
+  {"name": "Base16 Dark", "value": "base16-dark"},
+  {"name": "Base16 Light", "value": "base16-light"},
+  {"name": "Dracula", "value": "dracula"},
+  {"name": "Duotone Dark", "value": "duotone-dark"},
+  {"name": "Eclipse", "value": "eclipse"},
+  {"name": "Hopscotch", "value": "hopscotch"},
+  {"name": "Itg Flat", "value": "itg-flat"},
+  {"name": "Material", "value": "material"},
+  {"name": "Monokai", "value": "monokai"},
+  {"name": "Neo", "value": "neo"},
+  {"name": "Oceanic", "value": "oceanic"},
+  {"name": "One Dark", "value": "one-dark"},
+  {"name": "Panda", "value": "panda"},
+  {"name": "Railscasts", "value": "railscasts"},
+  {"name": "Seti", "value": "seti"},
+  {"name": "Solarized Dark", "value": "solarized-dark"},
+  {"name": "Solarized Light", "value": "solarized-light"},
+  {"name": "Tomorrow Night", "value": "tomorrow-night"},
+  {"name": "Yeti", "value": "yeti"},
+  {"name": "Zenburn", "value": "zenburn"}
+]

@@ -126,7 +126,7 @@ const createWindow = exports.createWindow = (filePath) => {
 }
 
 ipc.on('export-to-pdf', (event, pdfPath) => {
-  const win = BrowserWindow.fromWebContents(event.sender);
+  let win = BrowserWindow.fromWebContents(event.sender);
   win.webContents.printToPDF({ 'printBackground': true, 'pageSize': 'A4' }, (error, data) => {
     if (error) throw error;
     fs.writeFile(pdfPath, data, (error) => {
@@ -144,39 +144,15 @@ ipc.on('export-to-html', (event, data, htmlPath) => {
 });
 
 const getThemes = exports.getThemes = () => {
-  var themes = [
-      {'name': 'Base16 Dark', 'value': 'base16-dark'},
-      {'name': 'Base16 Light', 'value': 'base16-light'},
-      {'name': 'Dracula', 'value': 'dracula'},
-      {'name': 'Duotone Dark', 'value': 'duotone-dark'},
-      {'name': 'Eclipse', 'value': 'eclipse'},
-      {'name': 'Hopscotch', 'value': 'hopscotch'},
-      {'name': 'Itg Flat', 'value': 'itg-flat'},
-      {'name': 'Material', 'value': 'material'},
-      {'name': 'Monokai', 'value': 'monokai'},
-      {'name': 'Neo', 'value': 'neo'},
-      {'name': 'Oceanic', 'value': 'oceanic'},
-      {'name': 'One Dark', 'value': 'one-dark'},
-      {'name': 'Panda', 'value': 'panda'},
-      {'name': 'Railscasts', 'value': 'railscasts'},
-      {'name': 'Seti', 'value': 'seti'},
-      {'name': 'Solarized Dark', 'value': 'solarized-dark'},
-      {'name': 'Solarized Light', 'value': 'solarized-light'},
-      {'name': 'Tomorrow Night', 'value': 'tomorrow-night'},
-      {'name': 'Yeti', 'value': 'yeti'},
-      {'name': 'Zenburn', 'value': 'zenburn'}
-  ];
-  return themes;
+  return require(path.join(__dirname, 'assets','json','themes.json'));
 }
 
 function menuThemes() {
-  var themes = [],
-      themeFiles = fs.readdirSync(path.join(__dirname,'assets','css','themes'));
-  getThemes().forEach((str) => {
-    var theme = { label: str.name, click: () => {
-      var focusedWindow = BrowserWindow.getFocusedWindow();
-      focusedWindow.webContents.send("set-theme", str.value.toString()); }};
-    themes.push(theme);
+  var themes = [];
+      // themeFiles = fs.readdirSync(path.join(__dirname,'assets','css','themes'));
+  getThemes().forEach((theme) => {
+    var temp = { label: theme.name, click: () => { ipcSend('set-theme', theme.value); settings.set('editorTheme', theme.value.toString()); }};
+    themes.push(temp);
   });
   return themes;
 }
@@ -235,7 +211,7 @@ var template = [
 		{type: 'separator'},
 		{role: 'toggledevtools'}
 	]},
-	{label: '&Window', submenu: [
+	{role:'window', label: '&Window', submenu: [
 		{label: 'Minimize', click: () => {
 			BrowserWindow.getFocusedWindow().minimize();
 		}},
@@ -273,9 +249,7 @@ if (process.platform === 'darwin') {
   template.unshift({
     label: name,
     submenu: [
-      {role: 'about', click: () => {
-        ipcSend('about-modal');
-      }},
+      {role: 'about'},
       {type: 'separator'},
       {role: 'preferences', label: 'Preferences', accelerator: 'CmdOrCtrl+,', click: () => { ipcSend('toggle-settings'); }},
       {type: 'separator'},
@@ -290,6 +264,7 @@ if (process.platform === 'darwin') {
   })
   template[1].submenu[9] = {label: "Show in Finder", click: () => { ipcSend('open-file-manager'); }};
   template[1].submenu.splice(11,1);
+  template[1].submenu[12] = {label: 'Close', accelerator: 'CmdOrCtrl+Q', click: () => { ipcSend('win-close'); }};
   template[3].submenu.splice(2,1);
   // Add syntax-themes to menu
   template[3].submenu[6].submenu = menuThemes();

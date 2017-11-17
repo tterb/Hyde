@@ -45,20 +45,28 @@ let conf = {
 	}
 };
 
-let theme = settings.get('editorTheme');
-setEditorTheme(theme);
-if(main.getThemes().filter((temp) => { return temp.value === theme; }))
-	conf.theme = theme;
-else
-	conf.theme = 'one-dark';
-
 if(settings.get('enableSpellCheck')) {
 	conf.mode = 'spell-checker';
 	conf.backdrop = 'yaml-frontmatter';
 	spellChecker({ codeMirrorInstance: CodeMirror });
 }
 
+let themes = [],
+		theme = settings.get('editorTheme');
+main.getThemes().filter((temp) => { themes.push(temp.value); });
+themes.forEach(function(file) {
+	let tag = document.createElement('link');
+	tag.setAttribute('rel', 'stylesheet');
+	tag.setAttribute('href', 'assets/css/themes/'+file+'.css');
+	$('head').append(tag);
+});
+if(themes.filter((temp) => { return temp.value === theme; }))
+	conf.theme = theme;
+else
+	conf.theme = 'one-dark';
+
 var cm = CodeMirror.fromTextArea(document.getElementById('markdownText'), conf);
+setEditorTheme(theme);
 
 if(os.type() === 'Darwin') {
 	$('.CodeMirror-scroll').css('paddingTop', '35px');
@@ -69,23 +77,15 @@ if(os.type() === 'Darwin') {
 	$('#settings-section ul li').css('letter-spacing', '0.075em');
 }
 
-let themes = [],
-		head = $('head');
-main.getThemes().filter((temp) => {
-	themes.push(temp.value);
-});
-themes.forEach(function(index) {
-	let tag = document.createElement('link');
-	tag.setAttribute('rel', 'stylesheet');
-	tag.setAttribute('href', 'assets/css/themes/'+index+'.css');
-	head.append(tag);
-});
-
 function setEditorTheme(theme) {
 	let themeTag;
-	if(theme === undefined)
-		theme = 'one-dark';
-	themeTag = $('link[href="assets/css/themes/'+theme.toString()+'.css"]');
+	if(typeof(theme) !== 'string' || theme === undefined) {
+		if(settings.get('editorTheme'))
+			theme = settings.get('editorTheme');
+		else
+			theme = 'one-dark';
+	}
+	themeTag = $('link[href="assets/css/themes/'+theme+'.css"]');
 	themeTag.attr('id', 'themeLink');
 	let title = theme.replace(/-/g , ' ').replace(/\w\S*/g, function(str) {
 		return str.charAt(0).toUpperCase() + str.substr(1).toLowerCase();
@@ -177,6 +177,7 @@ window.onload = () => {
 
 function getHTML() { return converter.makeHtml(cm.getValue()); }
 
+
 /**************************
  * Synchronized scrolling *
  **************************/
@@ -185,10 +186,11 @@ var preview = $('#previewPanel'),
 		markdown = $('#mdPreview'),
 		syncScroll = $('#syncScrollToggle'),
 		isSynced = settings.get('syncScroll');
+		
 if(settings.get('previewMode') === 'html')
   markdown = $('#htmlPreview');
 
- // Retaining state in boolean will be more CPU friendly rather than selecting on each event.
+ // Retaining state in boolean is more CPU friendly than selecting on each event
 var toggleSyncScroll = () => {
 	if(settings.get('syncScroll')) {
 		syncScroll.attr('class', 'fa fa-unlink');
