@@ -127,7 +127,7 @@ const createWindow = exports.createWindow = (filePath) => {
 
 ipc.on('export-to-pdf', (event, pdfPath) => {
   const win = BrowserWindow.fromWebContents(event.sender);
-  win.webContents.printToPDF({ pageSize: 'A4' }, (error, data) => {
+  win.webContents.printToPDF({ 'printBackground': true, 'pageSize': 'A4' }, (error, data) => {
     if (error) throw error;
     fs.writeFile(pdfPath, data, (error) => {
       if (error) throw error;
@@ -184,10 +184,11 @@ function menuThemes() {
 var template = [
   {label: '&File', submenu: [
 		{label: 'New', accelerator: 'CmdOrCtrl+N', click: () => { createWindow(); }},
-		{label: 'Open', accelerator: 'CmdOrCtrl+O', click: () => { ipcSend('file-open'); }},
+		{label: 'Open...', accelerator: 'CmdOrCtrl+O', click: () => { ipcSend('file-open'); }},
+    {label: 'Open in New Window', accelerator: 'CmdOrCtrl+Shift+O', click: () => { ipcSend('file-open-new'); }},
 		{type: 'separator'},
 		{label: 'Save', accelerator: 'CmdOrCtrl+S', click: () => { ipcSend('file-save'); }},
-		{label: 'Save As', accelerator: 'CmdOrCtrl+Shift+S', click: () => { ipcSend('file-save-as'); }},
+		{label: 'Save As...', accelerator: 'CmdOrCtrl+Shift+S', click: () => { ipcSend('file-save-as'); }},
 		{label: 'Export to PDF', click: () => { ipcSend('file-pdf'); }},
     {label: 'Export to HTML', click: () => { ipcSend('file-html'); }},
 		{type: 'separator'},
@@ -276,6 +277,8 @@ if (process.platform === 'darwin') {
         ipcSend('about-modal');
       }},
       {type: 'separator'},
+      {role: 'preferences', label: 'Preferences', accelerator: 'CmdOrCtrl+,', click: () => { ipcSend('toggle-settings'); }},
+      {type: 'separator'},
       {role: 'services', submenu: []},
       {type: 'separator'},
       {role: 'hide'},
@@ -285,7 +288,8 @@ if (process.platform === 'darwin') {
       {role: 'quit'}
     ]
   })
-  template[1].submenu[7] = {label: "Show in Finder", click: () => { ipcSend('open-file-manager'); }};
+  template[1].submenu[9] = {label: "Show in Finder", click: () => { ipcSend('open-file-manager'); }};
+  template[1].submenu.splice(11,1);
   template[3].submenu.splice(2,1);
   // Add syntax-themes to menu
   template[3].submenu[6].submenu = menuThemes();
