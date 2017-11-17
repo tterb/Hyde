@@ -27,7 +27,11 @@ let opts = [
 ];
 
 function getUserSettings() {
-	opts.forEach(checkSetting);
+	// If no setting for option, sets default
+	opts.forEach((setting) => {
+		if(!settings.has(setting.name))
+			settings.set(setting.name, config.get(setting.name));
+	});
 	setPreviewMode(settings.get('previewMode'));
 	setPreviewProfile(settings.get('previewProfile'));
 	opts.forEach(applySettings);
@@ -38,12 +42,6 @@ function getUserSettings() {
 		$('#menuToggle').remove();
 		$('#metacity').hide();
 	}
-}
-
-// If there are no settings for option, sets default
-function checkSetting(opt) {
-	if(!settings.has(opt.name))
-		settings.set(opt.name, config.get(opt.name));
 }
 
 function applySettings(opt) {
@@ -77,9 +75,12 @@ function syncScrollCheck() {
 var formatHead = () => {
 	var textPanel = $('#textPanel'),
 			menuToggle = $('#menuToggle');
-	if(process.platfrom === 'darwin')
-		if(menu.is(':visible') !== toolbar.is(':visible'))
+	if(process.platfrom === 'darwin') {
+		preview.css('paddingTop', '25px');
+		if(toolbar.is(':visible') !== menu.is(':visible')) {
 			toggleMenu();
+		}
+	}
 	if(menu.is(':visible')) {
 		toolbar.css('top', '26px');
 		dragArea.css('width', '-webkit-calc(100% - 255px)');
@@ -162,9 +163,9 @@ var toggleToolbar = () => {
 		toolbar.css('display', 'block');
 		settings.set('showToolbar', true);
 	}
-	if(process.platform === 'darwin') {
-		toggleMenu();
-		return;
+	if( process.platform === 'darwin') {
+		if(toolbar.is(':visible') !== menu.is(':visible'))
+			toggleMenu();
 	}
 	formatHead();
 };
@@ -182,7 +183,7 @@ function togglePreview() {
 		syncScroll.hide();
     // syncScroll.css('color', '#444444');
 		previewToggle.attr('class', 'fa fa-eye-slash');
-		settings.set('showPreview', true);
+		settings.set('showPreview', false);
 	} else {
 		preview.css('display', 'block');
 		leftPanel.width('50%');
@@ -191,7 +192,7 @@ function togglePreview() {
 		rightFade.show();
 		syncScroll.show();
 		previewToggle.attr('class', 'fa fa-eye');
-		settings.set('showPreview', false);
+		settings.set('showPreview', true);
 	}
 	formatHead();
 	manageWindowSize();
@@ -277,11 +278,11 @@ function toggleDynamicFont() {
 		tag = document.createElement('link');
 		tag.setAttribute('id', 'dynamicTag');
 		tag.setAttribute('rel', 'stylesheet');
-		tag.setAttribute('href', 'css/dynamicEditor.css');
+		tag.setAttribute('href', 'assets/css/dynamicEditor.css');
 		head.appendChild(tag);
 	} else {
 		$('#dynamicTag').remove();
-		$('#dynamicTag').attr('href', 'css/style.css');
+		// $('#dynamicTag').attr('href', 'assets/css/style.css');
 	}
 }
 
