@@ -145,14 +145,22 @@ ipc.on('toggle-palette', () => { commandPalette().show(); });
 ipc.on('maximize', () => { toggleMaximize(); });
 // Save as PDF file
 ipc.on('file-pdf', () => {
-	options = { filters: [{ name:'PDF', extensions:['pdf']}]};
+	let data = main.getWindows()[remote.getCurrentWindow().id].filePath;
+	let options = { filters: [{ name:'PDF', extensions:['pdf']}]};
+	if('filename' in data) {
+		options.defaultPath = data.filename.replace(/\.[^/.]+$/,'');  // Remove existing markdown extension
+	}
 	dialog.showSaveDialog(options, (filePath) => {
 		ipc.send('export-to-pdf', filePath);
 	});
 });
 // Save as HTML file
 ipc.on('file-html', () => {
-	options = { filters: [{ name:'html', extensions: ['html']}]};
+	let data = main.getWindows()[remote.getCurrentWindow().id].filePath;
+	let options = { filters: [{ name:'HTML', extensions:['html']}]};
+	if('filename' in data) {
+		options.defaultPath = data.filename.replace(/\.[^/.]+$/,'');  // Remove existing markdown extension
+	}
 	dialog.showSaveDialog(options, (filePath) => {
 		ipc.send('export-to-html', getHTML(), filePath);
 	});
