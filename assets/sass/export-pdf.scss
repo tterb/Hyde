@@ -1,0 +1,121 @@
+$text-color: rgba(#fff, 0.75);
+$code-bg: #3e3c3e;
+$sans-serif: 'Open Sans','Helvetica Neue','Segoe UI',Helvetica,Arial,sans-serif;
+$monospaced: 'Source Code Pro','Monaco','Ubuntu Mono','Dejavu Sans Mono','Consolas',monospace;
+
+@media print {
+
+  * {
+    color: rgba(#000, 0.7);
+    font-family: $sans-serif;
+    letter-spacing: 0.01em
+    overflow: visible;
+  }
+
+  body {
+    font-size: 50%;
+    margin: 0;
+    padding: 0;
+  }
+
+  #appMenu, #metacity, #toolbar, #sidebar,
+  #leftPanel, #rightFade, .bottom-bar {
+    display: none;
+  }
+
+  #rightPanel {
+    display: block !important;
+    width: 100%;
+  }
+
+  #previewPanel {
+    padding: 0 8px !important;
+    overflow: visible;
+  }
+
+  #mdPreview {
+    h1, h2, h3, h4, h5 {
+      /*line-height: 1.5;*/
+      color: #333 !important;
+    }
+    h1 {
+      letter-spacing: 0.02em !important;
+    }
+    h3 {
+      margin-top: 0.9em;
+      margin-bottom: 0.5em;
+    }
+    p, ul li {
+      font-size: 10pt !important;
+    }
+    p {
+      // line-height: 1.5;
+      margin: 0 0 6px !important;
+    }
+    ul li {
+      line-height: 1.75;
+    }
+    img {
+      max-width: 95%;
+      margin: 0 auto 0.5em !important;
+      padding: 0 !important;
+    }
+    pre code {
+      background: $code-bg !important;
+      color: $text-color;
+      font-family: $monospaced !important;
+      font-size: 0.9em !important;
+      letter-spacing: 0.045em;
+      border-radius: 10px;
+      box-shadow: inset 0 -2px 20px rgba(0,0,0,0.6);
+      padding: 0 !important;
+    }
+  }
+
+  strong {
+    font-weight: 700;
+  }
+
+  pre {
+    display: block;
+    background-color: $code-bg !important;
+    color: $text-color !important;
+    font-family: $monospaced !important;
+    border: 1px inset #aaa !important;
+    border-radius: 10px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.6) !important;
+    margin: 1.1em 0 0.9em !important;
+    padding: 8px 15px 7px !important;
+  }
+
+  code {
+    background: $code-bg !important;
+    color: $text-color !important;
+    font-family: $monospaced !important;
+    font-size: 0.75em !important;
+    letter-spacing: 0.05em;
+    text-shadow: 0 0 5px rgba(0,0,0,0.4) !important;
+    white-space: nowrap;
+    border: 5px;
+    padding: 4px 5px 3px 6px !important;
+  }
+
+  a {
+    color: #1c74a0 !important;
+    text-decoration: none;
+    &::after {
+      display: none;
+    }
+  }
+
+  img {
+    max-width: 95%;
+    vertical-align: middle;
+    box-sizing: content-box;
+    margin: 0.2em 0;
+  }
+
+  ul, li {
+    letter-spacing: 0.01em;
+  }
+}
