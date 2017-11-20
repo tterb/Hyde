@@ -126,7 +126,7 @@ var updateWindowTitle = (path) => {
       filename,
       title;
   if(path) {
-    title = appName + ' - ' + path.toString();
+    title = path.toString().replace(os.homedir(),'~');
     filename = parsePath(path).basename;
   } else {
     title = appName;
@@ -147,12 +147,25 @@ var updateWindowTitle = (path) => {
 };
 
 function toggleMaximize() {
+  if(process.platform === 'darwin')
+    toggleFullScreen();
   var window = electron.remote.getCurrentWindow();
   if(window.isMaximized()) {
     window.unmaximize();
     settings.set('isMaximized', false);
   } else {
     window.maximize();
+    settings.set('isMaximized', true);
+  }
+}
+
+function toggleFullScreen() {
+  var window = electron.remote.getCurrentWindow();
+  if(window.isFullScreen()) {
+    window.setFullScreen(false);
+    settings.set('isMaximized', false);
+  } else {
+    window.setFullScreen(true);
     settings.set('isMaximized', true);
   }
 }
@@ -168,7 +181,7 @@ function toggleSearch(opt) {
       cm.execCommand('replace');
     else return;
   }
-}
+} 
 
 function appendCustomCSS() {
   var input = $('#custom-css').val();
