@@ -49,6 +49,7 @@
 #mdPreview img {
   background: transparent;
   max-width: 95%;
+  height: auto;
   vertical-align: middle;
   box-sizing: content-box;
   border-style: none;

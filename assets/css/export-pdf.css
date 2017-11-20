@@ -1,118 +1,101 @@
 @media print {
-  
   * {
-    font-family: "Open Sans","Helvetica Neue","Segoe UI",Helvetica,Arial,sans-serif;
-    color: rgba(0,0,0,0.7) !important;
+    color: rgba(0, 0, 0, 0.7);
+    font-family: "Open Sans", "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
     letter-spacing: 0.01em;
     overflow: visible;
   }
-
   body {
     font-size: 50%;
-    margin: 0; 
+    margin: 0;
     padding: 0;
   }
-
-  #appMenu, #metacity, #toolbar, #sidebar, #leftPanel, #rightFade, .bottom-bar {
+  #appMenu, #metacity, #toolbar, #sidebar,
+  #leftPanel, #rightFade, .bottom-bar {
     display: none;
   }
-
   #rightPanel {
     display: block !important;
     width: 100%;
   }
-
   #previewPanel {
     padding: 0 8px !important;
     overflow: visible;
   }
-
-  #mdPreview h1, h2, h3, h4, h5 {
+  #mdPreview h1, #mdPreview h2, #mdPreview h3, #mdPreview h4, #mdPreview h5 {
+    /*line-height: 1.5;*/
     color: #333 !important;
   }
-  
   #mdPreview h1 {
     letter-spacing: 0.02em !important;
   }
-  
   #mdPreview h3 {
     margin-top: 0.9em;
     margin-bottom: 0.5em;
   }
-
   #mdPreview p, #mdPreview ul li {
     font-size: 10pt !important;
   }
-
   #mdPreview p {
     margin: 0 0 6px !important;
   }
-
-  #mdPreview li {
+  #mdPreview ul li {
     line-height: 1.75;
   }
-
   #mdPreview img {
     max-width: 95%;
+    height: auto;
     margin: 0 auto 0.5em !important;
     padding: 0 !important;
   }
-
   #mdPreview pre code {
-    background: #3e3d3e !important;
-    color: rgba(255,255,255,0.75);
-    font-family: "Source Code Pro","Monaco","Ubuntu Mono","Dejavu Sans Mono","Consolas",monospace !important;
+    background: #3e3c3e !important;
+    color: rgba(255, 255, 255, 0.75);
+    font-family: "Source Code Pro", "Monaco", "Ubuntu Mono", "Consolas", monospace !important;
     font-size: 0.9em !important;
     letter-spacing: 0.045em;
     border-radius: 10px;
-    box-shadow: inset 0 -2px 20px rgba(0,0,0,0.6);
+    box-shadow: inset 0 -2px 20px rgba(0, 0, 0, 0.6);
     padding: 0 !important;
   }
-
   strong {
     font-weight: 700;
   }
-
   pre {
     display: block;
-    background: #3e3d3e !important;
-    color: rgba(255, 255, 255, 0.75);
-    font-family: "Source Code Pro","Monaco","Ubuntu Mono","Dejavu Sans Mono","Consolas",monospace;
+    background-color: #3e3c3e !important;
+    color: rgba(255, 255, 255, 0.75) !important;
+    font-family: "Source Code Pro", "Monaco", "Ubuntu Mono", "Consolas", monospace !important;
     border: 1px inset #aaa !important;
     border-radius: 10px;
-    box-shadow: inset 0 0 12px rgba(0,0,0,0.6) !important;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.6) !important;
     margin: 1.1em 0 0.9em !important;
     padding: 8px 15px 7px !important;
   }
-
   code {
     background: #3e3c3e !important;
-    color: rgba(255,255,255,0.75) !important;
-    font-family: "Source Code Pro","Monaco","Ubuntu Mono","Dejavu Sans Mono","Consolas",monospace !important;
+    color: rgba(255, 255, 255, 0.75) !important;
+    font-family: "Source Code Pro", "Monaco", "Ubuntu Mono", "Consolas", monospace !important;
     font-size: 0.75em !important;
     letter-spacing: 0.05em;
-    text-shadow: 0 0 5px rgba(0,0,0,0.4) !important;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.4) !important;
     white-space: nowrap;
-    border-radius: 5px;
+    border: 5px;
     padding: 4px 5px 3px 6px !important;
   }
-
   a {
     color: #1c74a0 !important;
     text-decoration: none;
   }
-  
-  a:after {
+  a::after {
     display: none;
   }
-
   img {
     max-width: 95%;
     vertical-align: middle;
     box-sizing: content-box;
     margin: 0.2em 0;
   }
-
   ul, li {
     letter-spacing: 0.01em;
   }

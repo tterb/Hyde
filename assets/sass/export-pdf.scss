@@ -1,7 +1,7 @@
 $text-color: rgba(#fff, 0.75);
 $code-bg: #3e3c3e;
 $sans-serif: 'Open Sans','Helvetica Neue','Segoe UI',Helvetica,Arial,sans-serif;
-$monospaced: 'Source Code Pro','Monaco','Ubuntu Mono','Dejavu Sans Mono','Consolas',monospace;
+$monospaced: 'Source Code Pro','Monaco','Ubuntu Mono','Consolas',monospace;
 
 @media print {
 
@@ -57,6 +57,7 @@ $monospaced: 'Source Code Pro','Monaco','Ubuntu Mono','Dejavu Sans Mono','Consol
     }
     img {
       max-width: 95%;
+      height: auto;
       margin: 0 auto 0.5em !important;
       padding: 0 !important;
     }
