@@ -23,15 +23,13 @@ const options = {
 	appVersion: appVersion,
   ignore: [
     '.github/*',
-    '.gulp-scss-cache/*',
-    '.sass-cache/*',
-    'modal/*',
+    '*-cache/*',
     '.codeclimate.yml',
     '.travis.yml',
+    '.eslint.yml',
+    '.sass-lint.yml',
     'frontMatter.yml',
-    'Hyde.lnk',
-    'TODO.md',
-    'test.md'
+    '*_.*'
   ]
 };
 
@@ -53,22 +51,21 @@ gulp.task('rebuild', () => {
 
 gulp.task('liveReload', () => {
 	electron.start();
-	//Watch js files and restart Electron if they change
+	// Watch HTML & JS files and restart Electron if they change
+  gulp.watch(['./index.html'], electron.restart);
 	gulp.watch(['./*.js'], electron.restart);
 	gulp.watch(['./assets/js/*.js'], electron.restart);
-  // gulp.watch(['./assets/js/**/*.js'], electron.restart);
-	//watch css files, but only reload (no restart necessary)
+  gulp.watch(['./assets/js/**/*.js'], electron.restart);
+	// Watch CSS & SCSS files, but only reload (no restart necessary)
 	gulp.watch(['./assets/css/*.css'], electron.reload);
 	gulp.watch(['./assets/css/**/*.css'], electron.reload);
   gulp.watch(['./assets/sass/*.scss'], ['scss']);
   gulp.watch(['./assets/sass/**/*.scss'], ['scss']);
-	//watch html
-	gulp.watch(['./index.html'], electron.restart);
 });
 
 gulp.task('scss', () => {
   gulp.src('./assets/sass/*.scss')
-    .pipe(sass().on('error', sass.logError))
+    .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
     .pipe(gulp.dest('./assets/css/'));
   gulp.src('./assets/sass/preview/*.scss')
     .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
@@ -114,11 +111,7 @@ gulp.task('build:osx', (done) => {
 
 
 gulp.task('test', ['launch']);
-
 gulp.task('default', ['rebuild', 'scss', 'launch']);
-
 gulp.task('start', ['rebuild', 'scss', 'launch']);
-
 gulp.task('watch', ['rebuild', 'scss', 'liveReload']);
-
 gulp.task('build', ['build:osx', 'build:win', 'build:linux']);
