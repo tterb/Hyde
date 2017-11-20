@@ -4,7 +4,7 @@ $header-subtle-color: #666;
 $code-text-color: rgba(255,255,255,0.7);
 $code-background: #3a393b;
 $link-color: #1a6b9a;
-$link-hover-color: #28abda;
+$link-hover-color: #30abda;
 
 $system-font: 'Roboto','Segoe UI','Helvetica Neue',Helvetica,Arial,sans-serif;
 $sans-serif: 'Open Sans','Helvetica Neue','Segoe UI',Helvetica,Arial,sans-serif;
@@ -111,7 +111,7 @@ $monospaced: 'Source Code Pro','Monaco','Ubuntu Mono','Dejavu Sans Mono','Consol
   a {
     color: $link-color;
     text-decoration: none;
-    transition: 300ms ease;
+    transition: 200ms ease;
     &:hover, &:focus, &:active {
       color: $link-hover-color;
       text-decoration: none;
@@ -146,7 +146,7 @@ $monospaced: 'Source Code Pro','Monaco','Ubuntu Mono','Dejavu Sans Mono','Consol
       font-family: $monospaced !important;
       background: transparent;
       color: $code-text-color;
-      font-size: 90%;
+      font-size: 95%;
       letter-spacing: 0.045em;
       line-height: 1.7;
       border-radius: 10px;
@@ -159,8 +159,9 @@ $monospaced: 'Source Code Pro','Monaco','Ubuntu Mono','Dejavu Sans Mono','Consol
     font-family: $monospaced !important;
     font-size: 90%;
     letter-spacing: 0.05em;
+    border-radius: 5px;
     margin: 0 2px;
-    padding: 3px 5px 3px 6px;
+    padding: 4px 5px 2.5px 6px;
   }
   blockquote {
     display: flex;

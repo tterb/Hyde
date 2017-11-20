@@ -118,11 +118,11 @@
 #mdPreview a {
   color: #1a6b9a;
   text-decoration: none;
-  transition: 300ms ease;
+  transition: 200ms ease;
 }
 
 #mdPreview a:hover, #mdPreview a:focus, #mdPreview a:active {
-  color: #28abda;
+  color: #30abda;
   text-decoration: none;
 }
 
@@ -161,7 +161,7 @@
   font-family: "Source Code Pro", "Monaco", "Ubuntu Mono", "Dejavu Sans Mono", "Consolas", monospace !important;
   background: transparent;
   color: rgba(255, 255, 255, 0.7);
-  font-size: 90%;
+  font-size: 95%;
   letter-spacing: 0.045em;
   line-height: 1.7;
   border-radius: 10px;
@@ -174,8 +174,9 @@
   font-family: "Source Code Pro", "Monaco", "Ubuntu Mono", "Dejavu Sans Mono", "Consolas", monospace !important;
   font-size: 90%;
   letter-spacing: 0.05em;
+  border-radius: 5px;
   margin: 0 2px;
-  padding: 3px 5px 3px 6px;
+  padding: 4px 5px 2.5px 6px;
 }
 
 #mdPreview blockquote {
