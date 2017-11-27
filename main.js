@@ -18,7 +18,7 @@
 
 'use strict';
 // handle setupevents as quickly as possible
-const setupEvents = require('./assets/js/installer/setupEvents');
+const setupEvents = require('./js/installer/setupEvents');
 if(setupEvents.handleSquirrelEvent()) { return; }
 const electron = require('electron');
 const app = electron.app;
@@ -27,7 +27,7 @@ const dialog = electron.dialog;
 const shell = electron.shell;
 const BrowserWindow = electron.BrowserWindow;
 const {Menu, MenuItem} = require('electron');
-const config = require('./assets/js/config');
+const config = require('./js/config');
 const tray = require('./tray');
 const settings = require('electron-settings');
 const fs = require('fs');
@@ -100,7 +100,6 @@ process.argv.forEach(function(val, index, array) {
     readFile = val;
   }
 });
-
 
 const createWindow = exports.createWindow = (filePath) => {
   let argFile;
@@ -244,10 +243,10 @@ var template = [
 		}}
 	]},
 	{label:'&Help', role: 'help', submenu: [
-		{label:'Markdown Help', click:() => {
-			ipcSend('markdown-modal');
-		}},
-		{type:'separator'},
+		// {label:'Markdown Help', click:() => {
+		// 	ipcSend('markdown-modal');
+		// }},
+		// {type:'separator'},
 		{label:'Documentation', click:() => {
 			shell.openExternal(packageJSON.docs);
 		}},
@@ -257,6 +256,10 @@ var template = [
 		{label:'Report Issue', click:() => {
 			shell.openExternal(packageJSON.repository.bugs);
 		}},
+    {type:'separator'},
+    {label:'Markdown Help', click:() => {
+      ipcSend('markdown-modal');
+    }},
 		{type:'separator'},
 		{label:'About Hyde', click:() => {
 			ipcSend('about-modal');
@@ -359,7 +362,6 @@ app.on('ready', function() {
     mainWindow.webContents.openDevTools();
   }
   
-  
   // FIXME: Window is still being removed from window.windows array
   mainWindow.on('close', (e) => {
     if(process.platform === 'darwin') {
@@ -388,6 +390,7 @@ app.on('ready', function() {
 });
 
 ipc.on('changed-state', (state) => {
+  // hasChanges = settings.get('hasChanges');
   hasChanges = state;
 });
 
@@ -407,11 +410,10 @@ app.on('open-file', (e, path) => {
 
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
-  // On OSX it is common for applications and their menu bar
-  // to stay active until the user quits explicitly with Cmd+Q
-  if(process.platform !== 'darwin') {
+  // On OSX it is common for applications and their menu bar to stay active until the user quits explicitly with Cmd+Q
+  // if(process.platform !== 'darwin') {
     app.quit();
-  }
+  // }
 });
 
 app.on('quit', (e) => {
