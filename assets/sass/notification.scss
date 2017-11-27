@@ -26,7 +26,7 @@ $error-color: #be2424;
   border-radius: 4px;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
-  border: none !important;
+  border: 0 !important;
   margin-top: 20px !important;
   margin-right: 4px !important;
   padding: 0 0 7px 10px !important;
@@ -96,7 +96,7 @@ $error-color: #be2424;
       height: auto !important;
       margin: auto;
     }
-    &:before {
+    &::before {
       position: relative !important;
       font-size: 1.5em !important;
       top: 1.65px;
