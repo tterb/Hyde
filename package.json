@@ -11,7 +11,7 @@
     "package-win": "electron-packager . --overwrite --asar --platform=win32 --arch=ia32 --icon=assets/img/icon/ico/icon.ico --prune=true --out=dist/ --version-string.CompanyName=BStevensonDev --version-string.FileDescription=Hyde-Installer --version-string.ProductName=\"Hyde\"",
     "package-linux": "electron-packager . --overwrite --asar --platform=linux --arch=arm64 --icon=assets/img/icon/png/256x256.png --prune=true --out=dist/ --version-string.CompanyName=BStevensonDev --version-string.FileDescription=Hyde-Installer --version-string.ProductName=\"Hyde\"",
     "create-installer-mac": "electron-installer-dmg ./dist/hyde-darwin-x64/Hyde.app hyde --out=dist/installers/ --overwrite --icon=assets/img/icon/icns/icon.icns",
-    "create-installer-win": "node assets/js/installers/windows/createinstaller.js",
+    "create-installer-win": "node js/installers/windows/createinstaller.js",
     "create-installer-linux": "electron-installer-debian ./dist/hyde-linux-x64/ --out=dist/installers/ --arch=arm64 --overwrite  --icon=assets/img/icon/icns/icon.icns"
   },
   "build": {
@@ -75,7 +75,7 @@
     "gulp-sass": "^3.1.0"
   },
   "dependencies": {
-    "codemirror": "^5.18.2",
+    "codemirror": "^5.32.0",
     "codemirror-spell-checker": "^1.1.2",
     "color": "^2.0.0",
     "devtron": "^1.4.0",
@@ -85,7 +85,7 @@
     "electron-json-storage": "latest",
     "electron-localshortcut": "^0.6.1",
     "electron-settings": "^3.1.4",
-    "electron-window": "^0.8.1",
+    "electron-window": "https://github.com/JonSn0w/electron-window/tarball/master",
     "electron-window-state": "^4.1.1",
     "emojify.js": "^1.1.0",
     "jquery": "^3.1.0",
