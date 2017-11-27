@@ -29,7 +29,8 @@ ipc.on('file-new', function() {
 		if(err) notify(err, 'error');
 	});
 	this.currentFile = '';
-	this.updateWindowTitle('New Document');
+	main.createWindow();
+	// this.updateWindowTitle('New Document');
 	cm.getDoc().setValue('');
 });
 
@@ -72,16 +73,17 @@ ipc.on('file-open', () => {
 			'extensions': ['md','markdown','mdown','mkdn','mkd','mdwn','mdtxt','mdtext']
 		}]
 	};
-  if('filename' in data)
-    options.defaultPath = data.filename;
+  // if('filename' in data)
+  //   options.defaultPath = data.filename;
   dialog.showOpenDialog(options, (file) => {
 		if(file === undefined) {
 			return notify('You didn\'t select a file to open', 'info');
 		}
-    data = { 'filename' : file[0] };
+    main.getWindows()[remote.getCurrentWindow().id].filePath = { 'filename' : file[0] };
+		if('filename' in file)
+			options.defaultPath = data.filename;
 		storage.set('markdown-savefile', { 'filename' : file[0] },
     (err) => { if(err) notify(err, 'error'); });
-
 		this.isFileLoadedInitially = true;
 		this.currentFile = file[0];
     if(!this.isClean()) {
@@ -173,7 +175,7 @@ ipc.on('markdown-modal', () => { $('#markdown-modal').modal(); });
 ipc.on('table-modal', () => { $('#table-modal').modal(); });
 ipc.on('insert-emoji', () => { $('#emoji-modal').modal(); });
 ipc.on('keybinding-modal', () => { settings.set('targetFile', path.join(__dirname, '/docs/keybindings.md')); main.createWindow(); });
-ipc.on('has-changes', () => { ipc.send('changed-state', !isClean()); });
+ipc.on('has-changes', () => { ipc.send('changed-state', !this.isClean()); });
 ipc.on('open-file-manager', () => { shell.showItemInFolder(currentFile); });
 ipc.on('target-file', () => { return target; });
 ipc.on('set-theme', function(data) { setEditorTheme(data); });

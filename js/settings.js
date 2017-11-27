@@ -1,4 +1,4 @@
-const config = require('./assets/js/config');
+const config = require('./js/config');
 var menu = $('#appMenu'),
 		toolbar = $('#toolbar'),
 		leftFade = $('#leftFade'),
@@ -105,7 +105,8 @@ var formatHead = () => {
 			dragArea.css({ 'width': 'calc(100% - 117px)' });
 			editor.css('paddingTop', '5px');
 			textPanel.css('paddingTop', '0px');
-			preview.css('paddingTop', '30px');
+			if(settings.get('previewMode') === 'markdown')
+				preview.css('paddingTop', '30px');
 		}
 	}
 };
@@ -202,6 +203,13 @@ function setPreviewMode(opt) {
 	var markdown = $('#mdPreview'),
 			html = $('#htmlPreview'),
 			htmlText = '';
+	if(markdown.is(':visible') && opt === 'read') {
+		$('#rightPanel').css('width','100%');
+		$('#leftPanel').hide();
+		$('leftFade').hide();
+		$('#previewPanel').css('paddingLeft', '5%');
+		$('#previewPanel').css('paddingRight', '5%');
+	}
   if(markdown.is(':visible') && opt === 'html') {
 		markdown.hide();
 		html.show();
@@ -338,16 +346,16 @@ function toggleTooltips() {
 
 function manageWindowSize() {
 	var codeMirror = $('.CodeMirror-sizer');
-	if(preview.is(':visible') && parseInt($('#body').width(),10) > 987) {
-		toolbar.css('width', '50%');
-		codeMirror.css('margin-right', '0');
-	} else {
+	if(preview.is(':visible') && $('.toolbar-buttons').height() > 40) {
 		toolbar.css('width', '100%');
 		codeMirror.css('margin-right', '8px');
 		if(!menu.is(':visible') && toolbar.is(':visible'))
 			dragArea.css('width','calc(36% - 50px)');
+	} else {
+		toolbar.css('width', '50%');
+		codeMirror.css('margin-right', '0');	
 	}
-	settings.set('windowWidth', parseInt($(window).width(),10));
+	settings.set('windowWidth', parseInt($('#body').width(),10));
 	settings.set('windowHeight', parseInt($(window).height(),10));
 }
 

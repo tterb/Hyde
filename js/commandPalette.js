@@ -1,5 +1,5 @@
 const CmdPalette = require('electron-command-palette');
-const cmds = require(path.join(__dirname, '../','json','commands.json'));
+const cmds = require(path.join(__dirname, '../','assets','json','commands.json'));
 let palette = new CmdPalette();
 palette.add(cmds);
 

@@ -7,12 +7,12 @@ const fs = remote.require('fs');
 const main = remote.require('./main');
 const path = require('path');
 const showdown  = require('showdown');
-const notify = require('./assets/js/notify');
-const argHandling = require('./assets/js/argHandling');
-const katex = require('./assets/js/parseTex');
+const notify = require('./js/notify');
+const argHandling = require('./js/argHandling');
+const katex = require('./js/parseTex');
 const settings = require('electron-settings');
 const storage = require('electron-json-storage');
-const commandPalette = require('./assets/js/commandPalette');
+const commandPalette = require('./js/commandPalette');
 const spellChecker = require('codemirror-spell-checker');
 const packageJSON = require(path.join(__dirname, '/package.json'));
 const emoji = require('node-emoji');
@@ -69,12 +69,14 @@ var cm = CodeMirror.fromTextArea(document.getElementById('markdownText'), conf);
 setEditorTheme(theme);
 
 if(os.type() === 'Darwin') {
+	var settingsTitle = $('#settings-title'),
+		settingsSection = $('#settings-section');
 	$('.CodeMirror-scroll').css('paddingTop', '35px');
-	$('#settings-title').css('paddingTop', '1.5em');
-	$('#settings-title > img').css('marginTop', '-13px');
-	$('#settings-title > h2').css('font-size', '3.175em');
-	$('#settings-section h3').css('letter-spacing', '0.045em');
-	$('#settings-section ul li').css('letter-spacing', '0.075em');
+    settingsTitle.css('paddingTop', '1.5em');
+    settingsTitle.find('> img').css('marginTop', '-13px');
+    settingsTitle.find('> h2').css('font-size', '3.175em');
+    settingsSection.find('h3').css('letter-spacing', '0.045em');
+    settingsSection.find('ul li').css('letter-spacing', '0.075em');
 }
 
 function setEditorTheme(theme) {
@@ -123,10 +125,10 @@ window.onload = () => {
 	fillEmojiModal();
 
   // Render editor changes to live-preview
-	cm.on('change', (cm) => { renderMarkdown(cm); });
+	cm.on('change', (cm) => { renderMarkdown(cm); sendIPC('has-changes'); });
 
 	// Open preview links in default browser
-	$('#mdPreview a').on('click', function() {
+	$('#mdPreview').find('a').on('click', function() {
 		event.preventDefault();
 		openInBrowser($(this).attr('href'));
 	});
@@ -157,7 +159,6 @@ window.onload = () => {
 
 	$('#minimize').on('click', () => { remote.BrowserWindow.getFocusedWindow().minimize(); });
 	$('#close').on('click', () => { closeWindow(remote.BrowserWindow.getFocusedWindow()); });
-	$('#sidebar-new').on('click', () => { main.createWindow(); });
 	$('.link').on('click', function() {
 		event.preventDefault();
 		openInBrowser($(this).attr('href'));
@@ -187,21 +188,21 @@ var preview = $('#previewPanel'),
 		syncScroll = $('#syncScrollToggle'),
 		isSynced = settings.get('syncScroll');
 		
-if(settings.get('previewMode') === 'html')
-  markdown = $('#htmlPreview');
+// if(settings.get('previewMode') === 'html')
+//   markdown = $('#htmlPreview');
 
- // Retaining state in boolean is more CPU friendly than selecting on each event
+// Retaining state in boolean is more CPU friendly
 var toggleSyncScroll = () => {
-	if(settings.get('syncScroll')) {
-		syncScroll.attr('class', 'fa fa-unlink');
-		isSynced = false;
-		$(window).trigger('resize');
-	} else {
-		syncScroll.attr('class', 'fa fa-link');
-		isSynced = true;
-		$(window).trigger('resize');
-	}
-	settings.set('syncScroll', isSynced);
+    if(settings.get('syncScroll')) {
+        syncScroll.attr('class', 'fa fa-unlink');
+        isSynced = false;
+        $(window).trigger('resize');
+    } else {
+        syncScroll.attr('class', 'fa fa-link');
+        isSynced = true;
+        $(window).trigger('resize');
+    }
+    settings.set('syncScroll', isSynced);
 };
 syncScroll.on('change', () => { toggleSyncScroll(); });
 
@@ -347,7 +348,6 @@ function openInBrowser(url) {
 
 function renderMarkdown(cm) {
 	let markdownText = cm.getValue();
-	sendIPC('has-changes');
 	// Remove the YAML frontmatter
 	if(settings.get('hideYAMLFrontMatter'))
 		markdownText = removeYAMLPreview(markdownText);
@@ -361,7 +361,7 @@ function renderMarkdown(cm) {
 	// Markdown -> Preview
 	$('#mdPreview').html(renderedMD);
   // Allows for making '<br>' tags more GitHub-esque
-	$('#mdPreview p').each(function() {
+	$('#mdPreview').find('p').each(function() {
 		if($(this).html() === '<br>') {
 			$(this).attr('class', 'break');
 		}
@@ -370,8 +370,8 @@ function renderMarkdown(cm) {
 	converter.setOption('noHeaderId', true);
   $('#htmlPreview').val(converter.makeHtml(markdownText));
 	// Handle preview checkboxes
-	$('#mdPreview :checkbox').removeAttr('disabled');
-	$('#mdPreview :checkbox').on('click', function() {
+	$('#mdPreview').find(':checkbox').removeAttr('disabled');
+	$('#mdPreview').find(':checkbox').on('click', function() {
 		event.preventDefault();
 	});
 	if(this.isFileLoadedInitially) {
@@ -383,5 +383,5 @@ function renderMarkdown(cm) {
 }
 
 var formatEmoji = (code, name) => {
-  return '<span class="emoji emoji-'+ name +'" alt="' + code + '">'+ code +'</span>';
+  return '<span class="emoji emoji-'+ name + code + '">'+ code +'</span>';
 };
