@@ -1,4 +1,3 @@
-
 engines:
   csslint:
     enabled: true
@@ -29,14 +28,7 @@ engines:
       no-unused-expressions:
         enabled: false
   fixme:
-    enabled: true
-    checks:
-      TODO:
-        enabled: false
-      FIXME:
-        enabled: false
-      NOTE:
-        enabled: false
+    enabled: false
 
 ratings:
   paths:
@@ -49,8 +41,8 @@ exclude_paths:
   - "assets/css/metro-icons.min.css"
   - "assets/css/font-awesome.min.css"
   - "assets/css/fonts/*"
-  - "assets/js/codemirror/*"
-  - "assets/js/showdown-icon.js"
+  - "js/codemirror/*"
+  - "js/showdown-icon.js"
   - "assets/img/*"
 
 parserOptions:
@@ -117,7 +109,13 @@ rules:
   dot-location: off
   dot-notation: off
   eqeqeq: error
+  file-lines:
+    config:
+      threshold: 350
   guard-for-in: error
+  method-lines:
+    config:
+      threshold: 60
   no-alert: error
   no-caller: error
   no-case-declarations: error
@@ -329,4 +327,4 @@ rules:
   symbol-description: off
   template-curly-spacing: off
   yield-star-spacing: off
-  "complexity": ["error", 12]
+  "complexity": ["error", 15]
