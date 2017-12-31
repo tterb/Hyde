@@ -83,18 +83,18 @@
     "electron-command-palette": "^0.1.1",
     "electron-config": "^1.0.0",
     "electron-json-storage": "latest",
-    "electron-localshortcut": "^0.6.1",
+    "electron-localshortcut": "^2.0.2",
     "electron-settings": "^3.1.4",
-    "electron-window": "https://github.com/JonSn0w/electron-window/tarball/master",
+    "electron-window": "^0.8.1",
     "electron-window-state": "^4.1.1",
     "emojify.js": "^1.1.0",
     "jquery": "^3.1.0",
     "katex": "^0.9.0-alpha1",
     "lodash": "^4.17.4",
     "node-emoji": "^1.8.1",
-    "parse-filepath": "1.0.1",
+    "parse-filepath": "1.0.2",
     "showdown": "^1.8.1",
     "showdown-youtube": "^1.2.1",
-    "yargs": "^9.0.1"
+    "yargs": "^10.0.3"
   }
 }
