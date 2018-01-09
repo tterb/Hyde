@@ -16,7 +16,7 @@ $monospaced: 'SFMono-Regular', Consolas, Inconsolata, 'Liberation Mono', Menlo, 
   line-height: 1.5;
   text-rendering: geometricPrecision;
   margin-top: 0;
-  overflow: none;
+  overflow: hidden;
   h1, h2, h3, h4, h5, h6 {
     font-weight: 600;
     line-height: 1.25;
@@ -119,6 +119,7 @@ $monospaced: 'SFMono-Regular', Consolas, Inconsolata, 'Liberation Mono', Menlo, 
       font-family: $monospaced !important;
       background: transparent;
       letter-spacing: 0.045em;
+      white-space: pre-wrap;
       &::before, &::after {
         letter-spacing: -0.2em;
         content: '';
@@ -132,6 +133,7 @@ $monospaced: 'SFMono-Regular', Consolas, Inconsolata, 'Liberation Mono', Menlo, 
     border-radius: 5px;
     margin: 0;
     padding: 0.2em 0;
+    white-space: nowrap;
     &::before, &::after {
       letter-spacing: -0.2em;
       content: '\00a0';
@@ -154,7 +156,7 @@ $monospaced: 'SFMono-Regular', Consolas, Inconsolata, 'Liberation Mono', Menlo, 
     border-collapse: collapse;
     margin-left: 10px;
     tr {
-      background-color: #f8f7f5;
+      background-color: #f8f8f8;
       border: 1px solid #c6cbd1;
       &:nth-child(2n) {
         background-color: #ecedee;

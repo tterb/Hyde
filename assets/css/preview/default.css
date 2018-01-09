@@ -5,7 +5,7 @@
   letter-spacing: 0.0375em;
   line-height: 1.5;
   text-rendering: geometricPrecision;
-  overflow: auto;
+  overflow: hidden;
   margin-top: 0;
 }
 
@@ -37,7 +37,6 @@
   font-size: 1.6em;
   letter-spacing: 0.01em;
   line-height: 1.3;
-  margin-top: 10px;
   margin-bottom: 15px;
 }
 
@@ -148,12 +147,12 @@
 }
 
 #mdPreview pre {
-  background: #3a393b;
+  background: #333237;
   color: rgba(255, 255, 255, 0.7);
   border: 1px inset #fff;
   border-radius: 10px;
   margin: 15px 5px 20px;
-  padding: 8px 16px;
+  padding: 12px 16px;
   box-shadow: inset 0 0 14px rgba(0, 0, 0, 0.5);
   overflow: hidden;
 }
@@ -167,6 +166,7 @@
   line-height: 1.7;
   border-radius: 10px;
   padding: 2px 0 3px;
+  white-space: pre-wrap;
 }
 
 #mdPreview code {
@@ -178,6 +178,7 @@
   border-radius: 5px;
   margin: 0 2px;
   padding: 4px 5px 2.5px 6px;
+  white-space: nowrap;
 }
 
 #mdPreview blockquote {
@@ -187,12 +188,13 @@
   font-size: 95%;
   border-left: 3px solid rgba(0, 0, 0, 0.5);
   border-radius: 5px;
-  margin: 15px 10px;
+  margin: 15px 10px 25px;
   padding: 10px 20px 11px;
 }
 
 #mdPreview blockquote > p {
   margin-bottom: 0;
+  line-height: 1.65;
 }
 
 #mdPreview table {
@@ -201,23 +203,23 @@
 }
 
 #mdPreview table tr {
-  background-color: #f8f7f5;
-  border: 1px solid #c6cbd1;
+  background-color: #f8f8fa;
+  border: 1px solid #c6c8d1;
 }
 
 #mdPreview table tr:nth-child(2n) {
-  background-color: #eeeff0;
+  background-color: #f0f1f3;
 }
 
 #mdPreview table th {
-  background-color: #f4f5f6;
+  background-color: #f0f1f3;
   font-size: 1em;
   font-weight: 700;
   letter-spacing: 0.03em;
 }
 
 #mdPreview table th, #mdPreview table td {
-  border: 1px solid #dfe2e5;
+  border: 1px solid #dadada;
   padding: 6px 13px;
 }
 

@@ -5,7 +5,7 @@
   line-height: 1.5;
   text-rendering: geometricPrecision;
   margin-top: 0;
-  overflow: none;
+  overflow: hidden;
 }
 
 #mdPreview h1, #mdPreview h2, #mdPreview h3, #mdPreview h4, #mdPreview h5, #mdPreview h6 {
@@ -128,6 +128,7 @@
   font-family: "SFMono-Regular", Consolas, Inconsolata, "Liberation Mono", Menlo, monospace !important;
   background: transparent;
   letter-spacing: 0.045em;
+  white-space: pre-wrap;
 }
 
 #mdPreview pre code::before, #mdPreview pre code::after {
@@ -142,6 +143,7 @@
   border-radius: 5px;
   margin: 0;
   padding: 0.2em 0;
+  white-space: nowrap;
 }
 
 #mdPreview code::before, #mdPreview code::after {
@@ -170,7 +172,7 @@
 }
 
 #mdPreview table tr {
-  background-color: #f8f7f5;
+  background-color: #f8f8f8;
   border: 1px solid #c6cbd1;
 }
 
