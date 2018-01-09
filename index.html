@@ -21,6 +21,7 @@
   <link rel="stylesheet" href="assets/css/dialog.css">
   <link rel="stylesheet" href="assets/css/scrollbar.css">
   <link rel="stylesheet" href="assets/css/export-pdf.css">
+  <link rel="stylesheet" href="assets/css/fonts.css">
   <script src="node_modules/codemirror/lib/codemirror.js"></script>
   <script src="node_modules/codemirror/mode/markdown/markdown.js"></script>
   <script src="node_modules/codemirror/mode/gfm/gfm.js"></script>
@@ -58,6 +59,19 @@
   <div id="draggable" style="-webkit-app-region:drag"></div>
   <div id="menuToggle">
     <button id="menuButton" onclick="toggleToolbar()"><span class="mif-menu"></span></button>
+  </div>
+  <div class="window-controls">
+    <ul class="window-buttons">
+      <li id="close" class="closer">
+        <i class="material-icons">close</i>
+      </li>
+      <li id="minimize" class="minimizer">
+        <i class="material-icons">remove</i>
+      </li>
+      <li id="maximize" class="maximizer">
+        <i class="material-icons">crop_square</i>
+      </li>
+    </ul>
   </div>
   <div id="metacity">
     <button id="close" class="window-button" style="cursor: pointer;"><img class="active" src="assets/img/buttons/close_active.png" alt="Close"/><img class="hover" src="assets/img/buttons/close_hover.png" alt="Close"/><img class="inactive" src="assets/img/buttons/close.png" alt="Close"/></button>
@@ -174,7 +188,7 @@
     </div>
   </div>
   <div id="toolbar">
-    <div class="toolbar-buttons" style="padding:5px 12px 2px;">
+    <div class="toolbar-buttons">
       <a onclick="toggleHeading();" style="padding-left:4x;" data-tooltip="Header (Ctrl+H)" class="fa fa-header editor-toolbar"></a>
       <a onclick="toggleFormat('strong');" data-tooltip="Bold (Ctrl+B)" class="fa fa-bold editor-toolbar"></a>
       <a onclick="toggleFormat('em');" data-tooltip="Italic (Ctrl+I)" class="mif-italic editor-toolbar"></a>
@@ -422,6 +436,13 @@
     <div class="modal-dialog">
       <div class="modal-content modal-inset">
         <div class="modal-header">
+          <!-- <div class="modal-closer">
+            <ul>
+              <li class="closer" data-dismiss="modal">
+                <i class="material-icons">close</i>
+              </li>
+            </ul>
+          </div> -->
           <button type="button" class="modal-close" data-dismiss="modal"><img class="inactive" src="assets/img/buttons/close.png" alt="Close"/><img class="hover" src="assets/img/buttons/close_hover.png" alt="Close"/><img class="active" src="assets/img/buttons/close_active.png" alt="Close"/>
           </button>
           <h4 class="modal-title">Emoji</h4>

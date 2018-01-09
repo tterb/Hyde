@@ -396,6 +396,7 @@ label {
 }
 
 .toolbar-buttons {
+  padding: 4.5px 12px 2px;
   a {
     position: relative;
     top: 0;
@@ -770,7 +771,7 @@ input[type='checkbox'] {
   }
   .settings-section {
     position: relative;
-    top: 80px;
+    top: 75px;
     padding: 2px 0 6px 17px;
     h3 {
       color: rgba(255,255,255,0.775);
@@ -1054,11 +1055,11 @@ input[type='checkbox'] {
 #toolbar {
   display: none;
   position: fixed;
-  background-image: -webkit-linear-gradient(top, #343134, #2c2a2c);
+  background-image: -webkit-linear-gradient(top, #343334, #2e2d2e);
   top: 0;
   left: 0;
   width: 50%;
-  height: 34px;
+  height: 35px;
   border-bottom: 1px #2a2a2a solid;
   box-shadow: 0 2px 5px rgba(0,0,0,0.5);
   transition: width 600ms cubic-bezier(0.17, 0.04, 0.03, 0.75);
@@ -1080,10 +1081,11 @@ input[type='checkbox'] {
   width: 100%;
   padding: 0;
   overflow-y: auto;
+  cursor: url('../img/cursor_light.png') !important;
   text-rendering: geometricPrecision;
   > div {
     font-size: 11.5px;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.07em;
     line-height: 1.5;
     padding: 0 0 30px;
   }
@@ -1135,6 +1137,11 @@ input[type='checkbox'] {
   margin-top: 0.5px;
   overflow-y: auto;
   text-rendering: geometricPrecision;
+  #mdPreview {
+    text-rendering: geometricPrecision;
+    overflow: hidden !important;
+    margin-top: 0;
+  }
   input[type='checkbox'] {
     color: #000;
     left: 0;
@@ -1249,7 +1256,7 @@ input[type='checkbox'] {
 }
 
 .cm-header {
-  letter-spacing: 0.025em;
+  letter-spacing: 0.035em;
 }
 
 // When trialing whitespace is visible
@@ -1309,7 +1316,7 @@ input[type='checkbox'] {
   border: 0;
   word-wrap: break-word;
   text-rendering: geometricPrecision;
-  padding: 0 20px;
+  padding: 20px;
   overflow-y: auto;
   outline: none !important;
   resize: none;
@@ -1604,4 +1611,128 @@ input:disabled + .switch__toggle {
   bottom: -10px;
   left: -15px;
   right: -15px;
+}
+
+.window-controls {
+  position: absolute;
+  top: 0;
+  left: 10px;
+  width: 55px;
+  height: 26px;
+  z-index: 1000;
+  // &:hover li .material-icons {
+  //   opacity: 1;
+  // }
+  li {
+    position: absolute;
+    text-align: center;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    width: 12px;
+    height: 12px;
+    line-height: 12.25px;
+    border-radius: 99px;
+    outline: 0;
+    -webkit-app-region: no-drag;
+    &:hover .material-icons {
+      opacity: 1;
+    }
+  }
+  .material-icons {
+    font-size: 9.75px;
+    opacity: 0;
+    transition: opacity 300ms;
+    cursor: pointer;
+  }
+  .closer {
+    color: #600603;
+    background-color: #ea5f56;
+    left: 0;
+    &:hover {
+      background-color: #f55f56;
+      box-shadow: 0 0 2px #660603;
+    }
+    &:active {
+      background-color: #d04942;
+    }
+  }
+  .minimizer {
+    color: #65551f;
+    background-color: #f3bf3e;
+    left: 21px;
+    &:hover {
+      background-color: #fac42e;
+      box-shadow: 0 0 2px #65551f;
+    }
+    &:active {
+      background-color: #ce9314;
+    }
+  }
+  .maximizer {
+    // color: #147322;
+    color: #205810;
+    background-color: #64c459;
+    left: 42px;
+    &:hover {
+      background-color: #37c94f;
+      box-shadow: 0 0 2px #205810;
+    }
+    &:active {
+      background-color: #20a934;
+    }
+  }
+}
+
+.window-buttons {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.modal-closer {
+  position: absolute;
+  top: 1%;
+  left: 94.5%;
+  width: 15px;
+  height: 25px;
+  z-index: 1000;
+  ul {
+    list-style: none;
+  }
+  li {
+    position: absolute;
+    text-align: center;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    width: 13px;
+    height: 13px;
+    line-height: 13.5px;
+    border-radius: 99px;
+    outline: 0;
+    -webkit-app-region: no-drag;
+    cursor: pointer;
+    &:hover .material-icons {
+      opacity: 1;
+    }
+    .material-icons {
+      font-size: 9.75px;
+      opacity: 0;
+      transition: opacity 300ms;
+    }
+  }
+}
+
+.closer {
+  color: #600603;
+  background-color: #ea5f56;
+  left: 0;
+  &:hover {
+    background-color: #f55f56;
+    box-shadow: 0 0 2px #660603;
+  }
+  &:active {
+    background-color: #d04942;
+  }
 }
