@@ -3,6 +3,7 @@ const electron = require('electron');
 const remote = electron.remote;
 const dialog = electron.remote.dialog;
 const shell = electron.shell;
+const app = electron.remote.app;
 const fs = remote.require('fs');
 const main = remote.require('./main');
 const path = require('path');
@@ -18,9 +19,8 @@ const packageJSON = require(path.join(__dirname, '/package.json'));
 const emoji = require('node-emoji');
 const Color = require('color');
 const os = require('os');
-//conse marked = require('marked');
-// const highlight = require('showdown-highlight');
 require('showdown-youtube');
+require('showdown-highlightjs-extension');
 
 getUserSettings();
 let currentTheme = settings.get('editorTheme');
@@ -115,7 +115,7 @@ let converter = new showdown.Converter({
 		simplifiedAutoLink: false,
 		excludeTrailingPunctuationFromURLs: true,
 		disableForced4SpacesIndentedSublists: true,
-		extensions: ['youtube']
+		extensions: ['highlightjs','youtube']
 });
 
 window.onload = () => {
@@ -125,7 +125,7 @@ window.onload = () => {
 	fillEmojiModal();
 
   // Render editor changes to live-preview
-	cm.on('change', (cm) => { renderMarkdown(cm); sendIPC('has-changes'); });
+	cm.on('change', (cm) => { renderMarkdown(cm); });
 
 	// Open preview links in default browser
 	$('#mdPreview').find('a').on('click', function() {
@@ -193,16 +193,16 @@ var preview = $('#previewPanel'),
 
 // Retaining state in boolean is more CPU friendly
 var toggleSyncScroll = () => {
-    if(settings.get('syncScroll')) {
-        syncScroll.attr('class', 'fa fa-unlink');
-        isSynced = false;
-        $(window).trigger('resize');
-    } else {
-        syncScroll.attr('class', 'fa fa-link');
-        isSynced = true;
-        $(window).trigger('resize');
-    }
-    settings.set('syncScroll', isSynced);
+  if(settings.get('syncScroll')) {
+    syncScroll.attr('class', 'fa fa-unlink');
+    isSynced = false;
+    $(window).trigger('resize');
+  } else {
+    syncScroll.attr('class', 'fa fa-link');
+    isSynced = true;
+    $(window).trigger('resize');
+  }
+  settings.set('syncScroll', isSynced);
 };
 syncScroll.on('change', () => { toggleSyncScroll(); });
 
@@ -287,7 +287,7 @@ $('.spinner .btn').on('click', function() {
 	input.val(value);
 	settings.set(btn.attr('id').split('-')[0], value);
   $('#mdPreview').css('font-size', settings.get('previewFontSize'));
-  $('#textPanel > div').css('font-size', settings.get('editorFontSize'));
+  $('#textPanel').find('> div').css('font-size', settings.get('editorFontSize'));
 });
 
 $('#leftAlign, #centerAlign, #rightAlign').on('click', function() {
@@ -375,10 +375,11 @@ function renderMarkdown(cm) {
 		event.preventDefault();
 	});
 	if(this.isFileLoadedInitially) {
-		this.setClean();
+		setClean();
 		this.isFileLoadedInitially = false;
 	}
 	this.updateWindowTitle(this.currentFile);
+	app.hasChanges = !this.isClean();
 	countWords();
 }
 
