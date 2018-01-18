@@ -54,8 +54,7 @@ gulp.task('liveReload', () => {
 	// Watch HTML & JS files and restart Electron if they change
   gulp.watch(['./index.html'], electron.restart);
 	gulp.watch(['./*.js'], electron.restart);
-	gulp.watch(['./assets/js/*.js'], electron.restart);
-  gulp.watch(['./assets/js/**/*.js'], electron.restart);
+	gulp.watch(['./js/*.js'], electron.restart);
 	// Watch CSS & SCSS files, but only reload (no restart necessary)
 	gulp.watch(['./assets/css/*.css'], electron.reload);
 	gulp.watch(['./assets/css/**/*.css'], electron.reload);
