@@ -37,8 +37,9 @@ let conf = {
   matchBrackets: settings.get('matchBrackets'),
   matchTags: settings.get('matchBrackets'),
 	highlightSelectionMatches: true,
-  cursorScrollMargin: 50,
-	cursorBlinkRate: 425,
+	githubSpice: false,
+  cursorScrollMargin: 80,
+	cursorBlinkRate: 415,
 	autofocus: true,
 	extraKeys: {
 		Enter: 'newlineAndIndentContinueMarkdownList'
@@ -71,7 +72,7 @@ setEditorTheme(theme);
 if(os.type() === 'Darwin') {
 	var settingsTitle = $('#settings-title'),
 		settingsSection = $('#settings-section');
-	$('.CodeMirror-scroll').css('paddingTop', '35px');
+	// $('.CodeMirror-scroll').css('paddingTop', '35px');
     settingsTitle.css('paddingTop', '1.5em');
     settingsTitle.find('> img').css('marginTop', '-13px');
     settingsTitle.find('> h2').css('font-size', '3.175em');

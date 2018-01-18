@@ -12,7 +12,7 @@
 .CodeMirror-lines {
   padding: 5px 0 0; /* Vertical padding around content */
   min-height: 1px; /* prevents collapsing before first draw */
-  cursor: text;
+  cursor: url('../img/cursor_light.png') !important;
 }
 .CodeMirror pre {
   font-size: 18px;
@@ -162,9 +162,14 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {
 
 .CodeMirror-scroll {
   overflow: scroll !important;
-  margin-bottom: -30px; margin-right: -30px;
-  padding: 35px 0 30px;
-  height: -webkit-calc(100% - 23px);
+  /* margin-bottom: -30px; */
+  /* margin-bottom: 0; */
+  margin-right: -30px;
+  /* padding: 35px 0 30px; */
+  /* padding: 35px 0 0; */
+  padding: 0 0 35px;
+  /* height: -webkit-calc(100% - 23px); */
+  height: 100%;
   outline: none;  /* Prevent dragging from highlighting the element */
   position: relative;
 }
@@ -290,6 +295,7 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {
 /*.CodeMirror-widget {}*/
 
 .CodeMirror-code {
+  margin-top: 32px;
   outline: none;
 }
 
