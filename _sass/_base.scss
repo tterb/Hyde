@@ -10,7 +10,7 @@ dl, dd, ol, ul, figure {
 $base-line-height:                    1.5em;
 $horizontal-spacing-unit:              50px;
 $vertical-spacing-unit:                40px;
-$nav-height:                         3.25em;
+$nav-height:                          2.8em;
 
 // portfolio tinkering
 $img-spacing:                           5px;
@@ -37,18 +37,25 @@ $text-color: #555;
 
 // Basic styling
 body {
+  background-color: $background-color;
+  color: $text-color;
+  font-family: _font(ctrl-family);
+  font-size: $base-font-size;
+  font-weight: 300;
+  line-height: $base-line-height;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
   width: 100%;
   height: 100%;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-  font-family: _font(ctrl-family);
-  font-size: $base-font-size;
-  line-height: $base-line-height;
-  font-weight: 100;
-  color: $text-color;
-  background-color: $background-color;
-  -webkit-text-size-adjust: 100%;
+}
+
+html {
+  margin: 0;
+  padding: 0;
 }
 
 // Set `margin-bottom` to maintain vertical rhythm
@@ -63,7 +70,12 @@ ul, ol, dl, figure,
 }
 
 a {
+  color: rgba(#fff, 0.65);
   text-decoration: none;
+  border-bottom: 1px dotted transparent;
+  &:hover, &:active {
+    border-bottom: 1px dotted rgba(#fff, 0.65);
+  }
 }
 
 hr {
