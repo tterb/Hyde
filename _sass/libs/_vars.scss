@@ -1,5 +1,7 @@
 /* Variables */
 
+@import 'bourbon/bourbon';
+
 // Misc
 $misc: (
   max-spotlights:		10,
@@ -9,26 +11,26 @@ $misc: (
 
 // Duration
 $duration: (
-  transitions:		0.2s,
-  menu:				    0.5s,
-  fadein:				    3s
+  transitions:		  0.2s,
+  menu:				      0.5s,
+  fadein:				      3s
 );
 
 // Size
 $size: (
-  element-height:		2.75em,
-  element-margin:		2em,
-  letter-spacing:		0.075em,
-  letter-spacing-alt:	0.2em
+  element-height:		   2.75em,
+  element-margin:		      2em,
+  letter-spacing:		  0.075em,
+  letter-spacing-alt:	  0.2em
 );
 
 // Font
 $font: (
-  thin:                     100,
-  light:                    300,
-  normal:				      			400,
-  bold:		             			700,
-  extrabold:	              800,
+  thin:                       100,
+  light:                      300,
+  normal:				      		  	400,
+  bold:		             			  700,
+  extrabold:	                800,
   monospace-family:	       ('Source Code Pro', 'Inconsolata', 'Monaco', monospace),
   fixed-size:                 1em,
   inline-fixed-size:       1.05em,
@@ -87,42 +89,39 @@ $font: (
 
 // Palette
 $palette: (
-  bg:                         #292c33,
-  bg-light:					          #fcfbfe,
-  bg-dark:                    #24282d,
-  fg:                 rgba(0,0,0,0.4),
-  fg-light:			rgba(255,255,255,0.6),
-  fg-white:                   #fafafa,
-  fg-header:                  #01040a,
-  border:				    rgba(0,0,0,0.175),
-  border-bg:	 rgba(144,144,144,0.25),
-  border2:			      rgba(0,0,0,0.8),
-  border2-bg:		rgba(144,144,144,0.5),
-  accent1:                    #3d74c0,
-  accent2:                    #dd9dbd,
-  accent3:                       #d44,
+  bg:                           #292c33,
+  bg-light:			  		          #fefdff,
+  bg-dark:                      #24282d,
+  fg:                    rgba(#000,0.4),
+  fg-light:		           rgba(#fff,0.6),
+  fg-white:                     #fafafa,
+  fg-header:                    #01040a,
+  border:				       rgba(#000,0.175),
+  border-bg:	      rgba(#909090, 0.25),
+  border2:			         rgba(#000,0.8),
+  border2-bg:		  rgba(144,144,144,0.5),
 
-  accent4: (
-    bg:					   #4f6272,
-    fg-bold:			 #fff,
-    fg:						 mix(#4f6272, #fff, 20%),
-    fg-light:			 mix(#4f6272, #fff, 40%),
-    shadow:        desaturate(darken(#4f6272, 12%), 10%),
-    border:				 rgba(0,0,0,0.125),
-    border-bg:		 rgba(255,255,255,0.075),
-    border2:		   rgba(0,0,0,0.25),
-    border2-bg:		 rgba(255,255,255,0.2)
+  accent1: (
+    bg:					                #4f6272,
+    fg-bold:		  	               #fff,
+    fg:					  	 tint(#4f6272, 20%),
+    fg-light:		  	 tint(#4f6272, 40%),
+    shadow:          desaturate(darken(#4f6272, 12%), 10%),
+    border:			  	   rgba(#000,0.125),
+    border-bg:	  	   rgba(#fff,0.075),
+    border2:		        rgba(#000,0.25),
+    border2-bg:		       rgba(#fff,0.2)
 	),
 
-  accent5: (
-    bg:						 #ff3636,
-    fg-bold:			 #fff,
-    fg:						 mix(#ff3636, #fff, 25%),
-    fg-light:			 mix(#ff3636, #fff, 40%),
-    shadow:        desaturate(darken(#ff3636, 15%), 25%),
-    border:				 rgba(0,0,0,0.125),
-    border-bg:		 rgba(255,255,255,0.075),
-    border2:			 rgba(0,0,0,0.25),
-    border2-bg:		 rgba(255,255,255,0.2)
+  accent2: (
+    bg:						             #ff3636,
+    fg-bold:		  	              #fff,
+    fg:					  	tint(#ff3636, 25%),
+    fg-light:		  	tint(#ff3636, 40%),
+    shadow:         desaturate(darken(#ff3636, 15%), 25%),
+    border:			  	  rgba(#000,0.125),
+    border-bg:		    rgba(#fff,0.075),
+    border2:			     rgba(#000,0.25),
+    border2-bg:		      rgba(#fff,0.2)
 	),
 );
