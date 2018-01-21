@@ -9,17 +9,16 @@ sitemap:
   priority: 0.9
 ---
 
-<!-- <div class="document gradient"></div> -->
-<!-- <h1 class="document page-title">Docs</h1> -->
 <h1 class="document page-title">Docs</h1>
-<section id="TOC" class="document-toc">
+<section id="toc" class="document-toc">
   <h3>Table of Contents</h3>
   <ul class="toc-list">
-    <li><a href="{{ '/docs#about' | prepend: site.baseurl }}">About</a></li>
-    <li><a href="{{ '/docs#install' | prepend: site.baseurl }}">Install</a></li>
-    <li><a href="{{ '/docs#keybindings' | prepend: site.baseurl }}">Keybindings</a></li>
-    <li><a href="{{ '/docs#changelog' | prepend: site.baseurl }}">Changelog</a></li>
-    <li><a href="{{ '/docs#contributing' | prepend: site.baseurl }}">Contributing</a></li>
+    <li><a href="#about" class="scrolly">About</a></li>
+    <li><a href="#install" class="scrolly">Install</a></li>
+    <li><a href="#usage" class="scrolly">Usage</a></li>
+    <li><a href="#keybindings" class="scrolly">Keybindings</a></li>
+    <li><a href="#changelog" class="scrolly">Changelog</a></li>
+    <li><a href="#contributing" class="scrolly">Contributing</a></li>
   </ul>
 </section>
 <section id="about" class="document-section">
@@ -29,15 +28,27 @@ sitemap:
 <hr>
 <section id="install" class="document-section">
   <h2>Install</h2>
-  <p>Though there isn't an installer yet, using Hyde is simple. To use Hyde on any platform, you must first <a href="https://www.npmjs.com/">install npm</a> and download Hyde from the <a href="https://github.com/JonSn0w/Hyde">project repo</a>. Then simply run the following command from within the project directory:
-    <div class="language-shell highlighter-rouge">
-      <pre class="highlight"><code><span class="c"># Clone the repository</span><br><span class="nv">$</span> git clone https://github.com/jonsn0w/hyde<br><br><span class="c"># Navigate to the directory</span><br><span class="nv">$</span> cd hyde<br><br><span class="c"># Install Hyde</span><br><span class="nv">$</span> npm install -g ./</code></pre>
-    </div>
-    Now, <strong>Hyde</strong> can easily be launched from anywhere using the following command:
-    <div class="language-shell highlighter-rouge">
-      <pre class="highlight"><code><span class="nv">$</span> hyde &#60;filename&#62;</code></pre>
-    </div>
-  </p>
+  <p>Though there isn't an installer yet, using Hyde is simple. To use Hyde on any platform, you must first <a href="https://www.npmjs.com/">install npm</a> and download Hyde from the <a href="https://github.com/JonSn0w/Hyde">project repo</a>. Then simply run the following command from within the project directory:</p>
+  <div class="language-shell highlighter-rouge">
+    <pre class="highlight multi-line"><code><span class="c"># Clone the repository</span><br><span class="nv">$</span> git clone https://github.com/jonsn0w/hyde<br><br><span class="c"># Navigate to the directory</span><br><span class="nv">$</span> cd hyde<br><br><span class="c"># Install Hyde</span><br><span class="nv">$</span> npm install -g ./</code></pre>
+  </div>
+  <p>Now, <strong>Hyde</strong> can easily be launched from anywhere using the following command:</p>
+  <div class="language-shell highlighter-rouge">
+    <pre class="highlight"><code><span class="nv">$</span> hyde &#60;filename&#62;</code></pre>
+  </div>
+</section>
+<hr>
+<section id="usage" class="document-section">
+  <h2>Usage</h2>
+  <h3 class="sub-heading">Command-line Interface</h3>
+  <p>Hyde also features a convenient CLI, with support for a handful of helpful features.</p>
+  <div class="language-shell highlighter-rouge">
+    <pre class="highlight"><code><span class="nv">$</span> hyde [options] &#60;filename&#62;</code></pre>
+  </div>
+  <p><strong>Note:</strong> If you'd like to utilize the compiled application, until a published release is available, you must build the app yourself. This can be done using the following command:</p> 
+  <div class="language-shell highlighter-rouge">
+    <pre class="highlight"><code><span class="nv">$</span> gulp build</code></pre>
+  </div>
 </section>
 <hr>
 <section id="keybindings" class="document-section">
@@ -47,8 +58,8 @@ sitemap:
   <table id="table-ops" class="document-table">
     <thead>
       <tr>
-        <th id="table-header">Commands</th>
-        <th id="table-header" style="border-left:none">Shortcut</th>
+        <th class="table-header">Commands</th>
+        <th class="table-header" style="border-left:none">Shortcut</th>
       </tr>
     </thead>
     <tbody>
@@ -104,8 +115,8 @@ sitemap:
     <h3>Editing</h3>
     <thead>
       <tr>
-        <th id="table-header">Commands</th>
-        <th id="table-header" style="border-left:none">Shortcut</th>
+        <th class="table-header">Commands</th>
+        <th class="table-header" style="border-left:none">Shortcut</th>
       </tr>
     </thead>
     <tbody>
@@ -157,8 +168,8 @@ sitemap:
     <h3>Formatting</h3>
     <thead>
       <tr>
-        <th id="table-header">Commands</th>
-        <th id="table-header" style="border-left:none">Shortcut</th>
+        <th class="table-header">Commands</th>
+        <th class="table-header" style="border-left:none">Shortcut</th>
       </tr>
     </thead>
     <tbody>

@@ -9,24 +9,25 @@ sitemap:
   priority: 0.9
 ---
 
-<!-- {% include title.html %} -->
+<h2 class="document page-title lg">Hyde</h2>
 <section class="install-content">
-  <!-- <div class="gradient"></div> -->
   <div class="install-buttons">
     <h3>Choose your platform</h3>
     <button id="winButton" class="platform-button">
-      <img class="os-image" src="{{ site.baseurl }}images/windows.png"/>
+      <img class="os-image" alt="windows" src="images/windows.png"/>
       <span>Windows</span>
     </button>
     <button id="macButton" class="platform-button">
-      <img class="os-image" src="{{ site.baseurl }}images/macOS.png"/>
-      <span>macOS</span></button>
+      <img class="os-image" alt="macOS" src="images/macOS.png"/>
+      <span>macOS</span>
+    </button>
     <button id="linuxButton" class="platform-button">
-      <img class="os-image" src="{{ site.baseurl }}images/linux.png"/>
-      <span>Linux</span></button>
+      <img class="os-image" alt="linux" src="images/linux.png"/>
+      <span>Linux</span>
+    </button>
   </div>
   <div class="alert">
-    <img class="alert-icon" src="{{ site.baseurl }}images/alert.png"/>
-    <span>There aren't installers for Hyde just yet,<br>but you can still download the app like <a href="{{ site.baseurl }}docs#install">this</a></span>
+    <img class="alert-icon" alt="alert" src="images/alert.png"/>
+    <span>There aren't installers for Hyde just yet,<br>but you can still download the app like <a href="{{ 'docs#install' | prepend: site.baseurl }}">this</a></span>
   </div>
 </section>

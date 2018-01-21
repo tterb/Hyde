@@ -9,20 +9,18 @@ sitemap:
   priority: 0.9
 ---
 
-<!-- <div class="document gradient"></div> -->
 <h1 class="document page-title">FAQ</h1>
-<section id="FAQ" class="document-section">
+<section id="faq" class="document-section">
   <ul class="faq-list">
-    {% for entry in site.data.faq %}
-      <li class="faq-item">
-        <div class="faq-question">{{ entry.question }}</div>
-        <img class="expand" src="./css/img/plus.svg"/>
-        <div class="answer-container">
-        <!-- <div class="answer-wrapper"> -->
-          <div class="faq-answer">{{ entry.answer }}</div>
-        </div>
-        <hr>
-      </li>
-    {% endfor %}
+  {% for entry in site.data.faq %}
+    <li class="faq-item">
+      <div class="faq-question">{{ entry.question }}</div>
+      <img class="expand" alt="expand" src="./css/img/plus.svg"/>
+      <div class="answer-container">
+        <div class="faq-answer">{{ entry.answer }}</div>
+      </div>
+      <hr>
+    </li>
+  {% endfor %}
   </ul>
 </section>
