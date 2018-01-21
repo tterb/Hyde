@@ -7,7 +7,16 @@
 <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="{{ 'js/jquery.fitvids.min.js' | absolute_url }}"></script>
 <script type="text/javascript" src="{{ 'js/index.min.js' | absolute_url }}"></script>
-<script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
+<script type="text/javascript" src="{{ 'js/scrollreveal.min.js' | absolute_url }}"></script>
+
+<script>
+(function ($) {
+  "use strict";
+  $(window).load(function() {
+    $("body").removeClass("is-loading");
+  });
+}(jQuery));
+</script>
 
 <script>
 (function ($) {
