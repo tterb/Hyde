@@ -5,7 +5,7 @@
   answer: All of Hyde's keyboard shortcuts can be found <a href="http://JonSn0w.github.io/Hyde/docs#keybindings">here</a>. 
   
 - question: How do I set a Jekyll-frontmatter template?
-  answer: To set a frontmatter template for Jekyll posts, create a <i>.yml</i> file with only the frontmatter used in your Jekyll blog posts or you can also use the default template provided <a href="https://gist.github.com/JonSn0w/c76a3567342f2e230acc6d0b1b287e2d target="_blank"">here</a>. Once this file has been created you can set this as your frontmatter template by opening Hyde's settings menu (<kbd>ctrl + ,</kbd>), selecting the <i>Frontmatter Template</i> text-field and navigating to your created file. 
+  answer: To set a frontmatter template for Jekyll posts, create a <i>.yml</i> file with only the frontmatter used in your Jekyll blog posts or you can also use the default template provided <a href="https://gist.github.com/JonSn0w/c76a3567342f2e230acc6d0b1b287e2d" target="_blank">here</a>. Once this file has been created you can set this as your frontmatter template by opening Hyde's settings menu (<kbd>ctrl + ,</kbd>), selecting the <i>Frontmatter Template</i> text-field and navigating to your created file. 
   
 - question: Can I submit feature requests?
   answer: Of course, the goal of <strong>Hyde</strong> is to create the most accessible markdown editor possible, and getting feedback from users is a huge part of that. I encourage you to submit feature requests <a href="https://github.com/JonSn0w/Hyde/issues/new" target="_blank">here</a>, where you can discuss your suggested feature with the developers. 
