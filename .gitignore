@@ -14,10 +14,11 @@ images/res/*
 images/pre-optimize/*
 images/favicon.ico
 TODO.md
+*_.png
 
 #Non-minified javascript
-js/index.js
-js/jekyll-search.js
-js/main.js
-js/scroll-top.js
-js/util.js
+js/*.js
+!js/*.min.js
+
+*.ai
+*.ps
