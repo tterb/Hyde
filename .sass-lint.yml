@@ -63,7 +63,7 @@ rules:
   force-attribute-nesting:
     - 0
   property-sort-order:
-    - 0
+    - 1
     -
       order:
         - 'display'
@@ -77,6 +77,7 @@ rules:
         - 'font-family'
         - 'font-size'
         - 'font-weight'
+        - 'text-transform'
         - 'text-decoration'
         - 'letter-spacing'
         - 'line-height'
@@ -97,6 +98,7 @@ rules:
         - 'outline'
         - 'box-shadow'
         - 'text-shadow'
+        - 'float'
         - 'margin'
         - 'margin-top'
         - 'margin-left'
@@ -111,11 +113,12 @@ rules:
         - 'overflow-x'
         - 'overflow-y'
         - 'resize'
-        - 'visibility'
         - 'opacity'
+        - 'visibility'
         - 'transition'
         - 'transition-delay'
         - 'transition-duration'
         - 'transition-property'
         - 'transition-timing-function'
+        - 'transform'
         - 'z-index'
