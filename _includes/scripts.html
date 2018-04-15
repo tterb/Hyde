@@ -10,7 +10,7 @@
 <script type="text/javascript" src="{{ 'js/scrollreveal.min.js' | absolute_url }}"></script>
 
 <script>
-(function ($) {
+(function($) {
   "use strict";
   $(window).load(function() {
     $("body").removeClass("is-loading");
@@ -21,12 +21,12 @@
 <script>
 (function ($) {
   "use strict";
-  window.sr = ScrollReveal({ duration: 1000, reset: true });
+  window.sr = ScrollReveal({ duration: 1000, reset: false });
   sr.reveal('.editor-section .feature-list li', 50);
   sr.reveal('.preview-section .feature-list li', 25);
   sr.reveal('.repo-icons a', 20);
   sr.reveal('.tag-line');
-  
+
   $('.faq-item').on('click', function() {
     var answer = $(this).find('.answer-container');
     if (answer.height() > 0) {
