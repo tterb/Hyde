@@ -46,40 +46,40 @@ pre code, code {
   font-size: 2.02vw;
   font-weight: 300;
   line-height: 3em;
-  left: 0;
-  top: 0;
-  height: 2.5em;
   width: 100%;
+  height: 2.5em;
+  top: 0;
+  left: 0;
   z-index: 9999;
   .logo {
     display: inline-block;
     position: relative;
-    float: left;
     left: 4%;
+    float: left;
     a {
       display: inline-block;
-      height: 2.5em;
       width: auto;
+      height: 2.5em;
 		}
 	}
   &.alt {
     @include vendor('transition', 'background-color #{_duration(.8s)} ease');
     @include vendor('transition', 'color #{_duration(.8s)} ease');
     display: block;
-    border: 0;
     line-height: 3em;
-    left: 0;
-    top: 0;
-    height: 3em;
     width: 101%;
+    height: 3em;
+    top: 0;
+    left: 0;
+    border: 0;
     z-index: 9999;
     .title {
-      position: absolute;
       display: inline-block;
+      position: absolute;
+      color: rgba(#fff, 0.75);
       font-family: _font(hdr-family);
       font-size: 2em;
       font-weight: 500;
-      color: rgba(#fff, 0.75);
       top: 0.105em;
       left: 1em;
     }
@@ -95,12 +95,10 @@ pre code, code {
     }
     .logo img {
       @include opacity(0.7);
-      position: relative;
-      height: 1.8em;
+      @include position(relative, 18px null null -58px);
       width: auto;
+      height: 1.8em;
       float: left;
-      top: 18px;
-      left: -58px;
   	}
   }
 }
@@ -111,9 +109,9 @@ pre code, code {
 
 .site-nav {
   position: absolute;
-  float: right;
   line-height: $nav-height;
   right: 2.5%;
+  float: right;
   z-index: 999;
   .page-link {
     // @include transition(color 250ms cubic-bezier(0.84, 0.17, 0.23, 0.57), font-weight 250ms cubic-bezier(0.84, 0.17, 0.23, 0.57));
@@ -121,24 +119,20 @@ pre code, code {
     position: relative;
     color: rgba(#5f6269, 0.6);
     line-height: $base-line-height;
-    text-align: center;
     text-transform: lowercase;
+    text-align: center;
+    text-shadow: transparent 0 0 0, rgba(#000, 0.4) 0 0 0 !important;
     -webkit-user-select: none;
     -webkit-touch-callout: none;
-    text-shadow: transparent 0 0 0, rgba(#000, 0.4) 0 0 0 !important;
     &:not(:first-child) {
       margin-left: 10px;
 		}
     &::after {
       @include transition(all 500ms ease 0s);
-      position: absolute;
+      @include position(absolute, -2px 0 null 0);
       content: '';
-      height: 2px;
-      top: -2px;
-      left: 0;
-      bottom: 20;
       width: 1px;
-      right: 0;
+      height: 2px;
       margin: 0 auto 3px;
     }
     &:hover {
@@ -147,14 +141,14 @@ pre code, code {
     }
     &:hover::after,
     &:focus::after {
-      width: 100%;
       background: rgba(#5f6269, 0.15);
+      width: 100%;
     }
 	}
   @include media-query($on-palm) {
+    text-align: right;
     top: 0;
     right: 10px;
-    text-align: right;
     &:hover .trigger {
       display: block;
       padding-bottom: 5px;
@@ -170,29 +164,31 @@ pre code, code {
   display: block;
   position: relative;
   background: transparent;
-  left: 0;
-  top: 0;
-  width: 100%;
+  line-height: 2.5em;
   text-align: left;
+  width: 100%;
+  top: 0;
+  left: 0;
   padding-left: 5%;
   line-height: 2.5em;
   z-index: 25;
   h1 {
-    font-family: _font(hdr-family);
     color: _palette(fg-header);
+    font-family: _font(hdr-family);
     font-size: 150px;
     font-weight: 600;
+    letter-spacing: -1px;
     line-height: 1.15;
 	}
   h3 {
+    color: lighten(_palette(fg-header),5%);
     font-family: _font(hdr-family);
     font-size: 3.05vw !important;
-    color: lighten(_palette(fg-header),5%);
     padding-left: 15px;
   }
   &.landing {
-    top: 1vw;
     line-height: 1.5em;
+    top: 1vw;
     h1 {
       font-size: 18.5vw;
     }
@@ -200,7 +196,7 @@ pre code, code {
       position: relative;
       font-size: 3.35vw !important;
       font-weight: 500;
-      left: 5px;
+      left: 1px;
 		}
 	}
 }
@@ -218,9 +214,9 @@ pre code, code {
 .gradient {
   @include background-image(linear-gradient(to top, _palette(bg-dark) 56%, rgba(#292c33, 0.935) 62%, rgba(#292c33, 0.8) 67%, rgba(#292c33, 0.2) 80%, rgba(#292c33, 0.1) 83%, transparent));
   position: absolute;
-  height: 101vw;
   width: 100%;
-  top: 6.5vh;
+  height: 104vw;
+  top: 9.5vh;
   left: 0;
   overflow: auto;
   z-index: 0;
@@ -235,8 +231,8 @@ pre code, code {
     font-family: _font(ctrl-family);
     font-size: 2vw;
     font-weight: 300;
-    line-height: 1.35;
     letter-spacing: 0.035em;
+    line-height: 1.35;
     li {
       font-size: 2vw;
       padding-left: 12px;
@@ -247,13 +243,13 @@ pre code, code {
 
 .editor-section {
   height: 75vw;
-  padding-top: 0.5em;
+  padding-top: 2em;
   .editor-features {
     @include opacity(0.65);
     position: absolute;
     color: #fff;
     left: 3.5vw;
-    padding-top: 12.25vw;
+    padding-top: 13.5vw;
     padding-left: 0;
     .feature-list {
       list-style: url('./img/bullet.png');
@@ -271,8 +267,8 @@ pre code, code {
   margin: 0.5vw 0 2.75vw;
   .preview-features {
     position: relative;
-    right: 0.5vw;
     top: 13.5vw;
+    right: 0.5vw;
     .feature-list {
       list-style-image: url('./img/bullet_dark.png');
     }
@@ -280,33 +276,33 @@ pre code, code {
 }
 
 .left-img {
-  position: relative;
   display: inline-block;
-  max-width: 50%;
+  position: relative;
   height: auto;
+  max-width: 50%;
   top: 4.25vw;
   left: 0;
   float: left;
   #previewImg {
     position: relative;
-    height: 100%;
     width: 123%;
+    height: 100%;
     left: 0;
     float: left;
 	}
 }
 
 .right-img {
-  position: relative;
   display: inline-block;
-  max-width: 50%;
+  position: relative;
   height: auto;
+  max-width: 50%;
   top: 3.5vw;
   left: 50%;
   #editorImg {
     position: relative;
-    height: 100%;
     width: 123%;
+    height: 100%;
     right: 0;
     float: right;
 	}
@@ -315,7 +311,7 @@ pre code, code {
 .repo-icons {
   position: absolute;
   font-size: 5.4vw;
-  right: 22.75%;
+  right: 25.5%;
   a {
     span {
       @include opacity(0.9);
@@ -367,17 +363,17 @@ pre code, code {
   line-height: 1.45;
   text-align: center;
   width: 75%;
-  margin: 6.5vh 12.5% 12vh;
   text-shadow: 0 1px 2px rgba(#000, 0.25) !important;
+  margin: 6.5vh 12.5% 12vh;
 }
 
 .install-content {
   text-align: center;
   h3 {
+    color: rgba(#fff, 0.7);
     font-size: 2.85em;
     font-weight: 300;
     line-height: 1.5;
-    color: rgba(#fff, 0.7);
     margin: 0.5em 0 0.75em;
 	}
   .install-buttons {
@@ -387,9 +383,9 @@ pre code, code {
     .os-image {
       display: block;
       position: relative;
-      top: 0;
       width: 55%;
       height: auto;
+      top: 0;
       margin: 0 auto 5%;
 		}
     span {
@@ -434,8 +430,8 @@ pre code, code {
     position: relative;
     top: -5.5em;
     span {
-      position: relative;
       display: inline-block;
+      position: relative;
       color: rgba(#fff, 0.55);
       font-size: 1.5em;
       line-height: 1.3;
@@ -445,10 +441,10 @@ pre code, code {
       }
     }
     img {
-      position: relative;
       display: inline-block;
-      height: 50px;
+      position: relative;
       width: auto;
+      height: 50px;
       top: 3px;
     }
   }
@@ -469,20 +465,20 @@ pre code, code {
     top: -5px;
     left: 0;
     span {
+      color: _palette(fg);
       font-size: 1.05em;
       font-weight: 300;
       letter-spacing: 0.02em;
       line-height: 1.7;
-      color: _palette(fg);
       i::before {
-        font-size: 1.2em;
         color: rgba(#fff, 0.75);
+        font-size: 1.2em;
         padding: 0 1px;
       }
       .fa-heart {
         position: relative;
-        top: 0.5px;
         font-size: 0.9em;
+        top: 0.5px;
       }
       a {
         @include transition(color 250ms ease-in-out 0s, border 350ms ease-in-out 0s);
@@ -497,8 +493,8 @@ pre code, code {
     display: inline-block;
     position: relative;
     width: auto;
-    top: 8.75%;
-    left: 51.4%;
+    top: 10.75%;
+    left: 52.5%;
     span {
       display: block;
       color: #d3d3d6;
@@ -522,8 +518,8 @@ pre code, code {
         @include opacity(0.45);
         display: inline-block;
         position: relative;
-        height: 5.6vh;
         width: auto;
+        height: 5.2vh;
         margin-left: 0;
         padding: 0 7px;
         &:nth-child(2) {
@@ -569,9 +565,9 @@ i {
 pre {
   background: #2d2d2d;
   color: rgba(#fff, 0.6);
-  box-shadow: inset 0 0 8px rgba(#000, 0.6);
   border: 1px inset #3f3f3f;
   border-radius: 16px;
+  box-shadow: inset 0 0 8px rgba(#000, 0.6);
   margin: 0 60px 20px 30px !important;
   padding: 10px 14px 11px;
   overflow-x: auto;
@@ -594,8 +590,8 @@ kbd {
 .document {
   &.gradient {
     @include background(linear-gradient(to top, _palette(bg) 54%, rgba(#292c33, 0.85) 60%, rgba(#292c33, 0.7) 64.5%, rgba(#292c33, 0.3) 74%, rgba(#292c33, 0) 87%));
-    top: -6.5em;
     height: 145%;
+    top: -6.5em;
 	}
 }
 
@@ -607,8 +603,8 @@ kbd {
   font-weight: 600 !important;
   letter-spacing: 0.03em;
   line-height: 1;
-  margin: 0.1em 0.4em 0.175em;
   text-shadow: 0 3px 10px rgba(#000, 0.3) !important;
+  margin: 0.1em 0.4em 0.175em;
   &.lg {
     font-size: 180px;
     margin-top: 0;
@@ -625,9 +621,9 @@ kbd {
     font-size: 3em;
     font-weight: 300;
     line-height: 1;
+    text-shadow: 0 3px 10px rgba(#000, 0.2)  !important;
     margin: 0 0 0.55em;
     padding-left: 0 !important;
-    text-shadow: 0 3px 10px rgba(#000, 0.2)  !important;
 	}
   h3 {
     color: rgba(#fff, 0.6);
@@ -650,9 +646,9 @@ kbd {
 
   .document-table {
     width: 100%;
-    table-layout: fixed;
     box-shadow: 0 3px 15px rgba(#000, 0.2);
     margin: 20px 30px 20px 10px;
+    table-layout: fixed;
     span {
       margin-top: 1.75em;
       margin-left: 3%;
@@ -660,13 +656,13 @@ kbd {
     th {
       background: rgba(#fff, 0.035);
       color: _palette(fg);
-      font-weight: 500;
       font-size: 16px;
+      font-weight: 500;
       letter-spacing: 0.035em;
-      text-align: center;
-      vertical-align: middle;
       text-transform: uppercase;
+      text-align: center;
       border: solid 1px rgba(#fff, 0.085);
+      vertical-align: middle;
       padding: 15px;
 		}
     td {
@@ -675,9 +671,9 @@ kbd {
       font-weight: 300;
       letter-spacing: 0.05em;
       text-align: left;
-      vertical-align: middle;
       border: solid 1px rgba(#fff, 0.1);
       border-top: 0;
+      vertical-align: middle;
       padding: 9px;
       padding-left: 15px;
       span {
@@ -700,10 +696,10 @@ kbd {
   }
 }
 hr {
-  position: relative;
   display: inline-block;
-  height: 10px;
+  position: relative;
   width: 140%;
+  height: 10px;
   left: -20%;
   border: 0;
   box-shadow: inset 0 10px 10px -5px rgba(#000, 0.2);
@@ -719,8 +715,8 @@ hr {
     color: rgba(#fff, 0.7);
     font-size: 2.35em;
     font-weight: 300;
-    margin-bottom: 0.75em;
     text-shadow: 3px 5px 10px rgba(#000, 0.8);
+    margin-bottom: 0.75em;
 	}
   .toc-list {
     font-size: 1.45em;
@@ -769,15 +765,15 @@ hr {
   .key-note {
     display: block;
     position: relative;
-    font-size: 15px;
     color: rgba(#fff, 0.5);
+    font-size: 15px;
     text-align: center;
     top: -1.5vh;
     margin: 0 auto;
     code {
       font-family: _font(monospace-family);
-      padding-right: 1px;
       padding-left: 3px;
+      padding-right: 1px;
     }
   }
 }
@@ -804,12 +800,12 @@ hr {
   .faq-list {
     background: _palette(bg);
     letter-spacing: 0.05em;
+    list-style: none;
     width: 90%;
     border-radius: 5px;
-    list-style: none;
+    box-shadow: 0 1px 15px rgba(#000, 0.45);
     margin: 0 auto 30px;
     padding: 1.25em 3em 0.15em 2em;
-    box-shadow: 0 1px 15px rgba(#000, 0.45);
     .faq-question {
       @include transition(all 500ms ease 0s);
       display: inline-block;
@@ -847,10 +843,10 @@ hr {
       overflow: hidden;
     }
     .faq-answer {
+      display: block;
       color: _palette(fg);
       letter-spacing: 0.05em;
       height: auto;
-      display: block;
       margin-bottom: 20px;
     }
     li:last-child {
@@ -908,16 +904,16 @@ hr {
       text-shadow: 3px 5px 10px rgba(#000, 0.8);
       margin-bottom: 0.35em;
       span {
+        color: rgba(#fff, 0.5);
         font-size: 0.85em;
         margin-right: 0.175em;
-        color: rgba(#fff, 0.5);
         padding: 0 1px 0 2px;
 			}
 		}
     .version-rule {
       @include background-image(linear-gradient(to right, rgba(#fff, 0.2), rgba(#fff, 0)));
-      height: 1.5px;
       width: 100%;
+      height: 1.5px;
       left: 0;
       box-shadow: none;
       margin: 0.25em auto 0.75em;
@@ -925,8 +921,8 @@ hr {
     .version-changes {
       font-size: 1.05em;
       line-height: 2;
-      margin-left: 40px;
       list-style-image: url('./img/bullet_small.png');
+      margin-left: 40px;
       li {
         padding-left: 14px;
         padding-bottom: 5px;
@@ -955,9 +951,9 @@ hr {
   }
   .credits-list {
     background: _palette(bg);
-    list-style-image: url('./img/bullet_small.png');
     font-size: 0.9em;
     letter-spacing: 0.06em;
+    list-style-image: url('./img/bullet_small.png');
     margin: 0 3em;
     padding: 0 35px;
     ul {
