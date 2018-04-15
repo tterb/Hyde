@@ -7,19 +7,19 @@
     @if $content {
       content: $content;
 		}
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
     font-family: FontAwesome;
-    font-style: normal;
     font-weight: normal;
+    font-style: normal;
     text-transform: none !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 	}
 }
 
 @mixin transitionAll {
+  transition: all 0.35s;
   -webkit-transition: all 0.35s;
   -moz-transition: all 0.35s;
-  transition: all 0.35s;
 }
 
 @mixin respondTo($breakpoint) {
