@@ -58,17 +58,17 @@
   "homepage": "https://brettstevenson.io/Hyde",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JonSn0w/Hyde.git"
+    "url": "git+https://github.com/tterb/Hyde.git"
   },
   "bugs": {
-    "url": "https://github.com/JonSn0w/Hyde/issues/new"
+    "url": "https://github.com/tterb/Hyde/issues/new"
   },
   "docs": "https://brettstevenson.io/Hyde/docs",
   "keybindings": "https://brettstevenson.io/Hyde/docs#keybindings",
   "devDependencies": {
     "electron-connect": "^0.6.1",
     "electron-installer-dmg": "^0.2.1",
-    "electron-packager": "^11.2.0",
+    "electron-packager": "^12.0.1",
     "electron-rebuild": "^1.5.11",
     "electron-winstaller": "^2.6.4",
     "gulp": "^3.9.1",
