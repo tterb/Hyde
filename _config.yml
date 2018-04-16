@@ -5,8 +5,8 @@ description: A website for Hyde editor
 owner:
   name: Brett Stevenson # or company name
   url: http://brettstevenson.io
-repo: https://github.com/JonSn0w/Hyde
-bugs: https://github.com/JonSn0w/Hyde/issues/new
+repo: https://github.com/tterb/Hyde
+bugs: https://github.com/tterb/Hyde/issues/new
 first_published: 2017
 baseurl: "/Hyde/" # the subpath of your site, e.g. /blog/
 
