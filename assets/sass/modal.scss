@@ -11,7 +11,7 @@ $monospaced: 'Source Code Pro','Monaco','Ubuntu Mono','Dejavu Sans Mono','Consol
 
 .modal-content {
   position: relative;
-  background: -webkit-linear-gradient(top, #292728, #222) !important;
+  background: -webkit-linear-gradient(top, #292829, #222) !important;
   color: $text-color;
   top: 20px;
   border-radius: 15px;
@@ -19,7 +19,7 @@ $monospaced: 'Source Code Pro','Monaco','Ubuntu Mono','Dejavu Sans Mono','Consol
   box-shadow: 0 3px 15px rgba(0,0,0,0.6);
   overflow-y: auto;
   .modal-body {
-    background-image: -webkit-linear-gradient(top, #292728, #222);
+    background-image: -webkit-linear-gradient(top, #292829, #222);
     color: $text-color;
     font-size: 15.5px;
     font-weight: 300;
@@ -40,7 +40,7 @@ $monospaced: 'Source Code Pro','Monaco','Ubuntu Mono','Dejavu Sans Mono','Consol
 }
 
 .modal-inset {
-  background: -webkit-linear-gradient(top, #272625, #232221) !important;
+  background: -webkit-linear-gradient(top, #272627, #232223) !important;
   overflow: hidden;
   .modal-header {
     background: transparent;
@@ -80,7 +80,7 @@ $monospaced: 'Source Code Pro','Monaco','Ubuntu Mono','Dejavu Sans Mono','Consol
     width: 390px;
     margin: 100px auto !important;
     .modal-content {
-      background: -webkit-linear-gradient(top, #292728, #222) !important;
+      background: -webkit-linear-gradient(top, #292829, #222) !important;
     }
     .modal-header {
       padding: 8px 8px 7px;
@@ -168,7 +168,7 @@ $monospaced: 'Source Code Pro','Monaco','Ubuntu Mono','Dejavu Sans Mono','Consol
 }
 
 .button-group {
-  background: -webkit-linear-gradient(top, #454344, #2a2829);
+  background: -webkit-linear-gradient(top, #454445, #2a292a);
   height: 28px;
   // width: 14px;
   border-radius: 0 !important;
@@ -208,7 +208,7 @@ $monospaced: 'Source Code Pro','Monaco','Ubuntu Mono','Dejavu Sans Mono','Consol
 }
 
 .modal-body-inset {
-  background-image: -webkit-linear-gradient(top, #292827, #232221);
+  background-image: -webkit-linear-gradient(top, #292829, #232223);
   color: #343332;
   padding: 2.5%;
   .text-input {
@@ -501,13 +501,21 @@ $monospaced: 'Source Code Pro','Monaco','Ubuntu Mono','Dejavu Sans Mono','Consol
     padding: 0 5px 8px;
   }
   .about-content {
-    color: rgba(255,255,255,0.5);
+    color: rgba(255,255,255,0.6);
     font-size: 22px;
     font-weight: 400;
     letter-spacing: 0.04em;
     width: 90%;
     text-align: center;
     margin: 5px auto 35px;
+    .fa {
+      color: rgba(255,255,255,0.65);
+      font-size: 14px;
+    }
+    .fa-code {
+      color: rgba(255,255,255,0.75);
+      font-size: 16.5px;
+    }
   }
   .modal-close {
     background: transparent !important;
@@ -555,8 +563,8 @@ $monospaced: 'Source Code Pro','Monaco','Ubuntu Mono','Dejavu Sans Mono','Consol
     font-size: 12px;
   }
   #name {
-    color: rgba(255,255,255,0.5);
-    font-weight: 400;
+    color: rgba(255,255,255,0.6);
+    font-weight: 300;
     letter-spacing: 0.035em;
     &:hover {
       color: $accent-color;
@@ -566,11 +574,12 @@ $monospaced: 'Source Code Pro','Monaco','Ubuntu Mono','Dejavu Sans Mono','Consol
   .check-update-button {
     background: -webkit-linear-gradient(top, #454344, #272526);
     text-decoration: none !important;
-    padding-top: 4px;
+    padding-top: 3px;
     margin: 20px auto 0 10px;
     a {
-      color: $text-subtle-color;
+      color: rgba(255,255,255,0.65);
       font-size: 13px;
+      font-weight: 300;
       text-decoration: none !important;
       &:hover, &:active {
         color: $text-color;

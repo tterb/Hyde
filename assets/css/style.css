@@ -917,7 +917,7 @@ input[type='checkbox']:checked + span {
 #settingsMenu .dropdown-menu {
   background: #353335;
   color: rgba(255, 255, 255, 0.6);
-  top: 34px;
+  top: 31px;
   left: -4px;
   border: 1px solid #353335;
   padding: 0;
@@ -1303,13 +1303,14 @@ input[type='checkbox']:checked + span {
   background: #3c393a;
   color: rgba(255, 255, 255, 0.6);
   letter-spacing: 0.03em;
+  text-overflow: ellipsis;
+  width: 98%;
   box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.6);
-  border: 1px inset #3d3d3d;
-  border-radius: 12px;
-  padding: 5px 10px;
+  border: 1px inset #424242;
+  border-radius: 10px;
+  padding: 0 10px;
   margin-top: 3px;
   margin-bottom: 10px;
-  text-overflow: ellipsis;
 }
 
 #editMenu {
@@ -1465,7 +1466,7 @@ input[type='checkbox']:checked + span {
   }
   .dropdown-toggle, .dropdown-menu, .dropdown-item,
   .bottom-bar > div {
-    font-size: 11px !important;
+    font-size: 11.5px !important;
   }
 }
 

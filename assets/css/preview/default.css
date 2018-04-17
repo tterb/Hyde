@@ -12,6 +12,7 @@
 #mdPreview h1, #mdPreview h2, #mdPreview h3, #mdPreview h4 {
   color: #333;
   font-weight: 700;
+  letter-spacing: 0.0035em;
 }
 
 #mdPreview h1, #mdPreview h2 {
@@ -20,31 +21,28 @@
 
 #mdPreview h1 {
   font-size: 2.5em;
-  letter-spacing: 0.0175em;
   line-height: 1.45;
   margin-top: 0;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
 }
 
 #mdPreview h2 {
   font-size: 2em;
-  letter-spacing: 0.0125em;
   line-height: 1.4;
-  margin-bottom: 22px;
+  margin-bottom: 18px;
 }
 
 #mdPreview h3 {
-  font-size: 1.6em;
-  letter-spacing: 0.01em;
+  font-size: 1.55em;
   line-height: 1.3;
-  margin-bottom: 15px;
+  margin-bottom: 12px;
 }
 
 #mdPreview h4 {
   font-size: 1.45em;
   letter-spacing: 0.01em;
   line-height: 1.25;
-  margin-bottom: 16px;
+  margin-bottom: 9px;
 }
 
 #mdPreview h5 {
@@ -52,7 +50,7 @@
   font-size: 1.3em;
   font-weight: 600;
   line-height: 1.25;
-  margin-bottom: 14px;
+  margin-bottom: 9px;
 }
 
 #mdPreview h6 {
@@ -60,7 +58,7 @@
   font-size: 1.08em;
   font-weight: 600;
   line-height: 1.2;
-  margin-bottom: 14px;
+  margin-bottom: 9px;
 }
 
 #mdPreview img {
@@ -132,7 +130,7 @@
 
 #mdPreview p {
   color: #222;
-  letter-spacing: 0.0375em;
+  letter-spacing: 0.03em;
   margin: 0 0 16px 2px;
 }
 
@@ -182,14 +180,14 @@
 }
 
 #mdPreview blockquote {
-  display: flex;
   background: rgba(0, 0, 0, 0.04);
   color: rgba(0, 0, 0, 0.65);
   font-size: 95%;
   border-left: 3px solid rgba(0, 0, 0, 0.5);
   border-radius: 5px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
   margin: 15px 10px 25px;
-  padding: 10px 20px 11px;
+  padding: 10px 20px 13px;
 }
 
 #mdPreview blockquote > p {

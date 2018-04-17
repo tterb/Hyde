@@ -154,13 +154,14 @@ $error-color: #be2424;
     background: $info-active;
   }
   .alert-title {
-    background: rgba(#72b7df, 0.2);
+    background: rgba(#74b9e2, 0.2);
     border-bottom: 1px solid rgba(#9eb2bb, 0.8);
   }
   .close {
     color: $info-active !important;
     &:hover {
       background: rgba($info-active, 0.55) !important;
+      border: 1px outset $info-color;
     }
   }
 }
@@ -184,6 +185,7 @@ $error-color: #be2424;
     color: $warning-color !important;
     &:hover {
       background: rgba($warning-active, 0.75) !important;
+      border: 1px outset $warning-color;
     }
   }
 }
@@ -207,6 +209,7 @@ $error-color: #be2424;
     color: $error-color !important;
     &:hover {
       background: rgba($error-active, 0.75) !important;
+      border: 1px outset $error-color;
     }
   }
 }

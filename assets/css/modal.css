@@ -1,6 +1,6 @@
 .modal-content {
   position: relative;
-  background: -webkit-linear-gradient(top, #292728, #222) !important;
+  background: -webkit-linear-gradient(top, #292829, #222) !important;
   color: rgba(255, 255, 255, 0.75);
   top: 20px;
   border-radius: 15px;
@@ -10,7 +10,7 @@
 }
 
 .modal-content .modal-body {
-  background-image: -webkit-linear-gradient(top, #292728, #222);
+  background-image: -webkit-linear-gradient(top, #292829, #222);
   color: rgba(255, 255, 255, 0.75);
   font-size: 15.5px;
   font-weight: 300;
@@ -31,7 +31,7 @@
 }
 
 .modal-inset {
-  background: -webkit-linear-gradient(top, #272625, #232221) !important;
+  background: -webkit-linear-gradient(top, #272627, #232223) !important;
   overflow: hidden;
 }
 
@@ -75,7 +75,7 @@
 }
 
 #unsaved-modal .modal-dialog .modal-content {
-  background: -webkit-linear-gradient(top, #292728, #222) !important;
+  background: -webkit-linear-gradient(top, #292829, #222) !important;
 }
 
 #unsaved-modal .modal-dialog .modal-header {
@@ -177,7 +177,7 @@
 }
 
 .button-group {
-  background: -webkit-linear-gradient(top, #454344, #2a2829);
+  background: -webkit-linear-gradient(top, #454445, #2a292a);
   height: 28px;
   border-radius: 0 !important;
   margin-top: 9px !important;
@@ -221,7 +221,7 @@
 }
 
 .modal-body-inset {
-  background-image: -webkit-linear-gradient(top, #292827, #232221);
+  background-image: -webkit-linear-gradient(top, #292829, #232223);
   color: #343332;
   padding: 2.5%;
 }
@@ -547,13 +547,23 @@
 }
 
 #about-modal .about-content {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.6);
   font-size: 22px;
   font-weight: 400;
   letter-spacing: 0.04em;
   width: 90%;
   text-align: center;
   margin: 5px auto 35px;
+}
+
+#about-modal .about-content .fa {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 14px;
+}
+
+#about-modal .about-content .fa-code {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 16.5px;
 }
 
 #about-modal .modal-close {
@@ -607,8 +617,8 @@
 }
 
 #about-modal #name {
-  color: rgba(255, 255, 255, 0.5);
-  font-weight: 400;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 300;
   letter-spacing: 0.035em;
 }
 
@@ -620,13 +630,14 @@
 #about-modal .check-update-button {
   background: -webkit-linear-gradient(top, #454344, #272526);
   text-decoration: none !important;
-  padding-top: 4px;
+  padding-top: 3px;
   margin: 20px auto 0 10px;
 }
 
 #about-modal .check-update-button a {
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.65);
   font-size: 13px;
+  font-weight: 300;
   text-decoration: none !important;
 }
 

@@ -1,8 +1,8 @@
-$text-color: rgba(255,255,255,0.75);
-$text-subtle-color: rgba(255,255,255,0.4);
+$text-color: rgba(#fff, 0.75);
+$text-subtle-color: rgba(#fff, 0.4);
 $text-emphasis-color: #f0f0f0;
 $preview-background: #fcfafd;
-$accent-color: hsl(355, 68%, 60%);
+$accent-color: #de545f;
 
 $sans-serif: 'Roboto','Segoe UI','Helvetica Neue',Helvetica,Arial,sans-serif;
 $preview-font: 'Open Sans','Helvetica Neue','Segoe UI',Helvetica,Arial,sans-serif;
@@ -70,7 +70,7 @@ label {
     display: block;
     font-size: 1.95em;
     background: transparent;
-    color: rgba(255,255,255,0.07);
+    color: rgba(#fff, 0.07);
     border: 0;
     outline: none !important;
     transform: scale(1);
@@ -157,7 +157,7 @@ label {
 
 #appMenu {
   position: fixed;
-  // background: -webkit-linear-gradient(top, #222 0%, #2a2a2a 40%, #121212 150%), -webkit-linear-gradient(bottom, rgba(255,255,255,0.4) 0%, rgba(0,0,0,0.25) 200%);
+  // background: -webkit-linear-gradient(top, #222 0%, #2a2a2a 40%, #121212 150%), -webkit-linear-gradient(bottom, rgba(#fff, 0.4) 0%, rgba(#000, 0.25) 200%);
   // background-image: -webkit-linear-gradient(top, #323232 1%, #2d2c2b 25%, #252423, #1a1918);
   background: -webkit-linear-gradient(top, #2f2f2f 5%, #282726 40%, #262524 60%, #191817 90%);
   background-blend-mode: multiply;
@@ -169,7 +169,7 @@ label {
   left: 0;
   border: 1px outset #2b2d30;
   border-bottom: 1px solid #212121;
-  // box-shadow: 0 1px 20px rgba(0,0,0,0.3);
+  // box-shadow: 0 1px 20px rgba(#000, 0.3);
   transition-delay: 3s;
   transition: top 5000ms ease;//cubic-bezier(0.17, 0.04, 0.03, 0.75);
   z-index: 999;
@@ -192,7 +192,7 @@ label {
     .dropdown-toggle {
       display: inline-block;
       background: -webkit-linear-gradient(top, #2d2d2d 5%, #262524 40%, #222120, #121110);
-      color: rgba(255,255,255,0.5);
+      color: rgba(#fff, 0.5);
       font-size: 11px;
       font-weight: 300;
       letter-spacing: 0.08em;
@@ -219,13 +219,13 @@ label {
         color: $text-color;
         border: 1px inset #434443;
         border-right: 0;
-        box-shadow: inset 0 0 4px rgba(0,0,0,0.25);
+        box-shadow: inset 0 0 4px rgba(#000, 0.25);
       }
     }
     .dropdown-menu {
       // background-color: #2c2b2b;
       background-color: #343234;
-      color: rgba(255,255,255,0.65);
+      color: rgba(#fff, 0.65);
       font-size: 11px;
       min-width: 170px;
       top: 95%;
@@ -247,7 +247,7 @@ label {
           display: inline;
           position: relative;
           background-color: transparent;
-          color: rgba(255,255,255,0.65);
+          color: rgba(#fff, 0.65);
           font-size: 11px;
           font-weight: 300;
           letter-spacing: 0.09em;
@@ -261,7 +261,7 @@ label {
         span {
           display: inline;
           position: relative;
-          color: rgba(255,255,255,0.3);
+          color: rgba(#fff, 0.3);
           font-size: 10px;
           font-weight: 200;
           text-align: right;
@@ -272,7 +272,7 @@ label {
         }
         &:hover, &:active {
           background: #2f2b2c;
-          box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+          box-shadow: inset 0 0 5px rgba(#000, 0.2);
           a {
             color: $text-emphasis-color;
           }
@@ -285,13 +285,13 @@ label {
       .dropdown-divider {
         height: 0;
         width: 98%;
-        border-top: 1px solid rgba(0,0,0,0.25);
+        border-top: 1px solid rgba(#000, 0.25);
         margin: 2px auto;
         padding: 0;
         &:hover {
           background: none;
           border-radius: 0;
-          border-top: 1px solid rgba(0,0,0,0.15);
+          border-top: 1px solid rgba(#000, 0.15);
           box-shadow: none;
         }
       }
@@ -314,7 +314,7 @@ label {
   position: relative;
   // background-color: #2c2b2c;
   // background-color: #3d3a3b;
-  color: rgba(255,255,255,0.65);
+  color: rgba(#fff, 0.65);
   font-size: 11px;
   top: 82%;
   border-bottom-left-radius: 5px;
@@ -324,7 +324,7 @@ label {
     top: -3px !important;
     border-radius: 3px !important;
     li > a {
-      color: rgba(255,255,255,0.65) !important;
+      color: rgba(#fff, 0.65) !important;
     }
   }
   .dropdown-menu {
@@ -339,7 +339,7 @@ label {
       a {
         display: inline;
         background-color: transparent;
-        color: rgba(255,255,255,0.65);
+        color: rgba(#fff, 0.65);
         font-size: 11px;
         letter-spacing: 0.06em;
         text-decoration: none !important;
@@ -351,7 +351,7 @@ label {
       span {
         display: inline;
         position: relative;
-        color: rgba(255,255,255,0.2);
+        color: rgba(#fff, 0.2);
         font-size: 10px;
         font-weight: 200;
         text-align: right;
@@ -361,7 +361,7 @@ label {
       }
       &:hover, &:active {
         background: #3a393b;
-        box-shadow: inset 0 0 2px rgba(0,0,0,0.4);
+        box-shadow: inset 0 0 2px rgba(#000, 0.4);
         a {
           color: $text-emphasis-color;
         }
@@ -402,7 +402,7 @@ label {
     top: 0;
     vertical-align: middle;
     border: 1px outset #4a4f4d;
-    box-shadow: 0.5px 1px 3px rgba(0,0,0,0.3);
+    box-shadow: 0.5px 1px 3px rgba(#000, 0.3);
     margin-right: 1.5px;
     padding: 3.5px 5px 5px 4.25px;
     transition: top 100ms ease-in-out;
@@ -418,7 +418,7 @@ label {
     &:active, &:focus {
       background: #333;
       border: 1px inset #454443;
-      box-shadow: inset 0 0 4px rgba(0,0,0,0.4);
+      box-shadow: inset 0 0 4px rgba(#000, 0.4);
       transform: translateY(0.5px);
     }
   }
@@ -432,7 +432,7 @@ label {
 
 .bottom-bar {
   position: absolute;
-  // background: -webkit-linear-gradient(top, #282628 0%, #2b2a2b 30%, #191919 150%), -webkit-linear-gradient(bottom, rgba(255,255,255,0.4) 0%, rgba(0,0,0,0.025) 200%);
+  // background: -webkit-linear-gradient(top, #282628 0%, #2b2a2b 30%, #191919 150%), -webkit-linear-gradient(bottom, rgba(#fff, 0.4) 0%, rgba(#000, 0.025) 200%);
   background: -webkit-linear-gradient(top, #1d1d1d 12%, #212021 45%, #141414 100%), -webkit-linear-gradient(bottom, rgba(255, 255, 255, 0.4) 0%, rgba(0, 0, 0, 0.025) 200%);
   background: -webkit-linear-gradient(top, #232223 45%, #141414 100%), -webkit-linear-gradient(bottom, rgba(255, 255, 255, 0.4) 0%, rgba(0, 0, 0, 0.025) 200%);
   background-blend-mode: multiply;
@@ -609,7 +609,7 @@ input[type='checkbox'] {
   width: 50px;
   border-radius: 100px;
   border: 1px solid  #3a3839;
-  box-shadow: 1px 1px 8px rgba(0,0,0,0.7);
+  box-shadow: 1px 1px 8px rgba(#000, 0.7);
   i {
     display: block;
     position: relative;
@@ -617,7 +617,7 @@ input[type='checkbox'] {
     top: -webkit-calc(50% - 0.4em);
     left: 65%;
     &::before {
-      color: rgba(255,255,255,0.8);
+      color: rgba(#fff, 0.8);
 		}
 	}
 }
@@ -637,7 +637,7 @@ input[type='checkbox'] {
   width: 240px;
   top: 0;
   left: -250px;
-  box-shadow: 0 0 16px rgba(0,0,0,0.4);
+  box-shadow: 0 0 16px rgba(#000, 0.4);
   transition: left 500ms cubic-bezier(0.17, 0.04, 0.03, 0.75);
   z-index: 999;
 }
@@ -661,11 +661,11 @@ input[type='checkbox'] {
     text-align: center;
     padding: 2px 0;
     a {
-      color: rgba(255,255,255,0.65);
+      color: rgba(#fff, 0.65);
       transition: all 300ms linear;
       cursor: pointer;
       &:hover, &:active {
-        color: rgba(255,255,255,0.7);
+        color: rgba(#fff, 0.7);
         font-weight: 300;
         text-decoration: none;
       }
@@ -674,11 +674,11 @@ input[type='checkbox'] {
       display: block;
       position: relative;
       content: '';
-      background: rgba(255,255,255,0.085);
+      background: rgba(#fff, 0.085);
       height: 1px;
       width: 200px;
       border: 0;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+      box-shadow: 0 2px 4px rgba(#000, 0.4);
       margin: 3px auto;
       padding: 0;
     }
@@ -686,13 +686,13 @@ input[type='checkbox'] {
 }
 #sidebarIcons {
   width: 40%;
-  text-shadow: 0 2px rgba(0,0,0,0.2);
+  text-shadow: 0 2px rgba(#000, 0.2);
   margin: 55px 72px 8px;
   padding: 0;
   li {
     position: relative;
     font-size: 25px;
-    color: rgba(255,255,255,0.3);
+    color: rgba(#fff, 0.3);
     padding-right: 13px;
     cursor: pointer;
     &:first-child {
@@ -736,7 +736,7 @@ input[type='checkbox'] {
   left: -330px;
   overflow-x: hidden;
   overflow-y: scroll;
-  box-shadow: 0 0 16px rgba(0,0,0,0.4);
+  box-shadow: 0 0 16px rgba(#000, 0.4);
   transition: left 500ms cubic-bezier(0.17, 0.04, 0.03, 0.75);
   margin-bottom: 30px;
   padding: 12px 8px 30px 16px;
@@ -774,7 +774,7 @@ input[type='checkbox'] {
     top: 75px;
     padding: 2px 0 6px 17px;
     h3 {
-      color: rgba(255,255,255,0.775);
+      color: rgba(#fff, 0.775);
       font-size: 30px;
       font-weight: 200;
       margin-top: 4px;
@@ -782,7 +782,7 @@ input[type='checkbox'] {
       margin-bottom: 10px;
     }
     ul {
-      color: rgba(255,255,255,0.65);
+      color: rgba(#fff, 0.65);
       list-style: none;
       padding-left: 10px;
       li {
@@ -817,7 +817,7 @@ input[type='checkbox'] {
             transition: all 250ms ease-in-out;
             outline: none !important;
             &:hover, &:focus, &:active {
-              color: rgba(255,255,255,0.85);
+              color: rgba(#fff, 0.85);
             }
           }
           .caret {
@@ -836,23 +836,23 @@ input[type='checkbox'] {
     }
     hr {
       position: relative;
-      background: rgba(255,255,255,0.06);
+      background: rgba(#fff, 0.06);
       height: 1px;
       left: -4px;
       border-top: 0;
-      box-shadow: 0 2px 3px rgba(0,0,0,0.45);
+      box-shadow: 0 2px 3px rgba(#000, 0.45);
       margin-top: 20px;
       margin-bottom: 5px;
     }
   }
   .dropdown-menu {
     background: #353335;
-    color: rgba(255,255,255,0.6);
-    top: 34px;
+    color: rgba(#fff, 0.6);
+    top: 31px;
     left: -4px;
     border: 1px solid #353335;
     padding: 0;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.25);
+    box-shadow: 0 3px 10px rgba(#000, 0.25);
     z-index: -9;
     ul {
       padding-left: 0;
@@ -861,7 +861,7 @@ input[type='checkbox'] {
           background: #3b393a;
         }
         a {
-          color: rgba(255,255,255,0.6);
+          color: rgba(#fff, 0.6);
           font-size: 14px;
           font-weight: 300;
           padding: 3px 12px;
@@ -873,7 +873,7 @@ input[type='checkbox'] {
           }
           &:hover {
             background: #2f2d2f;
-            // box-shadow: inset 0 0 4px rgba(0,0,0,0.4);
+            // box-shadow: inset 0 0 4px rgba(#000, 0.4);
           }
         }
       }
@@ -887,13 +887,13 @@ input[type='checkbox'] {
     vertical-align: middle;
     .form-control {
       background: #3c393a;
-      color: rgba(255,255,255,0.7);
+      color: rgba(#fff, 0.7);
       font-weight: 300;
       left: 0;
       height: 26px;
       border: 1px inset #403e3f;
       border-radius: 6px;
-      box-shadow: inset 0 0 5px rgba(0,0,0,0.35), 0 0.25px 4px rgba(255,255,255,0.15);
+      box-shadow: inset 0 0 5px rgba(#000, 0.35), 0 0.25px 4px rgba(#fff, 0.15);
       padding: 1px 0 0 7px;
       z-index: -99;
     }
@@ -915,7 +915,7 @@ input[type='checkbox'] {
       margin-left: -1px;
       border: 1px outset #4b4a4c;
       border-radius: 0;
-      box-shadow: -1px 0 6px rgba(0,0,0,0.3);
+      box-shadow: -1px 0 6px rgba(#000, 0.3);
       outline: none !important;
       &:first-child {
         // background: #262626;
@@ -933,7 +933,7 @@ input[type='checkbox'] {
     }
     i {
       position: absolute;
-      color: rgba(255,255,255,0.5);
+      color: rgba(#fff, 0.5);
       font-size: 11px;
       top: -0.7px;
       left: 4.5px;
@@ -966,7 +966,7 @@ input[type='checkbox'] {
   }
   hr {
     position: relative;
-    border-top: 1px outset rgba(255,255,255,0.125);
+    border-top: 1px outset rgba(#fff, 0.125);
     left: -4px;
     margin-top: 20px;
     margin-bottom: 5px;
@@ -992,13 +992,13 @@ input[type='checkbox'] {
     vertical-align: middle;
     .form-control {
       background: #3c393a;
-      color: rgba(255,255,255,0.7);
+      color: rgba(#fff, 0.7);
       font-weight: 300;
       left: 0;
       height: 26px;
       border: 1px inset #403e3f;
       border-radius: 6px;
-      box-shadow: inset 0 0 5px rgba(0,0,0,0.35), 0 0.25px 4px rgba(255,255,255,0.15);
+      box-shadow: inset 0 0 5px rgba(#000, 0.35), 0 0.25px 4px rgba(#fff, 0.15);
       padding: 1px 0 0 7px;
       z-index: -99;
     }
@@ -1038,7 +1038,7 @@ input[type='checkbox'] {
     max-width: 100%;
     border-radius: 8px;
     padding: 4px 8px;
-    box-shadow: 0 1px 5px rgba(0,0,0,0.3);
+    box-shadow: 0 1px 5px rgba(#000, 0.3);
     white-space: normal;
     transition: opacity 225ms linear 1.25s;
     // z-index: 99;
@@ -1061,7 +1061,7 @@ input[type='checkbox'] {
   width: 50%;
   height: 35px;
   border-bottom: 1px #2a2a2a solid;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+  box-shadow: 0 2px 5px rgba(#000, 0.5);
   transition: width 600ms cubic-bezier(0.17, 0.04, 0.03, 0.75);
   z-index: 950;
 }
@@ -1161,7 +1161,7 @@ input[type='checkbox'] {
     left: auto;
     border-radius: 4px;
     border-color: rgba(#666, 0.7);
-    box-shadow: 0 0 4px 0 rgba(0,0,0,0.7);
+    box-shadow: 0 0 4px 0 rgba(#000, 0.7);
     margin-top: 1.9em;
     margin-left: -4em;
     padding: 0 4px;
@@ -1173,7 +1173,7 @@ input[type='checkbox'] {
   display: inline-block;
   text-align: center;
   text-decoration: none !important;
-  color: rgba(255,255,255,0.55) !important;
+  color: rgba(#fff, 0.55) !important;
   width: 25px;
   height: 25px;
   margin: 0;
@@ -1224,15 +1224,16 @@ input[type='checkbox'] {
   }
   input[type='text'] {
     background: #3c393a;
-    color: rgba(255,255,255,0.6);
+    color: rgba(#fff, 0.6);
     letter-spacing: 0.03em;
-    box-shadow: inset 0 0 8px rgba(0,0,0,0.6);
-    border: 1px inset #3d3d3d;
-    border-radius: 12px;
-    padding: 5px 10px;
+    text-overflow: ellipsis;
+    width: 98%;
+    box-shadow: inset 0 0 8px rgba(#000, 0.6);
+    border: 1px inset #424242;
+    border-radius: 10px;
+    padding: 0 10px;
     margin-top: 3px;
     margin-bottom: 10px;
-    text-overflow: ellipsis;
   }
 }
 
@@ -1263,7 +1264,7 @@ input[type='checkbox'] {
 .cm-trailingspace,
 .cm-trailing-space-a,
 .cm-trailing-space-new-line {
-  color: rgba(255,255,255,0.1) !important;
+  color: rgba(#fff, 0.1) !important;
   text-decoration-style: solid;
 }
 
@@ -1281,12 +1282,12 @@ input[type='checkbox'] {
   #searchIcon {
     position: relative;
     background: transparent;
-    color: rgba(255,255,255,0.6);
+    color: rgba(#fff, 0.6);
     top: 8.5%;
     left: 2.5%;
     width: 5%;
     height: auto;
-    text-shadow: 4px 0 1px rgba(0,0,0,0.6);
+    text-shadow: 4px 0 1px rgba(#000, 0.6);
   }
 }
 
@@ -1386,7 +1387,7 @@ input[type='checkbox'] {
   left: 5%;
   top: -250%;
   border-radius: 4px;
-  box-shadow: 0 0.5px 6px 0 rgba(0,0,0,0.7);
+  box-shadow: 0 0.5px 6px 0 rgba(#000, 0.7);
   white-space: nowrap;
   margin-left: -5px;
   padding: 4px 8px;
@@ -1397,7 +1398,7 @@ input[type='checkbox'] {
 }
 
 .fa-link {
-  color: rgba(255,255,255,0.65);
+  color: rgba(#fff, 0.65);
 }
 
 .fa-unlink {
@@ -1405,7 +1406,7 @@ input[type='checkbox'] {
 }
 
 .fa-eye {
-  color: rgba(255,255,255,0.65);
+  color: rgba(#fff, 0.65);
 }
 
 .fa-eye-slash {
@@ -1429,7 +1430,7 @@ input[type='checkbox'] {
   }
   .dropdown-toggle, .dropdown-menu, .dropdown-item,
   .bottom-bar > div {
-    font-size: 11px !important;
+    font-size: 11.5px !important;
   }
 }
 
@@ -1507,7 +1508,7 @@ input[type='checkbox'] {
   transition-property: all;
   transition-duration: 0.35s;
   transition-timing-function: cubic-bezier(0.59, 0.01, 0.5, 0.99);
-  box-shadow: 0 0 0 1px #444, 0 3px 2px rgba(0,0,0,0.25);
+  box-shadow: 0 0 0 1px #444, 0 3px 2px rgba(#000, 0.25);
 }
 .switch--active .switch__handle {
   transition-duration: 0s;
@@ -1518,7 +1519,7 @@ input:checked + .switch__toggle {
 }
 input:checked + .switch__toggle .switch__handle {
   left: 21px;
-  box-shadow: 0 3px 2px rgba(0,0,0,0.25);
+  box-shadow: 0 3px 2px rgba(#000, 0.25);
 }
 input:disabled + .switch__toggle {
   opacity: 0.3;
@@ -1572,7 +1573,7 @@ input:disabled + .switch__toggle {
   width: 20px;
   height: 20px;
   border: 1px outset #424242;
-  box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px -1px rgba(0,0,0,0.4);
+  box-shadow: 0 4px 5px 0 rgba(#000, 0.14), 0 1px 10px 0 rgba(#000, 0.12), 0 2px 4px -1px rgba(#000, 0.4);
 }
 .switch.switch--material input:checked + .switch__toggle {
   background: desaturate(darken($accent-color, 5%), 2%);//#77c2bb;
@@ -1581,7 +1582,7 @@ input:disabled + .switch__toggle {
 .switch.switch--material input:checked + .switch__toggle .switch__handle {
   left: 16px;
   background-color: #383838;//#009688;
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 2px 0 rgba(#000, 0.14), 0 1px 5px 0 rgba(#000, 0.12), 0 3px 1px -2px rgba(#000, 0.2);
 }
 .switch.switch--material input:disabled + .switch__toggle {
   opacity: 0.3;
@@ -1596,11 +1597,11 @@ input:disabled + .switch__toggle {
   height: 100%;
   border-radius: 50%;
   z-index: -1;
-  box-shadow: 0 0 0 0 rgba(0,0,0,0.12);
+  box-shadow: 0 0 0 0 rgba(#000, 0.12);
   transition: box-shadow 0.1s linear;
 }
 .switch.switch--material.switch--active .switch__handle::before {
-  box-shadow: 0 0 0 14px rgba(0,0,0,0.12);
+  box-shadow: 0 0 0 14px rgba(#000, 0.12);
 }
 .switch.switch--material.switch--active input:checked + .switch__toggle .switch__handle::before {
   box-shadow: 0 0 0 14px darken($accent-color, 10%);
