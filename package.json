@@ -29,12 +29,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JonSn0w/Hyde.git"
+    "url": "git+https://github.com/tterb/Hyde.git"
   },
   "author": "Brett Stevenson",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/JonSn0w/Hyde/issues"
+    "url": "https://github.com/tterb/Hyde/issues"
   },
   "homepage": "https://brettstevenson.io/Hyde",
   "jspm": {
