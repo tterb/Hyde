@@ -85,13 +85,22 @@ pre code, code {
     }
     .page-link {
       color: rgba(#fff, 0.55);
-      &:hover, &:focus, &:active {
-        color: rgba(#fff, 0.9);
-        border: 0 !important;
+      &::after {
+        display: block;
+        content: '';
+        border-top: 10px solid rgba(#fff, 0);
+        border-bottom: 3px solid rgba(#fff, 0.35);
+        transition: transform 350ms ease-in-out;
+        transform: scale3d(0,1,1);
+        transform-origin: bottom left;
+      }
+      &:hover, &:active {
+        color: rgba(#fff, 0.975) !important;
+        text-shadow: 0 1px 2px rgba(#000, 0.4);
         &::after {
-          background: rgba(#fff, 0.3);
+          transform: scale3d(1,1,1);
         }
-    	}
+      }
     }
     .logo img {
       @include opacity(0.7);
@@ -128,22 +137,38 @@ pre code, code {
       margin-left: 10px;
 		}
     &::after {
-      @include transition(all 500ms ease 0s);
-      @include position(absolute, -2px 0 null 0);
+      display: block;
       content: '';
-      width: 1px;
-      height: 2px;
-      margin: 0 auto 3px;
+      border-top: 0 solid rgba(#5f6269, 0.15);
+      border-bottom: 2px solid rgba(#5f6269, 0.3);
+      transition: transform 350ms ease-in-out;
+      transform: scale3d(0,1,1);
+      transform-origin: bottom left;
     }
-    &:hover {
-      @include transition(all 500ms ease 0s);
-      cursor: pointer;
+    &:hover, &:active {
+      // color: rgba(#fff, 0.975) !important;
+      text-shadow: 0 1px 2px rgba(#000, 0.4);
+      &::after {
+        transform: scale3d(1,1,1);
+      }
     }
-    &:hover::after,
-    &:focus::after {
-      background: rgba(#5f6269, 0.15);
-      width: 100%;
-    }
+  //   &::after {
+  //     @include transition(all 500ms ease 0s);
+  //     @include position(absolute, -2px 0 null 0);
+  //     content: '';
+  //     width: 1px;
+  //     height: 2px;
+  //     margin: 0 auto 3px;
+  //   }
+  //   &:hover {
+  //     @include transition(all 500ms ease 0s);
+  //     cursor: pointer;
+  //   }
+  //   &:hover::after,
+  //   &:focus::after {
+  //     background: rgba(#5f6269, 0.15);
+  //     width: 100%;
+  //   }
 	}
   @include media-query($on-palm) {
     text-align: right;
@@ -212,7 +237,7 @@ pre code, code {
 }
 
 .gradient {
-  @include background-image(linear-gradient(to top, _palette(bg-dark) 56%, rgba(#292c33, 0.935) 62%, rgba(#292c33, 0.8) 67%, rgba(#292c33, 0.2) 80%, rgba(#292c33, 0.1) 83%, transparent));
+  @include background-image(linear-gradient(to top, _palette(bg-dark) 56%, rgba(#292c33, 0.935) 62%, rgba(#292c33, 0.75) 67%, rgba(#292c33, 0.2) 79%, rgba(#292c33, 0.1) 83%, transparent));
   position: absolute;
   width: 100%;
   height: 104vw;
