@@ -7,7 +7,7 @@
     <img alt="Build Status" height="21" src="https://travis-ci.org/tterb/Hyde.svg?branch=master"/>&nbsp;
   </a>
   <a href="https://codeclimate.com/github/JonSn0w/Hyde">
-    <img alt="Code Climate" height="21" src="https://codeclimate.com/github/tterb/Hyde/badges/gpa.svg"/>&nbsp;
+    <img alt="Code Climate" height="21" src="https://codeclimate.com/github/JonSn0w/Hyde/badges/gpa.svg"/>&nbsp;
   </a>
   <a href="https://david-dm.org/tterb/Hyde">
     <img alt="Dependency Status" height="21" src="https://david-dm.org/tterb/Hyde.svg"/>&nbsp;
