@@ -77,25 +77,28 @@
   "dependencies": {
     "codemirror": "^5.39.0",
     "codemirror-spell-checker": "^1.1.2",
-    "color": "^2.0.1",
+    "color": "^3.1.0",
     "devtron": "^1.4.0",
-    "electron": "^1.8.7",
+    "electron": "^3.0.1",
     "electron-command-palette": "^0.1.1",
-    "electron-config": "^1.0.0",
+    "electron-config": "^2.0.0",
     "electron-json-storage": "^4.1.0",
-    "electron-localshortcut": "^2.0.2",
+    "electron-localshortcut": "^3.1.0",
     "electron-settings": "^3.2.0",
     "electron-window": "^0.8.1",
-    "electron-window-state": "^4.1.1",
+    "electron-window-state": "^5.0.2",
     "emojify.js": "^1.1.0",
     "jquery": "^3.3.0",
-    "katex": "^0.9.0",
+    "katex": "^0.10.0",
     "lodash": "^4.17.10",
     "node-emoji": "^1.8.1",
     "parse-filepath": "1.0.2",
     "showdown": "^1.8.6",
     "showdown-highlightjs-extension": "^0.1.2",
     "showdown-youtube": "^1.2.1",
-    "yargs": "^10.1.2"
+    "yargs": "^12.0.0"
+  },
+  "resolutions": {
+    "natives": "1.1.3"
   }
 }
