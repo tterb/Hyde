@@ -67,12 +67,12 @@
   "keybindings": "https://brettstevenson.io/Hyde/docs#keybindings",
   "devDependencies": {
     "electron-connect": "^0.6.3",
-    "electron-installer-dmg": "^0.2.1",
+    "electron-installer-dmg": "^2.0.0",
     "electron-packager": "^12.1.0",
     "electron-rebuild": "^1.7.3",
     "electron-winstaller": "^2.6.4",
     "gulp": "^3.9.1",
-    "gulp-sass": "^3.2.1"
+    "gulp-sass": "^4.0.2"
   },
   "dependencies": {
     "codemirror": "^5.39.0",
