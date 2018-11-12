@@ -1,10 +1,12 @@
-[<img alt="Title" height="150" src="https://user-images.githubusercontent.com/16360374/31757195-ba3c3b24-b45c-11e7-8d74-4aef9849c473.png"/>](./README.md)
+<p align="center">
+  <img alt="Title" height="150" src="https://user-images.githubusercontent.com/16360374/31757195-ba3c3b24-b45c-11e7-8d74-4aef9849c473.png"/>
+</p>
 <br>
 <p align="right">
   <a href="https://travis-ci.org/tterb/Hyde">
     <img alt="Build Status" height="21" src="https://travis-ci.org/tterb/Hyde.svg?branch=master"/>&nbsp;
   </a>
-  <a href="https://codeclimate.com/github/tterb/Hyde">
+  <a href="https://codeclimate.com/github/JonSn0w/Hyde">
     <img alt="Code Climate" height="21" src="https://codeclimate.com/github/tterb/Hyde/badges/gpa.svg"/>&nbsp;
   </a>
   <a href="https://david-dm.org/tterb/Hyde">
