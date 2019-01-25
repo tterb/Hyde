@@ -23,7 +23,12 @@
   </a> -->
 </p>
 
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ftterb%2FHyde.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Ftterb%2FHyde?ref=badge_large)
+
 # Description
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ftterb%2FHyde.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Ftterb%2FHyde?ref=badge_shield)
+
 
 
 **Hyde** is an [Electron](http://electron.atom.io)-based markdown editor that aims to improve the accessibility of creating beautifully formatted markdown documents for developers and non-developers, alike.
