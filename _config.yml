@@ -28,16 +28,16 @@ sass:
 # paginate: 15
 # paginate_path: "/blog/page:num/"
 
-html_proofer:
-  check_favicon: true
-  check_html: true
-  file_ignore:
-    - /a.*regexp*/
-    - a_string
-    - bower_components/*
-    - fonts/*
-  url_ignore:
-    - /Hyde/
+# html_proofer:
+#   check_favicon: true
+#   check_html: true
+#   file_ignore:
+#     - /a.*regexp*/
+#     - a_string
+#     - bower_components/*
+#     - fonts/*
+#   url_ignore:
+#     - /Hyde/
 
 exclude: ['template.md', '.gitignore', 'TODO.md', 'README.md', 'Gulpfile.js', 'package.json', 'node_modules', 'jspm_packages']
 include: ['_pages','.htaccess']
