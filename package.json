@@ -37,7 +37,7 @@
   "bugs": {
     "url": "https://github.com/tterb/Hyde/issues"
   },
-  "homepage": "https://brettstevenson.io/Hyde",
+  "homepage": "https://brettstevenson.io/hyde",
   "jspm": {
     "dependencies": {
       "jquery": "npm:jquery@^3.2.1"
