@@ -8,11 +8,11 @@ owner:
 repo: https://github.com/tterb/Hyde
 bugs: https://github.com/tterb/Hyde/issues/new
 first_published: 2017
-baseurl: "/Hyde/" # the subpath of your site, e.g. /blog/
+baseurl: "/hyde/" # the subpath of your site, e.g. /blog/
 
 url: "" # the base hostname & protocol for your site
 twitter_username: bstevensondev
-github_username:  JonSn0w
+github_username:  tterb
 
 name: 'Brett Stevenson'
 author: 'Brett Stevenson'
