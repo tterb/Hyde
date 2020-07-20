@@ -79,7 +79,7 @@
     "codemirror-spell-checker": "^1.1.2",
     "color": "^3.1.0",
     "devtron": "^1.4.0",
-    "electron": "^3.0.1",
+    "electron": "^9.1.0",
     "electron-command-palette": "^0.1.1",
     "electron-config": "^2.0.0",
     "electron-json-storage": "^4.1.0",
